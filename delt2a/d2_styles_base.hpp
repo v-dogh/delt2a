@@ -8,10 +8,6 @@
 
 namespace d2::style
 {
-	using uai_property = unsigned int;
-
-	// I <heart emoji> templates
-
 	namespace impl
 	{
 #		define D2_UAI_INTERFACE_TEMPL template<std::size_t> typename
@@ -19,216 +15,11 @@ namespace d2::style
 		using data::set; \
 		using data::get; \
 		using data::interface;
-
-#		define D2_UAI_SETUP(type) unsigned char __type = Element::WriteType::type;
-#		define D2_UAI_SETUP_EMPTY unsigned char __type = 0x00;
-#		define D2_UAI_SETUP_MUL(type) unsigned char __type = type;
-
-#		define D2_UAI_VAR_START if constexpr (false) {}
-#		define D2_UAI_GET_VAR(prop, var, type) \
-		else if constexpr (Property == prop) return std::make_pair(&var, ::d2::Element::WriteType::type);
-#		define D2_UAI_GET_VAR_MUL(prop, var, type) \
-		else if constexpr (Property == prop) return std::make_pair(&var, type);
-#		define D2_UAI_GET_VAR_A(prop, var) \
-		else if constexpr (Property == prop) return std::make_pair(&var, __type);
-#		define D2_UAI_GET_VAR_COMPUTED(prop, type, ...) \
-		else if constexpr (Property == prop) return std::make_pair(__VA_ARGS__, ::d2::Element::WriteType::type);
-#		define D2_UAI_GET_VAR_COMPUTED_MUL(prop, type, ...) \
-		else if constexpr (Property == prop) return std::make_pair(__VA_ARGS__, type);
-#		define D2_UAI_GET_VAR_COMPUTED_A(prop, ...) \
-		else if constexpr (Property == prop) return std::make_pair(__VA_ARGS__, __type);
-#		define D2_UAI_VAR_END else static_assert(false, "Invalid Property");
-
-		template<typename Chain>
-		struct ResolveChain
-		{
-			static constexpr auto offset = Chain::last_offset_;
-		};
-		template<>
-		struct ResolveChain<void>
-		{
-			static constexpr auto offset = 0;
-		};
-
-		template<D2_UAI_INTERFACE_TEMPL First, D2_UAI_INTERFACE_TEMPL... Rest>
-		struct LastImpl
-		{
-			template<std::size_t Prop>
-			using type = LastImpl<Rest...>::template type<Prop>;
-		};
-		template<D2_UAI_INTERFACE_TEMPL Last>
-		struct LastImpl<Last>
-		{
-			template<std::size_t Prop>
-			using type = Last<Prop>;
-		};
-
-		namespace
-		{
-			template<
-				std::size_t Search,
-				typename Current,
-				D2_UAI_INTERFACE_TEMPL... Rest
-			> struct SearchPropertyOwnerImpl { };
-			template<
-				std::size_t Search,
-				typename Current,
-				D2_UAI_INTERFACE_TEMPL Next,
-				D2_UAI_INTERFACE_TEMPL... Rest
-			>
-			struct SearchPropertyOwnerImpl<Search, Current, Next, Rest...>
-			{
-				using type = std::conditional<
-					Search >= Current::base && Search < Current::offset,
-					Current,
-					typename SearchPropertyOwnerImpl<
-						Search,
-						Next<Current::offset>,
-						Rest...
-					>::type
-				>::type;
-			};
-			template<
-				std::size_t Search,
-				typename Current
-			>
-			struct SearchPropertyOwnerImpl<Search, Current>
-			{
-				using type = std::conditional<
-					Search >= Current::base && Search < Current::offset,
-					Current,
-					void
-				>::type;
-			};
-		}
-		template<
-			std::size_t BaseOffset,
-			std::size_t Search,
-			D2_UAI_INTERFACE_TEMPL First,
-			D2_UAI_INTERFACE_TEMPL... Rest
-		>
-		struct SearchPropertyOwner
-		{
-			using type = SearchPropertyOwnerImpl<
-				Search,
-				First<BaseOffset>,
-				Rest...
-			>::type;
-		};
-
-		namespace
-		{
-			template<
-				std::size_t Offset,
-				D2_UAI_INTERFACE_TEMPL Search,
-				D2_UAI_INTERFACE_TEMPL... Rest
-			> struct SearchInterfaceImpl { };
-			template<
-				std::size_t Offset,
-				D2_UAI_INTERFACE_TEMPL Search,
-				D2_UAI_INTERFACE_TEMPL Current,
-				D2_UAI_INTERFACE_TEMPL... Rest
-			>
-			struct SearchInterfaceImpl<Offset, Search, Current, Rest...>
-			{
-				using type = std::conditional<
-					std::is_same_v<Search<0>, Current<0>>,
-					Current<Offset>,
-					typename SearchInterfaceImpl<
-						Current<Offset>::offset,
-						Search,
-						Rest...
-					>::type
-				>::type;
-			};
-			template<
-				std::size_t Offset,
-				D2_UAI_INTERFACE_TEMPL Search,
-				D2_UAI_INTERFACE_TEMPL Current
-			>
-			struct SearchInterfaceImpl<Offset, Search, Current>
-			{
-				using type = std::conditional<
-					std::is_same_v<Search<0>, Current<0>>,
-					Current<Offset>,
-					void
-				>::type;
-			};
-		}
-		template<
-			std::size_t BaseOffset,
-			D2_UAI_INTERFACE_TEMPL Search,
-			D2_UAI_INTERFACE_TEMPL... Rest
-		>
-		struct SearchInterface
-		{
-			using type = SearchInterfaceImpl<
-				BaseOffset,
-				Search,
-				Rest...
-			>;
-		};
-
-		namespace
-		{
-			template<
-				D2_UAI_INTERFACE_TEMPL Search,
-				typename Current,
-				D2_UAI_INTERFACE_TEMPL CurrentType,
-				D2_UAI_INTERFACE_TEMPL Next,
-				D2_UAI_INTERFACE_TEMPL... Rest
-			>
-			struct OffsetHelperImpl
-			{
-				using type = std::conditional<
-					std::is_same_v<Next<0>, Search<0>>,
-					Current,
-					typename OffsetHelperImpl<
-						Search,
-						Next<Current::offset>,
-						Next,
-						Rest...
-					>::type
-				>::type;
-			};
-			template<
-				D2_UAI_INTERFACE_TEMPL Search,
-				typename Current,
-				D2_UAI_INTERFACE_TEMPL CurrentType,
-				D2_UAI_INTERFACE_TEMPL Next
-			>
-			struct OffsetHelperImpl<Search, Current, CurrentType, Next>
-			{
-				using type = Current;
-			};
-		}
-		template<
-			std::size_t BaseOffset,
-			D2_UAI_INTERFACE_TEMPL Current,
-			D2_UAI_INTERFACE_TEMPL First,
-			D2_UAI_INTERFACE_TEMPL... Rest
-		>
-		struct OffsetHelper
-		{
-			using result = OffsetHelperImpl<
-				Current,
-				First<BaseOffset>,
-				First,
-				Rest...
-			>;
-			using type = result::type;
-			static constexpr auto offset = result::type::offset;
-		};
-		template<
-			std::size_t BaseOffset,
-			D2_UAI_INTERFACE_TEMPL Current,
-			D2_UAI_INTERFACE_TEMPL First
-		>
-		struct OffsetHelper<BaseOffset, Current, First>
-		{
-			static constexpr auto offset = BaseOffset;
-		};
 	}
+
+	using uai_property = unsigned int;
+
+	// I <heart emoji> templates
 
 	class Theme : public std::enable_shared_from_this<Theme>
 	{
@@ -401,9 +192,13 @@ namespace d2::style
 			);
 		}
 
-		template<D2_UAI_INTERFACE_TEMPL Interface, property Property, typename Type>
-		auto _int_set_for(Type&& value, bool temporary = false)
+		template<D2_UAI_INTERFACE_TEMPL Interface, Interface<0>::Property Property, typename Type>
+		auto& _int_set_for(Type&& value, bool temporary = false)
 		{
+			auto* interface = _interface_for<Interface>();
+			if (interface == nullptr)
+				throw std::logic_error{ "Type does not implement interface" };
+
 			if constexpr (impl::is_var<Type>)
 			{
 				_set_dynamic_impl(Property, true);
@@ -431,16 +226,13 @@ namespace d2::style
 			else
 			{
 				_set_dynamic_impl(Property, _test_dynamic_impl(Property) && temporary);
-				auto* interface = _interface_for<Interface>();
-				if (interface == nullptr)
-					throw std::logic_error{ "Type does not implement interface" };
 				auto [ ptr, type ] = interface->template at_style<Property>();
 				*ptr = std::forward<Type>(value);
 				_signal_base_impl(type, Property);
 			}
 			return *this;
 		}
-		template<D2_UAI_INTERFACE_TEMPL Interface, property Property>
+		template<D2_UAI_INTERFACE_TEMPL Interface, Interface<0>::Property Property>
 		auto _int_get_for() const
 		{
 			return *getref_for<Interface, Property>();
@@ -459,15 +251,15 @@ namespace d2::style
 			return _interface_for<Interface>() != nullptr;
 		}
 
-		template<D2_UAI_INTERFACE_TEMPL Interface, property Property, typename Type>
+		template<D2_UAI_INTERFACE_TEMPL Interface, Interface<0>::Property Property, typename Type>
 		auto& set_for(Type&& value, bool temporary = false)
 		{
-			_sync_impl([value = std::forward<Type>(value), &temporary, this]() {
+			_sync_impl([value = std::forward<Type>(value), &temporary, this]() mutable {
 				_int_set_for<Interface, Property>(std::forward<Type>(value), temporary);
 			});
 			return *this;
 		}
-		template<D2_UAI_INTERFACE_TEMPL Interface, property Property>
+		template<D2_UAI_INTERFACE_TEMPL Interface, Interface<0>::Property Property>
 		auto get_for() const
 		{
 			using type = std::remove_cvref_t<decltype(*getref_for<Interface, Property>())>;
@@ -477,7 +269,7 @@ namespace d2::style
 			});
 			return result;
 		}
-		template<D2_UAI_INTERFACE_TEMPL Interface, property Property>
+		template<D2_UAI_INTERFACE_TEMPL Interface, Interface<0>::Property Property>
 		auto* getref_for()
 		{
 			auto* interface = _interface_for<Interface>();

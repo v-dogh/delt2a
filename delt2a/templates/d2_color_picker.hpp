@@ -48,12 +48,11 @@ namespace d2
 			D2_STYLESHEET_END(rgba_picker)
 		}
 
-		class ColorPicker :
-			public dx::VirtualBox,
-			public style::UAIC<dx::VirtualBox::data, ColorPicker, style::IColorPicker>
+		class ColorPicker : public style::UAIC<dx::VirtualBox, ColorPicker, style::IColorPicker>
 		{
 		public:
-			using data = style::UAIC<VirtualBox::data, ColorPicker, style::IColorPicker>;
+			using data = style::UAIC<VirtualBox, ColorPicker, style::IColorPicker>;
+			using data::data;
 			D2_UAI_CHAIN(VirtualBox)
 		protected:
 			static eptr<ColorPicker> _core(TreeState::ptr state)
@@ -219,8 +218,6 @@ namespace d2
 				};
 			}
 		public:
-			using VirtualBox::VirtualBox;
-
 			void submit()
 			{
 				if (data::on_submit != nullptr)

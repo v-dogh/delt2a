@@ -47,7 +47,6 @@ namespace d2
 	namespace dx::graph
 	{
 		class CyclicVerticalBar :
-			public Element,
 			public style::UAI<
 				CyclicVerticalBar,
 				style::ILayout,
@@ -68,6 +67,7 @@ namespace d2
 				style::IColors,
 				style::IRangeGraph
 			>;
+			using data::data;
 		protected:
 			// Data points are normalized from 0 to 1
 			std::vector<float> _data{};
@@ -150,8 +150,6 @@ namespace d2
 					(width - (basex + ibasex)) : data::resolution;
 			}
 		public:
-			using Element::Element;
-
 			void clear() noexcept
 			{
 				_data.clear();

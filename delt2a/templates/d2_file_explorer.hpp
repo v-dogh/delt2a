@@ -10,24 +10,35 @@
 
 namespace d2::templ
 {
-	class FilesystemExplorer :
-		public dx::VirtualBox,
-		public style::UAIC<dx::VirtualBox::data, FilesystemExplorer, style::IResponsive>
+	class FilesystemExplorer : public style::UAIC<dx::VirtualBox, FilesystemExplorer, style::IResponsive>
 	{
 	public:
-		using data = style::UAIC<VirtualBox::data, FilesystemExplorer, style::IResponsive>;
+		using data = style::UAIC<VirtualBox, FilesystemExplorer, style::IResponsive>;
+		using data::data;
 		D2_UAI_CHAIN(FilesystemExplorer)
 	protected:
 		class FolderView :
-			public MetaParentElement,
-			public style::UAI<FolderView, style::ILayout, style::IColors, style::IKeyboardNav>,
+			public style::UAIC<
+				MetaParentElement,
+				FolderView,
+				style::ILayout,
+				style::IColors,
+				style::IKeyboardNav
+			>,
 			public dx::impl::UnitUpdateHelper<FolderView>,
 			public dx::impl::TextHelper<FolderView>
 		{
 		public:
 			friend class UnitUpdateHelper;
 			friend class TextHelper;
-			using data = style::UAI<FolderView, style::ILayout, style::IColors, style::IKeyboardNav>;
+			using data = style::UAIC<
+				MetaParentElement,
+				FolderView,
+				style::ILayout,
+				style::IColors,
+				style::IKeyboardNav
+			>;
+			using data::data;
 		protected:
 			struct FileEntry
 			{
@@ -261,8 +272,6 @@ namespace d2::templ
 				}
 			}
 		public:
-			using MetaParentElement::MetaParentElement;
-
 			void filter(const std::string& reg) noexcept
 			{
 				scrollbar_->reset_absolute();
@@ -548,8 +557,6 @@ namespace d2::templ
 			);
 		}
 	public:
-		using VirtualBox::VirtualBox;
-
 		void forwards()
 		{
 			if (!history_.empty())

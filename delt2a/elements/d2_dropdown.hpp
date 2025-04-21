@@ -62,7 +62,6 @@ namespace d2
 	namespace dx
 	{
 		class Dropdown :
-			public Element,
 			public style::UAI<
 				Dropdown,
 				style::ILayout,
@@ -87,6 +86,7 @@ namespace d2
 				style::IDropdown,
 				style::IKeyboardNav
 			>;
+			using data::data;
 			using opts = std::vector<string>;
 		protected:
 			mutable int cell_height_{ 0 };
@@ -312,8 +312,6 @@ namespace d2
 				}
 			}
 		public:
-			using Element::Element;
-
 			void choose(int idx)
 			{
 				if (idx >= 0)

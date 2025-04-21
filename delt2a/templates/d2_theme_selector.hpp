@@ -45,12 +45,11 @@ namespace d2
 	}
 	namespace templ
 	{
-		class ThemeSelector :
-			public dx::VirtualBox,
-			public style::UAIC<dx::VirtualBox::data, ThemeSelector, style::IThemeSelector>
+		class ThemeSelector : public style::UAIC<dx::VirtualBox, ThemeSelector, style::IThemeSelector>
 		{
 		public:
-			using data = style::UAIC<VirtualBox::data, ThemeSelector, style::IThemeSelector>;
+			using data = style::UAIC<VirtualBox, ThemeSelector, style::IThemeSelector>;
+			using data::data;
 			D2_UAI_CHAIN(VirtualBox)
 		protected:
 			data::accent_vec _accents{};
@@ -262,8 +261,6 @@ namespace d2
 				}
 			}
 		public:
-			using VirtualBox::VirtualBox;
-
 			void submit(const std::string& name)
 			{
 				if (data::on_submit != nullptr)

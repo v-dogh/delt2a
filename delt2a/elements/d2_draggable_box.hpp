@@ -56,12 +56,11 @@ namespace d2
 	}
 	namespace dx
 	{
-		class VirtualBox :
-			public Box,
-			public style::UAIC<Box::data, VirtualBox, style::IDraggableBox, style::IKeyboardNav>
+		class VirtualBox : public style::UAIC<Box, VirtualBox, style::IDraggableBox, style::IKeyboardNav>
 		{
 		public:
-			using data = style::UAIC<Box::data, VirtualBox, style::IDraggableBox, style::IKeyboardNav>;
+			using data = style::UAIC<Box, VirtualBox, style::IDraggableBox, style::IKeyboardNav>;
+			using data::data;
 			D2_UAI_CHAIN(Box)
 		protected:
 			std::pair<int, int> offset_{ 0, 0 };
@@ -254,8 +253,6 @@ namespace d2
 				}
 			}
 		public:
-			using Box::Box;
-
 			void close() noexcept
 			{
 				parent()

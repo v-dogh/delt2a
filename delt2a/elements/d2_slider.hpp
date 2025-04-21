@@ -52,13 +52,13 @@ namespace d2
 	namespace dx
 	{
 		class Slider :
-			public Element,
 			public style::UAI<Slider, style::ILayout, style::ISlider, style::IKeyboardNav>,
 			public impl::UnitUpdateHelper<Slider>
 		{
 		public:
 			friend class UnitUpdateHelper;
 			using data = style::UAI<Slider, style::ILayout, style::ISlider, style::IKeyboardNav>;
+			using data::data;
 		protected:
 			int slider_spos_{ 0 };
 			int slider_pos_{ 0 };
@@ -227,8 +227,6 @@ namespace d2
 				return std::clamp(float(slider_pos_) / (bbox.width - sw - 1), 0.f, 1.f);
 			}
 		public:
-			using Element::Element;
-
 			virtual void reset_absolute(int value = 0) noexcept
 			{
 				slider_pos_ = (value / (data::max - data::min)) * box().width;
@@ -258,6 +256,8 @@ namespace d2
 
 		class VerticalSlider : public Slider
 		{
+		public:
+			using Slider::Slider;
 		protected:
 			virtual void _state_change_impl(State state, bool value) override
 			{
@@ -343,8 +343,6 @@ namespace d2
 				return std::clamp(float(slider_pos_) / (bbox.height - sw), 0.f, 1.f);
 			}
 		public:
-			using Slider::Slider;
-
 			virtual void reset_absolute(int value = 0) noexcept override
 			{
 				slider_pos_ = (value / (data::max - data::min)) * box().height;

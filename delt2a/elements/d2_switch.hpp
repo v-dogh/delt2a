@@ -60,7 +60,6 @@ namespace d2
 	namespace dx
 	{
 		class Switch :
-			public Element,
 			public style::UAI<
 				Switch,
 				style::ISwitch,
@@ -86,6 +85,7 @@ namespace d2
 				style::IColors,
 				style::IKeyboardNav
 			>;
+			using data::data;
 		protected:
 			int _idx{ 0 };
 
@@ -246,8 +246,6 @@ namespace d2
 					data::on_change(shared_from_this(), _idx);
 			}
 		public:
-			using Element::Element;
-
 			void reset(int idx) noexcept
 			{
 				if (_idx != idx)

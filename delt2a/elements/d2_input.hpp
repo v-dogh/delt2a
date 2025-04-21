@@ -2,7 +2,6 @@
 #define D2_INPUT_HPP
 
 #include "../d2_tree_element.hpp"
-#include "../d2_screen.hpp"
 #include "d2_element_utils.hpp"
 
 namespace d2
@@ -60,7 +59,6 @@ namespace d2
 	namespace dx
 	{
 		class Input :
-			public Element,
 			public style::UAI<
 				Input,
 				style::ILayout,
@@ -79,6 +77,7 @@ namespace d2
 				style::IText,
 				style::IInput
 			>;
+			using data::data;
 		protected:
 			bool ptr_blink_{ false };
 			int ptr_{ 0 };
@@ -550,8 +549,6 @@ namespace d2
 					}
 				}
 			}
-		public:
-			using Element::Element;
 		};
 	}
 }

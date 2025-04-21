@@ -10,6 +10,224 @@
 
 namespace d2::style
 {
+	namespace impl
+	{
+#		define D2_UAI_SETUP(type) unsigned char __type = Element::WriteType::type;
+#		define D2_UAI_SETUP_EMPTY unsigned char __type = 0x00;
+#		define D2_UAI_SETUP_MUL(type) unsigned char __type = type;
+
+#		define D2_UAI_VAR_START if constexpr (false) {}
+#		define D2_UAI_GET_VAR(prop, var, type) \
+		else if constexpr (Property == prop) return std::make_pair(&var, ::d2::Element::WriteType::type);
+#		define D2_UAI_GET_VAR_MUL(prop, var, type) \
+		else if constexpr (Property == prop) return std::make_pair(&var, type);
+#		define D2_UAI_GET_VAR_A(prop, var) \
+		else if constexpr (Property == prop) return std::make_pair(&var, __type);
+#		define D2_UAI_GET_VAR_COMPUTED(prop, type, ...) \
+		else if constexpr (Property == prop) return std::make_pair(__VA_ARGS__, ::d2::Element::WriteType::type);
+#		define D2_UAI_GET_VAR_COMPUTED_MUL(prop, type, ...) \
+		else if constexpr (Property == prop) return std::make_pair(__VA_ARGS__, type);
+#		define D2_UAI_GET_VAR_COMPUTED_A(prop, ...) \
+		else if constexpr (Property == prop) return std::make_pair(__VA_ARGS__, __type);
+#		define D2_UAI_VAR_END else static_assert(false, "Invalid Property");
+
+		template<typename Type>
+		concept chained = requires
+		{
+			(Type::last_offset_);
+		};
+
+		template<typename Chain>
+		struct ResolveChain
+		{
+			static constexpr auto offset = 0;
+		};
+		template<chained Chain>
+		struct ResolveChain<Chain>
+		{
+			static constexpr auto offset = Chain::last_offset_;
+		};
+
+		template<D2_UAI_INTERFACE_TEMPL First, D2_UAI_INTERFACE_TEMPL... Rest>
+		struct LastImpl
+		{
+			template<std::size_t Prop>
+			using type = LastImpl<Rest...>::template type<Prop>;
+		};
+		template<D2_UAI_INTERFACE_TEMPL Last>
+		struct LastImpl<Last>
+		{
+			template<std::size_t Prop>
+			using type = Last<Prop>;
+		};
+
+		namespace
+		{
+			template<
+				std::size_t Search,
+				typename Current,
+				D2_UAI_INTERFACE_TEMPL... Rest
+			> struct SearchPropertyOwnerImpl { };
+			template<
+				std::size_t Search,
+				typename Current,
+				D2_UAI_INTERFACE_TEMPL Next,
+				D2_UAI_INTERFACE_TEMPL... Rest
+			>
+			struct SearchPropertyOwnerImpl<Search, Current, Next, Rest...>
+			{
+				using type = std::conditional<
+					Search >= Current::base && Search < Current::offset,
+					Current,
+					typename SearchPropertyOwnerImpl<
+						Search,
+						Next<Current::offset>,
+						Rest...
+					>::type
+				>::type;
+			};
+			template<
+				std::size_t Search,
+				typename Current
+			>
+			struct SearchPropertyOwnerImpl<Search, Current>
+			{
+				using type = std::conditional<
+					Search >= Current::base && Search < Current::offset,
+					Current,
+					void
+				>::type;
+			};
+		}
+		template<
+			std::size_t BaseOffset,
+			std::size_t Search,
+			D2_UAI_INTERFACE_TEMPL First,
+			D2_UAI_INTERFACE_TEMPL... Rest
+		>
+		struct SearchPropertyOwner
+		{
+			using type = SearchPropertyOwnerImpl<
+				Search,
+				First<BaseOffset>,
+				Rest...
+			>::type;
+		};
+
+		namespace
+		{
+			template<
+				std::size_t Offset,
+				D2_UAI_INTERFACE_TEMPL Search,
+				D2_UAI_INTERFACE_TEMPL... Rest
+			> struct SearchInterfaceImpl { };
+			template<
+				std::size_t Offset,
+				D2_UAI_INTERFACE_TEMPL Search,
+				D2_UAI_INTERFACE_TEMPL Current,
+				D2_UAI_INTERFACE_TEMPL... Rest
+			>
+			struct SearchInterfaceImpl<Offset, Search, Current, Rest...>
+			{
+				using type = std::conditional<
+					std::is_same_v<Search<0>, Current<0>>,
+					Current<Offset>,
+					typename SearchInterfaceImpl<
+						Current<Offset>::offset,
+						Search,
+						Rest...
+					>::type
+				>::type;
+			};
+			template<
+				std::size_t Offset,
+				D2_UAI_INTERFACE_TEMPL Search,
+				D2_UAI_INTERFACE_TEMPL Current
+			>
+			struct SearchInterfaceImpl<Offset, Search, Current>
+			{
+				using type = std::conditional<
+					std::is_same_v<Search<0>, Current<0>>,
+					Current<Offset>,
+					void
+				>::type;
+			};
+		}
+		template<
+			std::size_t BaseOffset,
+			D2_UAI_INTERFACE_TEMPL Search,
+			D2_UAI_INTERFACE_TEMPL... Rest
+		>
+		struct SearchInterface
+		{
+			using type = SearchInterfaceImpl<
+				BaseOffset,
+				Search,
+				Rest...
+			>;
+		};
+
+		namespace
+		{
+			template<
+				D2_UAI_INTERFACE_TEMPL Search,
+				typename Current,
+				D2_UAI_INTERFACE_TEMPL CurrentType,
+				D2_UAI_INTERFACE_TEMPL Next,
+				D2_UAI_INTERFACE_TEMPL... Rest
+			>
+			struct OffsetHelperImpl
+			{
+				using type = std::conditional<
+					std::is_same_v<Next<0>, Search<0>>,
+					Current,
+					typename OffsetHelperImpl<
+						Search,
+						Next<Current::offset>,
+						Next,
+						Rest...
+					>::type
+				>::type;
+			};
+			template<
+				D2_UAI_INTERFACE_TEMPL Search,
+				typename Current,
+				D2_UAI_INTERFACE_TEMPL CurrentType,
+				D2_UAI_INTERFACE_TEMPL Next
+			>
+			struct OffsetHelperImpl<Search, Current, CurrentType, Next>
+			{
+				using type = Current;
+			};
+		}
+		template<
+			std::size_t BaseOffset,
+			D2_UAI_INTERFACE_TEMPL Current,
+			D2_UAI_INTERFACE_TEMPL First,
+			D2_UAI_INTERFACE_TEMPL... Rest
+		>
+		struct OffsetHelper
+		{
+			using result = OffsetHelperImpl<
+				Current,
+				First<BaseOffset>,
+				First,
+				Rest...
+			>;
+			using type = result::type;
+			static constexpr auto offset = result::type::offset;
+		};
+		template<
+			std::size_t BaseOffset,
+			D2_UAI_INTERFACE_TEMPL Current,
+			D2_UAI_INTERFACE_TEMPL First
+		>
+		struct OffsetHelper<BaseOffset, Current, First>
+		{
+			static constexpr auto offset = BaseOffset;
+		};
+	}
+
 	// UAI provides read/write access to styles (member variables) of objects that derive from it (elements)
 	// It handles proper synchronization and signals, and manages the process of assigning unique ID's to properties for elements at compile time
 	// It also facilitates the ability for objects to derive from other objects through chaining
@@ -25,6 +243,7 @@ namespace d2::style
 		D2_UAI_INTERFACE_TEMPL... Interfaces
 	>
 	class UniversalAccessInterface :
+		public Chain,
 		public Interface<impl::ResolveChain<Chain>::offset>,
 		public Interfaces<
 			impl::OffsetHelper<
@@ -48,10 +267,8 @@ namespace d2::style
 				last_interface,
 				Interface, Interfaces...
 			>::offset + last_interface<0>::count;
-		static constexpr std::size_t chain_base_ =
-			impl::ResolveChain<Chain>::offset;
-		static constexpr bool chain_ =
-			!std::is_same_v<Chain, void>;
+		static constexpr std::size_t chain_base_ = impl::ResolveChain<Chain>::offset;
+		static constexpr bool chain_ = impl::chained<Chain>;
 
 		template<D2_UAI_INTERFACE_TEMPL Type>
 		struct FindInterface
@@ -220,7 +437,7 @@ namespace d2::style
 			if constexpr (chain_)
 			{
 				auto* ptr =
-					static_cast<Chain*>(
+					static_cast<Chain::data*>(
 					static_cast<Base*>(this)
 					)->_has_interface_own_impl(id);
 				if (ptr != nullptr)
@@ -235,7 +452,9 @@ namespace d2::style
 					out = static_cast<Type<0>::data*>(this);
 				return pred;
 			};
-			[[ maybe_unused ]] const auto result = ((check_xid.template operator()<Interfaces>()) || ...);
+			[[ maybe_unused ]] const auto result =
+				check_xid.template operator()<Interface>() ||
+				((check_xid.template operator()<Interfaces>()) || ...);
 			return out;
 		}
 		virtual void _sync_impl(std::function<void()> func) const noexcept override
@@ -263,7 +482,7 @@ namespace d2::style
 		template<typename, typename, D2_UAI_INTERFACE_TEMPL, D2_UAI_INTERFACE_TEMPL...>
 		friend class UniversalAccessInterface;
 
-		UniversalAccessInterface() = default;
+		using Chain::Chain;
 
 		template<D2_UAI_INTERFACE_TEMPL Type>
 		auto& interface() noexcept
@@ -417,7 +636,7 @@ namespace d2::style
 		D2_UAI_INTERFACE_TEMPL Interface,
 		D2_UAI_INTERFACE_TEMPL... Interfaces
 	>
-	using UAI = UniversalAccessInterface<void, Base, Interface, Interfaces...>;
+	using UAI = UniversalAccessInterface<Element, Base, Interface, Interfaces...>;
 	template<
 		typename Chain,
 		typename Base,

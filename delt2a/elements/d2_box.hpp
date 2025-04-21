@@ -6,17 +6,17 @@
 #include "d2_element_utils.hpp"
 
 namespace d2::dx
-{
+{	
 	class Box :
-		public VecParentElement,
-		public style::UAI<Box, style::ILayout, style::IContainer, style::IColors>,
+		public style::UAIC<VecParentElement, Box, style::ILayout, style::IContainer, style::IColors>,
 		public impl::UnitUpdateHelper<Box>,
 		public impl::ContainerHelper<Box>
 	{
 	public:
 		friend class UnitUpdateHelper;
 		friend class ContainerHelper;
-		using data = style::UAI<Box, style::ILayout, style::IContainer, style::IColors>;
+		using data = style::UAIC<VecParentElement, Box, style::ILayout, style::IContainer, style::IColors>;
+		using data::data;
 	protected:
 		void _recompute_layout(int basex = 0, int basey = 0) const noexcept
 		{
@@ -451,8 +451,6 @@ namespace d2::dx
 				buffer.inscribe(x, y, f.buffer());
 			}
 		}
-	public:
-		using VecParentElement::VecParentElement;
 	};
 }
 

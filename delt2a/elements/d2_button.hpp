@@ -8,7 +8,6 @@
 namespace d2::dx
 {
 	class Button :
-		public Element,
 		public style::UAI<
 			Button,
 			style::ILayout,
@@ -35,6 +34,7 @@ namespace d2::dx
 			style::IText,
 			style::IKeyboardNav
 		>;
+		using data::data;
 	protected:
 		virtual char _index_impl() const noexcept override
 		{
@@ -123,8 +123,6 @@ namespace d2::dx
 				buffer
 			);
 		}
-	public:
-		using Element::Element;
 	};
 } // d2::elem
 

@@ -230,13 +230,13 @@ namespace d2
 	namespace dx
 	{
 		class Matrix :
-			public Element,
 			public style::UAI<Matrix, style::ILayout, style::IModel>,
 			public impl::UnitUpdateHelper<Matrix>
 		{
 		public:
 			friend class UnitUpdateHelper;
 			using data = style::UAI<Matrix, style::ILayout, style::IModel>;
+			using data::data;
 		protected:
 			virtual unit_meta_flag _unit_report_impl() const noexcept override
 			{
@@ -347,8 +347,6 @@ namespace d2
 					}
 				}
 			}
-		public:
-			using Element::Element;
 		};
 	}
 }

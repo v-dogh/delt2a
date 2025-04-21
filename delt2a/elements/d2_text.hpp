@@ -8,7 +8,6 @@
 namespace d2::dx
 {
 	class Text :
-		public Element,
 		public style::UAI<Text, style::ILayout, style::IText, style::IColors>,
 		public impl::UnitUpdateHelper<Text>,
 		public impl::TextHelper<Text>
@@ -119,7 +118,7 @@ namespace d2::dx
 			const std::string& name,
 			TreeState::ptr state,
 			ptr parent
-		) : Element(name, state, parent)
+		) : data(name, state, parent)
 		{
 			data::background_color.a = 0;
 		}

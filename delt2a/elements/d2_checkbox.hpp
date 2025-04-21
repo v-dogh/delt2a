@@ -49,7 +49,6 @@ namespace d2
 	namespace dx
 	{
 		class Checkbox :
-			public Element,
 			public style::UAI<Checkbox, style::ILayout, style::IColors, style::ICheckbox>,
 			public impl::UnitUpdateHelper<Checkbox>,
 			public impl::TextHelper<Checkbox>
@@ -58,6 +57,7 @@ namespace d2
 			friend class UnitUpdateHelper;
 			friend class TextHelper;
 			using data = style::UAI<Checkbox, style::ILayout, style::IColors, style::ICheckbox>;
+			using data::data;
 		protected:
 			virtual char _index_impl() const noexcept override
 			{
@@ -116,8 +116,6 @@ namespace d2
 					buffer
 				);
 			}
-		public:
-			using Element::Element;
 		};
 	}
 }
