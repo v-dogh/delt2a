@@ -13,9 +13,9 @@ namespace d2
 		struct ThemeSelector
 		{
 			using accent_vec = std::vector<px::background>;
-			using theme = std::variant<accent_vec, std::string>;
+			using theme = std::variant<accent_vec, string>;
 			std::function<void(Element::TraversalWrapper, theme)> on_submit{ nullptr };
-			std::vector<std::string> themes{};
+			std::vector<string> themes{};
 			int accents{ 0 };
 
 			template<uai_property Property>

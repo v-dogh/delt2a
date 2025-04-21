@@ -1,28 +1,22 @@
 #ifndef D2_MODEL_EDITOR_HPP
 #define D2_MODEL_EDITOR_HPP
 
-#include "../d2_std.hpp"
-#include "../d2_screen.hpp"
-#include "../d2_colors.hpp"
-#include "../elements/d2_box.hpp"
-#include "../elements/d2_input.hpp"
-#include "../elements/d2_text.hpp"
-#include "../elements/d2_button.hpp"
-#include "../elements/d2_matrix.hpp"
-#include "../elements/d2_dropdown.hpp"
-#include "d2_exit_prompt.hpp"
-#include "d2_color_picker.hpp"
-#include "d2_file_explorer.hpp"
-#include "d2_theme_selector.hpp"
+#include "../delt2a/d2_std.hpp"
+#include "../delt2a/elements/d2_std.hpp"
+#include "../delt2a/templates/d2_exit_prompt.hpp"
+#include "../delt2a/templates/d2_color_picker.hpp"
+#include "../delt2a/templates/d2_file_explorer.hpp"
+#include "../delt2a/templates/d2_theme_selector.hpp"
 
-namespace d2::templ::md2
+// To run this example call editor::run()
+namespace editor
 {
 	using namespace d2::dx;
 
-	class ModelEditorState : public TreeState
+	class ModelEditorState : public d2::TreeState
 	{
 	public:
-		struct Theme : style::Theme, d2::templ::PopupTheme
+		struct Theme : d2::style::Theme, d2::templ::PopupTheme
 		{
 			D2_DEPENDENCY(d2::px::background, primary_background)
 			D2_DEPENDENCY(d2::px::background, secondary_background)
@@ -81,7 +75,7 @@ namespace d2::templ::md2
 			{
 				auto from_tint_manual = [](float r, float g, float b, d2::px::background tint)
 				{
-					return px::background{
+					return d2::px::background{
 						.r = static_cast<std::uint8_t>(tint.r * r),
 						.g = static_cast<std::uint8_t>(tint.g * g),
 						.b = static_cast<std::uint8_t>(tint.b * b),
@@ -112,9 +106,9 @@ namespace d2::templ::md2
 			}
 		};
 	protected:
-		IOContext::EventListener setpixel_ev_{};
-		px::combined brush_{ px::combined(d2::colors::w::white) };
-		px::combined brush_secondary_{ px::combined(d2::colors::w::black) };
+		d2::IOContext::EventListener setpixel_ev_{};
+		d2::px::combined brush_{ d2::px::combined(d2::colors::w::white) };
+		d2::px::combined brush_secondary_{ d2::px::combined(d2::colors::w::black) };
 	public:
 		using TreeState::TreeState;
 
@@ -126,23 +120,23 @@ namespace d2::templ::md2
 					.as<Matrix>()
 					->set<Matrix::Model>(MatrixModel::make());
 
-				setpixel_ev_ = context()->listen<IOContext::Event::MouseInput>([](auto, auto, TreeState::ptr state) {
+				setpixel_ev_ = context()->listen<d2::IOContext::Event::MouseInput>([](auto, auto, TreeState::ptr state) {
 					auto model =
 						(state->core()->traverse()/"editor"/"model")
 						.as<Matrix>();
-					if (model->getstate(Element::Hovered))
+					if (model->getstate(d2::Element::Hovered))
 					{
 						const auto [ x, y ] = model->mouse_object_space();
 						model->apply_set<Matrix::Model>([&](MatrixModel::ptr& model) {
 							if (x >= 0 && x < model->width() &&
 								y >= 0 && y < model->height())
 							{
-								if (state->context()->input()->is_pressed_mouse(sys::SystemInput::Left))
+								if (state->context()->input()->is_pressed_mouse(d2::sys::SystemInput::Left))
 								{
 									model->at(x, y) =
 										state->as<ModelEditorState>()->brush_;
 								}
-								else if (state->context()->input()->is_pressed_mouse(sys::SystemInput::Right))
+								else if (state->context()->input()->is_pressed_mouse(d2::sys::SystemInput::Right))
 								{
 									model->at(x, y) =
 										state->as<ModelEditorState>()->brush_secondary_;
@@ -167,7 +161,7 @@ namespace d2::templ::md2
 					->get<Matrix::Model>()
 					->save_model(
 						path.string(),
-						opt == 0 ? Screen::ModelType::Visual : Screen::ModelType::Raw
+						opt == 0 ? d2::Screen::ModelType::Visual : d2::Screen::ModelType::Raw
 					);
 			}
 			catch (...) {}
@@ -185,7 +179,7 @@ namespace d2::templ::md2
 					->get<Matrix::Model>()
 					->load_model(
 						path.string(),
-						opt == 0 ? Screen::ModelType::Visual : Screen::ModelType::Raw
+						opt == 0 ? d2::Screen::ModelType::Visual : d2::Screen::ModelType::Raw
 					);
 				(r/"editor"/"topbar"/"title")
 					.as<Text>()
@@ -193,7 +187,7 @@ namespace d2::templ::md2
 			}
 			catch (...) {}
 		}
-		void set_color(px::background color)
+		void set_color(d2::px::background color)
 		{
 			auto opts = core()->traverse()/"sidebar"/"style"/"options";
 			auto mode = (opts/"brush-choice").as<Button>();
@@ -238,7 +232,7 @@ namespace d2::templ::md2
 				}
 			}
 		}
-		void set_brush(value_type value)
+		void set_brush(d2::value_type value)
 		{
 			auto mode = (core()->traverse()
 				/"sidebar"/"style"/"options"/"brush-choice").as<Button>();
@@ -252,7 +246,7 @@ namespace d2::templ::md2
 					brush_secondary_.v = value;
 				}
 			});
-		}	
+		}
 		void resize()
 		{
 			try
@@ -343,7 +337,7 @@ namespace d2::templ::md2
 			D2_LISTEN(Clicked, true) rsize = true; D2_LISTEN_END
 			D2_LISTEN_GLOBAL(MouseInput)
 				const auto rel = ptr->context()->input()
-					->is_pressed_mouse(sys::SystemInput::Left, sys::SystemInput::KeyMode::Release);
+					->is_pressed_mouse(d2::sys::SystemInput::Left, d2::sys::SystemInput::KeyMode::Release);
 				if (rel) rsize = false;
 				else if (rsize)
 				{
@@ -370,16 +364,15 @@ namespace d2::templ::md2
 						D2_STYLE(Value, "Open")
 						D2_STYLE(X, 0.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-						D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
-							auto p = ptr->screen()->traverse()
-								.asp()
-								->override<FilesystemExplorer>("__fs_open__")
-								.as<FilesystemExplorer>();
-							p->set<FilesystemExplorer::OnSubmit>([](Element::TraversalWrapper ptr) {
-								ptr->state()
-									->as<ModelEditorState>()
-									->open(ptr.as<FilesystemExplorer>()->getpath());
-							});
+						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
+							using d2::templ::FilesystemExplorer;
+							ptr->screen()->traverse().asp()->override<FilesystemExplorer>("__fs_open__")
+								.as<FilesystemExplorer>()->set<FilesystemExplorer::OnSubmit>(
+									[](d2::Element::TraversalWrapper ptr) {
+										ptr->state()
+											->as<ModelEditorState>()
+											->open(ptr.as<FilesystemExplorer>()->getpath());
+									});
 						})
 						D2_STYLES_APPLY(button_react)
 					D2_UELEM_END
@@ -387,16 +380,15 @@ namespace d2::templ::md2
 						D2_STYLE(Value, "Save")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-						D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
-							auto p = ptr->screen()->traverse()
-								.asp()
-								->override<FilesystemExplorer>("__fs_save__")
-								.as<FilesystemExplorer>();
-							p->set<FilesystemExplorer::OnSubmit>([](Element::TraversalWrapper ptr) {
-								ptr->state()
-									->as<ModelEditorState>()
-									->save(ptr.as<FilesystemExplorer>()->getpath());
-							});
+						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
+							using d2::templ::FilesystemExplorer;
+							ptr->screen()->traverse().asp()->override<FilesystemExplorer>("__fs_save__")
+								.as<FilesystemExplorer>()->set<FilesystemExplorer::OnSubmit>(
+									[](d2::Element::TraversalWrapper ptr) {
+										ptr->state()
+											->as<ModelEditorState>()
+											->save(ptr.as<FilesystemExplorer>()->getpath());
+									});
 						})
 						D2_STYLES_APPLY(button_react)
 					D2_UELEM_END
@@ -404,7 +396,7 @@ namespace d2::templ::md2
 						D2_STYLE(Value, "Exit")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-						D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
+						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
 							d2::templ::exit_prompt::create_at(
 								ptr->screen()->root(), ptr->state()
 							);
@@ -415,24 +407,23 @@ namespace d2::templ::md2
 						D2_STYLE(Value, "Theme")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-						D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
-							auto p = ptr->screen()->traverse()
-								.asp()
-								->override<ThemeSelector>("__theme_select__")
-								.as<ThemeSelector>();
-							p->set<ThemeSelector::OnSubmit>([](Element::TraversalWrapper ptr, const ThemeSelector::theme& theme) {
-								if (std::holds_alternative<ThemeSelector::accent_vec>(theme))
-								{
-									auto& accents = std::get<ThemeSelector::accent_vec>(theme);
-									if (!accents.empty())
-									{
-										MDTheme::accent_dynamic(
-											&ptr->state()->screen()->theme<MDTheme>(),
-											accents[0]
-										);
-									}
-								}
-							});
+						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
+							using d2::templ::ThemeSelector;
+							ptr->screen()->traverse().asp()->override<ThemeSelector>("__theme_select__")
+								.as<ThemeSelector>()->set<ThemeSelector::OnSubmit>(
+									[](d2::Element::TraversalWrapper ptr, const ThemeSelector::theme& theme) {
+										if (std::holds_alternative<ThemeSelector::accent_vec>(theme))
+										{
+											auto& accents = std::get<ThemeSelector::accent_vec>(theme);
+											if (!accents.empty())
+											{
+												MDTheme::accent_dynamic(
+													&ptr->state()->screen()->theme<MDTheme>(),
+													accents[0]
+												);
+											}
+										}
+									});
 						})
 						D2_STYLES_APPLY(button_react)
 					D2_UELEM_END
@@ -467,7 +458,7 @@ namespace d2::templ::md2
 						D2_STYLE(Value, "Resize")
 						D2_STYLE(X, 5.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-						D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
+						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
 							ptr->state()
 								->as<ModelEditorState>()
 								->resize();
@@ -478,16 +469,15 @@ namespace d2::templ::md2
 						D2_STYLE(Value, "Pick Color")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-						D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
-							auto p = ptr->screen()->traverse()
-								.asp()
-								->override<ColorPicker>("__color_picker__")
-								.as<ColorPicker>();
-							p->set<ColorPicker::OnSubmit>([](Element::TraversalWrapper ptr, px::background color) {
-								ptr->state()
-									->as<ModelEditorState>()
-									->set_color(color);
-							});
+						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
+							using d2::templ::ColorPicker;
+							ptr->screen()->traverse().asp()->override<ColorPicker>("__color_picker__")
+								.as<ColorPicker>()->set<ColorPicker::OnSubmit>(
+									[](d2::Element::TraversalWrapper ptr, d2::px::background color) {
+										ptr->state()
+											->as<ModelEditorState>()
+											->set_color(color);
+									});
 						})
 						D2_STYLES_APPLY(button_react)
 					D2_UELEM_END
@@ -496,7 +486,7 @@ namespace d2::templ::md2
 						D2_STYLE(Y, 0.0_relative)
 						D2_STYLE(X, 0.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-						D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
+						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
 							if (ptr.as<Button>()->get<Button::Value>()[0] == 'V')
 								ptr.as<Button>()->set<Button::Value>("Hex Mode");
 							else
@@ -508,7 +498,7 @@ namespace d2::templ::md2
 						D2_STYLE(Value, "L-Brush")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-						D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
+						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
 							if (ptr.as<Button>()->get<Button::Value>()[0] == 'L')
 								ptr.as<Button>()->set<Button::Value>("R-Brush");
 							else
@@ -520,7 +510,7 @@ namespace d2::templ::md2
 						D2_STYLE(Value, "Bg-Color")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-						D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
+						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
 							if (ptr.as<Button>()->get<Button::Value>()[0] == 'F')
 								ptr.as<Button>()->set<Button::Value>("Bg-Color");
 							else
@@ -534,7 +524,7 @@ namespace d2::templ::md2
 					D2_STYLE(Pre, "Value: ")
 					D2_STYLE(Width, 12.0_pxi)
 					D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-					D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr, string value) {
+					D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr, d2::string value) {
 						if (ptr.up().asp()
 							->at("options").asp()
 							->at("brush-mode").as<Button>()
@@ -548,7 +538,7 @@ namespace d2::templ::md2
 						{
 							ptr->state()
 								->as<ModelEditorState>()
-								->set_brush(value_type{ static_cast<value_type>(std::stoi(value, 0, 16)) });
+								->set_brush(static_cast<d2::value_type>(std::stoi(value, 0, 16)));
 						}
 					})
 					D2_STYLES_APPLY(align_vertical)

@@ -61,7 +61,6 @@ add_executable(DeltaAscii main.cpp
 
     # Programs
 
-    delt2a/templates/d2_model_editor.hpp
     delt2a/templates/d2_element_test.hpp
     delt2a/templates/d2_quedits.hpp
 
@@ -84,7 +83,6 @@ add_executable(DeltaAscii main.cpp
     delt2a/elements/d2_graph.hpp
     delt2a/elements/d2_checkbox.hpp
     delt2a/elements/d2_surface.hpp
-
 )
 
 include(GNUInstallDirs)
