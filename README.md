@@ -17,6 +17,7 @@ but so far the core features include:
 - reflection
 - macro based DSL for building UIs and interacting with the framework
 ## Roadmap
+- optimization (especially the naive implementations, e.g. utils/function.hpp)
 - full UTF8 support
 - memory optimization (compression, caching etc.)
 - images/videos/raster surfaces
