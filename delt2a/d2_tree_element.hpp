@@ -7,6 +7,7 @@
 #include <memory>
 #include <cmath>
 #include "d2_tree_element_frwd.hpp"
+#include "d2_styles_base.hpp"
 #include "d2_exceptions.hpp"
 #include "d2_io_handler.hpp"
 #include "d2_element_units.hpp"
@@ -15,7 +16,9 @@
 namespace d2
 {
 	class ParentElement;
-	class Element : public std::enable_shared_from_this<Element>
+	class Element :
+		public std::enable_shared_from_this<Element>,
+		public style::UniversalAccessInterfaceBase
 	{
 	public:
 		template<typename Type>
@@ -164,7 +167,7 @@ namespace d2
 		using unit_meta_flag = unsigned char;
 		using internal_flag = unsigned short;
 		using state_flag = unsigned char;
-		using write_flag = unsigned char;
+		using write_flag = element_write_flag;
 
 		using event_callback = std::function<void(EventListener, TraversalWrapper)>;
 		using foreach_callback = TraversalWrapper::foreach_callback;

@@ -3,6 +3,7 @@
 
 namespace d2
 {
+	using element_write_flag = unsigned char;
 	class Element;
 	class ParentElement;
 }

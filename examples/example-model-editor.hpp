@@ -568,7 +568,7 @@ namespace editor
 				d2::os::output,
 				d2::os::clipboard
 			>(),
-			d2::style::Theme::make<MDTheme>(&MDTheme::accent_dynamic, d2::colors::w::white)
+			d2::style::Theme::make<MDTheme>(MDTheme::accent_dynamic, d2::colors::w::white)
 		)->start_blocking(
 			d2::Screen::fps(44),
 			d2::Screen::Profile::Stable

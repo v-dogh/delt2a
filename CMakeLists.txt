@@ -83,6 +83,7 @@ add_executable(DeltaAscii main.cpp
     delt2a/elements/d2_graph.hpp
     delt2a/elements/d2_checkbox.hpp
     delt2a/elements/d2_surface.hpp
+    delt2a/d2_styles_base.hpp
 )
 
 include(GNUInstallDirs)

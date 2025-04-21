@@ -1,9 +1,9 @@
 #ifndef EXAMPLE_2_HPP
 #define EXAMPLE_2_HPP
 
-#include "delt2a/elements/d2_std.hpp"
-#include "delt2a/d2_std.hpp"
-#include "delt2a/templates/d2_debug_box.hpp"
+#include "../delt2a/elements/d2_std.hpp"
+#include "../delt2a/d2_std.hpp"
+#include "../delt2a/templates/d2_debug_box.hpp"
 
 // d2::Element is the base class for all elements
 // d2::ParentElement is a superset which represents an object that manages sub-elements

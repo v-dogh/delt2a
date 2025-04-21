@@ -9,18 +9,35 @@
 // Else compilation will proceed and the component will be null
 #define D2_COMPATIBILITY_MODE STRICT
 // Includes standard elements
-#include "delt2a/elements/d2_std.hpp"
+#include "../delt2a/elements/d2_std.hpp"
 // Includes core headers
-#include "delt2a/d2_std.hpp"
+#include "../delt2a/d2_std.hpp"
 // Includes the debug box template (tree)
-#include "delt2a/templates/d2_debug_box.hpp"
+#include "../delt2a/templates/d2_debug_box.hpp"
 // ^ Quedits tree
-#include "delt2a/templates/d2_quedits.hpp"
+#include "../delt2a/templates/d2_quedits.hpp"
 
 void example1()
 {
 	// Namespace with all of the standard elements
 	using namespace d2::dx;
+
+	// This part will be about theming so you can return to it after you look a bit at the tree
+	// Themes are handled through dependencies
+	// A dependency will track any subscribers and automatically update their values if its value changes
+	struct Theme : d2::style::Theme
+	{
+		// This will create a dependency with a type of a background color
+		// Any writes to this dependency will reflect in all dependent variables
+		Dependency<d2::px::background> color;
+
+		// This function will be passed to d2::style::Theme::make to initialize our default theme
+		// You can also make the initialization function take arguments and pass them to d2::style::Theme::make
+		static void default_accents(Theme* theme)
+		{
+			theme->color = d2::colors::g::olive;
+		}
+	};
 
 	// Defines a tree without any custom state
 	// The parameter is the symbol name which refers to the tree
@@ -41,6 +58,19 @@ void example1()
 			// The first argument is the property of the element
 			// The second one is the value which is set to the property
 			D2_STYLE(Value, "Click Me")
+			// Here we set the foreground color to the color Dependency from Theme
+			// For more about themes go to the beginning
+			D2_STYLE(ForegroundColor, D2_VAR(Theme, color))
+			// Dynavars allow you to process a dynamic variable before it is propagated
+			// Here we adjust the value's alpha channel
+			D2_STYLE(BackgroundColor, D2_DYNAVAR(Theme, color, value.alpha(0.3f)))
+
+			// Here we set the dependency to blue after 3 seconds which should become visible immediately
+			// After that time passes
+			// This is also how you normally refer to (without the dsl) the themes and dependencies
+			// You just pass them by reference to element.set(...)
+			// If you want to set a dynavar you use d2::style::dynavar<[](const auto& value) { ... }>(var)
+			D2_DEFER_EXPR(3000, state->screen()->theme<Theme>().color = d2::colors::b::blue)
 
 			// Units include
 			// _px (pixels)
@@ -56,7 +86,6 @@ void example1()
 
 			D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
 				// Changes the screen's tree
-				// std::terminate();
 				ptr
 					->screen()
 					->set("Test2");
@@ -173,8 +202,20 @@ void example1()
 		// The callback is where we set styles and perform any initialization
 		d2::tree::Elem<Text, "name", [](d2::Element::TraversalWrapper elem, d2::TreeState::ptr state) {
 			Text& ptr = *elem.as<Text>();
-			ptr.set<Text::X>(0.0_center);
-			ptr.set<Text::X>(0.0_center);
+			ptr
+				.set<Text::X>(0.0_center)
+				.set<Text::Y>(0.0_center);
+
+			// While 'set/get' are the most convenient way to access properties, one can also use their 'more' type erased variants
+			// set/get_for instead operate on interfaces and do not require you to know the exact object type
+			// E.g. to se the foreground color
+			elem->set_for<
+				// We pass the interface
+				d2::style::IColors,
+				// We pass the property
+				// the IZ variant is just an instantiation of IColors<0> so you can access the properties more easily
+				d2::style::IZColors::ForegroundColor
+			>(d2::colors::b::indigo);
 
 			state->context()->scheduler()->launch_cyclic_task([ptr = elem.as<Text>(), state](auto) {
 				static constexpr d2::string_view str{ "Hello World!" };
@@ -224,7 +265,11 @@ void example1()
 			d2::os::input,
 			d2::os::output,
 			d2::os::clipboard
-		>()
+		>(),
+		// Here we load the theme into the screen
+		// This will make it accessible at d2::Screen::theme<Type>
+		// You can also load themes at runtime with d2::Screen::create_theme
+		d2::style::Theme::make<Theme>(Theme::default_accents)
 	// Starts the application
 	)->start_blocking(
 		// Sets the target delay between frames
