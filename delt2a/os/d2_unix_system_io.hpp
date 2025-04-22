@@ -614,20 +614,18 @@ namespace d2::sys
 			out_.reserve(
 				(buffer.size()) * sizeof(value_type) +
 				(height + 1) +
-				cls_code_.size() +
-				max_color_len_ * 5
+				max_color_len_ * 2
 			);
 
 			// Clean redraw
 			if (buffer.size() != previous_frame_.size() ||
-				// Check all corners, if changed it is likely that the entire frame changed
+				// Check top left and bottom right corners (if changed, it is likely that the entire screen changed)
 				(buffer[0] != previous_frame_[0] &&
 				 buffer[buffer.size() - 1] != previous_frame_[buffer.size() - 1] &&
 				 buffer[width - 1] != previous_frame_[width - 1] &&
 				 buffer[buffer.size() - width] != previous_frame_[buffer.size() - width]))
 			{
 				out_.insert(out_.end(), cls_code_.begin(), cls_code_.end());
-
 				for (auto it = buffer.begin(); it != buffer.end();)
 				{
 					const auto& px = *it;
@@ -720,20 +718,6 @@ namespace d2::sys
 				constexpr auto chunk = 1024ull;
 				constexpr auto frame_upper_bound = 56ull * 1024ull;
 				D2_EXPECT(out_.size() <= frame_upper_bound)
-
-				// Results in visual tearing with large buffers (same as unchunked)
-				// std::array<iovec, frame_upper_bound / chunk> chunks;
-				// const auto len = (out_.size() + chunk - 1) / chunk;
-				// for (std::size_t i = 0; i < len; i++)
-				// {
-				// 	const auto idx = i * chunk;
-				// 	const auto rem = out_.size() - idx;
-				// 	chunks[i] = iovec{
-				// 		.iov_base = out_.data() + idx,
-				// 		.iov_len = std::min(chunk, rem)
-				// 	};
-				// }
-				// _writev({ chunks.begin(), chunks.begin() + len });
 
 				const auto len = (out_.size() + chunk - 1) / chunk;
 				for (std::size_t i = 0; i < len; i++)

@@ -1,6 +1,7 @@
 #ifndef D2_PIXEL_HPP
 #define D2_PIXEL_HPP
 
+#include <functional>
 #include <cstdint>
 #include <cstring>
 #include <span>
@@ -206,6 +207,20 @@ namespace d2
 			value.bf = from.bf + progress * (to.bf - from.bf);
 			value.af = from.af + progress * (to.af - from.af);
 			return value;
+		}
+
+		static PixelBase cform(std::uint64_t len) noexcept
+		{
+			PixelBase px;
+			*reinterpret_cast<std::uint64_t*>(&px.g) = len;
+			px.style = Style::Reserved;
+			return px;
+		}
+		static std::size_t is_cform(const PixelBase& px) noexcept
+		{
+			if (px.style == Style::Reserved)
+				return *reinterpret_cast<const std::uint64_t*>(&px.g);
+			return 0;
 		}
 
 		void blend(const PixelBase& src) noexcept
@@ -598,11 +613,143 @@ namespace d2
 			View& operator=(const View&) = default;
 			View& operator=(View&&) = default;
 		};
+		class RleIterator
+		{
+		private:
+			std::span<const PixelBase> _buffer{};
+			std::span<const PixelBase>::iterator _current{};
+			std::size_t _rem{ 0 };
+		public:
+			RleIterator() = default;
+			RleIterator(std::nullptr_t) {}
+			RleIterator(std::span<const PixelBase> buffer)
+				: _buffer(buffer), _current(buffer.begin())
+			{
+				if (!buffer.empty() &&
+					(_rem = PixelBase::is_cform(_buffer[0])) > 0)
+				{
+					++_current;
+				}
+			}
+			RleIterator(const RleIterator&) = default;
+			RleIterator(RleIterator&&) = default;
+
+			void increment() noexcept
+			{
+				if (!is_end() && !_rem)
+				{
+					++_current;
+					if ((_rem = PixelBase::is_cform(*_current)) > 0)
+					{
+						++_current;
+					}
+				}
+			}
+			bool is_end() const noexcept
+			{
+				return _current == _buffer.end();
+			}
+			const auto& value() const noexcept
+			{
+				return *_current;
+			}
+
+			RleIterator& operator=(const RleIterator&) = default;
+			RleIterator& operator=(RleIterator&&) = default;
+		};
 	protected:
 		std::vector<Pixel> buffer_{};
 		int width_{ 0 };
 		int height_{ 0 };
 	public:
+		static std::vector<Pixel> rle_pack(std::span<const Pixel> buffer) noexcept
+		{
+			if (buffer.empty())
+				return {};
+
+			std::vector<Pixel> result;
+			result.reserve(buffer.size());
+
+			Pixel current = buffer[0];
+			std::size_t len = 0;
+			for (auto it = buffer.begin(); it != buffer.end(); ++it)
+			{
+				const auto& px = *it;
+				if (px == current)
+				{
+					len++;
+				}
+				else
+				{
+					if (len > 2)
+					{
+						result.push_back(PixelBase::cform(len));
+						result.push_back(current);
+					}
+					else if (len == 2)
+					{
+						result.push_back(current);
+						result.push_back(current);
+					}
+					else
+					{
+						result.push_back(current);
+					}
+					current = px;
+					len = 1;
+				}
+			}
+
+			result.shrink_to_fit();
+			return result;
+		}
+		static std::vector<Pixel> rle_unpack(std::span<const Pixel> buffer) noexcept
+		{
+			std::vector<Pixel> result;
+			result.reserve(buffer.size() * 3);
+
+			for (auto it = buffer.begin(); it != buffer.end(); ++it)
+			{
+				if (const auto len = PixelBase::is_cform(*it))
+				{
+					auto& px = *(++it);
+					for (std::size_t i = 0; i < len; i++)
+						result.push_back(px);
+					if (it == buffer.end())
+						break;
+				}
+				else
+				{
+					result.push_back(*it);
+				}
+			}
+
+			result.shrink_to_fit();
+			return result;
+		}
+		static void rle_walk(std::span<const Pixel> buffer, std::function<void(Pixel)> func) noexcept
+		{
+			for (auto it = buffer.begin(); it != buffer.end(); ++it)
+			{
+				if (const auto len = PixelBase::is_cform(*it))
+				{
+					auto& px = *(++it);
+					for (std::size_t i = 0; i < len; i++)
+						func(px);
+					if (it == buffer.end())
+						break;
+				}
+				else
+				{
+					func(*it);
+				}
+			}
+		}
+		static RleIterator rle_iterator(std::span<const Pixel> buffer) noexcept
+		{
+			return RleIterator(buffer);
+		}
+
 		PixelBuffer() = default;
 		PixelBuffer(int w, int h)
 			: width_(w), height_(h) {}

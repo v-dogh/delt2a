@@ -620,7 +620,10 @@ namespace d2
 				_buffer.width(), _buffer.height()
 			};
 		}
-		virtual bool _provides_buffer_impl() const noexcept { return false; }
+		virtual bool _provides_buffer_impl() const noexcept
+		{
+			return false;
+		}
 
 		// Core
 
@@ -771,7 +774,6 @@ namespace d2
 
 		Frame frame()
 		{
-
 			if (_internal_state & WasWrittenLayout)
 			{
 				_update_layout_impl();
