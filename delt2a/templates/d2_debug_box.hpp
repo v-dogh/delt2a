@@ -104,7 +104,7 @@ namespace d2::templ
 					D2_ELEM(Text, performance-values)
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 2.0_px)
-						D2_STYLE(HandleNewlines, true)
+						D2_STYLE(TextHandleNewlines, true)
 						D2_CYCLIC_TASK(1000)
 							static std::function<std::size_t(d2::Element::TraversalWrapper)> func = nullptr;
 							static auto count_elements_recursive = [](d2::Element::TraversalWrapper elem) -> std::size_t {
@@ -170,7 +170,7 @@ namespace d2::templ
 						D2_STYLE(Value, "Value: ")
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 0.0_relative)
-						D2_STYLE(HandleNewlines, true)
+						D2_STYLE(TextHandleNewlines, true)
 						D2_CYCLIC_TASK(5000)
 							auto* clipboard = state->context()->sys_if<sys::ext::SystemClipboard>();
 							ptr.as<Text>()->set<Text::Value>(std::format("Value: {}",

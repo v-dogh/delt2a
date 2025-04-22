@@ -293,7 +293,7 @@ namespace editor
 	D2_STYLESHEET_END(button_react)
 
 	D2_STATEFUL_TREE(model_editor, ModelEditorState)
-		// D2_INJECT_TREE(d2::templ::debug)
+		D2_INJECT_TREE(d2::templ::debug)
 		// The main editor
 		D2_ELEM_NESTED(Box, editor)
 			D2_STYLE(X, 0.0_relative)
