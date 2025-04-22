@@ -320,21 +320,6 @@ namespace editor
 				D2_STYLE(X, 0.0_center)
 				D2_STYLE(Y, 0.0_center)
 			D2_ELEM_END(model)
-			D2_ELEM(Text, test)
-				D2_STYLE(X, 0.0_center)
-				D2_STYLE(Y, 0.0_center)
-				D2_STYLE(TextHandleNewlines, true)
-				D2_CYCLIC_TASK(1000)
-					ptr.as<Text>()->set<Text::Value>(std::format(
-						"Components: {}\nFps/avg: {}\nDelta: {}\nFbuf: {}\nAnimations: {}",
-						state->context()->syscnt(),
-						state->screen()->fps(),
-						state->screen()->delta(),
-						state->context()->output()->as<d2::sys::UnixOutput>()->buffer_size(),
-						state->screen()->animations()
-					));
-				D2_CYCLIC_END
-			D2_ELEM_END(test)
 		D2_ELEM_NESTED_END(editor)
 		// Sidebar with all of the options
 		D2_ELEM_NESTED(Box, sidebar)
