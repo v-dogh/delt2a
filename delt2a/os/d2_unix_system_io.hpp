@@ -1,6 +1,7 @@
 #ifndef LINUX_IO_HANDLERS_HPP
 #define LINUX_IO_HANDLERS_HPP
 
+#include <sys/uio.h>
 #include <sys/ioctl.h>
 #include <termios.h>
 #include <unistd.h>
@@ -376,15 +377,18 @@ namespace d2::sys
 		static constexpr auto max_color_len_ =
 			std::string_view("\033[RX;RX;RX;RX;RX;RX;RX;m").size() +
 			(std::string_view("38;2;255;255;255").size() * 2);
+		static constexpr auto max_pos_len_ =
+			std::string_view("\x1b[XXXX;XXXXH").size();
 		static constexpr auto max_sixel_len_ = std::string_view("63;63;63m").size();
-		static constexpr auto cls_code_ = std::string_view("\033[H");// std::string_view("\033[2J\033[1;1H");
+		static constexpr auto cls_code_ = std::string_view("\033[H");
 
-		std::vector<unsigned char> out_{};
 		std::chrono::microseconds frame_time_{ 0 };
+		std::vector<unsigned char> out_{};
+		std::vector<Pixel> previous_frame_{};
 		std::size_t buffer_size_{ 0 };
+		std::uint8_t track_style_{};
 		PixelForeground track_foreground_{};
 		PixelBackground track_background_{};
-		std::uint8_t track_style_{};
 
 		std::mutex mtx_{};
 		std::unordered_map<
@@ -437,7 +441,26 @@ namespace d2::sys
 			return img;
 		}
 
-		auto _generate_color(const Pixel& px) noexcept
+		auto _generate_position(int x, int y, bool skip = false) noexcept
+		{
+			D2_EXPECT(x <= 9999 && y <= 9999)
+
+			using buffer = std::array<char, max_pos_len_>;
+
+			if (skip)
+				return std::make_pair(buffer(), 0);
+
+			buffer result{ "\x1b[" };
+
+			const auto [ ptr1, _1 ] = std::to_chars(result.begin() + 2, result.end(), y + 1);
+			const auto [ ptr2, _2 ] = std::to_chars(ptr1 + 1, result.end(), x + 1);
+
+			*ptr1 = ';';
+			*ptr2 = 'H';
+
+			return std::make_pair(result, int(ptr2 - result.begin() + 1));
+		}
+		auto _generate_color(const Pixel& px, bool force = false) noexcept
 		{
 			using buffer = std::array<char, max_color_len_>;
 
@@ -451,10 +474,12 @@ namespace d2::sys
 			// Preds
 
 			const auto do_background =
+				force ||
 				px.r != track_background_.r ||
 				px.g != track_background_.g ||
 				px.b != track_background_.b;
 			const auto do_foreground =
+				force ||
 				px.rf != track_foreground_.r ||
 				px.gf != track_foreground_.g ||
 				px.bf != track_foreground_.b;
@@ -467,7 +492,7 @@ namespace d2::sys
 			// Styles
 
 			buffer::iterator ptr = code.begin() + style_code.size();
-			if (px.style != track_style_)
+			if (force || px.style != track_style_)
 			{
 				for (std::size_t i = 0; i < 7; i++)
 				{
@@ -532,6 +557,7 @@ namespace d2::sys
 
 			return std::make_pair(code, int(ptrfe - code.begin() + 1));
 		}
+
 		void _write(std::span<const unsigned char> buffer) noexcept
 		{
 			::write(STDOUT_FILENO, buffer.data(), buffer.size());
@@ -539,6 +565,10 @@ namespace d2::sys
 		void _write(std::span<const char> buffer) noexcept
 		{
 			::write(STDOUT_FILENO, buffer.data(), buffer.size());
+		}
+		void _writev(std::span<const iovec> vecs) noexcept
+		{
+			::writev(STDOUT_FILENO, vecs.data(), vecs.size());
 		}
 	public:
 		using SystemOutput::SystemOutput;
@@ -575,54 +605,152 @@ namespace d2::sys
 		{
 			std::unique_lock lock(mtx_);
 
+			const auto beg = std::chrono::high_resolution_clock::now();
+
 			track_style_ = 0x00;
 			track_foreground_ = PixelForeground(255, 255, 255);
 			track_background_ = PixelBackground(0, 0, 0);
 
-			volatile const auto beg = std::chrono::high_resolution_clock::now();
 			out_.reserve(
 				(buffer.size()) * sizeof(value_type) +
 				(height + 1) +
 				cls_code_.size() +
 				max_color_len_ * 5
 			);
-			out_.insert(out_.end(), cls_code_.begin(), cls_code_.end());
 
-			for (auto it = buffer.begin(); it != buffer.end();)
+			// Clean redraw
+			if (buffer.size() != previous_frame_.size() ||
+				// Check all corners, if changed it is likely that the entire frame changed
+				(buffer[0] != previous_frame_[0] &&
+				 buffer[buffer.size() - 1] != previous_frame_[buffer.size() - 1] &&
+				 buffer[width - 1] != previous_frame_[width - 1] &&
+				 buffer[buffer.size() - width] != previous_frame_[buffer.size() - width]))
 			{
-				const auto& px = *it;
-				const auto [ code, len ] = _generate_color(px);
+				out_.insert(out_.end(), cls_code_.begin(), cls_code_.end());
 
-				auto sit = it;
-				while (sit != buffer.end() && px.compare_colors(*sit)) ++sit;
-
-				const std::size_t abs_start = it - buffer.begin();
-				const std::size_t abs_end = sit - buffer.begin();
-				const std::size_t edls = (abs_end - abs_start) / width;
-
-				out_.reserve(out_.size() + len + ((sit - it) * sizeof(value_type)) + edls);
-				out_.insert(out_.end(), code.begin(), code.begin() + len);
-
-				while (it != sit)
+				for (auto it = buffer.begin(); it != buffer.end();)
 				{
-					const auto abs = it - buffer.begin();
-					if (abs && !(abs % width))
-						out_.push_back('\n');
-					out_.push_back(it->v);
-					++it;
-				}
+					const auto& px = *it;
+					const auto [ code, len ] = _generate_color(px);
 
-				if (sit == buffer.end())
-					break;
+					auto sit = it;
+					while (sit != buffer.end() && px.compare_colors(*sit)) ++sit;
+
+					const auto abs_start = it - buffer.begin();
+					const auto abs_end = sit - buffer.begin();
+					const auto edls = (abs_end - abs_start) / width;
+
+					out_.reserve(out_.size() + len + ((sit - it) * sizeof(value_type)) + edls);
+					out_.insert(out_.end(), code.begin(), code.begin() + len);
+
+					while (it != sit)
+					{
+						const auto abs = it - buffer.begin();
+						if (abs && !(abs % width) && abs != abs_start)
+							out_.push_back('\n');
+						out_.push_back(it->v);
+						++it;
+					}
+
+					if (sit == buffer.end())
+						break;
+				}
+			}
+			else
+			{
+				bool sequential = false;
+				bool linear = false;
+				for (auto it = buffer.begin(); it != buffer.end();)
+				{
+					if (const auto& px = *it;
+						px != previous_frame_[it - buffer.begin()])
+					{
+						const auto idx = it - buffer.begin();
+						const auto x = idx % width;
+						const auto y = idx / width;
+						const auto [ pos, plen ] = _generate_position(x, y, linear && sequential);
+						const auto [ code, len ] = _generate_color(px, !sequential);
+
+						auto sit = it;
+						auto cnt = 0;
+						while (sit != buffer.end() &&
+							   *sit != previous_frame_[idx + cnt] &&
+							   px.compare_colors(*sit))
+						{
+							++sit;
+							++cnt;
+						}
+
+						const auto end = sit - buffer.begin();
+						const auto edls = (end - idx) / width;
+
+						out_.reserve(out_.size() + len + plen + ((sit - it) * sizeof(value_type)) + edls);
+						out_.insert(out_.end(), pos.begin(), pos.begin() + plen);
+						out_.insert(out_.end(), code.begin(), code.begin() + len);
+
+						linear = true;
+						sequential = true;
+						while (it != sit)
+						{
+							const auto abs = it - buffer.begin();
+							if (abs && !(abs % width) && abs != idx)
+							{
+								linear = false;
+								out_.push_back('\n');
+							}
+							out_.push_back(it->v);
+							++it;
+						}
+
+						if (sit == buffer.end())
+							break;
+					}
+					else
+					{
+						const auto abs = it - buffer.begin();
+						linear = !(abs && !(abs % width));
+						sequential = false;
+						++it;
+					}
+				}
 			}
 
+			if (!out_.empty())
+			{
+				constexpr auto chunk = 1024ull;
+				constexpr auto frame_upper_bound = 56ull * 1024ull;
+				D2_EXPECT(out_.size() <= frame_upper_bound)
+
+				// Results in visual tearing with large buffers (same as unchunked)
+				// std::array<iovec, frame_upper_bound / chunk> chunks;
+				// const auto len = (out_.size() + chunk - 1) / chunk;
+				// for (std::size_t i = 0; i < len; i++)
+				// {
+				// 	const auto idx = i * chunk;
+				// 	const auto rem = out_.size() - idx;
+				// 	chunks[i] = iovec{
+				// 		.iov_base = out_.data() + idx,
+				// 		.iov_len = std::min(chunk, rem)
+				// 	};
+				// }
+				// _writev({ chunks.begin(), chunks.begin() + len });
+
+				const auto len = (out_.size() + chunk - 1) / chunk;
+				for (std::size_t i = 0; i < len; i++)
+				{
+					const auto idx = i * chunk;
+					const auto rem = out_.size() - idx;
+					_write({ out_.begin() + idx, out_.begin() + idx + std::min(chunk, rem) });
+				}
+
+				previous_frame_.clear();
+				previous_frame_.insert(previous_frame_.end(), buffer.begin(), buffer.end());
+			}
 			buffer_size_ = out_.size();
-			_write({ out_.begin(), out_.end() });
 			out_.clear();
 
 			frame_time_ = std::chrono::duration_cast<std::chrono::microseconds>(
-				std::chrono::high_resolution_clock::now() -
-				const_cast<const std::chrono::high_resolution_clock::time_point&>(beg)
+				std::chrono::high_resolution_clock::now() - beg
 			);
 		}
 	};

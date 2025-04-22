@@ -900,7 +900,7 @@ namespace d2::style
 		};
 
 		string text{ "" };
-		Alignment alignment{};
+		Alignment alignment{ Alignment::Center };
 		unsigned char text_options{ 0x00 };
 
 		template<uai_property Property>

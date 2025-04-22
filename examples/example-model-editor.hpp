@@ -7,6 +7,7 @@
 #include "../delt2a/templates/d2_color_picker.hpp"
 #include "../delt2a/templates/d2_file_explorer.hpp"
 #include "../delt2a/templates/d2_theme_selector.hpp"
+#include "../delt2a/templates/d2_debug_box.hpp"
 
 // To run this example call editor::run()
 namespace editor
@@ -292,6 +293,7 @@ namespace editor
 	D2_STYLESHEET_END(button_react)
 
 	D2_STATEFUL_TREE(model_editor, ModelEditorState)
+		// D2_INJECT_TREE(d2::templ::debug)
 		// The main editor
 		D2_ELEM_NESTED(Box, editor)
 			D2_STYLE(X, 0.0_relative)
@@ -318,6 +320,21 @@ namespace editor
 				D2_STYLE(X, 0.0_center)
 				D2_STYLE(Y, 0.0_center)
 			D2_ELEM_END(model)
+			D2_ELEM(Text, test)
+				D2_STYLE(X, 0.0_center)
+				D2_STYLE(Y, 0.0_center)
+				D2_STYLE(TextHandleNewlines, true)
+				D2_CYCLIC_TASK(1000)
+					ptr.as<Text>()->set<Text::Value>(std::format(
+						"Components: {}\nFps/avg: {}\nDelta: {}\nFbuf: {}\nAnimations: {}",
+						state->context()->syscnt(),
+						state->screen()->fps(),
+						state->screen()->delta(),
+						state->context()->output()->as<d2::sys::UnixOutput>()->buffer_size(),
+						state->screen()->animations()
+					));
+				D2_CYCLIC_END
+			D2_ELEM_END(test)
 		D2_ELEM_NESTED_END(editor)
 		// Sidebar with all of the options
 		D2_ELEM_NESTED(Box, sidebar)
