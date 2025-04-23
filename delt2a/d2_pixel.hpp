@@ -212,14 +212,14 @@ namespace d2
 		static PixelBase cform(std::uint64_t len) noexcept
 		{
 			PixelBase px;
-			*reinterpret_cast<std::uint64_t*>(&px.g) = len;
+			*reinterpret_cast<std::uint64_t*>(&px.r) = len;
 			px.style = Style::Reserved;
 			return px;
 		}
 		static std::size_t is_cform(const PixelBase& px) noexcept
 		{
 			if (px.style == Style::Reserved)
-				return *reinterpret_cast<const std::uint64_t*>(&px.g);
+				return *reinterpret_cast<const std::uint64_t*>(&px.r);
 			return 0;
 		}
 
@@ -532,6 +532,12 @@ namespace d2
 	class PixelBuffer
 	{
 	public:
+		enum class RleBreak
+		{
+			Continue,
+			SkipRest,
+			SkipLine
+		};
 		class View
 		{
 		private:
@@ -542,6 +548,7 @@ namespace d2
 			int height_{ 0 };
 		public:
 			View() = default;
+			View(std::nullptr_t) {}
 			View(View&&) = default;
 			View(const View&) = default;
 			explicit View(PixelBuffer* ptr, int x, int y, int width, int height)
@@ -552,39 +559,64 @@ namespace d2
 				width_(width), height_(height)
 			{}
 
+			std::span<const Pixel> data() const noexcept
+			{
+				D2_ASSERT(buffer_ != nullptr)
+				return buffer_->data();
+			}
+
 			void clear() noexcept
 			{
+				D2_ASSERT(buffer_ != nullptr)
 				buffer_->clear();
 			}
 			void fill(Pixel px) noexcept
 			{
+				D2_ASSERT(buffer_ != nullptr)
 				buffer_->fill(
 					px, xoff_, yoff_, width_, height_
 				);
 			}
 			void fill(Pixel px, int x, int y, int width, int height) noexcept
 			{
+				D2_ASSERT(buffer_ != nullptr)
 				buffer_->fill(
 					px, x + xoff_, y + yoff_, width, height
 				);
 			}
 
+			bool compressed() const noexcept
+			{
+				D2_ASSERT(buffer_ != nullptr)
+				return buffer_->compressed_;
+			}
 			bool empty() const noexcept
 			{
-				return buffer_->empty();
+				return buffer_ == nullptr || buffer_->empty();
 			}
 
 			int width() const noexcept
 			{
+				D2_ASSERT(buffer_ != nullptr)
 				return width_;
 			}
 			int height() const noexcept
 			{
+				D2_ASSERT(buffer_ != nullptr)
 				return height_;
+			}
+			int xpos() const noexcept
+			{
+				return xoff_;
+			}
+			int ypos() const noexcept
+			{
+				return yoff_;
 			}
 
 			const Pixel& at(int x, int y) const noexcept
 			{
+				D2_ASSERT(buffer_ != nullptr)
 				return buffer_->buffer_[
 					((y + yoff_) * buffer_->width_) + (x + xoff_)
 				];
@@ -596,6 +628,7 @@ namespace d2
 
 			const Pixel& at(int c) const noexcept
 			{
+				D2_ASSERT(buffer_ != nullptr)
 				const auto idxx = c % width_;
 				const auto idxy = c / width_;
 				return at(idxx, idxy);
@@ -607,6 +640,7 @@ namespace d2
 
 			void inscribe(int x, int y, const View& sub) noexcept
 			{
+				D2_ASSERT(buffer_ != nullptr)
 				return buffer_->inscribe(x, y, sub);
 			}
 
@@ -666,6 +700,7 @@ namespace d2
 		std::vector<Pixel> buffer_{};
 		int width_{ 0 };
 		int height_{ 0 };
+		bool compressed_{ false };
 	public:
 		static std::vector<Pixel> rle_pack(std::span<const Pixel> buffer) noexcept
 		{
@@ -680,12 +715,11 @@ namespace d2
 			for (auto it = buffer.begin(); it != buffer.end(); ++it)
 			{
 				const auto& px = *it;
-				if (px == current)
+				const auto cmp = px == current;
+				len += cmp;
+				if (!cmp || (it + 1) == buffer.end())
 				{
-					len++;
-				}
-				else
-				{
+
 					if (len > 2)
 					{
 						result.push_back(PixelBase::cform(len));
@@ -732,7 +766,7 @@ namespace d2
 			result.shrink_to_fit();
 			return result;
 		}
-		static void rle_walk(std::span<const Pixel> buffer, std::function<void(Pixel)> func) noexcept
+		static void rle_walk(std::span<const Pixel> buffer, std::function<bool(const Pixel&)> func) noexcept
 		{
 			for (auto it = buffer.begin(); it != buffer.end(); ++it)
 			{
@@ -740,14 +774,130 @@ namespace d2
 				{
 					auto& px = *(++it);
 					for (std::size_t i = 0; i < len; i++)
-						func(px);
+					{
+						if (!func(px))
+							return;
+					}
 					if (it == buffer.end())
 						break;
 				}
 				else
 				{
-					func(*it);
+					if (!func(*it))
+						return;
 				}
+			}
+		}
+		static void rle_mdwalk(std::span<const Pixel> buffer, int width, int height, int xf, int yf, std::function<RleBreak(int, int, const Pixel&)> func) noexcept
+		{
+			int x = xf;
+			int y = yf;
+			int skip = 0;
+			for (auto it = buffer.begin(); it != buffer.end(); ++it)
+			{
+				if (const auto len = PixelBase::is_cform(*it))
+				{
+					auto& px = *(++it);
+					for (std::size_t i = 0; i < len; i++)
+					{
+						if (x >= xf && x < xf + width &&
+							y >= yf && y < yf + height)
+						{
+							if (!skip)
+							{
+								const auto res = func(x, y, px);
+								if ((++x % width) == 0)
+								{
+									x = 0;
+									y++;
+								}
+
+								if (res == RleBreak::SkipLine)
+								{
+									const auto req = width - x - 1;
+									if (req > len - i)
+									{
+										skip = req - (len - i);
+										break;
+									}
+									else
+									{
+										i += req;
+										if (i >= len)
+											break;
+									}
+								}
+								else if (res == RleBreak::SkipRest)
+								{
+									return;
+								}
+							}
+							else
+							{
+								if ((++x % width) == 0)
+								{
+									x = 0;
+									y++;
+								}
+							}
+						}
+						else
+						{
+							++x;
+							if (x >= xf + width)
+							{
+								x = 0;
+								y++;
+							}
+						}
+					}
+					if (it == buffer.end())
+						break;
+				}
+				else
+				{
+					if (x >= xf && x < xf + width &&
+						y >= yf && y < yf + height)
+					{
+						if (!skip)
+						{
+							const auto res = func(x, y, *it);
+							if ((++x % width) == 0)
+							{
+								x = 0;
+								y++;
+							}
+
+							if (res == RleBreak::SkipLine)
+							{
+								skip = width - x - 1;
+							}
+							else if (res == RleBreak::SkipRest)
+							{
+								return;
+							}
+						}
+						else
+						{
+							if ((++x % width) == 0)
+							{
+								x = 0;
+								y++;
+							}
+						}
+					}
+					else
+					{
+						++x;
+						if (x >= xf + width)
+						{
+							x = 0;
+							y++;
+						}
+					}
+				}
+				if (y >= yf + height)
+					break;
 			}
 		}
 		static RleIterator rle_iterator(std::span<const Pixel> buffer) noexcept
@@ -776,6 +926,7 @@ namespace d2
 			buffer_.shrink_to_fit();
 			width_ = 0;
 			height_ = 0;
+			compressed_ = false;
 		}
 		void fill(Pixel px) noexcept
 		{
@@ -786,7 +937,7 @@ namespace d2
 			for (std::size_t i = y; i < height; i++)
 				for (std::size_t j = x; j < width; j++)
 				{
-					buffer_[(i * width) + j] = px;
+					buffer_[(i * width_) + j] = px;
 				}
 		}
 
@@ -794,10 +945,16 @@ namespace d2
 		{
 			return buffer_.empty();
 		}
+		bool compressed() const noexcept
+		{
+			return compressed_;
+		}
+
 		void set_size(int w, int h) noexcept
 		{
 			if (w > 0 && h > 0)
 			{
+				compressed_ = false;
 				width_ = w;
 				height_ = h;
 				buffer_.clear();
@@ -810,6 +967,7 @@ namespace d2
 		}
 		void reset(std::vector<Pixel> data, int w, int h) noexcept
 		{
+			compressed_ = false;
 			width_ = w;
 			height_ = h;
 			buffer_ = std::move(data);
@@ -817,6 +975,11 @@ namespace d2
 			{
 				buffer_.resize(width_ * height_);
 			}
+		}
+		void compress()
+		{
+			buffer_ = rle_pack(buffer_);
+			compressed_ = true;
 		}
 
 		int width() const noexcept
@@ -850,21 +1013,43 @@ namespace d2
 			return buffer_[c];
 		}
 
-		void inscribe(int x, int y, View view) noexcept
+		void inscribe(int xf, int yf, View view) noexcept
 		{
-			const int xdiff = (x < 0) * -x;
-			const int ydiff = (y < 0) * -y;
-			for (std::size_t ys = ydiff; ys < view.height(); ys++)
+			if (view.empty())
+				return;
+
+			const int xdiff = (xf < 0) * -xf;
+			const int ydiff = (yf < 0) * -yf;
+			if (view.compressed())
 			{
-				if (ys + y >= height_)
-					break;
-				for (std::size_t xs = xdiff; xs < view.width(); xs++)
+				rle_mdwalk(view.data(),
+					view.width(), view.height(),
+					xdiff + view.xpos(), ydiff + view.ypos(),
+					[&xdiff, &ydiff, &xf, &yf, this](int xs, int ys, const Pixel& px) -> RleBreak {
+						if (ys + yf >= height_)
+							return RleBreak::SkipRest;
+						if (xs + xf >= width_)
+							return RleBreak::SkipLine;
+						auto& dest = at(xs + xf, ys + yf);
+						dest.blend(px);
+						return RleBreak::Continue;
+					}
+				);
+			}
+			else
+			{
+				for (std::size_t ys = ydiff; ys < view.height(); ys++)
 				{
-					if (xs + x >= width_)
+					if (ys + yf >= height_)
 						break;
-					const auto src = view.at(xs, ys);
-					auto& dest = at(xs + x, ys + y);
-					dest.blend(src);
+					for (std::size_t xs = xdiff; xs < view.width(); xs++)
+					{
+						if (xs + xf >= width_)
+							break;
+						const auto src = view.at(xs, ys);
+						auto& dest = at(xs + xf, ys + yf);
+						dest.blend(src);
+					}
 				}
 			}
 		}

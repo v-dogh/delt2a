@@ -677,13 +677,12 @@ namespace d2::sys
 						const auto [ code, len ] = _generate_color(px, !sequential);
 
 						auto sit = it;
-						auto cnt = 0;
 						while (sit != buffer.end() &&
-							   *sit != previous_frame_[idx + cnt] &&
+							   *sit != pv_it.value() &&
 							   px.compare_colors(*sit))
 						{
+							pv_it.increment();
 							++sit;
-							++cnt;
 						}
 
 						const auto end = sit - buffer.begin();
@@ -704,7 +703,6 @@ namespace d2::sys
 								out_.push_back('\n');
 							}
 							out_.push_back(it->v);
-							pv_it.increment();
 							++it;
 						}
 

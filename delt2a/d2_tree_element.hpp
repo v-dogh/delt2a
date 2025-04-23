@@ -198,8 +198,10 @@ namespace d2
 			PositionUpdated = 1 << 4,
 			// Indicates that the object's framebuffer should not be compressed
 			CachePolicyDynamic = 1 << 5,
-			// Indicates that the object's framebuffer should not be cached
-			CachePolicyVolatile = 1 << 6
+			// Indicates that the object should me drawn in immediate mode
+			CachePolicyVolatile = 1 << 6,
+			// Indicates that the object's framebuffer should be preemptively compressed
+			CachePolicyStatic = 1 << 7,
 		};
 		enum WriteType : write_flag
 		{
@@ -407,7 +409,7 @@ namespace d2
 		// Flags
 
 		mutable std::atomic<state_flag> _state{ Display | Swapped };
-		mutable std::atomic<internal_flag> _internal_state{ WasWritten | WasWrittenLayout };
+		mutable std::atomic<internal_flag> _internal_state{ WasWritten | WasWrittenLayout | CachePolicyStatic };
 
 		// Listeners
 
@@ -615,10 +617,22 @@ namespace d2
 		virtual BoundingBox _reserve_buffer_impl() const noexcept { return box(); }
 		virtual PixelBuffer::View _fetch_pixel_buffer_impl() const noexcept
 		{
-			return PixelBuffer::View{
-				&_buffer, 0, 0,
-				_buffer.width(), _buffer.height()
-			};
+			if ((_internal_state & CachePolicyVolatile) && parent() != nullptr)
+			{
+				const auto [ width, height ] = box();
+				const auto [ x, y ] = position();
+				return PixelBuffer::View{
+					parent()->_fetch_pixel_buffer_impl(),
+					x, y, width, height
+				};
+			}
+			else
+			{
+				return PixelBuffer::View{
+					&_buffer, 0, 0,
+					_buffer.width(), _buffer.height()
+				};
+			}
 		}
 		virtual bool _provides_buffer_impl() const noexcept
 		{
@@ -673,6 +687,16 @@ namespace d2
 		bool getistate(internal_flag flags) const noexcept
 		{
 			return (_internal_state & flags) == flags;
+		}
+		void setcache(InternalState flag) const noexcept
+		{
+			D2_ASSERT(
+				flag == CachePolicyStatic ||
+				flag == CachePolicyVolatile ||
+				flag == CachePolicyDynamic
+			)
+			_internal_state &= ~(CachePolicyStatic | CachePolicyVolatile | CachePolicyDynamic);
+			_internal_state |= flag;
 		}
 		bool getstate(State state) const noexcept
 		{
@@ -760,7 +784,9 @@ namespace d2
 		}
 		bool needs_update() const noexcept
 		{
-			return _internal_state & WasWritten;
+			return
+				_internal_state & WasWritten ||
+				_internal_state & CachePolicyVolatile;
 		}
 
 		// Listeners
@@ -774,6 +800,7 @@ namespace d2
 
 		Frame frame()
 		{
+			D2_ASSERT((_internal_state & (CachePolicyStatic | CachePolicyDynamic | CachePolicyVolatile)))
 			if (_internal_state & WasWrittenLayout)
 			{
 				_update_layout_impl();
@@ -785,11 +812,13 @@ namespace d2
 					width > 0 && height > 0)
 				{
 					_update_style_impl();
-
 					if (!_provides_buffer_impl())
 					{
-						const auto [ bwidth, bheight ] = _reserve_buffer_impl();
-						_buffer.set_size(bwidth, bheight);
+						if ((_internal_state & CachePolicyStatic) || parent() == nullptr)
+						{
+							const auto [ bwidth, bheight ] = _reserve_buffer_impl();
+							_buffer.set_size(bwidth, bheight);
+						}
 					}
 					else
 					{
@@ -799,6 +828,11 @@ namespace d2
 					_internal_state |= IsBeingRendered;
 					_frame_impl(_fetch_pixel_buffer_impl());
 					_internal_state &= ~IsBeingRendered;
+
+					if ((_internal_state & CachePolicyStatic) && parent() != nullptr)
+					{
+						_buffer.compress();
+					}
 				}
 				_signal_update(WasWritten);
 			}
