@@ -385,6 +385,7 @@ namespace d2::sys
 		std::chrono::microseconds frame_time_{ 0 };
 		std::vector<unsigned char> out_{};
 		std::vector<Pixel> previous_frame_{};
+		std::size_t pbuffer_size_{ 0 };
 		std::size_t buffer_size_{ 0 };
 		std::uint8_t track_style_{};
 		PixelForeground track_foreground_{};
@@ -496,7 +497,6 @@ namespace d2::sys
 			{
 				for (std::size_t i = 0; i < 7; i++)
 				{
-
 					const auto ns = px.style & (1 << i);
 					const auto ps = track_style_ & (1 << i);
 					if (ns != ps)
@@ -617,13 +617,19 @@ namespace d2::sys
 				max_color_len_ * 2
 			);
 
+			const auto compressed = PixelBuffer::rle_pack(buffer);
+
+			bool corner_check = false;
+			if (!previous_frame_.empty())
+			{
+				PixelBuffer::RleIterator it(previous_frame_);
+				corner_check =
+					it.value() != buffer[0] &&
+					previous_frame_.back() != buffer.back();
+			}
+
 			// Clean redraw
-			if (buffer.size() != previous_frame_.size() ||
-				// Check top left and bottom right corners (if changed, it is likely that the entire screen changed)
-				(buffer[0] != previous_frame_[0] &&
-				 buffer[buffer.size() - 1] != previous_frame_[buffer.size() - 1] &&
-				 buffer[width - 1] != previous_frame_[width - 1] &&
-				 buffer[buffer.size() - width] != previous_frame_[buffer.size() - width]))
+			if (buffer.size() != pbuffer_size_ || corner_check)
 			{
 				out_.insert(out_.end(), cls_code_.begin(), cls_code_.end());
 				for (auto it = buffer.begin(); it != buffer.end();)
@@ -658,10 +664,11 @@ namespace d2::sys
 			{
 				bool sequential = false;
 				bool linear = false;
+				PixelBuffer::RleIterator pv_it(previous_frame_);
 				for (auto it = buffer.begin(); it != buffer.end();)
 				{
 					if (const auto& px = *it;
-						px != previous_frame_[it - buffer.begin()])
+						px != pv_it.value())
 					{
 						const auto idx = it - buffer.begin();
 						const auto x = idx % width;
@@ -697,6 +704,7 @@ namespace d2::sys
 								out_.push_back('\n');
 							}
 							out_.push_back(it->v);
+							pv_it.increment();
 							++it;
 						}
 
@@ -708,6 +716,7 @@ namespace d2::sys
 						const auto abs = it - buffer.begin();
 						linear = !(abs && !(abs % width));
 						sequential = false;
+						pv_it.increment();
 						++it;
 					}
 				}
@@ -727,8 +736,9 @@ namespace d2::sys
 					_write({ out_.begin() + idx, out_.begin() + idx + std::min(chunk, rem) });
 				}
 
+				pbuffer_size_ = width * height;
 				previous_frame_.clear();
-				previous_frame_.insert(previous_frame_.end(), buffer.begin(), buffer.end());
+				previous_frame_.insert(previous_frame_.end(), compressed.begin(), compressed.end());
 			}
 			buffer_size_ = out_.size();
 			out_.clear();

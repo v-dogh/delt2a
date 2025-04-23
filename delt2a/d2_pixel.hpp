@@ -645,6 +645,11 @@ namespace d2
 					}
 				}
 			}
+			void increment(std::size_t cnt) noexcept
+			{
+				while (cnt--)
+					increment();
+			}
 			bool is_end() const noexcept
 			{
 				return _current == _buffer.end();
