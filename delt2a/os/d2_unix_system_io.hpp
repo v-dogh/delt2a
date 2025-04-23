@@ -384,7 +384,7 @@ namespace d2::sys
 
 		std::chrono::microseconds frame_time_{ 0 };
 		std::vector<unsigned char> out_{};
-		std::vector<Pixel> previous_frame_{};
+		std::vector<Pixel> swapframe_{};
 		std::size_t pbuffer_size_{ 0 };
 		std::size_t buffer_size_{ 0 };
 		std::uint8_t track_style_{};
@@ -566,10 +566,6 @@ namespace d2::sys
 		{
 			::write(STDOUT_FILENO, buffer.data(), buffer.size());
 		}
-		void _writev(std::span<const iovec> vecs) noexcept
-		{
-			::writev(STDOUT_FILENO, vecs.data(), vecs.size());
-		}
 	public:
 		using SystemOutput::SystemOutput;
 		virtual ~UnixOutput() = default;
@@ -620,12 +616,12 @@ namespace d2::sys
 			const auto compressed = PixelBuffer::rle_pack(buffer);
 
 			bool corner_check = false;
-			if (!previous_frame_.empty())
+			if (!swapframe_.empty())
 			{
-				PixelBuffer::RleIterator it(previous_frame_);
+				PixelBuffer::RleIterator it(swapframe_);
 				corner_check =
 					it.value() != buffer[0] &&
-					previous_frame_.back() != buffer.back();
+					swapframe_.back() != buffer.back();
 			}
 
 			// Clean redraw
@@ -664,7 +660,7 @@ namespace d2::sys
 			{
 				bool sequential = false;
 				bool linear = false;
-				PixelBuffer::RleIterator pv_it(previous_frame_);
+				PixelBuffer::RleIterator pv_it(swapframe_);
 				for (auto it = buffer.begin(); it != buffer.end();)
 				{
 					if (const auto& px = *it;
@@ -705,7 +701,6 @@ namespace d2::sys
 							out_.push_back(it->v);
 							++it;
 						}
-
 						if (sit == buffer.end())
 							break;
 					}
@@ -735,8 +730,8 @@ namespace d2::sys
 				}
 
 				pbuffer_size_ = width * height;
-				previous_frame_.clear();
-				previous_frame_.insert(previous_frame_.end(), compressed.begin(), compressed.end());
+				swapframe_.clear();
+				swapframe_.insert(swapframe_.end(), compressed.begin(), compressed.end());
 			}
 			buffer_size_ = out_.size();
 			out_.clear();

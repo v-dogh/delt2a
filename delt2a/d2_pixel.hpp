@@ -411,23 +411,7 @@ namespace d2
 			return *this;
 		}
 
-		bool operator==(const PixelBase& copy) const noexcept
-		{
-			return
-				r == copy.r &&
-				g == copy.g &&
-				b == copy.b &&
-				rf == copy.rf &&
-				gf == copy.gf &&
-				bf == copy.bf &&
-				a == copy.a &&
-				af == copy.af &&
-				v == copy.v;
-		}
-		bool operator!=(const PixelBase& copy) const noexcept
-		{
-			return !const_cast<const PixelBase*>(this)->operator==(copy);
-		}
+		auto operator<=>(const PixelBase&) const = default;
 	};
 
 	inline PixelForeground::operator PixelBackground() const noexcept
@@ -663,34 +647,43 @@ namespace d2
 					(_rem = PixelBase::is_cform(_buffer[0])) > 0)
 				{
 					++_current;
+					--_rem;
 				}
 			}
 			RleIterator(const RleIterator&) = default;
 			RleIterator(RleIterator&&) = default;
 
-			void increment() noexcept
+			const auto& value() const noexcept
 			{
-				if (!is_end() && !_rem)
+				return *_current;
+			}
+			const auto& increment() noexcept
+			{
+				D2_ASSERT(!is_end())
+				if (!_rem)
 				{
 					++_current;
 					if ((_rem = PixelBase::is_cform(*_current)) > 0)
 					{
 						++_current;
+						--_rem;
 					}
 				}
+				else
+				{
+					--_rem;
+				}
+				return value();
 			}
-			void increment(std::size_t cnt) noexcept
+			const auto& increment(std::size_t cnt) noexcept
 			{
 				while (cnt--)
 					increment();
+				return value();
 			}
 			bool is_end() const noexcept
 			{
 				return _current == _buffer.end();
-			}
-			const auto& value() const noexcept
-			{
-				return *_current;
 			}
 
 			RleIterator& operator=(const RleIterator&) = default;
@@ -710,33 +703,35 @@ namespace d2
 			std::vector<Pixel> result;
 			result.reserve(buffer.size());
 
-			Pixel current = buffer[0];
-			std::size_t len = 0;
-			for (auto it = buffer.begin(); it != buffer.end(); ++it)
+			for (std::size_t i = 0;;)
 			{
-				const auto& px = *it;
-				const auto cmp = px == current;
-				len += cmp;
-				if (!cmp || (it + 1) == buffer.end())
-				{
+				Pixel current = buffer[i];
+				i++;
 
-					if (len > 2)
-					{
-						result.push_back(PixelBase::cform(len));
-						result.push_back(current);
-					}
-					else if (len == 2)
-					{
-						result.push_back(current);
-						result.push_back(current);
-					}
-					else
-					{
-						result.push_back(current);
-					}
-					current = px;
-					len = 1;
+				std::size_t len = 1;
+				while (i < buffer.size() && current == buffer[i])
+				{
+					i++;
+					len++;
 				}
+
+				if (len == 1)
+				{
+					result.push_back(current);
+				}
+				else if (len == 2)
+				{
+					result.push_back(current);
+					result.push_back(current);
+				}
+				else
+				{
+					result.push_back(PixelBase::cform(len));
+					result.push_back(current);
+				}
+
+				if (i >= buffer.size())
+					break;
 			}
 
 			result.shrink_to_fit();
@@ -788,10 +783,10 @@ namespace d2
 				}
 			}
 		}
-		static void rle_mdwalk(std::span<const Pixel> buffer, int width, int height, int xf, int yf, std::function<RleBreak(int, int, const Pixel&)> func) noexcept
+		static void rle_mdwalk(std::span<const Pixel> buffer, int width, int height, std::function<RleBreak(int, int, const Pixel&)> func) noexcept
 		{
-			int x = xf;
-			int y = yf;
+			int x = 0;
+			int y = 0;
 			int skip = 0;
 			for (auto it = buffer.begin(); it != buffer.end(); ++it)
 			{
@@ -800,77 +795,26 @@ namespace d2
 					auto& px = *(++it);
 					for (std::size_t i = 0; i < len; i++)
 					{
-						if (x >= xf && x < xf + width &&
-							y >= yf && y < yf + height)
-						{
-							if (!skip)
-							{
-								const auto res = func(x, y, px);
-								if ((++x % width) == 0)
-								{
-									x = 0;
-									y++;
-								}
-
-								if (res == RleBreak::SkipLine)
-								{
-									const auto req = width - x - 1;
-									if (req > len - i)
-									{
-										skip = req - (len - i);
-										break;
-									}
-									else
-									{
-										i += req;
-										if (i >= len)
-											break;
-									}
-								}
-								else if (res == RleBreak::SkipRest)
-								{
-									return;
-								}
-							}
-							else
-							{
-								if ((++x % width) == 0)
-								{
-									x = 0;
-									y++;
-								}
-							}
-						}
-						else
-						{
-							++x;
-							if (x >= xf + width)
-							{
-								x = 0;
-								y++;
-							}
-						}
-					}
-					if (it == buffer.end())
-						break;
-				}
-				else
-				{
-					if (x >= xf && x < xf + width &&
-						y >= yf && y < yf + height)
-					{
 						if (!skip)
 						{
-							const auto res = func(x, y, *it);
-							if ((++x % width) == 0)
-							{
-								x = 0;
-								y++;
-							}
-
+							const auto res = func(x, y, px);
 							if (res == RleBreak::SkipLine)
 							{
 								skip = width - x - 1;
+								// For now naive approach
+								// For this one we need to consider the X/Y offsets after the transformation but its kinda late rn fr fr
+								// const auto req = width - x - 1;
+								// if (req > len - i)
+								// {
+								// 	skip = req - (len - i);
+								// 	break;
+								// }
+								// else
+								// {
+								// 	i += req;
+								// 	if (i >= len)
+								// 		break;
+								// }
 							}
 							else if (res == RleBreak::SkipRest)
 							{
@@ -878,25 +822,41 @@ namespace d2
 							}
 						}
 						else
-						{
-							if ((++x % width) == 0)
-							{
-								x = 0;
-								y++;
-							}
-						}
-					}
-					else
-					{
-						++x;
-						if (x >= xf + width)
+							skip--;
+
+						if (++x == width)
 						{
 							x = 0;
 							y++;
 						}
 					}
+					if (it == buffer.end())
+						break;
 				}
-				if (y >= yf + height)
+				else
+				{
+					if (!skip)
+					{
+						const auto res = func(x, y, *it);
+						if (res == RleBreak::SkipLine)
+						{
+							skip = width - x - 1;
+						}
+						else if (res == RleBreak::SkipRest)
+						{
+							return;
+						}
+					}
+					else
+						skip--;
+
+					if (++x == width)
+					{
+						x = 0;
+						y++;
+					}
+				}
+				if (y >= height)
 					break;
 			}
 		}
@@ -1022,15 +982,17 @@ namespace d2
 			const int ydiff = (yf < 0) * -yf;
 			if (view.compressed())
 			{
-				rle_mdwalk(view.data(),
-					view.width(), view.height(),
-					xdiff + view.xpos(), ydiff + view.ypos(),
+				rle_mdwalk(view.data(), view.width(), view.height(),
 					[&xdiff, &ydiff, &xf, &yf, this](int xs, int ys, const Pixel& px) -> RleBreak {
-						if (ys + yf >= height_)
+						const auto xoff = xs + xf;
+						const auto yoff = ys + yf;
+						if (xoff < 0 || yoff < 0)
+							return RleBreak::Continue;
+						else if (yoff >= height_)
 							return RleBreak::SkipRest;
-						if (xs + xf >= width_)
+						else if (xoff >= width_)
 							return RleBreak::SkipLine;
-						auto& dest = at(xs + xf, ys + yf);
+						auto& dest = at(xoff, yoff);
 						dest.blend(px);
 						return RleBreak::Continue;
 					}

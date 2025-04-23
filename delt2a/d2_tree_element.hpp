@@ -812,13 +812,11 @@ namespace d2
 					width > 0 && height > 0)
 				{
 					_update_style_impl();
-					if (!_provides_buffer_impl())
+					if (!_provides_buffer_impl() &&
+						(_internal_state & CachePolicyStatic) || parent() == nullptr)
 					{
-						if ((_internal_state & CachePolicyStatic) || parent() == nullptr)
-						{
-							const auto [ bwidth, bheight ] = _reserve_buffer_impl();
-							_buffer.set_size(bwidth, bheight);
-						}
+						const auto [ bwidth, bheight ] = _reserve_buffer_impl();
+						_buffer.set_size(bwidth, bheight);
 					}
 					else
 					{
