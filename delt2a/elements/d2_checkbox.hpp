@@ -12,9 +12,10 @@ namespace d2
 		struct Checkbox
 		{
 			std::function<void(Element::TraversalWrapper, bool)> on_change{ nullptr };
-			string label{};
-			PixelForeground checkbox_color_true{ .v = '+' };
-			PixelForeground checkbox_color_false{ .v = 'o' };
+			string value_on{ "x" };
+			string value_off{ "o" };
+			Pixel color_on{};
+			Pixel color_off{};
 			bool checkbox_value{ false };
 
 			template<uai_property Property>
@@ -23,24 +24,26 @@ namespace d2
 				D2_UAI_SETUP_EMPTY
 				D2_UAI_VAR_START
 				D2_UAI_GET_VAR_A(0, on_change)
-				D2_UAI_GET_VAR(1, label, Masked)
-				D2_UAI_GET_VAR(2, checkbox_color_true, Style)
-				D2_UAI_GET_VAR(3, checkbox_color_false, Style)
-				D2_UAI_GET_VAR(4, checkbox_value, Style)
+				D2_UAI_GET_VAR(1, value_on, Masked)
+				D2_UAI_GET_VAR(2, value_off, Masked)
+				D2_UAI_GET_VAR(3, color_on, Style)
+				D2_UAI_GET_VAR(4, color_off, Style)
+				D2_UAI_GET_VAR(5, checkbox_value, Masked)
 				D2_UAI_VAR_END;
 			}
 		};
 
 		template<std::size_t PropBase>
-		struct ICheckbox : Checkbox, InterfaceHelper<ICheckbox, PropBase, 5>
+		struct ICheckbox : Checkbox, InterfaceHelper<ICheckbox, PropBase, 6>
 		{
 			using data = Checkbox;
 			enum Property : uai_property
 			{
 				OnChange = PropBase,
-				Label,
-				ColorTrue,
-				ColorFalse,
+				ValueOn,
+				ValueOff,
+				ColorOn,
+				ColorOff,
 				Value,
 			};
 		};
@@ -49,16 +52,22 @@ namespace d2
 	namespace dx
 	{
 		class Checkbox :
-			public style::UAI<Checkbox, style::ILayout, style::IColors, style::ICheckbox>,
+			public style::UAI<Checkbox, style::ILayout, style::IColors, style::ICheckbox, style::IKeyboardNav>,
 			public impl::UnitUpdateHelper<Checkbox>,
 			public impl::TextHelper<Checkbox>
 		{
 		public:
 			friend class UnitUpdateHelper;
 			friend class TextHelper;
-			using data = style::UAI<Checkbox, style::ILayout, style::IColors, style::ICheckbox>;
+			using data = style::UAI<Checkbox, style::ILayout, style::IColors, style::ICheckbox, style::IKeyboardNav>;
 			using data::data;
 		protected:
+			void _submit()
+			{
+				if (data::on_change != nullptr)
+					data::on_change(shared_from_this(), data::checkbox_value);
+			}
+
 			virtual char _index_impl() const noexcept override
 			{
 				return data::zindex;
@@ -67,25 +76,23 @@ namespace d2
 			{
 				return UnitUpdateHelper::_report_units();
 			}
+			virtual bool _provides_input_impl() const noexcept override
+			{
+				return true;
+			}
 
 			virtual BoundingBox _dimensions_impl() const noexcept override
 			{
-				if (data::width.getunits() == Unit::Auto || data::height.getunits() == Unit::Auto)
+				BoundingBox bbox;
+				if (data::checkbox_value)
 				{
-					BoundingBox bbox;
-					if (data::width.getunits() == Unit::Auto) bbox.width = 1 + data::label.size();
-					else bbox.width = _resolve_units(data::width);
-					if (data::height.getunits() == Unit::Auto) bbox.height = 1;
-					else bbox.height = _resolve_units(data::height);
-					return bbox;
+					bbox = TextHelper::_text_bounding_box(data::value_on);
 				}
 				else
 				{
-					return {
-						_resolve_units(data::width),
-						_resolve_units(data::height)
-					};
+					bbox = TextHelper::_text_bounding_box(data::value_off);
 				}
+				return bbox;
 			}
 			virtual Position _position_impl() const noexcept override
 			{
@@ -100,18 +107,33 @@ namespace d2
 				if (state == State::Clicked && value)
 				{
 					data::checkbox_value = !data::checkbox_value;
-					_signal_write(Style);
+					_submit();
+					_signal_write(data::value_on.size() == data::value_off.size() ?
+						Style : Masked
+					);
+				}
+			}
+			virtual void _event_impl(IOContext::Event ev) override
+			{
+				if (getstate(State::Keynavi) &&
+					ev == IOContext::Event::KeyInput &&
+					context()->input()->is_pressed(sys::SystemInput::Enter, sys::SystemInput::KeyMode::Press))
+				{
+					_submit();
 				}
 			}
 
+
 			virtual void _frame_impl(PixelBuffer::View buffer) noexcept override
 			{
-				const auto color = Pixel::combine(data::foreground_color, data::background_color);
-				buffer.at(0) = Pixel::combine((data::checkbox_value ?
-					data::checkbox_color_true : data::checkbox_color_false), data::background_color);
-				TextHelper::_render_text_simple(
-					data::label, color,
-					{ 1, 0 },
+				const auto color = Pixel::combine(
+					data::foreground_color,
+					getstate(Keynavi) ? data::focused_color : data::background_color
+				);
+				TextHelper::_render_text(
+					data::checkbox_value ? data::value_on : data::value_off,
+					data::checkbox_value ? data::color_on : data::color_off,
+					{ 0, 0 },
 					box(),
 					buffer
 				);
