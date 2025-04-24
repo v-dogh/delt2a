@@ -822,9 +822,9 @@ namespace d2::style
 			ContainerDisableTop,
 			ContainerDisableBottom,
 			// Other flags
-			ContainerAutoLayout,
+			ContainerDisableAutoLayout,
 			ContainerTopFix,
-			ContainerCorners
+			ContainerOverrideCorners
 		};
 	};
 	using IZContainer = IContainer<0>;

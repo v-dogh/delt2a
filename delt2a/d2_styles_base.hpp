@@ -3,6 +3,7 @@
 
 #include <type_traits>
 #include <functional>
+#include <algorithm>
 #include <memory>
 #include "d2_tree_element_frwd.hpp"
 

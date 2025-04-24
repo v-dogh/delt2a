@@ -32,16 +32,16 @@ namespace d2
 		};
 
 		template<std::size_t PropBase>
-		struct ICheckbox : Checkbox, InterfaceHelper<ICheckbox, PropBase, 2>
+		struct ICheckbox : Checkbox, InterfaceHelper<ICheckbox, PropBase, 5>
 		{
 			using data = Checkbox;
 			enum Property : uai_property
 			{
 				OnChange = PropBase,
 				Label,
-				CheckboxColorTrue,
-				CheckBoxColorFalse,
-				CheckboxValue,
+				ColorTrue,
+				ColorFalse,
+				Value,
 			};
 		};
 		using IZCheckbox = ICheckbox<0>;

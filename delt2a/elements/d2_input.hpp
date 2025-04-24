@@ -2,6 +2,7 @@
 #define D2_INPUT_HPP
 
 #include "../d2_tree_element.hpp"
+#include "../d2_screen.hpp"
 #include "d2_element_utils.hpp"
 
 namespace d2
@@ -552,6 +553,12 @@ namespace d2
 						);
 					}
 				}
+			}
+		public:
+			virtual ~Input()
+			{
+				if (data::input_options & data::Censor)
+					std::fill(data::text.begin(), data::text.end(), 0);
 			}
 		};
 	}

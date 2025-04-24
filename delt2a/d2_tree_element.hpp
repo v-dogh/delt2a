@@ -95,6 +95,17 @@ namespace d2
 					return _elem.lock();
 				return TraversalWrapper(_elem.lock()->parent()).up(cnt - 1);
 			}
+			TraversalWrapper up(const std::string& name) const
+			{
+				auto current = _elem.lock();
+				while (current->name() != name)
+				{
+					current = current->parent();
+					if (current == nullptr)
+						throw std::runtime_error{ std::format("Failed to locate parent with ID: {}", name) };
+				}
+				return current;
+			}
 
 			void foreach(foreach_callback);
 

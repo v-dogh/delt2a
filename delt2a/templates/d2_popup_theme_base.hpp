@@ -3,6 +3,7 @@
 
 #include "../d2_tree_element.hpp"
 #include "../d2_styles.hpp"
+#include "../d2_screen.hpp"
 #include "../d2_dsl.hpp"
 
 namespace d2::templ
