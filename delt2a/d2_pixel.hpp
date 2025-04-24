@@ -657,13 +657,13 @@ namespace d2
 			{
 				return *_current;
 			}
-			const auto& increment() noexcept
+			void increment() noexcept
 			{
 				D2_ASSERT(!is_end())
 				if (!_rem)
 				{
 					++_current;
-					if ((_rem = PixelBase::is_cform(*_current)) > 0)
+					if (!is_end() && (_rem = PixelBase::is_cform(*_current)) > 0)
 					{
 						++_current;
 						--_rem;
@@ -673,13 +673,11 @@ namespace d2
 				{
 					--_rem;
 				}
-				return value();
 			}
-			const auto& increment(std::size_t cnt) noexcept
+			void increment(std::size_t cnt) noexcept
 			{
 				while (cnt--)
 					increment();
-				return value();
 			}
 			bool is_end() const noexcept
 			{
