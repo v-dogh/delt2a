@@ -123,13 +123,13 @@ namespace d2
 				}
 			}
 
-
 			virtual void _frame_impl(PixelBuffer::View buffer) noexcept override
 			{
 				const auto color = Pixel::combine(
 					data::foreground_color,
 					getstate(Keynavi) ? data::focused_color : data::background_color
 				);
+				buffer.fill(color);
 				TextHelper::_render_text(
 					data::checkbox_value ? data::value_on : data::value_off,
 					data::checkbox_value ? data::color_on : data::color_off,

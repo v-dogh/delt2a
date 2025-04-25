@@ -46,32 +46,42 @@ namespace d2::dx::impl
 			}
 			return box;
 		}
-		Element::BoundingBox _paragraph_bounding_box(const string& value) const noexcept
+		Element::BoundingBox _paragraph_bounding_box(const string& value, int width = INT_MAX) const noexcept
 		{
 			Element::BoundingBox box;
 			for (std::size_t i = 0; i < value.size(); i++)
 			{
-				int nbasis = 0;
+				int nbasis = -1;
 				int line_width = 0;
 				while (i + line_width < value.size() &&
 					   value[line_width + i] == '\n') i++;
 				while (i + line_width < value.size() &&
 					   std::isspace(value[line_width + i]) &&
 					   !(value[line_width + i] == '\n')) line_width++;
-				while (i + line_width < value.size())
+				while (i + line_width < value.size() &&
+					   line_width < width)
 				{
 					int saved_lwidth = line_width;
 					while (i + saved_lwidth < value.size() &&
+						   saved_lwidth < width &&
 						   !std::isspace(value[saved_lwidth + i]))
 					{
 						saved_lwidth++;
+					}
+
+					if (saved_lwidth >= width)
+					{
+						line_width = saved_lwidth;
+						nbasis = -1;
+						break;
 					}
 
 					while (i + saved_lwidth < value.size() &&
 						   std::isspace(value[saved_lwidth + i]) &&
 						   !(value[saved_lwidth + i] == '\n')) saved_lwidth++;
 
-					if (value[saved_lwidth + i] == '\n')
+					if (i + saved_lwidth < value.size() &&
+						value[saved_lwidth + i] == '\n')
 					{
 						line_width = saved_lwidth;
 						break;
@@ -217,6 +227,7 @@ namespace d2::dx::impl
 
 					if (saved_lwidth >= box.width)
 					{
+						line_width = saved_lwidth;
 						nbasis = -1;
 						break;
 					}
