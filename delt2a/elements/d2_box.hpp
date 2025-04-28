@@ -13,6 +13,7 @@ namespace d2::dx
 		public impl::ContainerHelper<Box>
 	{
 	public:
+		static constexpr auto overlap = 6;
 		friend class UnitUpdateHelper;
 		friend class ContainerHelper;
 		using data = style::UAIC<VecParentElement, Box, style::ILayout, style::IContainer, style::IColors>;
@@ -322,7 +323,7 @@ namespace d2::dx
 		{
 			if (
 				(data::container_options & ContainerOptions::EnableBorder) &&
-				elem->getzindex() < 6
+				elem->getzindex() < overlap
 				)
 				return _resolve_units(data::border_width);
 			return 0;
@@ -408,8 +409,8 @@ namespace d2::dx
 
 				_fleshbox_render_start();
 
-				// Border is zindex = 6 (relative) so we defer the rest to after we render the border
-				while (idx < ptrs.size() && ptrs[idx]->getzindex() < 6)
+				// Border is zindex = overlap (relative) so we defer the rest to after we render the border
+				while (idx < ptrs.size() && ptrs[idx]->getzindex() < overlap)
 				{
 					auto& obj = *ptrs[idx];
 					if (obj.getstate(Display))

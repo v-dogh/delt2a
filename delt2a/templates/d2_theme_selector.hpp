@@ -173,7 +173,7 @@ namespace d2
 										D2_STYLE(X, 0.0_center)
 										D2_STYLE(Y, 1.0_relative)
 										D2_STYLE(OnSubmit, [](Element::TraversalWrapper ptr) {
-											(ptr->parent()->traverse()/"list"/"accents").asp()->clear();
+											(_core(ptr->state())->traverse()/"logic"/"accents"/"list"/"accents").asp()->clear();
 											_core(ptr->state())->_accents.clear();
 										})
 										D2_STYLES_APPLY(impl::button_react)

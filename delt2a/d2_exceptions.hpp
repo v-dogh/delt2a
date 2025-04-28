@@ -8,10 +8,11 @@
 
 namespace d2
 {
+#	define D2_EXPECT(...) (((__VA_ARGS__) == false) ? std::terminate() : void());
 #	ifndef NDEBUG
-#	define D2_ASSERT(expr) ((expr) == false ? (std::terminate()) : void());
+#	define D2_ASSERT(...) D2_EXPECT(__VA_ARGS__);
 #	else
-#	define D2_ASSERT(expr) void();
+#	define D2_ASSERT(...) void();
 #	endif
 
 #	define D2_EXCEPTION(name, log) \

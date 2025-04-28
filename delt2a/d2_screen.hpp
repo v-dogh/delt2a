@@ -556,13 +556,23 @@ namespace d2
 			_update_viewport();
 		}
 
-		const TreeState* getstate() const noexcept
+		template<typename Type = void>
+		auto getstate() const
 		{
-			return _current->state.get();
-		}
-		TreeState* getstate() noexcept
-		{
-			return _current->state.get();
+			if constexpr (std::is_same_v<Type, void>)
+			{
+				return TreeState::ptr(_current->state);
+			}
+			else
+			{
+				for (decltype(auto) it : _trees)
+				{
+					auto& state = *it.second->state;
+					if (typeid(state) == typeid(Type))
+						return std::static_pointer_cast<Type>(it.second->state);
+				}
+				throw std::logic_error{ "Invalid state" };
+			}
 		}
 
 		eptr root() const noexcept

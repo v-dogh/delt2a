@@ -822,9 +822,9 @@ namespace d2::style
 			ContainerDisableTop,
 			ContainerDisableBottom,
 			// Other flags
-			ContainerAutoLayout,
+			ContainerDisableAutoLayout,
 			ContainerTopFix,
-			ContainerCorners
+			ContainerOverrideCorners
 		};
 	};
 	using IZContainer = IContainer<0>;
@@ -900,7 +900,7 @@ namespace d2::style
 		};
 
 		string text{ "" };
-		Alignment alignment{};
+		Alignment alignment{ Alignment::Center };
 		unsigned char text_options{ 0x00 };
 
 		template<uai_property Property>

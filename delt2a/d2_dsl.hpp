@@ -24,15 +24,15 @@
 #define D2_UELEM_END D2_ELEM_END()
 #define D2_UELEM_NESTED_END D2_ELEM_NESTED_END()
 
-#define D2_INJECT_TREE(type, ...) ::d2::tree::SubTree<type, \
+#define D2_EMBED(type, ...) ::d2::tree::SubTree<type, \
 	[]<typename Type>(::d2::Screen::ptr src) \
 	{ return Type::build(src __VA_OPT__(,) __VA_ARGS__); }>,
-#define D2_INJECT_ELEM(type, name, ...) ::d2::tree::ArgElem<[](auto loc, auto src) { \
+#define D2_EMBED_ELEM(type, name, ...) ::d2::tree::ArgElem<[](auto loc, auto src) { \
 		return loc.asp()->override(std::make_shared<type>( \
 			std::string(name), src, loc.as() __VA_OPT__(,) __VA_ARGS__ \
 		)); \
 	}>,
-#define D2_INJECT_ELEM_UNNAMED(type, ...) D2_INJECT_ELEM(type, "", __VA_ARGS__)
+#define D2_EMBED_ELEM_UNNAMED(type, ...) D2_EMBED_ELEM(type, "", __VA_ARGS__)
 #define D2_STATELESS_TREE(alias) using alias = ::d2::TreeTemplate<
 #define D2_STATEFUL_TREE(alias, state) using alias = ::d2::TreeTemplateInit<state,
 #define D2_TREE_END(...) ::d2::tree::PaddingElem>;

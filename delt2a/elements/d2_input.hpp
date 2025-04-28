@@ -2,6 +2,7 @@
 #define D2_INPUT_HPP
 
 #include "../d2_tree_element.hpp"
+#include "../d2_screen.hpp"
 #include "d2_element_utils.hpp"
 
 namespace d2
@@ -257,12 +258,15 @@ namespace d2
 			virtual BoundingBox _dimensions_impl() const noexcept override
 			{
 				BoundingBox bbox{};
+
 				bbox.width = ((data::width.getunits() == Unit::Auto) ?
 					int(data::pre.size() + data::text.size()) :
 					data::pre.size() +
 					_resolve_units(data::width)) +
 					(data::input_options & InputOptions::DrawPtr);
-				bbox.height = 1;
+				bbox.height = data::height.getunits() == d2::Unit::Auto ?
+					1 : _resolve_units(data::height);
+
 				return bbox;
 			}
 			virtual Position _position_impl() const noexcept override
@@ -472,6 +476,7 @@ namespace d2
 
 			virtual void _frame_impl(PixelBuffer::View buffer) noexcept override
 			{
+				const auto [ width, height ] = box();
 				const auto color = Pixel::combine(
 					data::foreground_color,
 					data::background_color
@@ -480,7 +485,7 @@ namespace d2
 				// Draw the pre-value
 				{
 					buffer.fill(data::background_color);
-					for (std::size_t i = 0; i < data::pre.size(); i++)
+					for (std::size_t i = 0; i < std::min(width, int(data::pre.size())); i++)
 					{
 						auto& p = buffer.at(i);
 						p = color;
@@ -503,7 +508,7 @@ namespace d2
 						const auto hlower = std::min(highlight_start_, highlight_end_);
 						const auto hupper = std::max(highlight_start_, highlight_end_);
 						const auto m =
-							std::min(bound_lower_ + box().width, int(data::text.size())) +
+							std::min(bound_lower_ + width, int(data::text.size())) +
 							bool(data::input_options & InputOptions::DrawPtr);
 
 						for (std::size_t pi = data::pre.size(),
@@ -548,6 +553,12 @@ namespace d2
 						);
 					}
 				}
+			}
+		public:
+			virtual ~Input()
+			{
+				if (data::input_options & data::Censor)
+					std::fill(data::text.begin(), data::text.end(), 0);
 			}
 		};
 	}
