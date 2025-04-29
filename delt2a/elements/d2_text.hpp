@@ -30,7 +30,8 @@ namespace d2::dx
 					{
 						const auto [ bwidth, bheight ] =
 							TextHelper::_paragraph_bounding_box(data::text,
-							(data::width.getunits() == Unit::Auto ? INT_MAX : _resolve_units(data::width)));
+							(data::width.getunits() == Unit::Auto ? INT_MAX : _resolve_units(data::width)),
+							(data::height.getunits() == Unit::Auto ? INT_MAX : _resolve_units(data::height)));
 						width = bwidth;
 						height = (data::height.getunits() == Unit::Auto) ?
 							bheight : _resolve_units(data::height);
