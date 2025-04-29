@@ -46,52 +46,58 @@ namespace d2::dx::impl
 			}
 			return box;
 		}
-		Element::BoundingBox _paragraph_bounding_box(const string& value, int width = INT_MAX) const noexcept
+		Element::BoundingBox _paragraph_bounding_box(const string& value, int width = INT_MAX, int height = INT_MAX) const noexcept
 		{
 			Element::BoundingBox box;
-			for (std::size_t i = 0; i < value.size(); i++)
+			for (std::size_t i = 0; i < value.size();)
 			{
-				int nbasis = -1;
-				int line_width = 0;
-				while (i + line_width < value.size() &&
-					   value[line_width + i] == '\n') i++;
-				while (i + line_width < value.size() &&
-					   std::isspace(value[line_width + i]) &&
-					   !(value[line_width + i] == '\n')) line_width++;
-				while (i + line_width < value.size() &&
-					   line_width < width)
+				while (i < value.size() && std::isspace(value[i]))
 				{
-					int saved_lwidth = line_width;
-					while (i + saved_lwidth < value.size() &&
-						   saved_lwidth < width &&
-						   !std::isspace(value[saved_lwidth + i]))
+					if (value[i] == '\n')
 					{
-						saved_lwidth++;
+						if (++box.height >= height)
+							return box;
+						i++;
 					}
-
-					if (saved_lwidth >= width)
-					{
-						line_width = saved_lwidth;
-						nbasis = -1;
-						break;
-					}
-
-					while (i + saved_lwidth < value.size() &&
-						   std::isspace(value[saved_lwidth + i]) &&
-						   !(value[saved_lwidth + i] == '\n')) saved_lwidth++;
-
-					if (i + saved_lwidth < value.size() &&
-						value[saved_lwidth + i] == '\n')
-					{
-						line_width = saved_lwidth;
-						break;
-					}
-					line_width = saved_lwidth;
+					else
+						i++;
 				}
 
-				box.height++;
-				box.width = std::max(box.width, line_width);
-				i += line_width + nbasis;
+				if (i >= value.size())
+					break;
+
+				int line_end = i;
+				int last_space = -1;
+				int line_width = 0;
+
+				while (line_end < value.size() && line_width < width)
+				{
+					char ch = value[line_end];
+					if (ch == '\n')
+						break;
+					if (std::isspace(ch))
+						last_space = line_end;
+
+					line_end++;
+					line_width++;
+				}
+
+				if (line_width == width && last_space > int(i))
+				{
+					line_end = last_space;
+				}
+
+				int actual_width = line_end - i;
+				box.width = std::min(box.width, int(line_end - i));
+
+				if (++box.height >= height)
+					break;
+
+				i = line_end;
+				while (i < value.size() && std::isspace(value[i]) && value[i] != '\n')
+					i++;
+				if (i < value.size() && value[i] == '\n')
+					i++;
 			}
 			return box;
 		}
@@ -205,59 +211,58 @@ namespace d2::dx::impl
 		) noexcept
 		{
 			int y = pos.y;
-			for (std::size_t i = 0; i < value.size(); i++)
+			for (std::size_t i = 0; i < value.size();)
 			{
-				int nbasis = 0;
-				int line_width = 0;
-				while (i + line_width < value.size() &&
-					   value[line_width + i] == '\n') i++;
-				while (i + line_width < value.size() &&
-					   std::isspace(value[line_width + i]) &&
-					   !(value[line_width + i] == '\n')) line_width++;
-				while (i + line_width < value.size() &&
-					   line_width < box.width)
+				while (i < value.size() && std::isspace(value[i]))
 				{
-					int saved_lwidth = line_width;
-					while (i + saved_lwidth < value.size() &&
-						   saved_lwidth < box.width &&
-						   !std::isspace(value[saved_lwidth + i]))
+					if (value[i] == '\n')
 					{
-						saved_lwidth++;
+						if (++y >= box.height)
+							return;
+						i++;
 					}
+					else
+						i++;
+				}
 
-					if (saved_lwidth >= box.width)
-					{
-						line_width = saved_lwidth;
-						nbasis = -1;
+				if (i >= value.size())
+					break;
+
+				int line_end = i;
+				int last_space = -1;
+				int line_width = 0;
+
+				while (line_end < value.size() && line_width < box.width)
+				{
+					char ch = value[line_end];
+					if (ch == '\n')
 						break;
-					}
+					if (std::isspace(ch))
+						last_space = line_end;
 
-					while (i + saved_lwidth < value.size() &&
-						   std::isspace(value[saved_lwidth + i]) &&
-						   !(value[saved_lwidth + i] == '\n')) saved_lwidth++;
+					line_end++;
+					line_width++;
+				}
 
-					if (i + saved_lwidth < value.size() &&
-						value[saved_lwidth + i] == '\n')
-					{
-						line_width = saved_lwidth;
-						break;
-					}
-					line_width = saved_lwidth;
+				if (line_width == box.width && last_space > int(i))
+				{
+					line_end = last_space;
 				}
 
 				int basis = 0;
+				int actual_width = line_end - i;
 				if (alignment == style::Text::Alignment::Center)
 				{
-					basis = pos.x + ((box.width - line_width) / 2);
+					basis = pos.x + ((box.width - actual_width) / 2);
 				}
 				else if (alignment == style::Text::Alignment::Right)
 				{
-					basis = pos.x + (box.width - line_width - 1);
+					basis = pos.x + (box.width - actual_width - 1);
 				}
 
 				const auto m = std::min(
 					int(value.size() - i),
-					std::min(int(box.width - basis), line_width)
+					std::min(int(box.width - basis), actual_width)
 				);
 				for (std::size_t j = 0; j < m; j++)
 				{
@@ -272,7 +277,12 @@ namespace d2::dx::impl
 
 				if (++y >= box.height)
 					break;
-				i += line_width + nbasis;
+
+				i = line_end;
+				while (i < value.size() && std::isspace(value[i]) && value[i] != '\n')
+					i++;
+				if (i < value.size() && value[i] == '\n')
+					i++;
 			}
 		}
 		void _render_paragraph(

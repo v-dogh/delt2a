@@ -457,6 +457,8 @@ namespace d2
 	class IOContext : public std::enable_shared_from_this<IOContext>
 	{
 	public:
+		template<typename Type>
+		using future = util::mt::future<Type>;
 		using ptr = std::shared_ptr<IOContext>;
 		using wptr = std::weak_ptr<IOContext>;
 		enum class Event
