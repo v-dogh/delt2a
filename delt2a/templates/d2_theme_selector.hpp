@@ -5,6 +5,7 @@
 #include "../d2_colors.hpp"
 #include "d2_popup_theme_base.hpp"
 #include "d2_color_picker.hpp"
+#include <variant>
 
 namespace d2
 {

@@ -38,14 +38,14 @@ namespace d2
 #	endif
 
 #	if D2_LOCALE_MODE == ASCII
-#	define D2_STRING
-#	define D2_CHAR
+#	define D2_STRING(s) s
+#	define D2_CHAR(c) c
 	using string = std::string;
 	using string_view = std::string;
 	using value_type = char;
 #	elif D2_LOCALE_MODE == UTF8
-#	define D2_STRING u32
-#	define D2_CHAR u32
+#	define D2_STRING(s) U##s
+#	define D2_CHAR(c) U##c
 	using string = std::u32string;
 	using string_view = std::u32string_view;
 	using value_type = char32_t;
