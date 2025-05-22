@@ -36,9 +36,10 @@ add_executable(DeltaAscii main.cpp
 
     # Tree data
 
+    delt2a/d2_element_units.hpp
     delt2a/d2_tree_element_frwd.hpp
     delt2a/d2_tree_element.hpp
-    delt2a/d2_element_units.hpp
+    delt2a/d2_tree.hpp
 
     # Screen
 
@@ -53,17 +54,23 @@ add_executable(DeltaAscii main.cpp
 
     # Popups
 
+    delt2a/templates/d2_popup_theme_base.hpp
+
     delt2a/templates/d2_file_explorer.hpp
     delt2a/templates/d2_exit_prompt.hpp
     delt2a/templates/d2_color_picker.hpp
-    delt2a/templates/d2_debug_box.hpp
-    delt2a/templates/d2_popup_theme_base.hpp
     delt2a/templates/d2_theme_selector.hpp
+
+    delt2a/templates/d2_file_explorer.cpp
+    delt2a/templates/d2_theme_selector.cpp
+    delt2a/templates/d2_exit_prompt.cpp
+    delt2a/templates/d2_color_picker.cpp
 
     # Programs
 
-    delt2a/templates/d2_element_test.hpp
-    delt2a/templates/d2_quedits.hpp
+    delt2a/programs/d2_debug_box.hpp
+    delt2a/programs/d2_element_test.hpp
+    delt2a/programs/d2_quedits.hpp
 
     # Elements
 

@@ -6,7 +6,7 @@
 #include "../d2_screen.hpp"
 #include "../d2_dsl.hpp"
 
-namespace d2::templ
+namespace d2::ctm
 {
 	struct PopupTheme
 	{
