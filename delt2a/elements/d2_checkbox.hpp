@@ -62,82 +62,19 @@ namespace d2
 			using data = style::UAI<Checkbox, style::ILayout, style::IColors, style::ICheckbox, style::IKeyboardNav>;
 			using data::data;
 		protected:
-			void _submit()
-			{
-				if (data::on_change != nullptr)
-					data::on_change(shared_from_this(), data::checkbox_value);
-			}
+			void _submit();
 
-			virtual char _index_impl() const noexcept override
-			{
-				return data::zindex;
-			}
-			virtual unit_meta_flag _unit_report_impl() const noexcept override
-			{
-				return UnitUpdateHelper::_report_units();
-			}
-			virtual bool _provides_input_impl() const noexcept override
-			{
-				return true;
-			}
+			virtual char _index_impl() const noexcept override;
+			virtual unit_meta_flag _unit_report_impl() const noexcept override;
+			virtual bool _provides_input_impl() const noexcept override;
 
-			virtual BoundingBox _dimensions_impl() const noexcept override
-			{
-				BoundingBox bbox;
-				if (data::checkbox_value)
-				{
-					bbox = TextHelper::_text_bounding_box(data::value_on);
-				}
-				else
-				{
-					bbox = TextHelper::_text_bounding_box(data::value_off);
-				}
-				return bbox;
-			}
-			virtual Position _position_impl() const noexcept override
-			{
-				return {
-					_resolve_units(data::x),
-					_resolve_units(data::y)
-				};
-			}
+			virtual BoundingBox _dimensions_impl() const noexcept override;
+			virtual Position _position_impl() const noexcept override;
 
-			virtual void _state_change_impl(State state, bool value) override
-			{
-				if (state == State::Clicked && value)
-				{
-					data::checkbox_value = !data::checkbox_value;
-					_submit();
-					_signal_write(data::value_on.size() == data::value_off.size() ?
-						Style : Masked
-					);
-				}
-			}
-			virtual void _event_impl(IOContext::Event ev) override
-			{
-				if (getstate(State::Keynavi) &&
-					ev == IOContext::Event::KeyInput &&
-					context()->input()->is_pressed(sys::SystemInput::Enter, sys::SystemInput::KeyMode::Press))
-				{
-					_submit();
-				}
-			}
+			virtual void _state_change_impl(State state, bool value) override;
+			virtual void _event_impl(IOContext::Event ev) override;
 
-			virtual void _frame_impl(PixelBuffer::View buffer) noexcept override
-			{
-				const auto color = Pixel::combine(
-					data::foreground_color,
-					getstate(Keynavi) ? data::focused_color : data::background_color
-				);
-				buffer.fill(color);
-				TextHelper::_render_text(
-					data::checkbox_value ? data::value_on : data::value_off,
-					data::checkbox_value ? data::color_on : data::color_off,
-					{ 0, 0 },
-					box(),
-					buffer
-				);
-			}
+			virtual void _frame_impl(PixelBuffer::View buffer) noexcept override;
 		};
 	}
 }
