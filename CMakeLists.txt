@@ -25,6 +25,7 @@ add_executable(DeltaAscii main.cpp
     delt2a/d2_locale.hpp
     delt2a/d2_platform.hpp
     delt2a/d2_styles.hpp
+    delt2a/d2_styles_base.hpp
     delt2a/d2_dsl.hpp
 
     # Pixel stuff
@@ -77,13 +78,22 @@ add_executable(DeltaAscii main.cpp
     delt2a/elements/d2_input.hpp
     delt2a/elements/d2_dropdown.hpp
     delt2a/elements/d2_matrix.hpp
-
-
     delt2a/elements/d2_switch.hpp
     delt2a/elements/d2_graph.hpp
     delt2a/elements/d2_checkbox.hpp
 
-    delt2a/d2_styles_base.hpp
+    delt2a/elements/d2_box.cpp
+    delt2a/elements/d2_button.cpp
+    delt2a/elements/d2_checkbox.cpp
+    delt2a/elements/d2_draggable_box.cpp
+    delt2a/elements/d2_dropdown.cpp
+    delt2a/elements/d2_graph.cpp
+    delt2a/elements/d2_input.cpp
+    delt2a/elements/d2_matrix.cpp
+    delt2a/elements/d2_scrollbox.cpp
+    delt2a/elements/d2_slider.cpp
+    delt2a/elements/d2_switch.cpp
+    delt2a/elements/d2_text.cpp
 )
 
 include(GNUInstallDirs)

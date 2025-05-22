@@ -17,12 +17,13 @@ namespace d2
 
 	struct PixelBackground
 	{
+		using component = std::uint8_t;
 		using scalar = std::uint32_t;
 
-		std::uint8_t r{ 0 };
-		std::uint8_t g{ 0 };
-		std::uint8_t b{ 0 };
-		std::uint8_t a{ 255 };
+		component r{ 0 };
+		component g{ 0 };
+		component b{ 0 };
+		component a{ 255 };
 
 		static scalar to_scalar(const PixelBackground& px) noexcept
 		{
@@ -36,14 +37,14 @@ namespace d2
 		static PixelBackground from_scalar(const scalar& px) noexcept
 		{
 			PixelBackground bg{};
-			bg.r = std::uint8_t(px);
-			bg.g = std::uint8_t(px >> 8);
-			bg.b = std::uint8_t(px >> 16);
-			bg.a = std::uint8_t(px >> 24);
+			bg.r = component(px);
+			bg.g = component(px >> 8);
+			bg.b = component(px >> 16);
+			bg.a = component(px >> 24);
 			return bg;
 		}
 
-		PixelForeground extend(value_type v = ' ', std::uint8_t style = 0x00) const noexcept;
+		PixelForeground extend(value_type v = ' ', component style = 0x00) const noexcept;
 		PixelBackground alpha(float value) const noexcept
 		{
 			auto cpy = PixelBackground(*this);
@@ -53,23 +54,23 @@ namespace d2
 		PixelBackground invert() const noexcept
 		{
 			return PixelBackground{
-				static_cast<std::uint8_t>(255 - r),
-				static_cast<std::uint8_t>(255 - g),
-				static_cast<std::uint8_t>(255 - b),
+				static_cast<component>(255 - r),
+				static_cast<component>(255 - g),
+				static_cast<component>(255 - b),
 				a
 			};
 		}
 		PixelBackground mask(const PixelBackground& px, float progress = 0.5f) const noexcept
 		{
 			return PixelBackground{
-				.r = static_cast<std::uint8_t>((r + progress * (px.r - r)) / 2),
-				.g = static_cast<std::uint8_t>((g + progress * (px.g - g)) / 2),
-				.b = static_cast<std::uint8_t>((b + progress * (px.b - b)) / 2),
-				.a = static_cast<std::uint8_t>((a + progress * (px.a - a)) / 2),
+				.r = static_cast<component>((r + progress * (px.r - r)) / 2),
+				.g = static_cast<component>((g + progress * (px.g - g)) / 2),
+				.b = static_cast<component>((b + progress * (px.b - b)) / 2),
+				.a = static_cast<component>((a + progress * (px.a - a)) / 2),
 			};
 		}
 
-		PixelForeground operator|(std::uint8_t flag) const noexcept;
+		PixelForeground operator|(component flag) const noexcept;
 
 		operator PixelBase() const noexcept;
 		operator PixelForeground() const noexcept;
@@ -94,11 +95,13 @@ namespace d2
 			Reserved = 1 << 7
 		};
 
-		std::uint8_t r{ 255 };
-		std::uint8_t g{ 255 };
-		std::uint8_t b{ 255 };
-		std::uint8_t a{ 255 };
-		std::uint8_t style{ 0x00 };
+		using component = std::uint8_t;
+
+		component r{ 255 };
+		component g{ 255 };
+		component b{ 255 };
+		component a{ 255 };
+		component style{ 0x00 };
 		value_type v{ ' ' };
 
 		PixelForeground alpha(float value) const noexcept
@@ -107,7 +110,7 @@ namespace d2
 			cpy.a = value * 255;
 			return cpy;
 		}
-		PixelForeground extend(value_type v, std::uint8_t style = 0x00) const noexcept
+		PixelForeground extend(value_type v, component style = 0x00) const noexcept
 		{
 			return {
 				.r = r,
@@ -121,9 +124,9 @@ namespace d2
 		PixelForeground invert() const noexcept
 		{
 			return PixelForeground{
-				static_cast<std::uint8_t>(255 - r),
-				static_cast<std::uint8_t>(255 - g),
-				static_cast<std::uint8_t>(255 - b),
+				static_cast<component>(255 - r),
+				static_cast<component>(255 - g),
+				static_cast<component>(255 - b),
 				a,
 				style,
 				v
@@ -132,10 +135,10 @@ namespace d2
 		PixelForeground mask(const PixelForeground& px, float progress = 0.5f) const noexcept
 		{
 			return PixelForeground{
-				static_cast<std::uint8_t>((r + progress * (px.r - r)) / 2),
-				static_cast<std::uint8_t>((g + progress * (px.g - g)) / 2),
-				static_cast<std::uint8_t>((b + progress * (px.b - b)) / 2),
-				static_cast<std::uint8_t>((a + progress * (px.a - a)) / 2),
+				static_cast<component>((r + progress * (px.r - r)) / 2),
+				static_cast<component>((g + progress * (px.g - g)) / 2),
+				static_cast<component>((b + progress * (px.b - b)) / 2),
+				static_cast<component>((a + progress * (px.a - a)) / 2),
 				style,
 				v
 			};
@@ -144,7 +147,7 @@ namespace d2
 		operator PixelBase() const noexcept;
 		operator PixelBackground() const noexcept;
 
-		PixelForeground operator|(std::uint8_t style) const noexcept
+		PixelForeground operator|(component style) const noexcept
 		{
 			PixelForeground copy = *this;
 			copy.style |= style;
@@ -168,16 +171,17 @@ namespace d2
 	{
 		using Style = PixelForeground::Style;
 		using value_type = ::d2::value_type;
+		using component = std::uint8_t;
 
-		std::uint8_t r{ 0 };
-		std::uint8_t g{ 0 };
-		std::uint8_t b{ 0 };
-		std::uint8_t rf{ 255 };
-		std::uint8_t gf{ 255 };
-		std::uint8_t bf{ 255 };
-		std::uint8_t a{ 255 };
-		std::uint8_t af{ 255 };
-		std::uint8_t style{ 0x00 };
+		component r{ 0 };
+		component g{ 0 };
+		component b{ 0 };
+		component rf{ 255 };
+		component gf{ 255 };
+		component bf{ 255 };
+		component a{ 255 };
+		component af{ 255 };
+		component style{ 0x00 };
 		value_type v{ ' ' };
 
 		static PixelBase combine(const PixelForeground& fg, const PixelBackground& bg) noexcept
@@ -225,9 +229,9 @@ namespace d2
 
 		void blend(const PixelBase& src) noexcept
 		{
-			static auto blend = [](std::uint8_t src, std::uint8_t dest, double alpha_src)
+			static auto blend = [](component src, component dest, double alpha_src)
 			{
-				return static_cast<std::uint8_t>(
+				return static_cast<component>(
 					(src * alpha_src) +
 					(dest * (1 - alpha_src))
 				);
@@ -241,7 +245,7 @@ namespace d2
 				rf = blend(src.rf, rf, alpha_src);
 				gf = blend(src.gf, gf, alpha_src);
 				bf = blend(src.bf, bf, alpha_src);
-				af = static_cast<std::uint8_t>((alpha_src + alpha_dest * (1 - alpha_src)) * 255);
+				af = static_cast<component>((alpha_src + alpha_dest * (1 - alpha_src)) * 255);
 			}
 			else
 			{
@@ -259,7 +263,7 @@ namespace d2
 				r = blend(src.r, r, alpha_src);
 				g = blend(src.g, g, alpha_src);
 				b = blend(src.b, b, alpha_src);
-				a = static_cast<std::uint8_t>((alpha_src + alpha_dest * (1 - alpha_src)) * 255);
+				a = static_cast<component>((alpha_src + alpha_dest * (1 - alpha_src)) * 255);
 			}
 			else
 			{
@@ -321,14 +325,14 @@ namespace d2
 		PixelBase mask(const PixelBase& px) const noexcept
 		{
 			return PixelBase{
-				.r = static_cast<std::uint8_t>((r + px.r) / 2),
-				.g = static_cast<std::uint8_t>((g + px.g) / 2),
-				.b = static_cast<std::uint8_t>((b + px.b) / 2),
-				.rf = static_cast<std::uint8_t>((rf + px.rf) / 2),
-				.gf = static_cast<std::uint8_t>((gf + px.gf) / 2),
-				.bf = static_cast<std::uint8_t>((bf + px.bf) / 2),
-				.a = static_cast<std::uint8_t>((a + px.a) / 2),
-				.af = static_cast<std::uint8_t>((af + px.af) / 2),
+				.r = static_cast<component>((r + px.r) / 2),
+				.g = static_cast<component>((g + px.g) / 2),
+				.b = static_cast<component>((b + px.b) / 2),
+				.rf = static_cast<component>((rf + px.rf) / 2),
+				.gf = static_cast<component>((gf + px.gf) / 2),
+				.bf = static_cast<component>((bf + px.bf) / 2),
+				.a = static_cast<component>((a + px.a) / 2),
+				.af = static_cast<component>((af + px.af) / 2),
 			};
 		}
 		PixelBase mask_foreground(const PixelBase& px) const noexcept
@@ -337,23 +341,23 @@ namespace d2
 				.r = r,
 				.g = g,
 				.b = b,
-				.rf = static_cast<std::uint8_t>((rf + px.rf) / 2),
-				.gf = static_cast<std::uint8_t>((gf + px.gf) / 2),
-				.bf = static_cast<std::uint8_t>((bf + px.bf) / 2),
+				.rf = static_cast<component>((rf + px.rf) / 2),
+				.gf = static_cast<component>((gf + px.gf) / 2),
+				.bf = static_cast<component>((bf + px.bf) / 2),
 				.a = a,
-				.af = static_cast<std::uint8_t>((af + px.af) / 2),
+				.af = static_cast<component>((af + px.af) / 2),
 			};
 		}
 		PixelBase mask_background(const PixelBase& px) const noexcept
 		{
 			return PixelBase{
-				.r = static_cast<std::uint8_t>((r + px.r) / 2),
-				.g = static_cast<std::uint8_t>((g + px.g) / 2),
-				.b = static_cast<std::uint8_t>((b + px.b) / 2),
+				.r = static_cast<component>((r + px.r) / 2),
+				.g = static_cast<component>((g + px.g) / 2),
+				.b = static_cast<component>((b + px.b) / 2),
 				.rf = rf,
 				.gf = gf,
 				.bf = bf,
-				.a = static_cast<std::uint8_t>((a + px.a) / 2),
+				.a = static_cast<component>((a + px.a) / 2),
 				.af = af,
 			};
 		}
@@ -361,13 +365,13 @@ namespace d2
 		PixelBase invert() const noexcept
 		{
 			return PixelBase{
-				static_cast<std::uint8_t>(255 - r),
-				static_cast<std::uint8_t>(255 - g),
-				static_cast<std::uint8_t>(255 - b),
+				static_cast<component>(255 - r),
+				static_cast<component>(255 - g),
+				static_cast<component>(255 - b),
 				a,
-				static_cast<std::uint8_t>(255 - rf),
-				static_cast<std::uint8_t>(255 - gf),
-				static_cast<std::uint8_t>(255 - bf),
+				static_cast<component>(255 - rf),
+				static_cast<component>(255 - gf),
+				static_cast<component>(255 - bf),
 				af
 			};
 		}
@@ -483,7 +487,7 @@ namespace d2
 		return *this;
 	}
 
-	inline PixelForeground PixelBackground::extend(value_type v, std::uint8_t style) const noexcept
+	inline PixelForeground PixelBackground::extend(value_type v, component style) const noexcept
 	{
 		return PixelForeground{
 			.r = r,
@@ -494,7 +498,7 @@ namespace d2
 			.v = v,
 		};
 	}
-	inline PixelForeground PixelBackground::operator|(std::uint8_t flag) const noexcept
+	inline PixelForeground PixelBackground::operator|(component flag) const noexcept
 	{
 		return extend(' ', flag);
 	}
@@ -507,6 +511,7 @@ namespace d2
 	namespace px
 	{
 		using style = Pixel::Style;
+		using component = Pixel::component;
 		using combined = Pixel;
 		using background = PixelBackground;
 		using foreground = PixelForeground;
