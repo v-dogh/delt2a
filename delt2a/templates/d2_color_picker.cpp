@@ -1,5 +1,6 @@
 #include "d2_color_picker.hpp"
 #include "d2_popup_theme_base.hpp"
+#include "../d2_tree.hpp"
 
 namespace d2::ctm
 {

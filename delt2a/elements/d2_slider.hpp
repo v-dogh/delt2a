@@ -19,7 +19,18 @@ namespace d2
 			std::function<void(Element::TraversalWrapper, float, float)> on_change{};
 
 			template<uai_property Property>
-			auto at_style();
+			auto at_style()
+			{
+				D2_UAI_SETUP(Style)
+				D2_UAI_VAR_START
+				D2_UAI_GET_VAR_A(0, max)
+				D2_UAI_GET_VAR_A(1, min)
+				D2_UAI_GET_VAR_A(2, slider_background_color)
+				D2_UAI_GET_VAR_A(3, slider_color)
+				D2_UAI_GET_VAR_A(4, slider_width)
+				D2_UAI_GET_VAR(5, on_change, None)
+				D2_UAI_VAR_END;
+			}
 		};
 
 		template<std::size_t PropBase>

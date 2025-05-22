@@ -3,6 +3,7 @@
 #include "../elements/d2_std.hpp"
 #include "../d2_colors.hpp"
 #include "../d2_dsl.hpp"
+#include "../d2_tree.hpp"
 #include <regex>
 
 namespace d2::ctm

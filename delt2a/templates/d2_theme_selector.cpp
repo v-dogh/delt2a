@@ -3,6 +3,7 @@
 #include "d2_color_picker.hpp"
 #include "../elements/d2_std.hpp"
 #include "../d2_colors.hpp"
+#include "../d2_tree.hpp"
 
 namespace d2::ctm
 {

@@ -3,36 +3,11 @@
 
 #include "../d2_tree_element.hpp"
 #include "../d2_styles.hpp"
+#include "../d2_model.hpp"
 #include "d2_element_utils.hpp"
 
 namespace d2
 {
-	namespace dx
-	{
-		class MatrixModel : public PixelBuffer
-		{
-		public:
-			enum class ModelType
-			{
-				Raw,
-				Visual
-			};
-			enum ModelHeader : std::uint8_t
-			{
-				Endian = 1 << 0,
-				Compressed = 1 << 1,
-				Extended = 1 << 2,
-			};
-
-			using ptr = std::shared_ptr<MatrixModel>;
-			using PixelBuffer::PixelBuffer;
-		public:
-			static auto make(int width = 0, int height = 0) noexcept;
-
-			void load_model(const std::string& path, ModelType type);
-			void save_model(const std::string& path, ModelType type);
-		};
-	}
 	namespace style
 	{
 		struct Model
@@ -45,7 +20,7 @@ namespace d2
 				InterpBg = 1 << 3,
 			};
 
-			dx::MatrixModel::ptr model{ nullptr };
+			MatrixModel::ptr model{ nullptr };
 			PixelBackground background_mask{};
 			PixelForeground foreground_mask{};
 			unsigned char mask_options{ 0x00 };

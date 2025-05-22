@@ -1,6 +1,7 @@
 #ifndef D2_TREE_HPP
 #define D2_TREE_HPP
 
+#include "elements/d2_box.hpp"
 #include "d2_tree_element.hpp"
 #include "d2_screen.hpp"
 

@@ -25,7 +25,19 @@ namespace d2
 			Pixel separator_color{ .a = 0, .v = '|' };
 
 			template<uai_property Property>
-			auto at_style();
+			auto at_style()
+			{
+				D2_UAI_SETUP_EMPTY
+				D2_UAI_VAR_START
+				D2_UAI_GET_VAR(0, options, Masked)
+				D2_UAI_GET_VAR(1, enabled_foreground_color, Style)
+				D2_UAI_GET_VAR(2, enabled_background_color, Style)
+				D2_UAI_GET_VAR(3, disabled_foreground_color, Style)
+				D2_UAI_GET_VAR(4, disabled_background_color, Style)
+				D2_UAI_GET_VAR_A(5, on_change)
+				D2_UAI_GET_VAR(6, separator_color, Style)
+				D2_UAI_VAR_END;
+			}
 		};
 
 		template<std::size_t PropBase>

@@ -27,6 +27,9 @@ add_executable(DeltaAscii main.cpp
     delt2a/d2_styles.hpp
     delt2a/d2_styles_base.hpp
     delt2a/d2_dsl.hpp
+    delt2a/d2_model.hpp
+
+    delt2a/d2_model.cpp
 
     # Pixel stuff
 
@@ -47,6 +50,8 @@ add_executable(DeltaAscii main.cpp
     delt2a/d2_screen_frwd.hpp
     delt2a/d2_io_handler.hpp
     delt2a/d2_io_handler_frwd.hpp
+
+    delt2a/d2_screen.cpp
 
     # IO Handlers
 
@@ -101,6 +106,7 @@ add_executable(DeltaAscii main.cpp
     delt2a/elements/d2_slider.cpp
     delt2a/elements/d2_switch.cpp
     delt2a/elements/d2_text.cpp
+    delt2a/d2_tree_element.cpp
 )
 
 include(GNUInstallDirs)
