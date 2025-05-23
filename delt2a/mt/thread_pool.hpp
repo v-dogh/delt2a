@@ -305,11 +305,11 @@ namespace util::mt
 			}
 			value_type_ptr operator->() const
 			{
-				return &value();
+				return &m_control_block->value();
 			}
 			value_type_ptr operator->()
 			{
-				return &value();
+				return &m_control_block->value();
 			}
 		};
 	}
