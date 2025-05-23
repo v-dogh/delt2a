@@ -2,23 +2,34 @@ cmake_minimum_required(VERSION 3.16)
 
 project(DeltaAscii LANGUAGES CXX)
 
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g -fno-omit-frame-pointer")
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=default -flto")
-# set(ENV{ASAN_OPTIONS} "${ASAN_OPTIONS}:second_deadlock_stack=1")
-# set(ENV{ASAN_OPTIONS} "${ASAN_OPTIONS}:symbolize=1:log_path=/home/dogh/logs.txt=continue_on_error=1")
-# add_compile_options(-fsanitize=address,undefined,leak,bounds,cfi)
-# set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address,undefined,leak,bounds,cfi")
-# Concurrency options
-# add_compile_options(-fsanitize=thread,bounds,cfi)
-# set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=thread,bounds,cfi")
-
 option(D2_EXCLUDE_LIBRARY_TEMPLATES "Disable elements module"   OFF)
 option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable templates module"  OFF)
 option(D2_EXCLUDE_OS_CORE           "Disable default os module" OFF)
+option(D2_SANITIZE_MEMORY           "Enable memory sanitizer"   OFF)
+option(D2_SANITIZE_THREAD           "Enable thread sanitizer"   OFF)
+
+if (D2_SANITIZE_MEMORY OR D2_SANITIZE_THREAD)
+    set(CMAKE_CXX_FLAGS   "${CMAKE_CXX_FLAGS} -O0 -g -fno-omit-frame-pointer -fvisibility=default")
+    set(ENV{ASAN_OPTIONS} "${ASAN_OPTIONS}:second_deadlock_stack=1:symbolize=1")
+    if (D2_SANITIZE_THREAD)
+        add_compile_options(-fsanitize=address,undefined,leak,bounds,cfi)
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address,undefined,leak,bounds,cfi")
+    elseif(D2_SANITIZE_MEMORY)
+        add_compile_options(-fsanitize=thread,bounds,cfi)
+        set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=thread,bounds,cfi")
+    endif()
+endif()
 
 set(CMAKE_CXX_STANDARD                 20)
 set(CMAKE_CXX_STANDARD_REQUIRED        ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE    ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(CMAKE_CXX_ARCHIVE_CREATE "<CMAKE_AR> qcD <TARGET> <OBJECTS>")
+    set(CMAKE_CXX_ARCHIVE_APPEND "<CMAKE_AR> qD  <TARGET> <OBJECTS>")
+    set(CMAKE_CXX_ARCHIVE_FINISH "<CMAKE_RANLIB> <TARGET>")
+endif()
 
 add_executable(DeltaAscii main.cpp)
 target_include_directories(DeltaAscii
