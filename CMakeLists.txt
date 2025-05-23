@@ -37,12 +37,16 @@ add_executable(DeltaAscii main.cpp
     delt2a/d2_colors.hpp
     delt2a/d2_interpolator.hpp
 
+    delt2a/d2_pixel.cpp
+
     # Tree data
 
     delt2a/d2_element_units.hpp
     delt2a/d2_tree_element_frwd.hpp
     delt2a/d2_tree_element.hpp
     delt2a/d2_tree.hpp
+
+    delt2a/d2_tree_element.cpp
 
     # Screen
 
@@ -56,6 +60,7 @@ add_executable(DeltaAscii main.cpp
     # IO Handlers
 
     delt2a/os/d2_unix_system_io.hpp
+    delt2a/os/d2_unix_system_io.cpp
 
     # Popups
 
@@ -106,7 +111,6 @@ add_executable(DeltaAscii main.cpp
     delt2a/elements/d2_slider.cpp
     delt2a/elements/d2_switch.cpp
     delt2a/elements/d2_text.cpp
-    delt2a/d2_tree_element.cpp
 )
 
 include(GNUInstallDirs)

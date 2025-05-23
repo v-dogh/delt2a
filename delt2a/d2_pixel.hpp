@@ -749,7 +749,7 @@ namespace d2
 			{
 				if (const auto len = PixelBase::is_cform(*it))
 				{
-					auto& px = *(++it);
+					const auto& px = *(++it);
 					for (std::size_t i = 0; i < len; i++)
 						result.push_back(px);
 					if (it == buffer.end())
