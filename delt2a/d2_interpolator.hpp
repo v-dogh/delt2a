@@ -2,7 +2,6 @@
 #define D2_INTERPOLATOR_HPP
 
 #include "d2_tree_element.hpp"
-#include "d2_styles.hpp"
 #include <chrono>
 
 namespace d2::interp

@@ -3,7 +3,6 @@
 
 #include <condition_variable>
 #include <shared_mutex>
-#include <functional>
 #include <algorithm>
 #include <stdexcept>
 #include <cstring>
@@ -15,7 +14,10 @@
 #include <mutex>
 #include <queue>
 #include <list>
-#include "../utils/function.hpp"
+
+#ifndef MT_TP_USE_CUSTOM_FUNCTION
+#include <functional>
+#endif
 
 namespace util::mt
 {
@@ -385,8 +387,13 @@ namespace util::mt
 				CyclicWorkerHandle& operator=(const CyclicWorkerHandle&) = delete;
 			};
 		private:
-			using normal_task = FunctionWrapper<void()>;
-			using cyclic_task = FunctionWrapper<bool()>;
+#			ifndef MT_TP_USE_CUSTOM_FUNCTION
+			using normal_task = std::function<void()>;
+			using cyclic_task = std::function<bool()>;
+#			else
+			using normal_task = MT_TP_USE_CUSTOM_FUNCTION<void()>;
+			using cyclic_task = MT_TP_USE_CUSTOM_FUNCTION<bool()>;
+#			endif
 			using control_block_ptr = std::shared_ptr<impl::AsyncControlBlock<void>>;
 			template<typename Type>
 			using typed_control_block = impl::AsyncControlBlock<Type>;

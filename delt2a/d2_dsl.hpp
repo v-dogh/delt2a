@@ -8,6 +8,30 @@
 #define D2_DEPENDENCY(type, name) Dependency<type> name;
 #define D2_DEPENDENCY_LINK(dname, name) virtual decltype(name)& dname() override { return name; }
 
+#define D2_EMBED(type, ...) ::d2::tree::SubTree<type, \
+	[]<typename Type>(::d2::Screen::ptr src) \
+	{ return Type::build(src __VA_OPT__(,) __VA_ARGS__); }>,
+#define D2_EMBED_ELEM(type, name, ...) ::d2::tree::ArgElem<[](auto loc, auto src) { \
+		return loc.asp()->override(std::make_shared<type>( \
+			std::string(name), src, loc.as() __VA_OPT__(,) __VA_ARGS__ \
+		)); \
+	}>,
+#define D2_EMBED_ELEM_UNNAMED(type, ...) D2_EMBED_ELEM(type, "", __VA_ARGS__)
+#define D2_STATELESS_TREE(alias) using alias = ::d2::TreeTemplate<
+#define D2_STATEFUL_TREE(alias, state) using alias = ::d2::TreeTemplateInit<state,
+#define D2_TREE_END(...) ::d2::tree::PaddingElem>;
+
+#define D2_STATELESS_TREE_FORWARD(alias) \
+struct alias : TreeTemplateInit<::d2::TreeState, void>  { \
+static ::d2::Element::TraversalWrapper create_at(::d2::Element::TraversalWrapper loc, TreeState::ptr src); };
+#define D2_STATEFUL_TREE_FORWARD(alias, state) \
+struct alias : TreeTemplateInit<state>  { \
+static ::d2::Element::TraversalWrapper create_at(::d2::Element::TraversalWrapper loc, TreeState::ptr src); };
+#define D2_TREE_INSTANTIATE(alias) \
+::d2::Element::TraversalWrapper alias::create_at(::d2::Element::TraversalWrapper loc, TreeState::ptr src) { \
+D2_STATELESS_TREE(_tree_)
+#define D2_TREE_INSTANTIATION_END(...) D2_TREE_END() return _tree_::create_at(loc, src); }
+
 #define D2_INVOCATION(type) [](::d2::Element::TraversalWrapper ptr, ::d2::TreeState::ptr state) \
 { using __object_type = type; \
 ::d2::Element::TraversalWrapper& __ptr = ptr; \
@@ -23,19 +47,6 @@
 #define D2_ELEM_NESTED_END(...) ::d2::tree::PaddingElem>,
 #define D2_UELEM_END D2_ELEM_END()
 #define D2_UELEM_NESTED_END D2_ELEM_NESTED_END()
-
-#define D2_EMBED(type, ...) ::d2::tree::SubTree<type, \
-	[]<typename Type>(::d2::Screen::ptr src) \
-	{ return Type::build(src __VA_OPT__(,) __VA_ARGS__); }>,
-#define D2_EMBED_ELEM(type, name, ...) ::d2::tree::ArgElem<[](auto loc, auto src) { \
-		return loc.asp()->override(std::make_shared<type>( \
-			std::string(name), src, loc.as() __VA_OPT__(,) __VA_ARGS__ \
-		)); \
-	}>,
-#define D2_EMBED_ELEM_UNNAMED(type, ...) D2_EMBED_ELEM(type, "", __VA_ARGS__)
-#define D2_STATELESS_TREE(alias) using alias = ::d2::TreeTemplate<
-#define D2_STATEFUL_TREE(alias, state) using alias = ::d2::TreeTemplateInit<state,
-#define D2_TREE_END(...) ::d2::tree::PaddingElem>;
 
 #define D2_STYLESHEET_BEGIN(name) \
 	struct name { \

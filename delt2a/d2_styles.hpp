@@ -7,6 +7,7 @@
 #include "d2_tree_element.hpp"
 #include "d2_element_units.hpp"
 #include "d2_pixel.hpp"
+#include "d2_screen.hpp"
 
 namespace d2::style
 {
@@ -758,7 +759,7 @@ namespace d2::style
 
 		HDUnit border_width{ 1 };
 		Pixel border_horizontal_color{ .a = 0, .v = '_' };
-		Pixel border_vertical_color{ .a = 0, .v = '|'};
+		Pixel border_vertical_color{ .a = 0, .v = '|' };
 		struct
 		{
 			Pixel::value_type top_left{};
@@ -899,7 +900,7 @@ namespace d2::style
 			Paragraph = PreserveWordBoundaries | HandleNewlines
 		};
 
-		string text{ "" };
+		string text{};
 		Alignment alignment{ Alignment::Center };
 		unsigned char text_options{ 0x00 };
 

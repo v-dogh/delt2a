@@ -16,71 +16,6 @@
 
 namespace d2
 {
-	namespace impl
-	{
-		// Idk what this is doing in here
-		class SharedAtomicFlag
-		{
-		private:
-			std::atomic_flag _rwlock{};
-			std::atomic_uint _rcnt{ 0 };
-		public:
-			SharedAtomicFlag() = default;
-			SharedAtomicFlag(SharedAtomicFlag&&) = delete;
-			SharedAtomicFlag(const SharedAtomicFlag&) = delete;
-
-			bool try_lock() noexcept
-			{
-				// Return false if there are readers or writers
-				if (_rwlock.test_and_set(std::memory_order::acquire))
-					return false;
-				return true;
-			}
-			void lock() noexcept
-			{
-				// Wait until no writers/readers are present
-				while (_rwlock.test_and_set(std::memory_order::acquire));
-			}
-			void unlock() noexcept
-			{
-				// Release the write lock
-				_rwlock.clear(std::memory_order::release);
-			}
-
-			bool try_lock_shared() noexcept
-			{
-				// Only lock if there are no readers
-				if (!_rcnt.load(std::memory_order::acquire))
-				{
-					// If there are writers return false
-					if (_rwlock.test_and_set(std::memory_order::acquire))
-						return false;
-					// Else increment the read count
-					_rcnt.fetch_add(1, std::memory_order::release);
-				}
-				return true;
-			}
-			void lock_shared() noexcept
-			{
-				// Only lock if there are no readers
-				if (!_rcnt.load(std::memory_order::acquire))
-				{
-					// Wait until no writers are present and lock for write
-					while (_rwlock.test_and_set(std::memory_order::acquire));
-					// Increment read count
-					_rcnt.fetch_add(1, std::memory_order::release);
-				}
-			}
-			void unlock_shared() noexcept
-			{
-				// Decrement the read count
-				// Release if this was the last reader
-				if (_rcnt.fetch_sub(1, std::memory_order::release) == 1)
-					_rwlock.clear(std::memory_order::release);
-			}
-		};
-	}
-
 	class IOContext;
 	namespace sys
 	{
@@ -457,6 +392,8 @@ namespace d2
 	class IOContext : public std::enable_shared_from_this<IOContext>
 	{
 	public:
+		template<typename Type>
+		using future = util::mt::future<Type>;
 		using ptr = std::shared_ptr<IOContext>;
 		using wptr = std::weak_ptr<IOContext>;
 		enum class Event
