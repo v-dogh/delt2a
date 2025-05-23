@@ -12,11 +12,21 @@ project(DeltaAscii LANGUAGES CXX)
 # add_compile_options(-fsanitize=thread,bounds,cfi)
 # set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=thread,bounds,cfi")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+option(D2_EXCLUDE_LIBRARY_TEMPLATES "Disable elements module"   ON)
+option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable templates module"  ON)
+option(D2_EXCLUDE_OS_CORE           "Disable default os module" ON)
 
-add_executable(DeltaAscii main.cpp
+set(CMAKE_CXX_STANDARD                 20)
+set(CMAKE_CXX_STANDARD_REQUIRED        ON)
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+
+add_executable(DeltaAscii main.cpp)
+target_include_directories(DeltaAscii
+    PRIVATE
+    ${CMAKE_SOURCE_DIR}/delt2a
+)
+
+add_library(DeltaCore STATIC
     # Core
 
     delt2a/d2_std.hpp
@@ -56,62 +66,77 @@ add_executable(DeltaAscii main.cpp
     delt2a/d2_io_handler_frwd.hpp
 
     delt2a/d2_screen.cpp
-
-    # IO Handlers
-
-    delt2a/os/d2_unix_system_io.hpp
-    delt2a/os/d2_unix_system_io.cpp
-
-    # Popups
-
-    delt2a/templates/d2_popup_theme_base.hpp
-
-    delt2a/templates/d2_file_explorer.hpp
-    delt2a/templates/d2_exit_prompt.hpp
-    delt2a/templates/d2_color_picker.hpp
-    delt2a/templates/d2_theme_selector.hpp
-
-    delt2a/templates/d2_file_explorer.cpp
-    delt2a/templates/d2_theme_selector.cpp
-    delt2a/templates/d2_exit_prompt.cpp
-    delt2a/templates/d2_color_picker.cpp
-
-    # Programs
-
-    delt2a/programs/d2_debug_box.hpp
-    delt2a/programs/d2_element_test.hpp
-    delt2a/programs/d2_quedits.hpp
-
-    # Elements
-
-    delt2a/elements/d2_std.hpp
-    delt2a/elements/d2_element_utils.hpp
-    delt2a/elements/d2_draggable_box.hpp
-    delt2a/elements/d2_button.hpp
-    delt2a/elements/d2_scrollbox.hpp
-    delt2a/elements/d2_slider.hpp
-    delt2a/elements/d2_text.hpp
-    delt2a/elements/d2_box.hpp
-    delt2a/elements/d2_input.hpp
-    delt2a/elements/d2_dropdown.hpp
-    delt2a/elements/d2_matrix.hpp
-    delt2a/elements/d2_switch.hpp
-    delt2a/elements/d2_graph.hpp
-    delt2a/elements/d2_checkbox.hpp
-
-    delt2a/elements/d2_box.cpp
-    delt2a/elements/d2_button.cpp
-    delt2a/elements/d2_checkbox.cpp
-    delt2a/elements/d2_draggable_box.cpp
-    delt2a/elements/d2_dropdown.cpp
-    delt2a/elements/d2_graph.cpp
-    delt2a/elements/d2_input.cpp
-    delt2a/elements/d2_matrix.cpp
-    delt2a/elements/d2_scrollbox.cpp
-    delt2a/elements/d2_slider.cpp
-    delt2a/elements/d2_switch.cpp
-    delt2a/elements/d2_text.cpp
 )
+target_link_libraries(DeltaAscii PRIVATE DeltaCore)
+
+if(NOT DEFINED D2_EXCLUDE_LIBRARY_ELEMENTS)
+    add_library(DeltaElements STATIC
+        delt2a/elements/d2_std.hpp
+        delt2a/elements/d2_element_utils.hpp
+        delt2a/elements/d2_draggable_box.hpp
+        delt2a/elements/d2_button.hpp
+        delt2a/elements/d2_scrollbox.hpp
+        delt2a/elements/d2_slider.hpp
+        delt2a/elements/d2_text.hpp
+        delt2a/elements/d2_box.hpp
+        delt2a/elements/d2_input.hpp
+        delt2a/elements/d2_dropdown.hpp
+        delt2a/elements/d2_matrix.hpp
+        delt2a/elements/d2_switch.hpp
+        delt2a/elements/d2_graph.hpp
+        delt2a/elements/d2_checkbox.hpp
+
+        delt2a/elements/d2_box.cpp
+        delt2a/elements/d2_button.cpp
+        delt2a/elements/d2_checkbox.cpp
+        delt2a/elements/d2_draggable_box.cpp
+        delt2a/elements/d2_dropdown.cpp
+        delt2a/elements/d2_graph.cpp
+        delt2a/elements/d2_input.cpp
+        delt2a/elements/d2_matrix.cpp
+        delt2a/elements/d2_scrollbox.cpp
+        delt2a/elements/d2_slider.cpp
+        delt2a/elements/d2_switch.cpp
+        delt2a/elements/d2_text.cpp
+    )
+    target_link_libraries(DeltaAscii PRIVATE DeltaElements)
+endif()
+if(NOT DEFINED D2_EXCLUDE_LIBRARY_TEMPLATES)
+    add_library(DeltaTemplates STATIC
+        # Popups
+
+        delt2a/templates/d2_popup_theme_base.hpp
+
+        delt2a/templates/d2_file_explorer.hpp
+        delt2a/templates/d2_exit_prompt.hpp
+        delt2a/templates/d2_color_picker.hpp
+        delt2a/templates/d2_theme_selector.hpp
+
+        delt2a/templates/d2_file_explorer.cpp
+        delt2a/templates/d2_theme_selector.cpp
+        delt2a/templates/d2_exit_prompt.cpp
+        delt2a/templates/d2_color_picker.cpp
+
+        # Programs
+
+        delt2a/programs/d2_debug_box.hpp
+        delt2a/programs/d2_element_test.hpp
+        delt2a/programs/d2_quedits.hpp
+    )
+    target_link_libraries(DeltaAscii PRIVATE DeltaTemplates)
+endif()
+
+if (NOT DEFINED D2_EXCLUDE_OS_CORE)
+    if (UNIX)
+        add_library(DeltaCoreUnix STATIC
+            # IO Handlers
+
+            delt2a/os/d2_unix_system_io.hpp
+            delt2a/os/d2_unix_system_io.cpp
+        )
+        target_link_libraries(DeltaAscii PRIVATE DeltaCoreUnix)
+    endif()
+endif()
 
 include(GNUInstallDirs)
 install(TARGETS DeltaAscii
