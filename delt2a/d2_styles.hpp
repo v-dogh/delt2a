@@ -7,6 +7,7 @@
 #include "d2_tree_element.hpp"
 #include "d2_element_units.hpp"
 #include "d2_pixel.hpp"
+#include "d2_screen.hpp"
 
 namespace d2::style
 {
