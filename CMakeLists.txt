@@ -12,9 +12,9 @@ project(DeltaAscii LANGUAGES CXX)
 # add_compile_options(-fsanitize=thread,bounds,cfi)
 # set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=thread,bounds,cfi")
 
-option(D2_EXCLUDE_LIBRARY_TEMPLATES "Disable elements module"   ON)
-option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable templates module"  ON)
-option(D2_EXCLUDE_OS_CORE           "Disable default os module" ON)
+option(D2_EXCLUDE_LIBRARY_TEMPLATES "Disable elements module"   OFF)
+option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable templates module"  OFF)
+option(D2_EXCLUDE_OS_CORE           "Disable default os module" OFF)
 
 set(CMAKE_CXX_STANDARD                 20)
 set(CMAKE_CXX_STANDARD_REQUIRED        ON)
@@ -69,7 +69,7 @@ add_library(DeltaCore STATIC
 )
 target_link_libraries(DeltaAscii PRIVATE DeltaCore)
 
-if(NOT DEFINED D2_EXCLUDE_LIBRARY_ELEMENTS)
+if(NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
     add_library(DeltaElements STATIC
         delt2a/elements/d2_std.hpp
         delt2a/elements/d2_element_utils.hpp
@@ -101,7 +101,7 @@ if(NOT DEFINED D2_EXCLUDE_LIBRARY_ELEMENTS)
     )
     target_link_libraries(DeltaAscii PRIVATE DeltaElements)
 endif()
-if(NOT DEFINED D2_EXCLUDE_LIBRARY_TEMPLATES)
+if(NOT D2_EXCLUDE_LIBRARY_TEMPLATES)
     add_library(DeltaTemplates STATIC
         # Popups
 
@@ -126,7 +126,7 @@ if(NOT DEFINED D2_EXCLUDE_LIBRARY_TEMPLATES)
     target_link_libraries(DeltaAscii PRIVATE DeltaTemplates)
 endif()
 
-if (NOT DEFINED D2_EXCLUDE_OS_CORE)
+if (NOT D2_EXCLUDE_OS_CORE)
     if (UNIX)
         add_library(DeltaCoreUnix STATIC
             # IO Handlers
