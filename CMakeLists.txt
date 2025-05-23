@@ -146,6 +146,8 @@ if (NOT D2_EXCLUDE_OS_CORE)
             delt2a/os/d2_unix_system_io.cpp
         )
         target_link_libraries(DeltaAscii PRIVATE DeltaCoreUnix)
+    else()
+        message(FATAL_ERROR "Unsupported platform")
     endif()
 endif()
 
