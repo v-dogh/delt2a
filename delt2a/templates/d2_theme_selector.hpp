@@ -17,7 +17,15 @@ namespace d2
 			int accents{ 0 };
 
 			template<uai_property Property>
-			auto at_style();
+			auto at_style()
+			{
+				D2_UAI_SETUP_EMPTY
+				D2_UAI_VAR_START
+				D2_UAI_GET_VAR_A(0, on_submit)
+				D2_UAI_GET_VAR(1, themes, Masked)
+				D2_UAI_GET_VAR_A(2, accents)
+				D2_UAI_VAR_END;
+			}
 		};
 
 		template<std::size_t PropBase>
