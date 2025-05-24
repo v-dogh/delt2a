@@ -8,7 +8,7 @@
 
 namespace d2::ctm
 {
-	std::string FilesystemExplorer::_memory_units(std::size_t bytes) noexcept
+	std::string _memory_units(std::size_t bytes) noexcept
 	{
 		constexpr auto gib = 1'073'741'824;
 		constexpr auto mib = 1'048'576;
@@ -22,7 +22,7 @@ namespace d2::ctm
 		else
 			return std::format("{}b", bytes);
 	}
-	FilesystemExplorer::eptr<FilesystemExplorer> FilesystemExplorer::_core(TreeState::ptr state)
+	FilesystemExplorer::eptr<FilesystemExplorer> _core(TreeState::ptr state)
 	{
 		return state->core()->traverse().as<FilesystemExplorer>();
 	}
