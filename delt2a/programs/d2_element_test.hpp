@@ -3,7 +3,7 @@
 
 #include "../elements/d2_std.hpp"
 
-namespace d2::templ
+namespace d2::prog
 {
 	// Slider
 	D2_ELEM(Text, slider-out)

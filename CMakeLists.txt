@@ -5,11 +5,13 @@ project(DeltaAscii LANGUAGES CXX VERSION 0.1.0)
 # OPTIONS #
 ###########
 
-option(D2_EXCLUDE_LIBRARY_TEMPLATES "Disable templates module"  OFF)
-option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"   OFF)
-option(D2_EXCLUDE_OS_CORE           "Disable default os module" OFF)
-option(D2_SANITIZE_MEMORY           "Enable memory sanitizer"   OFF)
-option(D2_SANITIZE_THREAD           "Enable thread sanitizer"   OFF)
+option(D2_EXCLUDE_LIBRARY_TEMPLATES "Disable templates module"     OFF)
+option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"      OFF)
+option(D2_EXCLUDE_OS_CORE           "Disable default os module"    OFF)
+option(D2_SANITIZE_MEMORY           "Enable memory sanitizer"      OFF)
+option(D2_SANITIZE_THREAD           "Enable thread sanitizer"      OFF)
+option(D2_UTF8_MODE                 "Enable UTF8 mode"             OFF)
+option(D2_STRICT_MODE               "Enable strict component mode" ON)
 
 set(D2_SANITIZER_FLAGS "")
 if(D2_SANITIZE_MEMORY AND D2_SANITIZE_THREAD)
@@ -20,6 +22,17 @@ if(D2_SANITIZE_MEMORY)
 endif()
 if(D2_SANITIZE_THREAD)
     list(APPEND D2_SANITIZER_FLAGS -fsanitize=thread)
+endif()
+if (D2_COMPONENT_MODE_STRICT)
+
+endif()
+if (D2_UTF8_MODE)
+    add_compile_definitions(D2_LOCALE_MODE UTF8)
+else()
+    add_compile_definitions(D2_LOCALE_MODE ASCII)
+endif()
+if (D2_STRICT_MODE)
+    add_compile_definitions(D2_COMPATIBILITY_MODE STRICT)
 endif()
 
 #########################

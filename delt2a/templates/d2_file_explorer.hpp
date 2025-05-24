@@ -18,9 +18,6 @@ namespace d2::ctm
 		std::filesystem::path path_{ "/" };
 		int rcnt_{ 0 };
 
-		static std::string _memory_units(std::size_t bytes) noexcept;
-		static eptr<FilesystemExplorer> _core(TreeState::ptr state);
-
 		virtual void _state_change_impl(State state, bool value) override;
 		void _update_results();
 	public:

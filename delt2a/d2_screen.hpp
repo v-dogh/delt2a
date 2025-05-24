@@ -116,7 +116,7 @@ namespace d2
 		template<typename Func>
 		auto sync(Func&& callback) -> util::mt::future<decltype(callback())>
 		{
-			return _ctx->scheduler()->launch_deferred_task([callback = std::forward<Func>(callback)]() {
+			return _ctx->scheduler()->launch_deferred_task([callback = std::forward<Func>(callback)]() -> decltype(auto) {
 				return callback();
 			}, std::chrono::milliseconds(0));
 		}
@@ -129,7 +129,7 @@ namespace d2
 			}
 			else
 			{
-				return _ctx->scheduler()->launch_deferred_task([callback = std::forward<Func>(callback)]() {
+				return _ctx->scheduler()->launch_deferred_task([callback = std::forward<Func>(callback)]() -> decltype(auto) {
 					return callback();
 				}, std::chrono::milliseconds(0)).value();
 			}

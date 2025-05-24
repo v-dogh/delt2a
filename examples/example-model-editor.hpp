@@ -7,7 +7,8 @@
 #include "../delt2a/templates/d2_color_picker.hpp"
 #include "../delt2a/templates/d2_file_explorer.hpp"
 #include "../delt2a/templates/d2_theme_selector.hpp"
-#include "delt2a/templates/d2_popup_theme_base.hpp"
+#include "../delt2a/templates/d2_popup_theme_base.hpp"
+#include "../delt2a/programs/d2_debug_box.hpp"
 
 // To run this example call editor::run()
 namespace editor
@@ -293,7 +294,7 @@ namespace editor
 	D2_STYLESHEET_END(button_react)
 
 	D2_STATEFUL_TREE(model_editor, ModelEditorState)
-		// D2_INJECT_TREE(d2::ctm::debug)
+		// D2_EMBED(d2::prog::debug)
 		// The main editor
 		D2_ELEM_NESTED(Box, editor)
 			D2_STYLE(X, 0.0_relative)

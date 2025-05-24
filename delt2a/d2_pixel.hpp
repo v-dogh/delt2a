@@ -6,7 +6,6 @@
 #include <cstring>
 #include <span>
 #include <vector>
-#include "d2_exceptions.hpp"
 #include "d2_locale.hpp"
 
 namespace d2
