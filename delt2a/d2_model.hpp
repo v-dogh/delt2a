@@ -24,7 +24,7 @@ namespace d2
 		using ptr = std::shared_ptr<MatrixModel>;
 		using PixelBuffer::PixelBuffer;
 	public:
-		static auto make(int width = 0, int height = 0) noexcept;
+		static MatrixModel::ptr make(int width = 0, int height = 0) noexcept;
 
 		void load_model(const std::string& path, ModelType type);
 		void save_model(const std::string& path, ModelType type);
