@@ -1,21 +1,25 @@
 #ifndef EXAMPLE_1_HPP
 #define EXAMPLE_1_HPP
 
+// Global macros
+// These have to be set in the cmake configuration
 // Possible values: ASCII or UTF8
 // Defines the value types for pixels
 // UTF8 mode will use more memory
-#define D2_LOCALE_MODE ASCII
+// #define D2_LOCALE_MODE ASCII
 // If STRICT, lack of a component will result in a compilation error
 // Else compilation will proceed and the component will be null
-#define D2_COMPATIBILITY_MODE STRICT
+// #define D2_COMPATIBILITY_MODE STRICT
 // Includes standard elements
 #include "../delt2a/elements/d2_std.hpp"
 // Includes core headers
 #include "../delt2a/d2_std.hpp"
-// Includes the debug box template (tree)
-#include "../delt2a/templates/d2_debug_box.hpp"
+// Includes the debug box tree
+#include "../delt2a/programs/d2_debug_box.hpp"
 // ^ Quedits tree
-#include "../delt2a/templates/d2_quedits.hpp"
+#include "../delt2a/programs/d2_quedits.hpp"
+// Popup theme
+#include "../delt2a/templates/d2_popup_theme_base.hpp"
 
 void example1()
 {
@@ -25,11 +29,21 @@ void example1()
 	// This part will be about theming so you can return to it after you look a bit at the tree
 	// Themes are handled through dependencies
 	// A dependency will track any subscribers and automatically update their values if its value changes
-	struct Theme : d2::style::Theme
+	struct Theme :
+		d2::style::Theme,
+		// If you want the popups to also be affected by your theme you will have to derive from the popup theme and link it (below)
+		d2::ctm::PopupTheme
 	{
 		// This will create a dependency with a type of a background color
 		// Any writes to this dependency will reflect in all dependent variables
 		Dependency<d2::px::background> color;
+
+		// You can also use macros for that
+		D2_DEPENDENCY(d2::px::background, other_color)
+		// To link a dependency (we have to do that for popup theme)
+		// Now any changes to color will also change pt_bg_primary
+		// We have to do that for all popup dependencies (you can look into the header for them)
+		D2_DEPENDENCY_LINK(pt_bg_primary, color)
 
 		// This function will be passed to d2::style::Theme::make to initialize our default theme
 		// You can also make the initialization function take arguments and pass them to d2::style::Theme::make
@@ -117,10 +131,10 @@ void example1()
 		// We can inject trees with these macros
 		// These will be created in place
 		// At runtime we can also use the create_at static method of the tree type
-		// E.g. d2::templ::debug::create_at(...)
-		D2_INJECT_TREE(d2::templ::debug)
+		// E.g. d2::ctm::debug::create_at(...)
+		D2_EMBED(d2::prog::debug)
 		// Here we inject poland
-		D2_INJECT_TREE(d2::templ::poland)
+		D2_EMBED(d2::prog::poland)
 		D2_ELEM(Text, example-named-element)
 			D2_STYLE(X, 0.0_center)
 			D2_STYLE(Y, 0.0_center)
@@ -196,8 +210,8 @@ void example1()
 	using test3 = d2::TreeTemplate<
 		// These classes accept a build lambda which will construct the tree
 		// Here we simply use a default constructor
-		d2::tree::SubTree<d2::templ::debug>,
-		d2::tree::SubTree<d2::templ::poland>,
+		d2::tree::SubTree<d2::prog::debug>,
+		d2::tree::SubTree<d2::prog::poland>,
 		// This type will construct a Text object with the passed name and call the callback on it
 		// The callback is where we set styles and perform any initialization
 		d2::tree::Elem<Text, "name", [](d2::Element::TraversalWrapper elem, d2::TreeState::ptr state) {
@@ -260,7 +274,7 @@ void example1()
 		// Output provides functions for rendering (meant to be used internally)
 		d2::IOContext::make<
 			// d2::os::<...> contains aliases for automatically asigned components (per-platform)
-			// One may load custom components if they want to
+			// One may load custom components if they want to (and define your own for any purpose)
 			// Components that are inactive (or not present) are void
 			d2::os::input,
 			d2::os::output,

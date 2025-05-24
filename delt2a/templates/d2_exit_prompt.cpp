@@ -7,13 +7,13 @@
 namespace d2::ctm
 {
 	using namespace d2::dx;
-	D2_TREE_INSTANTIATE(exit_prompt)
+	D2_TREE_DEFINE(exit_prompt)
 		D2_ELEM_NESTED_UNNAMED(Box)
 			D2_STYLE(ZIndex, 126)
 			D2_STYLE(Width, 1.0_pc)
 			D2_STYLE(Height, 1.0_pc)
 			D2_STYLE(BackgroundColor, d2::colors::w::black.alpha(0.7f))
-			D2_STYLE(ForegroundColor, d2::colors::w::black.alpha(0.5f))
+			D2_STYLE(ForegroundColor, d2::colors::w::black.alpha(0.7f))
 		D2_UELEM_NESTED_BODY
 			D2_ELEM_NESTED_UNNAMED(Box)
 				D2_STYLE(X, 0.0_center)
@@ -68,5 +68,5 @@ namespace d2::ctm
 				D2_UELEM_NESTED_END
 			D2_UELEM_NESTED_END
 		D2_UELEM_NESTED_END
-	D2_TREE_INSTANTIATION_END(exit_prompt)
+	D2_TREE_DEFINITION_END(exit_prompt)
 }

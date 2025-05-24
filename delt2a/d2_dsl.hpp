@@ -1,6 +1,8 @@
 #ifndef D2_DSL_HPP
 #define D2_DSL_HPP
 
+#include "d2_tree.hpp"
+
 // DSL macros (oh yeah macaroles!!! so many macaroles!!!!)
 
 #define D2_THEME(name, ...) struct name : ::d2::style::Theme __VA_OPT__(,) __VA_ARGS__ {
@@ -27,10 +29,10 @@ static ::d2::Element::TraversalWrapper create_at(::d2::Element::TraversalWrapper
 #define D2_STATEFUL_TREE_FORWARD(alias, state) \
 struct alias : TreeTemplateInit<state>  { \
 static ::d2::Element::TraversalWrapper create_at(::d2::Element::TraversalWrapper loc, TreeState::ptr src); };
-#define D2_TREE_INSTANTIATE(alias) \
+#define D2_TREE_DEFINE(alias) \
 ::d2::Element::TraversalWrapper alias::create_at(::d2::Element::TraversalWrapper loc, TreeState::ptr src) { \
 D2_STATELESS_TREE(_tree_)
-#define D2_TREE_INSTANTIATION_END(...) D2_TREE_END() return _tree_::create_at(loc, src); }
+#define D2_TREE_DEFINITION_END(...) D2_TREE_END() return _tree_::create_at(loc, src); }
 
 #define D2_INVOCATION(type) [](::d2::Element::TraversalWrapper ptr, ::d2::TreeState::ptr state) \
 { using __object_type = type; \
@@ -83,37 +85,37 @@ using __object_type = typev;
 #define D2_SYNCED_BLOCK state->screen()->sync_if([=]{
 #define D2_SYNCED_BLOCK_END });
 
-#define D2_LISTEN_EEXPR(event, value, ...) [=]() -> decltype(auto) { D2_LISTEN_EXPR(event, value, __VA_ARGS__) }()
+#define D2_LISTEN_EEXPR(event, value, ...) [=]() -> void { D2_LISTEN_EXPR(event, value, __VA_ARGS__) }()
 #define D2_LISTEN_EXPR(event, value, ...) D2_LISTEN(event, value) (__VA_ARGS__); D2_LISTEN_END
 #define D2_LISTEN(event, value) \
 	__ptr->listen(::d2::Element::event, value, \
 	[=](::d2::Element::EventListener listener, ::d2::Element::TraversalWrapper ptr) { D2_CONTEXT(ptr, __object_type)
 #define D2_LISTEN_END D2_CONTEXT_END });
 
-#define D2_LISTEN_GLOBAL_EEXPR(event, ...) [=]() -> decltype(auto) { D2_LISTEN_GLOBAL_EXPR(event, __VA_ARGS__) }()
+#define D2_LISTEN_GLOBAL_EEXPR(event, ...) [=]() -> void { D2_LISTEN_GLOBAL_EXPR(event, __VA_ARGS__) }()
 #define D2_LISTEN_GLOBAL_EXPR(event, ...) D2_LISTEN_GLOBAL(event) (__VA_ARGS__); D2_LISTEN_GLOBAL_END
 #define D2_LISTEN_GLOBAL(event) \
 	__state->context()->listen<::d2::IOContext::Event::event>( \
 	[=](::d2::IOContext::EventListener listener, ::d2::IOContext::ptr ctx, auto&&...) {
 #define D2_LISTEN_GLOBAL_END });
 
-#define D2_ASYNC_EEXPR(...) [=]() -> decltype(auto) { D2_ASYNC_EXPR(__VA_ARGS__) }()
+#define D2_ASYNC_EEXPR(...) [=]() -> void { D2_ASYNC_EXPR(__VA_ARGS__) }()
 #define D2_ASYNC_EXPR(...) D2_ASYNC_TASK (__VA_ARGS__); D2_ASYNC_END
 #define D2_ASYNC_TASK __state->context()->scheduler()->launch_task([=]() {
 #define D2_ASYNC_END });
 
-#define D2_CYCLIC_EEXPR(time, ...) [=]() -> decltype(auto) { D2_CYCLIC_EXPR(time, __VA_ARGS__) }()
+#define D2_CYCLIC_EEXPR(time, ...) [=]() -> void { D2_CYCLIC_EXPR(time, __VA_ARGS__) }()
 #define D2_CYCLIC_EXPR(time, ...) D2_CYCLIC_TASK(time) (__VA_ARGS__); D2_CYCLIC_END
 #define D2_CYCLIC_TASK(time) \
 	{ constexpr auto __cyclic_time = std::chrono::milliseconds(time); \
 	__state->context()->scheduler()->launch_cyclic_task([=](auto task) {
 #define D2_CYCLIC_END }, __cyclic_time); }
 
-#define D2_DEFER_EEXPR(time, ...) [=]() -> decltype(auto) { D2_DEFER_EXPR(time, __VA_ARGS__) }()
+#define D2_DEFER_EEXPR(time, ...) [=]() -> void { D2_DEFER_EXPR(time, __VA_ARGS__) }()
 #define D2_DEFER_EXPR(time, ...) D2_DEFER_TASK(time) (__VA_ARGS__); D2_DEFERRED_TASK_END
 #define D2_DEFER_TASK(time) \
 	{ constexpr auto __defer_time = std::chrono::milliseconds(time); \
-	__state->context()->scheduler()->launch_deferred_task([=]() -> decltype(auto) {
+	__state->context()->scheduler()->launch_deferred_task([=]() -> void {
 #define D2_DEFERRED_TASK_END }, __defer_time); }
 
 // Interpolation
@@ -144,14 +146,15 @@ using __object_type = typev;
 { \
 	using __type = decltype(std::declval<object>().template get<object::style>()); \
 	static bool __is_on{ false }; \
-	static bool __is_rev_on{ false }; \
 	static __type __saved_initial{}; \
+	static std::chrono::steady_clock::time_point __rev_timestamp{}; \
 	ptr->listen(::d2::Element::State::event, true, [=](auto, auto ptr) { \
 		const bool __finished = ptr.template as<object>()->template get<object::style>() == static_cast<__type>(dest); \
 		if (!__is_on && !__finished) \
 		{ \
-			if (!__is_rev_on) __saved_initial = ptr.template as<object>()->template get<object::style>(); \
-			__is_rev_on = false; \
+			if ((std::chrono::steady_clock::now() - __rev_timestamp) >= std::chrono::milliseconds(time)) \
+				__saved_initial = ptr.template as<object>()->template get<object::style>(); \
+			__rev_timestamp = std::chrono::steady_clock::time_point(); \
 			ptr->state()->screen()->template interpolate<::d2::interp::interpolator<object, object::style>>( \
 				std::chrono::milliseconds(time), \
 				ptr.as(), \
@@ -165,7 +168,7 @@ using __object_type = typev;
 		} \
 	}); \
 	ptr->listen(::d2::Element::State::event, false, [=](auto, auto ptr) { \
-		__is_rev_on = true; \
+		__rev_timestamp = std::chrono::steady_clock::now(); \
 		ptr->state()->screen()->template interpolate<::d2::interp::interpolator<object, object::style>>( \
 			std::chrono::milliseconds(time), \
 			ptr.as(), \

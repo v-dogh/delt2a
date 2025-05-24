@@ -47,10 +47,6 @@ namespace util::mt
 			{
 				return !(m_flags & BlockState::Discard && m_flags & BlockState::Finished);
 			}
-			bool _valid() noexcept
-			{
-				return !(m_flags & BlockState::Discard && m_flags & BlockState::Finished);
-			}
 		public:
 			AsyncControlBlock() = default;
 			AsyncControlBlock(std::nullptr_t) { }
@@ -64,11 +60,6 @@ namespace util::mt
 				std::unique_lock lock(m_mtx);
 				m_flags |= Discard;
 			}
-			void discard() noexcept
-			{
-				std::unique_lock lock(m_mtx);
-				m_flags |= Discard;
-			}
 
 			void sync() const
 			{
@@ -76,10 +67,6 @@ namespace util::mt
 				m_cv.wait(lock, [this]() {
 					return !_valid();
 				});
-			}
-			void sync()
-			{
-				return const_cast<const AsyncControlBlock*>(this)->sync();
 			}
 
 			void value() const
@@ -90,10 +77,6 @@ namespace util::mt
 				});
 				if (m_ex != nullptr)
 					std::rethrow_exception(m_ex);
-			}
-			void value()
-			{
-				const_cast<const AsyncControlBlock*>(this)->value();
 			}
 
 			void set_exception(std::exception_ptr ex)
@@ -124,11 +107,6 @@ namespace util::mt
 				std::unique_lock lock(m_mtx);
 				return _valid();
 			}
-			bool valid() noexcept
-			{
-				std::unique_lock lock(m_mtx);
-				return _valid();
-			}
 		};
 
 		template<typename Type>
@@ -136,8 +114,19 @@ namespace util::mt
 		{
 		private:
 			using base = AsyncControlBlock<void>;
+			using value_type = std::conditional_t<
+				std::is_reference_v<Type>,
+				std::remove_reference_t<Type>*,
+				Type
+			>;
 		private:
-			Type m_value{};
+			value_type m_value{};
+		private:
+			const Type& _value() const
+			{
+				if constexpr (std::is_reference_v<Type>) return *m_value;
+				else return m_value;
+			}
 		public:
 			using promise_type = std::shared_ptr<AsyncControlBlock<void>>;
 
@@ -153,12 +142,7 @@ namespace util::mt
 			const Type& value() const
 			{
 				base::value();
-				return m_value;
-			}
-			const Type& value()
-			{
-				base::value();
-				return m_value;
+				return _value();
 			}
 
 			template<typename Val>
@@ -166,7 +150,15 @@ namespace util::mt
 			{
 				{
 					std::unique_lock lock(m_mtx);
-					m_value = std::forward<Val>(value);
+					if constexpr (std::is_reference_v<Type>)
+					{
+						static_assert(std::is_reference_v<Val>);
+						m_value = &value;
+					}
+					else
+					{
+						m_value = std::forward<Val>(value);
+					}
 				}
 				base::set_value();
 			}
@@ -183,8 +175,8 @@ namespace util::mt
 		template<typename Val>
 		struct ValueType
 		{
-			using result = const Val&;
-			using result_ptr = const Val*;
+			using result = const std::decay_t<Val>&;
+			using result_ptr = const std::decay_t<Val>*;
 		};
 		template<>
 		struct ValueType<void>
@@ -207,10 +199,6 @@ namespace util::mt
 				if (m_control_block == nullptr)
 					throw std::runtime_error{ "Attempt to access nullptr future" };
 			}
-			void _check_block()
-			{
-				const_cast<const AsyncResult*>(this)->_check_block();
-			}
 		public:
 			AsyncResult() = default;
 			AsyncResult(std::nullptr_t) {}
@@ -226,10 +214,6 @@ namespace util::mt
 			{
 				return m_control_block;
 			}
-			auto block()
-			{
-				return m_control_block;
-			}
 
 			// Synchronization
 
@@ -239,18 +223,10 @@ namespace util::mt
 					return;
 				m_control_block->sync();
 			}
-			void sync()
-			{
-				const_cast<const AsyncResult*>(this)->sync();
-			}
 
 			value_type value() const
 			{
 				return m_control_block->value();
-			}
-			value_type value()
-			{
-				return const_cast<const AsyncResult*>(this)->value();
 			}
 
 			void stop(bool with_sync = true) const
@@ -262,10 +238,6 @@ namespace util::mt
 					sync();
 				m_control_block.reset();
 			}
-			void stop(bool with_sync = true)
-			{
-				const_cast<const AsyncResult*>(this)->stop(with_sync);
-			}
 
 			AsyncResult& operator=(const AsyncResult&) = default;
 			AsyncResult& operator=(AsyncResult&&) = default;
@@ -274,23 +246,11 @@ namespace util::mt
 			{
 				return m_control_block == nullptr;
 			}
-			bool operator==(std::nullptr_t) noexcept
-			{
-				return m_control_block == nullptr;
-			}
 			bool operator!=(std::nullptr_t) const noexcept
 			{
 				return m_control_block != nullptr;
 			}
-			bool operator!=(std::nullptr_t) noexcept
-			{
-				return m_control_block != nullptr;
-			}
 			bool operator!() const noexcept
-			{
-				return m_control_block == nullptr;
-			}
-			bool operator!() noexcept
 			{
 				return m_control_block == nullptr;
 			}
@@ -299,15 +259,7 @@ namespace util::mt
 			{
 				return value();
 			}
-			value_type operator*()
-			{
-				return value();
-			}
 			value_type_ptr operator->() const
-			{
-				return &m_control_block->value();
-			}
-			value_type_ptr operator->()
 			{
 				return &m_control_block->value();
 			}

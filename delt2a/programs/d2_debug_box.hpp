@@ -9,10 +9,10 @@
 #include "../elements/d2_input.hpp"
 #include "../elements/d2_button.hpp"
 #include "../d2_dsl.hpp"
+#include "../d2_tree.hpp"
+#include "delt2a/os/d2_unix_system_io.hpp"
 
-#include "../os/d2_unix_system_io.hpp"
-
-namespace d2::templ
+namespace d2::prog
 {
 	// Ima just put these rad af load animations in here for later bcs why not
 	// D2_INTERPOLATE_GEN(1000, Sequential, Text, value, std::vector<d2::string>{ "⠇", "⠋", "⠙", "⠸", "⢰", "⣠", "⣄", "⡆" });
@@ -134,7 +134,7 @@ namespace d2::templ
 								state->context()->syscnt(),
 								state->screen()->fps(),
 								state->screen()->delta(),
-								state->context()->output()->as<sys::UnixOutput>()->buffer_size(),
+								state->context()->output()->as<sys::UnixTerminalOutput>()->buffer_size(),
 								state->screen()->animations(),
 								cnt,
 								f

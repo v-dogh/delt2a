@@ -3,10 +3,10 @@
 
 #include "../elements/d2_box.hpp"
 #include "../elements/d2_text.hpp"
-#include "../d2_screen.hpp"
 #include "../d2_colors.hpp"
+#include "../d2_dsl.hpp"
 
-namespace d2::templ
+namespace d2::prog
 {
 	using namespace d2::dx;
 	D2_STATELESS_TREE(poland)

@@ -1,4 +1,5 @@
 #include "d2_pixel.hpp"
+#include "d2_exceptions.hpp"
 
 namespace d2
 {
@@ -242,53 +243,54 @@ namespace d2
 
 	void PixelBase::blend(const PixelBase& src) noexcept
 	{
-		auto blend = [](component src, component dest, double alpha_src)
+		auto do_blend = [](component source, component dest, float alpha)
 		{
 			return static_cast<component>(
-				(src * alpha_src) +
-				(dest * (1 - alpha_src))
+				source * alpha + dest * (1.f - alpha) + 0.5f
 			);
 		};
 
-		// Foreground
-		if (af != 255 || src.af != 255)
-		{
-			const auto alpha_src = src.af / 255.0;
-			const auto alpha_dest = af / 255.0;
-			rf = blend(src.rf, rf, alpha_src);
-			gf = blend(src.gf, gf, alpha_src);
-			bf = blend(src.bf, bf, alpha_src);
-			af = static_cast<component>((alpha_src + alpha_dest * (1 - alpha_src)) * 255);
-		}
-		else
+		const auto special_case = (src.v == ' ' && src.a < a);
+		const auto src_af = special_case ? src.a : src.af;
+		if (src_af == 255)
 		{
 			rf = src.rf;
 			gf = src.gf;
 			bf = src.bf;
-			af = src.af;
+			af = 255;
+		}
+		else if (src.af != 0)
+		{
+			const auto alpha_src = src_af / 255.f;
+			const auto alpha_dest = af / 255.f;
+			rf = do_blend(src.rf, rf, alpha_src);
+			gf = do_blend(src.gf, gf, alpha_src);
+			bf = do_blend(src.bf, bf, alpha_src);
+			af = static_cast<component>(
+				(alpha_src + alpha_dest * (1.f - alpha_src)) * 255.f + 0.5f
+			);
 		}
 
-		// Background
-		if (a != 255 || src.a != 255)
-		{
-			const auto alpha_src = src.a / 255.0;
-			const auto alpha_dest = a / 255.0;
-			r = blend(src.r, r, alpha_src);
-			g = blend(src.g, g, alpha_src);
-			b = blend(src.b, b, alpha_src);
-			a = static_cast<component>((alpha_src + alpha_dest * (1 - alpha_src)) * 255);
-		}
-		else
+		if (src.a == 255)
 		{
 			r = src.r;
 			g = src.g;
 			b = src.b;
-			a = src.a;
+			a = 255;
+		}
+		else if (src.a != 0)
+		{
+			const auto alpha_src = src.a / 255.f;
+			const auto alpha_dest = a / 255.f;
+			r = do_blend(src.r, r, alpha_src);
+			g = do_blend(src.g, g, alpha_src);
+			b = do_blend(src.b, b, alpha_src);
+			a = static_cast<component>(
+				(alpha_src + alpha_dest * (1.f - alpha_src)) * 255.f + 0.5f
+			);
 		}
 
-		// Value
-		if (src.af >= af &&
-			!(src.a <= a && src.v == ' '))
+		if (src_af >= af && !special_case)
 		{
 			v = src.v;
 			style = src.style;

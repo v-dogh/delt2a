@@ -7,7 +7,8 @@
 #include "../delt2a/templates/d2_color_picker.hpp"
 #include "../delt2a/templates/d2_file_explorer.hpp"
 #include "../delt2a/templates/d2_theme_selector.hpp"
-#include "../delt2a/templates/d2_debug_box.hpp"
+#include "../delt2a/templates/d2_popup_theme_base.hpp"
+#include "../delt2a/programs/d2_debug_box.hpp"
 
 // To run this example call editor::run()
 namespace editor
@@ -17,7 +18,7 @@ namespace editor
 	class ModelEditorState : public d2::TreeState
 	{
 	public:
-		struct Theme : d2::style::Theme, d2::templ::PopupTheme
+		struct Theme : d2::style::Theme, d2::ctm::PopupTheme
 		{
 			D2_DEPENDENCY(d2::px::background, primary_background)
 			D2_DEPENDENCY(d2::px::background, secondary_background)
@@ -119,7 +120,7 @@ namespace editor
 			{
 				(core()->traverse()/"editor"/"model")
 					.as<Matrix>()
-					->set<Matrix::Model>(MatrixModel::make());
+					->set<Matrix::Model>(d2::MatrixModel::make());
 
 				setpixel_ev_ = context()->listen<d2::IOContext::Event::MouseInput>([](auto, auto, TreeState::ptr state) {
 					auto model =
@@ -128,7 +129,7 @@ namespace editor
 					if (model->getstate(d2::Element::Hovered))
 					{
 						const auto [ x, y ] = model->mouse_object_space();
-						model->apply_set<Matrix::Model>([&](MatrixModel::ptr& model) {
+						model->apply_set<Matrix::Model>([&](d2::MatrixModel::ptr& model) {
 							if (x >= 0 && x < model->width() &&
 								y >= 0 && y < model->height())
 							{
@@ -264,7 +265,7 @@ namespace editor
 					->get<Input::Value>()));
 
 				auto model = (r/"editor"/"model").as<Matrix>();
-				model->apply_set<Matrix::Model>([&](MatrixModel::ptr& model) {
+				model->apply_set<Matrix::Model>([&](d2::MatrixModel::ptr& model) {
 					model->set_size(width, height);
 					model->fill({ .v = ' ' });
 				});
@@ -293,7 +294,7 @@ namespace editor
 	D2_STYLESHEET_END(button_react)
 
 	D2_STATEFUL_TREE(model_editor, ModelEditorState)
-		// D2_INJECT_TREE(d2::templ::debug)
+		// D2_EMBED(d2::prog::debug)
 		// The main editor
 		D2_ELEM_NESTED(Box, editor)
 			D2_STYLE(X, 0.0_relative)
@@ -367,7 +368,7 @@ namespace editor
 						D2_STYLE(X, 0.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
-							using d2::templ::FilesystemExplorer;
+							using d2::ctm::FilesystemExplorer;
 							ptr->screen()->traverse().asp()->override<FilesystemExplorer>("__fs_open__")
 								.as<FilesystemExplorer>()->set<FilesystemExplorer::OnSubmit>(
 									[](d2::Element::TraversalWrapper ptr) {
@@ -383,7 +384,7 @@ namespace editor
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
-							using d2::templ::FilesystemExplorer;
+							using d2::ctm::FilesystemExplorer;
 							ptr->screen()->traverse().asp()->override<FilesystemExplorer>("__fs_save__")
 								.as<FilesystemExplorer>()->set<FilesystemExplorer::OnSubmit>(
 									[](d2::Element::TraversalWrapper ptr) {
@@ -399,7 +400,7 @@ namespace editor
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
-							d2::templ::exit_prompt::create_at(
+							d2::ctm::exit_prompt::create_at(
 								ptr->screen()->root(), ptr->state()
 							);
 						})
@@ -410,7 +411,7 @@ namespace editor
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
-							using d2::templ::ThemeSelector;
+							using d2::ctm::ThemeSelector;
 							ptr->screen()->traverse().asp()->override<ThemeSelector>("__theme_select__")
 								.as<ThemeSelector>()->set<ThemeSelector::OnSubmit>(
 									[](d2::Element::TraversalWrapper ptr, const ThemeSelector::theme& theme) {
@@ -472,7 +473,7 @@ namespace editor
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 						D2_STYLE(OnSubmit, [](d2::Element::TraversalWrapper ptr) {
-							using d2::templ::ColorPicker;
+							using d2::ctm::ColorPicker;
 							ptr->screen()->traverse().asp()->override<ColorPicker>("__color_picker__")
 								.as<ColorPicker>()->set<ColorPicker::OnSubmit>(
 									[](d2::Element::TraversalWrapper ptr, d2::px::background color) {

@@ -4,7 +4,7 @@
 
 namespace d2
 {
-	auto MatrixModel::make(int width, int height) noexcept
+	MatrixModel::ptr MatrixModel::make(int width, int height) noexcept
 	{
 		auto ptr = std::make_shared<MatrixModel>();
 		ptr->set_size(width, height);
