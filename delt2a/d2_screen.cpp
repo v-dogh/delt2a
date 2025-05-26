@@ -424,7 +424,9 @@ namespace d2
 	bool Screen::is_keynav() const noexcept
 	{
 		std::unique_lock lock(_mtx);
-		return _keynav_iterator != nullptr;
+		return
+			_keynav_iterator != nullptr &&
+			_focused == _keynav_iterator.value();
 	}
 
 	void Screen::apply(const Element::foreach_callback& func) const
