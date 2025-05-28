@@ -8,6 +8,7 @@
 #include "d2_element_units.hpp"
 #include "d2_pixel.hpp"
 #include "d2_screen.hpp"
+#include "d2_chardef.hpp"
 
 namespace d2::style
 {
@@ -758,16 +759,19 @@ namespace d2::style
 		};
 
 		HDUnit border_width{ 1 };
-		Pixel border_horizontal_color{ .a = 0, .v = '_' };
-		Pixel border_vertical_color{ .a = 0, .v = '|' };
+		Pixel border_horizontal_color{ .a = 0, .v = charset::box_border_vertical };
+		Pixel border_vertical_color{ .a = 0, .v = charset::box_border_horizontal };
 		struct
 		{
-			Pixel::value_type top_left{};
-			Pixel::value_type top_right{};
-			Pixel::value_type bottom_left{};
-			Pixel::value_type bottom_right{};
+			Pixel::value_type top_left{ charset::box_tl_corner };
+			Pixel::value_type top_right{ charset::box_tr_corner };
+			Pixel::value_type bottom_left{ charset::box_bl_corner };
+			Pixel::value_type bottom_right{ charset::box_br_corner };
 		} corners;
-		unsigned char container_options{ 0x00 };
+		unsigned char container_options{
+			(charset::top_fix * TopFix) |
+			(charset::corners * OverrideCorners)
+		};
 
 		void _setopt(ContainerOptions opt, bool value)
 		{
