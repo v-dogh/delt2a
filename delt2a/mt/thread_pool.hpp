@@ -208,6 +208,13 @@ namespace util::mt
 				: m_control_block(block) { }
 			~AsyncResult() = default;
 
+			// Metadata
+
+			bool running() const noexcept
+			{
+				return m_control_block->valid();
+			}
+
 			// Internals
 
 			auto block() const

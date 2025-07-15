@@ -76,7 +76,7 @@ namespace d2::dx
 				upper - lower
 			);
 		}
-		return "";
+		return D2_STRING("");
 	}
 
 	void Input::_start_blink() noexcept
@@ -177,9 +177,7 @@ namespace d2::dx
 
 		bbox.width = ((data::width.getunits() == Unit::Auto) ?
 			int(data::pre.size() + data::text.size()) :
-			data::pre.size() +
-			_resolve_units(data::width)) +
-			(data::input_options & InputOptions::DrawPtr);
+			_resolve_units(data::width));
 		bbox.height = data::height.getunits() == d2::Unit::Auto ?
 			1 : _resolve_units(data::height);
 

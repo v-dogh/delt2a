@@ -36,7 +36,7 @@ namespace d2::prog
 			D2_STYLE(BorderHorizontalColor, d2::px::foreground{ .v = '_' })
 			D2_STYLE(BorderVerticalColor, d2::px::foreground{ .v = '|' })
 			D2_STYLE(ContainerOptions, Box::EnableBorder)
-		D2_ELEM_NESTED_BODY(dbg-box)
+		D2_ELEM_NESTED_BODY
 			// Controls
 			D2_ELEM(Text, exit)
 				D2_STYLE(Value, "X")
@@ -48,7 +48,7 @@ namespace d2::prog
 				D2_LISTEN(Clicked, true)
 					state->screen()->stop_blocking();
 				D2_LISTEN_END
-			D2_ELEM_END(exit)
+			D2_ELEM_END
 			D2_ELEM(Text, indicator)
 				D2_STYLE(Y, 0.0_px)
 				D2_STYLE(X, 1.0_px)
@@ -65,23 +65,23 @@ namespace d2::prog
 						!state->screen()->is_suspended()
 					);
 				D2_LISTEN_END
-			D2_ELEM_END(indicator)
+			D2_ELEM_END
 			// Main display
-			D2_ELEM_NESTED_UNNAMED(ScrollBox)
+			D2_ELEM_NESTED(ScrollBox)
 				D2_STYLE(Width, 1.0_pc)
 				D2_STYLE(Height, 1.0_pc)
 				D2_STYLE(Y, 1.0_px)
-			D2_UELEM_NESTED_BODY
+			D2_ELEM_NESTED_BODY
 				// Performance
 				D2_ELEM_NESTED(Box, performance-box)
 					D2_STYLE(Width, 0.5_pc)
 					D2_STYLE(Height, 1.0_pxi)
 					D2_STYLE(X, 0.0_relative)
-				D2_UELEM_NESTED_BODY
-					D2_ELEM_UNNAMED(Text)
+				D2_ELEM_NESTED_BODY
+					D2_ELEM(Text)
 						D2_STYLE(Value, "Info")
 						D2_STYLE(X, 0.0_center)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Input, input)
 						D2_STYLE(Pre, "<fps>")
 						D2_STYLE(X, 1.0_px)
@@ -100,7 +100,7 @@ namespace d2::prog
 							}
 							catch (...) {}
 						})
-					D2_ELEM_END(input)
+					D2_ELEM_END
 					D2_ELEM(Text, performance-values)
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 2.0_px)
@@ -140,20 +140,20 @@ namespace d2::prog
 								f
 							));
 						D2_CYCLIC_END
-					D2_ELEM_END(performance-values)
-				D2_ELEM_NESTED_END(performance-box)
+					D2_ELEM_END
+				D2_ELEM_NESTED_END
 				// Clipboard
 				D2_ELEM_NESTED(Box, clipboard-box)
 					D2_STYLE(Width, 0.5_pc)
 					D2_STYLE(Height, 1.0_pxi)
 					D2_STYLE(X, 0.0_relative)
-				D2_ELEM_NESTED_BODY()
-					D2_ELEM_UNNAMED(Text)
+				D2_ELEM_NESTED_BODY
+					D2_ELEM(Text)
 						D2_STYLE(Value, "Clipboard")
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 0.0_relative)
-					D2_UELEM_END
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM_END
+					D2_ELEM(Text)
 						D2_STYLE(Value, "Status: ")
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 0.0_relative)
@@ -165,8 +165,8 @@ namespace d2::prog
 								)
 							));
 						D2_CYCLIC_END
-					D2_UELEM_END
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM_END
+					D2_ELEM(Text)
 						D2_STYLE(Value, "Value: ")
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 0.0_relative)
@@ -179,8 +179,8 @@ namespace d2::prog
 									std::format("'{}'", clipboard->paste())
 							));
 						D2_CYCLIC_END
-					D2_UELEM_END
-					D2_ELEM_UNNAMED(Input)
+					D2_ELEM_END
+					D2_ELEM(Input)
 						D2_STYLE(Pre, "Copy: ")
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 0.0_relative)
@@ -190,8 +190,8 @@ namespace d2::prog
 								->sys<sys::ext::SystemClipboard>()
 								->copy(value);
 						})
-					D2_UELEM_END
-					D2_ELEM_UNNAMED(Button)
+					D2_ELEM_END
+					D2_ELEM(Button)
 						D2_STYLE(Value, "Clear Data")
 						D2_STYLE(BackgroundColor, colors::w::gray)
 						D2_STYLE(X, 0.0_center)
@@ -204,11 +204,11 @@ namespace d2::prog
 						D2_INTERPOLATE_TWOWAY_AUTO(Hovered, 500, Linear, BackgroundColor, colors::w::silver);
 						D2_INTERPOLATE_TWOWAY_AUTO(Clicked, 100, Linear, BackgroundColor, colors::w::white);
 						D2_INTERPOLATE_TWOWAY_AUTO(Clicked, 100, Linear, ForegroundColor, colors::w::black);
-					D2_UELEM_END
-				D2_ELEM_NESTED_END(clipboard-box)
-			D2_UELEM_NESTED_END
-		D2_ELEM_NESTED_END(dbg-box)
-	D2_TREE_END(debug)
+					D2_ELEM_END
+				D2_ELEM_NESTED_END
+			D2_ELEM_NESTED_END
+		D2_ELEM_NESTED_END
+	D2_TREE_END
 }
 
 #endif // D2_DEBUG_BOX_HPP

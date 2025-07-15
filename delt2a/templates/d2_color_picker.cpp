@@ -25,7 +25,7 @@ namespace d2::ctm
 	void ColorPicker::_state_change_impl(State state, bool value)
 	{
 		VirtualBox::_state_change_impl(state, value);
-		if (state == State::Swapped && !value && empty())
+		if (state == State::Created && value && empty())
 		{
 			VirtualBox::width = 42.0_px;
 			VirtualBox::height = 8.0_px;
@@ -67,7 +67,7 @@ namespace d2::ctm
 					D2_STYLE(OnSubmit, [state](Element::TraversalWrapper ptr) {
 						_core(state)->close();
 					})
-				D2_ELEM_END(exit)
+				D2_ELEM_END
 				D2_ELEM(Button, submit)
 					D2_STYLE(Value, "<Ok>")
 					D2_STYLE(X, 5.0_pxi)
@@ -76,71 +76,71 @@ namespace d2::ctm
 					D2_STYLE(OnSubmit, [state](Element::TraversalWrapper ptr) {
 						_core(state)->submit();
 					})
-				D2_ELEM_END(submit)
+				D2_ELEM_END
 				// Colors
 				D2_ELEM_NESTED(Box, colors)
 					D2_STYLE(Width, 0.5_pc)
 					D2_STYLE(Height, 12.0_px)
 					D2_STYLE(X, 1.0_relative)
 					D2_STYLE(Y, 1.0_px)
-				D2_ELEM_NESTED_BODY(colors)
-					D2_ELEM_UNNAMED(Text)
+				D2_ELEM_NESTED_BODY
+					D2_ELEM(Text)
 						D2_STYLE(Value, "R: ")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Slider, r)
 						D2_STYLES_APPLY(rgba_picker)
-					D2_ELEM_END(r)
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM_END
+					D2_ELEM(Text)
 						D2_STYLE(Value, "G: ")
 						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(Y, 0.0_relative)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Slider, g)
 						D2_STYLES_APPLY(rgba_picker)
-					D2_ELEM_END(g)
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM_END
+					D2_ELEM(Text)
 						D2_STYLE(Value, "B: ")
 						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(Y, 0.0_relative)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Slider, b)
 						D2_STYLES_APPLY(rgba_picker)
-					D2_ELEM_END(b)
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM_END
+					D2_ELEM(Text)
 						D2_STYLE(Value, "A: ")
 						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(Y, 0.0_relative)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Slider, a)
 						D2_STYLES_APPLY(rgba_picker)
-					D2_ELEM_END(a)
-				D2_ELEM_NESTED_END(colors)
+					D2_ELEM_END
+				D2_ELEM_NESTED_END
 				// Statistics
 				D2_ELEM_NESTED(Box, statistics)
 					D2_STYLE(X, 0.0_pxi)
 					D2_STYLE(Y, 1.0_px)
 					D2_STYLE(Width, 0.5_pc)
 					D2_STYLE(Height, 1.0_pxi)
-				D2_ELEM_NESTED_BODY(statistics)
-					D2_ELEM_UNNAMED(Text)
+				D2_ELEM_NESTED_BODY
+					D2_ELEM(Text)
 						D2_STYLE(Value, "RGBA")
 						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 0.0_relative)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Text, color-rgba)
 						D2_STYLE(Value, "[0][0][0][0]")
 						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 0.0_relative)
-					D2_ELEM_END(color-rgba)
-				D2_ELEM_NESTED_END(statistics)
-			D2_TREE_END(color_picker)
+					D2_ELEM_END
+				D2_ELEM_NESTED_END
+			D2_TREE_END
 
 			color_picker::create_at(
 				traverse(),

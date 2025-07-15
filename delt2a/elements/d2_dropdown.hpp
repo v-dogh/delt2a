@@ -11,7 +11,7 @@ namespace d2
 	{
 		struct Dropdown
 		{
-			string default_value{ "" };
+			string default_value{};
 
 			PixelForeground selected_foreground_color{};
 			PixelBackground selected_background_color{};

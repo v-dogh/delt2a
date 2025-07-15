@@ -43,7 +43,7 @@ namespace d2::dx
 
 	void ScrollBox::_state_change_impl(State state, bool value)
 	{
-		if (state == State::Swapped && !value)
+		if (state == State::Created && value)
 		{
 			if (scrollbar_ == nullptr)
 			{
@@ -91,6 +91,7 @@ namespace d2::dx
 	{
 		for (decltype(auto) it : _elements)
 			callback(it);
-		callback(scrollbar_);
+		if (scrollbar_)
+			callback(scrollbar_);
 	}
 }

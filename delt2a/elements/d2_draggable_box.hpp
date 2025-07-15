@@ -20,7 +20,7 @@ namespace d2
 				Static = Draggable,
 			};
 
-			string title{ "" };
+			string title{};
 			PixelForeground bar_color{ .v = '.' };
 			Pixel::value_type resize_point_value{ ',' };
 			VDUnit bar_height{ 2.0_px };

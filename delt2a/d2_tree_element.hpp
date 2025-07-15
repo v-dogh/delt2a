@@ -169,6 +169,7 @@ namespace d2
 			Display = 1 << 3,
 			Swapped = 1 << 4,
 			Keynavi = 1 << 5,
+			Created = 1 << 6,
 		};
 		enum InternalState : internal_flag
 		{
@@ -434,6 +435,14 @@ namespace d2
 		virtual void _update_style_impl() noexcept {}
 		virtual void _frame_impl(PixelBuffer::View) noexcept = 0;
 	public:
+		template<typename Type>
+		static auto make(const std::string& name, TreeState::ptr state, ptr parent)
+		{
+			auto ptr = std::make_shared<Type>(name, state, parent);
+			ptr->setstate(State::Created);
+			return ptr;
+		}
+
 		Element() = default;
 		Element(
 			const std::string& name,
@@ -446,7 +455,10 @@ namespace d2
 		{}
 		Element(Element&&) = delete;
 		Element(const Element&) = delete;
-		virtual ~Element() = default;
+		virtual ~Element()
+		{
+			setstate(State::Created, false);
+		}
 
 		// Metadata
 
@@ -623,7 +635,7 @@ namespace d2
 
 		template<typename Type> TraversalWrapper create(const std::string& name = "")
 		{
-			return create(std::make_shared<Type>(
+			return create(Element::make<Type>(
 				name,
 				state(),
 				shared_from_this()
@@ -631,7 +643,7 @@ namespace d2
 		}
 		template<typename Type> TraversalWrapper override(const std::string& name = "")
 		{
-			return override(std::make_shared<Type>(
+			return override(Element::make<Type>(
 				name,
 				state(),
 				shared_from_this()
@@ -639,10 +651,12 @@ namespace d2
 		}
 		TraversalWrapper create(ptr ptr)
 		{
+			ptr->setstate(State::Created);
 			return _create_impl(ptr);
 		}
 		TraversalWrapper override(ptr ptr) noexcept
 		{
+			ptr->setstate(State::Created);
 			return _override_impl(ptr);
 		}
 

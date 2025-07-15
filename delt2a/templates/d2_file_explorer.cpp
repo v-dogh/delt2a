@@ -98,13 +98,13 @@ namespace d2::ctm
 
 		virtual void _state_change_impl(State state, bool value) override
 		{
-			if (state == State::Swapped && !value)
+			if (state == State::Created && value)
 			{
 				if (scrollbar_ == nullptr)
 				{
 					using namespace dx;
 
-					scrollbar_ = std::make_shared<dx::VerticalSlider>(
+					scrollbar_ = Element::make<dx::VerticalSlider>(
 						"", this->state(), shared_from_this()
 					);
 					scrollbar_->setstate(State::Swapped, false);
@@ -384,14 +384,14 @@ namespace d2::ctm
 	void FilesystemExplorer::_state_change_impl(State state, bool value)
 	{
 		VirtualBox::_state_change_impl(state, value);
-		if (state == State::Swapped && !value && empty())
+		if (state == State::Created && value && empty())
 		{
 			VirtualBox::width = 52.0_px;
 			VirtualBox::height = 16.0_px;
 			VirtualBox::zindex = 120;
 			VirtualBox::container_options =
 				ContainerOptions::EnableBorder | ContainerOptions::TopFix;
-			VirtualBox::title = "<->";
+			VirtualBox::title = D2_STRING("<->");
 
 			if (screen()->is_keynav())
 			{
@@ -426,7 +426,7 @@ namespace d2::ctm
 					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
 						_core(state)->close();
 					})
-				D2_ELEM_END(exit)
+				D2_ELEM_END
 				D2_ELEM(Button, submit)
 					D2_STYLE(Value, "<Ok>")
 					D2_STYLE(X, 5.0_pxi)
@@ -435,8 +435,8 @@ namespace d2::ctm
 					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
 						_core(state)->submit_soft();
 					})
-				D2_ELEM_END(submit)
-				D2_ELEM_UNNAMED(Button)
+				D2_ELEM_END
+				D2_ELEM(Button)
 					D2_STYLE(Value, "<-")
 					D2_STYLE(X, 1.0_px)
 					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
@@ -444,8 +444,8 @@ namespace d2::ctm
 					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
 						_core(state)->backwards();
 					})
-				D2_UELEM_END
-				D2_ELEM_UNNAMED(Button)
+				D2_ELEM_END
+				D2_ELEM(Button)
 					D2_STYLE(Value, "->")
 					D2_STYLE(X, 4.0_px)
 					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
@@ -453,23 +453,23 @@ namespace d2::ctm
 					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
 						_core(state)->forwards();
 					})
-				D2_UELEM_END
+				D2_ELEM_END
 				D2_ELEM(Text, info)
 					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 					D2_STYLE(X, 0.0_center)
-				D2_ELEM_END(info)
+				D2_ELEM_END
 				// Separators
-				D2_ELEM_UNNAMED(Text)
+				D2_ELEM(Text)
 					D2_STYLE(Value, ">")
 					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 					D2_STYLE(Y, 1.0_px)
-				D2_UELEM_END
-				D2_ELEM_UNNAMED(Text)
+				D2_ELEM_END
+				D2_ELEM(Text)
 					D2_STYLE(Value, "<")
 					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 					D2_STYLE(X, 0.0_pxi)
 					D2_STYLE(Y, 1.0_px)
-				D2_UELEM_END
+				D2_ELEM_END
 				// Search Controls
 				D2_ELEM(Input, search)
 					D2_STYLE(Pre, "<search> ")
@@ -481,8 +481,8 @@ namespace d2::ctm
 					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr, const std::string& filename) {
 						_core(state)->rselect(filename);
 					})
-				D2_ELEM_END(search)
-				D2_ELEM_UNNAMED(Button)
+				D2_ELEM_END
+				D2_ELEM(Button)
 					D2_STYLE(Value, "filter")
 					D2_STYLE(X, 1.0_relative)
 					D2_STYLE(Y, 2.0_px)
@@ -496,8 +496,8 @@ namespace d2::ctm
 						_core(state)->_update_results();
 					})
 					D2_STYLES_APPLY(impl::button_react)
-				D2_UELEM_END
-				D2_ELEM_UNNAMED(Button)
+				D2_ELEM_END
+				D2_ELEM(Button)
 					D2_STYLE(Value, "set path")
 					D2_STYLE(X, 1.0_relative)
 					D2_STYLE(Y, 2.0_px)
@@ -509,7 +509,7 @@ namespace d2::ctm
 							_core(state)->setpath(path);
 					})
 					D2_STYLES_APPLY(impl::button_react)
-				D2_UELEM_END
+				D2_ELEM_END
 				// Display
 				D2_ELEM(FolderView, folder)
 					D2_STYLE(Width, 1.0_pc)
@@ -518,8 +518,8 @@ namespace d2::ctm
 					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 					D2_STYLE(BackgroundColor, d2::colors::w::transparent)
 					D2_STYLE(FocusedColor, D2_VAR(PopupTheme, pt_hbg_button()))
-				D2_ELEM_END(folder)
-			D2_TREE_END(filesystem)
+				D2_ELEM_END
+			D2_TREE_END
 
 			filesystem::create_at(
 				traverse(),

@@ -27,8 +27,8 @@ namespace d2
 
 		static constexpr auto checkbox_true = 'x';
 		static constexpr auto checkbox_false = 'o';
-		static constexpr auto switch_separator_horizontal = '|';
-		static constexpr auto switch_separator_vertical = '-';
+		static constexpr auto switch_separator_horizontal = '-';
+		static constexpr auto switch_separator_vertical = '|';
 		static constexpr auto slider_horizontal = '-';
 		static constexpr auto slider_vertical = '|';
 		static constexpr auto slider_thumb_vertical = ' ';
@@ -61,8 +61,8 @@ namespace d2
 
 		static constexpr auto checkbox_true = u'☑';
 		static constexpr auto checkbox_false = u'☐';
-		static constexpr auto switch_separator_horizontal = u'┃';
-		static constexpr auto switch_separator_vertical = u'━';
+		static constexpr auto switch_separator_horizontal = u'━';
+		static constexpr auto switch_separator_vertical = u'┃';
 		static constexpr auto slider_horizontal = u'─';
 		static constexpr auto slider_vertical = u'│';
 		static constexpr auto slider_thumb_vertical = u'█';

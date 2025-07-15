@@ -3,7 +3,6 @@
 #include "d2_color_picker.hpp"
 #include "../elements/d2_std.hpp"
 #include "../d2_colors.hpp"
-#include "../d2_tree.hpp"
 
 namespace d2::ctm
 {
@@ -15,7 +14,7 @@ namespace d2::ctm
 	void ThemeSelector::_state_change_impl(State state, bool value)
 	{
 		VirtualBox::_state_change_impl(state, value);
-		if (state == State::Swapped && !value && empty())
+		if (state == State::Created && value && empty())
 		{
 			VirtualBox::width = 42.0_px;
 			VirtualBox::height = 16.0_px;
@@ -59,8 +58,8 @@ namespace d2::ctm
 					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
 						_core(state)->close();
 					})
-				D2_ELEM_END(exit)
-				D2_ELEM_UNNAMED(Switch)
+				D2_ELEM_END
+				D2_ELEM(Switch)
 					D2_STYLE(Width, 1.0_pc)
 					D2_STYLE(EnabledForegroundColor, D2_VAR(PopupTheme, pt_hbg_button()))
 					D2_STYLE(EnabledBackgroundColor, d2::colors::w::transparent)
@@ -75,29 +74,29 @@ namespace d2::ctm
 						(ptr->parent()->traverse()/"logic"/"accents")
 							->setstate(d2::Element::Display, idx == 1);
 					})
-				D2_UELEM_END
+				D2_ELEM_END
 				D2_ELEM_NESTED(Box, logic)
 					D2_STYLE(Y, 1.0_px)
 					D2_STYLE(Width, 1.0_pc)
 					D2_STYLE(Height, 3.0_pxi)
-				D2_ELEM_NESTED_BODY(logic)
+				D2_ELEM_NESTED_BODY
 					D2_ELEM(ScrollBox, themes)
 						D2_STYLE(Width, 1.0_pc)
 						D2_STYLE(Height, 1.0_pc)
 						(*ptr.as<ScrollBox>()->scrollbar().as<VerticalSlider>())
 							.set<VerticalSlider::SliderColor>(D2_VAR(PopupTheme, pt_bg_button()))
 							.set<VerticalSlider::BackgroundColor>(D2_VAR(PopupTheme, pt_bg_button()));
-					D2_ELEM_END(themes)
+					D2_ELEM_END
 					D2_ELEM_NESTED(Box, accents)
 						D2_STYLE(Width, 1.0_pc)
 						D2_STYLE(Height, 1.0_pc)
-					D2_ELEM_NESTED_BODY(accents)
+					D2_ELEM_NESTED_BODY
 						D2_ELEM_NESTED(Box, controls)
 							D2_STYLE(X, 0.0_relative)
 							D2_STYLE(Width, 0.5_pc)
 							D2_STYLE(Height, 1.0_pc)
-						D2_ELEM_NESTED_BODY(controls)
-							D2_ELEM_UNNAMED(Button)
+						D2_ELEM_NESTED_BODY
+							D2_ELEM(Button)
 								D2_STYLE(Value, "Push Accent")
 								D2_STYLE(X, 0.0_center)
 								D2_STYLE(Y, 2.0_relative)
@@ -119,8 +118,8 @@ namespace d2::ctm
 									});
 								})
 								D2_STYLES_APPLY(impl::button_react)
-							D2_UELEM_END
-							D2_ELEM_UNNAMED(Button)
+							D2_ELEM_END
+							D2_ELEM(Button)
 								D2_STYLE(Value, "Clear Accents")
 								D2_STYLE(X, 0.0_center)
 								D2_STYLE(Y, 1.0_relative)
@@ -129,8 +128,8 @@ namespace d2::ctm
 									_core(ptr->state())->_accents.clear();
 								})
 								D2_STYLES_APPLY(impl::button_react)
-							D2_UELEM_END
-							D2_ELEM_UNNAMED(Button)
+							D2_ELEM_END
+							D2_ELEM(Button)
 								D2_STYLE(Value, "Submit Accents")
 								D2_STYLE(X, 0.0_center)
 								D2_STYLE(Y, 1.0_relative)
@@ -138,28 +137,28 @@ namespace d2::ctm
 									_core(ptr->state())->submit();
 								})
 								D2_STYLES_APPLY(impl::button_react)
-							D2_UELEM_END
-						D2_ELEM_NESTED_END(controls)
+							D2_ELEM_END
+						D2_ELEM_NESTED_END
 						D2_ELEM_NESTED(Box, list)
 							D2_STYLE(X, 0.0_relative)
 							D2_STYLE(Width, 0.5_pc)
 							D2_STYLE(Height, 1.0_pc)
-						D2_ELEM_NESTED_BODY(list)
-							D2_ELEM_UNNAMED(Text)
+						D2_ELEM_NESTED_BODY
+							D2_ELEM(Text)
 								D2_STYLE(Value, "Accent List")
 								D2_STYLE(X, 0.0_center)
 								D2_STYLE(Y, 1.0_relative)
 								D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-							D2_UELEM_END
+							D2_ELEM_END
 							D2_ELEM(Box, accents)
 								D2_STYLE(Width, 1.0_pc)
 								D2_STYLE(Height, 1.0_pxi)
 								D2_STYLE(Y, 0.0_relative)
-							D2_ELEM_END(accents)
-						D2_ELEM_NESTED_END(list)
-					D2_ELEM_NESTED_END(accents)
-				D2_ELEM_NESTED_END(logic)
-			D2_TREE_END(theme_picker)
+							D2_ELEM_END
+						D2_ELEM_NESTED_END
+					D2_ELEM_NESTED_END
+				D2_ELEM_NESTED_END
+			D2_TREE_END
 
 			theme_picker::create_at(
 				traverse(),

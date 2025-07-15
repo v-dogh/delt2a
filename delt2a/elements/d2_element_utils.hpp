@@ -29,7 +29,7 @@ namespace d2::dx::impl
 	protected:
 		Element::BoundingBox _text_bounding_box(const string& value) const noexcept
 		{
-			Element::BoundingBox box;
+			Element::BoundingBox box{ 0, 0 };
 			int x = 0;
 			for (std::size_t i = 0;; i++)
 			{
@@ -48,7 +48,7 @@ namespace d2::dx::impl
 		}
 		Element::BoundingBox _paragraph_bounding_box(const string& value, int width = INT_MAX, int height = INT_MAX) const noexcept
 		{
-			Element::BoundingBox box;
+			Element::BoundingBox box{ 0, 0 };
 			for (std::size_t i = 0; i < value.size();)
 			{
 				while (i < value.size() && std::isspace(value[i]))
@@ -88,7 +88,7 @@ namespace d2::dx::impl
 				}
 
 				int actual_width = line_end - i;
-				box.width = std::min(box.width, int(line_end - i));
+				box.width = std::max(box.width, int(line_end - i));
 
 				if (++box.height >= height)
 					break;

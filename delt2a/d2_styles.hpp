@@ -759,8 +759,8 @@ namespace d2::style
 		};
 
 		HDUnit border_width{ 1 };
-		Pixel border_horizontal_color{ .a = 0, .v = charset::box_border_vertical };
-		Pixel border_vertical_color{ .a = 0, .v = charset::box_border_horizontal };
+		Pixel border_horizontal_color{ .a = 0, .v = charset::box_border_horizontal };
+		Pixel border_vertical_color{ .a = 0, .v = charset::box_border_vertical };
 		struct
 		{
 			Pixel::value_type top_left{ charset::box_tl_corner };

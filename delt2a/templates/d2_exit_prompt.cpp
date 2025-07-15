@@ -6,16 +6,16 @@
 
 namespace d2::ctm
 {
-	using namespace d2::dx;
+	using namespace dx;
 	D2_TREE_DEFINE(exit_prompt)
-		D2_ELEM_NESTED_UNNAMED(Box)
+		D2_ELEM_NESTED(Box)
 			D2_STYLE(ZIndex, 126)
 			D2_STYLE(Width, 1.0_pc)
 			D2_STYLE(Height, 1.0_pc)
 			D2_STYLE(BackgroundColor, d2::colors::w::black.alpha(0.7f))
 			D2_STYLE(ForegroundColor, d2::colors::w::black.alpha(0.7f))
 		D2_UELEM_NESTED_BODY
-			D2_ELEM_NESTED_UNNAMED(Box)
+			D2_ELEM_NESTED(Box)
 				D2_STYLE(X, 0.0_center)
 				D2_STYLE(Y, 0.0_center)
 				D2_STYLE(Width, 32.0_px)
@@ -29,17 +29,17 @@ namespace d2::ctm
 					value.extend('+').balpha(0)
 				))
 			D2_UELEM_NESTED_BODY
-				D2_ELEM_UNNAMED(Text)
+				D2_ELEM(Text)
 					D2_STYLE(Value, "Exit? Are You Sure?")
 					D2_STYLE(X, 0.0_center)
 					D2_STYLE(Y, 0.0_center)
 					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-				D2_UELEM_END
-				D2_ELEM_NESTED_UNNAMED(Box)
+				D2_ELEM_END
+				D2_ELEM_NESTED(Box)
 					D2_STYLE(X, 0.0_center)
 					D2_STYLE(Y, 1.0_center)
 				D2_UELEM_NESTED_BODY
-					D2_ELEM_UNNAMED(Button)
+					D2_ELEM(Button)
 						D2_STYLE(Value, "CONFIRM")
 						D2_STYLE(X, 0.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
@@ -48,8 +48,8 @@ namespace d2::ctm
 							ptr->screen()->stop_blocking();
 						})
 						D2_INTERPOLATE_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, colors::r::red);
-					D2_UELEM_END
-					D2_ELEM_UNNAMED(Button)
+					D2_ELEM_END
+					D2_ELEM(Button)
 						D2_STYLE(Value, "CANCEL")
 						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
 						D2_STYLE(BackgroundColor, d2::colors::w::transparent)
@@ -64,9 +64,9 @@ namespace d2::ctm
 								->remove(root.as());
 						})
 						D2_INTERPOLATE_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, colors::g::green);
-					D2_UELEM_END
-				D2_UELEM_NESTED_END
-			D2_UELEM_NESTED_END
-		D2_UELEM_NESTED_END
-	D2_TREE_DEFINITION_END(exit_prompt)
+					D2_ELEM_END
+				D2_ELEM_NESTED_END
+			D2_ELEM_NESTED_END
+		D2_ELEM_NESTED_END
+	D2_TREE_DEFINITION_END
 }

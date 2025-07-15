@@ -90,6 +90,11 @@ namespace d2::style
 				apply();
 			}
 
+			const auto& value() const noexcept
+			{
+				return _value;
+			}
+
 			template<typename Value>
 			operator Value() requires (!std::is_reference_v<Value> || std::is_const_v<Value>)
 			{

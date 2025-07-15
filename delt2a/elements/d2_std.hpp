@@ -24,3 +24,7 @@
 // Graphs
 
 #include "d2_graph.hpp"
+
+// Other
+
+#include "d2_separator.hpp"
