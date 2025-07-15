@@ -493,10 +493,10 @@ namespace d2
 	void Screen::start_blocking(std::chrono::milliseconds refresh, Profile profile)
 	{
 		static constexpr auto factor = 1.5;
-		auto update_req_fps = [&refresh]() -> std::size_t
+		auto update_req_fps = [&]() -> std::size_t
 		{
-			if (!refresh.count())
-				return 0;
+			[[ unlikely ]] if (!refresh.count())
+				return ~0ull;
 			return 1000 / refresh.count();
 		};
 
@@ -517,8 +517,8 @@ namespace d2
 		_worker = _ctx->scheduler()->make_cyclic_worker();
 		while (!_is_stop)
 		{
-			const auto refresh_min = _refresh_rate.load();
-			volatile const auto beg = std::chrono::high_resolution_clock::now();
+			const auto refresh_max = _refresh_rate.load();
+			const auto beg = std::chrono::high_resolution_clock::now();
 
 			if (root()->needs_update())
 			{
@@ -544,30 +544,28 @@ namespace d2
 				last_measurement = std::chrono::high_resolution_clock::now();
 			}
 
-			volatile const auto end = std::chrono::high_resolution_clock::now();
-			const auto delta =
-				const_cast<const std::chrono::high_resolution_clock::time_point&>(end) -
-				const_cast<const std::chrono::high_resolution_clock::time_point&>(beg);
+			const auto end = std::chrono::high_resolution_clock::now();
+			const auto delta = end - beg;
 			_prev_delta = std::chrono::duration_cast<std::chrono::microseconds>(delta);
 
 			if (profile == Profile::Adaptive)
 			{
-				if (frames_w_update > fps_req)
+				if (frames_w_update > fps_req / 4)
 				{
 					refresh = std::chrono::milliseconds(
-								static_cast<std::size_t>(refresh.count() * factor)
-								);
+						static_cast<std::size_t>(refresh.count() / factor)
+					);
 					fps_req = update_req_fps();
 				}
 				else if (frames_wo_update > fps_req * 2)
 				{
-					refresh = std::min(refresh_min, std::chrono::milliseconds(
-								static_cast<std::size_t>(refresh.count() * (1 - factor))
-								));
+					refresh = std::min(refresh_max, std::chrono::milliseconds(
+						static_cast<std::size_t>(refresh.count() * factor)
+					));
 					fps_req = update_req_fps();
 				}
 			}
-			else refresh = refresh_min;
+			else refresh = refresh_max;
 			if (refresh > std::chrono::seconds(0))
 			{
 				_worker.wait(
