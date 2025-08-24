@@ -303,25 +303,25 @@ namespace editor
 			D2_STYLE(BackgroundColor,
 				D2_VAR(MDTheme, secondary_background)
 			)
-		D2_ELEM_NESTED_BODY(editor)
+		D2_ELEM_NESTED_BODY
 			D2_ELEM_NESTED(Box, topbar)
 				D2_STYLE(Width, 1.0_pc)
 				D2_STYLE(Height, 3.0_px)
 				D2_STYLE(BackgroundColor,
 					D2_VAR(MDTheme, primary_background)
 				)
-			D2_ELEM_NESTED_BODY(topbar)
+			D2_ELEM_NESTED_BODY
 				D2_ELEM(Text, title)
 					D2_STYLE(X, 0.0_center)
 					D2_STYLE(Y, 0.0_center)
 					D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
-				D2_ELEM_END(title)
-			D2_ELEM_NESTED_END(topbar)
+				D2_ELEM_END
+			D2_ELEM_NESTED_END
 			D2_ELEM(Matrix, model)
 				D2_STYLE(X, 0.0_center)
 				D2_STYLE(Y, 0.0_center)
-			D2_ELEM_END(model)
-		D2_ELEM_NESTED_END(editor)
+			D2_ELEM_END
+		D2_ELEM_NESTED_END
 		// Sidebar with all of the options
 		D2_ELEM_NESTED(Box, sidebar)
 			D2_STYLE(ZIndex, 1)
@@ -337,7 +337,7 @@ namespace editor
 			)
 			// Resizing logic
 			static bool rsize = false;
-			D2_LISTEN(Clicked, true) rsize = true; D2_LISTEN_END
+			D2_LISTEN_EXPR(Clicked, true, rsize = true)
 			D2_LISTEN_GLOBAL(MouseInput)
 				const auto rel = ptr->context()->input()
 					->is_pressed_mouse(d2::sys::SystemInput::Left, d2::sys::SystemInput::KeyMode::Release);
@@ -349,21 +349,21 @@ namespace editor
 						->set<Box::Width>(ptr->box().width - x);
 				}
 			D2_LISTEN_GLOBAL_END
-		D2_ELEM_NESTED_BODY(sidebar)
+		D2_ELEM_NESTED_BODY
 			D2_ELEM_NESTED(Box, project)
 				D2_STYLE(Y, 0.0_relative)
 				D2_STYLE(Width, 1.0_pxi)
 				D2_STYLE(Height, 0.5_pc)
-			D2_ELEM_NESTED_BODY(project)
-				D2_ELEM_UNNAMED(Text)
+			D2_ELEM_NESTED_BODY
+				D2_ELEM(Text)
 					D2_STYLE(Value, "Project")
 					D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 					D2_STYLES_APPLY(align_vertical)
-				D2_UELEM_END
-				D2_ELEM_NESTED_UNNAMED(Box)
+				D2_ELEM_END
+				D2_ELEM_NESTED(Box)
 					D2_STYLES_APPLY(align_vertical)
 				D2_UELEM_NESTED_BODY
-					D2_ELEM_UNNAMED(Button)
+					D2_ELEM(Button)
 						D2_STYLE(Value, "Open")
 						D2_STYLE(X, 0.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
@@ -378,8 +378,8 @@ namespace editor
 									});
 						})
 						D2_STYLES_APPLY(button_react)
-					D2_UELEM_END
-					D2_ELEM_UNNAMED(Button)
+					D2_ELEM_END
+					D2_ELEM(Button)
 						D2_STYLE(Value, "Save")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
@@ -394,8 +394,8 @@ namespace editor
 									});
 						})
 						D2_STYLES_APPLY(button_react)
-					D2_UELEM_END
-					D2_ELEM_UNNAMED(Button)
+					D2_ELEM_END
+					D2_ELEM(Button)
 						D2_STYLE(Value, "Exit")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
@@ -405,8 +405,8 @@ namespace editor
 							);
 						})
 						D2_STYLES_APPLY(button_react)
-					D2_UELEM_END
-					D2_ELEM_UNNAMED(Button)
+					D2_ELEM_END
+					D2_ELEM(Button)
 						D2_STYLE(Value, "Theme")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
@@ -429,8 +429,8 @@ namespace editor
 									});
 						})
 						D2_STYLES_APPLY(button_react)
-					D2_UELEM_END
-				D2_UELEM_NESTED_END
+					D2_ELEM_END
+				D2_ELEM_NESTED_END
 				D2_ELEM(Dropdown, model-type)
 					D2_STYLE(DefaultValue, "Model Type")
 					D2_STYLE(ContainerBorder, true)
@@ -441,23 +441,23 @@ namespace editor
 					D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 					D2_STYLES_APPLY(navigable)
 					D2_STYLES_APPLY(align_vertical)
-				D2_ELEM_END(model-type)
-			D2_ELEM_NESTED_END(project)
+				D2_ELEM_END
+			D2_ELEM_NESTED_END
 			D2_ELEM_NESTED(Box, style)
 				D2_STYLE(Y, 0.0_relative)
 				D2_STYLE(Width, 1.0_pxi)
 				D2_STYLE(Height, 0.5_pc)
-			D2_ELEM_NESTED_BODY(style)
-				D2_ELEM_UNNAMED(Text)
+			D2_ELEM_NESTED_BODY
+				D2_ELEM(Text)
 					D2_STYLE(Value, "Styles")
 					D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 					D2_STYLES_APPLY(align_vertical)
-				D2_UELEM_END
+				D2_ELEM_END
 				// Options
 				D2_ELEM_NESTED(Box, options)
 					D2_STYLES_APPLY(align_vertical)
-				D2_ELEM_NESTED_BODY(options)
-					D2_ELEM_UNNAMED(Button)
+				D2_ELEM_NESTED_BODY
+					D2_ELEM(Button)
 						D2_STYLE(Value, "Resize")
 						D2_STYLE(X, 5.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
@@ -467,8 +467,8 @@ namespace editor
 								->resize();
 						})
 						D2_STYLES_APPLY(button_react)
-					D2_UELEM_END
-					D2_ELEM_UNNAMED(Button)
+					D2_ELEM_END
+					D2_ELEM(Button)
 						D2_STYLE(Value, "Pick Color")
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
@@ -483,7 +483,7 @@ namespace editor
 									});
 						})
 						D2_STYLES_APPLY(button_react)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Button, brush-mode)
 						D2_STYLE(Value, "Value Mode")
 						D2_STYLE(Y, 0.0_relative)
@@ -496,7 +496,7 @@ namespace editor
 								ptr.as<Button>()->set<Button::Value>("Value Mode");
 						})
 						D2_STYLES_APPLY(button_react)
-					D2_ELEM_END(brush-mode)
+					D2_ELEM_END
 					D2_ELEM(Button, brush-choice)
 						D2_STYLE(Value, "L-Brush")
 						D2_STYLE(X, 1.0_relative)
@@ -508,7 +508,7 @@ namespace editor
 								ptr.as<Button>()->set<Button::Value>("L-Brush");
 						})
 						D2_STYLES_APPLY(button_react)
-					D2_ELEM_END(brush-choice)
+					D2_ELEM_END
 					D2_ELEM(Button, color-choice)
 						D2_STYLE(Value, "Bg-Color")
 						D2_STYLE(X, 1.0_relative)
@@ -520,10 +520,10 @@ namespace editor
 								ptr.as<Button>()->set<Button::Value>("Fg-Color");
 						})
 						D2_STYLES_APPLY(button_react)
-					D2_ELEM_END(color-choice)
-				D2_ELEM_NESTED_END(options)
+					D2_ELEM_END
+				D2_ELEM_NESTED_END
 				// Value of the brush
-				D2_ELEM_UNNAMED(Input)
+				D2_ELEM(Input)
 					D2_STYLE(Pre, "Value: ")
 					D2_STYLE(Width, 12.0_pxi)
 					D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
@@ -545,23 +545,23 @@ namespace editor
 						}
 					})
 					D2_STYLES_APPLY(align_vertical)
-				D2_UELEM_END
+				D2_ELEM_END
 				// Size of the model
 				D2_ELEM(Input, width)
 					D2_STYLE(Pre, "Width: ")
 					D2_STYLE(Width, 12.0_pxi)
 					D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 					D2_STYLES_APPLY(align_vertical)
-				D2_ELEM_END(width)
+				D2_ELEM_END
 				D2_ELEM(Input, height)
 					D2_STYLE(Pre, "Height: ")
 					D2_STYLE(Width, 12.0_pxi)
 					D2_STYLE(ForegroundColor, D2_VAR(MDTheme, text))
 					D2_STYLES_APPLY(align_vertical)
-				D2_ELEM_END(height)
-			D2_ELEM_NESTED_END(style)
-		D2_ELEM_NESTED_END(sidebar)
-	D2_TREE_END(model_editor)
+				D2_ELEM_END
+			D2_ELEM_NESTED_END
+		D2_ELEM_NESTED_END
+	D2_TREE_END
 
 	inline void run()
 	{
@@ -573,7 +573,7 @@ namespace editor
 			>(),
 			d2::style::Theme::make<MDTheme>(MDTheme::accent_dynamic, d2::colors::w::white)
 		)->start_blocking(
-			d2::Screen::fps(44),
+			d2::Screen::fps(144),
 			d2::Screen::Profile::Stable
 		);
 	}

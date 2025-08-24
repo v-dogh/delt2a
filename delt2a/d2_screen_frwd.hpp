@@ -36,7 +36,7 @@ namespace d2
 			std::shared_ptr<Screen> src,
 			std::shared_ptr<IOContext> ctx,
 			std::shared_ptr<ParentElement> rptr,
-			std::shared_ptr<ParentElement> coreptr = nullptr
+            std::shared_ptr<ParentElement> coreptr
 			) : src_(src), ctx_(ctx), root_ptr_(rptr), core_ptr_(coreptr)
 		{}
 		virtual ~TreeState() {}

@@ -9,7 +9,7 @@ namespace d2
 	{
 		struct ColorPicker
 		{
-			std::function<void(Element::TraversalWrapper, px::background)> on_submit{ nullptr };
+            std::function<void(TreeIter, px::background)> on_submit{ nullptr };
 
 			template<uai_property Property>
 			auto at_style()

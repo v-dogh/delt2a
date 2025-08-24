@@ -1,6 +1,7 @@
 // Containers
 
 #include "d2_box.hpp"
+#include "d2_flow_box.hpp"
 #include "d2_draggable_box.hpp"
 #include "d2_scrollbox.hpp"
 

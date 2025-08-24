@@ -28,20 +28,18 @@ namespace d2::ctm
 	}
 
 	class FolderView :
-		public style::UAIC<
+        public style::UAIE<
 			MetaParentElement,
 			FolderView,
 			style::ILayout,
 			style::IColors,
 			style::IKeyboardNav
 		>,
-		public dx::impl::UnitUpdateHelper<FolderView>,
 		public dx::impl::TextHelper<FolderView>
 	{
 	public:
-		friend class UnitUpdateHelper;
 		friend class TextHelper;
-		using data = style::UAIC<
+        using data = style::UAIE<
 			MetaParentElement,
 			FolderView,
 			style::ILayout,
@@ -63,34 +61,27 @@ namespace d2::ctm
 		int range_idx_{ 0 };
 		bool use_filtered_{ false };
 
-		virtual BoundingBox _dimensions_impl() const noexcept override
-		{
-			return {
-				(data::width.getunits() == Unit::Auto ?
-					int(entries_.size()) : _resolve_units(data::width)),
-				(data::height.getunits() == Unit::Auto ?
-					int(std::max_element(entries_.begin(), entries_.end(), [](const auto& v1, const auto& v2) {
-						return v1.value.size() < v2.value.size();
-					}) - entries_.begin()) :
-					_resolve_units(data::height))
-			};
-		}
-		virtual Position _position_impl() const noexcept override
-		{
-			return {
-				_resolve_units(data::x),
-				_resolve_units(data::y)
-			};
-		}
+        virtual Unit _layout_impl(Element::Layout type) const noexcept override
+        {
+            switch (type)
+            {
+            case Element::Layout::X: return data::x;
+            case Element::Layout::Y: return data::y;
+            case Element::Layout::Width:
+                if (data::width.getunits() == Unit::Auto)
+                    return int(entries_.size());
+                return data::width;
+            case Element::Layout::Height:
+                if (data::width.getunits() == Unit::Auto)
+                {
+                    return int(std::max_element(entries_.begin(), entries_.end(), [](const auto& v1, const auto& v2) {
+                        return v1.value.size() < v2.value.size();
+                    }) - entries_.begin());
+                }
+                return data::height;
+            }
+        }
 
-		virtual unit_meta_flag _unit_report_impl() const noexcept override
-		{
-			return UnitUpdateHelper::_report_units();
-		}
-		virtual char _index_impl() const noexcept override
-		{
-			return data::zindex;
-		}
 		virtual bool _provides_input_impl() const noexcept override
 		{
 			return true;
@@ -105,7 +96,7 @@ namespace d2::ctm
 					using namespace dx;
 
 					scrollbar_ = Element::make<dx::VerticalSlider>(
-						"", this->state(), shared_from_this()
+                        "", this->state(), std::static_pointer_cast<ParentElement>(shared_from_this())
 					);
 					scrollbar_->setstate(State::Swapped, false);
 
@@ -119,10 +110,10 @@ namespace d2::ctm
 						_signal_write(WriteType::Masked);
 					};
 
-					auto& theme = this->state()->screen()->theme<PopupTheme>();
+					auto& theme = this->state()->screen()->theme<WidgetTheme>();
 					(*scrollbar_)
-						.set<VerticalSlider::SliderColor>(theme.pt_bg_button())
-						.set<VerticalSlider::BackgroundColor>(theme.pt_bg_button());
+						.set<VerticalSlider::SliderColor>(theme.wg_bg_button())
+						.set<VerticalSlider::BackgroundColor>(theme.wg_bg_button());
 
 					scrollbar_->_signal_write(Masked);
 				}
@@ -189,7 +180,7 @@ namespace d2::ctm
 						focused_idx_++;
 						const auto h = box().height;
 						if (focused_idx_ > (scrollbar_->absolute_value() + h - 1))
-							scrollbar_->reset_absolute(focused_idx_ - h + 1);
+                            scrollbar_->reset_relative(focused_idx_ - h + 1);
 						_signal_write(Style);
 					}
 				}
@@ -202,7 +193,7 @@ namespace d2::ctm
 					{
 						focused_idx_--;
 						if (focused_idx_ < scrollbar_->absolute_value())
-							scrollbar_->reset_absolute(focused_idx_);
+                            scrollbar_->reset_relative(focused_idx_);
 						_signal_write(Style);
 					}
 				}
@@ -224,13 +215,9 @@ namespace d2::ctm
 		{
 			const auto [ width, height ] = box();
 			const auto full_height = use_filtered_ ? filtered_view_.size() : entries_.size();
-			scrollbar_->set<dx::VerticalSlider::SliderWidth>(
-				full_height ? ((float(height) / full_height) * height) : 0
-			);
-			scrollbar_->set<dx::VerticalSlider::Max>(
-				(use_filtered_ ? filtered_view_.size() : entries_.size()) -
-				box().height
-			);
+            scrollbar_->slider_width = full_height ? ((float(height) / full_height) * height) : 0;
+            scrollbar_->max = (use_filtered_ ? filtered_view_.size() : entries_.size()) - box().height;
+            scrollbar_->_signal_write(WriteType::Style);
 		}
 		virtual void _frame_impl(PixelBuffer::View buffer) noexcept override
 		{
@@ -407,78 +394,76 @@ namespace d2::ctm
 				VirtualBox::y = y;
 			}
 
-			auto& src = this->state()->screen()->theme<PopupTheme>();
-			data::set<VirtualBox::BorderHorizontalColor>(src.pt_border_horizontal());
-			data::set<VirtualBox::BorderVerticalColor>(src.pt_border_vertical());
-			data::set<VirtualBox::FocusedColor>(src.pt_hbg_button());
+			auto& src = this->state()->screen()->theme<WidgetTheme>();
+            data::set<VirtualBox::BorderHorizontalColor>(src.wg_border_horizontal());
+			data::set<VirtualBox::BorderVerticalColor>(src.wg_border_vertical());
+			data::set<VirtualBox::FocusedColor>(src.wg_hbg_button());
 			data::set<VirtualBox::BarColor>(style::dynavar<[](const auto& value) {
 				return value.extend('.');
-			}>(src.pt_border_horizontal()));
+            }>(src.wg_border_horizontal()));
 
 			using namespace dx;
-			D2_STATELESS_TREE(filesystem)
+            D2_STATELESS_TREE(filesystem)
 				// Controls
 				D2_ELEM(Button, exit)
 					D2_STYLE(Value, "<X>")
 					D2_STYLE(X, 1.0_pxi)
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_STYLE(FocusedColor, D2_VAR(PopupTheme, pt_hbg_button()))
-					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
+					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+					D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr) {
 						_core(state)->close();
 					})
 				D2_ELEM_END
 				D2_ELEM(Button, submit)
 					D2_STYLE(Value, "<Ok>")
 					D2_STYLE(X, 5.0_pxi)
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_STYLE(FocusedColor, D2_VAR(PopupTheme, pt_hbg_button()))
-					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
+					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+					D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr) {
 						_core(state)->submit_soft();
 					})
 				D2_ELEM_END
 				D2_ELEM(Button)
 					D2_STYLE(Value, "<-")
 					D2_STYLE(X, 1.0_px)
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_STYLE(FocusedColor, D2_VAR(PopupTheme, pt_hbg_button()))
-					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
+					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+					D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr) {
 						_core(state)->backwards();
 					})
 				D2_ELEM_END
 				D2_ELEM(Button)
 					D2_STYLE(Value, "->")
 					D2_STYLE(X, 4.0_px)
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_STYLE(FocusedColor, D2_VAR(PopupTheme, pt_hbg_button()))
-					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
+					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+					D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr) {
 						_core(state)->forwards();
 					})
 				D2_ELEM_END
 				D2_ELEM(Text, info)
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
+					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
 					D2_STYLE(X, 0.0_center)
 				D2_ELEM_END
-				// Separators
-				D2_ELEM(Text)
-					D2_STYLE(Value, ">")
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_STYLE(Y, 1.0_px)
-				D2_ELEM_END
-				D2_ELEM(Text)
-					D2_STYLE(Value, "<")
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_STYLE(X, 0.0_pxi)
-					D2_STYLE(Y, 1.0_px)
-				D2_ELEM_END
+                D2_ELEM(Separator)
+                    D2_STYLE(Width, 1.0_pc)
+                    D2_STYLE(Height, 1.0_px)
+                    D2_STYLE(Y, 1.0_px)
+                    D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+                    D2_STYLE(CornerLeft, '>')
+                    D2_STYLE(CornerRight, '<')
+                    D2_STYLE(OverrideCorners, true)
+                    D2_STYLE(HideBody, true)
+                D2_ELEM_END
 				// Search Controls
 				D2_ELEM(Input, search)
 					D2_STYLE(Pre, "<search> ")
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_STYLE(PtrColor, D2_VAR(PopupTheme, pt_text_ptr()))
+					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+					D2_STYLE(PtrColor, D2_VAR(WidgetTheme, wg_text_ptr()))
 					D2_STYLE(X, 1.0_relative)
 					D2_STYLE(Y, 2.0_px)
-					D2_STYLE(Width, 27.0_pxi)
-					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr, const std::string& filename) {
+                    D2_STYLE(Width, 20.0_pxi)
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr, const std::string& filename) {
 						_core(state)->rselect(filename);
 					})
 				D2_ELEM_END
@@ -486,7 +471,7 @@ namespace d2::ctm
 					D2_STYLE(Value, "filter")
 					D2_STYLE(X, 1.0_relative)
 					D2_STYLE(Y, 2.0_px)
-					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr) {
 						const auto path = (*(_core(state)->traverse()/"search")
 							.as<Input>())
 							.get<Input::Value>();
@@ -501,7 +486,7 @@ namespace d2::ctm
 					D2_STYLE(Value, "set path")
 					D2_STYLE(X, 1.0_relative)
 					D2_STYLE(Y, 2.0_px)
-					D2_STYLE(OnSubmit, [state](d2::Element::TraversalWrapper ptr) {
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr) {
 						const auto path = (*(_core(state)->traverse()/"search")
 							.as<Input>())
 							.get<Input::Value>();
@@ -510,14 +495,25 @@ namespace d2::ctm
 					})
 					D2_STYLES_APPLY(impl::button_react)
 				D2_ELEM_END
+                D2_ELEM(Separator)
+                    D2_STYLE(Width, 1.0_pc)
+                    D2_STYLE(Height, 1.0_px)
+                    D2_STYLE(Y, 3.0_px)
+                    D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+                    D2_STYLE(CornerLeft, '>')
+                    D2_STYLE(CornerRight, '<')
+                    D2_STYLE(OverrideCorners, true)
+                    D2_STYLE(HideBody, true)
+                D2_ELEM_END
 				// Display
 				D2_ELEM(FolderView, folder)
-					D2_STYLE(Width, 1.0_pc)
+                    D2_STYLE(Width, 1.0_pxi)
 					D2_STYLE(Height, 5.0_pxi)
+                    D2_STYLE(X, 1.0_px)
 					D2_STYLE(Y, 4.0_px)
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
+					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
 					D2_STYLE(BackgroundColor, d2::colors::w::transparent)
-					D2_STYLE(FocusedColor, D2_VAR(PopupTheme, pt_hbg_button()))
+					D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
 				D2_ELEM_END
 			D2_TREE_END
 

@@ -7,100 +7,98 @@
 
 namespace d2
 {
-	namespace style
-	{
-		struct Slider
-		{
-			float min{ 0 };
-			float max{ 0 };
-			PixelForeground slider_background_color{ .v = '-' };
-			Pixel slider_color{ .r = 255, .g = 255, .b = 255, .v = ' ' };
-			HDUnit slider_width{ 1 };
-			std::function<void(Element::TraversalWrapper, float, float)> on_change{};
+    namespace style
+    {
+        struct Slider
+        {
+            float min{ 0.f };
+            float max{ 0.f };
+            float step{ 1.f };
+            PixelForeground slider_background_color{ .v = '-' };
+            Pixel slider_color{ .r = 255, .g = 255, .b = 255, .v = ' ' };
+            HDUnit slider_width{ 1 };
+            std::function<void(TreeIter, float, float)> on_change{};
 
-			template<uai_property Property>
-			auto at_style()
-			{
-				D2_UAI_SETUP(Style)
-				D2_UAI_VAR_START
-				D2_UAI_GET_VAR_A(0, max)
-				D2_UAI_GET_VAR_A(1, min)
-				D2_UAI_GET_VAR_A(2, slider_background_color)
-				D2_UAI_GET_VAR_A(3, slider_color)
-				D2_UAI_GET_VAR_A(4, slider_width)
-				D2_UAI_GET_VAR(5, on_change, None)
-				D2_UAI_VAR_END;
-			}
-		};
+            template<uai_property Property>
+            auto at_style()
+            {
+                D2_UAI_SETUP(Style)
+                D2_UAI_VAR_START
+                D2_UAI_GET_VAR_A(0, max)
+                D2_UAI_GET_VAR_A(1, min)
+                D2_UAI_GET_VAR(2, step, None)
+                D2_UAI_GET_VAR_A(3, slider_background_color)
+                D2_UAI_GET_VAR_A(4, slider_color)
+                D2_UAI_GET_VAR_A(5, slider_width)
+                D2_UAI_GET_VAR(6, on_change, None)
+                D2_UAI_VAR_END;
+            }
+        };
 
-		template<std::size_t PropBase>
-		struct ISlider : Slider, InterfaceHelper<ISlider, PropBase, 6>
-		{
-			using data = Slider;
-			enum Property : uai_property
-			{
-				Max = PropBase,
-				Min,
-				BackgroundColor,
-				SliderColor,
-				SliderWidth,
-				OnChange,
-			};
-		};
-		using IZSlider = ISlider<0>;
-	}
-	namespace dx
-	{
-		class Slider :
-			public style::UAI<Slider, style::ILayout, style::ISlider, style::IKeyboardNav>,
-			public impl::UnitUpdateHelper<Slider>
-		{
-		public:
-			friend class UnitUpdateHelper;
-			using data = style::UAI<Slider, style::ILayout, style::ISlider, style::IKeyboardNav>;
-			using data::data;
-		protected:
-			int slider_spos_{ 0 };
-			int slider_pos_{ 0 };
+        template<std::size_t PropBase>
+        struct ISlider : Slider, InterfaceHelper<ISlider, PropBase, 7>
+        {
+            using data = Slider;
+            enum Property : uai_property
+            {
+                Max = PropBase,
+                Min,
+                Step,
+                BackgroundColor,
+                SliderColor,
+                SliderWidth,
+                OnChange,
+            };
+        };
+        using IZSlider = ISlider<0>;
+    }
+    namespace dx
+    {
+        class Slider : public style::UAI<Slider, style::ILayout, style::ISlider, style::IKeyboardNav>
+        {
+        public:
+            friend class UnitUpdateHelper;
+            using data = style::UAI<Slider, style::ILayout, style::ISlider, style::IKeyboardNav>;
+        protected:
+            int _slider_spos{ 0 };
+            float _slider_pos{ 0 };
 
-			void _submit();
+            void _submit();
 
-			virtual char _index_impl() const noexcept override;
-			virtual unit_meta_flag _unit_report_impl() const noexcept override;
-			virtual bool _provides_input_impl() const noexcept override;
+            virtual bool _provides_input_impl() const noexcept override;
+            virtual void _state_change_impl(State state, bool value) override;
+            virtual void _event_impl(IOContext::Event ev) override;
 
-			virtual BoundingBox _dimensions_impl() const noexcept override;
-			virtual Position _position_impl() const noexcept override;
+            virtual void _frame_impl(PixelBuffer::View buffer) noexcept override;
 
-			virtual void _state_change_impl(State state, bool value) override;
-			virtual void _event_impl(IOContext::Event ev) override;
+            virtual int _aligned_mouse() noexcept;
+            virtual int _aligned_width() noexcept;
 
-			virtual void _frame_impl(PixelBuffer::View buffer) noexcept override;
+            int _relative_to_absolute(float rel) noexcept;
+            float _absolute_to_relative(int abs) noexcept;
+        public:
+            Slider(
+                const std::string& name,
+                TreeState::ptr state,
+                pptr parent
+            );
 
-			virtual float _absolute_value();
-			virtual float _relative_value();
-		public:
-			virtual void reset_absolute(int value = 0) noexcept;
-			virtual void reset_relative(float value = 0) noexcept;
+            void reset_absolute(int value = 0) noexcept;
+            void reset_relative(float value = 0) noexcept;
 
-			float absolute_value() noexcept;
-			float relative_value() noexcept;
-		};
-
-		class VerticalSlider : public Slider
-		{
-		public:
-			using Slider::Slider;
-		protected:
-			virtual void _state_change_impl(State state, bool value) override;
-			virtual void _event_impl(IOContext::Event ev) override;
-			virtual void _frame_impl(PixelBuffer::View buffer) noexcept override;
-			virtual float _relative_value() override;
-		public:
-			virtual void reset_absolute(int value = 0) noexcept override;
-			virtual void reset_relative(float value = 0) noexcept override;
-		};
-	}
+            float absolute_value() noexcept;
+            float relative_value() noexcept;
+        };
+        class VerticalSlider : public Slider
+        {
+        public:
+            using Slider::Slider;
+        protected:
+            virtual int _aligned_mouse() noexcept override;
+            virtual int _aligned_width() noexcept override;
+            virtual void _frame_impl(PixelBuffer::View buffer) noexcept override;
+        };
+    }
 }
 
 #endif // D2_SLIDER_HPP

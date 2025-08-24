@@ -3,56 +3,62 @@
 
 #include "elements/d2_box.hpp"
 #include "d2_tree_element.hpp"
+#include "d2_tree_parent.hpp"
 #include "d2_screen.hpp"
 
 namespace d2
-{	
-	namespace tree
-	{
-		template<typename Tree, util::cmp::str String>
-		struct make
-		{
-			static constexpr std::string_view name = String.view();
-			using tree = Tree;
-		};
-	}
+{
+    template<util::cmp::str Name, typename State, typename Tree, typename Root = dx::Box>
+    struct TreeTemplateInit
+    {
+        static constexpr std::string_view name = Name.view();
 
-	template<typename State, typename Tree>
-	struct TreeTemplateInit
-	{
-		template<typename... Argvv>
-		static auto build(Screen::ptr src, Argvv&&... args)
-		{
-			auto state = std::make_shared<State>(
-				src,
-				src->context(),
-				nullptr,
-				nullptr,
-				args...
-			);
-			state->set_root(d2::Element::make<dx::Box>(
-				"",
-				state,
-				nullptr
-			));
-			state->set_core(state->root());
-			return state;
-		}
-		static Element::TraversalWrapper create_at(Element::TraversalWrapper loc, TreeState::ptr src)
-		{
-			if constexpr (std::is_void_v<Tree>)
-			{
-				return nullptr;
-			}
-			else
-			{
-				return Tree::create_at(loc, src);
-			}
-		}
-	};
+        template<typename... Argv>
+        static auto build_sub(const std::string& name, TreeState::ptr state, d2::Element::pptr root, Argv&&... args)
+        {
+            auto s = std::make_shared<State>(
+                state->screen(),
+                state->context(),
+                state->root(),
+                nullptr,
+                std::forward<Argv>(args)...
+            );
+            auto core = d2::Element::make<Root>(
+                name,
+                s,
+                root
+            );
+            s->set_core(core);
+            root->override(core);
+            return s;
+        }
+        template<typename... Argv>
+        static auto build(Screen::ptr src, Argv&&... args)
+        {
+            auto state = std::make_shared<State>(
+                src,
+                src->context(),
+                nullptr,
+                nullptr,
+                std::forward<Argv>(args)...
+                );
+            state->set_root(d2::Element::make<Root>(
+                "",
+                state,
+                nullptr
+            ));
+            state->set_core(state->root());
+            return state;
+        }
+        static void create_at(TreeIter loc, TreeState::ptr src)
+        {
+            if constexpr(!std::is_void_v<Tree>)
+                Tree::create_at(loc, src);
+        }
+    };
 
-	template<typename Tree>
-	struct TreeTemplate : TreeTemplateInit<TreeState, Tree>{ };
+    template<util::cmp::str Name, typename Tree, typename Root = dx::Box>
+    struct TreeTemplate : TreeTemplateInit<Name, TreeState, Tree, Root> { };
 }
 
 #endif // D2_TREE_HPP

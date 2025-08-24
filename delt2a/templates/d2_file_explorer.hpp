@@ -1,15 +1,15 @@
 #ifndef D2_FILE_EXPLORER_HPP
 #define D2_FILE_EXPLORER_HPP
 
-#include "../elements/d2_draggable_box.hpp"
+#include "../elements/d2_flow_box.hpp"
 #include <filesystem>
 
 namespace d2::ctm
 {
-	class FilesystemExplorer : public style::UAIC<dx::VirtualBox, FilesystemExplorer, style::IResponsive>
+    class FilesystemExplorer : public style::UAIC<dx::VirtualFlowBox, FilesystemExplorer, style::IResponsive>
 	{
 	public:
-		using data = style::UAIC<VirtualBox, FilesystemExplorer, style::IResponsive>;
+        using data = style::UAIC<VirtualFlowBox, FilesystemExplorer, style::IResponsive>;
 		using data::data;
 		D2_UAI_CHAIN(FilesystemExplorer)
 	protected:

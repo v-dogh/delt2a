@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+﻿cmake_minimum_required(VERSION 3.21)
 project(DeltaAscii LANGUAGES CXX VERSION 0.1.0)
 
 ###########
@@ -20,7 +20,7 @@ option(D2_STRICT_MODE               "Enable strict component mode" ON)
 # set(D2_SANITIZE_MEMORY           OFF CACHE BOOL "Enable memory sanitizer"      FORCE)
 # set(D2_SANITIZE_THREAD           OFF CACHE BOOL "Enable thread sanitizer"      FORCE)
 # set(D2_UNICODE_MODE              OFF CACHE BOOL "Enable unicode mode"          FORCE)
-# set(D2_STRICT_MODE               ON  CACHE BOOL "Enable strict component mode" FORCE)
+# set(D2_STRICT_MODE               OFF CACHE BOOL "Enable strict component mode" FORCE)
 
 set(D2_SANITIZER_FLAGS "")
 if(D2_SANITIZE_MEMORY AND D2_SANITIZE_THREAD)
@@ -64,6 +64,22 @@ endfunction()
 # LIBRARIES #
 #############
 
+# LSX library
+add_library(DeltaLSX STATIC
+    delt2a/lsx/d2_solver.hpp
+    delt2a/lsx/d2_solver.cpp
+    delt2a/lsx/d2_solver_types.hpp
+    delt2a/lsx/d2_solver_types.cpp
+    delt2a/lsx/d2_solver_ops.hpp
+    delt2a/lsx/d2_solver_ops.cpp
+)
+find_package(absl REQUIRED)
+target_link_libraries(DeltaLSX PRIVATE
+    absl::base
+    absl::flat_hash_map
+)
+delta_setup_target(DeltaLSX)
+
 # Core library
 add_library(DeltaCore STATIC
     # Core
@@ -86,8 +102,10 @@ add_library(DeltaCore STATIC
     delt2a/d2_element_units.hpp
     delt2a/d2_tree_element_frwd.hpp
     delt2a/d2_tree_element.hpp
+    delt2a/d2_tree_parent.hpp
     delt2a/d2_tree.hpp
     delt2a/d2_tree_element.cpp
+    delt2a/d2_tree_parent.cpp
     # Screen
     delt2a/d2_screen.hpp
     delt2a/d2_screen_frwd.hpp
@@ -95,6 +113,7 @@ add_library(DeltaCore STATIC
     delt2a/d2_io_handler_frwd.hpp
     delt2a/d2_screen.cpp
 )
+target_link_libraries(DeltaCore PUBLIC DeltaLSX)
 delta_setup_target(DeltaCore)
 
 # Standard elements library
@@ -105,6 +124,8 @@ if (NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
         # Boxes
         delt2a/elements/d2_box.hpp
         delt2a/elements/d2_box.cpp
+        delt2a/elements/d2_flow_box.hpp
+        delt2a/elements/d2_flow_box.cpp
         delt2a/elements/d2_draggable_box.hpp
         delt2a/elements/d2_draggable_box.cpp
         delt2a/elements/d2_scrollbox.hpp
@@ -133,7 +154,7 @@ if (NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
         delt2a/elements/d2_separator.hpp
         delt2a/elements/d2_separator.cpp
     )
-    target_link_libraries     (DeltaElements PUBLIC DeltaCore)
+    target_link_libraries(DeltaElements PUBLIC DeltaCore)
     delta_setup_target(DeltaElements)
 endif()
 
@@ -155,7 +176,7 @@ if (NOT D2_EXCLUDE_LIBRARY_TEMPLATES)
         delt2a/programs/d2_element_test.hpp
         delt2a/programs/d2_quedits.hpp
     )
-    target_link_libraries     (DeltaTemplates PUBLIC DeltaCore DeltaElements)
+    target_link_libraries(DeltaTemplates PUBLIC DeltaCore DeltaElements)
     delta_setup_target(DeltaTemplates)
 endif()
 
@@ -164,7 +185,7 @@ if (NOT D2_EXCLUDE_OS_CORE AND UNIX)
         delt2a/os/d2_unix_system_io.hpp
         delt2a/os/d2_unix_system_io.cpp
     )
-    target_link_libraries     (DeltaCoreUnix PUBLIC DeltaCore)
+    target_link_libraries(DeltaCoreUnix PUBLIC DeltaCore)
     delta_setup_target(DeltaCoreUnix)
 endif()
 
@@ -182,9 +203,7 @@ target_link_libraries(DeltaAscii INTERFACE
     $<$<TARGET_EXISTS:DeltaCoreUnix>:DeltaCoreUnix>
 )
 
-include(GNUInstallDirs)
-
-set(_install_targets DeltaCore)
+set(_install_targets DeltaCore DeltaLSX)
 if(TARGET DeltaElements)
     list(APPEND _install_targets DeltaElements)
 endif()
