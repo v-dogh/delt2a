@@ -386,7 +386,11 @@ namespace d2
         root->state->swap_in();
         this->root()->setstate(Element::Swapped, false);
 
+        _ctx->input()->begincycle();
+        _ctx->input()->endcycle();
         _update_viewport();
+
+        root->state->root()->initialize(true);
     }
 
     void Screen::focus(eptr p)
@@ -498,6 +502,8 @@ namespace d2
 
     void Screen::start_blocking(std::chrono::milliseconds refresh, Profile profile)
     {
+        ExtendedCodePage::activate_thread();
+
         static constexpr auto factor = 1.5;
         auto update_req_fps = [&]() -> std::size_t
         {
@@ -583,6 +589,8 @@ namespace d2
         _is_stop = false;
         _worker.stop();
         _ctx->scheduler()->clear();
+
+        ExtendedCodePage::deactivate_thread();
     }
     void Screen::stop_blocking() noexcept
     {

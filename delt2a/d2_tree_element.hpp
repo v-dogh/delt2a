@@ -104,6 +104,8 @@ namespace d2
     class TypedTreeIter : public TreeIter
     {
     public:
+        using type = Type;
+    public:
         TypedTreeIter() = default;
         TypedTreeIter(std::nullptr_t) {}
         TypedTreeIter(const TypedTreeIter&) = default;
@@ -226,24 +228,26 @@ namespace d2
         enum InternalState : internal_flag
         {
             IsBeingRendered = 1 << 0,
+            // Set if the element is being initialized (prevents write signal propagation etc.)
+            IsBeingInitialized = 1 << 1,
             // Set if the style is changed (i.e. requires a redraw)
-            WasWritten = 1 << 1,
+            WasWritten = 1 << 2,
             // Set if the layout of the object has changed (for parent elements)
-            WasWrittenLayout = 1 << 2,
+            WasWrittenLayout = 1 << 3,
             // Set when the x-position of the object was updated
-            PositionXUpdated = 1 << 3,
+            PositionXUpdated = 1 << 4,
             // Set when the y-position of the object was updated
-            PositionYUpdated = 1 << 4,
+            PositionYUpdated = 1 << 5,
             // Set when the width of the bounding box of the object was updated
-            DimensionsWidthUpdated = 1 << 5,
+            DimensionsWidthUpdated = 1 << 6,
             // Set when the height of the bounding box of the object was updated
-            DimensionsHeightUpdated = 1 << 6,
+            DimensionsHeightUpdated = 1 << 7,
             // Indicates that the object's framebuffer should not be compressed
-            CachePolicyDynamic = 1 << 7,
+            CachePolicyDynamic = 1 << 8,
             // Indicates that the object should me drawn in immediate mode
-            CachePolicyVolatile = 1 << 8,
+            CachePolicyVolatile = 1 << 9,
             // Indicates that the object's framebuffer should be preemptively compressed
-            CachePolicyStatic = 1 << 9,
+            CachePolicyStatic = 1 << 10,
         };
         enum WriteType : write_flag
         {
@@ -431,14 +435,14 @@ namespace d2
     private:
         // Metadata
 
-        const pwptr _parent{};
         const std::string _name{};
         const TreeState::ptr _state_ptr{ nullptr };
+        pwptr _parent{};
 
         // Flags
 
         mutable std::atomic<state_flag> _state{ Display | Swapped };
-        mutable std::atomic<internal_flag> _internal_state{ WasWritten | WasWrittenLayout | CachePolicyStatic };
+        mutable std::atomic<internal_flag> _internal_state{ WasWritten | WasWrittenLayout | IsBeingInitialized | CachePolicyStatic };
 
         // Listeners
 
@@ -483,6 +487,7 @@ namespace d2
         void _signal_context_change(write_flag type, unsigned int prop, ptr element) noexcept;
         void _signal_context_change(write_flag type = WriteType::Masked, unsigned int prop = ~0u) noexcept;
         void _signal_write(write_flag type = WriteType::Masked, unsigned int prop = ~0u) noexcept;
+        void _signal_initialization(unsigned int prop) noexcept;
         void _signal_write_update(write_flag type) const noexcept;
         void _signal_update(internal_flag type) const noexcept;
         void _trigger_event(IOContext::Event ev);
@@ -554,6 +559,7 @@ namespace d2
         void setcache(InternalState flag) const noexcept;
         bool getstate(State state) const noexcept;
         void setstate(State state, bool value = true);
+        void setparent(pptr parent) noexcept;
 
         // Units
 

@@ -25,7 +25,8 @@ namespace d2::dx
 
     void Button::_signal_write_impl(write_flag type, unsigned int prop, ptr element) noexcept
     {
-        if (element.get() == this && prop == Value &&
+        if (element.get() == this &&
+            (prop == Value || prop == initial_property) &&
                 (data::width.getunits() == Unit::Auto ||
                  data::height.getunits() == Unit::Auto))
         {
@@ -68,14 +69,24 @@ namespace d2::dx
             )
         );
 
-        const auto bbox = box();
         if (data::container_options & data::EnableBorder)
             ContainerHelper::_render_border(buffer);
+
+        BoundingBox bbox = box();
+        Position pos{ 0, 0 };
+        if (data::container_options & EnableBorder)
+        {
+            const auto bw = resolve_units(data::border_width);
+            bbox.width -= bw * 2;
+            bbox.height -= bw * 2;
+            pos.x = bw;
+            pos.y = bw;
+        }
         TextHelper::_render_text(
             data::text,
             data::foreground_color,
             style::Text::Alignment::Center,
-            {}, bbox,
+            pos, bbox,
             buffer
         );
     }

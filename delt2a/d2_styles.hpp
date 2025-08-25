@@ -418,9 +418,22 @@ namespace d2::style
         {
             return UniversalAccessInterface::_has_interface_impl(id);
         }
+        virtual void _initialize_impl(bool force) noexcept override
+        {
+            if ((this->parent() && !this->parent()->getistate(Element::InternalState::IsBeingInitialized)) || force)
+            {
+                _base()->_signal_initialization(Element::initial_property);
+                if constexpr (std::is_base_of_v<ParentElement, UniversalAccessInterface>)
+                {
+                    this->foreach_internal([](Element::ptr ptr) {
+                        ptr->initialize();
+                    });
+                }
+            }
+        }
         virtual void _signal_base_impl(Element::write_flag type, property prop) override
         {
-            if (type != 0x00)
+            if (type != 0x00 && !this->getistate(Element::InternalState::IsBeingInitialized))
                 _base()->_signal_write(type, prop);
         }
         virtual void _set_dynamic_impl(property prop, bool value) override

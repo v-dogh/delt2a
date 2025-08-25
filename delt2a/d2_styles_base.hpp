@@ -189,6 +189,7 @@ namespace d2::style
 	{
 	public:
 		using property = unsigned int;
+        static constexpr auto initial_property = ~0u - 1;
 	private:
 		template<D2_UAI_INTERFACE_TEMPL Interface>
 		auto* _interface_for()
@@ -244,6 +245,7 @@ namespace d2::style
 			return *getref_for<Interface, Property>();
 		}
 	protected:
+        virtual void _initialize_impl(bool force) noexcept = 0;
 		virtual void _signal_base_impl(element_write_flag, property) = 0;
 		virtual void _set_dynamic_impl(property, bool) = 0;
 		virtual bool _test_dynamic_impl(property) = 0;
@@ -284,7 +286,9 @@ namespace d2::style
 			auto [ ptr, _ ] = interface->template at_style<Property>();
 			return ptr;
 		}
-	};
+
+        void initialize(bool force = false) noexcept { _initialize_impl(force); }
+    };
 }
 
 #endif // D2_STYLES_BASE_HPP

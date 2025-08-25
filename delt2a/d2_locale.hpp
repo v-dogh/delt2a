@@ -3,6 +3,7 @@
 
 #include <string>
 #include <limits>
+#include "delt2a/d2_extended_page.hpp"
 
 namespace d2
 {
@@ -32,19 +33,15 @@ namespace d2
 	};
 
 #	if D2_LOCALE_MODE == 8
-#	define D2_STRING(s) s
-#	define D2_CHAR(c) c
 	constexpr auto encoding = Encoding::Ascii;
 	using string = std::string;
 	using string_view = std::string;
-	using value_type = char;
+    using value_type = char;
 #	elif D2_LOCALE_MODE == 32
-#	define D2_STRING(s) U##s
-#	define D2_CHAR(c) U##c
 	constexpr auto encoding = Encoding::Unicode;
-	using string = std::u32string;
-	using string_view = std::u32string_view;
-	using value_type = char32_t;
+    using string = std::string;
+    using string_view = std::string_view;
+    using value_type = AutoValueType;
 #	else
 #	error(Invalid locale mode)
 #	endif

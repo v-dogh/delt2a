@@ -1,5 +1,5 @@
-#ifndef D2_POPUP_THEME_BASE_HPP
-#define D2_POPUP_THEME_BASE_HPP
+#ifndef D2_WIDGET_THEME_BASE_H
+#define D2_WIDGET_THEME_BASE_H
 
 #include "../d2_tree_element.hpp"
 #include "../d2_styles.hpp"
@@ -42,4 +42,4 @@ namespace d2::ctm
 	}
 }
 
-#endif // D2_POPUP_THEME_BASE_HPP
+#endif // D2_WIDGET_THEME_BASE_H

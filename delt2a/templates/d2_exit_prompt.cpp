@@ -1,5 +1,5 @@
 #include "d2_exit_prompt.hpp"
-#include "d2_popup_theme_base.hpp"
+#include "d2_widget_theme_base.hpp"
 #include "../elements/d2_text.hpp"
 #include "../elements/d2_button.hpp"
 #include "../elements/d2_flow_box.hpp"
@@ -22,10 +22,10 @@ namespace d2::ctm
             D2_STYLE(BackgroundColor, d2::colors::w::transparent)
             D2_STYLE(ContainerBorder, true)
             D2_STYLE(BorderHorizontalColor, D2_DYNAVAR(WidgetTheme, wg_border_horizontal(),
-                value.extend('+').balpha(0)
+                value.extend(charset::box_border_horizontal).balpha(0)
             ))
             D2_STYLE(BorderVerticalColor, D2_DYNAVAR(WidgetTheme, wg_border_vertical(),
-                value.extend('+').balpha(0)
+                value.extend(charset::box_border_vertical).balpha(0)
             ))
             D2_ELEM(Text)
                 D2_STYLE(Value, "Exit? Are You Sure?")

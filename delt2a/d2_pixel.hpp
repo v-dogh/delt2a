@@ -31,6 +31,7 @@ namespace d2
 		PixelBackground alpha(float value) const noexcept;
 		PixelBackground invert() const noexcept;
 		PixelBackground mask(const PixelBackground& px, float progress = 0.5f) const noexcept;
+        PixelBackground stylize(component style) const noexcept;
 
 		PixelForeground operator|(component flag) const noexcept;
 
@@ -69,6 +70,7 @@ namespace d2
 		PixelForeground alpha(float value) const noexcept;
 		PixelForeground extend(value_type v, component style = 0x00) const noexcept;
 		PixelForeground invert() const noexcept;
+        PixelForeground stylize(component style) const noexcept;
 		PixelForeground mask(const PixelForeground& px, float progress = 0.5f) const noexcept;
 
 		operator PixelBase() const noexcept;
@@ -112,6 +114,7 @@ namespace d2
 		PixelBase falpha(float value) const;
 		PixelBase balpha(float value) const;
 		PixelBase extend(value_type ch) const noexcept;
+        PixelBase stylize(component style) const noexcept;
 
 		PixelBase mask(const PixelBase& px) const noexcept;
 		PixelBase mask_foreground(const PixelBase& px) const noexcept;

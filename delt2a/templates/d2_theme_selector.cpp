@@ -1,5 +1,5 @@
 #include "d2_theme_selector.hpp"
-#include "d2_popup_theme_base.hpp"
+#include "d2_widget_theme_base.hpp"
 #include "d2_color_picker.hpp"
 #include "../elements/d2_std.hpp"
 #include "../d2_colors.hpp"
@@ -19,8 +19,7 @@ namespace d2::ctm
 			VirtualBox::width = 42.0_px;
 			VirtualBox::height = 16.0_px;
 			VirtualBox::zindex = 120;
-			VirtualBox::container_options =
-				ContainerOptions::EnableBorder | ContainerOptions::TopFix;
+            VirtualBox::container_options |= ContainerOptions::EnableBorder;
 			VirtualBox::title = "<Pick Theme>";
 
 			if (screen()->is_keynav())
@@ -45,7 +44,7 @@ namespace d2::ctm
 				return value.alpha(0.3f);
 			}>(theme.wg_bg_secondary()));
 			data::set<VirtualBox::BarColor>(style::dynavar<[](const auto& value) {
-				return value.extend('.');
+                return value.extend('.');
             }>(theme.wg_border_horizontal()));
 
 			using namespace dx;
@@ -68,7 +67,7 @@ namespace d2::ctm
 					D2_STYLE(SeparatorColor, D2_VAR(WidgetTheme, wg_border_vertical()))
 					D2_STYLE(FocusedColor, D2_DYNAVAR(WidgetTheme, wg_hbg_button(), value.alpha(0.7f)))
 					D2_STYLE(Options, Switch::opts{ "Themes", "Accents" })
-                    D2_STYLE(OnChange, [](TreeIter ptr, int idx) {
+                    D2_STYLE(OnChange, [](TreeIter ptr, int idx, int) {
 						(ptr->parent()->traverse()/"logic"/"themes")
 							->setstate(d2::Element::Display, idx == 0);
 						(ptr->parent()->traverse()/"logic"/"accents")
@@ -83,8 +82,8 @@ namespace d2::ctm
 						D2_STYLE(Width, 1.0_pc)
 						D2_STYLE(Height, 1.0_pc)
 						(*ptr.as<ScrollBox>()->scrollbar().as<VerticalSlider>())
-							.set<VerticalSlider::SliderColor>(D2_VAR(WidgetTheme, wg_bg_button()))
-							.set<VerticalSlider::BackgroundColor>(D2_VAR(WidgetTheme, wg_bg_button()));
+                            .set<VerticalSlider::SliderColor>(D2_VAR(WidgetTheme, wg_bg_button()))
+                            .set<VerticalSlider::BackgroundColor>(D2_VAR(WidgetTheme, wg_bg_button()));
 					D2_ELEM_END
                     D2_ELEM(FlowBox, accents)
 						D2_STYLE(Width, 1.0_pc)
@@ -139,6 +138,7 @@ namespace d2::ctm
                             D2_STYLE(X, 0.0_center)
                             D2_STYLE(Width, 1.0_px)
                             D2_STYLE(Height, 1.0_pc)
+                            D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_border_vertical()))
                         D2_ELEM_END
                         D2_ELEM(FlowBox, list)
                             D2_STYLE(X, 0.0_relative)
@@ -151,7 +151,7 @@ namespace d2::ctm
                                 D2_STYLE(Y, 0.0_relative)
                                 D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
                             D2_ELEM_END
-                            D2_ELEM(Box, accents)
+                            D2_ELEM(FlowBox, accents)
                                 D2_STYLE(Width, 1.0_pc)
                                 D2_STYLE(Height, 2.0_pxi)
                                 D2_STYLE(Y, 0.0_relative)

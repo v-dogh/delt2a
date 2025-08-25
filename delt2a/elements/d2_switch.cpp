@@ -13,7 +13,8 @@ namespace d2::dx
                 (data::width.getunits() == Unit::Auto ||
                  data::height.getunits() == Unit::Auto) &&
                 prop == BorderWidth ||
-                prop == Options)
+                prop == Options ||
+                prop == initial_property)
         {
             const auto [ xbasis, ybasis ] = ContainerHelper::_border_base();
             const auto [ ixbasis, iybasis ] = ContainerHelper::_border_base_inv();
@@ -106,34 +107,37 @@ namespace d2::dx
             )
         );
 
-        const auto [ width, height ] = box();
-        const auto [ basisx, basisy ] = ContainerHelper::_border_base();
-        const auto [ ibasisx, ibasisy ] = ContainerHelper::_border_base_inv();
-        const int width_slice =
-            (width - (data::options.size() - 1) - (basisx + ibasisx)) /
-            data::options.size();
-
-        const auto disabled_color = Pixel::combine(
-                                        data::disabled_foreground_color,
-                                        data::disabled_background_color
-                                    );
-        const auto enabled_color = Pixel::combine(
-                                       data::enabled_foreground_color,
-                                       (getstate(Keynavi) ? data::focused_color : data::enabled_background_color)
-                                   );
-        for (std::size_t i = 0; i < data::options.size(); i++)
+        if (!data::options.empty())
         {
-            const auto xoff = int(basisx + ((width_slice + 1) * i));
-            TextHelper::_render_text_simple(
-                data::options[i],
-                (i == _idx) ? enabled_color : disabled_color,
-                style::Text::Alignment::Center,
-            { xoff, basisy }, { width_slice, 1 },
-            buffer
-            );
-            if (i < data::options.size() - 1)
-                buffer.at(xoff + width_slice, basisy)
-                      .blend(data::separator_color);
+            const auto [ width, height ] = box();
+            const auto [ basisx, basisy ] = ContainerHelper::_border_base();
+            const auto [ ibasisx, ibasisy ] = ContainerHelper::_border_base_inv();
+            const int width_slice =
+                (width - (data::options.size() - 1) - (basisx + ibasisx)) /
+                data::options.size();
+
+            const auto disabled_color = Pixel::combine(
+                data::disabled_foreground_color,
+                data::disabled_background_color
+                );
+            const auto enabled_color = Pixel::combine(
+                data::enabled_foreground_color,
+                (getstate(Keynavi) ? data::focused_color : data::enabled_background_color)
+                );
+            for (std::size_t i = 0; i < data::options.size(); i++)
+            {
+                const auto xoff = int(basisx + ((width_slice + 1) * i));
+                TextHelper::_render_text_simple(
+                    data::options[i],
+                    (i == _idx) ? enabled_color : disabled_color,
+                    style::Text::Alignment::Center,
+                    { xoff, basisy }, { width_slice, 1 },
+                    buffer
+                    );
+                if (i < data::options.size() - 1)
+                    buffer.at(xoff + width_slice, basisy)
+                        .blend(data::separator_color);
+            }
         }
 
         ContainerHelper::_render_border(buffer);
@@ -141,7 +145,10 @@ namespace d2::dx
     void Switch::_submit()
     {
         if (data::on_change != nullptr)
-            data::on_change(shared_from_this(), _idx);
+            data::on_change(shared_from_this(), _idx, _old);
+        else if (data::on_change_values != nullptr)
+            data::on_change_values(shared_from_this(), data::options[_idx], data::options[_old]);
+        _old = _idx;
     }
     void Switch::reset(int idx) noexcept
     {
@@ -151,5 +158,19 @@ namespace d2::dx
             _signal_write(Style);
             _submit();
         }
+    }
+    void Switch::reset(string choice) noexcept
+    {
+        auto f = std::find(data::options.begin(), data::options.end(), choice);
+        if (f != data::options.end())
+            reset(f - data::options.begin());
+    }
+    string Switch::choice() noexcept
+    {
+        return data::options[_idx];
+    }
+    int Switch::index() noexcept
+    {
+        return _idx;
     }
 }

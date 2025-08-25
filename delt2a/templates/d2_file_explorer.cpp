@@ -1,5 +1,5 @@
 #include "d2_file_explorer.hpp"
-#include "d2_popup_theme_base.hpp"
+#include "d2_widget_theme_base.hpp"
 #include "../elements/d2_std.hpp"
 #include "../d2_colors.hpp"
 #include "../d2_dsl.hpp"
@@ -8,19 +8,19 @@
 
 namespace d2::ctm
 {
-	std::string _memory_units(std::size_t bytes) noexcept
+    string _memory_units(std::size_t bytes) noexcept
 	{
 		constexpr auto gib = 1'073'741'824;
 		constexpr auto mib = 1'048'576;
 		constexpr auto kib = 1'024;
 		if (bytes > gib)
-			return std::format("{}GiB", bytes / gib);
+            return std::format("{}GiB", bytes / gib);
 		else if (bytes > mib)
-			return std::format("{}MiB", bytes / mib);
+            return std::format("{}MiB", bytes / mib);
 		else if (bytes > kib)
-			return std::format("{}KiB", bytes / kib);
+            return std::format("{}KiB", bytes / kib);
 		else
-			return std::format("{}b", bytes);
+            return std::format("{}b", bytes);
 	}
 	FilesystemExplorer::eptr<FilesystemExplorer> _core(TreeState::ptr state)
 	{
@@ -50,8 +50,8 @@ namespace d2::ctm
 	protected:
 		struct FileEntry
 		{
-			std::string path{ "" };
-			std::string value{ "" };
+            string path{};
+            string value{};
 		};
 
 		std::shared_ptr<dx::VerticalSlider> scrollbar_{ nullptr };
@@ -104,8 +104,8 @@ namespace d2::ctm
 					scrollbar_->y = 0.0_center;
 					scrollbar_->width = 1.0_px;
 					scrollbar_->height = 1.0_pc;
-					scrollbar_->slider_background_color = PixelForeground{ .v = '|' };
-					scrollbar_->on_change = [this](auto, auto, auto abs) {
+                    scrollbar_->slider_background_color = PixelForeground{ .v = '|' };
+                    scrollbar_->on_change = [this](auto, auto, auto abs) {
 						range_idx_ = abs;
 						_signal_write(WriteType::Masked);
 					};
@@ -269,7 +269,7 @@ namespace d2::ctm
 			}
 		}
 	public:
-		void filter(const std::string& reg) noexcept
+        void filter(const string& reg) noexcept
 		{
 			scrollbar_->reset_absolute();
 			range_idx_ = 0;
@@ -376,9 +376,8 @@ namespace d2::ctm
 			VirtualBox::width = 52.0_px;
 			VirtualBox::height = 16.0_px;
 			VirtualBox::zindex = 120;
-			VirtualBox::container_options =
-				ContainerOptions::EnableBorder | ContainerOptions::TopFix;
-			VirtualBox::title = D2_STRING("<->");
+            VirtualBox::container_options |= ContainerOptions::EnableBorder;
+            VirtualBox::title = "<->";
 
 			if (screen()->is_keynav())
 			{
@@ -398,8 +397,8 @@ namespace d2::ctm
             data::set<VirtualBox::BorderHorizontalColor>(src.wg_border_horizontal());
 			data::set<VirtualBox::BorderVerticalColor>(src.wg_border_vertical());
 			data::set<VirtualBox::FocusedColor>(src.wg_hbg_button());
-			data::set<VirtualBox::BarColor>(style::dynavar<[](const auto& value) {
-				return value.extend('.');
+            data::set<VirtualBox::BarColor>(style::dynavar<[](const px::foreground& value) {
+                return value.extend('.');
             }>(src.wg_border_horizontal()));
 
 			using namespace dx;
@@ -463,7 +462,7 @@ namespace d2::ctm
 					D2_STYLE(X, 1.0_relative)
 					D2_STYLE(Y, 2.0_px)
                     D2_STYLE(Width, 20.0_pxi)
-                    D2_STYLE(OnSubmit, [state](TreeIter ptr, const std::string& filename) {
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr, const string& filename) {
 						_core(state)->rselect(filename);
 					})
 				D2_ELEM_END
@@ -551,7 +550,7 @@ namespace d2::ctm
 	{
 		if (path_.has_parent_path())
 		{
-			history_.push_back(path_.filename());
+            history_.push_back(path_.filename());
 			setpath(path_.parent_path());
 			rcnt_++;
 		}
@@ -560,7 +559,7 @@ namespace d2::ctm
 	{
 		setpath(path_);
 	}
-	void FilesystemExplorer::rselect(const std::string& filename)
+    void FilesystemExplorer::rselect(const string& filename)
 	{
 		if (!std::filesystem::exists(path_/filename) ||
 			!std::filesystem::is_directory(path_/filename))
@@ -581,7 +580,7 @@ namespace d2::ctm
 			setpath(path_/filename);
 		}
 	}
-	void FilesystemExplorer::sselect(const std::string& filename) noexcept
+    void FilesystemExplorer::sselect(const string& filename) noexcept
 	{
 		softselect_ = filename;
 	}
@@ -605,7 +604,7 @@ namespace d2::ctm
 			);
 		}
 
-		softselect_ = "";
+        softselect_ = {};
 		path_ = path;
 		at("folder").as<FolderView>()
 			->setpath(path_);

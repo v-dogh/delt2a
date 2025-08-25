@@ -16,8 +16,10 @@ namespace d2::dx
     void Checkbox::_signal_write_impl(write_flag type, unsigned int prop, ptr element) noexcept
     {
         if (element.get() == this &&
-                (prop == Value || ((data::checkbox_value && prop == ValueOn) ||
-                                   (!data::checkbox_value && prop == ValueOff))))
+                (prop == Value ||
+                 prop == initial_property ||
+                    ((data::checkbox_value && prop == ValueOn) ||
+                    (!data::checkbox_value && prop == ValueOff))))
         {
             if (data::checkbox_value)
             {

@@ -10,7 +10,7 @@ option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"      OFF)
 option(D2_EXCLUDE_OS_CORE           "Disable default os module"    OFF)
 option(D2_SANITIZE_MEMORY           "Enable memory sanitizer"      OFF)
 option(D2_SANITIZE_THREAD           "Enable thread sanitizer"      OFF)
-option(D2_UNICODE_MODE              "Enable unicode mode"          OFF)
+option(D2_UNICODE_MODE              "Enable unicode mode"          ON)
 option(D2_STRICT_MODE               "Enable strict component mode" ON)
 
 # Force reset cache
@@ -98,6 +98,8 @@ add_library(DeltaCore STATIC
     delt2a/d2_colors.hpp
     delt2a/d2_interpolator.hpp
     delt2a/d2_pixel.cpp
+    delt2a/d2_extended_page.hpp
+    delt2a/d2_extended_page.cpp
     # Tree
     delt2a/d2_element_units.hpp
     delt2a/d2_tree_element_frwd.hpp
@@ -112,6 +114,11 @@ add_library(DeltaCore STATIC
     delt2a/d2_io_handler.hpp
     delt2a/d2_io_handler_frwd.hpp
     delt2a/d2_screen.cpp
+)
+find_package(absl REQUIRED)
+target_link_libraries(DeltaCore PRIVATE
+    absl::base
+    absl::flat_hash_map
 )
 target_link_libraries(DeltaCore PUBLIC DeltaLSX)
 delta_setup_target(DeltaCore)
@@ -162,7 +169,7 @@ endif()
 if (NOT D2_EXCLUDE_LIBRARY_TEMPLATES)
     add_library(DeltaTemplates STATIC
         # Popups
-        delt2a/templates/d2_popup_theme_base.hpp
+        delt2a/templates/d2_widget_theme_base.hpp
         delt2a/templates/d2_file_explorer.hpp
         delt2a/templates/d2_file_explorer.cpp
         delt2a/templates/d2_exit_prompt.hpp

@@ -117,6 +117,7 @@ namespace d2::sys
 		position_type _generate_position(int x, int y, bool skip = false) noexcept;
 		color_type _generate_color(const Pixel& px, bool force = false) noexcept;
 
+        void _push(const Pixel& px) noexcept;
 		void _write(std::span<const unsigned char> buffer) noexcept;
 		void _write(std::span<const char> buffer) noexcept;
 	public:

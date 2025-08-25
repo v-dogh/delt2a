@@ -22,7 +22,8 @@ namespace d2::dx
         if (element.get() == this &&
                 (data::width.getunits() == Unit::Auto ||
                  data::height.getunits() == Unit::Auto) &&
-                prop == BorderWidth)
+                (prop == BorderWidth ||
+                 prop == initial_property))
         {
             const auto bw = (data::container_options & data::EnableBorder) ? resolve_units(data::border_width) : 0;
 

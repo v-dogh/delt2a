@@ -21,8 +21,8 @@ namespace d2
             };
 
             string title{};
-            PixelForeground bar_color{ .v = '.' };
-            Pixel::value_type resize_point_value{ ',' };
+            PixelForeground bar_color{ .v = charset::box_top_bar };
+            Pixel::value_type resize_point_value{ charset::box_top_drag_spot };
             VDUnit bar_height{ 2.0_px };
             unsigned char vbox_options{ Auto };
 

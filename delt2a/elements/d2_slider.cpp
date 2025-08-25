@@ -119,8 +119,7 @@ namespace d2::dx
         buffer.fill(data::slider_background_color);
 
         const auto sw = resolve_units(data::slider_width);
-        auto sc = getstate(State::Keynavi) ?
-                  px::combined(data::focused_color) : data::slider_color;
+        auto sc = getstate(State::Keynavi) ? px::combined(data::focused_color) : data::slider_color;
         sc.v = data::slider_color.v;
         const auto abs = _relative_to_absolute(_slider_pos);
         for (std::size_t i = 0; i < sw; i++)
@@ -185,6 +184,8 @@ namespace d2::dx
         buffer.fill(data::slider_background_color);
 
         const auto sw = resolve_units(data::slider_width);
+        auto sc = getstate(State::Keynavi) ? px::combined(data::focused_color) : data::slider_color;
+        sc.v = data::slider_color.v;
         const auto abs = _relative_to_absolute(_slider_pos);
         for (std::size_t i = 0; i < sw; i++)
         {

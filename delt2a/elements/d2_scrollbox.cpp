@@ -60,17 +60,23 @@ namespace d2::dx
     }
     void ScrollBox::_update_layout_impl() noexcept
     {
-        const auto bbox = box();
+        const auto height = layout(Element::Layout::Height);
         const auto bw = (Box::container_options & Box::EnableBorder) ?
                         resolve_units(Box::border_width) : 0;
 
         _recompute_height();
 
-        scrollbar_->slider_width =
-            computed_height_ ? ((float(bbox.height) / computed_height_) * bbox.height) : 0;
-        scrollbar_->min = 0;
-        scrollbar_->max = (computed_height_ - bbox.height) + bw;
-        scrollbar_->_signal_write(WriteType::Style);
+        if (computed_height_ > height)
+        {
+            scrollbar_->setstate(Display, true);
+            scrollbar_->slider_width =
+                computed_height_ ? ((float(height) / computed_height_) * height) : 0;
+            scrollbar_->min = 0;
+            scrollbar_->max = computed_height_ - (bw * 2);
+            scrollbar_->_signal_write(WriteType::Style);
+        }
+        else
+            scrollbar_->setstate(Display, false);
     }
 
     TypedTreeIter<VerticalSlider> ScrollBox::scrollbar() const noexcept

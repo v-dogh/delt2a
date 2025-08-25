@@ -278,6 +278,7 @@ namespace d2
             throw std::runtime_error{ "Attempt to create an object with a duplicate name" };
         auto result = _elements.emplace_back(ptr);
         _elements.back()->setstate(Swapped, false);
+        _elements.back()->initialize();
         _signal_write(Style);
         return result;
     }
@@ -293,6 +294,7 @@ namespace d2
         }
         _elements.emplace_back(ptr);
         ptr->setstate(Swapped, false);
+        _elements.back()->initialize();
         _signal_write(Style);
         return ptr;
     }

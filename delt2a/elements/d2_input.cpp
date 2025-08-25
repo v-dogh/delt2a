@@ -76,7 +76,7 @@ namespace d2::dx
                        upper - lower
                    );
         }
-        return D2_STRING("");
+        return "";
     }
 
     void Input::_start_blink() noexcept

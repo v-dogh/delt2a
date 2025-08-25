@@ -405,101 +405,120 @@ namespace d2::sys
 	}
 	UnixTerminalOutput::color_type UnixTerminalOutput::_generate_color(const Pixel& px, bool force) noexcept
 	{
-		using buffer = std::array<char, max_color_len_>;
+        using buffer = std::array<char, max_color_len_>;
 
-		constexpr auto style_code_table = std::array<char, 7>{
-			'1', '4', '3', '9', '5', '7', '8'
-		};
-		constexpr auto style_code = std::string_view("\033[");
-		constexpr auto bg_code = std::string_view("48;2;");
-		constexpr auto fg_code = std::string_view("38;2;");
+        constexpr std::array<const char*, 7> style_on  = { "1", "4", "3", "9", "5", "7", "8" };
+        constexpr std::array<const char*, 7> style_off = { "22", "24", "23", "29", "25", "27", "28" };
+        constexpr auto style_code = std::string_view("\033[");
+        constexpr auto bg_code = std::string_view("48;2;");
+        constexpr auto fg_code = std::string_view("38;2;");
 
-		// Preds
+        // Preds
 
-		const auto do_background =
-			force ||
-			px.r != track_background_.r ||
-			px.g != track_background_.g ||
-			px.b != track_background_.b;
-		const auto do_foreground =
-			force ||
-			px.rf != track_foreground_.r ||
-			px.gf != track_foreground_.g ||
-			px.bf != track_foreground_.b;
+        const auto do_background =
+            force ||
+            px.r != track_background_.r ||
+            px.g != track_background_.g ||
+            px.b != track_background_.b;
+        const auto do_foreground =
+            force ||
+            px.rf != track_foreground_.r ||
+            px.gf != track_foreground_.g ||
+            px.bf != track_foreground_.b;
 
-		if (px.style == track_style_ && !do_background && !do_foreground)
-			return std::make_pair(buffer(), 0);
+        if (px.style == track_style_ && !do_background && !do_foreground)
+            return std::make_pair(buffer(), 0);
 
-		buffer code{ "\033[" };
+        buffer code{ "\033[" };
 
-		// Styles
+        // Styles
 
-		buffer::iterator ptr = code.begin() + style_code.size();
-		if (force || px.style != track_style_)
-		{
-			for (std::size_t i = 0; i < 7; i++)
-			{
-				const auto ns = px.style & (1 << i);
-				const auto ps = track_style_ & (1 << i);
-				if (ns != ps)
-				{
-					if (!ns)
-						*(ptr++) = '2';
-					*(ptr++) = style_code_table[i];
-					*(ptr++) = ';';
-				}
-			}
-			track_style_ = px.style;
-		}
+        buffer::iterator ptr = code.begin() + style_code.size();
+        if (force || px.style != track_style_)
+        {
+            for (std::size_t i = 0; i < 7; i++)
+            {
+                const auto ns = px.style & (1 << i);
+                const auto ps = track_style_ & (1 << i);
+                if (ns != ps)
+                {
+                    if (ns)
+                    {
+                        *(ptr++) = style_on[i][0];
+                    }
+                    else
+                    {
+                        *(ptr++) = style_off[i][0];
+                        *(ptr++) = style_off[i][1];
+                    }
+                    *(ptr++) = ';';
+                }
+            }
+            track_style_ = px.style;
+        }
 
-		if (!(do_foreground || do_background))
-			*ptr = 'm';
+        if (!(do_foreground || do_background))
+            *ptr = 'm';
 
-		// Background
-		buffer::iterator ptrbe = ptr;
-		if (do_background)
-		{
-			const auto ptrb = std::copy(bg_code.begin(), bg_code.end(), ptrbe);
+        // Background
+        buffer::iterator ptrbe = ptr;
+        if (do_background)
+        {
+            const auto ptrb = std::copy(bg_code.begin(), bg_code.end(), ptrbe);
 
-			const auto [ ptr1b, _1b ] = std::to_chars(ptrb, code.end(), px.r);
-			const auto [ ptr2b, _2b ] = std::to_chars(ptr1b + 1, code.end(), px.g);
-			const auto [ ptr3b, _3b ] = std::to_chars(ptr2b + 1, code.end(), px.b);
+            const auto [ ptr1b, _1b ] = std::to_chars(ptrb, code.end(), px.r);
+            const auto [ ptr2b, _2b ] = std::to_chars(ptr1b + 1, code.end(), px.g);
+            const auto [ ptr3b, _3b ] = std::to_chars(ptr2b + 1, code.end(), px.b);
 
-			*ptr1b = ';';
-			*ptr2b = ';';
-			*ptr3b = do_foreground ? ';' : 'm';
+            *ptr1b = ';';
+            *ptr2b = ';';
+            *ptr3b = do_foreground ? ';' : 'm';
 
-			ptrbe = ptr3b + 1;
+            ptrbe = ptr3b + 1;
 
-			track_background_.r = px.r;
-			track_background_.g = px.g;
-			track_background_.b = px.b;
-		}
+            track_background_.r = px.r;
+            track_background_.g = px.g;
+            track_background_.b = px.b;
+        }
 
-		// Foreground
-		buffer::iterator ptrfe = ptrbe;
-		if (do_foreground)
-		{
-			const auto ptrf = std::copy(fg_code.begin(), fg_code.end(), ptrfe);
+        // Foreground
+        buffer::iterator ptrfe = ptrbe;
+        if (do_foreground)
+        {
+            const auto ptrf = std::copy(fg_code.begin(), fg_code.end(), ptrfe);
 
-			const auto [ ptr1f, _1f ] = std::to_chars(ptrf, code.end(), px.rf);
-			const auto [ ptr2f, _2f ] = std::to_chars(ptr1f + 1, code.end(), px.gf);
-			const auto [ ptr3f, _3f ] = std::to_chars(ptr2f + 1, code.end(), px.bf);
+            const auto [ ptr1f, _1f ] = std::to_chars(ptrf, code.end(), px.rf);
+            const auto [ ptr2f, _2f ] = std::to_chars(ptr1f + 1, code.end(), px.gf);
+            const auto [ ptr3f, _3f ] = std::to_chars(ptr2f + 1, code.end(), px.bf);
 
-			*ptr1f = ';';
-			*ptr2f = ';';
-			*ptr3f = 'm';
+            *ptr1f = ';';
+            *ptr2f = ';';
+            *ptr3f = 'm';
 
-			ptrfe = ptr3f;
+            ptrfe = ptr3f;
 
-			track_foreground_.r = px.rf;
-			track_foreground_.g = px.gf;
-			track_foreground_.b = px.bf;
-		}
+            track_foreground_.r = px.rf;
+            track_foreground_.g = px.gf;
+            track_foreground_.b = px.bf;
+        }
 
-		return std::make_pair(code, int(ptrfe - code.begin() + 1));
+        return std::make_pair(code, int(ptrfe - code.begin() + 1));
 	}
 
+    void UnixTerminalOutput::_push(const Pixel& px) noexcept
+    {
+#       if D2_LOCALE_MODE == 32
+            if (global_extended_code_page.is_extended(px.v))
+            {
+                const auto ext = global_extended_code_page.read(px.v);
+                out_.insert(out_.end(), ext.begin(), ext.end());
+            }
+            else
+                out_.push_back(px.v);
+#       else
+            out_.push_back(px.v);
+#       endif
+    }
 	void UnixTerminalOutput::_write(std::span<const unsigned char> buffer) noexcept
 	{
 		::write(STDOUT_FILENO, buffer.data(), buffer.size());
@@ -587,7 +606,7 @@ namespace d2::sys
 					const auto abs = it - buffer.begin();
 					if (abs && !(abs % width) && abs != abs_start)
 						out_.push_back('\n');
-					out_.push_back(it->v);
+                    _push(*it);
 					++it;
 				}
 
@@ -637,8 +656,8 @@ namespace d2::sys
 							linear = false;
 							out_.push_back('\n');
 						}
-						out_.push_back(it->v);
-						++it;
+                        _push(*it);
+                        ++it;
 					}
 					if (sit == buffer.end())
 						break;

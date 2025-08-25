@@ -11,7 +11,8 @@ namespace d2::dx
                  prop == TextOptions ||
                  prop == TextAlignment ||
                  prop == TextPreserveWordBoundaries ||
-                 prop == TextHandleNewlines))
+                 prop == TextHandleNewlines ||
+                 prop == initial_property))
         {
             if (data::text_options & HandleNewlines)
             {
@@ -37,7 +38,7 @@ namespace d2::dx
             _signal_write(WriteType::Dimensions);
         }
     }
-    Unit Text::_layout_impl(enum Element::Layout type) const noexcept
+    Unit Text::_layout_impl(Element::Layout type) const noexcept
     {
         switch (type)
         {

@@ -285,6 +285,11 @@ namespace d2
         // Propagate up
         _signal_write(type, prop, shared_from_this());
     }
+    void Element::_signal_initialization(unsigned int prop) noexcept
+    {
+        _signal_write_impl(0x00, prop, shared_from_this());
+        _internal_state &= ~IsBeingInitialized;
+    }
     void Element::_signal_write_update(write_flag type) const noexcept
     {
         _internal_state |= type;
@@ -397,6 +402,10 @@ namespace d2
             _state_change_impl(state, value);
             _trigger(state, value);
         }
+    }
+    void Element::setparent(pptr parent) noexcept
+    {
+        _parent = parent;
     }
 
     Element::unit_meta_flag Element::unit_report() const noexcept

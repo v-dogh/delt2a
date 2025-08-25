@@ -12,8 +12,8 @@ namespace d2
         struct Checkbox
         {
             std::function<void(TreeIter, bool)> on_change{ nullptr };
-            string value_on{ D2_STRING("x") };
-            string value_off{ D2_STRING("o") };
+            string value_on{ "x" };
+            string value_off{ "o" };
             Pixel color_on{};
             Pixel color_off{};
             bool checkbox_value{ false };

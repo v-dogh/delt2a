@@ -1,5 +1,5 @@
 #include "d2_color_picker.hpp"
-#include "d2_popup_theme_base.hpp"
+#include "d2_widget_theme_base.hpp"
 #include "../d2_tree.hpp"
 
 namespace d2::ctm
@@ -11,6 +11,7 @@ namespace d2::ctm
 			D2_STYLE(Width, 3.0_pxi)
 			D2_STYLE(Min, 0)
 			D2_STYLE(Max, 255)
+            D2_STYLE(Step, 20)
 			D2_STYLE(SliderColor, D2_VAR(WidgetTheme, wg_bg_button()))
 			D2_STYLE(BackgroundColor, D2_VAR(WidgetTheme, wg_bg_button()))
 			D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
@@ -30,8 +31,7 @@ namespace d2::ctm
 			VirtualBox::width = 42.0_px;
 			VirtualBox::height = 8.0_px;
 			VirtualBox::zindex = 120;
-			VirtualBox::container_options =
-				ContainerOptions::EnableBorder | ContainerOptions::TopFix;
+            VirtualBox::container_options |= ContainerOptions::EnableBorder;
 			VirtualBox::title = "<Pick Color>";
 
 			if (screen()->is_keynav())

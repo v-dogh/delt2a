@@ -13,8 +13,8 @@ namespace d2::ctm
 		using data::data;
 		D2_UAI_CHAIN(FilesystemExplorer)
 	protected:
-		std::vector<std::string> history_{};
-		std::string softselect_{ "" };
+        std::vector<string> history_{};
+        string softselect_{};
 		std::filesystem::path path_{ "/" };
 		int rcnt_{ 0 };
 
@@ -24,8 +24,8 @@ namespace d2::ctm
 		void forwards();
 		void backwards();
 		void refresh();
-		void rselect(const std::string& filename);
-		void sselect(const std::string& filename) noexcept;
+        void rselect(const string& filename);
+        void sselect(const string& filename) noexcept;
 		void setpath(std::filesystem::path path);
 		std::filesystem::path getpath() const noexcept;
 

@@ -14,7 +14,8 @@
         auto __uptr = __ptr; \
         auto __nsrc = _type_::build_sub(#_name_, __uptr->state(), __state->root() __VA_OPT__(,) __VA_ARGS__); \
         _type_::create_at(__nsrc->core(), __nsrc); \
-        __nsrc->swap_in(); }
+        __nsrc->swap_in(); \
+        __nsrc->initialize(); }
 #define D2_EMBED(_type_, ...) D2_EMBED_NAMED(_type_,, __VA_ARGS__)
 #define D2_EMBED_ELEM_NAMED(_type_, _name_, ...) \
     __ptr.asp()->override(::d2::Element::make<_type_>( \
@@ -26,7 +27,10 @@
 struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
         using __state_type = _state_; \
         static ::d2::TreeIter create_at(::d2::TreeIter __ptr, ::d2::TreeState::ptr __state) { \
-            using __object_type = _root_;
+            using __object_type = _root_; \
+            using namespace d2::dx; \
+            auto& state = __state; \
+            auto& ptr   = __ptr;
 #define D2_STATEFUL_TREE(_alias_, _state_) D2_STATEFUL_TREE_ROOT(_alias_, _state_, ::d2::dx::Box)
 #define D2_STATELESS_TREE_ROOT(_alias_, _root_) D2_STATEFUL_TREE_ROOT(_alias_, ::d2::TreeState, _root_)
 #define D2_STATELESS_TREE(_alias_) D2_STATEFUL_TREE(_alias_, ::d2::TreeState)
@@ -41,8 +45,8 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 
 #define D2_TREE_DEFINE(_alias_) \
     ::d2::TreeIter _alias_::create_at(::d2::TreeIter __ptr, ::d2::TreeState::ptr __state) { \
-        using __object_type = ::d2::dx::Box;
-
+        using __object_type = ::d2::dx::Box; \
+        using namespace d2::dx;
 #define D2_TREE_DEFINITION_END return __ptr; }
 #define D2_TREE_END return __ptr; }};
 
@@ -57,6 +61,17 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 #define D2_REQUIRE(...) __ptr.template as<__object_type>()->constraint(__VA_ARGS__);
 #define D2_ELEM(_type_, ...) D2_CREATE_OBJECT(_type_, __VA_ARGS__)
 #define D2_ELEM_END __uptr.asp()->override(__nptr); }
+#define D2_ANCHOR(_type_, __VA_ARGS__) \
+    auto __##__VA_ARGS__ = ::d2::Element::make<_type_>(#__VA_ARGS__, __state, nullptr); \
+    auto __VA_ARGS__    = ::d2::TypedTreeIter<_type_>(__##__VA_ARGS__);
+#define D2_ELEM_ANCHOR(...) { \
+    __VA_ARGS__->setparent(__ptr.asp()); \
+    using __object_type = decltype(__VA_ARGS__)::type; \
+    auto& __uptr = __ptr; \
+    auto  __nptr = __##__VA_ARGS__; \
+    auto  __ptr  = __nptr->traverse(); \
+    auto& state  = __state; \
+    auto  ptr    = __VA_ARGS__;
 
 #define D2_STYLESHEET_BEGIN(name) \
     struct name { \
@@ -72,6 +87,8 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 #define D2_VAR_TYPE(type, var) typename std::remove_cvref_t<decltype(D2_VAR(type, var))>::value_type
 #define D2_DYNAVAR(type, var, ...) ::d2::style::dynavar< \
     [](const D2_VAR_TYPE(type, var)& value) { return __VA_ARGS__; }>(D2_VAR(type, var))
+
+#define D2_STATIC(_type_) static thread_local _type_
 
 // Helpers
 // EEXPR variants do not include line breaks
