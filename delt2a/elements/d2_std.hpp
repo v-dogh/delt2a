@@ -1,6 +1,7 @@
 // Containers
 
 #include "d2_box.hpp"
+#include "d2_flow_box.hpp"
 #include "d2_draggable_box.hpp"
 #include "d2_scrollbox.hpp"
 
@@ -24,3 +25,7 @@
 // Graphs
 
 #include "d2_graph.hpp"
+
+// Other
+
+#include "d2_separator.hpp"

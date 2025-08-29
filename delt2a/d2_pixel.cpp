@@ -45,6 +45,10 @@ namespace d2
 		cpy.a = value * 255;
 		return cpy;
 	}
+    PixelBackground PixelBackground::stylize(component style) const noexcept
+    {
+        return PixelForeground(*this).stylize(style);
+    }
 	PixelBackground PixelBackground::invert() const noexcept
 	{
 		return PixelBackground{
@@ -124,6 +128,12 @@ namespace d2
 		cpy.a = value * 255;
 		return cpy;
 	}
+    PixelForeground PixelForeground::stylize(component style) const noexcept
+    {
+        auto cpy = PixelForeground(*this);
+        cpy.style = style;
+        return cpy;
+    }
 	PixelForeground PixelForeground::extend(value_type v, component style) const noexcept
 	{
 		return {
@@ -328,6 +338,12 @@ namespace d2
 		cpy.a = value * 255;
 		return cpy;
 	}
+    PixelBase PixelBase::stylize(component style) const noexcept
+    {
+        auto cpy = PixelBase(*this);
+        cpy.style = style;
+        return cpy;
+    }
 	PixelBase PixelBase::extend(value_type ch) const noexcept
 	{
 		auto cpy = PixelBase(*this);

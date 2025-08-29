@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+﻿cmake_minimum_required(VERSION 3.21)
 project(DeltaAscii LANGUAGES CXX VERSION 0.1.0)
 
 ###########
@@ -10,8 +10,17 @@ option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"      OFF)
 option(D2_EXCLUDE_OS_CORE           "Disable default os module"    OFF)
 option(D2_SANITIZE_MEMORY           "Enable memory sanitizer"      OFF)
 option(D2_SANITIZE_THREAD           "Enable thread sanitizer"      OFF)
-option(D2_UTF8_MODE                 "Enable UTF8 mode"             OFF)
+option(D2_UNICODE_MODE              "Enable unicode mode"          ON)
 option(D2_STRICT_MODE               "Enable strict component mode" ON)
+
+# Force reset cache
+# set(D2_EXCLUDE_LIBRARY_TEMPLATES OFF CACHE BOOL "Disable templates module"     FORCE)
+# set(D2_EXCLUDE_LIBRARY_ELEMENTS  OFF CACHE BOOL "Disable elements module"      FORCE)
+# set(D2_EXCLUDE_OS_CORE           OFF CACHE BOOL "Disable default os module"    FORCE)
+# set(D2_SANITIZE_MEMORY           OFF CACHE BOOL "Enable memory sanitizer"      FORCE)
+# set(D2_SANITIZE_THREAD           OFF CACHE BOOL "Enable thread sanitizer"      FORCE)
+# set(D2_UNICODE_MODE              OFF CACHE BOOL "Enable unicode mode"          FORCE)
+# set(D2_STRICT_MODE               OFF CACHE BOOL "Enable strict component mode" FORCE)
 
 set(D2_SANITIZER_FLAGS "")
 if(D2_SANITIZE_MEMORY AND D2_SANITIZE_THREAD)
@@ -23,27 +32,28 @@ endif()
 if(D2_SANITIZE_THREAD)
     list(APPEND D2_SANITIZER_FLAGS -fsanitize=thread)
 endif()
-if (D2_COMPONENT_MODE_STRICT)
-
-endif()
-if (D2_UTF8_MODE)
-    add_compile_definitions(D2_LOCALE_MODE UTF8)
-else()
-    add_compile_definitions(D2_LOCALE_MODE ASCII)
-endif()
-if (D2_STRICT_MODE)
-    add_compile_definitions(D2_COMPATIBILITY_MODE STRICT)
-endif()
 
 #########################
 # SUBLIBRARY PROPERTIES #
 #########################
 
 function(delta_setup_target target)
-    target_compile_features(${target} PUBLIC cxx_std_20)
+    target_compile_features   (${target} PUBLIC cxx_std_20)
+    target_include_directories(${target} PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        $<INSTALL_INTERFACE:include>
+    )
     if (D2_SANITIZE_MEMORY OR D2_SANITIZE_THREAD)
         target_compile_options (${target} PUBLIC -fno-omit-frame-pointer ${D2_SANITIZER_FLAGS})
         target_link_options    (${target} PUBLIC                         ${D2_SANITIZER_FLAGS})
+    endif()
+    if (D2_UNICODE_MODE)
+        target_compile_definitions(${target} PUBLIC D2_LOCALE_MODE=32)
+    else()
+        target_compile_definitions(${target} PUBLIC D2_LOCALE_MODE=8)
+    endif()
+    if (D2_STRICT_MODE)
+        add_compile_definitions(D2_COMPATIBILITY_MODE STRICT)
     endif()
     if(CMAKE_INTERPROCEDURAL_OPTIMIZATION_SUPPORTED)
         set_target_properties  (${target} PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON)
@@ -54,12 +64,29 @@ endfunction()
 # LIBRARIES #
 #############
 
+# LSX library
+add_library(DeltaLSX STATIC
+    delt2a/lsx/d2_solver.hpp
+    delt2a/lsx/d2_solver.cpp
+    delt2a/lsx/d2_solver_types.hpp
+    delt2a/lsx/d2_solver_types.cpp
+    delt2a/lsx/d2_solver_ops.hpp
+    delt2a/lsx/d2_solver_ops.cpp
+)
+find_package(absl REQUIRED)
+target_link_libraries(DeltaLSX PRIVATE
+    absl::base
+    absl::flat_hash_map
+)
+delta_setup_target(DeltaLSX)
+
 # Core library
 add_library(DeltaCore STATIC
     # Core
     delt2a/d2_std.hpp
     delt2a/d2_exceptions.hpp
     delt2a/d2_locale.hpp
+    delt2a/d2_chardef.hpp
     delt2a/d2_platform.hpp
     delt2a/d2_styles.hpp
     delt2a/d2_styles_base.hpp
@@ -71,12 +98,16 @@ add_library(DeltaCore STATIC
     delt2a/d2_colors.hpp
     delt2a/d2_interpolator.hpp
     delt2a/d2_pixel.cpp
+    delt2a/d2_extended_page.hpp
+    delt2a/d2_extended_page.cpp
     # Tree
     delt2a/d2_element_units.hpp
     delt2a/d2_tree_element_frwd.hpp
     delt2a/d2_tree_element.hpp
+    delt2a/d2_tree_parent.hpp
     delt2a/d2_tree.hpp
     delt2a/d2_tree_element.cpp
+    delt2a/d2_tree_parent.cpp
     # Screen
     delt2a/d2_screen.hpp
     delt2a/d2_screen_frwd.hpp
@@ -84,10 +115,12 @@ add_library(DeltaCore STATIC
     delt2a/d2_io_handler_frwd.hpp
     delt2a/d2_screen.cpp
 )
-target_include_directories(DeltaCore PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-    $<INSTALL_INTERFACE:include>
+find_package(absl REQUIRED)
+target_link_libraries(DeltaCore PRIVATE
+    absl::base
+    absl::flat_hash_map
 )
+target_link_libraries(DeltaCore PUBLIC DeltaLSX)
 delta_setup_target(DeltaCore)
 
 # Standard elements library
@@ -95,9 +128,12 @@ if (NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
     add_library(DeltaElements STATIC
         delt2a/elements/d2_std.hpp
         delt2a/elements/d2_element_utils.hpp
+        delt2a/elements/d2_element_utils.cpp
         # Boxes
         delt2a/elements/d2_box.hpp
         delt2a/elements/d2_box.cpp
+        delt2a/elements/d2_flow_box.hpp
+        delt2a/elements/d2_flow_box.cpp
         delt2a/elements/d2_draggable_box.hpp
         delt2a/elements/d2_draggable_box.cpp
         delt2a/elements/d2_scrollbox.hpp
@@ -123,12 +159,10 @@ if (NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
         delt2a/elements/d2_matrix.cpp
         delt2a/elements/d2_graph.hpp
         delt2a/elements/d2_graph.cpp
+        delt2a/elements/d2_separator.hpp
+        delt2a/elements/d2_separator.cpp
     )
-    target_link_libraries     (DeltaElements PUBLIC DeltaCore)
-    target_include_directories(DeltaElements PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-        $<INSTALL_INTERFACE:include>
-    )
+    target_link_libraries(DeltaElements PUBLIC DeltaCore)
     delta_setup_target(DeltaElements)
 endif()
 
@@ -136,7 +170,7 @@ endif()
 if (NOT D2_EXCLUDE_LIBRARY_TEMPLATES)
     add_library(DeltaTemplates STATIC
         # Popups
-        delt2a/templates/d2_popup_theme_base.hpp
+        delt2a/templates/d2_widget_theme_base.hpp
         delt2a/templates/d2_file_explorer.hpp
         delt2a/templates/d2_file_explorer.cpp
         delt2a/templates/d2_exit_prompt.hpp
@@ -150,11 +184,7 @@ if (NOT D2_EXCLUDE_LIBRARY_TEMPLATES)
         delt2a/programs/d2_element_test.hpp
         delt2a/programs/d2_quedits.hpp
     )
-    target_link_libraries     (DeltaTemplates PUBLIC DeltaCore DeltaElements)
-    target_include_directories(DeltaTemplates PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-        $<INSTALL_INTERFACE:include>
-    )
+    target_link_libraries(DeltaTemplates PUBLIC DeltaCore DeltaElements)
     delta_setup_target(DeltaTemplates)
 endif()
 
@@ -163,11 +193,7 @@ if (NOT D2_EXCLUDE_OS_CORE AND UNIX)
         delt2a/os/d2_unix_system_io.hpp
         delt2a/os/d2_unix_system_io.cpp
     )
-    target_link_libraries     (DeltaCoreUnix PUBLIC DeltaCore)
-    target_include_directories(DeltaCoreUnix PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-        $<INSTALL_INTERFACE:include>
-    )
+    target_link_libraries(DeltaCoreUnix PUBLIC DeltaCore)
     delta_setup_target(DeltaCoreUnix)
 endif()
 
@@ -185,9 +211,7 @@ target_link_libraries(DeltaAscii INTERFACE
     $<$<TARGET_EXISTS:DeltaCoreUnix>:DeltaCoreUnix>
 )
 
-include(GNUInstallDirs)
-
-set(_install_targets DeltaCore)
+set(_install_targets DeltaCore DeltaLSX)
 if(TARGET DeltaElements)
     list(APPEND _install_targets DeltaElements)
 endif()

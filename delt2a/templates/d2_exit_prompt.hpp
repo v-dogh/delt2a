@@ -2,7 +2,6 @@
 #define D2_EXIT_PROMPT_HPP
 
 #include "../d2_dsl.hpp"
-#include "../d2_tree.hpp"
 
 namespace d2::ctm
 {

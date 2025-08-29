@@ -191,7 +191,7 @@ namespace d2
 		private:
 			bool enabled_{ true };
 		protected:
-			static constexpr keytype _resolve_key(value_type ch)
+            static constexpr keytype _resolve_key(char ch)
 			{
 				if (ch <= keymax() && ch >= keymin())
 				{
@@ -226,15 +226,15 @@ namespace d2
 			virtual void _begincycle_impl() = 0;
 			virtual void _endcycle_impl() = 0;
 		public:
-			static constexpr value_type keymin()
+            static constexpr char keymin()
 			{
 				return ' ';
 			}
-			static constexpr value_type keymax()
+            static constexpr char keymax()
 			{
 				return '~';
 			}
-			static constexpr keytype key(value_type ch)
+            static constexpr char key(value_type ch)
 			{
 				return _resolve_key(ch);
 			}
@@ -546,6 +546,10 @@ namespace d2
 					_ptr.lock()->destroy();
 				}
 			}
+            bool is_muted() const noexcept
+            {
+                return !_ptr.expired() && _ptr.lock()->state() == EventListenerState::State::Muted;
+            }
 
 			operator bool() const noexcept
 			{
@@ -554,11 +558,11 @@ namespace d2
 
 			bool operator==(std::nullptr_t) const noexcept
 			{
-				return !_ptr.expired();
+                return _ptr.expired();
 			}
 			bool operator!=(std::nullptr_t) const noexcept
 			{
-				return _ptr.expired();
+                return !_ptr.expired();
 			}
 
 			EventListener& operator=(EventListener&&) = default;

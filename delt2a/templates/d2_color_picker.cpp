@@ -1,5 +1,5 @@
 #include "d2_color_picker.hpp"
-#include "d2_popup_theme_base.hpp"
+#include "d2_widget_theme_base.hpp"
 #include "../d2_tree.hpp"
 
 namespace d2::ctm
@@ -11,9 +11,10 @@ namespace d2::ctm
 			D2_STYLE(Width, 3.0_pxi)
 			D2_STYLE(Min, 0)
 			D2_STYLE(Max, 255)
-			D2_STYLE(SliderColor, D2_VAR(PopupTheme, pt_bg_button()))
-			D2_STYLE(BackgroundColor, D2_VAR(PopupTheme, pt_bg_button()))
-			D2_STYLE(FocusedColor, D2_VAR(PopupTheme, pt_hbg_button()))
+            D2_STYLE(Step, 20)
+			D2_STYLE(SliderColor, D2_VAR(WidgetTheme, wg_bg_button()))
+			D2_STYLE(BackgroundColor, D2_VAR(WidgetTheme, wg_bg_button()))
+			D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
 		D2_STYLESHEET_END(rgba_picker)
 	}
 
@@ -25,13 +26,12 @@ namespace d2::ctm
 	void ColorPicker::_state_change_impl(State state, bool value)
 	{
 		VirtualBox::_state_change_impl(state, value);
-		if (state == State::Swapped && !value && empty())
+		if (state == State::Created && value && empty())
 		{
 			VirtualBox::width = 42.0_px;
 			VirtualBox::height = 8.0_px;
 			VirtualBox::zindex = 120;
-			VirtualBox::container_options =
-				ContainerOptions::EnableBorder | ContainerOptions::TopFix;
+            VirtualBox::container_options |= ContainerOptions::EnableBorder;
 			VirtualBox::title = "<Pick Color>";
 
 			if (screen()->is_keynav())
@@ -48,13 +48,13 @@ namespace d2::ctm
 				VirtualBox::y = y;
 			}
 
-			auto& src = this->state()->screen()->theme<PopupTheme>();
-			data::set<VirtualBox::BorderHorizontalColor>(src.pt_border_horizontal());
-			data::set<VirtualBox::BorderVerticalColor>(src.pt_border_vertical());
-			data::set<VirtualBox::FocusedColor>(src.pt_hbg_button());
+			auto& src = this->state()->screen()->theme<WidgetTheme>();
+            data::set<VirtualBox::BorderHorizontalColor>(src.wg_border_horizontal());
+			data::set<VirtualBox::BorderVerticalColor>(src.wg_border_vertical());
+			data::set<VirtualBox::FocusedColor>(src.wg_hbg_button());
 			data::set<VirtualBox::BarColor>(style::dynavar<[](const auto& value) {
 				return value.extend('.');
-			}>(src.pt_border_horizontal()));
+            }>(src.wg_border_horizontal()));
 
 			using namespace dx;
 			D2_STATELESS_TREE(color_picker)
@@ -62,85 +62,83 @@ namespace d2::ctm
 				D2_ELEM(Button, exit)
 					D2_STYLE(Value, "<X>")
 					D2_STYLE(X, 1.0_pxi)
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_STYLE(FocusedColor, D2_VAR(PopupTheme, pt_hbg_button()))
-					D2_STYLE(OnSubmit, [state](Element::TraversalWrapper ptr) {
+					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+					D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr) {
 						_core(state)->close();
 					})
-				D2_ELEM_END(exit)
+				D2_ELEM_END
 				D2_ELEM(Button, submit)
 					D2_STYLE(Value, "<Ok>")
 					D2_STYLE(X, 5.0_pxi)
-					D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_STYLE(FocusedColor, D2_VAR(PopupTheme, pt_hbg_button()))
-					D2_STYLE(OnSubmit, [state](Element::TraversalWrapper ptr) {
+					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+					D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
+                    D2_STYLE(OnSubmit, [state](TreeIter ptr) {
 						_core(state)->submit();
 					})
-				D2_ELEM_END(submit)
+				D2_ELEM_END
 				// Colors
-				D2_ELEM_NESTED(Box, colors)
+                D2_ELEM(FlowBox, colors)
 					D2_STYLE(Width, 0.5_pc)
 					D2_STYLE(Height, 12.0_px)
 					D2_STYLE(X, 1.0_relative)
 					D2_STYLE(Y, 1.0_px)
-				D2_ELEM_NESTED_BODY(colors)
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM(Text)
 						D2_STYLE(Value, "R: ")
 						D2_STYLE(X, 1.0_relative)
-						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
-					D2_UELEM_END
+						D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+					D2_ELEM_END
 					D2_ELEM(Slider, r)
 						D2_STYLES_APPLY(rgba_picker)
-					D2_ELEM_END(r)
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM_END
+					D2_ELEM(Text)
 						D2_STYLE(Value, "G: ")
-						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
+						D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(Y, 0.0_relative)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Slider, g)
 						D2_STYLES_APPLY(rgba_picker)
-					D2_ELEM_END(g)
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM_END
+					D2_ELEM(Text)
 						D2_STYLE(Value, "B: ")
-						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
+						D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(Y, 0.0_relative)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Slider, b)
 						D2_STYLES_APPLY(rgba_picker)
-					D2_ELEM_END(b)
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM_END
+					D2_ELEM(Text)
 						D2_STYLE(Value, "A: ")
-						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
+						D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
 						D2_STYLE(X, 1.0_relative)
 						D2_STYLE(Y, 0.0_relative)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Slider, a)
 						D2_STYLES_APPLY(rgba_picker)
-					D2_ELEM_END(a)
-				D2_ELEM_NESTED_END(colors)
+					D2_ELEM_END
+                D2_ELEM_END
 				// Statistics
-				D2_ELEM_NESTED(Box, statistics)
+                D2_ELEM(FlowBox, statistics)
 					D2_STYLE(X, 0.0_pxi)
 					D2_STYLE(Y, 1.0_px)
 					D2_STYLE(Width, 0.5_pc)
 					D2_STYLE(Height, 1.0_pxi)
-				D2_ELEM_NESTED_BODY(statistics)
-					D2_ELEM_UNNAMED(Text)
+					D2_ELEM(Text)
 						D2_STYLE(Value, "RGBA")
-						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
+						D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 0.0_relative)
-					D2_UELEM_END
+					D2_ELEM_END
 					D2_ELEM(Text, color-rgba)
 						D2_STYLE(Value, "[0][0][0][0]")
-						D2_STYLE(ForegroundColor, D2_VAR(PopupTheme, pt_text()))
+						D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
 						D2_STYLE(X, 0.0_center)
 						D2_STYLE(Y, 0.0_relative)
-					D2_ELEM_END(color-rgba)
-				D2_ELEM_NESTED_END(statistics)
-			D2_TREE_END(color_picker)
+					D2_ELEM_END
+                D2_ELEM_END
+			D2_TREE_END
 
 			color_picker::create_at(
 				traverse(),
@@ -152,10 +150,10 @@ namespace d2::ctm
 				)
 			);
 
-			at("colors").foreach([this](TraversalWrapper elem) {
+            at("colors").foreach([this](TreeIter elem) {
 				if (elem.is_type<Slider>())
 				{
-					elem.as<Slider>()->set<Slider::OnChange>([this](TraversalWrapper elem, auto, auto) {
+                    elem.as<Slider>()->set<Slider::OnChange>([this](TreeIter elem, auto, auto) {
 						const auto color = _get_color();
 						(*(traverse()/"statistics"/"color-rgba").as<Text>())
 							.set<Text::BackgroundColor>(color)
