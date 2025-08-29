@@ -8,6 +8,10 @@
 // Simple terminal (though the terminal functionality is debatable)
 // Mainly as a showcase of most of the features like interpolators, themes, popups, stylesheets, the tree structure
 // This example is both unicode and ASCII compatible (without any issues) as it relies on default values from the charset
+// You can open tabs either by pressing the indicator (empty button next to the tab list) or typing $tabopen in the input box
+// To close a tab either type exit or $tabclose
+// After you try opening a tab you will be able to type a name for as long as the button is in focus
+// Be careful though with input as it's not fully functional and some input sanitation is omitted
 
 D2_STATELESS_TREE(terminal)
     state->context()->sys<d2::os::input>()->mask_interrupts();
