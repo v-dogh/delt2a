@@ -245,10 +245,16 @@ namespace d2
         b->accept_layout();
         const auto [ width, height ] = _ctx->input()->screen_size();
         const auto [ pwidth, pheight ] = b->box();
-        if (pwidth != width || pheight != height)
+        const auto is_width = pwidth != width;
+        const auto is_height = pheight != height;
+        if (is_width || is_height)
         {
             b->override_dimensions(width, height);
             b->_signal_write(Element::WriteType::Style);
+            b->_signal_context_change(
+                (Element::WriteType::LayoutWidth * is_width) |
+                (Element::WriteType::LayoutHeight * is_height)
+            );
         }
     }
     Screen::eptr Screen::_update_states(eptr container, const std::pair<int, int>& mouse)
@@ -386,8 +392,8 @@ namespace d2
         root->state->swap_in();
         this->root()->setstate(Element::Swapped, false);
 
-        _ctx->input()->begincycle();
         _ctx->input()->endcycle();
+        _ctx->input()->begincycle();
         _update_viewport();
 
         root->state->root()->initialize(true);
@@ -624,6 +630,7 @@ namespace d2
     {
         std::unique_lock lock(_mtx);
 
+        root()->setcache(d2::Element::CachePolicyStatic);
         if (_ctx->input()->is_screen_resize())
         {
             _update_viewport();

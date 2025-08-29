@@ -42,18 +42,18 @@ namespace d2::dx
                                  "", this->state(), std::static_pointer_cast<ParentElement>(shared_from_this())
                              );
                 scrollbar_->setstate(State::Swapped, false);
-
                 scrollbar_->zindex = 5;
                 scrollbar_->x = 0.0_pxi;
                 scrollbar_->y = 0.0_center;
                 scrollbar_->height = 1.0_pc;
-                scrollbar_->slider_background_color = PixelForeground{ .v = '|' };
-                scrollbar_->on_change = [this](auto, auto, auto abs)
+                scrollbar_->on_change = [this](auto ptr, auto, auto abs)
                 {
                     offset_ = abs;
-                    _signal_write(WriteType::Masked);
+                    _signal_write(WriteType::Style);
+                    foreach([](TreeIter ptr) {
+                        ptr->_signal_write(WriteType::LayoutYPos);
+                    });
                 };
-
                 scrollbar_->_signal_write(WriteType::Masked);
             }
         }
@@ -66,17 +66,26 @@ namespace d2::dx
 
         _recompute_height();
 
+        bool written = false;
         if (computed_height_ > height)
         {
+            const auto sw = computed_height_ ? ((float(height) / computed_height_) * height) : 0;
             scrollbar_->setstate(Display, true);
-            scrollbar_->slider_width =
-                computed_height_ ? ((float(height) / computed_height_) * height) : 0;
-            scrollbar_->min = 0;
-            scrollbar_->max = computed_height_ - (bw * 2);
-            scrollbar_->_signal_write(WriteType::Style);
+            scrollbar_->slider_width = sw;
+            written = scrollbar_->slider_width != sw;
         }
         else
             scrollbar_->setstate(Display, false);
+
+        if (const auto ch = computed_height_ - (bw * 2) - height;
+            scrollbar_->max != ch)
+        {
+            scrollbar_->min = 0;
+            scrollbar_->max = ch;
+            written = true;
+        }
+        if (written)
+            scrollbar_->_signal_write(WriteType::Style);
     }
 
     TypedTreeIter<VerticalSlider> ScrollBox::scrollbar() const noexcept

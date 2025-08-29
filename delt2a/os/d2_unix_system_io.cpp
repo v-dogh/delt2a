@@ -56,14 +56,14 @@ namespace d2::sys
 		io.c_cc[VTIME] = 0;
 		tcsetattr(STDIN_FILENO, TCSANOW, &io);
 		fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
-		// Disable cursor | enable mouse tracking
-		std::cout << "\033[?25l" << "\033[?1003h" << std::flush;
+        // Disable cursor | enable mouse tracking | extended mode
+        std::cout << "\033[?25l" << "\033[?1003h" << "\x1b[?1006h" << std::flush;
 
 	}
 	void UnixTerminalInput::_disable_raw_mode()
 	{
 		tcsetattr(STDIN_FILENO, TCSANOW, &restore_termios_);
-		std::cout << "\033[?25h" << "\033[?1003l" << std::flush;
+        std::cout << "\033[?25h" << "\033[?1003l" << "\x1b[?1006l" << std::flush;
 	}
 
 	bool UnixTerminalInput::_is_pressed_impl(keytype ch, KeyMode mode)
@@ -225,9 +225,11 @@ namespace d2::sys
 			// Escape
 			else if (ch == '\e')
 			{
-				std::array<char, 6> seq{ ch };
+                std::array<char, 18> seq{ ch };
 				std::size_t i = 1;
-				while (i < seq.size() && ::read(STDIN_FILENO, &seq[i], 1) > 0) i++;
+                while (i < seq.size() &&
+                       ::read(STDIN_FILENO, &seq[i], 1) > 0 &&
+                       std::tolower(seq[i]) != 'm') i++;
 
 				if (i > 1)
 				{
@@ -243,25 +245,37 @@ namespace d2::sys
 					else if (seq[1] == '[')
 					{
 						// Mouse input
-						if (seq[2] == 'M')
+                        if (seq[2] == '<')
 						{
-							const int button = seq[3] - 32;
-							switch (button)
-							{
-							case 0: _setm(MouseKey::Left); break;
-							case 1: _setm(MouseKey::Middle); break;
-							case 2: _setm(MouseKey::Right); break;
-							case 3: _resetm(); break;
-							case 4: _relm(MouseKey::Middle); break;
-							case -127: _setm(MouseKey::SideTop); break;
-							case -128: _setm(MouseKey::SideBottom); break;
-							case -95: _relm(MouseKey::SideTop); break;
-							case 64: _setm(MouseKey::ScrollUp); break;
-							case 65: _setm(MouseKey::ScrollDown); break;
-							}
+                            int button = 0;
+                            const auto off1 = std::find(seq.begin() + 2, seq.end(), ';');
+                            const auto off2 = std::find(off1 + 1, seq.end(), ';');
+                            const auto off3 = std::find(off2 + 1, seq.end(), ';');
+                            std::from_chars<int>(seq.data() + 3, off1, button);
+                            std::from_chars<int>(off1 + 1, off2, mouse_pos_.first);
+                            std::from_chars<int>(off2 + 1, off3, mouse_pos_.second);
+                            mouse_pos_.first--;
+                            mouse_pos_.second--;
 
-							mouse_pos_.first = int(*reinterpret_cast<const unsigned char*>(&seq[4])) - 33;
-							mouse_pos_.second = int(*reinterpret_cast<const unsigned char*>(&seq[5])) - 33;
+                            const auto is_release = (seq[i] == 'm');
+                            const auto is_motion  = (button & 32) != 0;
+                            const auto is_wheel   = (button & 64) != 0;
+
+                            if (is_wheel)
+                            {
+                                if ((button & 1) == 0) _setm(MouseKey::ScrollUp);
+                                else                   _setm(MouseKey::ScrollDown);
+                            }
+                            else
+                            {
+                                switch (button & 3)
+                                {
+                                case 0: is_release ? _relm(MouseKey::Left)   : _setm(MouseKey::Left);   break;
+                                case 1: is_release ? _relm(MouseKey::Middle) : _setm(MouseKey::Middle); break;
+                                case 2: is_release ? _relm(MouseKey::Right)  : _setm(MouseKey::Right);  break;
+                                }
+                            }
+
 							_c_mpoll().set(MouseKeyMax);
 						}
 						else if (seq[2] == 'Z')

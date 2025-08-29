@@ -16,13 +16,13 @@ namespace d2
             std::function<void(TreeIter, string, string)> on_change_values{ nullptr };
             std::vector<string> options{};
 
-            PixelBackground enabled_background_color{};
-            PixelForeground enabled_foreground_color{};
-            PixelBackground disabled_background_color
+            PixelBackground disabled_background_color{};
+            PixelForeground disabled_foreground_color{};
+            PixelBackground enabled_background_color
             {
                 .r = 255, .g = 255, .b = 255
             };
-            PixelForeground disabled_foreground_color
+            PixelForeground enabled_foreground_color
             {
                 .r = 0, .g = 0, .b = 0
             };

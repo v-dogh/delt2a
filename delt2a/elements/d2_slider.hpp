@@ -14,7 +14,7 @@ namespace d2
             float min{ 0.f };
             float max{ 0.f };
             float step{ 1.f };
-            PixelForeground slider_background_color{ .v = '-' };
+            PixelForeground slider_background_color{ .v = charset::slider_horizontal };
             Pixel slider_color{ .r = 255, .g = 255, .b = 255, .v = ' ' };
             HDUnit slider_width{ 1 };
             std::function<void(TreeIter, float, float)> on_change{};
@@ -91,12 +91,16 @@ namespace d2
         };
         class VerticalSlider : public Slider
         {
-        public:
-            using Slider::Slider;
         protected:
             virtual int _aligned_mouse() noexcept override;
             virtual int _aligned_width() noexcept override;
             virtual void _frame_impl(PixelBuffer::View buffer) noexcept override;
+        public:
+            VerticalSlider(
+                const std::string& name,
+                TreeState::ptr state,
+                pptr parent
+            );
         };
     }
 }

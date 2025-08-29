@@ -154,9 +154,9 @@ namespace d2
 
     bool Element::_contextual_change(write_flag flags) const noexcept
     {
-        // We shift by one to align the start of the report's ContextualXPos flag with LayoutXPos
+        // ContextualXPos is aligned with LayoutXPos
         const unit_meta_flag rep = _unit_report_impl();
-        return static_cast<write_flag>(rep >> 1) & flags;
+        return static_cast<write_flag>(rep) & flags;
     }
 
     //
@@ -237,7 +237,7 @@ namespace d2
     }
     void Element::_signal_write_local(write_flag type, unsigned int prop, ptr element) noexcept
     {
-        if (type & WriteType::Dimensions)
+        if ((type & ~(WriteType::Style | WriteType::InternalLayout)) & WriteType::Dimensions)
         {
             _signal_context_change_impl(type, prop, shared_from_this());
             // Check if after the change of the dimensions the coordinates
@@ -256,17 +256,15 @@ namespace d2
     void Element::_signal_write(write_flag type, unsigned int prop, ptr element) noexcept
     {
         _signal_write_local(type, prop, element);
-        if (parent() && !parent()->_is_write_type(type))
+        if (const auto uptype = WriteType::Style | (type & WriteType::InternalLayout);
+            parent() && !parent()->_is_write_type(uptype))
         {
             // Any layout write to a sub-object will result in a Style write to the parent
-            parent()->_signal_write(
-                WriteType::Style,
-                prop, element
-            );
+            parent()->_signal_write(uptype, prop, element);
         }
     }
 
-    void Element::_signal_context_change(write_flag type, unsigned int prop, ptr element) noexcept
+    void Element::_signal_context_change_sub(write_flag type, unsigned int prop, ptr element) noexcept
     {
         if (_contextual_change(type))
         {
@@ -274,6 +272,15 @@ namespace d2
             _signal_write_impl(type, prop, element);
             _invalidate_state(type);
         }
+    }
+    void Element::_signal_context_change_sub(write_flag type, unsigned int prop) noexcept
+    {
+        // Propagate down
+        _signal_context_change_sub(type, prop, shared_from_this());
+    }
+    void Element::_signal_context_change(write_flag type, unsigned int prop, ptr element) noexcept
+    {
+        _signal_context_change_impl(type, prop, element);
     }
     void Element::_signal_context_change(write_flag type, unsigned int prop) noexcept
     {
@@ -301,6 +308,7 @@ namespace d2
     void Element::_trigger_event(IOContext::Event ev)
     {
         _event_impl(ev);
+        _trigger(State::Event, true);
     }
 
     // Rendering
@@ -554,6 +562,8 @@ namespace d2
                     _buffer.compress();
                 }
             }
+            else
+                _buffer.clear();
             _signal_update(WasWritten);
         }
         return Frame(shared_from_this());

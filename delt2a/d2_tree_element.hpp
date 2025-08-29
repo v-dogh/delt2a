@@ -224,6 +224,7 @@ namespace d2
             Swapped = 1 << 4,
             Keynavi = 1 << 5,
             Created = 1 << 6,
+            Event   = 1 << 7
         };
         enum InternalState : internal_flag
         {
@@ -253,6 +254,7 @@ namespace d2
         {
             None = 0x00,
             Style = WasWritten,
+            InternalLayout = WasWrittenLayout,
             LayoutXPos = PositionXUpdated | WasWrittenLayout,
             LayoutYPos = PositionYUpdated | WasWrittenLayout,
             LayoutWidth = DimensionsWidthUpdated | WasWrittenLayout | Style,
@@ -484,6 +486,8 @@ namespace d2
 
         void _signal_write(write_flag type, unsigned int prop, ptr element) noexcept;
     public:
+        void _signal_context_change_sub(write_flag type, unsigned int prop, ptr element) noexcept;
+        void _signal_context_change_sub(write_flag type, unsigned int prop) noexcept;
         void _signal_context_change(write_flag type, unsigned int prop, ptr element) noexcept;
         void _signal_context_change(write_flag type = WriteType::Masked, unsigned int prop = ~0u) noexcept;
         void _signal_write(write_flag type = WriteType::Masked, unsigned int prop = ~0u) noexcept;

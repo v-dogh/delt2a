@@ -128,6 +128,7 @@ if (NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
     add_library(DeltaElements STATIC
         delt2a/elements/d2_std.hpp
         delt2a/elements/d2_element_utils.hpp
+        delt2a/elements/d2_element_utils.cpp
         # Boxes
         delt2a/elements/d2_box.hpp
         delt2a/elements/d2_box.cpp

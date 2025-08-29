@@ -76,8 +76,8 @@ namespace d2
         static constexpr auto checkbox_false = "☐";
         static constexpr auto switch_separator_horizontal = "━";
         static constexpr auto switch_separator_vertical = "┃";
-        static constexpr auto slider_horizontal = "─";
-        static constexpr auto slider_vertical = "│";
+        static constexpr auto slider_horizontal = "━";
+        static constexpr auto slider_vertical = "┃";
         static constexpr auto slider_thumb_vertical = "█";
         static constexpr auto slider_thumb_horizontal = "█";
         static constexpr auto radio_checked = "◉";
@@ -90,6 +90,52 @@ namespace d2
 
         static constexpr auto shade_transparent = "░";
         static constexpr auto shade_opaque = "█";
+
+        struct icon
+        {
+            static constexpr auto arrow_left = "←";
+            static constexpr auto arrow_right = "→";
+            static constexpr auto arrow_up = "↑";
+            static constexpr auto arrow_down = "↓";
+
+            static constexpr auto play = "▶";
+            static constexpr auto pause = "⏸";
+            static constexpr auto stop = "⏹";
+            static constexpr auto record = "⏺";
+            static constexpr auto next = "⏭";
+            static constexpr auto previous = "⏮";
+
+            static constexpr auto checkbox_unchecked = "☐";
+            static constexpr auto checkbox_checked  = "☑";
+            static constexpr auto checkbox_crossed = "☒";
+            static constexpr auto radio_on = "◉";
+            static constexpr auto radio_off = "○";
+
+            static constexpr auto info = "ℹ";
+            static constexpr auto warning = "⚠";
+            static constexpr auto error = "❌";
+            static constexpr auto check = "✔";
+            static constexpr auto cross = "✖";
+            static constexpr auto exclamation = "❗";
+            static constexpr auto question = "❓";
+
+            static constexpr auto gear = "⚙";
+            static constexpr auto wrench = "🔧";
+            static constexpr auto hammer = "🔨";
+
+            static constexpr auto document = "📄";
+            static constexpr auto folder = "📁";
+            static constexpr auto trash = "🗑";
+            static constexpr auto scissors = "✂";
+
+            static constexpr auto star_filled = "★";
+            static constexpr auto star_empty = "☆";
+            static constexpr auto heart = "❤";
+            static constexpr auto heart_empty = "♡";
+
+            static constexpr auto envelope = "✉";
+            static constexpr auto phone = "☎";
+        };
 
         enum Cell
         {

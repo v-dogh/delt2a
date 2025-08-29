@@ -558,11 +558,11 @@ namespace d2
 
 			bool operator==(std::nullptr_t) const noexcept
 			{
-				return !_ptr.expired();
+                return _ptr.expired();
 			}
 			bool operator!=(std::nullptr_t) const noexcept
 			{
-				return _ptr.expired();
+                return !_ptr.expired();
 			}
 
 			EventListener& operator=(EventListener&&) = default;

@@ -157,6 +157,14 @@ namespace d2::interp
         {
             start_ = start_.max();
         }
+        void mute() noexcept
+        {
+            start_ = start_.min();
+        }
+        void unmute() noexcept
+        {
+            start_ = std::chrono::high_resolution_clock::now();
+        }
         void start() noexcept
         {
             if (!_vptr()) return;
@@ -166,9 +174,12 @@ namespace d2::interp
         }
         void update() noexcept
         {
-            if (!_vptr()) return;
-            const auto ptr = _hold();
-            _update_impl(ptr, _progress());
+            if (start_ != std::chrono::high_resolution_clock::time_point::min())
+            {
+                if (!_vptr()) return;
+                const auto ptr = _hold();
+                _update_impl(ptr, _progress());
+            }
         }
         bool keep_alive() noexcept
         {

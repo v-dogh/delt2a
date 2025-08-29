@@ -13,9 +13,8 @@
 #define D2_EMBED_NAMED(_type_, _name_, ...) { \
         auto __uptr = __ptr; \
         auto __nsrc = _type_::build_sub(#_name_, __uptr->state(), __state->root() __VA_OPT__(,) __VA_ARGS__); \
-        _type_::create_at(__nsrc->core(), __nsrc); \
-        __nsrc->swap_in(); \
-        __nsrc->initialize(); }
+        auto __nptr = _type_::create_at(__nsrc->core(), __nsrc); \
+        __nsrc->swap_in(); }
 #define D2_EMBED(_type_, ...) D2_EMBED_NAMED(_type_,, __VA_ARGS__)
 #define D2_EMBED_ELEM_NAMED(_type_, _name_, ...) \
     __ptr.asp()->override(::d2::Element::make<_type_>( \
@@ -54,7 +53,7 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
         using __object_type = _type_; \
         auto& __uptr = __ptr; \
         auto  __nptr = ::d2::Element::make<_type_>(#__VA_ARGS__, __state, __uptr.asp()); \
-        auto  __ptr  = __nptr->traverse(); \
+        auto  __ptr  = ::d2::TypedTreeIter<_type_>(__nptr); \
         auto& state  = __state; \
         auto  ptr    = ::d2::TypedTreeIter<_type_>(__nptr);
 #define D2_STYLE(_prop_, ...) __ptr.template as<__object_type>()->template set<__object_type::_prop_>(__VA_ARGS__);
@@ -69,26 +68,31 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
     using __object_type = decltype(__VA_ARGS__)::type; \
     auto& __uptr = __ptr; \
     auto  __nptr = __##__VA_ARGS__; \
-    auto  __ptr  = __nptr->traverse(); \
+    auto  __ptr  = ::d2::TypedTreeIter<__object_type>(__nptr); \
     auto& state  = __state; \
     auto  ptr    = __VA_ARGS__;
 
 #define D2_STYLESHEET_BEGIN(name) \
     struct name { \
-        template<typename __object_type> \
-        static void apply(::d2::TreeIter ptr, ::d2::TreeState::ptr state) { \
-            ::d2::TreeIter& __ptr = ptr; \
-            ::d2::TreeState::ptr& __state = state;
+        template<typename Type> \
+        static void apply(::d2::TypedTreeIter<Type> __ptr, ::d2::TreeState::ptr __state) { \
+            using __object_type = Type; \
+            auto  __uptr = ::d2::TypedTreeIter<ParentElement>(__ptr->parent()); \
+            auto& state  = __state; \
+            auto& ptr    = __ptr;
 #define D2_STYLESHEET_END(...) }};
-#define D2_STYLES_APPLY_MANUAL(name, object, ptr, state) name::template apply<object>(ptr, state);
-#define D2_STYLES_APPLY(name) D2_STYLES_APPLY_MANUAL(name, __object_type, __ptr, __state)
+#define D2_STYLES_APPLY_MANUAL(name, ptr, state) name::apply(::d2::TypedTreeIter(ptr), state);
+#define D2_STYLES_APPLY(name) D2_STYLES_APPLY_MANUAL(name, __ptr, __state)
 
 #define D2_VAR(type, var) __state->screen()->theme<type>().var
 #define D2_VAR_TYPE(type, var) typename std::remove_cvref_t<decltype(D2_VAR(type, var))>::value_type
 #define D2_DYNAVAR(type, var, ...) ::d2::style::dynavar< \
     [](const D2_VAR_TYPE(type, var)& value) { return __VA_ARGS__; }>(D2_VAR(type, var))
 
-#define D2_STATIC(_type_) static thread_local _type_
+#define D2_STATIC(_type_, _name_, ...) \
+    static thread_local _type_ _name_; \
+    std::destroy_at(&_name_); \
+    new (&_name_) _type_(__VA_ARGS__);
 
 // Helpers
 // EEXPR variants do not include line breaks
@@ -107,11 +111,11 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 #define D2_CONTEXT_END }
 #define D2_VOID_EXPR , void()
 
-#define D2_SYNCED_EEXPR(...) (state->screen()->is_synced() ? \
+#define D2_SYNC_EEXPR(...) (state->screen()->is_synced() ? \
 (__VA_ARGS__) : state->screen()->sync([=]() -> decltype(auto) { return __VA_ARGS__; }).value())
-#define D2_SYNCED_EXPR(...) D2_SYNCED_EEXPR(__VA_ARGS__);
-#define D2_SYNCED_BLOCK state->screen()->sync_if([=]{
-#define D2_SYNCED_BLOCK_END });
+#define D2_SYNC_EXPR(...) D2_SYNC_EEXPR(__VA_ARGS__);
+#define D2_SYNC_BLOCK state->screen()->sync_if([=]{
+#define D2_SYNC_BLOCK_END });
 
 #define D2_LISTEN_EEXPR(event, value, ...) [=]() -> void { D2_LISTEN_EXPR(event, value, __VA_ARGS__) }()
 #define D2_LISTEN_EXPR(event, value, ...) D2_LISTEN(event, value) (__VA_ARGS__); D2_LISTEN_END
@@ -148,47 +152,52 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 
 // Interpolation
 
-#define D2_INTERPOLATE_IMPL(time, interpolator, ptr, object, style, dest, ...) \
-    { \
-        using __type = decltype(std::declval<object>().template get<object::style>());\
-        ptr->state()->screen()->template interpolate<::d2::interp::interpolator<object, object::style>>( \
+#define D2_INTERPOLATE_IMPL(time, interpolator, ptr, style, dest, ...) \
+    [&]() { \
+        using __object_type = decltype(::d2::TypedTreeIter(ptr))::type; \
+        using __type = decltype(std::declval<__object_type>().template get<__object_type::style>());\
+        return ptr->state()->screen()->template interpolate<::d2::interp::interpolator<__object_type, __object_type::style>>( \
                 std::chrono::milliseconds(time), \
                 ptr, \
                 dest \
                 __VA_OPT__(,) __VA_ARGS__ \
-                                                                                                       ); \
-    }
-#define D2_INTERPOLATE_EVENT_IMPL(event, sstate, time, interpolator, ptr, object, style, dest, ...) \
+        ); \
+    }()
+#define D2_INTERPOLATE_EVENT_IMPL(event, sstate, time, interpolator, ptr, style, dest, ...) \
     { \
+        using __object_type = decltype(::d2::TypedTreeIter(ptr))::type; \
         ptr->listen(::d2::Element::State::event, sstate, [=](auto, auto ptr) { \
-            using __type = decltype(std::declval<object>().template get<object::style>());\
-            ptr->state()->screen()->template interpolate<::d2::interp::interpolator<object, object::style>>( \
+            const auto tptr = ptr.template as<__object_type>(); \
+            using __type = decltype(std::declval<__object_type>().template get<object::style>());\
+            tptr->state()->screen()->template interpolate<::d2::interp::interpolator<__object_type, object::style>>( \
                     std::chrono::milliseconds(time), \
-                    ptr, \
+                    tptr, \
                     dest \
                     __VA_OPT__(,) __VA_ARGS__ \
-                                                                                                           ); \
+            ); \
         }); \
     }
-#define D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, ptr, object, style, dest, ...) \
+#define D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, ptr, style, dest, ...) \
     { \
-        using __type = decltype(std::declval<object>().template get<object::style>()); \
+        using __object_type = decltype(::d2::TypedTreeIter(ptr))::type; \
+        using __type = decltype(std::declval<__object_type>().template get<__object_type::style>()); \
         static bool __is_on{ false }; \
         static __type __saved_initial{}; \
         static std::chrono::steady_clock::time_point __rev_timestamp{}; \
         ptr->listen(::d2::Element::State::event, true, [=](auto, auto ptr) { \
-            const bool __finished = ptr.template as<object>()->template get<object::style>() == static_cast<__type>(dest); \
+            const auto tptr = ptr.template as<__object_type>(); \
+            const bool __finished = tptr->template get<__object_type::style>() == static_cast<__type>(dest); \
             if (!__is_on && !__finished) \
             { \
                 if ((std::chrono::steady_clock::now() - __rev_timestamp) >= std::chrono::milliseconds(time)) \
-                    __saved_initial = ptr.template as<object>()->template get<object::style>(); \
+                    __saved_initial = tptr->template get<__object_type::style>(); \
                 __rev_timestamp = std::chrono::steady_clock::time_point(); \
-                ptr->state()->screen()->template interpolate<::d2::interp::interpolator<object, object::style>>( \
+                tptr->state()->screen()->template interpolate<::d2::interp::interpolator<__object_type, __object_type::style>>( \
                         std::chrono::milliseconds(time), \
-                        ptr, \
+                        tptr, \
                         dest \
                         __VA_OPT__(,) __VA_ARGS__ \
-                                                                                                               ); \
+                ); \
             } \
             else if (__finished) \
             { \
@@ -196,70 +205,70 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
             } \
         }); \
         ptr->listen(::d2::Element::State::event, false, [=](auto, auto ptr) { \
+            const auto tptr = ptr.template as<__object_type>(); \
             __rev_timestamp = std::chrono::steady_clock::now(); \
-            ptr->state()->screen()->template interpolate<::d2::interp::interpolator<object, object::style>>( \
+            tptr->state()->screen()->template interpolate<::d2::interp::interpolator<__object_type, __object_type::style>>( \
                     std::chrono::milliseconds(time), \
-                    ptr, \
+                    tptr, \
                     __saved_initial \
                     __VA_OPT__(,) __VA_ARGS__ \
-                                                                                                           ); \
+            ); \
         }); \
     }
-#define D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, ptr, object, style, dest, ...)
+#define D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, ptr, style, dest, ...)
 
 // Manual
 
-#define D2_INTERPOLATE(time, interpolator, ptr, object, style, dest) \
-    D2_INTERPOLATE_IMPL(time, interpolator, ptr, object, style, dest)
-#define D2_INTERPOLATE_GEN(time, interpolator, ptr, object, style, dest, ...) \
-    D2_INTERPOLATE_IMPL(time, interpolator, ptr, object, style, dest, __VA_ARGS__)
+#define D2_INTERPOLATE(time, interpolator, ptr, style, dest) \
+    D2_INTERPOLATE_IMPL(time, interpolator, ptr, style, dest)
+#define D2_INTERPOLATE_GEN(time, interpolator, ptr, style, dest, ...) \
+    D2_INTERPOLATE_IMPL(time, interpolator, ptr, style, dest, __VA_ARGS__)
 
-#define D2_INTERPOLATE_TOGGLE(time, interpolator, ptr, object, style, dest) \
-    D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, ptr, object, style, dest)
-#define D2_INTERPOLATE_TOGGLE_GEN(time, interpolator, ptr, object, style, dest, ...) \
-    D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, ptr, object, style, dest, __VA_ARGS__)
+#define D2_INTERPOLATE_TOGGLE(time, interpolator, ptr, style, dest) \
+    D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, ptr, style, dest)
+#define D2_INTERPOLATE_TOGGLE_GEN(time, interpolator, ptr, style, dest, ...) \
+    D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, ptr, style, dest, __VA_ARGS__)
 
-#define D2_INTERPOLATE_ACQ(event, time, interpolator, ptr, object, style, dest) \
-    D2_INTERPOLATE_EVENT_IMPL(event, true, time, interpolator, ptr, object, style, dest)
-#define D2_INTERPOLATE_ACQ_GEN(event, time, interpolator, ptr, object, style, dest, ...) \
-    D2_INTERPOLATE_EVENT_IMPL(event, true, time, interpolator, ptr, object, style, dest, __VA_ARGS__)
+#define D2_INTERPOLATE_ACQ(event, time, interpolator, ptr, style, dest) \
+    D2_INTERPOLATE_EVENT_IMPL(event, true, time, interpolator, ptr, style, dest)
+#define D2_INTERPOLATE_ACQ_GEN(event, time, interpolator, ptr, style, dest, ...) \
+    D2_INTERPOLATE_EVENT_IMPL(event, true, time, interpolator, ptr, style, dest, __VA_ARGS__)
 
-#define D2_INTERPOLATE_REL(event, time, interpolator, ptr, object, style, dest) \
+#define D2_INTERPOLATE_REL(event, time, interpolator, ptr, style, dest) \
     D2_INTERPOLATE_EVENT_IMPL(event, false, time, interpolator, ptr, object, style, dest)
-#define D2_INTERPOLATE_REL_GEN(event, time, interpolator, ptr, object, style, dest, ...) \
-    D2_INTERPOLATE_EVENT_IMPL(event, false, time, interpolator, ptr, object, style, dest, __VA_ARGS__)
+#define D2_INTERPOLATE_REL_GEN(event, time, interpolator, ptr, style, dest, ...) \
+    D2_INTERPOLATE_EVENT_IMPL(event, false, time, interpolator, ptr, style, dest, __VA_ARGS__)
 
-#define D2_INTERPOLATE_TWOWAY(event, time, interpolator, ptr, object, style, dest) \
-    D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, ptr, object, style, dest)
-#define D2_INTERPOLATE_TWOWAY_GEN(event, time, interpolator, ptr, object, style, dest, ...) \
-    D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, ptr, object, style, dest,  __VA_ARGS__)
+#define D2_INTERPOLATE_TWOWAY(event, time, interpolator, ptr, style, dest) \
+    D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, ptr, style, dest)
+#define D2_INTERPOLATE_TWOWAY_GEN(event, time, interpolator, ptr, style, dest, ...) \
+    D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, ptr, style, dest,  __VA_ARGS__)
 
 // Automatic (i.e. gets all of the variables from the D2_CONTEXT parameters)
 
 #define D2_INTERPOLATE_AUTO(time, interpolator, style, dest) \
-    D2_INTERPOLATE_IMPL(time, interpolator, __ptr, __object_type, style, dest)
+    D2_INTERPOLATE_IMPL(time, interpolator, __ptr, style, dest)
 #define D2_INTERPOLATE_GEN_AUTO(time, interpolator, style, dest, ...) \
-    D2_INTERPOLATE_IMPL(time, interpolator, __ptr, __object_type, style, dest, __VA_ARGS__)
+    D2_INTERPOLATE_IMPL(time, interpolator, __ptr, style, dest, __VA_ARGS__)
 
 #define D2_INTERPOLATE_TOGGLE_AUTO(time, interpolator, style, dest) \
-    D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, __ptr, __object_type, style, dest)
+    D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, __ptr, style, dest)
 #define D2_INTERPOLATE_TOGGLE_GEN_AUTO(time, interpolator, style, dest, ...) \
-    D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, __ptr, __object_type, style, dest, __VA_ARGS__)
-
+    D2_INTERPOLATE_TOGGLE_IMPL(time, interpolator, __ptr, style, dest, __VA_ARGS__)
 
 #define D2_INTERPOLATE_ACQ_AUTO(event, time, interpolator, style, dest) \
-    D2_INTERPOLATE_EVENT_IMPL(event, true, time, interpolator, __ptr, __object_type, style, dest)
+    D2_INTERPOLATE_EVENT_IMPL(event, true, time, interpolator, __ptr, style, dest)
 #define D2_INTERPOLATE_ACQ_GEN_AUTO(event, time, interpolator, style, dest, ...) \
-    D2_INTERPOLATE_EVENT_IMPL(event, true, time, interpolator, __ptr, __object_type, style, dest, __VA_ARGS__)
+    D2_INTERPOLATE_EVENT_IMPL(event, true, time, interpolator, __ptr, style, dest, __VA_ARGS__)
 
 #define D2_INTERPOLATE_REL_AUTO(event, time, interpolator, style, dest) \
-    D2_INTERPOLATE_EVENT_IMPL(event, false, time, interpolator, __ptr, __object_type, style, dest)
+    D2_INTERPOLATE_EVENT_IMPL(event, false, time, interpolator, __ptr, style, dest)
 #define D2_INTERPOLATE_REL_GEN_AUTO(event, time, interpolator, style, dest, ...) \
-    D2_INTERPOLATE_EVENT_IMPL(event, false, time, interpolator, __ptr, __object_type, style, dest, __VA_ARGS__)
+    D2_INTERPOLATE_EVENT_IMPL(event, false, time, interpolator, __ptr, style, dest, __VA_ARGS__)
 
 #define D2_INTERPOLATE_TWOWAY_AUTO(event, time, interpolator, style, dest) \
-    D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, __ptr, __object_type, style, dest)
+    D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, __ptr, style, dest)
 #define D2_INTERPOLATE_TWOWAY_GEN_AUTO(event, time, interpolator, style, dest, ...) \
-    D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, __ptr, __object_type, style, dest,  __VA_ARGS__)
+    D2_INTERPOLATE_EVENT_TWOWAY_IMPL(event, time, interpolator, __ptr, style, dest,  __VA_ARGS__)
 
 #endif // D2_DSL_HPP

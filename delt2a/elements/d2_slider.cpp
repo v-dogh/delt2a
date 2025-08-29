@@ -193,4 +193,13 @@ namespace d2::dx
             buffer.at(0, abs + i) = data::slider_color;
         }
     }
+
+    VerticalSlider::VerticalSlider(
+        const std::string& name,
+        TreeState::ptr state,
+        pptr parent
+        ) : Slider(name, state, parent)
+    {
+        data::slider_background_color = px::foreground{ .v = charset::slider_vertical };
+    }
 }
