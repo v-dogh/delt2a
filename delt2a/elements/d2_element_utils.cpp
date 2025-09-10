@@ -1,4 +1,5 @@
 #include "d2_element_utils.hpp"
+#include "../d2_platform_string.hpp"
 
 namespace d2::dx::impl
 {
@@ -8,73 +9,60 @@ namespace d2::dx::impl
         {
             Element::BoundingBox box{ 0, 0 };
             int x = 0;
-            for (std::size_t i = 0;; i++)
+            for (decltype(auto) it : StringIterator(value))
             {
-                if (i >= value.size() || value[i] == '\n')
+                if (it.size() == 1 && it[0] == '\n')
                 {
-                    box.width = std::max(box.width, x);
-                    x = 0;
+                    box.width = std::max(x, box.width);
                     box.height++;
-                    if (i >= value.size())
-                        break;
-                    continue;
                 }
-                x++;
+                else
+                    x++;
             }
             return box;
         }
         Element::BoundingBox _paragraph_bounding_box(const string& value, int width, int height) noexcept
         {
             Element::BoundingBox box{ 0, 0 };
-            for (std::size_t i = 0; i < value.size();)
+            for (auto it = StringIterator(value); !it.is_end();)
             {
-                while (i < value.size() && std::isspace(value[i]))
+                for (; !it.is_end() && it.is_space(); it.increment())
                 {
-                    if (value[i] == '\n')
-                    {
-                        if (++box.height >= height)
-                            return box;
-                        i++;
-                    }
-                    else
-                        i++;
+                    if (it.is_endline() && (++box.height >= height))
+                        return box;
                 }
-
-                if (i >= value.size())
+                if (it.is_end())
                     break;
 
-                int line_end = i;
-                int last_space = -1;
+                auto lit = it;
+                auto last_space = it.end();
+                int last_space_width = 0;
                 int line_width = 0;
 
-                while (line_end < value.size() && line_width < width)
+                for (; !lit.is_end() && line_width < box.width && !lit.is_endline(); lit.increment())
                 {
-                    char ch = value[line_end];
-                    if (ch == '\n')
-                        break;
-                    if (std::isspace(ch))
-                        last_space = line_end;
-
-                    line_end++;
                     line_width++;
+                    if (lit.is_space())
+                    {
+                        last_space = lit;
+                        last_space_width = line_width;
+                    }
                 }
 
-                if (line_width == width && last_space > int(i))
+                if (line_width == box.width && !last_space.is_end())
                 {
-                    line_end = last_space;
+                    line_width = last_space_width;
+                    lit = last_space;
                 }
 
-                int actual_width = line_end - i;
-                box.width = std::max(box.width, int(line_end - i));
-
+                box.width = std::max(box.width, line_width);
                 if (++box.height >= height)
                     break;
 
-                i = line_end;
-                while (i < value.size() && std::isspace(value[i]) && value[i] != '\n')
-                    i++;
-                if (i < value.size() && value[i] == '\n')
-                    i++;
+                it = lit;
+                for (; !it.is_end() && it.is_space() && !it.is_endline(); it.increment());
+                if (!it.is_end() && it.is_endline())
+                    it.increment();
             }
             return box;
         }
@@ -88,27 +76,13 @@ namespace d2::dx::impl
             PixelBuffer::View buffer
             ) noexcept
         {
-            if (alignment == style::Text::Alignment::Center)
-            {
-                pos.x = pos.x + ((box.width - value.size()) / 2);
-                pos.y = pos.y + ((box.height - 1) / 2);
-            }
-            else if (alignment == style::Text::Alignment::Right)
-            {
-                pos.x = pos.x + (box.width - value.size() - 1);
-            }
-
-            const auto m = std::min(
-                buffer.width() - pos.x,
-                std::min(int(value.size()), box.width)
-                );
-            for (std::size_t i = 0; i < m; i++)
-            {
-                auto& px = buffer.at(pos.x + i, pos.y);
-                color.v = value[i] < 32 ?
-                              char(248) : value[i];
-                px.blend(color);
-            }
+            return _render_paragraph(
+                value,
+                color,
+                alignment,
+                pos, box,
+                buffer
+            );
         }
         void _render_text(
             const string& value,
@@ -119,65 +93,13 @@ namespace d2::dx::impl
             PixelBuffer::View buffer
             ) noexcept
         {
-            const auto absx = pos.x + box.width;
-            const auto absy = pos.y + box.height;
-
-            int x = 0;
-            int y = 0;
-            if (alignment == style::Text::Alignment::Center ||
-                alignment == style::Text::Alignment::Right)
-            {
-                for (std::size_t i = 0; i < value.size();)
-                {
-                    int j = i;
-                    for (; j < value.size() && value[j] != '\n'; j++);
-
-                    const auto xoff = (alignment == style::Text::Alignment::Center) ?
-                                          static_cast<std::size_t>(std::max(0, (box.width - j) / 2)) :
-                                          static_cast<std::size_t>(std::max(0, box.width - j - 1));
-
-                    while (i < value.size() && value[i] != '\n')
-                    {
-                        const auto xp = x + xoff + pos.x;
-                        const auto yp = y + pos.y;
-                        if (yp >= absy || xp >= absx)
-                            break;
-                        auto& px = buffer.at(xp, yp);
-                        color.v = value[i] < 32 ?
-                                      char(248) : value[i];
-                        px.blend(color);
-                        x++;
-                        i++;
-                    }
-
-                    y++;
-                    x = 0;
-                }
-            }
-            else
-            {
-                for (std::size_t i = 0; i < value.size(); i++)
-                {
-                    if (value[i] == '\n')
-                    {
-                        y++;
-                        x = 0;
-                        continue;
-                    }
-                    else
-                    {
-                        const auto xp = x + pos.x;
-                        const auto yp = y + pos.y;
-                        if (yp >= absy || xp >= absx)
-                            break;
-                        auto& px = buffer.at(xp, yp);
-                        color.v = value[i] < 32 ?
-                                      char(248) : value[i];
-                        px.blend(color);
-                        x++;
-                    }
-                }
-            }
+            return _render_paragraph(
+                value,
+                color,
+                alignment,
+                pos, box,
+                buffer
+            );
         }
         void _render_paragraph(
             const string& value,
@@ -189,78 +111,63 @@ namespace d2::dx::impl
             ) noexcept
         {
             int y = pos.y;
-            for (std::size_t i = 0; i < value.size();)
+            for (auto it = StringIterator(value); !it.is_end();)
             {
-                while (i < value.size() && std::isspace(value[i]))
+                for (; !it.is_end() && it.is_space(); it.increment())
                 {
-                    if (value[i] == '\n')
-                    {
-                        if (++y >= box.height)
-                            return;
-                        i++;
-                    }
-                    else
-                        i++;
+                    if (it.is_endline() && (++y >= box.height))
+                        return;
                 }
-
-                if (i >= value.size())
+                if (it.is_end())
                     break;
 
-                int line_end = i;
-                int last_space = -1;
+                auto lit = it;
+                auto last_space = it.end();
+                int last_space_width = 0;
                 int line_width = 0;
 
-                while (line_end < value.size() && line_width < box.width)
+                for (; !lit.is_end() && line_width < box.width && !lit.is_endline(); lit.increment())
                 {
-                    char ch = value[line_end];
-                    if (ch == '\n')
-                        break;
-                    if (std::isspace(ch))
-                        last_space = line_end;
-
-                    line_end++;
                     line_width++;
+                    if (lit.is_space())
+                    {
+                        last_space = lit;
+                        last_space_width = line_width;
+                    }
                 }
 
-                if (line_width == box.width && last_space > int(i))
+                if (line_width == box.width && !last_space.is_end())
                 {
-                    line_end = last_space;
+                    line_width = last_space_width;
+                    lit = last_space;
                 }
 
                 int basis = 0;
-                int actual_width = line_end - i;
                 if (alignment == style::Text::Alignment::Center)
                 {
-                    basis = pos.x + ((box.width - actual_width) / 2);
+                    basis = pos.x + ((box.width - line_width) / 2);
                 }
                 else if (alignment == style::Text::Alignment::Right)
                 {
-                    basis = pos.x + (box.width - actual_width - 1);
+                    basis = pos.x + (box.width - line_width - 1);
                 }
 
-                const auto m = std::min(
-                    int(value.size() - i),
-                    std::min(int(box.width - basis), actual_width)
-                    );
-                for (std::size_t j = 0; j < m; j++)
+                const auto m = std::min(int(box.width - basis), line_width);
+                for (std::size_t j = 0; !it.is_end() && j < m; it.increment())
                 {
-                    const auto off = i + j;
                     if (pos.x + basis + j >= buffer.width())
                         break;
                     auto& px = buffer.at(pos.x + basis + j, pos.y + y);
-                    color.v = value[off] < 32 ?
-                                  char(248) : value[off];
+                    color.v = global_extended_code_page.write(it.current());
                     px.blend(color);
                 }
-
                 if (++y >= box.height)
                     break;
 
-                i = line_end;
-                while (i < value.size() && std::isspace(value[i]) && value[i] != '\n')
-                    i++;
-                if (i < value.size() && value[i] == '\n')
-                    i++;
+                it = lit;
+                for (; !it.is_end() && it.is_space() && !it.is_endline(); it.increment());
+                if (!it.is_end() && it.is_endline())
+                    it.increment();
             }
         }
     }

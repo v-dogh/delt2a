@@ -15,7 +15,7 @@ namespace d2::ctm
 			D2_STYLE(SliderColor, D2_VAR(WidgetTheme, wg_bg_button()))
 			D2_STYLE(BackgroundColor, D2_VAR(WidgetTheme, wg_bg_button()))
 			D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
-		D2_STYLESHEET_END(rgba_picker)
+        D2_STYLESHEET_END
 	}
 
 	ColorPicker::eptr<ColorPicker> ColorPicker::_core(TreeState::ptr state)

@@ -2,7 +2,7 @@
 
 namespace d2
 {
-#   if D2_LOCALE_MODE == 32
+#   if D2_LOCALE_MODE == UTF8
         AutoValueType::AutoValueType(const std::string& ext) noexcept :
             _value(global_extended_code_page.write(ext)) {}
         AutoValueType::AutoValueType(const char* ext) noexcept :
@@ -24,13 +24,13 @@ namespace d2
 
     void ExtendedCodePage::activate_thread() noexcept
     {
-#       if D2_LOCALE_MODE == 32
+#       if D2_LOCALE_MODE == UTF8
             global_extended_code_page.activate();
 #       endif
     }
     void ExtendedCodePage::deactivate_thread() noexcept
     {
-#       if D2_LOCALE_MODE == 32
+#       if D2_LOCALE_MODE == UTF8
         global_extended_code_page.deactivate();
 #       endif
     }

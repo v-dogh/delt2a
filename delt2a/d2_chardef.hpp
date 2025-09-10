@@ -51,12 +51,12 @@ namespace d2
 	};
 
 	template<>
-	struct Charset<Encoding::Unicode>
+	struct Charset<Encoding::Utf8>
 	{
 		static constexpr auto top_fix = false;
 		static constexpr auto corners = true;
-        static constexpr auto box_top_bar = "▁";
-        static constexpr auto box_top_drag_spot = "▃";
+        static constexpr auto box_top_bar = ".";
+        static constexpr auto box_top_drag_spot = ",";
         static constexpr auto box_tr_corner_rough = "┐";
         static constexpr auto box_tl_corner_rough = "┌";
         static constexpr auto box_br_corner_rough = "┘";

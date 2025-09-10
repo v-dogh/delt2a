@@ -172,7 +172,8 @@ namespace d2
     {
         foreach_internal([&](ptr elem)
         {
-            elem->_signal_context_change_sub(type, prop, element);
+            internal::ElementView::from(elem)
+                .signal_context_change_sub(type, prop, element);
         });
     }
     void ParentElement::_state_change_impl(State state, bool value)

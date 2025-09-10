@@ -11,10 +11,10 @@
 #define D2_DEPENDENCY_LINK(dname, name) virtual decltype(name)& dname() override { return name; }
 
 #define D2_EMBED_NAMED(_type_, _name_, ...) { \
-        auto __uptr = __ptr; \
-        auto __nsrc = _type_::build_sub(#_name_, __uptr->state(), __state->root() __VA_OPT__(,) __VA_ARGS__); \
-        auto __nptr = _type_::create_at(__nsrc->core(), __nsrc); \
-        __nsrc->swap_in(); }
+    auto __uptr = __ptr; \
+    auto __nsrc = _type_::build_sub(#_name_, __uptr->state(), __state->root() __VA_OPT__(,) __VA_ARGS__); \
+    auto __nptr = _type_::create_at(__nsrc->core(), __nsrc); \
+    __nsrc->swap_in(); }
 #define D2_EMBED(_type_, ...) D2_EMBED_NAMED(_type_,, __VA_ARGS__)
 #define D2_EMBED_ELEM_NAMED(_type_, _name_, ...) \
     __ptr.asp()->override(::d2::Element::make<_type_>( \
@@ -50,12 +50,12 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 #define D2_TREE_END return __ptr; }};
 
 #define D2_CREATE_OBJECT(_type_, ...) { \
-        using __object_type = _type_; \
-        auto& __uptr = __ptr; \
-        auto  __nptr = ::d2::Element::make<_type_>(#__VA_ARGS__, __state, __uptr.asp()); \
-        auto  __ptr  = ::d2::TypedTreeIter<_type_>(__nptr); \
-        auto& state  = __state; \
-        auto  ptr    = ::d2::TypedTreeIter<_type_>(__nptr);
+    using __object_type = _type_; \
+    auto& __uptr = __ptr; \
+    auto  __nptr = ::d2::Element::make<_type_>(#__VA_ARGS__, __state, __uptr.asp()); \
+    auto  __ptr  = ::d2::TypedTreeIter<_type_>(__nptr); \
+    auto& state  = __state; \
+    auto  ptr    = ::d2::TypedTreeIter<_type_>(__nptr);
 #define D2_STYLE(_prop_, ...) __ptr.template as<__object_type>()->template set<__object_type::_prop_>(__VA_ARGS__);
 #define D2_REQUIRE(...) __ptr.template as<__object_type>()->constraint(__VA_ARGS__);
 #define D2_ELEM(_type_, ...) D2_CREATE_OBJECT(_type_, __VA_ARGS__)
@@ -80,7 +80,7 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
             auto  __uptr = ::d2::TypedTreeIter<ParentElement>(__ptr->parent()); \
             auto& state  = __state; \
             auto& ptr    = __ptr;
-#define D2_STYLESHEET_END(...) }};
+#define D2_STYLESHEET_END }};
 #define D2_STYLES_APPLY_MANUAL(name, ptr, state) name::apply(::d2::TypedTreeIter(ptr), state);
 #define D2_STYLES_APPLY(name) D2_STYLES_APPLY_MANUAL(name, __ptr, __state)
 

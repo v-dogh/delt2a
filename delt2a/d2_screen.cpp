@@ -188,11 +188,11 @@ namespace d2
     }
     void Screen::_trigger_focused(IOContext::Event ev)
     {
-        _focused.as()->_trigger_event(ev);
+        internal::ElementView::from(_focused).trigger_event(ev);
     }
     void Screen::_trigger_hovered(IOContext::Event ev)
     {
-        _targetted.as()->_trigger_event(ev);
+        internal::ElementView::from(_targetted).trigger_event(ev);
     }
     void Screen::_trigger_events()
     {
@@ -249,9 +249,10 @@ namespace d2
         const auto is_height = pheight != height;
         if (is_width || is_height)
         {
+            auto i = internal::ElementView::from(b);
             b->override_dimensions(width, height);
-            b->_signal_write(Element::WriteType::Style);
-            b->_signal_context_change(
+            i.signal_write(Element::WriteType::Style);
+            i.signal_context_change(
                 (Element::WriteType::LayoutWidth * is_width) |
                 (Element::WriteType::LayoutHeight * is_height)
             );
@@ -365,7 +366,7 @@ namespace d2
     {
         return _ctx;
     }
-    Screen::eptr Screen::root() const noexcept
+    TypedTreeIter<ParentElement> Screen::root() const noexcept
     {
         if (_current == nullptr)
             return nullptr;

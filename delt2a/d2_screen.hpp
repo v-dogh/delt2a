@@ -97,7 +97,7 @@ namespace d2
         virtual ~Screen() = default;
 
         IOContext::ptr context() const noexcept;
-        eptr root() const noexcept;
+        TypedTreeIter<ParentElement> root() const noexcept;
 
         // Model Management
 

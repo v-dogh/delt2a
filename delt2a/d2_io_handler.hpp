@@ -82,8 +82,7 @@ namespace d2
 		// Additional system wrappers (Optional ones)
 		namespace ext
 		{
-			class SystemClipboard :
-				public impl::ComponentUIDGenerator<SystemClipboard>
+            class SystemClipboard : public impl::ComponentUIDGenerator<SystemClipboard>
 			{
 			public:
 				using ComponentUIDGenerator::ComponentUIDGenerator;
@@ -93,18 +92,19 @@ namespace d2
 				virtual string paste() = 0;
 				virtual bool empty() = 0;
 			};
-			class SystemAudio :
-				public impl::ComponentUIDGenerator<SystemAudio>
+            class SystemAudio : public impl::ComponentUIDGenerator<SystemAudio>
 			{
 			public:
 				using ComponentUIDGenerator::ComponentUIDGenerator;
 			};
-			class SystemNotifications :
-				public impl::ComponentUIDGenerator<SystemNotifications>
+            class SystemNotifications : public impl::ComponentUIDGenerator<SystemNotifications>
 			{
 			public:
 				using ComponentUIDGenerator::ComponentUIDGenerator;
-			};
+
+                virtual void notify(const std::string& title, const std::string& content, const std::vector<unsigned char> icon = {}) = 0;
+                virtual void remind(std::chrono::system_clock::time_point when, const std::string& title, const std::string& content, const std::vector<unsigned char> icon = {}) = 0;
+            };
 
 			class LocalSystemClipboard : public SystemClipboard
 			{
@@ -138,8 +138,7 @@ namespace d2
 		}
 
 		// Generic base for system input
-		class SystemInput :
-			public impl::ComponentUIDGenerator<SystemInput>
+        class SystemInput : public impl::ComponentUIDGenerator<SystemInput>
 		{
 		public:
 			using keytype = short;
@@ -323,8 +322,7 @@ namespace d2
 		// As such, an image has to occupy at least (sizeof(std::size_t) / sizeof(PixelBase) + 1) pixels (contiguous)
 		// The escape value for images is 0x10
 		// Subsequent lines of the image should use 0x11 and also store the hash so they can be skipped as well
-		class SystemOutput :
-			public impl::ComponentUIDGenerator<SystemOutput>
+        class SystemOutput : public impl::ComponentUIDGenerator<SystemOutput>
 		{
 		public:
 			// Manages an RGBA image resource with 8-bit components
@@ -388,6 +386,13 @@ namespace d2
 		using audio = ext::SystemAudio;
 		using notifications = ext::SystemNotifications;
 	}
+    namespace input
+    {
+        using mouse = sys::SystemInput::MouseKey;
+        using special = sys::SystemInput::SpecialKey;
+        using mode = sys::SystemInput::KeyMode;
+        constexpr auto key = sys::SystemInput::key;
+    }
 
 	class IOContext : public std::enable_shared_from_this<IOContext>
 	{
@@ -573,7 +578,7 @@ namespace d2
 		class ConcreteEventListenerState : public EventListenerState
 		{
 		public:
-			using callback = std::function<void(EventListener, IOContext::ptr, Argv...)>;
+            using callback = std::function<void(EventListener, Argv...)>;
 		private:
 			callback _func{ nullptr };
 		public:
@@ -585,7 +590,7 @@ namespace d2
 			void invoke(Argvv&&... args)
 			{
 				if (_func != nullptr && state() == State::Active)
-					_func(EventListener(shared_from_this()), _obj.lock(), std::forward<Argvv>(args)...);
+                    _func(EventListener(shared_from_this()), std::forward<Argvv>(args)...);
 			}
 		};
 	private:

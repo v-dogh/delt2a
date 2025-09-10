@@ -86,7 +86,7 @@ namespace d2
         ExtendedCodePage& operator=(ExtendedCodePage&&) = default;
     };
 
-#   if D2_LOCALE_MODE == 32
+#   if D2_LOCALE_MODE == UTF8
         inline thread_local ExtendedCodePage global_extended_code_page{};
 #   endif
 }

@@ -115,7 +115,8 @@ namespace d2::ctm
 						.set<VerticalSlider::SliderColor>(theme.wg_bg_button())
 						.set<VerticalSlider::BackgroundColor>(theme.wg_bg_button());
 
-					scrollbar_->_signal_write(Masked);
+                    internal::ElementView::from(scrollbar_)
+                        .signal_write(Masked);
 				}
 			}
 			else if (state == State::Clicked && value)
@@ -217,7 +218,8 @@ namespace d2::ctm
 			const auto full_height = use_filtered_ ? filtered_view_.size() : entries_.size();
             scrollbar_->slider_width = full_height ? ((float(height) / full_height) * height) : 0;
             scrollbar_->max = (use_filtered_ ? filtered_view_.size() : entries_.size()) - box().height;
-            scrollbar_->_signal_write(WriteType::Style);
+            internal::ElementView::from(scrollbar_)
+                .signal_write(WriteType::Style);
 		}
 		virtual void _frame_impl(PixelBuffer::View buffer) noexcept override
 		{
@@ -479,7 +481,7 @@ namespace d2::ctm
 						folder->filter(path);
 						_core(state)->_update_results();
 					})
-					D2_STYLES_APPLY(impl::button_react)
+                    D2_STYLES_APPLY(button_react)
 				D2_ELEM_END
 				D2_ELEM(Button)
 					D2_STYLE(Value, "set path")
@@ -492,7 +494,7 @@ namespace d2::ctm
 						if (std::filesystem::exists(path))
 							_core(state)->setpath(path);
 					})
-					D2_STYLES_APPLY(impl::button_react)
+                    D2_STYLES_APPLY(button_react)
 				D2_ELEM_END
                 D2_ELEM(Separator)
                     D2_STYLE(Width, 1.0_pc)

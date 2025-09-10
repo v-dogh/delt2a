@@ -51,10 +51,12 @@ namespace d2::dx
                     offset_ = abs;
                     _signal_write(WriteType::Style);
                     foreach([](TreeIter ptr) {
-                        ptr->_signal_write(WriteType::LayoutYPos);
+                        internal::ElementView::from(ptr)
+                            .signal_write(WriteType::LayoutYPos);
                     });
                 };
-                scrollbar_->_signal_write(WriteType::Masked);
+                internal::ElementView::from(scrollbar_)
+                    .signal_write(WriteType::Masked);
             }
         }
     }
@@ -85,7 +87,8 @@ namespace d2::dx
             written = true;
         }
         if (written)
-            scrollbar_->_signal_write(WriteType::Style);
+            internal::ElementView::from(scrollbar_)
+                .signal_write(WriteType::Style);
     }
 
     TypedTreeIter<VerticalSlider> ScrollBox::scrollbar() const noexcept
