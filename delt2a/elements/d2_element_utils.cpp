@@ -26,7 +26,7 @@ namespace d2::dx::impl
             Element::BoundingBox box{ 0, 0 };
             for (auto it = StringIterator(value); !it.is_end();)
             {
-                for (; !it.is_end() && it.is_space(); it.increment())
+                for (; !it.is_end() && it.is_space() || it.is_endline(); it.increment())
                 {
                     if (it.is_endline() && (++box.height >= height))
                         return box;
@@ -39,7 +39,7 @@ namespace d2::dx::impl
                 int last_space_width = 0;
                 int line_width = 0;
 
-                for (; !lit.is_end() && line_width < box.width && !lit.is_endline(); lit.increment())
+                for (; !lit.is_end() && line_width < width && !lit.is_endline(); lit.increment())
                 {
                     line_width++;
                     if (lit.is_space())
@@ -49,7 +49,7 @@ namespace d2::dx::impl
                     }
                 }
 
-                if (line_width == box.width && !last_space.is_end())
+                if (line_width > width && !last_space.is_end())
                 {
                     line_width = last_space_width;
                     lit = last_space;
@@ -61,8 +61,6 @@ namespace d2::dx::impl
 
                 it = lit;
                 for (; !it.is_end() && it.is_space() && !it.is_endline(); it.increment());
-                if (!it.is_end() && it.is_endline())
-                    it.increment();
             }
             return box;
         }
@@ -110,10 +108,10 @@ namespace d2::dx::impl
             PixelBuffer::View buffer
             ) noexcept
         {
-            int y = pos.y;
+            int y = 0;
             for (auto it = StringIterator(value); !it.is_end();)
             {
-                for (; !it.is_end() && it.is_space(); it.increment())
+                for (; !it.is_end() && it.is_space() || it.is_endline(); it.increment())
                 {
                     if (it.is_endline() && (++y >= box.height))
                         return;
@@ -136,7 +134,7 @@ namespace d2::dx::impl
                     }
                 }
 
-                if (line_width == box.width && !last_space.is_end())
+                if (line_width > box.width && !last_space.is_end())
                 {
                     line_width = last_space_width;
                     lit = last_space;
@@ -153,21 +151,19 @@ namespace d2::dx::impl
                 }
 
                 const auto m = std::min(int(box.width - basis), line_width);
-                for (std::size_t j = 0; !it.is_end() && j < m; it.increment())
+                for (std::size_t j = 0; !it.is_end() && j < m; it.increment(), j++)
                 {
                     if (pos.x + basis + j >= buffer.width())
                         break;
                     auto& px = buffer.at(pos.x + basis + j, pos.y + y);
-                    color.v = global_extended_code_page.write(it.current());
                     px.blend(color);
+                    px.v = global_extended_code_page.write(it.current());
                 }
                 if (++y >= box.height)
                     break;
 
                 it = lit;
                 for (; !it.is_end() && it.is_space() && !it.is_endline(); it.increment());
-                if (!it.is_end() && it.is_endline())
-                    it.increment();
             }
         }
     }

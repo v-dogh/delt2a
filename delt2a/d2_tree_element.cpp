@@ -455,15 +455,19 @@ namespace d2
             case Layout::X:
                 if (!(_internal_state & PositionXUpdated))
                     parent()->layout_for(Layout::X, shared_from_this());
+                break;
             case Layout::Y:
                 if (!(_internal_state & PositionYUpdated))
                     parent()->layout_for(Layout::Y, shared_from_this());
+                break;
             case Layout::Width:
                 if (!(_internal_state & DimensionsWidthUpdated))
                     parent()->layout_for(Layout::Width, shared_from_this());
+                break;
             case Layout::Height:
                 if (!(_internal_state & DimensionsHeightUpdated))
                     parent()->layout_for(Layout::Height, shared_from_this());
+                break;
         }
         return _layout.get(type);
     }

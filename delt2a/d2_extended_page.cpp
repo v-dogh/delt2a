@@ -45,6 +45,8 @@ namespace d2
     }
     standard_value_type ExtendedCodePage::write(std::string_view value) noexcept
     {
+        if (value.size() == 1)
+            return value[0];
         auto str = std::string(value);
         if (auto f = _map.find(str);
             f != _map.end())

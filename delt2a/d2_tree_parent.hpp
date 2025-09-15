@@ -77,7 +77,6 @@ namespace d2
             DynamicIterator& operator=(const DynamicIterator& copy) noexcept;
             DynamicIterator& operator=(DynamicIterator&&) noexcept = default;
         };
-    protected:
         enum class BorderType
         {
             Top,
@@ -85,6 +84,7 @@ namespace d2
             Left,
             Right
         };
+    protected:
 
         virtual void _layout_for_impl(enum Layout, cptr) const;
 
@@ -168,6 +168,8 @@ namespace d2
         {
             _remove_impl(ptr);
         }
+
+        int border_for(BorderType type, cptr ptr) const noexcept;
 
         virtual DynamicIterator begin() noexcept { return nullptr; }
         virtual DynamicIterator end() noexcept { return nullptr; }

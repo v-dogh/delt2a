@@ -82,7 +82,19 @@ namespace d2
 			return static_cast<Type*>(this);
 		}
 	};
-
+    template<typename... Argv>
+    struct TupTreeState : public TreeState
+    {
+        std::tuple<Argv...> params;
+        TupTreeState(
+            std::shared_ptr<Screen> src,
+            std::shared_ptr<IOContext> ctx,
+            std::shared_ptr<ParentElement> rptr,
+            std::shared_ptr<ParentElement> coreptr,
+            Argv... args
+            ) : TreeState(src, ctx, rptr, coreptr), params(std::move(args...))
+        {}
+    };
 } // d2
 
 #endif // D2_SCREEN_FRWD_HPP

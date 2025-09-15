@@ -149,17 +149,15 @@ namespace d2::dx
         return std::clamp(((float(abs) / _aligned_width()) * range) + data::min, data::min, data::max);
     }
 
-    void Slider::reset_absolute(int value) noexcept
+    void Slider::reset_absolute(float value) noexcept
     {
-        _slider_pos = _absolute_to_relative(value);
+        _slider_pos = value;
         _submit();
         _signal_write(WriteType::Style);
     }
     void Slider::reset_relative(float value) noexcept
     {
-        _slider_pos = std::clamp(value, data::min, data::max);
-        _submit();
-        _signal_write(WriteType::Style);
+        reset_absolute(data::min + (data::max - data::min) * value);
     }
 
     float Slider::absolute_value() noexcept

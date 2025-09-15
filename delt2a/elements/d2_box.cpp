@@ -19,7 +19,7 @@ namespace d2::dx
             }
             else
             {
-                const auto xpos = it->layout(Element::Layout::X);
+                const auto xpos = it->layout(Element::Layout::X) - (bw * it->getzindex() < overlap);
                 const auto width = it->layout(Element::Layout::Width);
                 perfect = std::max(perfect, xpos + width);
             }
@@ -43,7 +43,7 @@ namespace d2::dx
             }
             else
             {
-                const auto ypos = it->layout(Element::Layout::Y);
+                const auto ypos = it->layout(Element::Layout::Y) - (bw * it->getzindex() < overlap);
                 const auto height = it->layout(Element::Layout::Height);
                 perfect = std::max(perfect, ypos + height);
             }

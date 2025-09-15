@@ -12,7 +12,7 @@ namespace d2
         struct Slider
         {
             float min{ 0.f };
-            float max{ 0.f };
+            float max{ 100.f };
             float step{ 1.f };
             PixelForeground slider_background_color{ .v = charset::slider_horizontal };
             Pixel slider_color{ .r = 255, .g = 255, .b = 255, .v = ' ' };
@@ -83,7 +83,7 @@ namespace d2
                 pptr parent
             );
 
-            void reset_absolute(int value = 0) noexcept;
+            void reset_absolute(float value = 0) noexcept;
             void reset_relative(float value = 0) noexcept;
 
             float absolute_value() noexcept;

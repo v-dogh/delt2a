@@ -181,7 +181,7 @@ namespace d2
                 _current = t;
                 _current_name = Set::name;
 
-                Set::create_at(t->state->root(), t->state);
+                Set::create_at(t->state->root(), std::static_pointer_cast<typename Set::__state_type>(t->state));
 
                 _current_name = "";
                 _current = nullptr;

@@ -44,7 +44,7 @@ namespace d2::dx
                 scrollbar_->setstate(State::Swapped, false);
                 scrollbar_->zindex = 5;
                 scrollbar_->x = 0.0_pxi;
-                scrollbar_->y = 0.0_center;
+                scrollbar_->y = 0.0_px;
                 scrollbar_->height = 1.0_pc;
                 scrollbar_->on_change = [this](auto ptr, auto, auto abs)
                 {

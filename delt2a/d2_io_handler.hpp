@@ -80,62 +80,237 @@ namespace d2
 		}
 
 		// Additional system wrappers (Optional ones)
-		namespace ext
-		{
+        namespace ext
+        {
             class SystemClipboard : public impl::ComponentUIDGenerator<SystemClipboard>
-			{
-			public:
-				using ComponentUIDGenerator::ComponentUIDGenerator;
+            {
+            public:
+                using ComponentUIDGenerator::ComponentUIDGenerator;
 
-				virtual void clear() = 0;
-				virtual void copy(const string& value) = 0;
-				virtual string paste() = 0;
-				virtual bool empty() = 0;
-			};
+                virtual void clear() = 0;
+                virtual void copy(const string& value) = 0;
+                virtual string paste() = 0;
+                virtual bool empty() = 0;
+            };
             class SystemAudio : public impl::ComponentUIDGenerator<SystemAudio>
-			{
-			public:
-				using ComponentUIDGenerator::ComponentUIDGenerator;
-			};
+            {
+            public:
+                enum class Event
+                {
+                    Activate,
+                    Deactivate,
+                    Create,
+                    Destroy
+                };
+                enum class Device
+                {
+                    Input,
+                    Output,
+                };
+                enum class Format
+                {
+                    PCM16,
+                    PCM32,
+                    Float32,
+                    Float64,
+                };
+                struct FormatInfo
+                {
+                    Format format{ Format::Float32 };
+                    std::size_t channels{ 1 };
+                    std::size_t sample_rate{ 48'000 };
+                };
+                struct DeviceName
+                {
+                    std::string id{ "" };
+                    std::string name{ "Unknown" };
+                };
+
+                class Stream
+                {
+                private:
+                    std::span<float> _data{};
+                    std::size_t _total{ 0 };
+                    std::size_t _offset{ 0 };
+                    const FormatInfo* _format{ nullptr };
+                public:
+                    Stream(std::span<float> data, std::size_t offset, std::size_t total, const FormatInfo* format) :
+                        _data(data), _format(format), _offset(offset), _total(total) {}
+                    Stream(const Stream&) = default;
+                    Stream(Stream&&) = default;
+
+                    void apply(auto&& func, std::size_t channel, float start = 0.0f, float end = 1.f)
+                    {
+                        const auto channel_size = _data.size() / _format->channels;
+                        const auto astart = std::size_t(start * channel_size);
+                        const auto aend = std::size_t(end * channel_size);
+                        for (std::size_t i = astart; i < aend; i += _format->channels)
+                            _data[i + channel] = func(_data[i + channel], float(i + _offset) / _total);
+                    }
+                    void apply(auto&& func, float start = 0.0f, float end = 1.f)
+                    {
+                        const auto astart = std::size_t(start * _data.size());
+                        const auto aend = std::size_t(end * _data.size());
+                        const auto dist = aend - astart;
+                        if (_format->channels == 2)
+                        {
+                            for (std::size_t i = astart; i < aend; i += 2)
+                            {
+                                _data[i] = func(_data[i], float(i + _offset) / _total);
+                                _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
+                            }
+                        }
+                        else if (_format->channels == 4)
+                        {
+                            for (std::size_t i = astart; i < aend; i += 4)
+                            {
+                                _data[i] = func(_data[i], float(i + _offset) / _total);
+                                _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
+                                _data[i + 2] = func(_data[i + 2], float(i + 2 + _offset) / _total);
+                                _data[i + 3] = func(_data[i + 3], float(i + 3 + _offset) / _total);
+                            }
+                        }
+                        else
+                        {
+                            for (std::size_t i = astart; i < aend; i++)
+                                _data[i] = func(_data[i], float(i + _offset) / _total);
+                        }
+                    }
+
+                    const FormatInfo& info() const noexcept
+                    {
+                        return *_format;
+                    }
+                    std::size_t size() const noexcept
+                    {
+                        return _total / _format->channels;
+                    }
+                    std::size_t chunk() const noexcept
+                    {
+                        return _data.size() / _format->channels;
+                    }
+
+                    float& at(std::size_t idx, std::size_t channel) const noexcept
+                    {
+                        return _data[(idx * _format->channels) + channel];
+                    }
+                    float& at(float idx, std::size_t channel) const noexcept
+                    {
+                        return _data[(idx * _format->channels) + channel];
+                    }
+
+                    Stream& operator=(const Stream&) = default;
+                    Stream& operator=(Stream&&) = default;
+                };
+                struct FilterPipeline
+                {
+                    std::vector<std::function<void(Stream)>> transforms;
+
+                    FilterPipeline() = default;
+                    FilterPipeline(std::function<void(Stream)> callback)
+                    {
+                        transforms.push_back(std::move(callback));
+                    }
+
+                    FilterPipeline operator|(std::function<void(Stream)> callback) const noexcept
+                    {
+                        FilterPipeline pipeline;
+                        pipeline.transforms.reserve(4);
+                        pipeline.transforms.push_back(std::move(callback));
+                        return pipeline;
+                    }
+                    FilterPipeline& operator|(std::function<void(Stream)> callback) noexcept
+                    {
+                        transforms.push_back(std::move(callback));
+                        return *this;
+                    }
+                } static inline const signal;
+            private:
+                struct DeviceData
+                {
+                    FilterPipeline filter;
+                    std::function<void(const DeviceName&, Event)> listener;
+                };
+                std::array<DeviceData, 2> _device_data{};
+            private:
+                std::shared_mutex _device_mtx{};
+            protected:
+                std::unique_lock<std::shared_mutex> _lock_device_write();
+                std::shared_lock<std::shared_mutex> _lock_device_read();
+
+                std::size_t _stream_normalize_required(std::span<const unsigned char> data, FormatInfo format);
+                void _stream_normalize(std::span<float> out, std::span<const unsigned char> data, FormatInfo format);
+
+                void _run_device_filter(Device dev, Stream stream);
+                void _trigger_device_event(Device dev, Event ev, const DeviceName&);
+            public:         
+                static constexpr std::size_t sample_size(Format format) noexcept
+                {
+                    switch (format)
+                    {
+                    case SystemAudio::Format::PCM16: return 16 / 8;
+                    case SystemAudio::Format::PCM32: return 32 / 8;
+                    case SystemAudio::Format::Float32: return 32 / 8;
+                    case SystemAudio::Format::Float64: return 64 / 8;
+                    }
+                }
+
+                using ComponentUIDGenerator::ComponentUIDGenerator;
+
+                virtual void flush(Device dev) = 0;
+                virtual void record(std::function<void(std::span<const unsigned char>)> stream) = 0;
+                virtual void transmit(std::span<const unsigned char> stream, FormatInfo format, FilterPipeline filter = {}) = 0;
+                virtual void transmit(std::vector<unsigned char> stream, FormatInfo format, FilterPipeline filter = {}) = 0;
+                virtual void transmit(std::chrono::seconds time, FilterPipeline filter = {}) = 0;
+                virtual void deactivate(Device dev) = 0;
+                virtual void activate(Device dev, const std::string& name = "", std::size_t sample_rate = 48'000, std::size_t channels = 2) = 0;
+                virtual DeviceName active(Device dev) = 0;
+                virtual FormatInfo format(Device dev) = 0;
+                virtual std::vector<DeviceName> enumerate(Device dev) = 0;
+
+                void filter(Device dev, std::function<void(Stream)> callback) { filter(dev, FilterPipeline(callback)); }
+                void filter(Device dev, FilterPipeline filter);
+                void watch(Device dev, std::function<void(const DeviceName&, Event)> callback);
+            };
             class SystemNotifications : public impl::ComponentUIDGenerator<SystemNotifications>
-			{
-			public:
-				using ComponentUIDGenerator::ComponentUIDGenerator;
+            {
+            public:
+                using ComponentUIDGenerator::ComponentUIDGenerator;
 
                 virtual void notify(const std::string& title, const std::string& content, const std::vector<unsigned char> icon = {}) = 0;
                 virtual void remind(std::chrono::system_clock::time_point when, const std::string& title, const std::string& content, const std::vector<unsigned char> icon = {}) = 0;
             };
 
-			class LocalSystemClipboard : public SystemClipboard
-			{
-			private:
-				std::shared_mutex mtx_{};
-				string value_{};
-			public:
-				using SystemClipboard::SystemClipboard;
+            class LocalSystemClipboard : public SystemClipboard
+            {
+            private:
+                std::shared_mutex mtx_{};
+                string value_{};
+            public:
+                using SystemClipboard::SystemClipboard;
 
-				virtual void clear() override
-				{
-					std::unique_lock lock(mtx_);
-					value_.clear();
-				}
-				virtual void copy(const string& value) override
-				{
-					std::unique_lock lock(mtx_);
-					value_ = value;
-				}
-				virtual string paste() override
-				{
-					std::shared_lock lock(mtx_);
-					return value_;
-				}
-				virtual bool empty() override
-				{
-					std::shared_lock lock(mtx_);
-					return value_.empty();
-				}
-			};
-		}
+                virtual void clear() override
+                {
+                    std::unique_lock lock(mtx_);
+                    value_.clear();
+                }
+                virtual void copy(const string& value) override
+                {
+                    std::unique_lock lock(mtx_);
+                    value_ = value;
+                }
+                virtual string paste() override
+                {
+                    std::shared_lock lock(mtx_);
+                    return value_;
+                }
+                virtual bool empty() override
+                {
+                    std::shared_lock lock(mtx_);
+                    return value_.empty();
+                }
+            };
+        }
 
 		// Generic base for system input
         class SystemInput : public impl::ComponentUIDGenerator<SystemInput>

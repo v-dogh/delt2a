@@ -987,7 +987,7 @@ namespace d2::style
 
         string text{};
         Alignment alignment{ Alignment::Center };
-        unsigned char text_options{ 0x00 };
+        unsigned char text_options{ Paragraph };
 
         template<uai_property Property>
         auto at_style()
@@ -1006,7 +1006,7 @@ namespace d2::style
     template<std::size_t PropBase>
     struct IText : Text, InterfaceHelper<IText, PropBase, 5>
     {
-        using data = Layout;
+        using data = Text;
         enum Property : uai_property
         {
             Value = PropBase,
