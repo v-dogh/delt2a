@@ -30,11 +30,7 @@ namespace d2::dx
                 (data::width.getunits() == Unit::Auto ||
                  data::height.getunits() == Unit::Auto))
         {
-            const auto bw = (data::container_options & ContainerOptions::EnableBorder) ?
-                            resolve_units(data::border_width) : 0;
-            _text_dimensions = TextHelper::_text_bounding_box(data::text);
-            _text_dimensions.width += (bw * 2);
-            _text_dimensions.height += (bw * 2);
+            _text_dimensions = TextHelper::_paragraph_bounding_box(data::text);
         }
     }
     void Button::_state_change_impl(State state, bool value)
@@ -82,7 +78,7 @@ namespace d2::dx
             pos.x = bw;
             pos.y = bw;
         }
-        TextHelper::_render_text(
+        TextHelper::_render_paragraph(
             data::text,
             data::foreground_color,
             style::Text::Alignment::Center,

@@ -41,10 +41,10 @@ namespace d2::ctm
 			data::set<VirtualBox::BorderVerticalColor>(theme.wg_border_vertical());
 			data::set<VirtualBox::FocusedColor>(theme.wg_hbg_button());
 			data::set<VirtualBox::BackgroundColor>(style::dynavar<[](const auto& value) {
-				return value.alpha(0.3f);
+                return value.alpha(0.3f);
 			}>(theme.wg_bg_secondary()));
-			data::set<VirtualBox::BarColor>(style::dynavar<[](const auto& value) {
-                return value.extend('.');
+            data::set<VirtualBox::BarColor>(style::dynavar<[](const auto& value) {
+                return value.extend(charset::box_top_bar);
             }>(theme.wg_border_horizontal()));
 
 			using namespace dx;
@@ -111,7 +111,7 @@ namespace d2::ctm
                                             ));
                                     });
                                 })
-                                D2_STYLES_APPLY(impl::button_react)
+                                D2_STYLES_APPLY(button_react)
                             D2_ELEM_END
                             D2_ELEM(Button)
                                 D2_STYLE(Value, "Clear Accents")
@@ -121,7 +121,7 @@ namespace d2::ctm
                                     (_core(ptr->state())->traverse()/"logic"/"accents"/"list"/"accents").asp()->clear();
                                     _core(ptr->state())->_accents.clear();
                                 })
-                                D2_STYLES_APPLY(impl::button_react)
+                                D2_STYLES_APPLY(button_react)
                             D2_ELEM_END
 							D2_ELEM(Button)
 								D2_STYLE(Value, "Submit Accents")
@@ -130,7 +130,7 @@ namespace d2::ctm
                                 D2_STYLE(OnSubmit, [](TreeIter ptr) {
 									_core(ptr->state())->submit();
 								})
-								D2_STYLES_APPLY(impl::button_react)
+                                D2_STYLES_APPLY(button_react)
 							D2_ELEM_END
                         D2_ELEM_END
                         D2_ELEM(VerticalSeparator)

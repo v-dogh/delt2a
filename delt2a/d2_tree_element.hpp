@@ -150,6 +150,9 @@ namespace d2
         TypedTreeIter& operator=(TypedTreeIter&&) = default;
     };
 
+    namespace internal
+    { class ElementView; }
+
     class ParentElement;
     class Element :
         public std::enable_shared_from_this<Element>,
@@ -485,7 +488,9 @@ namespace d2
         virtual void _signal_context_change_impl(write_flag type, unsigned int prop, ptr element) noexcept {}
 
         void _signal_write(write_flag type, unsigned int prop, ptr element) noexcept;
-    public:
+    protected:
+        // Available to the element view
+
         void _signal_context_change_sub(write_flag type, unsigned int prop, ptr element) noexcept;
         void _signal_context_change_sub(write_flag type, unsigned int prop) noexcept;
         void _signal_context_change(write_flag type, unsigned int prop, ptr element) noexcept;
@@ -531,6 +536,8 @@ namespace d2
             ptr->setstate(State::Created);
             return ptr;
         }
+
+        friend class internal::ElementView;
 
         Element() = default;
         Element(
@@ -608,6 +615,28 @@ namespace d2
         Element& operator=(const Element&) = delete;
         Element& operator=(Element&&) = delete;
     };
+
+    namespace internal
+    {
+        struct ElementView
+        {
+        private:
+            Element::ptr _ptr{ nullptr };
+            ElementView(Element::ptr ptr) : _ptr(ptr) {}
+        public:
+            static ElementView from(Element::ptr ptr);
+
+            void signal_context_change_sub(Element::write_flag type, unsigned int prop, Element::ptr element) noexcept;
+            void signal_context_change_sub(Element::write_flag type, unsigned int prop) noexcept;
+            void signal_context_change(Element::write_flag type, unsigned int prop, Element::ptr element) noexcept;
+            void signal_context_change(Element::write_flag type = Element::WriteType::Masked, unsigned int prop = ~0u) noexcept;
+            void signal_write(Element::write_flag type = Element::WriteType::Masked, unsigned int prop = ~0u) noexcept;
+            void signal_initialization(unsigned int prop) noexcept;
+            void signal_write_update(Element::write_flag type) const noexcept;
+            void signal_update(Element::internal_flag type) const noexcept;
+            void trigger_event(IOContext::Event ev);
+        };
+    }
 }
 
 #endif // D2_TREE_ELEMENT_HPP

@@ -173,4 +173,127 @@ namespace d2::dx
     {
         return _idx;
     }
+
+    void VerticalSwitch::_signal_write_impl(write_flag type, unsigned int prop, ptr element) noexcept
+    {
+        if (element.get() == this &&
+                (data::width.getunits() == Unit::Auto ||
+                 data::height.getunits() == Unit::Auto) &&
+                prop == BorderWidth ||
+            prop == Options ||
+            prop == initial_property)
+        {
+            const auto [ xbasis, ybasis ] = ContainerHelper::_border_base();
+            const auto [ ixbasis, iybasis ] = ContainerHelper::_border_base_inv();
+
+            int perfect_width = 0;
+            for (decltype(auto) it : data::options)
+            {
+                perfect_width = std::max<int>(
+                    it.size(),
+                    perfect_width
+                );
+            }
+
+            _perfect_dimensions.height =
+                data::options.size() +
+                (data::options.size() - 1) * !data::disable_separator + (ybasis + iybasis) +
+                data::height.raw();
+            _perfect_dimensions.width = perfect_width + (xbasis + ixbasis);
+
+            _signal_write(WriteType::Dimensions);
+        }
+    }
+    void VerticalSwitch::_state_change_impl(State state, bool value)
+    {
+        if (state == State::Clicked && value)
+        {
+            const auto [ width, height ] = box();
+            const auto [ x, y ] = mouse_object_space();
+            const auto [ basisx, basisy ] = ContainerHelper::_border_base();
+            const auto [ ibasisx, ibasisy ] = ContainerHelper::_border_base_inv();
+            if (data::disable_separator)
+            {
+                const auto h = y - basisy;
+                if (h >= 0 && _idx != h)
+                {
+                    _idx = h;
+                    _signal_write(Style);
+                    _submit();
+                }
+            }
+            else
+            {
+                const auto h = height - basisy - ibasisy;
+                const auto ch =
+                    ((h - (data::options.size() - 1)) /
+                     (data::options.size())) + 1;
+
+                if (ch > 0)
+                {
+                    const auto idx = y / ch;
+                    const auto midx = y % ch;
+
+                    if (midx != (ch - 1) &&
+                        idx != _idx)
+                    {
+                        _idx = idx;
+                        _signal_write(Style);
+                        _submit();
+                    }
+                }
+            }
+        }
+        else if (state == State::Keynavi)
+        {
+            _signal_write(Style);
+        }
+    }
+    void VerticalSwitch::_frame_impl(PixelBuffer::View buffer) noexcept
+    {
+        buffer.fill(
+            Pixel::combine(
+                data::foreground_color,
+                data::background_color
+            )
+        );
+
+        if (!data::options.empty())
+        {
+            const auto [ width, height ] = box();
+            const auto [ basisx, basisy ] = ContainerHelper::_border_base();
+            const auto [ ibasisx, ibasisy ] = ContainerHelper::_border_base_inv();
+            const int height_slice =
+                (height - (data::options.size() - 1) * !data::disable_separator - (basisx + ibasisx)) /
+                data::options.size();
+
+            const auto disabled_color = Pixel::combine(
+                data::disabled_foreground_color,
+                data::disabled_background_color
+            );
+            const auto enabled_color = Pixel::combine(
+                data::enabled_foreground_color,
+                (getstate(Keynavi) ? data::focused_color : data::enabled_background_color)
+            );
+            for (std::size_t i = 0; i < data::options.size(); i++)
+            {
+                const auto yoff = int(basisy + !data::disable_separator + (height_slice * i));
+                TextHelper::_render_text_simple(
+                    data::options[i],
+                    (i == _idx) ? enabled_color : disabled_color,
+                    style::Text::Alignment::Center,
+                    { basisx, yoff }, { buffer.width(), height_slice },
+                    buffer
+                );
+                if (!data::disable_separator)
+                {
+                    if (i < data::options.size() - 1)
+                        buffer.at(basisx, yoff + height_slice)
+                            .blend(data::separator_color);
+                }
+            }
+        }
+
+        ContainerHelper::_render_border(buffer);
+    }
 }

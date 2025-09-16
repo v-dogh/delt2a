@@ -47,7 +47,7 @@ namespace d2::dx::impl
     protected:
         Element::BoundingBox _text_bounding_box(const string& value) const noexcept
         {
-            return _text_bounding_box(value);
+            return impl::tx::_text_bounding_box(value);
         }
         Element::BoundingBox _paragraph_bounding_box(const string& value, int width = INT_MAX, int height = INT_MAX) const noexcept
         {
@@ -271,10 +271,10 @@ namespace d2::dx::impl
                     auto& tr = buffer.at(bbox.width - 1);
                     auto& bl = buffer.at(0, bbox.height - 1);
                     auto& br = buffer.at(bbox.width - 1, bbox.height - 1);
-                    if (et && el) tl.blend(Pixel{ .a = bch.a, .v = p.corners.top_left });
-                    if (et && er) tr.blend(Pixel{ .a = bch.a, .v = p.corners.top_right });
-                    if (eb && el) bl.blend(Pixel{ .a = bch.a, .v = p.corners.bottom_left });
-                    if (eb && er) br.blend(Pixel{ .a = bch.a, .v = p.corners.bottom_right });
+                    if (et && el) tl.blend(bch.extend(p.corners.top_left));
+                    if (et && er) tr.blend(bch.extend(p.corners.top_right));
+                    if (eb && el) bl.blend(bch.extend(p.corners.bottom_left));
+                    if (eb && er) br.blend(bch.extend(p.corners.bottom_right));
                 }
             }
         }

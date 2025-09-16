@@ -19,7 +19,7 @@ namespace d2
 	enum class Encoding
 	{
 		Ascii,
-		Unicode
+        Utf8
 	};
 
 	template<std::size_t ID>
@@ -32,13 +32,13 @@ namespace d2
 		using notifications = void;
 	};
 
-#	if D2_LOCALE_MODE == 8
+#	if D2_LOCALE_MODE == ASCII
 	constexpr auto encoding = Encoding::Ascii;
 	using string = std::string;
 	using string_view = std::string;
     using value_type = char;
-#	elif D2_LOCALE_MODE == 32
-	constexpr auto encoding = Encoding::Unicode;
+#	elif D2_LOCALE_MODE == UTF8
+    constexpr auto encoding = Encoding::Utf8;
     using string = std::string;
     using string_view = std::string_view;
     using value_type = AutoValueType;

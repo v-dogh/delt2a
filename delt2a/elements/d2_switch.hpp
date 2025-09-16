@@ -27,6 +27,7 @@ namespace d2
                 .r = 0, .g = 0, .b = 0
             };
             Pixel separator_color{ .a = 0, .v = '|' };
+            bool disable_separator{ false };
 
             template<uai_property Property>
             auto at_style()
@@ -41,12 +42,13 @@ namespace d2
                 D2_UAI_GET_VAR_A(5, on_change)
                 D2_UAI_GET_VAR_A(6, on_change_values)
                 D2_UAI_GET_VAR(7, separator_color, Style)
+                D2_UAI_GET_VAR(8, disable_separator, Style)
                 D2_UAI_VAR_END;
             }
         };
 
         template<std::size_t PropBase>
-        struct ISwitch : Switch, InterfaceHelper<ISwitch, PropBase, 8>
+        struct ISwitch : Switch, InterfaceHelper<ISwitch, PropBase, 9>
         {
             using data = Switch;
             enum Property : uai_property
@@ -58,7 +60,8 @@ namespace d2
                 DisabledBackgroundColor,
                 OnChange,
                 OnChangeValues,
-                SeparatorColor
+                SeparatorColor,
+                DisableSeparator
             };
         };
         using IZSwitch = ISwitch<0>;
@@ -108,6 +111,23 @@ namespace d2
             void reset(string choice) noexcept;
             string choice() noexcept;
             int index() noexcept;
+        };
+
+        class VerticalSwitch : public Switch
+        {
+        protected:
+            virtual void _signal_write_impl(write_flag type, unsigned int prop, ptr element) noexcept override;
+            virtual void _state_change_impl(State state, bool value) override;
+            virtual void _frame_impl(PixelBuffer::View buffer) noexcept override;
+        public:
+            VerticalSwitch(
+                const std::string& name,
+                TreeState::ptr state,
+                pptr parent
+            ) : Switch(name, state, parent)
+            {
+                data::disable_separator = true;
+            }
         };
     }
 }

@@ -134,15 +134,4 @@ namespace d2::sys
 	};
 } // d2
 
-namespace d2
-{
-	template<>
-	struct OSConfig<std::size_t(OS::Unix)> : OSConfig<std::size_t(OS::Default)>
-	{
-		using input = sys::UnixTerminalInput;
-		using output = sys::UnixTerminalOutput;
-		using clipboard = sys::ext::LocalSystemClipboard;
-	};
-}
-
 #endif // LINUX_IO_HANDLERS_HPP

@@ -51,12 +51,12 @@ namespace d2
 	};
 
 	template<>
-	struct Charset<Encoding::Unicode>
+	struct Charset<Encoding::Utf8>
 	{
 		static constexpr auto top_fix = false;
 		static constexpr auto corners = true;
-        static constexpr auto box_top_bar = "▁";
-        static constexpr auto box_top_drag_spot = "▃";
+        static constexpr auto box_top_bar = ".";
+        static constexpr auto box_top_drag_spot = ",";
         static constexpr auto box_tr_corner_rough = "┐";
         static constexpr auto box_tl_corner_rough = "┌";
         static constexpr auto box_br_corner_rough = "┘";
@@ -137,17 +137,25 @@ namespace d2
             static constexpr auto phone = "☎";
         };
 
+
         enum Cell
         {
-            TopLeft = 1 << 0, TopRight = 1 << 1,
-            MidTopLeft = 1 << 2, MidTopRight = 1 << 3,
-            MidBotLeft = 1 << 4, MidBotRight = 1 << 5,
+            TopLeft = 1 << 0, TopRight = 1 << 3,
+            MidTopLeft = 1 << 1, MidTopRight = 1 << 4,
+            MidBotLeft = 1 << 2, MidBotRight = 1 << 5,
             BotLeft = 1 << 6, BotRight = 1 << 7,
         };
-        static auto cell(uint8_t mask) noexcept
+        static std::string cell(uint8_t mask) noexcept
         {
             const char32_t ch = 0x2800 + mask;
-            return std::string(reinterpret_cast<const char*>(&ch), sizeof(ch));
+            std::string s;
+            if (ch <= 0xFFFF)
+            {
+                s.push_back(char(0xE0 | ((ch >> 12) & 0x0F)));
+                s.push_back(char(0x80 | ((ch >> 6)  & 0x3F)));
+                s.push_back(char(0x80 | (ch & 0x3F)));
+            }
+            return s;
         }
 	};
 

@@ -434,7 +434,7 @@ namespace d2::style
         virtual void _signal_base_impl(Element::write_flag type, property prop) override
         {
             if (type != 0x00 && !this->getistate(Element::InternalState::IsBeingInitialized))
-                _base()->_signal_write(type, prop);
+                internal::ElementView::from(_base()->shared_from_this()).signal_write(type, prop);
         }
         virtual void _set_dynamic_impl(property prop, bool value) override
         {
@@ -909,7 +909,7 @@ namespace d2::style
             ContainerDisableBottom,
             // Other flags
             ContainerTopFix,
-            ContainerOverrideCorners
+            ContainerOverrideCorners,
         };
     };
     using IZContainer = IContainer<0>;
@@ -987,7 +987,7 @@ namespace d2::style
 
         string text{};
         Alignment alignment{ Alignment::Center };
-        unsigned char text_options{ 0x00 };
+        unsigned char text_options{ Paragraph };
 
         template<uai_property Property>
         auto at_style()
@@ -1006,7 +1006,7 @@ namespace d2::style
     template<std::size_t PropBase>
     struct IText : Text, InterfaceHelper<IText, PropBase, 5>
     {
-        using data = Layout;
+        using data = Text;
         enum Property : uai_property
         {
             Value = PropBase,

@@ -91,21 +91,26 @@ namespace d2
         return *this;
     }
 
+    int ParentElement::border_for(BorderType type, cptr ptr) const noexcept
+    {
+        return _get_border_impl(type, ptr);
+    }
+
     int ParentElement::resolve_units(Unit value, cptr elem) const noexcept
     {
         const bool dims = value.getmods() & UnitContext::Dimensions;
-        const bool pos = !dims;
         const bool horiz = value.getmods() & UnitContext::Horizontal;
         const bool inv = value.getmods() & Unit::Mods::Inverted;
+        const bool rel = value.getmods() & Unit::Relative;
         const float val = value.raw();
 
-        const auto border_top = _get_border_impl(BorderType::Top, elem);
-        const auto border_bottom = _get_border_impl(BorderType::Bottom, elem);
-        const auto border_left = _get_border_impl(BorderType::Left, elem);
-        const auto border_right = _get_border_impl(BorderType::Right, elem);
+        const auto border_top = _get_border_impl(BorderType::Top, elem) * (!rel || dims);
+        const auto border_bottom = _get_border_impl(BorderType::Bottom, elem) * (!rel || dims);
+        const auto border_left = _get_border_impl(BorderType::Left, elem) * (!rel || dims);
+        const auto border_right = _get_border_impl(BorderType::Right, elem) * (!rel || dims);
         const auto border_horizontal = border_left + border_right;
         const auto border_vertical = border_top + border_bottom;
-        const auto border_off = (horiz ?
+        const auto border_off = dims ? 0 : (horiz ?
                                  (inv ? -border_right : border_left) :
                                  (inv ? -border_bottom : border_top));
 
@@ -129,10 +134,6 @@ namespace d2
                     cpy.setunits(Unit::Pc);
                     cpy = 1.f - val;
                 }
-                else if (cpy.getmods() & Unit::Relative)
-                {
-                    cpy.setmods(Unit::Center);
-                }
                 else
                 {
                     cpy.setunits(Unit::Px);
@@ -143,14 +144,16 @@ namespace d2
             {
                 if (inv)
                 {
-                    if (dims) return (horiz ? layout(Layout::Width) : layout(Layout::Height)) - val - 1 + border_off;
+                    if (dims) return (horiz ?
+                        (layout(Layout::Width) - border_horizontal) :
+                        (layout(Layout::Height) - border_vertical)) - val;
                     else return ((horiz ?
                                       (layout(Layout::Width) - elem->layout(Layout::Width)) :
                                       (layout(Layout::Height) - elem->layout(Layout::Height))) -
                                      val) + border_off;
                 }
                 else
-                    return val + (pos * border_off);
+                    return val + border_off;
             }
             case Unit::Pv:
             {
@@ -164,7 +167,7 @@ namespace d2
                 const auto mval = inv ? (1 - val) : val;
                 return std::ceil((mval * (horiz ?
                                           (layout(Layout::Width) - border_horizontal) :
-                                          (layout(Layout::Height) - border_vertical))) + (pos * border_off));
+                                          (layout(Layout::Height) - border_vertical))) + border_off);
             }
         }
     }
@@ -172,7 +175,8 @@ namespace d2
     {
         foreach_internal([&](ptr elem)
         {
-            elem->_signal_context_change_sub(type, prop, element);
+            internal::ElementView::from(elem)
+                .signal_context_change_sub(type, prop, element);
         });
     }
     void ParentElement::_state_change_impl(State state, bool value)

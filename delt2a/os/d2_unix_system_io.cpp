@@ -521,7 +521,7 @@ namespace d2::sys
 
     void UnixTerminalOutput::_push(const Pixel& px) noexcept
     {
-#       if D2_LOCALE_MODE == 32
+#       if D2_LOCALE_MODE == UTF8
             if (global_extended_code_page.is_extended(px.v))
             {
                 const auto ext = global_extended_code_page.read(px.v);

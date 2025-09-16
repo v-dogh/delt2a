@@ -128,6 +128,7 @@ namespace d2::interp
         float _progress() const noexcept
         {
             return
+                duration_.count() == 0 ? 1.f :
                 float(std::chrono::duration_cast<std::chrono::milliseconds>((std::chrono::high_resolution_clock::now() -
                         start_)).count()) /
                 float(duration_.count());
@@ -211,7 +212,7 @@ namespace d2::interp
         virtual void _update_impl(Element::ptr ptr, float progress) noexcept override
         {
             std::static_pointer_cast<Type>(ptr)->template set<Property>(
-                impl::LinearInterpolationWriter<dest_type>::write(progress),
+                impl::LinearInterpolationWriter<dest_type>::write(std::min(progress, 1.f)),
                 true
             );
         }
@@ -224,8 +225,12 @@ namespace d2::interp
             Interpolator(ms, ptr),
             impl::LinearInterpolationWriter<dest_type>(
                 std::static_pointer_cast<Type>(ptr)->template get<Property>(), dest
-                                                                 )
+            )
         {}
+        virtual ~Linear()
+        {
+            update();
+        }
     };
 
     template<typename Type, style::uai_property Property>

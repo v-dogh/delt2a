@@ -263,7 +263,7 @@ namespace d2::style
 		auto& set_for(Type&& value, bool temporary = false)
 		{
 			_sync_impl([value = std::forward<Type>(value), &temporary, this]() mutable {
-				_int_set_for<Interface, Property>(std::forward<Type>(value), temporary);
+                _int_set_for<Interface, Property>(std::forward<Type>(value), temporary);
 			});
 			return *this;
 		}

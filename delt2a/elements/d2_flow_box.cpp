@@ -53,10 +53,11 @@ namespace d2::dx
         // A(*, (height - Q_height) / 2) B(*, (height - Q_height) / 2)
         // C(*, (height - Q_height) / 2) D(*, (height - Q_height) / 2)
 
-        int cxpos = 0;
-        int cypos = 0;
+        int cxpos = basex;
+        int cypos = basey;
         bool relh = false;
         bool relv = false;
+        bool is_primary = true;
 
         for (std::size_t i = 0; i < elements.size();)
         {
@@ -103,10 +104,11 @@ namespace d2::dx
 
                 int cxpos_offset = 0;
                 int cypos_offset = 0;
-                bool first = true;
+                bool is_first = true;
                 bool resetx = false;
                 bool resety = false;
 
+                const auto primary = elements[i];
                 do
                 {
                     auto sub = elements[i];
@@ -116,14 +118,14 @@ namespace d2::dx
 
                     // Absolute object (skip)
                     if (!(relhs || relvs) ||
-                            !sub->getstate(Element::State::Display))
+                        !sub->getstate(Element::State::Display))
                     {
                         i++;
                         continue;
                     }
                     // Break block
                     else if (
-                        !first &&
+                        !is_first &&
                         ((relh && !relhs) ||
                          (relv && !relvs) ||
                          (relv && relhs) ||
@@ -139,7 +141,6 @@ namespace d2::dx
                     // Relative size metadata
 
                     const auto bbox = sub->internal_box();
-
                     if ((relreps & Element::RelativeWidth) && relhs)
                     {
                         if (!is_pooled)
@@ -168,13 +169,12 @@ namespace d2::dx
                         reldims_pool -= bbox.height;
                     }
 
-                    first = false;
+                    is_first = false;
                     i++;
                 }
                 while (i < elements.size());
 
                 const int rel_size = relcount ? reldims_pool / relcount : 0;
-
                 do
                 {
                     auto sub = elements[beg];
@@ -183,7 +183,7 @@ namespace d2::dx
                     const bool relvs = relreps & Element::RelativeYPos;
 
                     if (!(relhs || relvs) ||
-                            !sub->getstate(Element::State::Display))
+                        !sub->getstate(Element::State::Display))
                     {
                         beg++;
                         continue;
@@ -191,12 +191,14 @@ namespace d2::dx
 
                     const auto bbox = sub->internal_box();
                     const auto ipos = sub->internal_position();
-                    const auto pos = first ? Element::Position
-                    {
-                        relhs ? (ptr->resolve_units(Unit(ipos.x, Unit::Px), sub) + basex) : ipos.x,
-                        relvs ? (ptr->resolve_units(Unit(ipos.y, Unit::Px), sub) + basey) : ipos.y
-} : ipos;
-                    sub->override_position(pos.x + cxpos, pos.y + cypos);
+                    auto pos = ipos;
+                    pos.x += is_primary * relht * ptr->border_for(ParentElement::BorderType::Left, elem);
+                    pos.y += is_primary * relvt * ptr->border_for(ParentElement::BorderType::Top, elem);
+                    sub->override_position(
+                        pos.x + cxpos,
+                        pos.y + cypos
+                    );
+                    is_primary = false;
 
                     if (relv)
                     {
@@ -205,9 +207,9 @@ namespace d2::dx
 
                         cypos += rheight + pos.y;
                         cxpos_offset = std::max(
-                                           cxpos_offset,
-                                           rwidth + pos.x
-                                       );
+                            cxpos_offset,
+                            rwidth + pos.x
+                        );
 
                         if (relreps & Element::RelativeHeight)
                         {
@@ -225,9 +227,9 @@ namespace d2::dx
 
                         cxpos += rwidth + pos.x;
                         cypos_offset = std::max(
-                                           cypos_offset,
-                                           rheight + pos.y
-                                       );
+                            cypos_offset,
+                            rheight + pos.y
+                        );
 
                         if (relreps & Element::RelativeWidth)
                         {
@@ -239,13 +241,12 @@ namespace d2::dx
                         }
                     }
 
-                    first = false;
+                    is_first = false;
                     beg++;
-                }
-                while (beg != i);
+                } while (beg != i);
 
-                if (resetx) cxpos = 0;
-                else if (resety) cypos = 0;
+                if (resetx) cxpos = basex;
+                else if (resety) cypos = basey;
 
                 cxpos += cxpos_offset;
                 cypos += cypos_offset;
@@ -257,21 +258,30 @@ namespace d2::dx
     void FlowBox::_layout_for_impl(enum Element::Layout type, cptr ptr) const
     {
         if (ptr->relative_layout(type))
-            recompute_layout(std::static_pointer_cast<const ParentElement>(shared_from_this()), _elements);
+            recompute_layout(
+                std::static_pointer_cast<const ParentElement>(shared_from_this()),
+                _elements
+            );
         else
             ParentElement::_layout_for_impl(type, ptr);
     }
     void ScrollFlowBox::_layout_for_impl(enum Element::Layout type, cptr ptr) const
     {
         if (ptr->relative_layout(type))
-            recompute_layout(std::static_pointer_cast<const ParentElement>(shared_from_this()), _elements, -offset_);
+            recompute_layout(
+                std::static_pointer_cast<const ParentElement>(shared_from_this()),
+                _elements, 0, -offset_
+            );
         else
-            ParentElement::_layout_for_impl(type, ptr);
+            ScrollBox::_layout_for_impl(type, ptr);
     }
     void VirtualFlowBox::_layout_for_impl(enum Element::Layout type, cptr ptr) const
     {
         if (ptr->relative_layout(type))
-            recompute_layout(std::static_pointer_cast<const ParentElement>(shared_from_this()), _elements);
+            recompute_layout(
+                std::static_pointer_cast<const ParentElement>(shared_from_this()),
+                _elements
+            );
         else
             ParentElement::_layout_for_impl(type, ptr);
     }

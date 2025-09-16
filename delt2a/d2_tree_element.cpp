@@ -455,15 +455,19 @@ namespace d2
             case Layout::X:
                 if (!(_internal_state & PositionXUpdated))
                     parent()->layout_for(Layout::X, shared_from_this());
+                break;
             case Layout::Y:
                 if (!(_internal_state & PositionYUpdated))
                     parent()->layout_for(Layout::Y, shared_from_this());
+                break;
             case Layout::Width:
                 if (!(_internal_state & DimensionsWidthUpdated))
                     parent()->layout_for(Layout::Width, shared_from_this());
+                break;
             case Layout::Height:
                 if (!(_internal_state & DimensionsHeightUpdated))
                     parent()->layout_for(Layout::Height, shared_from_this());
+                break;
         }
         return _layout.get(type);
     }
@@ -637,5 +641,50 @@ namespace d2
     TreeIter Element::operator+() noexcept
     {
         return traverse();
+    }
+
+    namespace internal
+    {
+        ElementView ElementView::from(Element::ptr ptr)
+        {
+            return ElementView(ptr);
+        }
+
+        void ElementView::signal_context_change_sub(Element::write_flag type, unsigned int prop, Element::ptr element) noexcept
+        {
+            return _ptr->_signal_context_change_sub(type, prop, element);
+        }
+        void ElementView::signal_context_change_sub(Element::write_flag type, unsigned int prop) noexcept
+        {
+            return _ptr->_signal_context_change_sub(type, prop);
+        }
+        void ElementView::signal_context_change(Element::write_flag type, unsigned int prop, Element::ptr element) noexcept
+        {
+            return _ptr->_signal_context_change(type, prop, element);
+        }
+        void ElementView::signal_context_change(Element::write_flag type, unsigned int prop) noexcept
+        {
+            return _ptr->_signal_context_change(type, prop);
+        }
+        void ElementView::signal_write(Element::write_flag type, unsigned int prop) noexcept
+        {
+            return _ptr->_signal_write(type, prop);
+        }
+        void ElementView::signal_initialization(unsigned int prop) noexcept
+        {
+            return _ptr->_signal_initialization(prop);
+        }
+        void ElementView::signal_write_update(Element::write_flag type) const noexcept
+        {
+            return _ptr->_signal_write_update(type);
+        }
+        void ElementView::signal_update(Element::internal_flag type) const noexcept
+        {
+            return _ptr->_signal_update(type);
+        }
+        void ElementView::trigger_event(IOContext::Event ev)
+        {
+            return _ptr->_trigger_event(ev);
+        }
     }
 }
