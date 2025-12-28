@@ -1,0 +1,260 @@
+#include "d2_io_handler.hpp"
+
+namespace d2
+{
+    namespace sys
+    {
+        SystemComponent::Status SystemComponent::status()
+        {
+            return _status;
+        }
+        void SystemComponent::load()
+        {
+            try
+            {
+                _status
+                    = _load_impl();
+                if (_status == Status::Offline)
+                    _status = Status::Degraded;
+            }
+            catch (...)
+            {
+                _status = Status::Failure;
+            }
+        }
+        void SystemComponent::unload()
+        {
+            try
+            {
+                _status
+                    = _unload_impl();
+                if (_status == Status::Ok)
+                    _status = Status::Offline;
+            }
+            catch (...)
+            {
+                _status = Status::Failure;
+            }
+        }
+
+        namespace ext
+        {
+            template<SystemAudio::Format>
+            inline float _convert_sample(const unsigned char* sample);
+
+            template<> inline float _convert_sample<SystemAudio::Format::PCM16>(const unsigned char* sample)
+            {
+                return static_cast<float>(*reinterpret_cast<const unsigned short*>(sample)) / 32768.0f;
+            }
+            template<> inline float _convert_sample<SystemAudio::Format::PCM32>(const unsigned char* sample)
+            {
+                return static_cast<float>(*reinterpret_cast<const unsigned int*>(sample)) / 2147483648.0f;
+            }
+            template<> inline float _convert_sample<SystemAudio::Format::Float32>(const unsigned char* sample)
+            {
+                return *reinterpret_cast<const float*>(sample);
+            }
+            template<> inline float _convert_sample<SystemAudio::Format::Float64>(const unsigned char* sample)
+            {
+                return static_cast<float>(*reinterpret_cast<const double*>(sample));
+            }
+
+            inline float _lerp(float t, float a, float b)
+            {
+                return a + t * (b - a);
+            }
+
+            template<SystemAudio::Format Fmt>
+            void _convert_from(std::span<float> out, std::span<const unsigned char> data, SystemAudio::FormatInfo format, SystemAudio::FormatInfo expected)
+            {
+                constexpr auto sample_size = SystemAudio::sample_size(Fmt);
+
+                if (format.channels == expected.channels &&
+                    format.sample_rate == expected.sample_rate &&
+                    format.format == expected.format)
+                {
+                    std::memcpy(out.data(), data.data(), data.size());
+                    return;
+                }
+
+                const auto sample_ratio = expected.sample_rate / format.sample_rate;
+                if (format.channels == expected.channels)
+                {
+                    if (format.sample_rate > expected.sample_rate)
+                    {
+                        for (std::size_t i = 0; i < data.size();)
+                        {
+                            for (std::size_t j = 0; j < expected.sample_rate; j += sample_size)
+                            {
+                                const auto base = float(j) / expected.sample_rate;
+                                const auto pos = static_cast<std::size_t>(base * format.sample_rate);
+                                const auto a = _convert_sample<Fmt>(&data[i + pos]);
+                                const auto b = _convert_sample<Fmt>(&data[i + pos + 1]);
+                                out[j++] += _lerp(
+                                    base - float(std::size_t(base)),
+                                    a, b
+                                );
+                            }
+                            i += format.sample_rate;
+                        }
+                    }
+                    else if (format.sample_rate < expected.sample_rate)
+                    {
+                        for (std::size_t i = 0; i < data.size();)
+                        {
+                            const auto a = _convert_sample<Fmt>(&data[i]);
+                            const auto b = _convert_sample<Fmt>(&data[i + 1]);
+                            for (std::size_t j = 0; j < expected.sample_rate; j += sample_size)
+                            {
+                                out[j++] += _lerp(
+                                    float(j) / expected.sample_rate,
+                                    a, b
+                                );
+                            }
+                            i += format.sample_rate;
+                        }
+                    }
+                    else
+                    {
+                        for (std::size_t i = 0, j = 0; j < data.size(); j += sample_size)
+                            out[i++] += _convert_sample<Fmt>(&data[j]);
+                    }
+                }
+                else
+                {
+                    const auto in_samples = data.size() / sample_size / format.channels;
+                    // Combine channels
+                    if (format.channels > expected.channels)
+                    {
+                        if (format.sample_rate > expected.sample_rate)
+                        {
+
+                        }
+                        else if (format.sample_rate < expected.sample_rate)
+                        {
+
+                        }
+                        else
+                        {
+                            for (std::size_t oi = 0, ii = 0; ii < in_samples;)
+                            {
+                                double sum = 0.f;
+                                for (std::size_t j = 0; j < format.channels; j++, ii++)
+                                    sum += _convert_sample<Fmt>(&data[ii * sample_size]);
+                                for (std::size_t j = 0; j < expected.channels; j++, oi++)
+                                    out[oi * sizeof(float)] += sum;
+                            }
+                        }
+                    }
+                    // Propagate to additional channels
+                    else
+                    {
+                        if (format.sample_rate > expected.sample_rate)
+                        {
+
+                        }
+                        else if (format.sample_rate < expected.sample_rate)
+                        {
+
+                        }
+                        else
+                        {
+                            for (std::size_t oi = 0, ii = 0; ii < in_samples;)
+                            {
+                                double sum = 0.f;
+                                for (std::size_t j = 0; j < format.channels; j++, ii++)
+                                    sum += _convert_sample<Fmt>(&data[ii * sample_size]);
+                                sum /= format.channels;
+                                for (std::size_t j = 0; j < expected.channels; j++, oi++)
+                                    out[oi * sizeof(float)] += sum;
+                            }
+                        }
+                    }
+                }
+            }
+
+            std::size_t SystemAudio::_stream_normalize_required(std::span<const unsigned char> data, FormatInfo format)
+            {
+                const auto expected = this->format(Device::Output);
+                const auto in_samples = data.size() / sample_size(format.format) / format.channels;
+                const auto rate_ratio = double(expected.sample_rate) / double(format.sample_rate);
+                const auto channel_ratio = double(expected.channels) / double(format.channels);
+                return static_cast<std::size_t>(in_samples * rate_ratio * expected.channels);
+            }
+            void SystemAudio::_stream_normalize(std::span<float> out, std::span<const unsigned char> data, FormatInfo format)
+            {
+                switch (format.format)
+                {
+                case Format::PCM16: _convert_from<Format::PCM16>(out, data, format, this->format(Device::Output)); break;
+                case Format::PCM32: _convert_from<Format::PCM32>(out, data, format, this->format(Device::Output)); break;
+                case Format::Float32: _convert_from<Format::Float32>(out, data, format, this->format(Device::Output)); break;
+                case Format::Float64: _convert_from<Format::Float64>(out, data, format, this->format(Device::Output)); break;
+                }
+            }
+
+            void SystemAudio::_set_device_status(Device dev, DeviceData::Status status)
+            {
+                _device_data[std::size_t(dev)].status = status;
+            }
+            SystemAudio::DeviceData::Status SystemAudio::_get_device_status(Device dev)
+            {
+                return _device_data[std::size_t(dev)].status;
+            }
+            void SystemAudio::_run_device_filter(Device dev, Stream stream)
+            {
+                for (decltype(auto) it : _device_data[std::size_t(dev)].filter.transforms)
+                    it(stream);
+            }
+            void SystemAudio::_trigger_device_event(Device dev, Event ev, const DeviceName& name)
+            {
+                bool cleanup = false;
+                auto& data = _device_data[std::size_t(dev)];
+                for (decltype(auto) it : data.listener)
+                {
+                    auto state = it->state.load();
+                    if (state == EventListenerState::State::Active)
+                    {
+                        it->callback(name, ev, it);
+                    }
+                    else
+                    {
+                        cleanup = true;
+                    }
+                }
+
+                if (cleanup)
+                {
+                    data.listener.erase(
+                        std::remove_if(
+                            data.listener.begin(),
+                            data.listener.end(),
+                            [](auto v) {
+                                return v->state == EventListenerState::State::Invalid;
+                            }
+                        ),
+                        data.listener.end()
+                    );
+                }
+            }
+
+            void SystemAudio::filter(Device dev, FilterPipeline filter)
+            {
+                _device_data[std::size_t(dev)].filter
+                    = std::move(filter);
+            }
+            SystemAudio::EventListener SystemAudio::watch(Device dev, std::function<void(const DeviceName&, Event, EventListener)> callback)
+            {
+                auto ev = std::make_shared<EventListenerState>(std::move(callback));
+                for (decltype(auto) it : enumerate(dev))
+                {
+                    if (ev->state == EventListenerState::State::Active)
+                        ev->callback(it, Event::Create, ev);
+                    else
+                        break;
+                }
+                _device_data[std::size_t(dev)].listener.push_back(ev);
+                return ev;
+            }
+        }
+    }
+}

@@ -1,2 +1,1 @@
-# delt2a
-Pretty Nice C++ TUI framework
+better think about it yeah?
