@@ -108,6 +108,12 @@ namespace d2::ctm
             value.extend(d2::charset::slider_vertical)
         ))
     D2_STYLESHEET_END
+    D2_STYLESHEET_BEGIN(checkbox_color)
+        D2_STYLE(ColorOn, D2_DYNAVAR(WidgetTheme, wg_text(),
+            px::combined::combine(value | d2::px::foreground::Bold, d2::colors::w::transparent)))
+        D2_STYLE(ColorOff, D2_DYNAVAR(WidgetTheme, wg_text(),
+            px::combined::combine(value | d2::px::foreground::Bold, d2::colors::w::transparent)))
+    D2_STYLESHEET_END
 }
 
 #endif // D2_WIDGET_THEME_BASE_H

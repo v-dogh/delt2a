@@ -4,6 +4,7 @@
 #include "../d2_colors.hpp"
 #include "../d2_dsl.hpp"
 #include "../d2_tree.hpp"
+#include <algorithm>
 #include <regex>
 
 namespace d2::ctm
@@ -40,6 +41,10 @@ namespace d2::ctm
 		public dx::impl::TextHelper<FolderView>
 	{
 	public:
+        enum Settings
+        {
+            ShowHidden = 1 << 0
+        };
 		friend class TextHelper;
         using data = style::UAIC<
             dx::Box,
@@ -54,12 +59,14 @@ namespace d2::ctm
             string value{};
 		};
 
-		std::shared_ptr<dx::VerticalSlider> scrollbar_{ nullptr };
-		std::vector<FileEntry> entries_{};
-		std::vector<FileEntry*> filtered_view_{};
-		int focused_idx_{ -1 };
-		int range_idx_{ 0 };
-		bool use_filtered_{ false };
+        std::shared_ptr<dx::VerticalSlider> _scrollbar{ nullptr };
+        std::vector<FileEntry> _entries{};
+        std::vector<FileEntry*> _filtered_view{};
+        string _pred{ "" };
+        int _focused_idx{ -1 };
+        int _range_idx{ 0 };
+        bool _use_filtered{ false };
+        unsigned char _settings{ 0x00 };
 
         virtual Unit _layout_impl(Element::Layout type) const override
         {
@@ -69,14 +76,14 @@ namespace d2::ctm
             case Element::Layout::Y: return data::y;
             case Element::Layout::Width:
                 if (data::width.getunits() == Unit::Auto)
-                    return int(entries_.size());
+                    return int(_entries.size());
                 return data::width;
             case Element::Layout::Height:
                 if (data::width.getunits() == Unit::Auto)
                 {
-                    return int(std::max_element(entries_.begin(), entries_.end(), [](const auto& v1, const auto& v2) {
+                    return int(std::max_element(_entries.begin(), _entries.end(), [](const auto& v1, const auto& v2) {
                         return v1.value.size() < v2.value.size();
-                    }) - entries_.begin());
+                    }) - _entries.begin());
                 }
                 return data::height;
             }
@@ -92,11 +99,11 @@ namespace d2::ctm
             Box::_state_change_impl(state, value);
 			if (state == State::Created && value)
 			{
-				if (scrollbar_ == nullptr)
+                if (_scrollbar == nullptr)
 				{
 					using namespace dx;
 
-                    scrollbar_ = std::static_pointer_cast<VerticalSlider>(
+                    _scrollbar = std::static_pointer_cast<VerticalSlider>(
                         create(Element::make<dx::VerticalSlider>(
                             "",
                             this->state(),
@@ -104,13 +111,13 @@ namespace d2::ctm
                         )).shared()
                     );
 
-                    D2_CONTEXT(scrollbar_, VerticalSlider)
+                    D2_CONTEXT(_scrollbar, VerticalSlider)
                         D2_STYLE(X, 0.0_pxi)
                         D2_STYLE(Y, 0.0_center)
                         D2_STYLE(Width, 1.0_px)
                         D2_STYLE(Height, 1.0_pc)
                         D2_STYLE(OnSubmit, [this](auto, auto, auto abs) {
-                            range_idx_ = abs;
+                            _range_idx = abs;
                             _signal_write(WriteType::Masked);
                         })
                         D2_STYLE(SliderColor, D2_DYNAVAR(WidgetTheme, wg_fg_button(),
@@ -121,22 +128,22 @@ namespace d2::ctm
                         ))
                     D2_CONTEXT_END
 
-                    internal::ElementView::from(scrollbar_)
+                    internal::ElementView::from(_scrollbar)
                         .signal_write(Masked);
 				}
 			}
 			else if (state == State::Clicked && value)
 			{
-				const auto src = scrollbar_->absolute_value();
+                const auto src = _scrollbar->absolute_value();
 				const auto [ width, height ] = box();
 				const auto [ x, idx ] = mouse_object_space();
 				if (x < width - 1 &&
-					scrollbar_->absolute_value() + idx <
-					(use_filtered_ ? filtered_view_.size() : entries_.size()))
+                    _scrollbar->absolute_value() + idx <
+                    (_use_filtered ? _filtered_view.size() : _entries.size()))
 				{
-					if (idx + src != focused_idx_)
+                    if (idx + src != _focused_idx)
 					{
-						focused_idx_ = idx + src;
+                        _focused_idx = idx + src;
 						_core(this->state())->sselect(
 							_focused_entry()->path
 						);
@@ -152,9 +159,9 @@ namespace d2::ctm
 			}
 			else if (state == State::Focused && !value)
 			{
-				if (focused_idx_ != -1)
+                if (_focused_idx != -1)
 				{
-					focused_idx_ = -1;
+                    _focused_idx = -1;
 					_signal_write(Style);
 				}
 			}
@@ -162,12 +169,12 @@ namespace d2::ctm
 			{
 				if (value)
 				{
-					focused_idx_ = 0;
+                    _focused_idx = 0;
 					_signal_write(Style);
 				}
 				else
 				{
-					focused_idx_ = -1;
+                    _focused_idx = -1;
 					_signal_write(Style);
 				}
 			}
@@ -180,39 +187,39 @@ namespace d2::ctm
 				if (context()->input()->is_pressed(sys::SystemInput::ArrowDown) ||
 					context()->input()->is_pressed(sys::SystemInput::ArrowRight))
 				{
-					if (focused_idx_ == -1)
-						focused_idx_ = 0;
-					if (focused_idx_ <
-						(use_filtered_ ? filtered_view_.size() : entries_.size()) - 1)
+                    if (_focused_idx == -1)
+                        _focused_idx = 0;
+                    if (_focused_idx <
+                        (_use_filtered ? _filtered_view.size() : _entries.size()) - 1)
 					{
-						focused_idx_++;
+                        _focused_idx++;
 						const auto h = box().height;
-						if (focused_idx_ > (scrollbar_->absolute_value() + h - 1))
-                            scrollbar_->reset_relative(focused_idx_ - h + 1);
+                        if (_focused_idx > (_scrollbar->absolute_value() + h - 1))
+                            _scrollbar->reset_relative(_focused_idx - h + 1);
 						_signal_write(Style);
 					}
 				}
 				else if (context()->input()->is_pressed(sys::SystemInput::ArrowUp) ||
 						 context()->input()->is_pressed(sys::SystemInput::ArrowLeft))
 				{
-					if (focused_idx_ == -1)
-						focused_idx_ = 0;
-					if (focused_idx_ > 0)
+                    if (_focused_idx == -1)
+                        _focused_idx = 0;
+                    if (_focused_idx > 0)
 					{
-						focused_idx_--;
-						if (focused_idx_ < scrollbar_->absolute_value())
-                            scrollbar_->reset_relative(focused_idx_);
+                        _focused_idx--;
+                        if (_focused_idx < _scrollbar->absolute_value())
+                            _scrollbar->reset_relative(_focused_idx);
 						_signal_write(Style);
 					}
 				}
 				else if (context()->input()->is_pressed(sys::SystemInput::Enter))
 				{
-					if (focused_idx_ != -1)
+                    if (_focused_idx != -1)
 					{
 						_core(this->state())->rselect(
 							_focused_entry()->path
 						);
-						focused_idx_ = 0;
+                        _focused_idx = 0;
 						_signal_write(Style);
 					}
 				}
@@ -223,13 +230,13 @@ namespace d2::ctm
 		{
             Box::_update_layout_impl();
 			const auto [ width, height ] = box();
-			const auto full_height = use_filtered_ ? filtered_view_.size() : entries_.size();
-            scrollbar_->set<dx::Slider::SliderWidth>(
+            const auto full_height = _use_filtered ? _filtered_view.size() : _entries.size();
+            _scrollbar->set<dx::Slider::SliderWidth>(
                 std::max<std::size_t>(1, (full_height && full_height > height) ?
                 (float(height) / full_height) * height : height)
             );
-            scrollbar_->set<dx::Slider::Max>(full_height > height ? full_height - height : 0);
-            internal::ElementView::from(scrollbar_)
+            _scrollbar->set<dx::Slider::Max>(full_height > height ? full_height - height : 0);
+            internal::ElementView::from(_scrollbar)
                 .signal_write(WriteType::Style);
 		}
 		virtual void _frame_impl(PixelBuffer::View buffer) override
@@ -237,24 +244,24 @@ namespace d2::ctm
             Box::_frame_impl(buffer);
 
             const auto [ width, height ] = box();
-            if (use_filtered_)
+            if (_use_filtered)
             {
-                const auto m = std::min(height + range_idx_, int(filtered_view_.size()));
-                for (std::size_t i = range_idx_; i < m; i++)
-                    _render_entry(filtered_view_[i], i - range_idx_, i == focused_idx_, buffer);
+                const auto m = std::min(height + _range_idx, int(_filtered_view.size()));
+                for (std::size_t i = _range_idx; i < m; i++)
+                    _render_entry(_filtered_view[i], i - _range_idx, i == _focused_idx, buffer);
             }
             else
             {
-                const auto m = std::min(height + range_idx_, int(entries_.size()));
-                for (std::size_t i = range_idx_; i < m; i++)
-                    _render_entry(&entries_[i], i - range_idx_, i == focused_idx_, buffer);
+                const auto m = std::min(height + _range_idx, int(_entries.size()));
+                for (std::size_t i = _range_idx; i < m; i++)
+                    _render_entry(&_entries[i], i - _range_idx, i == _focused_idx, buffer);
             }
 		}
 
 		FileEntry* _focused_entry()
 		{
-			return use_filtered_ ?
-				filtered_view_[focused_idx_] : &entries_[focused_idx_];
+            return _use_filtered ?
+                _filtered_view[_focused_idx] : &_entries[_focused_idx];
 		}
 		void _render_entry(FileEntry* ptr, int offset, bool focused, PixelBuffer::View buffer)
 		{
@@ -281,42 +288,56 @@ namespace d2::ctm
 	public:
         void filter(const string& reg)
 		{
-			scrollbar_->reset_absolute();
-			range_idx_ = 0;
-			focused_idx_ = -1;
-			filtered_view_.clear();
-			if (reg.empty())
+            bool was_changed = false;
+            if (reg.empty() || !(_settings & ShowHidden))
+            {
+                _scrollbar->reset_absolute();
+                _range_idx = 0;
+                _focused_idx = -1;
+                _filtered_view.clear();
+                was_changed = true;
+            }
+            if (reg.empty() && (_settings & ShowHidden))
 			{
-				use_filtered_ = false;
-				filtered_view_.shrink_to_fit();
+                _pred.clear();
+                _pred.shrink_to_fit();
+                _filtered_view.shrink_to_fit();
+                _use_filtered = false;
 			}
-			else
+            else if (!reg.empty() || !(_settings & ShowHidden))
 			{
-				filtered_view_.reserve(entries_.size() * 0.5);
-				for (decltype(auto) it : entries_)
+                if (_settings & ShowHidden) _filtered_view.reserve(_entries.size());
+                else _filtered_view.reserve(_entries.size() * 0.5);
+                for (decltype(auto) it : _entries)
 				{
+                    if (!(_settings & ShowHidden) && it.path.starts_with('.'))
+                        continue;
 					if (std::smatch match;
 						std::regex_search(it.path, match, std::regex(reg)))
 					{
-						filtered_view_.push_back(&it);
+                        _filtered_view.push_back(&it);
 					}
 				}
-				use_filtered_ = true;
+                _use_filtered = true;
+                _pred = reg;
 			}
-			_signal_write();
+            if (was_changed)
+                _signal_write();
 		}
 		void setpath(std::filesystem::path path)
 		{
-			scrollbar_->reset_absolute();
-			focused_idx_ = -1;
-			range_idx_ = 0;
-			use_filtered_ = false;
-			filtered_view_.clear();
-			entries_.clear();
+            _scrollbar->reset_absolute();
+            _focused_idx = -1;
+            _range_idx = 0;
+            _pred.clear();
+            _pred.shrink_to_fit();
+            _use_filtered = false;
+            _filtered_view.clear();
+            _entries.clear();
 
 			try
 			{
-				entries_.reserve(
+                _entries.reserve(
 					std::distance(
 						std::filesystem::directory_iterator(path),
 						std::filesystem::directory_iterator{}
@@ -345,7 +366,7 @@ namespace d2::ctm
 
 						const auto filename = it.path().filename().string();
 						const bool is_dir = it.is_directory();
-						entries_.push_back({
+                        _entries.push_back({
 							.path = filename,
 							.value = std::format(
 							   "{:<12} : <{}>, <{}>",
@@ -362,12 +383,38 @@ namespace d2::ctm
 			}
 			catch (...) {}
 			_signal_write();
+            filter("");
 		}
-		int results() const
+        void setting(unsigned char flags, bool value)
+        {
+            const auto cpy = _settings;
+            if (value)
+            {
+                _settings |= flags;
+                if ((cpy & flags) != flags)
+                {
+                    if ((flags & ShowHidden) && !(cpy & ShowHidden))
+                        filter(_pred);
+                }
+            }
+            else
+            {
+                _settings &= ~flags;
+                if ((cpy & flags) != 0x00)
+                {
+                    if ((flags & ShowHidden) && (cpy & ShowHidden))
+                    {
+                        if (_pred.empty())
+                            filter(_pred);
+                    }
+                }
+            }
+        }
+        int results() const
 		{
-			return use_filtered_ ? filtered_view_.size() : entries_.size();
-		}
-	};
+            return _use_filtered ? _filtered_view.size() : _entries.size();
+		}    
+    };
 
     D2_TREE_DEFINE(impl::FilesystemExplorerBase::interface, bool window)
         // Controls
@@ -450,10 +497,29 @@ namespace d2::ctm
             })
             D2_STYLES_APPLY(button_react)
         D2_ELEM_END
+        D2_ELEM(FlowBox)
+            D2_STYLE(Y, 3.0_px)
+            D2_STYLE(X, 0.0_center)
+            D2_STYLE(Width, 2.0_pxi)
+            D2_ELEM(Checkbox)
+                D2_STYLE(X, 0.0_relative)
+                D2_STYLE(OnSubmit, [](TypedTreeIter<Checkbox> ptr, bool value) {
+                    (ptr->state()->core()->traverse()/"folder").as<FolderView>()
+                        ->setting(FolderView::ShowHidden, value);
+                    _core(ptr->state())->_update_results();
+                })
+                D2_STYLES_APPLY(checkbox_color)
+            D2_ELEM_END
+            D2_ELEM(Text)
+                D2_STYLE(X, 1.0_relative)
+                D2_STYLE(Value, "Show Hidden")
+                D2_STYLES_APPLY(bold_text_color)
+            D2_ELEM_END
+        D2_ELEM_END
         D2_ELEM(Separator)
             D2_STYLE(Width, 1.0_pc)
             D2_STYLE(Height, 1.0_px)
-            D2_STYLE(Y, 3.0_px)
+            D2_STYLE(Y, 4.0_px)
             D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
             D2_STYLE(CornerLeft, '>')
             D2_STYLE(CornerRight, '<')
@@ -465,7 +531,7 @@ namespace d2::ctm
             D2_STYLE(Width, 1.0_pxi)
             D2_STYLE(Height, 5.0_pxi)
             D2_STYLE(X, 1.0_px)
-            D2_STYLE(Y, 4.0_px)
+            D2_STYLE(Y, 5.0_px)
             D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
             D2_STYLE(BackgroundColor, d2::colors::w::transparent)
             D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))

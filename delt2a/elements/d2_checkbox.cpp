@@ -77,9 +77,9 @@ namespace d2::dx
         TextHelper::_render_text(
             data::checkbox_value ? data::value_on : data::value_off,
             data::checkbox_value ? data::color_on : data::color_off,
-        { 0, 0 },
-        box(),
-        buffer
+            { 0, 0 },
+            box(),
+            buffer
         );
     }
 }
