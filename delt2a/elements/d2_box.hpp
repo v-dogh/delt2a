@@ -13,7 +13,8 @@ namespace d2::dx
         public impl::ContainerHelper<Box>
     {
     public:
-        static constexpr auto overlap = 6;
+        static constexpr auto overlap = 66;
+        static constexpr auto underlap = -66;
         friend class ContainerHelper<Box>;
         using data = style::UAIE<VecParentElement, Box, style::ILayout, style::IContainer, style::IColors>;
         using data::data;

@@ -97,15 +97,8 @@ namespace d2::dx
             callback(it);
     }
 
-    void DemandScrollBox::_frame_impl(PixelBuffer::View buffer)
+    void DemandScrollBox::_update_view()
     {
-        buffer.fill(
-            Pixel::combine(
-                data::foreground_color,
-                data::background_color
-            )
-        );
-
         // Pre disable scrollbar if we have hint
         const auto bw = (data::container_options & EnableBorder) ? resolve_units(data::border_width) : 0;
         const auto height = layout(d2::Element::Layout::Height) - bw * 2;
@@ -142,7 +135,7 @@ namespace d2::dx
                         if (_view.back())
                         {
                             accum += _view.back()
-                                ->layout(d2::Element::Layout::Height);
+                            ->layout(d2::Element::Layout::Height);
                             accum += ypad;
                         }
                     }
@@ -154,7 +147,23 @@ namespace d2::dx
             }
             _prev_offset = _offset;
         }
+    }
+    void DemandScrollBox::_frame_impl(PixelBuffer::View buffer)
+    {
+        _update_view();
+
+        buffer.fill(
+            Pixel::combine(
+                data::foreground_color,
+                data::background_color
+            )
+        );
+
         // Render elements
+        const auto bw = (data::container_options & EnableBorder) ? resolve_units(data::border_width) : 0;
+        const auto height = layout(d2::Element::Layout::Height) - bw * 2;
+        const auto xpad = resolve_units(data::padding_horizontal);
+        const auto ypad = resolve_units(data::padding_vertical);
         std::size_t logical_height = 0;
         {
             for (std::size_t i = data::preload; i < _view.size() - data::preload; i++)
@@ -164,6 +173,7 @@ namespace d2::dx
                 const auto frame = it->frame();
                 const auto [ x, y ] = it->position();
                 const auto [ width, height ] = it->box();
+                it->override_position(x + xpad, logical_height);
                 buffer.inscribe(
                     x + xpad, logical_height,
                     frame.buffer()

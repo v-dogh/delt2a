@@ -2,6 +2,7 @@
 #include "elements/d2_box.hpp"
 #include "d2_exceptions.hpp"
 #include <filesystem>
+#include "delt2a/elements/d2_slider.hpp"
 
 namespace d2
 {
@@ -213,10 +214,10 @@ namespace d2
     void Screen::_trigger_focused_events()
     {
         auto* input = _ctx->input();
-        const bool is_mouse_input = input->is_mouse_input();
-        const bool is_keyboard_input = input->is_key_input();
-        const bool is_key_seq_input = input->is_key_sequence_input();
-        const bool is_resize = input->is_screen_resize();
+        const auto is_mouse_input = input->is_mouse_input();
+        const auto is_keyboard_input = input->is_key_input();
+        const auto is_key_seq_input = input->is_key_sequence_input();
+        const auto is_resize = input->is_screen_resize();
 
         if (_focused != nullptr)
         {
@@ -230,7 +231,7 @@ namespace d2
     void Screen::_trigger_hovered_events()
     {
         auto* input = _ctx->input();
-        const bool is_mouse_input = input->is_mouse_input();
+        const auto is_mouse_input = input->is_mouse_input();
 
         if (_targetted != nullptr && _targetted != _focused)
         {
@@ -264,7 +265,7 @@ namespace d2
 
         eptr mouse_target{ nullptr };
         // Press B to pass the vibe check
-        container.asp()->foreach_internal([&](eptr it)
+        container.asp()->foreach_internal([&](eptr it) -> bool
         {
             if (it->getstate(Element::State::Display))
             {
@@ -280,16 +281,24 @@ namespace d2
                         mouse.first < (x + width) && mouse.second < (y + height)
                     )
                     {
-                        // Zindex lower/equal than -120 makes the child lose precedence over it's parent
                         mouse_target = it;
                         auto res = _update_states(it, std::pair(mouse.first - x, mouse.second - y));
-                        if (res != nullptr && res->getzindex() > -120)
+                        if (res != nullptr && res->getzindex() > dx::Box::underlap)
                             mouse_target = std::move(res);
                     }
                 }
             }
+            return true;
         });
         return mouse_target;
+    }
+    Screen::eptr Screen::_update_states_reverse(eptr ptr)
+    {
+        if (ptr->provides_cursor_sink())
+            return ptr;
+        if (ptr->parent() != nullptr)
+            return _update_states_reverse(ptr->parent());
+        return nullptr;
     }
 
     void Screen::_apply_impl(const Element::foreach_callback& func, eptr container) const
@@ -299,6 +308,7 @@ namespace d2
             func(it);
             if (it.is_type<ParentElement>())
                 _apply_impl(func, it);
+            return true;
         });
     }
 
@@ -777,37 +787,40 @@ namespace d2
         if (_ctx->input()->is_mouse_input())
         {
             const auto target = _update_states(root(), _ctx->input()->mouse_position());
-            const auto is_released = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left,
-                                     sys::SystemInput::KeyMode::Release);
-            const auto is_pressed = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left,
-                                    sys::SystemInput::KeyMode::Press);
+            const auto is_released = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left, sys::SystemInput::KeyMode::Release);
+            const auto is_pressed = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left, sys::SystemInput::KeyMode::Press);
 
             // Autofocus
+
+            auto uptarget = target;
+            if (target != nullptr && is_pressed && !target->provides_cursor_sink() && target->parent() != nullptr)
+                uptarget = _update_states_reverse(target->parent());
 
             if (_targetted != target)
             {
                 if (_targetted != nullptr)
                 {
-                    _targetted->setstate(Element::State::Clicked, false);
+                    _clicked->setstate(Element::State::Clicked, false);
                     _targetted->setstate(Element::State::Hovered, false);
                     _trigger_hovered_events();
                 }
                 if (target != nullptr)
                     target->setstate(Element::State::Hovered, true);
                 _targetted = target;
+                _clicked = uptarget;
             }
             if (_targetted != nullptr)
             {
                 if (is_released)
                 {
-                    _targetted->setstate(Element::State::Clicked, false);
+                    _clicked->setstate(Element::State::Clicked, false);
                 }
                 else if (is_pressed)
                 {
-                    _targetted->setstate(Element::State::Clicked);
+                    _clicked->setstate(Element::State::Clicked, true);
                 }
             }
-            if (_focused != target && is_pressed)
+            if (_focused != uptarget && is_pressed)
             {
                 if (_focused != nullptr)
                 {
@@ -817,14 +830,14 @@ namespace d2
                 {
                     _keynav_iterator->setstate(Element::State::Keynavi, false);
                 }
-                focus(target);
+                focus(uptarget);
             }
         }
         if (_ctx->input()->is_key_input())
         {
             // Micro forwards
             if (_ctx->input()->is_pressed(sys::SystemInput::LeftControl) &&
-                    _ctx->input()->is_pressed(sys::SystemInput::key('W'), sys::SystemInput::KeyMode::Press))
+                _ctx->input()->is_pressed(sys::SystemInput::key('W'), sys::SystemInput::KeyMode::Press))
             {
                 if (_keynav_iterator != nullptr)
                 {

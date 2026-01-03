@@ -15,7 +15,7 @@ namespace d2
     class TreeIter
     {
     public:
-        using foreach_callback = std::function<void(TreeIter)>;
+        using foreach_callback = std::function<bool(TreeIter)>;
     private:
         std::weak_ptr<Element> _elem{};
     public:
@@ -247,21 +247,21 @@ namespace d2
 
         using event_callback = std::function<void(EventListener, TreeIter)>;
         using foreach_callback = TreeIter::foreach_callback;
-        using foreach_internal_callback = std::function<void(ptr)>;
+        using foreach_internal_callback = std::function<bool(ptr)>;
 
         // Flags representing the meta state of the object
         // Event listeners notify when changes to them are made
         enum State : state_flag
         {
             Invalid = 0,
-            Hovered = 1 << 0,
-            Clicked = 1 << 1,
-            Focused = 1 << 2,
-            Display = 1 << 3,
-            Swapped = 1 << 4,
+            Display = 1 << 0,
+            Swapped = 1 << 1,
+            Created = 1 << 2,
+            Event   = 1 << 3,
+            Hovered = 1 << 4,
             Keynavi = 1 << 5,
-            Created = 1 << 6,
-            Event   = 1 << 7
+            Focused = 1 << 6,
+            Clicked = 1 << 7,
         };
         enum InternalState : internal_flag
         {
@@ -499,6 +499,7 @@ namespace d2
         // Listeners
 
         std::vector<EventListenerState::ptr> _subscribers{};
+        std::size_t _cursor_sink_listener_cnt{ 0 };
 
         // Rendering
 
@@ -620,6 +621,7 @@ namespace d2
 
         unit_meta_flag unit_report() const;
 
+        bool provides_cursor_sink() const;
         bool provides_input() const;
         bool needs_update() const;
 

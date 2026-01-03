@@ -120,6 +120,8 @@ namespace d2
             mutable int _prev_offset{ 0 };
             mutable int _offset{ 0 };
 
+            void _update_view();
+
             virtual void _signal_write_impl(write_flag type, unsigned int prop, ptr element) override;
             virtual void _state_change_impl(State state, bool value) override;
 

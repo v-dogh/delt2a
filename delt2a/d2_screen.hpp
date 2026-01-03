@@ -110,6 +110,7 @@ namespace d2
         ParentElement::DynamicIterator _keynav_iterator{ nullptr };
         eptr _focused{ nullptr };
         eptr _targetted{ nullptr };
+        eptr _clicked{ nullptr };
         tree _current{ nullptr };
 
         std::size_t _fps_avg{ 0 };
@@ -138,6 +139,7 @@ namespace d2
 
         void _update_viewport();
         eptr _update_states(eptr container, const std::pair<int, int>& mouse);
+        eptr _update_states_reverse(eptr ptr);
 
         void _apply_impl(const Element::foreach_callback& func, eptr container) const;
     public:

@@ -174,27 +174,35 @@ namespace d2
     {
         D2_ASSERT(callback != nullptr);
         auto& l = _subscribers.emplace_back(std::make_shared<EventListenerState>(
-                                                shared_from_this(),
-                                                _subscribers.size(),
-                                                value,
-                                                event,
-                                                std::move(callback)
-                                            ));
+            shared_from_this(),
+            _subscribers.size(),
+            value,
+            event,
+            std::move(callback)
+        ));
+        if (event == State::Clicked || event == State::Focused)
+            _cursor_sink_listener_cnt++;
         return EventListener(l);
     }
     void Element::_unmute_listener(EventListenerState::ptr listener)
     {
         D2_ASSERT(listener->index() < _subscribers.size());
+        if (listener->event() == State::Clicked || listener->event() == State::Focused)
+            _cursor_sink_listener_cnt--;
         _subscribers[listener->index()]->setstate(EventListenerState::Mode::Active);
     }
     void Element::_mute_listener(EventListenerState::ptr listener)
     {
         D2_ASSERT(listener->index() < _subscribers.size());
+        if (listener->event() == State::Clicked || listener->event() == State::Focused)
+            _cursor_sink_listener_cnt++;
         _subscribers[listener->index()]->setstate(EventListenerState::Mode::Muted);
     }
     void Element::_destroy_listener(EventListenerState::ptr listener)
     {
         D2_ASSERT(listener->index() < _subscribers.size());
+        if (listener->event() == State::Clicked || listener->event() == State::Focused)
+            _cursor_sink_listener_cnt--;
         _subscribers[listener->index()] = nullptr;
         for (auto it = _subscribers.begin(); it != _subscribers.end();)
         {
@@ -423,6 +431,10 @@ namespace d2
         return _unit_report_impl();
     }
 
+    bool Element::provides_cursor_sink() const
+    {
+        return _cursor_sink_listener_cnt || _provides_input_impl();
+    }
     bool Element::provides_input() const
     {
         return getstate(Display) && _provides_input_impl();
@@ -544,8 +556,7 @@ namespace d2
         }
         if (needs_update())
         {
-            if (const auto [ width, height ] = box();
-                    width > 0 && height > 0)
+            if (const auto [ width, height ] = box(); width > 0 && height > 0)
             {
                 _update_style_impl();
                 if (!_provides_buffer_impl() &&

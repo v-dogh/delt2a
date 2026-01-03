@@ -33,17 +33,17 @@ namespace d2::ctm
     D2_STYLESHEET_BEGIN(button_react)
         D2_STYLE(BackgroundColor, D2_VAR(WidgetTheme, wg_bg_button()))
         D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_fg_button()))
-        D2_INTERPOLATE_TWOWAY_AUTO(Hovered, 500, Linear, BackgroundColor, D2_VAR(WidgetTheme, wg_hbg_button()));
-        D2_INTERPOLATE_TWOWAY_AUTO(Clicked, 100, Linear, BackgroundColor, D2_VAR(WidgetTheme, wg_pbg_button()));
-        D2_INTERPOLATE_TWOWAY_AUTO(Clicked, 100, Linear, ForegroundColor, D2_VAR(WidgetTheme, wg_pfg_button()));
+        D2_INTERP_TWOWAY_AUTO(Hovered, 500, Linear, BackgroundColor, D2_VAR(WidgetTheme, wg_hbg_button()));
+        D2_INTERP_TWOWAY_AUTO(Clicked, 100, Linear, BackgroundColor, D2_VAR(WidgetTheme, wg_pbg_button()));
+        D2_INTERP_TWOWAY_AUTO(Clicked, 100, Linear, ForegroundColor, D2_VAR(WidgetTheme, wg_pfg_button()));
         D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
     D2_STYLESHEET_END
     D2_STYLESHEET_BEGIN(icon_react)
         D2_STYLE(ForegroundColor, D2_DYNAVAR(WidgetTheme, wg_fg_button(), value.stylize(d2::px::foreground::Bold)))
         auto dvar1 = D2_DYNAVAR(WidgetTheme, wg_hbg_button(), value.stylize(d2::px::foreground::Bold));
         auto dvar2 = D2_DYNAVAR(WidgetTheme, wg_pbg_button(), value.stylize(d2::px::foreground::Bold));
-        D2_INTERPOLATE_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, dvar1);
-        D2_INTERPOLATE_TWOWAY_AUTO(Clicked, 100, Linear, ForegroundColor, dvar2);
+        D2_INTERP_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, dvar1);
+        D2_INTERP_TWOWAY_AUTO(Clicked, 100, Linear, ForegroundColor, dvar2);
         D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
     D2_STYLESHEET_END
     D2_STYLESHEET_BEGIN(focus_color)

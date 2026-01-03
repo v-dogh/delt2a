@@ -12,6 +12,7 @@ namespace d2::dx
                 computed_height_ =
                     std::max(computed_height_, it->layout(Element::Layout::Y) + offset_ + it->layout(Element::Layout::Height));
             }
+            return true;
         });
     }
 
@@ -53,6 +54,7 @@ namespace d2::dx
                     foreach([](TreeIter ptr) {
                         internal::ElementView::from(ptr)
                             .signal_write(WriteType::LayoutYPos);
+                        return true;
                     });
                 });
                 internal::ElementView::from(scrollbar_)
@@ -104,7 +106,8 @@ namespace d2::dx
         _signal_write(WriteType::Style);
         foreach([](TreeIter ptr) {
             internal::ElementView::from(ptr)
-            .signal_write(WriteType::LayoutYPos);
+                .signal_write(WriteType::LayoutYPos);
+            return true;
         });
     }
 

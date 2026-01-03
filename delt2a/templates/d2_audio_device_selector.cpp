@@ -59,7 +59,7 @@ namespace d2::ctm
                 })
                 D2_STYLES_APPLY(border_color)
                 D2_STYLES_APPLY(selector_color)
-                D2_LISTEN_EXPR(Created, false, watch->destroy())
+                D2_OFF_EXPR(Created, watch->destroy())
                 *watch = ptr->state()->context()->sys<d2::sys::audio>()->watch(
                     dev, [=](const d2::sys::audio::DeviceName& name, d2::sys::audio::Event ev, d2::sys::audio::EventListener) {
                         switch (ev)

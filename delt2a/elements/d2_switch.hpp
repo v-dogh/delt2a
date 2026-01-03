@@ -20,14 +20,8 @@ namespace d2
 
                 PixelBackground disabled_background_color{};
                 PixelForeground disabled_foreground_color{};
-                PixelBackground enabled_background_color
-                {
-                .r = 255, .g = 255, .b = 255
-                };
-                PixelForeground enabled_foreground_color
-                {
-                .r = 0, .g = 0, .b = 0
-                };
+                PixelBackground enabled_background_color{ .r = 255, .g = 255, .b = 255 };
+                PixelForeground enabled_foreground_color{ .r = 0, .g = 0, .b = 0 };
                 Pixel separator_color{ .a = 0, .v = '|' };
                 bool disable_separator{ false };
             ),

@@ -427,6 +427,7 @@ namespace d2::style
                 {
                     this->foreach_internal([](Element::ptr ptr) {
                         ptr->initialize();
+                        return true;
                     });
                 }
             }

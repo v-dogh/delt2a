@@ -172,6 +172,7 @@ namespace d2::ctm
 							));
 					});
 				}
+                return true;
 			});
 		}
 	}

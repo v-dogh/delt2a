@@ -203,6 +203,7 @@ namespace d2
         {
             internal::ElementView::from(elem)
                 .signal_context_change_sub(type, prop, element);
+            return true;
         });
     }
     void ParentElement::_state_change_impl(State state, bool value)
@@ -212,6 +213,7 @@ namespace d2
             foreach_internal([&](ptr elem)
             {
                 elem->setstate(state, value);
+                return true;
             });
         }
     }
@@ -396,11 +398,13 @@ namespace d2
     void VecParentElement::foreach_internal(foreach_internal_callback callback) const
     {
         for (decltype(auto) it : _elements)
-            callback(it);
+            if (!callback(it))
+                break;
     }
     void VecParentElement::foreach (foreach_callback callback) const
     {
         for (decltype(auto) it : _elements)
-            callback(it->traverse());
+            if (!callback(it->traverse()))
+                break;
     }
 }
