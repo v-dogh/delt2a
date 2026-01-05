@@ -8,9 +8,24 @@
 #include <chrono>
 #include <vector>
 #include <thread>
+#include <any>
 
 namespace mt
 {
+    namespace impl
+    {
+        class Futex
+        {
+        private:
+            std::atomic_flag _flag{ false };
+        public:
+            Futex();
+
+            void release() noexcept;
+            void wait() noexcept;
+        };
+    }
+
 	class ThreadPool;
 
 	class context
@@ -56,10 +71,14 @@ namespace mt
             float growth_trigger_ratio{ 3.5f };
 			float pressure_trigger_ratio{ 10.f };
             Distribution default_dist{ Distribution::Fast };
-			std::size_t min_threads{ 2 };
-			std::size_t max_threads{ static_cast<std::size_t>(std::thread::hardware_concurrency() * 1.4) };
+            std::size_t min_threads{ 1 };
+            std::size_t max_threads{ std::thread::hardware_concurrency() };
 			std::chrono::seconds max_idle_time{ 10 };
-			std::function<std::size_t(std::size_t, std::size_t)> growth_callback{ [](std::size_t cnt, std::size_t) { return 4; } };
+            std::function<std::size_t(std::size_t, std::size_t)> growth_callback{
+                [](std::size_t cnt, std::size_t) {
+                    return cnt > 0 ? cnt * 2 - 1 : 1;
+                }
+            };
 			std::function<void(std::size_t)> event_grow{ nullptr };
 			std::function<void(std::size_t)> event_shrink{ nullptr };
 			std::function<void(std::size_t)> event_pressure{ nullptr };
@@ -71,7 +90,8 @@ namespace mt
             {
                 HandleTask = 1 << 0,
                 HandleCyclicTask = 1 << 1,
-                MainWorker = 1 << 2,
+                HandleDeferredTask = 1 << 2,
+                MainWorker = 1 << 3,
             };
         private:
             wptr _ptr{};
@@ -106,8 +126,21 @@ namespace mt
 				Continue,
 				Discard,
 			};
+            enum class Query
+            {
+                Type,
+                Task,
+            };
+            enum Type : unsigned char
+            {
+                Static = 1 << 0,
+                Cyclic = 1 << 1,
+                Deferred = 1 << 2,
+                System = 1 << 3,
+            };
+
             static constexpr auto oneoff = std::chrono::milliseconds::max();
-			std::function<Token()> callback{};
+            std::function<Token(Query, std::any&)> callback{};
             std::chrono::milliseconds timing{ oneoff };
 		};
 		struct CyclicTask : Task
@@ -130,7 +163,7 @@ namespace mt
 			}
 		};
 		struct Thread
-		{
+		{    
             TaskRing<Task, _thread_backlog> tasks{};
 			std::size_t id{};
 			std::vector<CyclicTask> cyclic_tasks{};
@@ -138,6 +171,7 @@ namespace mt
 			std::chrono::steady_clock::time_point last_task{};
 			std::jthread handle{};
             std::atomic<std::size_t> task_cnt{ 0 };
+            std::atomic<unsigned char> task_support{ 0x00 };
 			std::atomic<bool> stop{ true };
 		};
 		struct Node : std::enable_shared_from_this<Node>
@@ -171,10 +205,10 @@ namespace mt
 		std::size_t _node_count() const noexcept;
 		std::size_t _node_id() const noexcept;
 
-        std::size_t _distribute_random() noexcept;
-        std::size_t _distribute_fast() noexcept;
-        std::size_t _distribute_optimal() noexcept;
-        std::size_t _distribute(Distribution algo) noexcept;
+        std::size_t _distribute_random(unsigned char support) noexcept;
+        std::size_t _distribute_fast(unsigned char support) noexcept;
+        std::size_t _distribute_optimal(unsigned char support) noexcept;
+        std::size_t _distribute(Distribution algo, unsigned char support) noexcept;
 
         void _schedule(Task task, std::optional<Distribution> dist) noexcept;
 		bool _check_overload() noexcept;
@@ -191,6 +225,15 @@ namespace mt
 
 		// Helpers
 
+        template<typename Type>
+        Type _query_task(Task::Query query, const Task& task)
+        {
+            std::any out;
+            out.emplace<Type>();
+            task.callback(query, out);
+            return std::any_cast<Type&>(out);
+        }
+
 		template<typename Func, typename... Argv>
 		void _event(Func&& func, Argv&&... args) noexcept
 		{
@@ -203,7 +246,7 @@ namespace mt
 		}
 
 		template<typename Func>
-		void _launch_worker(std::size_t nid, Func&& func, std::size_t cnt = 1)
+        void _launch_worker(std::size_t nid, Func&& func, std::size_t cnt = 1, unsigned char support = Task::Cyclic | Task::Static | Task::Deferred)
 		{
 			auto& node = _nodes[nid];
 			while (cnt--)
@@ -216,6 +259,7 @@ namespace mt
 						node->thread_cnt++;
 						const auto id = i;
 						auto& state = node->threads[id];
+                        state.task_support = support | (i == 0 ? Task::System : 0x00);
 						state.id = id;
 						state.last_task = std::chrono::steady_clock::now();
                         state.handle = std::jthread(
@@ -231,7 +275,7 @@ namespace mt
 			}
 			_event(_cfg.event_grow, node->thread_cnt);
 		}
-        void _launch_worker(std::size_t nid, std::size_t cnt = 1);
+        void _launch_worker_auto(std::size_t nid, std::size_t cnt = 1, unsigned char support = Task::Cyclic | Task::Static | Task::Deferred);
 
         template<typename Future, typename Ret>
         static consteval void _future_check()
@@ -264,7 +308,7 @@ namespace mt
 		void resize(std::size_t size) noexcept;
 		void resize(std::size_t node, std::size_t size) noexcept;
 
-        Worker worker(unsigned char flags = Worker::Flags::HandleCyclicTask | Worker::Flags::HandleTask) noexcept;
+        Worker worker(unsigned char flags = Worker::Flags::HandleCyclicTask | Worker::Flags::HandleTask | Worker::Flags::HandleDeferredTask) noexcept;
 
         // Overrides
 
@@ -279,212 +323,251 @@ namespace mt
 
         template<typename Future, typename Func, typename... Argv>
         auto launchd(Func&& callback, TaskConfig<Future> cfg, Argv&&... args)
-		{
-			using ret = std::invoke_result_t<Func, Argv...>;
-            _future_check<Future, ret>();
-
-			if (_check_overload())
-                return Future(nullptr);
-            const auto task = cfg.future == nullptr ?
-                Future::make() : cfg.future;
-
-			_schedule({
-				.callback = [
-					block = std::weak_ptr(task.block()),
-					callback = std::forward<Func>(callback),
-					...args = std::forward<Argv>(args)
-				]() mutable -> Task::Token {
-					const auto ptr = block.lock();
-                    if (!ptr->is_discarded())
-                    {
-                        try
-                        {
-                            if (ptr)
-                            {
-                                if constexpr (std::is_same_v<void, ret>)
-                                {
-                                    callback(std::forward<Argv>(args)...);
-                                    ptr->set_value();
-                                }
-                                else
-                                    ptr->set_value(callback(std::forward<Argv>(args)...));
-                            }
-                            else
-                            {
-                                callback(std::forward<Argv>(args)...);
-                            }
-                        }
-                        catch (...)
-                        {
-                            if (ptr)
-                                ptr->set_exception(std::current_exception());
-                        }
-                    }
-					return Task::Token::Discard;
-				}
-            }, cfg.distribution);
-			return task;
-		}
-
-		template<typename Func, typename... Argv>
-        void launchd_void(Func&& callback, std::optional<Distribution> dist, Argv&&... args)
-		{
-			using ret = std::invoke_result_t<Func, Argv...>;
-
-			if (_check_overload())
-				return;
-
-			_schedule({
-				.callback = [
-					callback = std::forward<Func>(callback),
-					...args = std::forward<Argv>(args)
-                ]() mutable -> Task::Token {
-                    try { callback(std::forward<Argv>(args)...); }
-                    catch (...) {}
-					return Task::Token::Discard;
-				}
-            }, dist);
-		}
-
-        template<typename Future, typename Func, typename... Argv>
-        auto launchd_cyclic(std::chrono::milliseconds time, Func&& callback, TaskConfig<Future> cfg, Argv&&... args)
-		{
-			using ret = std::invoke_result_t<Func, std::nullptr_t, Argv...>;
-            _future_check<Future, ret>();
-
-			if (_check_overload())
-                return Future(nullptr);
-            const auto task = cfg.future == nullptr ?
-                Future::make() : cfg.future;
-
-			_schedule({
-				.callback = [
-					block = task.block(),
-					callback = std::forward<Func>(callback),
-					...args = std::forward<Argv>(args)
-				]() mutable -> Task::Token {
-					const auto fut = future<ret>(block);
-                    if (!block->is_discarded())
-                    {
-                        try
-                        {
-                            if constexpr (std::is_same_v<void, ret>)
-                            {
-                                callback(fut, args...);
-                                block->set_tick();
-                            }
-                            else
-                                block->set_tick(callback(fut, args...));
-                        }
-                        catch (...)
-                        {
-                            block->set_tick_exception(std::current_exception());
-                        }
-                    }
-					return block->is_discarded() ? Task::Token::Discard : Task::Token::Continue;
-				},
-                .timing = time
-            }, cfg.distribution);
-			return task;
-		}
-
-        template<typename Future, typename Func, typename... Argv>
-        auto launchd_deferred(std::chrono::milliseconds time, Func&& callback, TaskConfig<Future> cfg, Argv&&... args)
-		{
+        {
             using ret = std::invoke_result_t<Func, Argv...>;
             _future_check<Future, ret>();
 
-			if (_check_overload())
+            if (_check_overload())
                 return Future(nullptr);
-            const auto task = cfg.future == nullptr ?
-                Future::make() : cfg.future;
+            const auto task = cfg.future == nullptr ? Future::make() : cfg.future;
 
-			_schedule({
-				.callback = [
-					block = std::weak_ptr(task.block()),
-					callback = std::forward<Func>(callback),
-					...args = std::forward<Argv>(args)
-				]() mutable -> Task::Token {
-					const auto ptr = block.lock();
-                    if (!ptr->is_discarded())
+            _schedule({
+                .callback = [
+                    block = std::weak_ptr(task.block()),
+                    callback = std::forward<Func>(callback),
+                    ...args = std::forward<Argv>(args)
+                ](Task::Query query, std::any& out) mutable -> Task::Token {
+                    if (query == Task::Query::Type)
                     {
-                        try
+                        std::any_cast<unsigned char&>(out) = Task::Type::Static;
+                        return Task::Token::Continue;
+                    }
+                    else if (query == Task::Query::Task)
+                    {
+                        const auto ptr = block.lock();
+                        if (!(ptr && ptr->is_discarded()))
                         {
-                            if (ptr)
+                            try
+                            {
+                                if (ptr)
+                                {
+                                    if constexpr (std::is_same_v<void, ret>)
+                                    {
+                                        callback(std::forward<Argv>(args)...);
+                                        ptr->set_value();
+                                    }
+                                    else
+                                        ptr->set_value(callback(std::forward<Argv>(args)...));
+                                }
+                                else
+                                {
+                                    callback(std::forward<Argv>(args)...);
+                                }
+                            }
+                            catch (...)
+                            {
+                                if (ptr)
+                                    ptr->set_exception(std::current_exception());
+                            }
+                        }
+                    }
+                    return Task::Token::Discard;
+                }
+            }, cfg.distribution);
+            return task;
+        }
+
+        template<typename Func, typename... Argv>
+        void launchd_void(Func&& callback, std::optional<Distribution> dist, Argv&&... args)
+        {
+            using ret = std::invoke_result_t<Func, Argv...>;
+
+            if (_check_overload())
+                return;
+
+            _schedule({
+                .callback = [
+                    callback = std::forward<Func>(callback),
+                    ...args = std::forward<Argv>(args)
+                ](Task::Query query, std::any& out) mutable -> Task::Token {
+                    if (query == Task::Query::Type)
+                    {
+                        std::any_cast<unsigned char&>(out) = Task::Type::Static;
+                        return Task::Token::Continue;
+                    }
+                    else if (query == Task::Query::Task)
+                    {
+                        try { callback(std::forward<Argv>(args)...); }
+                        catch (...) {}
+                    }
+                    return Task::Token::Discard;
+                }
+            }, dist);
+        }
+
+        template<typename Future, typename Func, typename... Argv>
+        auto launchd_cyclic(std::chrono::milliseconds time, Func&& callback, TaskConfig<Future> cfg, Argv&&... args)
+        {
+            using ret = std::invoke_result_t<Func, std::nullptr_t, Argv...>;
+            _future_check<Future, ret>();
+
+            if (_check_overload())
+                return Future(nullptr);
+            const auto task = cfg.future == nullptr ? Future::make() : cfg.future;
+
+            _schedule({
+                .callback = [
+                    block = task.block(),
+                    callback = std::forward<Func>(callback),
+                    ...args = std::forward<Argv>(args)
+                ](Task::Query query, std::any& out) mutable -> Task::Token {
+                    if (query == Task::Query::Type)
+                    {
+                        std::any_cast<unsigned char&>(out) = Task::Type::Cyclic;
+                        return Task::Token::Continue;
+                    }
+                    else if (query == Task::Query::Task)
+                    {
+                        const auto fut = future<ret>(block);
+                        if (!block->is_discarded())
+                        {
+                            try
                             {
                                 if constexpr (std::is_same_v<void, ret>)
                                 {
-                                    callback(std::forward<Argv>(args)...);
-                                    ptr->set_value();
+                                    callback(fut, args...);
+                                    block->set_tick();
                                 }
                                 else
-                                    ptr->set_value(callback(std::forward<Argv>(args)...));
+                                    block->set_tick(callback(fut, args...));
                             }
-                            else
+                            catch (...)
                             {
-                                callback(std::forward<Argv>(args)...);
+                                block->set_tick_exception(std::current_exception());
                             }
                         }
-                        catch (...)
+                        return block->is_discarded() ? Task::Token::Discard : Task::Token::Continue;
+                    }
+                    return Task::Token::Discard;
+                },
+                .timing = time
+            }, cfg.distribution);
+            return task;
+        }
+
+        template<typename Future, typename Func, typename... Argv>
+        auto launchd_deferred(std::chrono::milliseconds time, Func&& callback, TaskConfig<Future> cfg, Argv&&... args)
+        {
+            using ret = std::invoke_result_t<Func, Argv...>;
+            _future_check<Future, ret>();
+
+            if (_check_overload())
+                return Future(nullptr);
+            const auto task = cfg.future == nullptr ? Future::make() : cfg.future;
+
+            _schedule({
+                .callback = [
+                    block = std::weak_ptr(task.block()),
+                    callback = std::forward<Func>(callback),
+                    ...args = std::forward<Argv>(args)
+                ](Task::Query query, std::any& out) mutable -> Task::Token {
+                    if (query == Task::Query::Type)
+                    {
+                        std::any_cast<unsigned char&>(out) = Task::Type::Deferred;
+                        return Task::Token::Continue;
+                    }
+                    else if (query == Task::Query::Task)
+                    {
+                        const auto ptr = block.lock();
+                        if (!(ptr && ptr->is_discarded()))
                         {
-                            if (ptr)
-                                ptr->set_exception(std::current_exception());
+                            try
+                            {
+                                if (ptr)
+                                {
+                                    if constexpr (std::is_same_v<void, ret>)
+                                    {
+                                        callback(std::forward<Argv>(args)...);
+                                        ptr->set_value();
+                                    }
+                                    else
+                                        ptr->set_value(callback(std::forward<Argv>(args)...));
+                                }
+                                else
+                                {
+                                    callback(std::forward<Argv>(args)...);
+                                }
+                            }
+                            catch (...)
+                            {
+                                if (ptr)
+                                    ptr->set_exception(std::current_exception());
+                            }
                         }
                     }
-					return Task::Token::Discard;
-				},
+                    return Task::Token::Discard;
+                },
                 .timing = time
             }, cfg.distribution);
 
             return task;
-		}
+        }
 
         template<typename Func, typename... Argv>
         auto co_launchd(Func&& callback, std::optional<Distribution> dist, Argv&&... args)
-		{
-			using ret = std::invoke_result_t<Func, Argv...>;
+        {
+            using ret = std::invoke_result_t<Func, Argv...>;
 
-			if (_check_overload())
+            if (_check_overload())
                 return co_future<ret>(nullptr);
             const auto task = co_future<ret>::make();
 
-			_schedule({
-				.callback = [
-					block = std::weak_ptr(task.block()),
-					callback = std::forward<Func>(callback),
-					...args = std::forward<Argv>(args)
-				]() mutable -> Task::Token {
-					const auto ptr = block.lock();
-                    if (!ptr->is_discarded())
+            _schedule({
+                .callback = [
+                    block = std::weak_ptr(task.block()),
+                    callback = std::forward<Func>(callback),
+                    ...args = std::forward<Argv>(args)
+                ](Task::Query query, std::any& out) mutable -> Task::Token {
+                    if (query == Task::Query::Type)
                     {
-                        try
+                        std::any_cast<unsigned char&>(out) = Task::Type::Static;
+                        return Task::Token::Continue;
+                    }
+                    else if (query == Task::Query::Task)
+                    {
+                        const auto ptr = block.lock();
+                        if (!(ptr && ptr->is_discarded()))
                         {
-                            if (ptr)
+                            try
                             {
-                                if constexpr (std::is_same_v<void, ret>)
+                                if (ptr)
                                 {
-                                    callback(std::forward<Argv>(args)...);
-                                    ptr->set_value();
+                                    if constexpr (std::is_same_v<void, ret>)
+                                    {
+                                        callback(std::forward<Argv>(args)...);
+                                        ptr->set_value();
+                                    }
+                                    else
+                                        ptr->set_value(callback(std::forward<Argv>(args)...));
                                 }
                                 else
-                                    ptr->set_value(callback(std::forward<Argv>(args)...));
+                                {
+                                    callback(std::forward<Argv>(args)...);
+                                }
                             }
-                            else
+                            catch (...)
                             {
-                                callback(std::forward<Argv>(args)...);
+                                if (ptr)
+                                    ptr->set_exception(std::current_exception());
                             }
-                        }
-                        catch (...)
-                        {
-                            if (ptr)
-                                ptr->set_exception(std::current_exception());
                         }
                     }
-					return Task::Token::Discard;
-				}
+                    return Task::Token::Discard;
+                }
             }, dist);
-			return task;
-		}
+
+            return task;
+        }
 
         // Defaults
 

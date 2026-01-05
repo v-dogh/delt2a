@@ -682,7 +682,7 @@ namespace d2
                 _frame();
 
                 fps_counter++;
-                if (std::chrono::steady_clock::now() - last_measurement >
+                if (beg - last_measurement >
                     std::chrono::seconds(1))
                 {
                     _fps_avg = fps_counter;
@@ -726,7 +726,7 @@ namespace d2
                 _frame();
 
                 fps_counter++;
-                if (std::chrono::steady_clock::now() - last_measurement >
+                if (beg - last_measurement >
                     std::chrono::seconds(1))
                 {
                     _fps_avg = fps_counter;
@@ -740,11 +740,11 @@ namespace d2
 
                 auto frame_ms = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
                 auto sleep = _refresh_rate - frame_ms;
-                if (sleep > std::chrono::milliseconds(0))
-                    _ctx->wait(
-                        _refresh_rate == std::chrono::milliseconds(0) ?
-                            std::chrono::milliseconds::max() : sleep
-                    );
+                _ctx->wait(
+                    sleep <= std::chrono::milliseconds(0) ||
+                    _refresh_rate == std::chrono::milliseconds(0) ?
+                        std::chrono::milliseconds::max() : sleep
+                );
             }
         }
         _ctx->deinitialize();

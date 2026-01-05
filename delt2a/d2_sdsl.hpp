@@ -295,25 +295,25 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 #define _D2_IMPL_LISTEN_GLOBAL_END });
 
 #define _D2_IMPL_ASYNC_EEXPR(...) [=]() -> void { _D2_IMPL_ASYNC_EXPR(__VA_ARGS__) }()
-#define _D2_IMPL_ASYNC_EXPR(...)  _D2_IMPL_ASYNC_TASK (__VA_ARGS__); _D2_IMPL_ASYNC_END
-#define _D2_IMPL_ASYNC_TASK       __state->context()->scheduler()->launch_task([=]() {
-#define _D2_IMPL_ASYNC_END        });
+#define _D2_IMPL_ASYNC_EXPR(...) _D2_IMPL_ASYNC_TASK (__VA_ARGS__); _D2_IMPL_ASYNC_END
+#define _D2_IMPL_ASYNC_TASK __state->context()->scheduler()->launch([=]() {
+#define _D2_IMPL_ASYNC_END });
 
 #define _D2_IMPL_CYCLIC_EEXPR(_time_, ...) [=]() -> void { _D2_IMPL_CYCLIC_EXPR(_time_, __VA_ARGS__) }()
-#define _D2_IMPL_CYCLIC_EXPR(_time_, ...)  _D2_IMPL_CYCLIC_TASK(_time_) (__VA_ARGS__); _D2_IMPL_CYCLIC_END
+#define _D2_IMPL_CYCLIC_EXPR(_time_, ...) _D2_IMPL_CYCLIC_TASK(_time_) (__VA_ARGS__); _D2_IMPL_CYCLIC_END
 
 #define _D2_IMPL_CYCLIC_TASK(_time_) \
     { constexpr auto __cyclic_time = std::chrono::milliseconds(_time_); \
-        __state->context()->scheduler()->launch_cyclic_task([=](auto task) {
+    __state->context()->scheduler()->launch_cyclic([=](auto task) {
 
 #define _D2_IMPL_CYCLIC_END }, __cyclic_time); }
 
 #define _D2_IMPL_DEFER_EEXPR(_time_, ...) [=]() -> void { _D2_IMPL_DEFER_EXPR(_time_, __VA_ARGS__) }()
-#define _D2_IMPL_DEFER_EXPR(_time_, ...)  _D2_IMPL_DEFER_TASK(_time_) (__VA_ARGS__); _D2_IMPL_DEFERRED_TASK_END
+#define _D2_IMPL_DEFER_EXPR(_time_, ...) _D2_IMPL_DEFER_TASK(_time_) (__VA_ARGS__); _D2_IMPL_DEFERRED_TASK_END
 
 #define _D2_IMPL_DEFER_TASK(_time_) \
     { constexpr auto __defer_time = std::chrono::milliseconds(_time_); \
-        __state->context()->scheduler()->launch_deferred_task([=]() -> void {
+    __state->context()->scheduler()->launch_deferred([=]() -> void {
 
 #define _D2_IMPL_DEFERRED_TASK_END }, __defer_time); }
 

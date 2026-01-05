@@ -1215,7 +1215,11 @@ namespace d2
             using wflags = mt::ThreadPool::Worker::Flags;
             _main_thread = std::this_thread::get_id();
             _scheduler->start();
-            _worker = _scheduler->worker(wflags::MainWorker | wflags::HandleCyclicTask);
+            _worker = _scheduler->worker(
+                wflags::MainWorker |
+                wflags::HandleCyclicTask |
+                wflags::HandleDeferredTask
+            );
             _worker.start();
         }
         void deinitialize()
