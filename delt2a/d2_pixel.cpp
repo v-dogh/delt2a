@@ -274,7 +274,7 @@ namespace d2
 			);
 		};
 
-        const auto special_case = false/*(src.v == ' ' && src.a < a)*/;
+        const auto special_case = (src.v == ' ' && src.a < a);
         const auto src_af = special_case ? src.a : src.af;
         if (src_af == 0 && src.a == 0)
             return;
@@ -325,11 +325,11 @@ namespace d2
 			);
 		}
 
-        if ((v == ' ' && src_af > 0) || src_af >= af /*&& !special_case*/) [[ unlikely ]]
-		{
-			v = src.v;
+        if ((v == ' ' && src_af > 0) || src_af >= af) [[ unlikely ]]
+        {
+            v = src.v;
             style = src.style;
-		}
+        }
 	}
 
 	bool PixelBase::compare_colors(const PixelBase& px) const

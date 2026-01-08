@@ -429,7 +429,7 @@ namespace mt
                     else if (query == Task::Query::Task)
                     {
                         const auto fut = future<ret>(block);
-                        if (!block->is_discarded())
+                        if (!block->is_discarded() && !block->is_paused())
                         {
                             try
                             {
@@ -485,6 +485,7 @@ namespace mt
                             {
                                 if (ptr)
                                 {
+                                    if (ptr->is_paused()) return Task::Token::Continue;
                                     if constexpr (std::is_same_v<void, ret>)
                                     {
                                         callback(std::forward<Argv>(args)...);

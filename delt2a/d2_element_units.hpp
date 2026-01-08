@@ -80,6 +80,10 @@ namespace d2
                 units_.type == Type::Pc ||
                 (units_.mods & (Mods::Inverted | Mods::Center));
         }
+        constexpr bool inverted() const
+        {
+            return units_.mods & Mods::Inverted;
+        }
 
         constexpr const float& raw() const
         {

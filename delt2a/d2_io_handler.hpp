@@ -237,65 +237,17 @@ namespace d2
                     Stream(const Stream&) = default;
                     Stream(Stream&&) = default;
 
-                    void apply(auto&& func, std::size_t channel, float start = 0.0f, float end = 1.f)
-                    {
-                        const auto channel_size = _data.size() / _format->channels;
-                        const auto astart = std::size_t(start * channel_size);
-                        const auto aend = std::size_t(end * channel_size);
-                        for (std::size_t i = astart; i < aend; i += _format->channels)
-                            _data[i + channel] = func(_data[i + channel], float(i + _offset) / _total);
-                    }
-                    void apply(auto&& func, float start = 0.0f, float end = 1.f)
-                    {
-                        const auto astart = std::size_t(start * _data.size());
-                        const auto aend = std::size_t(end * _data.size());
-                        const auto dist = aend - astart;
-                        if (_format->channels == 2)
-                        {
-                            for (std::size_t i = astart; i < aend; i += 2)
-                            {
-                                _data[i] = func(_data[i], float(i + _offset) / _total);
-                                _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
-                            }
-                        }
-                        else if (_format->channels == 4)
-                        {
-                            for (std::size_t i = astart; i < aend; i += 4)
-                            {
-                                _data[i] = func(_data[i], float(i + _offset) / _total);
-                                _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
-                                _data[i + 2] = func(_data[i + 2], float(i + 2 + _offset) / _total);
-                                _data[i + 3] = func(_data[i + 3], float(i + 3 + _offset) / _total);
-                            }
-                        }
-                        else
-                        {
-                            for (std::size_t i = astart; i < aend; i++)
-                                _data[i] = func(_data[i], float(i + _offset) / _total);
-                        }
-                    }
+                    void apply(auto&& func, std::size_t channel, float start = 0.0f, float end = 1.f);
+                    void apply(auto&& func, float start = 0.0f, float end = 1.f);
+                    void push(std::span<float> in);
+                    void push_expand(std::span<float> in);
 
-                    const FormatInfo& info() const
-                    {
-                        return *_format;
-                    }
-                    std::size_t size() const
-                    {
-                        return _total / _format->channels;
-                    }
-                    std::size_t chunk() const
-                    {
-                        return _data.size() / _format->channels;
-                    }
+                    const FormatInfo& info() const;
+                    std::size_t size() const;
+                    std::size_t chunk() const;
 
-                    float& at(std::size_t idx, std::size_t channel) const
-                    {
-                        return _data[(idx * _format->channels) + channel];
-                    }
-                    float& at(float idx, std::size_t channel) const
-                    {
-                        return _data[(idx * _format->channels) + channel];
-                    }
+                    float& at(std::size_t idx, std::size_t channel) const;
+                    float& at(float idx, std::size_t channel) const;
 
                     Stream& operator=(const Stream&) = default;
                     Stream& operator=(Stream&&) = default;
@@ -859,6 +811,9 @@ namespace d2
             virtual void release_image(const std::string& path) = 0;
             virtual ImageInstance image_info(const std::string& path) = 0;
             virtual std::uint32_t image_id(const std::string& path) = 0;
+
+            virtual std::size_t delta_size() = 0;
+            virtual std::size_t swapframe_size() = 0;
 
 			virtual void write(std::span<const Pixel> buffer, std::size_t width, std::size_t height) = 0;
 		};

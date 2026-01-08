@@ -704,7 +704,11 @@ namespace d2::style
                 (Element::ContextualXPos * this->x.contextual()) |
                 (Element::ContextualYPos * this->y.contextual()) |
                 (Element::ContextualWidth * this->width.contextual()) |
-                (Element::ContextualHeight * this->height.contextual());
+                (Element::ContextualHeight * this->height.contextual()) |
+                (Element::InvertedXPos * this->x.inverted()) |
+                (Element::InvertedYPos * this->y.inverted()) |
+                (Element::InvertedWidth * this->width.inverted()) |
+                (Element::InvertedHeight * this->height.inverted());
         }
     public:
         using base::base;

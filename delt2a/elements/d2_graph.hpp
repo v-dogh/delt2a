@@ -99,6 +99,7 @@ namespace d2
             void clear();
             void push(float data_point);
             void rescale(float scale);
+            void rescale(float scale, float trans);
         };
 
         class NodeWaveGraph :

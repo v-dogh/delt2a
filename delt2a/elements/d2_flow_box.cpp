@@ -260,69 +260,105 @@ namespace d2::dx
     {
         if (ptr->relative_layout(type))
         {
+            _layout_dirty = true;
             recompute_layout(
                 std::static_pointer_cast<const ParentElement>(shared_from_this()),
                 _elements
             );
+            _layout_dirty = false;
         }
         else
         {
-            auto recompute = false;
-            auto check_relative_dims = false;
-            enum Element::Layout layout;
-            if (ptr->relative_layout(Element::Layout::X))
+            ParentElement::_layout_for_impl(type, ptr);
+            if (!_layout_dirty &&
+                (ptr->relative_layout(Layout::X) ||
+                ptr->relative_layout(Layout::Y) ||
+                ptr->relative_layout(Layout::Width) ||
+                ptr->relative_layout(Layout::Height)))
             {
-                layout = Element::Layout::Width;
-                check_relative_dims = true;
-            }
-            else if (ptr->relative_layout(Element::Layout::Y))
-            {
-                layout = Element::Layout::Height;
-                check_relative_dims = true;
-            }
-            if (check_relative_dims)
-            {
-                foreach_internal([&](TreeIter ptr) {
-                    if (ptr->relative_layout(Element::Layout::Width))
-                    {
-                        recompute = true;
-                        internal::ElementView::from(ptr)
-                            .signal_write(
-                                layout == Element::Layout::Width ?
-                                    WriteType::LayoutWidth : WriteType::LayoutHeight
-                            );
-                    }
+                _layout_dirty = true;
+                foreach_internal([](Element::ptr ptr) -> bool {
+                    auto flags = 0x00;
+                    if (ptr->relative_layout(Layout::X)) flags |= WriteType::LayoutXPos;
+                    if (ptr->relative_layout(Layout::Y)) flags |= WriteType::LayoutYPos;
+                    if (ptr->relative_layout(Layout::Width)) flags |= WriteType::LayoutWidth;
+                    if (ptr->relative_layout(Layout::Height)) flags |= WriteType::LayoutHeight;
+                    if (flags != 0x00)
+                        d2::internal::ElementView::from(ptr)
+                            .signal_write(flags);
                     return true;
                 });
-            }
-            ParentElement::_layout_for_impl(type, ptr);
-            if (recompute)
-            {
-                recompute_layout(
-                    std::static_pointer_cast<const ParentElement>(shared_from_this()),
-                    _elements
-                );
             }
         }
     }
     void ScrollFlowBox::_layout_for_impl(enum Element::Layout type, cptr ptr) const
     {
         if (ptr->relative_layout(type))
+        {
+            _layout_dirty = true;
             recompute_layout(
                 std::static_pointer_cast<const ParentElement>(shared_from_this()),
                 _elements, 0, -offset_
             );
+            _layout_dirty = false;
+        }
         else
-            ScrollBox::_layout_for_impl(type, ptr);
+        {
+            ParentElement::_layout_for_impl(type, ptr);
+            if (!_layout_dirty &&
+                (ptr->relative_layout(Layout::X) ||
+                 ptr->relative_layout(Layout::Y) ||
+                 ptr->relative_layout(Layout::Width) ||
+                 ptr->relative_layout(Layout::Height)))
+            {
+                _layout_dirty = true;
+                foreach_internal([](Element::ptr ptr) -> bool {
+                    auto flags = 0x00;
+                    if (ptr->relative_layout(Layout::X)) flags |= WriteType::LayoutXPos;
+                    if (ptr->relative_layout(Layout::Y)) flags |= WriteType::LayoutYPos;
+                    if (ptr->relative_layout(Layout::Width)) flags |= WriteType::LayoutWidth;
+                    if (ptr->relative_layout(Layout::Height)) flags |= WriteType::LayoutHeight;
+                    if (flags != 0x00)
+                        d2::internal::ElementView::from(ptr)
+                            .signal_write(flags);
+                    return true;
+                });
+            }
+        }
     }
     void VirtualFlowBox::_layout_for_impl(enum Element::Layout type, cptr ptr) const
     {
         if (ptr->relative_layout(type))
+        {
+            _layout_dirty = true;
             recompute_layout(
                 std::static_pointer_cast<const ParentElement>(shared_from_this()),
                 _elements
-            );
+                );
+            _layout_dirty = false;
+        }
         else
+        {
             ParentElement::_layout_for_impl(type, ptr);
+            if (!_layout_dirty &&
+                (ptr->relative_layout(Layout::X) ||
+                 ptr->relative_layout(Layout::Y) ||
+                 ptr->relative_layout(Layout::Width) ||
+                 ptr->relative_layout(Layout::Height)))
+            {
+                _layout_dirty = true;
+                foreach_internal([](Element::ptr ptr) -> bool {
+                    auto flags = 0x00;
+                    if (ptr->relative_layout(Layout::X)) flags |= WriteType::LayoutXPos;
+                    if (ptr->relative_layout(Layout::Y)) flags |= WriteType::LayoutYPos;
+                    if (ptr->relative_layout(Layout::Width)) flags |= WriteType::LayoutWidth;
+                    if (ptr->relative_layout(Layout::Height)) flags |= WriteType::LayoutHeight;
+                    if (flags != 0x00)
+                        d2::internal::ElementView::from(ptr)
+                            .signal_write(flags);
+                    return true;
+                });
+            }
+        }
     }
 }

@@ -449,9 +449,9 @@ namespace d2::fb
                 }
             },
             Action::alloc_state<State>({
-                                           .abs = _ptr.abs,
-                                           .len = data.size()
-                                       }, std::span(data.begin(), data.end()))
+                .abs = _ptr.abs,
+                .len = data.size()
+            }, std::span(data.begin(), data.end()))
         });
     }
     void FragmentedBuffer::_action_erase(std::size_t len)

@@ -227,6 +227,58 @@ namespace d2
         _layout_for_impl(type, elem);
     }
 
+    bool ParentElement::empty() const
+    {
+        return _empty_impl();
+    }
+    bool ParentElement::exists(const std::string& name) const
+    {
+        return _exists_impl(name);
+    }
+    bool ParentElement::exists(ptr ptr) const
+    {
+        return _exists_impl(ptr);
+    }
+
+    TreeIter ParentElement::at(const std::string& name) const
+    {
+        return _at_impl(name);
+    }
+
+    TreeIter ParentElement::create(ptr ptr)
+    {
+        return _create_impl(ptr);
+    }
+    TreeIter ParentElement::override(ptr ptr)
+    {
+        return _override_impl(ptr);
+    }
+
+    void ParentElement::clear()
+    {
+        _clear_impl();
+    }
+
+    void ParentElement::remove(const std::string& name)
+    {
+        if (!_remove_impl(name))
+            throw std::runtime_error{ "Attempt to remove invalid object" };
+    }
+    void ParentElement::remove(ptr ptr)
+    {
+        if (!_remove_impl(ptr))
+            throw std::runtime_error{ "Attempt to remove invalid object" };
+    }
+
+    bool ParentElement::remove_if(const std::string& name)
+    {
+        return _remove_impl(name);
+    }
+    bool ParentElement::remove_if(ptr ptr)
+    {
+        return _remove_impl(ptr);
+    }
+
     //
     // VecParent
     //
@@ -334,24 +386,26 @@ namespace d2
         _signal_write(Style);
         return ptr;
     }
-    void VecParentElement::_remove_impl(const std::string& name)
+    bool VecParentElement::_remove_impl(const std::string& name)
     {
         const auto idx = _find(name);
         if (idx >= _elements.size())
-            throw std::runtime_error{ "Attempt to remove invalid object" };
+            return false;
         auto ptr = _elements[idx];
         ptr->setstate(Created, false);
         _elements.erase(_elements.begin() + idx);
         _signal_write(Style);
+        return true;
     }
-    void VecParentElement::_remove_impl(ptr ptr)
+    bool VecParentElement::_remove_impl(ptr ptr)
     {
         const auto idx = _find(ptr);
         if (idx >= _elements.size())
-            throw std::runtime_error{ "Attempt to remove invalid object" };
+            return false;
         ptr->setstate(Created, false);
         _elements.erase(_elements.begin() + idx);
         _signal_write(Style);
+        return true;
     }
     void VecParentElement::_clear_impl()
     {

@@ -2,10 +2,47 @@
 #include "elements/d2_box.hpp"
 #include "d2_exceptions.hpp"
 #include <filesystem>
-#include "delt2a/elements/d2_slider.hpp"
 
 namespace d2
 {
+    TreeState::TreeState(
+        std::shared_ptr<Screen> src,
+        std::shared_ptr<IOContext> ctx,
+        std::shared_ptr<ParentElement> rptr,
+        std::shared_ptr<ParentElement> coreptr
+    ) : src_(src), ctx_(ctx), root_ptr_(rptr), core_ptr_(coreptr)
+    {}
+
+    void TreeState::set_root(std::shared_ptr<ParentElement> ptr)
+    {
+        root_ptr_ = ptr;
+    }
+    void TreeState::set_core(std::shared_ptr<ParentElement> ptr)
+    {
+        core_ptr_ = ptr;
+    }
+
+    std::shared_ptr<IOContext> TreeState::context() const
+    {
+        return ctx_;
+    }
+    std::shared_ptr<Screen> TreeState::screen() const
+    {
+        return src_;
+    }
+    std::shared_ptr<ParentElement> TreeState::root() const
+    {
+        return root_ptr_;
+    }
+    std::shared_ptr<TreeState> TreeState::root_state() const
+    {
+        return root()->state();
+    }
+    std::shared_ptr<ParentElement> TreeState::core() const
+    {
+        return core_ptr_.lock();
+    }
+
     void Screen::_keynav_cycle_up(eptr ptr)
     {
         const auto cparent = ptr->parent();
@@ -490,6 +527,7 @@ namespace d2
         {
             if (_focused != nullptr)
             {
+                auto _ = _focused.shared();
                 _focused->setstate(Element::Focused, false);
                 _focused->setstate(Element::State::Clicked, false);
                 _focused->setstate(Element::State::Hovered, false);
@@ -752,7 +790,6 @@ namespace d2
 
         ExtendedCodePage::deactivate_thread();
     }
-
     void Screen::stop_blocking()
     {
         _is_stop = true;
@@ -796,29 +833,25 @@ namespace d2
             if (target != nullptr && is_pressed && !target->provides_cursor_sink() && target->parent() != nullptr)
                 uptarget = _update_states_reverse(target->parent());
 
+            auto _1 = _targetted.shared();
+            auto _2 = _clicked.shared();
+            auto _3 = _focused.shared();
             if (_targetted != target)
             {
                 if (_targetted != nullptr)
                 {
-                    _clicked->setstate(Element::State::Clicked, false);
                     _targetted->setstate(Element::State::Hovered, false);
                     _trigger_hovered_events();
                 }
                 if (target != nullptr)
                     target->setstate(Element::State::Hovered, true);
                 _targetted = target;
-                _clicked = uptarget;
             }
-            if (_targetted != nullptr)
+            if (_clicked != uptarget)
             {
-                if (is_released)
-                {
+                if (_clicked != nullptr)
                     _clicked->setstate(Element::State::Clicked, false);
-                }
-                else if (is_pressed)
-                {
-                    _clicked->setstate(Element::State::Clicked, true);
-                }
+                _clicked = uptarget;
             }
             if (_focused != uptarget && is_pressed)
             {
@@ -831,6 +864,17 @@ namespace d2
                     _keynav_iterator->setstate(Element::State::Keynavi, false);
                 }
                 focus(uptarget);
+            }
+            if (_clicked != nullptr)
+            {
+                if (is_released)
+                {
+                    _clicked->setstate(Element::State::Clicked, false);
+                }
+                else if (is_pressed)
+                {
+                    _clicked->setstate(Element::State::Clicked, true);
+                }
             }
         }
         if (_ctx->input()->is_key_input())

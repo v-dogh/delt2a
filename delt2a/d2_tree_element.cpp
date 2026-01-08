@@ -464,6 +464,8 @@ namespace d2
 
     int Element::layout(enum Layout type) const
     {
+        [[ unlikely ]] if (parent() == nullptr)
+            return _layout.get(type);
         switch (type)
         {
             case Layout::X:
@@ -587,12 +589,16 @@ namespace d2
     }
     Element::BoundingBox Element::box() const
     {
+        [[ unlikely ]] if (parent() == nullptr)
+            return { _layout.get(Layout::Width), _layout.get(Layout::Height) };
         if (!(_internal_state & DimensionsWidthUpdated)) parent()->layout_for(Layout::Width, shared_from_this());
         if (!(_internal_state & DimensionsHeightUpdated)) parent()->layout_for(Layout::Height, shared_from_this());
         return Element::BoundingBox{ _layout.get(Layout::Width), _layout.get(Layout::Height) };
     }
     Element::Position Element::position() const
     {
+        [[ unlikely ]] if (parent() == nullptr)
+            return { _layout.get(Layout::X), _layout.get(Layout::Y) };
         if (!(_internal_state & PositionXUpdated)) parent()->layout_for(Layout::X, shared_from_this());
         if (!(_internal_state & PositionYUpdated)) parent()->layout_for(Layout::Y, shared_from_this());
         return Element::Position{ _layout.get(Layout::X), _layout.get(Layout::Y) };

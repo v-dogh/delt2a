@@ -11,15 +11,15 @@ namespace d2
 
     std::size_t ExtendedCodePage::_value_to_index(standard_value_type value) const
     {
-        if (value >= 0 && value < 32) return static_cast<std::size_t>(value);
-        else if (value < 0) return static_cast<std::size_t>(value + 128) + 32;
-        return 0;
+        if (value >= 0)
+            return static_cast<std::size_t>(value);
+        return static_cast<std::size_t>(value + 160);
     }
     standard_value_type ExtendedCodePage::_index_to_value(std::size_t idx) const
     {
         if (idx < 32)
             return static_cast<standard_value_type>(idx);
-        return static_cast<standard_value_type>((idx - 32) - 128);
+        return static_cast<standard_value_type>(idx - 160);
     }
 
     void ExtendedCodePage::activate_thread()
@@ -52,7 +52,11 @@ namespace d2
         auto str = std::string(value);
         if (auto f = _map.find(str);
             f != _map.end())
-            return f->second;
+            return _index_to_value(f->second);
+        else if (_ctr >= extended_code_range - 1) [[ unlikely ]]
+            return '?';
+        else [[ likely ]]
+            ++_ctr;
         _append_page += value.size();
         std::memcpy(_page.data() + _append_page, value.data(), value.size());
         const auto idx = _append_link++;
@@ -66,7 +70,7 @@ namespace d2
         return std::string_view(
             _page.data() + _link[idx].first,
             _link[idx].second
-            );
+        );
     }
     void ExtendedCodePage::clear()
     {

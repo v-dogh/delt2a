@@ -11,7 +11,9 @@ namespace d2
     namespace style
     {
         D2_UAI_INTERFACE(Switch,
-            D2_UAI_OPTS(),
+            D2_UAI_OPTS(
+                using Alignment = IZText::Alignment;
+            ),
             D2_UAI_FIELDS(
                 // Ptr | new | old
                 std::function<void(TypedTreeIter<dx::Switch>, int, int)> on_change{ nullptr };
@@ -24,6 +26,13 @@ namespace d2
                 PixelForeground enabled_foreground_color{ .r = 0, .g = 0, .b = 0 };
                 Pixel separator_color{ .a = 0, .v = '|' };
                 bool disable_separator{ false };
+
+                PixelForeground pre_color{};
+                PixelForeground post_color{};
+                string select_pre{ "" };
+                string select_post{ "" };
+
+                IZText::Alignment text_alignment{ IZText::Alignment::Center };
             ),
             D2_UAI_PROPS(
                 Options,
@@ -34,7 +43,12 @@ namespace d2
                 OnChange,
                 OnChangeValues,
                 SeparatorColor,
-                DisableSeparator
+                DisableSeparator,
+                PreColor,
+                PostColor,
+                SelectPre,
+                SelectPost,
+                TextAlignment
             ),
             D2_UAI_LINK(
                 D2_UAI_PROP(Options, options, Masked)
@@ -46,6 +60,11 @@ namespace d2
                 D2_UAI_PROP(OnChangeValues, on_change_values, 0x00)
                 D2_UAI_PROP(SeparatorColor, separator_color, Style)
                 D2_UAI_PROP(DisableSeparator, disable_separator, Style)
+                D2_UAI_PROP(PreColor, pre_color, Style)
+                D2_UAI_PROP(PostColor, post_color, Style)
+                D2_UAI_PROP(SelectPre, select_pre, Style)
+                D2_UAI_PROP(SelectPost, select_post, Style)
+                D2_UAI_PROP(TextAlignment, text_alignment, Style)
             )
         )
 

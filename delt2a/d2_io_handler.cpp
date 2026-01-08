@@ -39,6 +39,77 @@ namespace d2
 
         namespace ext
         {
+            void SystemAudio::Stream::apply(auto&& func, std::size_t channel, float start, float end)
+            {
+                const auto channel_size = _data.size() / _format->channels;
+                const auto astart = std::size_t(start * channel_size);
+                const auto aend = std::size_t(end * channel_size);
+                for (std::size_t i = astart; i < aend; i += _format->channels)
+                    _data[i + channel] = func(_data[i + channel], float(i + _offset) / _total);
+            }
+            void SystemAudio::Stream::apply(auto&& func, float start, float end)
+            {
+                const auto astart = std::size_t(start * _data.size());
+                const auto aend = std::size_t(end * _data.size());
+                const auto dist = aend - astart;
+                if (_format->channels == 2)
+                {
+                    for (std::size_t i = astart; i < aend; i += 2)
+                    {
+                        _data[i] = func(_data[i], float(i + _offset) / _total);
+                        _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
+                    }
+                }
+                else if (_format->channels == 4)
+                {
+                    for (std::size_t i = astart; i < aend; i += 4)
+                    {
+                        _data[i] = func(_data[i], float(i + _offset) / _total);
+                        _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
+                        _data[i + 2] = func(_data[i + 2], float(i + 2 + _offset) / _total);
+                        _data[i + 3] = func(_data[i + 3], float(i + 3 + _offset) / _total);
+                    }
+                }
+                else
+                {
+                    for (std::size_t i = astart; i < aend; i++)
+                        _data[i] = func(_data[i], float(i + _offset) / _total);
+                }
+            }
+            void SystemAudio::Stream::push(std::span<float> in)
+            {
+                for (std::size_t i = 0; i < std::min(in.size(), _data.size()); i++)
+                    _data[i] = in[i];
+            }
+            void SystemAudio::Stream::push_expand(std::span<float> in)
+            {
+                for (std::size_t i = 0; i < std::min(in.size(), _data.size() / _format->channels); i++)
+                    for (std::size_t j = 0; j < _format->channels; j++)
+                        _data[i + j] = in[i];
+            }
+
+            const SystemAudio::FormatInfo& SystemAudio::Stream::info() const
+            {
+                return *_format;
+            }
+            std::size_t SystemAudio::Stream::size() const
+            {
+                return _total / _format->channels;
+            }
+            std::size_t SystemAudio::Stream::chunk() const
+            {
+                return _data.size() / _format->channels;
+            }
+
+            float& SystemAudio::Stream::at(std::size_t idx, std::size_t channel) const
+            {
+                return _data[(idx * _format->channels) + channel];
+            }
+            float& SystemAudio::Stream::at(float idx, std::size_t channel) const
+            {
+                return _data[(idx * _format->channels) + channel];
+            }
+
             template<SystemAudio::Format>
             inline float _convert_sample(const unsigned char* sample);
 

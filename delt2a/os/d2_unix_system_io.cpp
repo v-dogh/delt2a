@@ -575,7 +575,9 @@ namespace d2::sys
                 out_.insert(out_.end(), ext.begin(), ext.end());
             }
             else
+            {
                 out_.push_back(px.v);
+            }
 #       else
             out_.push_back(px.v);
 #       endif
@@ -592,10 +594,6 @@ namespace d2::sys
 	std::chrono::microseconds UnixTerminalOutput::frame_time() const
 	{
 		return frame_time_;
-	}
-	std::size_t UnixTerminalOutput::buffer_size() const
-	{
-		return buffer_size_;
 	}
 
     void UnixTerminalOutput::_release_image(std::any data)
@@ -867,4 +865,13 @@ namespace d2::sys
 			std::chrono::high_resolution_clock::now() - beg
 		);
 	}
+
+    std::size_t UnixTerminalOutput::delta_size()
+    {
+        return buffer_size_;
+    }
+    std::size_t UnixTerminalOutput::swapframe_size()
+    {
+        return swapframe_.size();
+    }
 }

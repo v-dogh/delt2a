@@ -149,7 +149,6 @@ namespace d2::sys
 		using SystemOutput::SystemOutput;
 
 		std::chrono::microseconds frame_time() const;
-		std::size_t buffer_size() const;
 
         virtual void load_image(const std::string& path, ImageInstance img) override;
         virtual void release_image(const std::string& path) override;
@@ -157,6 +156,9 @@ namespace d2::sys
         virtual std::uint32_t image_id(const std::string& path) override;
 
 		virtual void write(std::span<const Pixel> buffer, std::size_t width, std::size_t height) override;
+
+        virtual std::size_t delta_size() override;
+        virtual std::size_t swapframe_size() override;
 	};
 } // d2
 

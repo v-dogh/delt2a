@@ -86,17 +86,17 @@
 
 #define D2_ON_EEXPR(_event_, ...) _D2_IMPL_LISTEN_EEXPR(_event_, true, __VA_ARGS__)
 #define D2_ON_EXPR(_event_, ...) _D2_IMPL_LISTEN_EXPR(_event_, true, __VA_ARGS__)
-#define D2_ON(_event_) _D2_IMPL_LISTEN(_event_, true)
+#define D2_ON(_event_, ...) _D2_IMPL_LISTEN(_event_, true, __VA_ARGS__)
 #define D2_ON_END _D2_IMPL_LISTEN_END
 
 #define D2_OFF_EEXPR(_event_, ...) _D2_IMPL_LISTEN_EEXPR(_event_, false, __VA_ARGS__)
 #define D2_OFF_EXPR(_event_, ...) _D2_IMPL_LISTEN_EXPR(_event_, false, __VA_ARGS__)
-#define D2_OFF(_event_) _D2_IMPL_LISTEN(_event_, false)
+#define D2_OFF(_event_, ...) _D2_IMPL_LISTEN(_event_, false, __VA_ARGS__)
 #define D2_OFF_END _D2_IMPL_LISTEN_END
 
 #define D2_ON_EVENT_EEXPR(_event_, ...) _D2_IMPL_LISTEN_GLOBAL_EEXPR(_event_, __VA_ARGS__)
 #define D2_ON_EVENT_EXPR(_event_, ...) _D2_IMPL_LISTEN_GLOBAL_EXPR(_event_, __VA_ARGS__)
-#define D2_ON_EVENT(_event_) _D2_IMPL_LISTEN_GLOBAL(_event_)
+#define D2_ON_EVENT(_event_, ...) _D2_IMPL_LISTEN_GLOBAL(_event_, __VA_ARGS__)
 #define D2_ON_EVENT_END _D2_IMPL_LISTEN_GLOBAL_END
 
 #define D2_ASYNC_EEXPR(...) _D2_IMPL_ASYNC_EEXPR(__VA_ARGS__)

@@ -87,7 +87,7 @@ namespace d2::ctm {}
     _D2_IMPL_CONTEXT_EXT(__nptr, _type_::root, __nsrc, _type_::state)
 
 #define _D2_IMPL_EMBED_NAMED_BEGIN(_type_, _name_, ...) _D2_IMPL_EMBED_NAMED_STR_BEGIN(_type_, #_name_, __VA_ARGS__)
-#define _D2_IMPL_EMBED_BEGIN(_type_, ...)              _D2_IMPL_EMBED_NAMED_BEGIN(_type_,, __VA_ARGS__)
+#define _D2_IMPL_EMBED_BEGIN(_type_, ...) _D2_IMPL_EMBED_NAMED_BEGIN(_type_,, __VA_ARGS__)
 
 #define _D2_IMPL_EMBED_ELEM_NAMED_STR_BEGIN(_type_, _name_, ...) {{ \
     auto __nptr = __ptr.asp()->override(::d2::Element::make<_type_>( \
@@ -96,7 +96,7 @@ namespace d2::ctm {}
     _D2_IMPL_CONTEXT(__nptr, _type_)
 
 #define _D2_IMPL_EMBED_ELEM_NAMED_BEGIN(_type_, _name_, ...) _D2_IMPL_EMBED_ELEM_NAMED_STR_BEGIN(_type_, #_name_, __VA_ARGS__)
-#define _D2_IMPL_EMBED_ELEM_BEGIN(_type_, ...)              _D2_IMPL_EMBED_ELEM_NAMED_BEGIN(_type_,, __VA_ARGS__)
+#define _D2_IMPL_EMBED_ELEM_BEGIN(_type_, ...) _D2_IMPL_EMBED_ELEM_NAMED_BEGIN(_type_,, __VA_ARGS__)
 
 #define _D2_IMPL_EMBED_END _D2_IMPL_CONTEXT_END }}
 
@@ -106,36 +106,37 @@ namespace d2::ctm {}
 
 #define _D2_IMPL_STATEFUL_TREE_ROOT(_alias_, _state_, _root_, ...) \
 struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
-        using __state_type = _state_; \
-        static ::d2::TreeIter create_at(::d2::TreeIter __ptr, std::shared_ptr<__state_type> __state __VA_OPT__(,) __VA_ARGS__) { \
+        static ::d2::TreeIter create_at(::d2::TreeIter __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__) { \
             using __object_type = _root_; \
             using namespace d2::dx; \
             using namespace d2::ctm; \
-            auto& state = __state; \
-            auto& ptr   = __ptr;
+            auto  __ptr   = ::d2::TypedTreeIter<_root_>(__uptr); \
+            auto  __state = std::static_pointer_cast<__state_type>(__ustate); \
+            auto& state   = __state; \
+            auto& ptr     = __ptr;
 
-#define _D2_IMPL_STATEFUL_TREE(_alias_, _state_, ...)      _D2_IMPL_STATEFUL_TREE_ROOT(_alias_, _state_, ::d2::dx::Box, __VA_ARGS__)
+#define _D2_IMPL_STATEFUL_TREE(_alias_, _state_, ...) _D2_IMPL_STATEFUL_TREE_ROOT(_alias_, _state_, ::d2::dx::Box, __VA_ARGS__)
 #define _D2_IMPL_STATELESS_TREE_ROOT(_alias_, _root_, ...) _D2_IMPL_STATEFUL_TREE_ROOT(_alias_, ::d2::TreeState, _root_, __VA_ARGS__)
-#define _D2_IMPL_STATELESS_TREE(_alias_, ...)              _D2_IMPL_STATEFUL_TREE(_alias_, ::d2::TreeState, __VA_ARGS__)
+#define _D2_IMPL_STATELESS_TREE(_alias_, ...) _D2_IMPL_STATEFUL_TREE(_alias_, ::d2::TreeState, __VA_ARGS__)
 
 #define _D2_IMPL_STATEFUL_TREE_ROOT_FORWARD(_alias_, _state_, _root_, ...) \
     struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
-        using __state_type = _state_; \
-        static ::d2::TreeIter create_at(::d2::TreeIter __ptr, ::d2::TreeState::ptr __state __VA_OPT__(,) __VA_ARGS__); };
+        static ::d2::TreeIter create_at(::d2::TreeIter __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__); };
 
-#define _D2_IMPL_STATEFUL_TREE_FORWARD(_alias_, _state_, ...)      _D2_IMPL_STATEFUL_TREE_ROOT_FORWARD(_alias_, _state_, ::d2::dx::Box, __VA_ARGS__)
+#define _D2_IMPL_STATEFUL_TREE_FORWARD(_alias_, _state_, ...) _D2_IMPL_STATEFUL_TREE_ROOT_FORWARD(_alias_, _state_, ::d2::dx::Box, __VA_ARGS__)
 #define _D2_IMPL_STATELESS_TREE_ROOT_FORWARD(_alias_, _root_, ...) _D2_IMPL_STATEFUL_TREE_ROOT_FORWARD(_alias_, ::d2::TreeState, _root_, __VA_ARGS__)
-#define _D2_IMPL_STATELESS_TREE_FORWARD(_alias_, ...)              _D2_IMPL_STATEFUL_TREE_FORWARD(_alias_, ::d2::TreeState, __VA_ARGS__)
+#define _D2_IMPL_STATELESS_TREE_FORWARD(_alias_, ...) _D2_IMPL_STATEFUL_TREE_FORWARD(_alias_, ::d2::TreeState, __VA_ARGS__)
 
 #define _D2_IMPL_TREE_DEFINE(_alias_, ...) \
-    ::d2::TreeIter _alias_::create_at(::d2::TreeIter __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__) { \
-        { using __object_type = ::d2::dx::Box; \
+::d2::TreeIter _alias_::create_at(::d2::TreeIter __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__) { \
+        { using __object_type = _alias_::root; \
+          using __state_type = _alias_::state; \
         using namespace ::d2::dx; \
         using namespace d2::ctm; \
-        auto __ptr = ::d2::TypedTreeIter<_alias_::root>(__uptr); \
-        auto __state = std::static_pointer_cast<_alias_::state>(__ustate); \
-        auto ptr = __ptr; \
-        auto state = __state;
+        auto  __ptr   = ::d2::TypedTreeIter<_alias_::root>(__uptr); \
+        auto  __state = std::static_pointer_cast<_alias_::state>(__ustate); \
+        auto& state   = __state; \
+        auto& ptr     = __ptr;
 
 #define _D2_IMPL_TREE_DEFINITION_END } return __uptr; }
 #define _D2_IMPL_TREE_END return __ptr; }};
@@ -270,27 +271,27 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 
 // EEXPR variants do not include line breaks
 #define _D2_IMPL_SYNC_EEXPR(...) (state->context()->is_synced() ? \
-(__VA_ARGS__) : state->context()->sync([=]() -> decltype(auto) { return __VA_ARGS__; }).value())
+(__VA_ARGS__) : state->context()->sync([&]() -> decltype(auto) { return __VA_ARGS__; }).value())
 
 #define _D2_IMPL_SYNC_EXPR(...) _D2_IMPL_SYNC_EEXPR(__VA_ARGS__);
-#define _D2_IMPL_SYNC_BLOCK     state->context()->sync_if([=]{
+#define _D2_IMPL_SYNC_BLOCK     state->context()->sync_if([&]{
 #define _D2_IMPL_SYNC_BLOCK_END });
 
 #define _D2_IMPL_LISTEN_EEXPR(_event_, _value_, ...) [=]() -> void { _D2_IMPL_LISTEN_EXPR(_event_, _value_, __VA_ARGS__) }()
 #define _D2_IMPL_LISTEN_EXPR(_event_, _value_, ...)  _D2_IMPL_LISTEN(_event_, _value_) (__VA_ARGS__); _D2_IMPL_LISTEN_END
 
-#define _D2_IMPL_LISTEN(_event_, _value_) \
+#define _D2_IMPL_LISTEN(_event_, _value_, ...) \
     __ptr->listen(::d2::Element::_event_, _value_, \
-    [=](::d2::Element::EventListener listener, ::d2::TreeIter __lptr) { _D2_IMPL_CONTEXT(__lptr, __object_type)
+    [= __VA_OPT__(,) __VA_ARGS__](::d2::Element::EventListener listener, ::d2::TreeIter __lptr) { _D2_IMPL_CONTEXT(__lptr, __object_type)
 
 #define _D2_IMPL_LISTEN_END _D2_IMPL_CONTEXT_END });
 
 #define _D2_IMPL_LISTEN_GLOBAL_EEXPR(_event_, ...) [=]() -> void { _D2_IMPL_LISTEN_GLOBAL_EXPR(_event_, __VA_ARGS__) }()
 #define _D2_IMPL_LISTEN_GLOBAL_EXPR(_event_, ...)  _D2_IMPL_LISTEN_GLOBAL(_event_) (__VA_ARGS__); _D2_IMPL_LISTEN_GLOBAL_END
 
-#define _D2_IMPL_LISTEN_GLOBAL(_event_) \
+#define _D2_IMPL_LISTEN_GLOBAL(_event_, ...) \
     __state->context()->listen<::d2::IOContext::Event::_event_>( \
-    [=](::d2::IOContext::EventListener listener, ::d2::IOContext::ptr ctx, auto&&...) {
+    [= __VA_OPT__(,) __VA_ARGS__](::d2::IOContext::EventListener listener, ::d2::IOContext::ptr ctx, auto&&...) {
 
 #define _D2_IMPL_LISTEN_GLOBAL_END });
 

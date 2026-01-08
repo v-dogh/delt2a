@@ -240,7 +240,7 @@ namespace d2
             int y{ 0 };
         };
 
-        using unit_meta_flag = unsigned char;
+        using unit_meta_flag = unsigned short;
         using internal_flag = unsigned short;
         using state_flag = unsigned char;
         using write_flag = element_write_flag;
@@ -315,6 +315,13 @@ namespace d2
             ContextualYPos = 1 << 5,
             ContextualWidth = 1 << 6,
             ContextualHeight = 1 << 7,
+
+            // Inverted
+
+            InvertedXPos = 1 << 8,
+            InvertedYPos = 1 << 9,
+            InvertedWidth = 1 << 10,
+            InvertedHeight = 1 << 11,
         };
 
         enum class CachePolicy

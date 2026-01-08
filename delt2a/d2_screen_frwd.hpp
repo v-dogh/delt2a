@@ -2,7 +2,6 @@
 #define D2_SCREEN_FRWD_HPP
 
 #include <memory>
-#include <any>
 #include <absl/container/flat_hash_map.h>
 #include "d2_tree_element_frwd.hpp"
 #include "d2_io_handler_frwd.hpp"
@@ -39,42 +38,24 @@ namespace d2
 			std::shared_ptr<IOContext> ctx,
 			std::shared_ptr<ParentElement> rptr,
             std::shared_ptr<ParentElement> coreptr
-			) : src_(src), ctx_(ctx), root_ptr_(rptr), core_ptr_(coreptr)
-		{}
+        );
         TreeState(const TreeState&) = delete;
         TreeState(TreeState&&) = default;
-		virtual ~TreeState() {}
+        virtual ~TreeState() = default;
 
         virtual void construct() {}
 		virtual void swap_in() {}
 		virtual void swap_out() {}
 		virtual void update() {}
 
-		void set_root(std::shared_ptr<ParentElement> ptr)
-		{
-			root_ptr_ = ptr;
-		}
-		void set_core(std::shared_ptr<ParentElement> ptr)
-		{
-			core_ptr_ = ptr;
-		}
+        void set_root(std::shared_ptr<ParentElement> ptr);
+        void set_core(std::shared_ptr<ParentElement> ptr);
 
-		std::shared_ptr<IOContext> context() const
-		{
-			return ctx_;
-		}
-		std::shared_ptr<Screen> screen() const
-		{
-			return src_;
-		}
-		std::shared_ptr<ParentElement> root() const
-		{
-			return root_ptr_;
-		}
-		std::shared_ptr<ParentElement> core() const
-		{
-			return core_ptr_.lock();
-		}
+        std::shared_ptr<IOContext> context() const;
+        std::shared_ptr<Screen> screen() const;
+        std::shared_ptr<ParentElement> root() const;
+        std::shared_ptr<TreeState> root_state() const;
+        std::shared_ptr<ParentElement> core() const;
 
 		template<typename Type>
 		const auto* as() const

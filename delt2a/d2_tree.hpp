@@ -14,6 +14,7 @@ namespace d2
     public:
         using root = Root;
         using state = State;
+        using __state_type = state;
 
         static constexpr std::string_view name = Name.view();
 
