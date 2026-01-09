@@ -320,7 +320,7 @@ namespace d2
     {
         _internal_state &= ~type;
     }
-    void Element::_trigger_event(IOContext::Event ev)
+    void Element::_trigger_event(ScreenEvent ev)
     {
         _event_impl(ev);
         _trigger(State::Event, true);
@@ -701,7 +701,7 @@ namespace d2
         {
             return _ptr->_signal_update(type);
         }
-        void ElementView::trigger_event(IOContext::Event ev)
+        void ElementView::trigger_event(ScreenEvent ev)
         {
             return _ptr->_trigger_event(ev);
         }

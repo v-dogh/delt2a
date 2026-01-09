@@ -8,7 +8,34 @@
 
 namespace d2
 {
-    template<util::cmp::str Name, typename State, typename Tree, typename Root = dx::Box>
+    namespace impl
+    {
+        template <std::size_t Count>
+        struct CmpString
+        {
+            constexpr CmpString(const char (&str)[Count])
+            {
+                std::copy(str, str + Count, data.begin());
+            }
+            constexpr CmpString(std::string_view str)
+            {
+                std::copy(str.begin(), str.begin() + Count, data.begin());
+                data[Count - 1] = '\0';
+            }
+            std::array<char, Count> data{};
+
+            constexpr auto view() const
+            {
+                return std::string_view(data.data());
+            }
+            constexpr auto view()
+            {
+                return std::string_view(data.data());
+            }
+        };
+    }
+
+    template<impl::CmpString Name, typename State, typename Tree, typename Root = dx::Box>
     struct TreeTemplateInit
     {
     public:
@@ -59,7 +86,7 @@ namespace d2
         }
     };
 
-    template<util::cmp::str Name, typename Tree, typename Root = dx::Box>
+    template<impl::CmpString Name, typename Tree, typename Root = dx::Box>
     struct TreeTemplate : TreeTemplateInit<Name, TreeState, Tree, Root> { };
 }
 

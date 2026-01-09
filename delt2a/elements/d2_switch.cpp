@@ -91,9 +91,9 @@ namespace d2::dx
             _signal_write(Style);
         }
     }
-    void Switch::_event_impl(IOContext::Event ev)
+    void Switch::_event_impl(Screen::Event ev)
     {
-        if (ev == IOContext::Event::KeyInput)
+        if (ev == Screen::Event::KeyInput)
         {
             if (context()->input()->is_pressed(sys::input::Tab))
             {
@@ -298,10 +298,10 @@ namespace d2::dx
             _signal_write(Style);
         }
     }
-    void VerticalSwitch::_event_impl(IOContext::Event ev)
+    void VerticalSwitch::_event_impl(Screen::Event ev)
     {
         Switch::_event_impl(ev);
-        if (ev == IOContext::Event::KeyInput || ev == IOContext::Event::MouseInput)
+        if (ev == Screen::Event::KeyInput || ev == Screen::Event::MouseInput)
         {
             const auto in = context()->input();
             const auto [ basisx, basisy ] = ContainerHelper::_border_base();

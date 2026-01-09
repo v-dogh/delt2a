@@ -94,10 +94,15 @@
 #define D2_OFF(_event_, ...) _D2_IMPL_LISTEN(_event_, false, __VA_ARGS__)
 #define D2_OFF_END _D2_IMPL_LISTEN_END
 
-#define D2_ON_EVENT_EEXPR(_event_, ...) _D2_IMPL_LISTEN_GLOBAL_EEXPR(_event_, __VA_ARGS__)
-#define D2_ON_EVENT_EXPR(_event_, ...) _D2_IMPL_LISTEN_GLOBAL_EXPR(_event_, __VA_ARGS__)
-#define D2_ON_EVENT(_event_, ...) _D2_IMPL_LISTEN_GLOBAL(_event_, __VA_ARGS__)
-#define D2_ON_EVENT_END _D2_IMPL_LISTEN_GLOBAL_END
+#define D2_ON_EVENT_EEXPR(_event_, ...) _D2_IMPL_LISTEN_SIG_EEXPR(::d2::Screen::Event::_event_, __VA_ARGS__)
+#define D2_ON_EVENT_EXPR(_event_, ...) _D2_IMPL_LISTEN_SIG_EXPR(::d2::Screen::Event::_event_, __VA_ARGS__)
+#define D2_ON_EVENT(_event_, ...) _D2_IMPL_LISTEN_SIG(::d2::Screen::Event::_event_, __VA_ARGS__)
+#define D2_ON_EVENT_END _D2_IMPL_LISTEN_SIG_END
+
+#define D2_ON_SIG_EEXPR(_event_, ...) _D2_IMPL_LISTEN_SIG_EEXPR(_event_, __VA_ARGS__)
+#define D2_ON_SIG_EXPR(_event_, ...) _D2_IMPL_LISTEN_SIG_EXPR(_event_, __VA_ARGS__)
+#define D2_ON_SIG(_event_, ...) _D2_IMPL_LISTEN_SIG(_event_, __VA_ARGS__)
+#define D2_ON_SIG_END _D2_IMPL_LISTEN_SIG_END
 
 #define D2_ASYNC_EEXPR(...) _D2_IMPL_ASYNC_EEXPR(__VA_ARGS__)
 #define D2_ASYNC_EXPR(...) _D2_IMPL_ASYNC_EXPR(__VA_ARGS__)

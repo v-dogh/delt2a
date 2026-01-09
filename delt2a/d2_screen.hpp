@@ -84,6 +84,7 @@ namespace d2
             Adaptive,
             Auto = Stable,
         };
+        using Event = ScreenEvent;
         using ModelType = MatrixModel::ModelType;
         using ptr = std::shared_ptr<Screen>;
     private:
@@ -131,8 +132,8 @@ namespace d2
         void _frame();
 
         void _run_interpolators();
-        void _trigger_focused(IOContext::Event ev);
-        void _trigger_hovered(IOContext::Event ev);
+        void _trigger_focused(Event ev);
+        void _trigger_hovered(Event ev);
         void _trigger_events();
         void _trigger_focused_events();
         void _trigger_hovered_events();
@@ -142,6 +143,7 @@ namespace d2
         eptr _update_states_reverse(eptr ptr);
 
         void _apply_impl(const Element::foreach_callback& func, eptr container) const;
+        void _signal(Event ev);
     public:
         template<typename First, typename... Rest>
         static auto make(IOContext::ptr ctx, auto&&... themes)
@@ -161,7 +163,7 @@ namespace d2
             return std::chrono::milliseconds(1000 / c);
         }
 
-        explicit Screen(IOContext::ptr ctx) : _ctx(ctx) {}
+        explicit Screen(IOContext::ptr ctx);
         virtual ~Screen() = default;
 
         IOContext::ptr context() const;

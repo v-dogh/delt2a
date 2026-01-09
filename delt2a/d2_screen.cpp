@@ -13,6 +13,12 @@ namespace d2
     ) : src_(src), ctx_(ctx), root_ptr_(rptr), core_ptr_(coreptr)
     {}
 
+    Screen::Screen(IOContext::ptr ctx)
+        : _ctx(ctx)
+    {
+        _ctx->connect<Event, Screen::ptr>();
+    }
+
     void TreeState::set_root(std::shared_ptr<ParentElement> ptr)
     {
         root_ptr_ = ptr;
@@ -223,11 +229,11 @@ namespace d2
             }
         }
     }
-    void Screen::_trigger_focused(IOContext::Event ev)
+    void Screen::_trigger_focused(Event ev)
     {
         internal::ElementView::from(_focused).trigger_event(ev);
     }
-    void Screen::_trigger_hovered(IOContext::Event ev)
+    void Screen::_trigger_hovered(Event ev)
     {
         internal::ElementView::from(_targetted).trigger_event(ev);
     }
@@ -239,11 +245,11 @@ namespace d2
         const bool is_key_seq_input = input->is_key_sequence_input();
         const bool is_resize = input->is_screen_resize();
 
-        _ctx->trigger<IOContext::Event::Update>(_current->state);
-        if (is_mouse_input) _ctx->trigger<IOContext::Event::MouseInput>(_current->state);
-        if (is_resize) _ctx->trigger<IOContext::Event::Resize>(_current->state);
-        if (is_keyboard_input) _ctx->trigger<IOContext::Event::KeyInput>(_current->state);
-        if (is_key_seq_input) _ctx->trigger<IOContext::Event::KeySequenceInput>(_current->state);
+        _signal(Event::Update);
+        if (is_mouse_input) _signal(Event::MouseInput);
+        if (is_resize) _signal(Event::Resize);
+        if (is_keyboard_input) _signal(Event::KeyInput);
+        if (is_key_seq_input) _signal(Event::KeySequenceInput);
 
         _trigger_focused_events();
         _trigger_hovered_events();
@@ -258,11 +264,11 @@ namespace d2
 
         if (_focused != nullptr)
         {
-            _trigger_focused(IOContext::Event::Update);
-            if (is_mouse_input) _trigger_focused(IOContext::Event::MouseInput);
-            if (is_resize) _trigger_focused(IOContext::Event::Resize);
-            if (is_keyboard_input) _trigger_focused(IOContext::Event::KeyInput);
-            if (is_key_seq_input) _trigger_focused(IOContext::Event::KeySequenceInput);
+            _trigger_focused(Event::Update);
+            if (is_mouse_input) _trigger_focused(Event::MouseInput);
+            if (is_resize) _trigger_focused(Event::Resize);
+            if (is_keyboard_input) _trigger_focused(Event::KeyInput);
+            if (is_key_seq_input) _trigger_focused(Event::KeySequenceInput);
         }
     }
     void Screen::_trigger_hovered_events()
@@ -272,8 +278,8 @@ namespace d2
 
         if (_targetted != nullptr && _targetted != _focused)
         {
-            _trigger_hovered(IOContext::Event::Update);
-            if (is_mouse_input) _trigger_hovered(IOContext::Event::MouseInput);
+            _trigger_hovered(Event::Update);
+            if (is_mouse_input) _trigger_hovered(Event::MouseInput);
         }
     }
     void Screen::_update_viewport()
@@ -347,6 +353,10 @@ namespace d2
                 _apply_impl(func, it);
             return true;
         });
+    }
+    void Screen::_signal(Event ev)
+    {
+        _ctx->signal(ev, shared_from_this());
     }
 
     MatrixModel::ptr Screen::fetch_model(const std::string& name, const std::string& path)
@@ -803,7 +813,7 @@ namespace d2
     {
         if (!_is_suspended && root()->needs_update())
         {
-            _ctx->trigger<IOContext::Event::PreRedraw>(_current->state);
+            _signal(Event::PreRedraw);
 
             auto& root = *this->root().as();
             auto frame = root.frame();
@@ -811,7 +821,8 @@ namespace d2
             const auto [ bwidth, bheight ] = root.box();
             auto* output = _ctx->output();
             output->write(frame.data(), bwidth, bheight);
-            _ctx->trigger<IOContext::Event::PostRedraw>(_current->state);
+
+            _signal(Event::PostRedraw);
         }
     }
     void Screen::update()

@@ -2,6 +2,7 @@
 #define D2_DEMAND_SCROLLBOX_HPP
 
 #include "d2_slider.hpp"
+#include "d2_element_utils.hpp"
 
 namespace d2
 {

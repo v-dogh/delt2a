@@ -8,6 +8,17 @@
 
 namespace d2
 {
+    enum class ScreenEvent
+    {
+        Resize,
+        PreRedraw,
+        PostRedraw,
+        KeyInput,
+        KeySequenceInput,
+        MouseInput,
+        Update,
+    };
+
 	class Screen;
 	class TreeState
 	{

@@ -328,4 +328,65 @@ namespace d2
             }
         }
     }
+
+    std::weak_ptr<const IOContext> IOContext::_weak() const
+    {
+        return std::static_pointer_cast<const IOContext>(weak_from_this().lock());
+    }
+    std::shared_ptr<const IOContext> IOContext::_shared() const
+    {
+        return std::static_pointer_cast<const IOContext>(shared_from_this());
+    }
+    std::weak_ptr<IOContext> IOContext::_weak()
+    {
+        return std::static_pointer_cast<IOContext>(weak_from_this().lock());
+    }
+    std::shared_ptr<IOContext> IOContext::_shared()
+    {
+        return std::static_pointer_cast<IOContext>(shared_from_this());
+    }
+
+    IOContext::IOContext(mt::ThreadPool::ptr scheduler)
+        : _scheduler(scheduler), Signals(scheduler) { }
+
+    void IOContext::initialize()
+    {
+        using wflags = mt::ThreadPool::Worker::Flags;
+        _main_thread = std::this_thread::get_id();
+        _scheduler->start();
+        _worker = _scheduler->worker(
+            wflags::MainWorker |
+            wflags::HandleCyclicTask |
+            wflags::HandleDeferredTask
+        );
+        _worker.start();
+    }
+    void IOContext::deinitialize()
+    {
+        _worker.stop();
+        _scheduler->stop();
+    }
+    void IOContext::wait(std::chrono::milliseconds ms)
+    {
+        _worker.wait(ms);
+    }
+
+    mt::ThreadPool::ptr IOContext::scheduler()
+    {
+        return _scheduler;
+    }
+
+    std::size_t IOContext::syscnt() const
+    {
+        std::shared_lock lock(_module_mtx);
+        std::size_t cnt = 0;
+        for (decltype(auto) it : _components)
+            cnt += (it != nullptr);
+        return cnt;
+    }
+    void IOContext::sysenum(std::function<void(sys::SystemComponent*)> callback)
+    {
+        for (decltype(auto) it : _components)
+            callback(it.get());
+    }
 }

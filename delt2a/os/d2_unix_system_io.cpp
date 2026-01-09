@@ -447,8 +447,6 @@ namespace d2::sys
 
 	UnixTerminalOutput::position_type UnixTerminalOutput::_generate_position(int x, int y, bool skip)
 	{
-		D2_EXPECT(x <= 9999 && y <= 9999)
-
 		using buffer = std::array<char, max_pos_len_>;
 
 		if (skip)
@@ -659,7 +657,7 @@ namespace d2::sys
         const auto& state = std::any_cast<KittyImageState&>(images_.at(path));
         return ImageInstance({}, state.width, state.height);
     }
-    std::uint32_t UnixTerminalOutput::image_id(const std::string& path)
+    SystemOutput::image UnixTerminalOutput::image_id(const std::string& path)
     {
         return std::any_cast<KittyImageState&>(images_.at(path)).id;
     }

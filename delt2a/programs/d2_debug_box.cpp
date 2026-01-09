@@ -25,6 +25,10 @@ namespace d2::prog::impl
 {
     float cpu_usage()
     {
+        static auto ts_to_ns = [](const timespec& ts) -> std::uint64_t
+        {
+            return ts.tv_sec * 1000000000ull + ts.tv_nsec;
+        };
         static bool init = false;
         static timespec last_cpu{};
         static std::chrono::steady_clock::time_point last_wall{};
@@ -34,20 +38,21 @@ namespace d2::prog::impl
             return 0.0f;
 
         auto wall_now = std::chrono::steady_clock::now();
-
-        if (!init) {
+        if (!init)
+        {
             init = true;
             last_cpu = cpu;
             last_wall = wall_now;
             return 0.0f;
         }
 
-        const std::uint64_t cpu_ns_now  = impl::ts_to_ns(cpu);
-        const std::uint64_t cpu_ns_last = impl::ts_to_ns(last_cpu);
+        const std::uint64_t cpu_ns_now  = ts_to_ns(cpu);
+        const std::uint64_t cpu_ns_last = ts_to_ns(last_cpu);
         const std::uint64_t cpu_ns_delta = (cpu_ns_now >= cpu_ns_last) ? (cpu_ns_now - cpu_ns_last) : 0;
 
         const auto wall_ns_delta = std::chrono::duration_cast<std::chrono::nanoseconds>(wall_now - last_wall).count();
-        if (wall_ns_delta <= 0) {
+        if (wall_ns_delta <= 0)
+        {
             last_cpu = cpu;
             last_wall = wall_now;
             return 0.0f;
@@ -56,7 +61,7 @@ namespace d2::prog::impl
         last_cpu = cpu;
         last_wall = wall_now;
 
-        const double pct = (double(cpu_ns_delta) / double(wall_ns_delta)) * 100.0;
+        const auto pct = (double(cpu_ns_delta) / double(wall_ns_delta)) * 100.0;
         return float(pct);
     }
     std::uint64_t total_ram_bytes()
@@ -358,7 +363,7 @@ namespace d2::prog
                     .round = true,
                     .unit = "MiB",
                     .callback = [](Screen::ptr) -> float {
-                        return impl::MiB(impl::read_proc_self_rss_bytes());
+                        return impl::MiB(impl::total_rss_bytes());
                     }
                 }},
             };
@@ -540,32 +545,30 @@ namespace d2::prog
                 D2_STYLE(Height, 0.5_pc)
                 D2_STYLE(ContainerBorder, true)
                 D2_STATIC(grabbed, bool)
-                D2_STATIC(listener, d2::IOContext::AutoEventListener)
+                D2_STATIC(listener, d2::IOContext::Handle)
                 D2_ON(Clicked)
                     if (ptr->mouse_object_space().x == 0)
                         *grabbed = true;
                 D2_ON_END
                 D2_OFF_EXPR(Swapped, listener.unmute())
                 D2_ON_EXPR(Swapped, listener.mute())
-                *listener = state->context()->listen<d2::IOContext::Event::MouseInput>(
-                    [=](IOContext::EventListener, TreeState::ptr state) {
-                        const auto in = state->context()->input();
-                        if (in->is_pressed_mouse(sys::input::Left))
+                *listener = D2_ON_EVENT(MouseInput)
+                    const auto in = ctx->input();
+                    if (in->is_pressed_mouse(sys::input::Left))
+                    {
+                        if (*grabbed)
                         {
-                            if (*grabbed)
-                            {
-                                const auto pos = ptr->parent()->mouse_object_space().x;
-                                const auto w = ptr->layout(Element::Layout::Width);
-                                const auto pw = ptr->parent()->layout(Element::Layout::Width);
-                                const auto position = Unit(float(pos) / pw, Unit::Pc);
-                                ptr->set<Box::Width>(Unit(1.f - position.raw(), Unit::Pc));
-                                ptr->set<Box::X>(position);
-                            }
+                            const auto pos = ptr->parent()->mouse_object_space().x;
+                            const auto w = ptr->layout(Element::Layout::Width);
+                            const auto pw = ptr->parent()->layout(Element::Layout::Width);
+                            const auto position = Unit(float(pos) / pw, Unit::Pc);
+                            ptr->set<Box::Width>(Unit(1.f - position.raw(), Unit::Pc));
+                            ptr->set<Box::X>(position);
                         }
-                        else
-                            *grabbed = false;
                     }
-                );
+                    else
+                        *grabbed = false;
+                D2_ON_EVENT_END
                 *grabbed = false;
                 D2_ELEM(Text)
                     D2_STYLE(ZIndex, Box::overlap)

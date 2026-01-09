@@ -3,7 +3,6 @@
 
 #include "../d2_tree_element.hpp"
 #include "../d2_styles.hpp"
-#include "d2_element_utils.hpp"
 
 namespace d2
 {
@@ -46,7 +45,6 @@ namespace d2
         >
         {
         public:
-            friend class UnitUpdateHelper;
             using data = style::UAI<
                 Slider,
                 style::ILayout,
@@ -63,7 +61,7 @@ namespace d2
 
             virtual bool _provides_input_impl() const override;
             virtual void _state_change_impl(State state, bool value) override;
-            virtual void _event_impl(IOContext::Event ev) override;
+            virtual void _event_impl(Screen::Event ev) override;
 
             virtual void _frame_impl(PixelBuffer::View buffer) override;
 

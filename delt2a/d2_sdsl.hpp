@@ -84,7 +84,7 @@ namespace d2::ctm {}
         _type_::create_at(__nsrc->core(), __nsrc, std::forward<Argv>(args)...); \
     }, __args_tree); \
     __nsrc->swap_in(); \
-    _D2_IMPL_CONTEXT_EXT(__nptr, _type_::root, __nsrc, _type_::state)
+    _D2_IMPL_CONTEXT_EXT(__nptr, typename _type_::root, __nsrc, typename _type_::state)
 
 #define _D2_IMPL_EMBED_NAMED_BEGIN(_type_, _name_, ...) _D2_IMPL_EMBED_NAMED_STR_BEGIN(_type_, #_name_, __VA_ARGS__)
 #define _D2_IMPL_EMBED_BEGIN(_type_, ...) _D2_IMPL_EMBED_NAMED_BEGIN(_type_,, __VA_ARGS__)
@@ -286,14 +286,14 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 
 #define _D2_IMPL_LISTEN_END _D2_IMPL_CONTEXT_END });
 
-#define _D2_IMPL_LISTEN_GLOBAL_EEXPR(_event_, ...) [=]() -> void { _D2_IMPL_LISTEN_GLOBAL_EXPR(_event_, __VA_ARGS__) }()
-#define _D2_IMPL_LISTEN_GLOBAL_EXPR(_event_, ...)  _D2_IMPL_LISTEN_GLOBAL(_event_) (__VA_ARGS__); _D2_IMPL_LISTEN_GLOBAL_END
-
-#define _D2_IMPL_LISTEN_GLOBAL(_event_, ...) \
-    __state->context()->listen<::d2::IOContext::Event::_event_>( \
-    [= __VA_OPT__(,) __VA_ARGS__](::d2::IOContext::EventListener listener, ::d2::IOContext::ptr ctx, auto&&...) {
-
-#define _D2_IMPL_LISTEN_GLOBAL_END });
+#define _D2_IMPL_LISTEN_SIG(_event_, ...) \
+    __state->context()->listen(_event_, \
+        [= __VA_OPT__(,) __VA_ARGS__](::d2::Screen::ptr src) { \
+            ::d2::TreeState::ptr state = src->state(); \
+            ::d2::IOContext::ptr ctx = src->context();
+#define _D2_IMPL_LISTEN_SIG_EEXPR(_event_, ...) [=]() -> void { _D2_IMPL_LISTEN_SIG_EXPR(_event_, __VA_ARGS__) }()
+#define _D2_IMPL_LISTEN_SIG_EXPR(_event_, ...) _D2_IMPL_LISTEN_SIG(_event_) (__VA_ARGS__); _D2_IMPL_LISTEN_SIG_END
+#define _D2_IMPL_LISTEN_SIG_END });
 
 #define _D2_IMPL_ASYNC_EEXPR(...) [=]() -> void { _D2_IMPL_ASYNC_EXPR(__VA_ARGS__) }()
 #define _D2_IMPL_ASYNC_EXPR(...) _D2_IMPL_ASYNC_TASK (__VA_ARGS__); _D2_IMPL_ASYNC_END

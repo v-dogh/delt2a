@@ -554,7 +554,7 @@ namespace d2
         void _signal_initialization(unsigned int prop);
         void _signal_write_update(write_flag type) const;
         void _signal_update(internal_flag type) const;
-        void _trigger_event(IOContext::Event ev);
+        void _trigger_event(ScreenEvent ev);
     protected:
         // Layout
 
@@ -568,7 +568,7 @@ namespace d2
 
         // Events
 
-        virtual void _event_impl(IOContext::Event) {}
+        virtual void _event_impl(ScreenEvent) {}
         virtual void _state_change_impl(State, bool) {}
 
         // Layout
@@ -697,7 +697,7 @@ namespace d2
             void signal_initialization(unsigned int prop);
             void signal_write_update(Element::write_flag type) const;
             void signal_update(Element::internal_flag type) const;
-            void trigger_event(IOContext::Event ev);
+            void trigger_event(ScreenEvent ev);
         };
     }
 }

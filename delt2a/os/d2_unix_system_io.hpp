@@ -153,7 +153,7 @@ namespace d2::sys
         virtual void load_image(const std::string& path, ImageInstance img) override;
         virtual void release_image(const std::string& path) override;
         virtual ImageInstance image_info(const std::string& path) override;
-        virtual std::uint32_t image_id(const std::string& path) override;
+        virtual image image_id(const std::string& path) override;
 
 		virtual void write(std::span<const Pixel> buffer, std::size_t width, std::size_t height) override;
 

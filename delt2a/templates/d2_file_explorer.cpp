@@ -179,10 +179,10 @@ namespace d2::ctm
 				}
 			}
 		}
-		virtual void _event_impl(IOContext::Event ev) override
+        virtual void _event_impl(Screen::Event ev) override
 		{
             Box::_event_impl(ev);
-			if (ev == IOContext::Event::KeyInput)
+            if (ev == Screen::Event::KeyInput)
 			{
 				if (context()->input()->is_pressed(sys::SystemInput::ArrowDown) ||
 					context()->input()->is_pressed(sys::SystemInput::ArrowRight))

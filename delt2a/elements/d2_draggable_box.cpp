@@ -60,17 +60,14 @@ namespace d2::dx
             _signal_write(Style);
         }
     }
-    void VirtualBox::_event_impl(IOContext::Event ev)
+    void VirtualBox::_event_impl(Screen::Event ev)
     {
         Box::_event_impl(ev);
-        if (ev == IOContext::Event::MouseInput)
+        if (ev == Screen::Event::MouseInput)
         {
-            const auto rlc = context()->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left,
-                             sys::SystemInput::KeyMode::Release);
-            const auto rc = context()->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Right,
-                            sys::SystemInput::KeyMode::Press);
+            const auto rlc = context()->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left, sys::SystemInput::KeyMode::Release);
+            const auto rc = context()->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Right, sys::SystemInput::KeyMode::Press);
             const auto lc = context()->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left);
-
             if (getstate(Hovered) && !_is_being_resized())
             {
                 if (getstate(Clicked) && lc && (data::vbox_options & VBoxOptions::Draggable))
@@ -109,7 +106,7 @@ namespace d2::dx
                 offset_ = { 0, 0 };
             }
         }
-        else if (ev == IOContext::Event::KeyInput)
+        else if (ev == Screen::Event::KeyInput)
         {
             const auto left = context()->input()->is_pressed(sys::SystemInput::key('h'));
             const auto right = context()->input()->is_pressed(sys::SystemInput::key('l'));

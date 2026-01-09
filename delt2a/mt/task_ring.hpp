@@ -37,8 +37,7 @@ namespace mt
 	#		endif
 		}
 
-		template<typename... Argv>
-		bool _enqueue_impl(bool wait, Argv&&... args) noexcept
+        bool _enqueue_impl(bool wait, Type& value) noexcept
 		{
 			std::size_t head = 0;
 			while (true)
@@ -56,7 +55,7 @@ namespace mt
 				if (_head.compare_exchange_weak(head, head + 1))
 					break;
 			}
-			_ring[head & _mask] = Type{ std::forward<Argv>(args)... };
+            _ring[head & _mask] = Type{ std::move(value) };
 			_head_check.fetch_add(1);
 			_head_check.notify_one();
 			_available.release();
@@ -80,12 +79,23 @@ namespace mt
         template<typename... Argv>
         void enqueue(Argv&&... args) noexcept
         {
-            _enqueue_impl(true, std::forward<Argv>(args)...);
+            auto value = Type{ std::forward<Argv>(args)... };
+            _enqueue_impl(true, value);
         }
         template<typename... Argv>
         bool try_enqueue(Argv&&... args) noexcept
         {
-            return _enqueue_impl(false, std::forward<Argv>(args)...);
+            auto value = Type{ std::forward<Argv>(args)... };
+            return _enqueue_impl(false, value);
+        }
+
+        void enqueue_ref(Type& value) noexcept
+        {
+            _enqueue_impl(true, value);
+        }
+        bool try_enqueue_ref(Type& value) noexcept
+        {
+            return _enqueue_impl(false, value);
         }
 
         bool try_dequeue(Type& value) noexcept
