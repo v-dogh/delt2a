@@ -15,7 +15,7 @@ namespace d2
     class TreeIter
     {
     public:
-        using foreach_callback = std::function<void(TreeIter)>;
+        using foreach_callback = std::function<bool(TreeIter)>;
     private:
         std::weak_ptr<Element> _elem{};
     public:
@@ -240,28 +240,28 @@ namespace d2
             int y{ 0 };
         };
 
-        using unit_meta_flag = unsigned char;
+        using unit_meta_flag = unsigned short;
         using internal_flag = unsigned short;
         using state_flag = unsigned char;
         using write_flag = element_write_flag;
 
         using event_callback = std::function<void(EventListener, TreeIter)>;
         using foreach_callback = TreeIter::foreach_callback;
-        using foreach_internal_callback = std::function<void(ptr)>;
+        using foreach_internal_callback = std::function<bool(ptr)>;
 
         // Flags representing the meta state of the object
         // Event listeners notify when changes to them are made
         enum State : state_flag
         {
             Invalid = 0,
-            Hovered = 1 << 0,
-            Clicked = 1 << 1,
-            Focused = 1 << 2,
-            Display = 1 << 3,
-            Swapped = 1 << 4,
+            Display = 1 << 0,
+            Swapped = 1 << 1,
+            Created = 1 << 2,
+            Event   = 1 << 3,
+            Hovered = 1 << 4,
             Keynavi = 1 << 5,
-            Created = 1 << 6,
-            Event   = 1 << 7
+            Focused = 1 << 6,
+            Clicked = 1 << 7,
         };
         enum InternalState : internal_flag
         {
@@ -315,6 +315,13 @@ namespace d2
             ContextualYPos = 1 << 5,
             ContextualWidth = 1 << 6,
             ContextualHeight = 1 << 7,
+
+            // Inverted
+
+            InvertedXPos = 1 << 8,
+            InvertedYPos = 1 << 9,
+            InvertedWidth = 1 << 10,
+            InvertedHeight = 1 << 11,
         };
 
         enum class CachePolicy
@@ -499,6 +506,7 @@ namespace d2
         // Listeners
 
         std::vector<EventListenerState::ptr> _subscribers{};
+        std::size_t _cursor_sink_listener_cnt{ 0 };
 
         // Rendering
 
@@ -546,7 +554,7 @@ namespace d2
         void _signal_initialization(unsigned int prop);
         void _signal_write_update(write_flag type) const;
         void _signal_update(internal_flag type) const;
-        void _trigger_event(IOContext::Event ev);
+        void _trigger_event(ScreenEvent ev);
     protected:
         // Layout
 
@@ -560,7 +568,7 @@ namespace d2
 
         // Events
 
-        virtual void _event_impl(IOContext::Event) {}
+        virtual void _event_impl(ScreenEvent) {}
         virtual void _state_change_impl(State, bool) {}
 
         // Layout
@@ -620,6 +628,7 @@ namespace d2
 
         unit_meta_flag unit_report() const;
 
+        bool provides_cursor_sink() const;
         bool provides_input() const;
         bool needs_update() const;
 
@@ -688,7 +697,7 @@ namespace d2
             void signal_initialization(unsigned int prop);
             void signal_write_update(Element::write_flag type) const;
             void signal_update(Element::internal_flag type) const;
-            void trigger_event(IOContext::Event ev);
+            void trigger_event(ScreenEvent ev);
         };
     }
 }

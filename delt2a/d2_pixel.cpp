@@ -265,6 +265,8 @@ namespace d2
 
 	void PixelBase::blend(const PixelBase& src)
 	{
+        constexpr auto inv = 1.f / 255.f;
+
 		auto do_blend = [](component source, component dest, float alpha)
 		{
 			return static_cast<component>(
@@ -272,9 +274,12 @@ namespace d2
 			);
 		};
 
-        const auto special_case = false/*(src.v == ' ' && src.a < a)*/;
-		const auto src_af = special_case ? src.a : src.af;
-		if (src_af == 255)
+        const auto special_case = (src.v == ' ' && src.a < a);
+        const auto src_af = special_case ? src.a : src.af;
+        if (src_af == 0 && src.a == 0)
+            return;
+
+        if (src_af == 255) [[ likely ]]
 		{
 			rf = src.rf;
 			gf = src.gf;
@@ -283,7 +288,7 @@ namespace d2
 		}
         else if (v == ' ')
         {
-            const auto alpha_src = src_af / 255.f;
+            const auto alpha_src = src_af * inv;
             rf = do_blend(src.rf, r, alpha_src);
             gf = do_blend(src.gf, g, alpha_src);
             bf = do_blend(src.bf, b, alpha_src);
@@ -291,8 +296,8 @@ namespace d2
         }
         else if (src.af != 0)
 		{
-			const auto alpha_src = src_af / 255.f;
-			const auto alpha_dest = af / 255.f;
+            const auto alpha_src = src_af * inv;
+            const auto alpha_dest = af * inv;
 			rf = do_blend(src.rf, rf, alpha_src);
 			gf = do_blend(src.gf, gf, alpha_src);
 			bf = do_blend(src.bf, bf, alpha_src);
@@ -301,7 +306,7 @@ namespace d2
 			);
 		}
 
-		if (src.a == 255)
+        if (src.a == 255) [[ likely ]]
 		{
 			r = src.r;
 			g = src.g;
@@ -310,8 +315,8 @@ namespace d2
 		}
 		else if (src.a != 0)
 		{
-			const auto alpha_src = src.a / 255.f;
-			const auto alpha_dest = a / 255.f;
+            const auto alpha_src = src.a * inv;
+            const auto alpha_dest = a * inv;
 			r = do_blend(src.r, r, alpha_src);
 			g = do_blend(src.g, g, alpha_src);
 			b = do_blend(src.b, b, alpha_src);
@@ -320,11 +325,11 @@ namespace d2
 			);
 		}
 
-        if ((v == ' ' && src_af > 0) || src_af >= af /*&& !special_case*/)
-		{
-			v = src.v;
+        if ((v == ' ' && src_af > 0) || src_af >= af) [[ unlikely ]]
+        {
+            v = src.v;
             style = src.style;
-		}
+        }
 	}
 
 	bool PixelBase::compare_colors(const PixelBase& px) const

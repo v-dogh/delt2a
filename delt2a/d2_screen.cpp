@@ -5,6 +5,49 @@
 
 namespace d2
 {
+    TreeState::TreeState(
+        std::shared_ptr<Screen> src,
+        std::shared_ptr<ParentElement> rptr,
+        std::shared_ptr<ParentElement> coreptr
+    ) : src_(src), root_ptr_(rptr), core_ptr_(coreptr)
+    {}
+
+    Screen::Screen(IOContext::ptr ctx)
+        : _ctx(ctx)
+    {
+        _ctx->connect<Event, Screen::ptr>();
+    }
+
+    void TreeState::set_root(std::shared_ptr<ParentElement> ptr)
+    {
+        root_ptr_ = ptr;
+    }
+    void TreeState::set_core(std::shared_ptr<ParentElement> ptr)
+    {
+        core_ptr_ = ptr;
+    }
+
+    std::shared_ptr<IOContext> TreeState::context() const
+    {
+        return src_->context();
+    }
+    std::shared_ptr<Screen> TreeState::screen() const
+    {
+        return src_;
+    }
+    std::shared_ptr<ParentElement> TreeState::root() const
+    {
+        return root_ptr_;
+    }
+    std::shared_ptr<TreeState> TreeState::root_state() const
+    {
+        return root()->state();
+    }
+    std::shared_ptr<ParentElement> TreeState::core() const
+    {
+        return core_ptr_.lock();
+    }
+
     void Screen::_keynav_cycle_up(eptr ptr)
     {
         const auto cparent = ptr->parent();
@@ -185,11 +228,11 @@ namespace d2
             }
         }
     }
-    void Screen::_trigger_focused(IOContext::Event ev)
+    void Screen::_trigger_focused(Event ev)
     {
         internal::ElementView::from(_focused).trigger_event(ev);
     }
-    void Screen::_trigger_hovered(IOContext::Event ev)
+    void Screen::_trigger_hovered(Event ev)
     {
         internal::ElementView::from(_targetted).trigger_event(ev);
     }
@@ -201,11 +244,11 @@ namespace d2
         const bool is_key_seq_input = input->is_key_sequence_input();
         const bool is_resize = input->is_screen_resize();
 
-        _ctx->trigger<IOContext::Event::Update>(_current->state);
-        if (is_mouse_input) _ctx->trigger<IOContext::Event::MouseInput>(_current->state);
-        if (is_resize) _ctx->trigger<IOContext::Event::Resize>(_current->state);
-        if (is_keyboard_input) _ctx->trigger<IOContext::Event::KeyInput>(_current->state);
-        if (is_key_seq_input) _ctx->trigger<IOContext::Event::KeySequenceInput>(_current->state);
+        _signal(Event::Update);
+        if (is_mouse_input) _signal(Event::MouseInput);
+        if (is_resize) _signal(Event::Resize);
+        if (is_keyboard_input) _signal(Event::KeyInput);
+        if (is_key_seq_input) _signal(Event::KeySequenceInput);
 
         _trigger_focused_events();
         _trigger_hovered_events();
@@ -213,29 +256,29 @@ namespace d2
     void Screen::_trigger_focused_events()
     {
         auto* input = _ctx->input();
-        const bool is_mouse_input = input->is_mouse_input();
-        const bool is_keyboard_input = input->is_key_input();
-        const bool is_key_seq_input = input->is_key_sequence_input();
-        const bool is_resize = input->is_screen_resize();
+        const auto is_mouse_input = input->is_mouse_input();
+        const auto is_keyboard_input = input->is_key_input();
+        const auto is_key_seq_input = input->is_key_sequence_input();
+        const auto is_resize = input->is_screen_resize();
 
         if (_focused != nullptr)
         {
-            _trigger_focused(IOContext::Event::Update);
-            if (is_mouse_input) _trigger_focused(IOContext::Event::MouseInput);
-            if (is_resize) _trigger_focused(IOContext::Event::Resize);
-            if (is_keyboard_input) _trigger_focused(IOContext::Event::KeyInput);
-            if (is_key_seq_input) _trigger_focused(IOContext::Event::KeySequenceInput);
+            _trigger_focused(Event::Update);
+            if (is_mouse_input) _trigger_focused(Event::MouseInput);
+            if (is_resize) _trigger_focused(Event::Resize);
+            if (is_keyboard_input) _trigger_focused(Event::KeyInput);
+            if (is_key_seq_input) _trigger_focused(Event::KeySequenceInput);
         }
     }
     void Screen::_trigger_hovered_events()
     {
         auto* input = _ctx->input();
-        const bool is_mouse_input = input->is_mouse_input();
+        const auto is_mouse_input = input->is_mouse_input();
 
         if (_targetted != nullptr && _targetted != _focused)
         {
-            _trigger_hovered(IOContext::Event::Update);
-            if (is_mouse_input) _trigger_hovered(IOContext::Event::MouseInput);
+            _trigger_hovered(Event::Update);
+            if (is_mouse_input) _trigger_hovered(Event::MouseInput);
         }
     }
     void Screen::_update_viewport()
@@ -264,7 +307,7 @@ namespace d2
 
         eptr mouse_target{ nullptr };
         // Press B to pass the vibe check
-        container.asp()->foreach_internal([&](eptr it)
+        container.asp()->foreach_internal([&](eptr it) -> bool
         {
             if (it->getstate(Element::State::Display))
             {
@@ -280,16 +323,24 @@ namespace d2
                         mouse.first < (x + width) && mouse.second < (y + height)
                     )
                     {
-                        // Zindex lower/equal than -120 makes the child lose precedence over it's parent
                         mouse_target = it;
                         auto res = _update_states(it, std::pair(mouse.first - x, mouse.second - y));
-                        if (res != nullptr && res->getzindex() > -120)
+                        if (res != nullptr && res->getzindex() > dx::Box::underlap)
                             mouse_target = std::move(res);
                     }
                 }
             }
+            return true;
         });
         return mouse_target;
+    }
+    Screen::eptr Screen::_update_states_reverse(eptr ptr)
+    {
+        if (ptr->provides_cursor_sink())
+            return ptr;
+        if (ptr->parent() != nullptr)
+            return _update_states_reverse(ptr->parent());
+        return nullptr;
     }
 
     void Screen::_apply_impl(const Element::foreach_callback& func, eptr container) const
@@ -299,7 +350,12 @@ namespace d2
             func(it);
             if (it.is_type<ParentElement>())
                 _apply_impl(func, it);
+            return true;
         });
+    }
+    void Screen::_signal(Event ev)
+    {
+        _ctx->signal(ev, shared_from_this());
     }
 
     MatrixModel::ptr Screen::fetch_model(const std::string& name, const std::string& path)
@@ -400,11 +456,6 @@ namespace d2
             );
             _current->unbuilt = false;
         }
-        if (!_current->constructed)
-        {
-            root->state->construct();
-            _current->constructed = true;
-        }
         if (_current->swapped_out)
         {
             root->state->swap_in();
@@ -480,6 +531,7 @@ namespace d2
         {
             if (_focused != nullptr)
             {
+                auto _ = _focused.shared();
                 _focused->setstate(Element::Focused, false);
                 _focused->setstate(Element::State::Clicked, false);
                 _focused->setstate(Element::State::Hovered, false);
@@ -672,7 +724,7 @@ namespace d2
                 _frame();
 
                 fps_counter++;
-                if (std::chrono::steady_clock::now() - last_measurement >
+                if (beg - last_measurement >
                     std::chrono::seconds(1))
                 {
                     _fps_avg = fps_counter;
@@ -716,7 +768,7 @@ namespace d2
                 _frame();
 
                 fps_counter++;
-                if (std::chrono::steady_clock::now() - last_measurement >
+                if (beg - last_measurement >
                     std::chrono::seconds(1))
                 {
                     _fps_avg = fps_counter;
@@ -730,11 +782,11 @@ namespace d2
 
                 auto frame_ms = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
                 auto sleep = _refresh_rate - frame_ms;
-                if (sleep > std::chrono::milliseconds(0))
-                    _ctx->wait(
-                        _refresh_rate == std::chrono::milliseconds(0) ?
-                            std::chrono::milliseconds::max() : sleep
-                    );
+                _ctx->wait(
+                    sleep <= std::chrono::milliseconds(0) ||
+                    _refresh_rate == std::chrono::milliseconds(0) ?
+                        std::chrono::milliseconds::max() : sleep
+                );
             }
         }
         _ctx->deinitialize();
@@ -742,7 +794,6 @@ namespace d2
 
         ExtendedCodePage::deactivate_thread();
     }
-
     void Screen::stop_blocking()
     {
         _is_stop = true;
@@ -756,7 +807,7 @@ namespace d2
     {
         if (!_is_suspended && root()->needs_update())
         {
-            _ctx->trigger<IOContext::Event::PreRedraw>(_current->state);
+            _signal(Event::PreRedraw);
 
             auto& root = *this->root().as();
             auto frame = root.frame();
@@ -764,7 +815,8 @@ namespace d2
             const auto [ bwidth, bheight ] = root.box();
             auto* output = _ctx->output();
             output->write(frame.data(), bwidth, bheight);
-            _ctx->trigger<IOContext::Event::PostRedraw>(_current->state);
+
+            _signal(Event::PostRedraw);
         }
     }
     void Screen::update()
@@ -777,18 +829,22 @@ namespace d2
         if (_ctx->input()->is_mouse_input())
         {
             const auto target = _update_states(root(), _ctx->input()->mouse_position());
-            const auto is_released = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left,
-                                     sys::SystemInput::KeyMode::Release);
-            const auto is_pressed = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left,
-                                    sys::SystemInput::KeyMode::Press);
+            const auto is_released = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left, sys::SystemInput::KeyMode::Release);
+            const auto is_pressed = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left, sys::SystemInput::KeyMode::Press);
 
             // Autofocus
 
+            auto uptarget = target;
+            if (target != nullptr && is_pressed && !target->provides_cursor_sink() && target->parent() != nullptr)
+                uptarget = _update_states_reverse(target->parent());
+
+            auto _1 = _targetted.shared();
+            auto _2 = _clicked.shared();
+            auto _3 = _focused.shared();
             if (_targetted != target)
             {
                 if (_targetted != nullptr)
                 {
-                    _targetted->setstate(Element::State::Clicked, false);
                     _targetted->setstate(Element::State::Hovered, false);
                     _trigger_hovered_events();
                 }
@@ -796,18 +852,13 @@ namespace d2
                     target->setstate(Element::State::Hovered, true);
                 _targetted = target;
             }
-            if (_targetted != nullptr)
+            if (_clicked != uptarget)
             {
-                if (is_released)
-                {
-                    _targetted->setstate(Element::State::Clicked, false);
-                }
-                else if (is_pressed)
-                {
-                    _targetted->setstate(Element::State::Clicked);
-                }
+                if (_clicked != nullptr)
+                    _clicked->setstate(Element::State::Clicked, false);
+                _clicked = uptarget;
             }
-            if (_focused != target && is_pressed)
+            if (_focused != uptarget && is_pressed)
             {
                 if (_focused != nullptr)
                 {
@@ -817,14 +868,25 @@ namespace d2
                 {
                     _keynav_iterator->setstate(Element::State::Keynavi, false);
                 }
-                focus(target);
+                focus(uptarget);
+            }
+            if (_clicked != nullptr)
+            {
+                if (is_released)
+                {
+                    _clicked->setstate(Element::State::Clicked, false);
+                }
+                else if (is_pressed)
+                {
+                    _clicked->setstate(Element::State::Clicked, true);
+                }
             }
         }
         if (_ctx->input()->is_key_input())
         {
             // Micro forwards
             if (_ctx->input()->is_pressed(sys::SystemInput::LeftControl) &&
-                    _ctx->input()->is_pressed(sys::SystemInput::key('W'), sys::SystemInput::KeyMode::Press))
+                _ctx->input()->is_pressed(sys::SystemInput::key('W'), sys::SystemInput::KeyMode::Press))
             {
                 if (_keynav_iterator != nullptr)
                 {

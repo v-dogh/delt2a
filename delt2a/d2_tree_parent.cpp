@@ -203,6 +203,7 @@ namespace d2
         {
             internal::ElementView::from(elem)
                 .signal_context_change_sub(type, prop, element);
+            return true;
         });
     }
     void ParentElement::_state_change_impl(State state, bool value)
@@ -212,6 +213,7 @@ namespace d2
             foreach_internal([&](ptr elem)
             {
                 elem->setstate(state, value);
+                return true;
             });
         }
     }
@@ -223,6 +225,67 @@ namespace d2
     void ParentElement::layout_for(enum Layout type, cptr elem) const
     {
         _layout_for_impl(type, elem);
+    }
+
+    bool ParentElement::empty() const
+    {
+        return _empty_impl();
+    }
+    bool ParentElement::exists(const std::string& name) const
+    {
+        return _exists_impl(name);
+    }
+    bool ParentElement::exists(ptr ptr) const
+    {
+        return _exists_impl(ptr);
+    }
+
+    TreeIter ParentElement::at(const std::string& name) const
+    {
+        return _at_impl(name);
+    }
+
+    TreeIter ParentElement::create(ptr ptr)
+    {
+        return _create_impl(ptr);
+    }
+    TreeIter ParentElement::override(ptr ptr)
+    {
+        return _override_impl(ptr);
+    }
+
+    TreeIter ParentElement::create_after(ptr p, ptr after)
+    {
+        return _create_after_impl(p, after);
+    }
+    TreeIter ParentElement::override_after(ptr p, ptr after)
+    {
+        return _override_after_impl(p, after);
+    }
+
+    void ParentElement::clear()
+    {
+        _clear_impl();
+    }
+
+    void ParentElement::remove(const std::string& name)
+    {
+        if (!_remove_impl(name))
+            throw std::runtime_error{ "Attempt to remove invalid object" };
+    }
+    void ParentElement::remove(ptr ptr)
+    {
+        if (!_remove_impl(ptr))
+            throw std::runtime_error{ "Attempt to remove invalid object" };
+    }
+
+    bool ParentElement::remove_if(const std::string& name)
+    {
+        return _remove_impl(name);
+    }
+    bool ParentElement::remove_if(ptr ptr)
+    {
+        return _remove_impl(ptr);
     }
 
     //
@@ -307,8 +370,8 @@ namespace d2
         if (_find(ptr->name()) != ~0ull)
             throw std::runtime_error{ "Attempt to create an object with a duplicate name" };
         auto result = _elements.emplace_back(ptr);
-        _elements.back()->initialize();
-        _elements.back()->setstate(Created, true);
+        result->initialize();
+        result->setstate(Created, true);
         ptr->setstate(Swapped, getstate(Swapped));
         _signal_write(Style);
         return result;
@@ -322,7 +385,7 @@ namespace d2
             _elements[f] = ptr;
             _elements[f]->setstate(Created, true);
             _elements[f]->setstate(Swapped, getstate(Swapped));
-            _signal_write();
+            _signal_write(Style);
             return ptr;
         }
         _elements.emplace_back(ptr);
@@ -332,24 +395,64 @@ namespace d2
         _signal_write(Style);
         return ptr;
     }
-    void VecParentElement::_remove_impl(const std::string& name)
+
+    TreeIter VecParentElement::_create_after_impl(ptr p, ptr after)
+    {
+        if (_find(p->name()) != ~0ull)
+            throw std::runtime_error{ "Attempt to create an object with a duplicate name" };
+        const auto f = _find(after);
+        if (f == ~0ull)
+            throw std::logic_error{ "Attempt to create an object after a non-existed element" };
+
+        auto result = _elements.insert(_elements.begin() + f + 1, p);
+        p->initialize();
+        p->setstate(Created, true);
+        p->setstate(Swapped, getstate(Swapped));
+        _signal_write(Style);
+        return p;
+    }
+    TreeIter VecParentElement::_override_after_impl(ptr p, ptr after)
+    {
+        const auto f = _find(after);
+        if (f == ~0ull)
+        {
+            throw std::logic_error{ "Attempt to create an object after a non-existed element" };
+        }
+        else if (f == _elements.size() - 1)
+        {
+            return _create_impl(p);
+        }
+        else
+        {
+            _elements[f]->setstate(Created, false);
+            _elements[f] = p;
+            _elements[f]->setstate(Created, true);
+            _elements[f]->setstate(Swapped, getstate(Swapped));
+            _signal_write(Style);
+            return p;
+        }
+    }
+
+    bool VecParentElement::_remove_impl(const std::string& name)
     {
         const auto idx = _find(name);
         if (idx >= _elements.size())
-            throw std::runtime_error{ "Attempt to remove invalid object" };
+            return false;
         auto ptr = _elements[idx];
         ptr->setstate(Created, false);
         _elements.erase(_elements.begin() + idx);
         _signal_write(Style);
+        return true;
     }
-    void VecParentElement::_remove_impl(ptr ptr)
+    bool VecParentElement::_remove_impl(ptr ptr)
     {
         const auto idx = _find(ptr);
         if (idx >= _elements.size())
-            throw std::runtime_error{ "Attempt to remove invalid object" };
+            return false;
         ptr->setstate(Created, false);
         _elements.erase(_elements.begin() + idx);
         _signal_write(Style);
+        return true;
     }
     void VecParentElement::_clear_impl()
     {
@@ -396,11 +499,13 @@ namespace d2
     void VecParentElement::foreach_internal(foreach_internal_callback callback) const
     {
         for (decltype(auto) it : _elements)
-            callback(it);
+            if (!callback(it))
+                break;
     }
     void VecParentElement::foreach (foreach_callback callback) const
     {
         for (decltype(auto) it : _elements)
-            callback(it->traverse());
+            if (!callback(it->traverse()))
+                break;
     }
 }

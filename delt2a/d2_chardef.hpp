@@ -174,6 +174,7 @@ namespace d2
         {
             const char32_t ch = 0x2800 + mask;
             std::string s;
+            s.reserve(3);
             if (ch <= 0xFFFF)
             {
                 s.push_back(char(0xE0 | ((ch >> 12) & 0x0F)));

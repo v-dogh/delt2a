@@ -5,15 +5,17 @@
 #include "d2_tree_element.hpp"
 #include "d2_tree_parent.hpp"
 #include "d2_screen.hpp"
+#include "d2_meta.hpp"
 
 namespace d2
 {
-    template<util::cmp::str Name, typename State, typename Tree, typename Root = dx::Box>
+    template<meta::ConstString Name, typename State, typename Tree, typename Root = dx::Box>
     struct TreeTemplateInit
     {
     public:
         using root = Root;
         using state = State;
+        using __state_type = state;
 
         static constexpr std::string_view name = Name.view();
 
@@ -22,11 +24,11 @@ namespace d2
         {
             auto s = std::make_shared<State>(
                 state->screen(),
-                state->context(),
                 state->root(),
                 nullptr,
                 std::forward<Argv>(args)...
             );
+            s->construct();
             auto core = d2::Element::make<Root>(
                 name,
                 s,
@@ -41,11 +43,11 @@ namespace d2
         {
             auto state = std::make_shared<State>(
                 src,
-                src->context(),
                 nullptr,
                 nullptr,
                 std::forward<Argv>(args)...
-                );
+            );
+            state->construct();
             state->set_root(d2::Element::make<Root>(
                 "",
                 state,
@@ -58,7 +60,7 @@ namespace d2
         }
     };
 
-    template<util::cmp::str Name, typename Tree, typename Root = dx::Box>
+    template<meta::ConstString Name, typename Tree, typename Root = dx::Box>
     struct TreeTemplate : TreeTemplateInit<Name, TreeState, Tree, Root> { };
 }
 

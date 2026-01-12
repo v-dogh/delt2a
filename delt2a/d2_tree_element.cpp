@@ -174,27 +174,35 @@ namespace d2
     {
         D2_ASSERT(callback != nullptr);
         auto& l = _subscribers.emplace_back(std::make_shared<EventListenerState>(
-                                                shared_from_this(),
-                                                _subscribers.size(),
-                                                value,
-                                                event,
-                                                std::move(callback)
-                                            ));
+            shared_from_this(),
+            _subscribers.size(),
+            value,
+            event,
+            std::move(callback)
+        ));
+        if (event == State::Clicked || event == State::Focused)
+            _cursor_sink_listener_cnt++;
         return EventListener(l);
     }
     void Element::_unmute_listener(EventListenerState::ptr listener)
     {
         D2_ASSERT(listener->index() < _subscribers.size());
+        if (listener->event() == State::Clicked || listener->event() == State::Focused)
+            _cursor_sink_listener_cnt--;
         _subscribers[listener->index()]->setstate(EventListenerState::Mode::Active);
     }
     void Element::_mute_listener(EventListenerState::ptr listener)
     {
         D2_ASSERT(listener->index() < _subscribers.size());
+        if (listener->event() == State::Clicked || listener->event() == State::Focused)
+            _cursor_sink_listener_cnt++;
         _subscribers[listener->index()]->setstate(EventListenerState::Mode::Muted);
     }
     void Element::_destroy_listener(EventListenerState::ptr listener)
     {
         D2_ASSERT(listener->index() < _subscribers.size());
+        if (listener->event() == State::Clicked || listener->event() == State::Focused)
+            _cursor_sink_listener_cnt--;
         _subscribers[listener->index()] = nullptr;
         for (auto it = _subscribers.begin(); it != _subscribers.end();)
         {
@@ -312,7 +320,7 @@ namespace d2
     {
         _internal_state &= ~type;
     }
-    void Element::_trigger_event(IOContext::Event ev)
+    void Element::_trigger_event(ScreenEvent ev)
     {
         _event_impl(ev);
         _trigger(State::Event, true);
@@ -423,6 +431,10 @@ namespace d2
         return _unit_report_impl();
     }
 
+    bool Element::provides_cursor_sink() const
+    {
+        return _cursor_sink_listener_cnt || _provides_input_impl();
+    }
     bool Element::provides_input() const
     {
         return getstate(Display) && _provides_input_impl();
@@ -452,6 +464,8 @@ namespace d2
 
     int Element::layout(enum Layout type) const
     {
+        [[ unlikely ]] if (parent() == nullptr)
+            return _layout.get(type);
         switch (type)
         {
             case Layout::X:
@@ -544,8 +558,7 @@ namespace d2
         }
         if (needs_update())
         {
-            if (const auto [ width, height ] = box();
-                    width > 0 && height > 0)
+            if (const auto [ width, height ] = box(); width > 0 && height > 0)
             {
                 _update_style_impl();
                 if (!_provides_buffer_impl() &&
@@ -576,12 +589,16 @@ namespace d2
     }
     Element::BoundingBox Element::box() const
     {
+        [[ unlikely ]] if (parent() == nullptr)
+            return { _layout.get(Layout::Width), _layout.get(Layout::Height) };
         if (!(_internal_state & DimensionsWidthUpdated)) parent()->layout_for(Layout::Width, shared_from_this());
         if (!(_internal_state & DimensionsHeightUpdated)) parent()->layout_for(Layout::Height, shared_from_this());
         return Element::BoundingBox{ _layout.get(Layout::Width), _layout.get(Layout::Height) };
     }
     Element::Position Element::position() const
     {
+        [[ unlikely ]] if (parent() == nullptr)
+            return { _layout.get(Layout::X), _layout.get(Layout::Y) };
         if (!(_internal_state & PositionXUpdated)) parent()->layout_for(Layout::X, shared_from_this());
         if (!(_internal_state & PositionYUpdated)) parent()->layout_for(Layout::Y, shared_from_this());
         return Element::Position{ _layout.get(Layout::X), _layout.get(Layout::Y) };
@@ -684,7 +701,7 @@ namespace d2
         {
             return _ptr->_signal_update(type);
         }
-        void ElementView::trigger_event(IOContext::Event ev)
+        void ElementView::trigger_event(ScreenEvent ev)
         {
             return _ptr->_trigger_event(ev);
         }

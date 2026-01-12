@@ -39,6 +39,126 @@ namespace d2
 
         namespace ext
         {
+            SystemAudio::FilterPipeline SystemAudio::FilterPipeline::operator|(std::function<bool(Stream)> callback) const
+            {
+                FilterPipeline pipeline;
+                pipeline.transforms.reserve(4);
+                pipeline.transforms.push_back({ std::nullopt, std::move(callback) });
+                return pipeline;
+            }
+            SystemAudio::FilterPipeline SystemAudio::FilterPipeline::operator|(const std::string& name) const
+            {
+                FilterPipeline pipeline;
+                pipeline.transforms.reserve(4);
+                pipeline.transforms.push_back({ name, nullptr });
+                return pipeline;
+            }
+            SystemAudio::FilterPipeline& SystemAudio::FilterPipeline::operator&&(std::function<bool(Stream)> callback)
+            {
+                if (transforms.empty() ||
+                    !transforms.back().first.has_value() ||
+                    transforms.back().second != nullptr)
+                    return operator|(std::move(callback));
+                transforms.back().second = std::move(callback);
+                return *this;
+            }
+            SystemAudio::FilterPipeline& SystemAudio::FilterPipeline::operator|(const std::string& name)
+            {
+                transforms.push_back({ name, nullptr });
+                return *this;
+            }
+            SystemAudio::FilterPipeline& SystemAudio::FilterPipeline::operator|(std::function<bool(Stream)> callback)
+            {
+                transforms.push_back({ std::nullopt, std::move(callback) });
+                return *this;
+            }
+
+            SystemAudio::Status SystemAudio::_load_impl()
+            {
+                _sig_generic = context()->connect<Device, const DeviceName&, Event, SystemAudio&>();
+                _sig_in = context()->connect<Event, const DeviceName&, SystemAudio&>(Signals::id(Device::Input));
+                _sig_out = context()->connect<Event, const DeviceName&, SystemAudio&>(Signals::id(Device::Output));
+                return Status::Ok;
+            }
+            SystemAudio::Status SystemAudio::_unload_impl()
+            {
+                _sig_generic.disconnect();
+                _sig_in.disconnect();
+                _sig_out.disconnect();
+                return Status::Ok;
+            }
+
+            void SystemAudio::Stream::apply(auto&& func, std::size_t channel, float start, float end)
+            {
+                const auto channel_size = _data.size() / _format->channels;
+                const auto astart = std::size_t(start * channel_size);
+                const auto aend = std::size_t(end * channel_size);
+                for (std::size_t i = astart; i < aend; i += _format->channels)
+                    _data[i + channel] = func(_data[i + channel], float(i + _offset) / _total);
+            }
+            void SystemAudio::Stream::apply(auto&& func, float start, float end)
+            {
+                const auto astart = std::size_t(start * _data.size());
+                const auto aend = std::size_t(end * _data.size());
+                const auto dist = aend - astart;
+                if (_format->channels == 2)
+                {
+                    for (std::size_t i = astart; i < aend; i += 2)
+                    {
+                        _data[i] = func(_data[i], float(i + _offset) / _total);
+                        _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
+                    }
+                }
+                else if (_format->channels == 4)
+                {
+                    for (std::size_t i = astart; i < aend; i += 4)
+                    {
+                        _data[i] = func(_data[i], float(i + _offset) / _total);
+                        _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
+                        _data[i + 2] = func(_data[i + 2], float(i + 2 + _offset) / _total);
+                        _data[i + 3] = func(_data[i + 3], float(i + 3 + _offset) / _total);
+                    }
+                }
+                else
+                {
+                    for (std::size_t i = astart; i < aend; i++)
+                        _data[i] = func(_data[i], float(i + _offset) / _total);
+                }
+            }
+            void SystemAudio::Stream::push(std::span<float> in)
+            {
+                for (std::size_t i = 0; i < std::min(in.size(), _data.size()); i++)
+                    _data[i] = in[i];
+            }
+            void SystemAudio::Stream::push_expand(std::span<float> in)
+            {
+                for (std::size_t i = 0; i < std::min(in.size(), _data.size() / _format->channels); i++)
+                    for (std::size_t j = 0; j < _format->channels; j++)
+                        _data[i + j] = in[i];
+            }
+
+            const SystemAudio::FormatInfo& SystemAudio::Stream::info() const
+            {
+                return *_format;
+            }
+            std::size_t SystemAudio::Stream::size() const
+            {
+                return _total / _format->channels;
+            }
+            std::size_t SystemAudio::Stream::chunk() const
+            {
+                return _data.size() / _format->channels;
+            }
+
+            float& SystemAudio::Stream::at(std::size_t idx, std::size_t channel) const
+            {
+                return _data[(idx * _format->channels) + channel];
+            }
+            float& SystemAudio::Stream::at(float idx, std::size_t channel) const
+            {
+                return _data[(idx * _format->channels) + channel];
+            }
+
             template<SystemAudio::Format>
             inline float _convert_sample(const unsigned char* sample);
 
@@ -202,59 +322,152 @@ namespace d2
             }
             void SystemAudio::_run_device_filter(Device dev, Stream stream)
             {
-                for (decltype(auto) it : _device_data[std::size_t(dev)].filter.transforms)
-                    it(stream);
+                auto& device = _device_data[std::size_t(dev)];
+                auto& trans = device.filter.transforms;
+                for (std::size_t i = 0; i < trans.size(); i++)
+                    if (!trans[i].second(stream))
+                    {
+                        trans.erase(trans.begin() + i);
+                        i--;
+                    }
             }
             void SystemAudio::_trigger_device_event(Device dev, Event ev, const DeviceName& name)
             {
-                bool cleanup = false;
-                auto& data = _device_data[std::size_t(dev)];
-                for (decltype(auto) it : data.listener)
-                {
-                    auto state = it->state.load();
-                    if (state == EventListenerState::State::Active)
-                    {
-                        it->callback(name, ev, it);
-                    }
-                    else
-                    {
-                        cleanup = true;
-                    }
-                }
-
-                if (cleanup)
-                {
-                    data.listener.erase(
-                        std::remove_if(
-                            data.listener.begin(),
-                            data.listener.end(),
-                            [](auto v) {
-                                return v->state == EventListenerState::State::Invalid;
-                            }
-                        ),
-                        data.listener.end()
-                    );
-                }
+                context()->signal(dev, name, ev, d2::ref(*this));
+                context()->signal(ev, Signals::id(dev), name, d2::ref(*this));
+                context()->signal(ev, Signals::id(dev), name, d2::ref(*this));
             }
 
-            void SystemAudio::filter(Device dev, FilterPipeline filter)
+            void SystemAudio::_filter(Device dev, FilterPipeline filter)
             {
                 _device_data[std::size_t(dev)].filter
                     = std::move(filter);
             }
-            SystemAudio::EventListener SystemAudio::watch(Device dev, std::function<void(const DeviceName&, Event, EventListener)> callback)
+            void SystemAudio::_filter_push(Device dev, const std::string& after, FilterPipeline filter)
             {
-                auto ev = std::make_shared<EventListenerState>(std::move(callback));
-                for (decltype(auto) it : enumerate(dev))
+                auto& trans = _device_data[std::size_t(dev)].filter.transforms;
+                auto f = std::find_if(trans.begin(), trans.end(), [&](const auto& v) {
+                    return v.first == after;
+                });
+                if (f == trans.end())
                 {
-                    if (ev->state == EventListenerState::State::Active)
-                        ev->callback(it, Event::Create, ev);
-                    else
-                        break;
+                    trans.insert(
+                        trans.end(),
+                        std::make_move_iterator(filter.transforms.begin()),
+                        std::make_move_iterator(filter.transforms.end())
+                    );
                 }
-                _device_data[std::size_t(dev)].listener.push_back(ev);
-                return ev;
+                else
+                {
+                    trans.insert(
+                        f + 1,
+                        std::make_move_iterator(filter.transforms.begin()),
+                        std::make_move_iterator(filter.transforms.end())
+                    );
+                }
+            }
+            void SystemAudio::_filter_push(Device dev, FilterPipeline filter)
+            {
+                auto& trans = _device_data[std::size_t(dev)].filter.transforms;
+                trans.insert(
+                    trans.end(),
+                    std::make_move_iterator(filter.transforms.begin()),
+                    std::make_move_iterator(filter.transforms.end())
+                );
+            }
+            void SystemAudio::_filter_override(Device dev, const std::string& name, std::function<bool(Stream)> filter)
+            {
+                auto& trans = _device_data[std::size_t(dev)].filter.transforms;
+                auto f = std::find_if(trans.begin(), trans.end(), [&](const auto& v) {
+                    return v.first == name;
+                });
+                if (f != trans.end())
+                    f->second = filter;
+            }
+            void SystemAudio::_filter_remove(Device dev, const std::string& name)
+            {
+                auto& trans = _device_data[std::size_t(dev)].filter.transforms;
+                auto f = std::find_if(trans.begin(), trans.end(), [&](const auto& v) {
+                    return v.first == name;
+                });
+                if (f != trans.end())
+                    trans.erase(f);
+            }
+            void SystemAudio::_filter_clear(Device dev)
+            {
+                _device_data[std::size_t(dev)]
+                    .filter.transforms.clear();
+            }
+
+            Signals::Handle SystemAudio::watch(Device dev, Event ev, std::function<void(const DeviceName&, SystemAudio&)> callback)
+            {
+                return context()->listen(ev, Signals::id(dev), std::move(callback));
+            }
+            Signals::Handle SystemAudio::watch(Device dev, std::function<void(const DeviceName&, Event, SystemAudio&)> callback)
+            {
+                return context()->listen(dev, std::move(callback));
             }
         }
+    }
+
+    std::weak_ptr<const IOContext> IOContext::_weak() const
+    {
+        return std::static_pointer_cast<const IOContext>(weak_from_this().lock());
+    }
+    std::shared_ptr<const IOContext> IOContext::_shared() const
+    {
+        return std::static_pointer_cast<const IOContext>(shared_from_this());
+    }
+    std::weak_ptr<IOContext> IOContext::_weak()
+    {
+        return std::static_pointer_cast<IOContext>(weak_from_this().lock());
+    }
+    std::shared_ptr<IOContext> IOContext::_shared()
+    {
+        return std::static_pointer_cast<IOContext>(shared_from_this());
+    }
+
+    IOContext::IOContext(mt::ThreadPool::ptr scheduler)
+        : _scheduler(scheduler), Signals(scheduler) { }
+
+    void IOContext::initialize()
+    {
+        using wflags = mt::ThreadPool::Worker::Flags;
+        _main_thread = std::this_thread::get_id();
+        _scheduler->start();
+        _worker = _scheduler->worker(
+            wflags::MainWorker |
+            wflags::HandleCyclicTask |
+            wflags::HandleDeferredTask
+        );
+        _worker.start();
+    }
+    void IOContext::deinitialize()
+    {
+        _worker.stop();
+        _scheduler->stop();
+    }
+    void IOContext::wait(std::chrono::milliseconds ms)
+    {
+        _worker.wait(ms);
+    }
+
+    mt::ThreadPool::ptr IOContext::scheduler()
+    {
+        return _scheduler;
+    }
+
+    std::size_t IOContext::syscnt() const
+    {
+        std::shared_lock lock(_module_mtx);
+        std::size_t cnt = 0;
+        for (decltype(auto) it : _components)
+            cnt += (it != nullptr);
+        return cnt;
+    }
+    void IOContext::sysenum(std::function<void(sys::SystemComponent*)> callback)
+    {
+        for (decltype(auto) it : _components)
+            callback(it.get());
     }
 }

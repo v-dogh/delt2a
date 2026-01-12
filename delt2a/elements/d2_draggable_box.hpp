@@ -60,7 +60,7 @@ namespace d2
             virtual bool _provides_input_impl() const override;
             virtual int _get_border_impl(BorderType type, Element::cptr elem) const override;
             virtual void _state_change_impl(State state, bool value) override;
-            virtual void _event_impl(IOContext::Event ev) override;
+            virtual void _event_impl(Screen::Event ev) override;
             virtual void _frame_impl(PixelBuffer::View buffer) override;
         public:
             void close();

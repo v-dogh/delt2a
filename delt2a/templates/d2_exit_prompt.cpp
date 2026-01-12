@@ -43,7 +43,7 @@ namespace d2::ctm
                     D2_STYLE(OnSubmit, [](TreeIter ptr) {
                         ptr->screen()->stop_blocking();
                     })
-                    D2_INTERPOLATE_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, colors::r::red);
+                    D2_INTERP_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, colors::r::red);
                 D2_ELEM_END
                 D2_ELEM(Button)
                     D2_STYLE(Value, "CANCEL")
@@ -55,7 +55,7 @@ namespace d2::ctm
                         auto state = ptr->state();
                         state->root()->remove(state->core());
                     })
-                    D2_INTERPOLATE_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, colors::g::green);
+                    D2_INTERP_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, colors::g::green);
                 D2_ELEM_END
             D2_ELEM_END
         D2_ELEM_END

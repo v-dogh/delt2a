@@ -49,10 +49,10 @@ namespace d2::dx
             _signal_write(Style);
         }
     }
-    void Button::_event_impl(IOContext::Event ev)
+    void Button::_event_impl(Screen::Event ev)
     {
         if (getstate(State::Keynavi) &&
-                ev == IOContext::Event::KeyInput &&
+                ev == Screen::Event::KeyInput &&
                 context()->input()->is_pressed(sys::SystemInput::Enter, sys::SystemInput::KeyMode::Press))
         {
             if (data::on_submit != nullptr)

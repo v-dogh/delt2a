@@ -447,8 +447,6 @@ namespace d2::sys
 
 	UnixTerminalOutput::position_type UnixTerminalOutput::_generate_position(int x, int y, bool skip)
 	{
-		D2_EXPECT(x <= 9999 && y <= 9999)
-
 		using buffer = std::array<char, max_pos_len_>;
 
 		if (skip)
@@ -575,7 +573,9 @@ namespace d2::sys
                 out_.insert(out_.end(), ext.begin(), ext.end());
             }
             else
+            {
                 out_.push_back(px.v);
+            }
 #       else
             out_.push_back(px.v);
 #       endif
@@ -592,10 +592,6 @@ namespace d2::sys
 	std::chrono::microseconds UnixTerminalOutput::frame_time() const
 	{
 		return frame_time_;
-	}
-	std::size_t UnixTerminalOutput::buffer_size() const
-	{
-		return buffer_size_;
 	}
 
     void UnixTerminalOutput::_release_image(std::any data)
@@ -661,7 +657,7 @@ namespace d2::sys
         const auto& state = std::any_cast<KittyImageState&>(images_.at(path));
         return ImageInstance({}, state.width, state.height);
     }
-    std::uint32_t UnixTerminalOutput::image_id(const std::string& path)
+    SystemOutput::image UnixTerminalOutput::image_id(const std::string& path)
     {
         return std::any_cast<KittyImageState&>(images_.at(path)).id;
     }
@@ -867,4 +863,13 @@ namespace d2::sys
 			std::chrono::high_resolution_clock::now() - beg
 		);
 	}
+
+    std::size_t UnixTerminalOutput::delta_size()
+    {
+        return buffer_size_;
+    }
+    std::size_t UnixTerminalOutput::swapframe_size()
+    {
+        return swapframe_.size();
+    }
 }

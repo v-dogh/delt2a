@@ -7,12 +7,14 @@
 #include <mutex>
 #include <memory>
 #include <span>
+#include <tuple>
 
-#include "d2_exceptions.hpp"
+#include "d2_signal_handler.hpp"
 #include "d2_screen_frwd.hpp"
+#include "d2_io_handler_frwd.hpp"
 #include "d2_pixel.hpp"
 #include "mt/thread_pool.hpp"
-#include "utils/cmptime.hpp"
+#include "d2_meta.hpp"
 
 namespace d2
 {
@@ -47,14 +49,14 @@ namespace d2
                 Failure,
                 Offline,
             };
-		protected:
+        private:
             const std::weak_ptr<IOContext> _ctx{};
             const std::string _name{ "<Unknown>" };
             const bool _is_thread_safe{ false };
             Status _status{ Status::Offline };
-
-            virtual Status _load_impl() = 0;
-            virtual Status _unload_impl() = 0;
+        protected:
+            virtual Status _load_impl() { return Status::Ok; }
+            virtual Status _unload_impl() { return Status::Ok; }
 		public:
 			template<typename Component>
             static std::unique_ptr<Component> make(mt::ThreadPool::ptr scheduler)
@@ -64,7 +66,12 @@ namespace d2
 
             SystemComponent(std::weak_ptr<IOContext> ptr, const std::string& name, bool is_thread_safe)
                 : _ctx(ptr), _name(name), _is_thread_safe(is_thread_safe) {}
-			virtual ~SystemComponent() = default;
+            virtual ~SystemComponent() = default;
+
+            std::shared_ptr<IOContext> context() const noexcept
+            {
+                return _ctx.lock();
+            }
 
             Status status();
             void load();
@@ -88,47 +95,47 @@ namespace d2
 			}
 		};
 
-		namespace impl
-		{
-			template<typename Type>
-			struct ComponentUIDGenerator : public SystemComponent
-			{
-				using SystemComponent::SystemComponent;
+        template<meta::ConstString Name, typename Type>
+        struct SystemComponentBase : public SystemComponent
+        {
+            static inline constexpr auto name = Name.view();
+            static inline const auto uidc = impl::component_uidgen();
 
-				static inline const std::size_t uidc = impl::component_uidgen();
-				virtual std::size_t uid() const override
-				{
-					return uidc;
-				}
-			};
-		}
+            using SystemComponent::SystemComponent;
+
+            virtual std::size_t uid() const override
+            {
+                return uidc;
+            }
+        };
+        template<bool ThreadSafe>
+        struct SystemComponentCfg
+        {
+            static inline constexpr auto tsafe = ThreadSafe;
+        };
 
 		// Additional system wrappers (Optional ones)
         namespace ext
         {
-            class SystemClipboard : public impl::ComponentUIDGenerator<SystemClipboard>
+            class SystemClipboard : public SystemComponentBase<"Clipboard", SystemClipboard>
             {
             public:
-                static constexpr auto name = "Clipboard";
-
-                using ComponentUIDGenerator::ComponentUIDGenerator;
+                using SystemComponentBase::SystemComponentBase;
 
                 virtual void clear() = 0;
                 virtual void copy(const string& value) = 0;
                 virtual string paste() = 0;
                 virtual bool empty() = 0;
             };
-            class SystemAudio : public impl::ComponentUIDGenerator<SystemAudio>
+            class SystemAudio : public SystemComponentBase<"Audio", SystemAudio>
             {
-            public:
-                static constexpr auto name = "Audio";
             public:
                 enum class Event
                 {
                     Activate,
                     Deactivate,
                     Create,
-                    Destroy
+                    Destroy,
                 };
                 enum class Device
                 {
@@ -153,77 +160,6 @@ namespace d2
                     std::string id{ "" };
                     std::string name{ "Unknown" };
                 };
-                class EventListener;
-            private:
-                struct EventListenerState
-                {
-                    enum class State
-                    {
-                        Muted,
-                        Active,
-                        Invalid,
-                    };
-
-                    std::function<void(const DeviceName&, Event, EventListener)> callback{ nullptr };
-                    std::atomic<State> state{ State::Active };
-                };
-            public:
-                class EventListener
-                {
-                private:
-                    std::weak_ptr<EventListenerState> _ptr{};
-                public:
-                    EventListener() = default;
-                    EventListener(EventListener&&) = default;
-                    EventListener(const EventListener&) = default;
-                    EventListener(std::shared_ptr<EventListenerState> ptr)
-                        : _ptr(ptr) {}
-
-                    void unmute()
-                    {
-                        if (!_ptr.expired())
-                        {
-                            _ptr.lock()->state = EventListenerState::State::Active;
-                        }
-                    }
-                    void mute()
-                    {
-                        if (!_ptr.expired())
-                        {
-                            _ptr.lock()->state = EventListenerState::State::Muted;
-                        }
-                    }
-                    void destroy()
-                    {
-                        if (!_ptr.expired())
-                        {
-                            _ptr.lock()->state = EventListenerState::State::Invalid;
-                        }
-                    }
-                    bool is_muted() const
-                    {
-                        return
-                            !_ptr.expired() &&
-                            _ptr.lock()->state == EventListenerState::State::Muted;
-                    }
-
-                    operator bool() const
-                    {
-                        return !_ptr.expired();
-                    }
-
-                    bool operator==(std::nullptr_t) const
-                    {
-                        return _ptr.expired();
-                    }
-                    bool operator!=(std::nullptr_t) const
-                    {
-                        return !_ptr.expired();
-                    }
-
-                    EventListener& operator=(EventListener&&) = default;
-                    EventListener& operator=(const EventListener&) = default;
-                };
                 class Stream
                 {
                 private:
@@ -237,91 +173,37 @@ namespace d2
                     Stream(const Stream&) = default;
                     Stream(Stream&&) = default;
 
-                    void apply(auto&& func, std::size_t channel, float start = 0.0f, float end = 1.f)
-                    {
-                        const auto channel_size = _data.size() / _format->channels;
-                        const auto astart = std::size_t(start * channel_size);
-                        const auto aend = std::size_t(end * channel_size);
-                        for (std::size_t i = astart; i < aend; i += _format->channels)
-                            _data[i + channel] = func(_data[i + channel], float(i + _offset) / _total);
-                    }
-                    void apply(auto&& func, float start = 0.0f, float end = 1.f)
-                    {
-                        const auto astart = std::size_t(start * _data.size());
-                        const auto aend = std::size_t(end * _data.size());
-                        const auto dist = aend - astart;
-                        if (_format->channels == 2)
-                        {
-                            for (std::size_t i = astart; i < aend; i += 2)
-                            {
-                                _data[i] = func(_data[i], float(i + _offset) / _total);
-                                _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
-                            }
-                        }
-                        else if (_format->channels == 4)
-                        {
-                            for (std::size_t i = astart; i < aend; i += 4)
-                            {
-                                _data[i] = func(_data[i], float(i + _offset) / _total);
-                                _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
-                                _data[i + 2] = func(_data[i + 2], float(i + 2 + _offset) / _total);
-                                _data[i + 3] = func(_data[i + 3], float(i + 3 + _offset) / _total);
-                            }
-                        }
-                        else
-                        {
-                            for (std::size_t i = astart; i < aend; i++)
-                                _data[i] = func(_data[i], float(i + _offset) / _total);
-                        }
-                    }
+                    void apply(auto&& func, std::size_t channel, float start = 0.0f, float end = 1.f);
+                    void apply(auto&& func, float start = 0.0f, float end = 1.f);
+                    void push(std::span<float> in);
+                    void push_expand(std::span<float> in);
 
-                    const FormatInfo& info() const
-                    {
-                        return *_format;
-                    }
-                    std::size_t size() const
-                    {
-                        return _total / _format->channels;
-                    }
-                    std::size_t chunk() const
-                    {
-                        return _data.size() / _format->channels;
-                    }
+                    const FormatInfo& info() const;
+                    std::size_t size() const;
+                    std::size_t chunk() const;
 
-                    float& at(std::size_t idx, std::size_t channel) const
-                    {
-                        return _data[(idx * _format->channels) + channel];
-                    }
-                    float& at(float idx, std::size_t channel) const
-                    {
-                        return _data[(idx * _format->channels) + channel];
-                    }
+                    float& at(std::size_t idx, std::size_t channel) const;
+                    float& at(float idx, std::size_t channel) const;
 
                     Stream& operator=(const Stream&) = default;
                     Stream& operator=(Stream&&) = default;
                 };
                 struct FilterPipeline
                 {
-                    std::vector<std::function<void(Stream)>> transforms;
+                    std::vector<
+                        std::pair<
+                            std::optional<std::string>,
+                            std::function<bool(Stream) >
+                        >
+                    > transforms;
 
                     FilterPipeline() = default;
-                    FilterPipeline(std::function<void(Stream)> callback)
-                    {
-                        transforms.push_back(std::move(callback));
-                    }
 
-                    FilterPipeline operator|(std::function<void(Stream)> callback) const
-                    {
-                        FilterPipeline pipeline;
-                        pipeline.transforms.reserve(4);
-                        pipeline.transforms.push_back(std::move(callback));
-                        return pipeline;
-                    }
-                    FilterPipeline& operator|(std::function<void(Stream)> callback)
-                    {
-                        transforms.push_back(std::move(callback));
-                        return *this;
-                    }
+                    FilterPipeline operator|(std::function<bool(Stream)> callback) const;
+                    FilterPipeline operator|(const std::string& name) const;
+                    FilterPipeline& operator&&(std::function<bool(Stream)> callback);
+                    FilterPipeline& operator|(const std::string& name);
+                    FilterPipeline& operator|(std::function<bool(Stream)> callback);
                 } static inline const signal;
                 class preset
                 {
@@ -467,6 +349,10 @@ namespace d2
                         }
                     };
                 };
+            private:
+                Signals::Signal _sig_generic{ nullptr };
+                Signals::Signal _sig_in{ nullptr };
+                Signals::Signal _sig_out{ nullptr };
             protected:
                 struct DeviceData
                 {
@@ -478,7 +364,6 @@ namespace d2
                         Closing
                     };
                     FilterPipeline filter;
-                    std::vector<std::shared_ptr<EventListenerState>> listener;
                     Status status{ Status::Closed };
                 };
                 std::array<DeviceData, 2> _device_data{};
@@ -489,6 +374,19 @@ namespace d2
                 DeviceData::Status _get_device_status(Device dev);
                 void _run_device_filter(Device dev, Stream stream);
                 void _trigger_device_event(Device dev, Event ev, const DeviceName&);
+
+                // Helpers for the implementation
+                // We do not implement these publicly because we cannot assume the concurrency model of the implementation
+
+                void _filter(Device dev, FilterPipeline filter);
+                void _filter_push(Device dev, const std::string& after, FilterPipeline filter);
+                void _filter_push(Device dev, FilterPipeline filter);
+                void _filter_override(Device dev, const std::string& name, std::function<bool(Stream)> filter);
+                void _filter_remove(Device dev, const std::string& name);
+                void _filter_clear(Device dev);
+
+                virtual Status _load_impl() override;
+                virtual Status _unload_impl() override;
             public:         
                 static constexpr std::size_t sample_size(Format format)
                 {
@@ -501,7 +399,7 @@ namespace d2
                     }
                 }
 
-                using ComponentUIDGenerator::ComponentUIDGenerator;
+                using SystemComponentBase::SystemComponentBase;
 
                 virtual void flush(Device dev) = 0;
                 virtual void record(std::function<void(std::span<const unsigned char>)> stream) = 0;
@@ -514,21 +412,25 @@ namespace d2
                 virtual FormatInfo format(Device dev) = 0;
                 virtual std::vector<DeviceName> enumerate(Device dev) = 0;
 
-                void filter(Device dev, std::function<void(Stream)> callback) { filter(dev, FilterPipeline(callback)); }
-                void filter(Device dev, FilterPipeline filter);
-                EventListener watch(Device dev, std::function<void(const DeviceName&, Event, EventListener)> callback);
+                virtual void filter(Device dev, FilterPipeline filter) = 0;
+                virtual void filter_push(Device dev, const std::string& after, FilterPipeline filter) = 0;
+                virtual void filter_push(Device dev, FilterPipeline filter) = 0;
+                virtual void filter_override(Device dev, const std::string& name, std::function<bool(Stream)> filter) = 0;
+                virtual void filter_remove(Device dev, const std::string& name) = 0;
+                virtual void filter_clear(Device dev) = 0;
+
+                Signals::Handle watch(Device dev, Event ev, std::function<void(const DeviceName&, SystemAudio&)> callback);
+                Signals::Handle watch(Device dev, std::function<void(const DeviceName&, Event, SystemAudio&)> callback);
             };
-            class SystemNotifications : public impl::ComponentUIDGenerator<SystemNotifications>
+            class SystemNotifications : public SystemComponentBase<"Notifications", SystemNotifications>
             {
             public:
-                static constexpr auto name = "Notifications";
-
-                using ComponentUIDGenerator::ComponentUIDGenerator;
+                using SystemComponentBase::SystemComponentBase;
 
                 virtual void notify(const std::string& title, const std::string& content, const std::vector<unsigned char> icon = {}) = 0;
                 virtual void remind(std::chrono::system_clock::time_point when, const std::string& title, const std::string& content, const std::vector<unsigned char> icon = {}) = 0;
             };
-            class SystemPlugins : public impl::ComponentUIDGenerator<SystemPlugins>
+            class SystemPlugins : public SystemComponentBase<"Plugins", SystemPlugins>
             {
             public:
                 enum class LoadStatus
@@ -548,9 +450,7 @@ namespace d2
 
                 };
             public:
-                static constexpr auto name = "Plugins";
-
-                using ComponentUIDGenerator::ComponentUIDGenerator;
+                using SystemComponentBase::SystemComponentBase;
 
                 template<typename... Components, typename... Argv>
                 Environment sandbox(std::tuple<Argv...>&& params, mt::ThreadPool::ptr pool = nullptr)
@@ -577,15 +477,15 @@ namespace d2
                 virtual LoadStatus load(const std::filesystem::path& path, const std::string& name, Environment ctx = Environment()) = 0;
                 virtual void unload(const std::string& name) = 0;
             };
-            class SystemIO : public impl::ComponentUIDGenerator<SystemPlugins>
+            class SystemIO : public SystemComponentBase<"IO", SystemIO>
             {
 
             };
 
-            class LocalSystemClipboard : public SystemClipboard
+            class LocalSystemClipboard :
+                public SystemClipboard,
+                public SystemComponentCfg<false>
             {
-            public:
-                static constexpr auto tsafe = false;
             private:
                 string value_{};
             protected:
@@ -622,10 +522,8 @@ namespace d2
         }
 
 		// Generic base for system input
-        class SystemInput : public impl::ComponentUIDGenerator<SystemInput>
+        class SystemInput : public SystemComponentBase<"Input", SystemInput>
 		{
-        public:
-            static constexpr auto name = "Input";
 		public:
 			using keytype = short;
 			enum MouseKey : keytype
@@ -724,7 +622,7 @@ namespace d2
 				return _resolve_key(ch);
 			}
 
-			using ComponentUIDGenerator::ComponentUIDGenerator;
+            using SystemComponentBase::SystemComponentBase;
 
 			void begincycle()
 			{
@@ -803,10 +701,8 @@ namespace d2
 
 		// Generic base for system output
 		// Provides interfaces used for rendering to the console and other OS agnostic interfaces
-        class SystemOutput : public impl::ComponentUIDGenerator<SystemOutput>
+        class SystemOutput : public SystemComponentBase<"Output", SystemOutput>
 		{
-        public:
-            static constexpr auto name = "Output";
 		public:
             static constexpr auto image_constant = px::combined{ .v = std::numeric_limits<standard_value_type>::max() };
 			class ImageInstance
@@ -846,6 +742,7 @@ namespace d2
                     return format_;
                 }
             };
+            using image = std::uint32_t;
             enum Format : unsigned int
             {
                 RGB8,
@@ -853,12 +750,15 @@ namespace d2
                 PNG,
             };
         public:
-			using ComponentUIDGenerator::ComponentUIDGenerator;
+            using SystemComponentBase::SystemComponentBase;
 
             virtual void load_image(const std::string& path, ImageInstance img) = 0;
             virtual void release_image(const std::string& path) = 0;
             virtual ImageInstance image_info(const std::string& path) = 0;
-            virtual std::uint32_t image_id(const std::string& path) = 0;
+            virtual image image_id(const std::string& path) = 0;
+
+            virtual std::size_t delta_size() = 0;
+            virtual std::size_t swapframe_size() = 0;
 
 			virtual void write(std::span<const Pixel> buffer, std::size_t width, std::size_t height) = 0;
 		};
@@ -881,285 +781,28 @@ namespace d2
         constexpr auto key = sys::SystemInput::key;
     }
 
-	class IOContext : public std::enable_shared_from_this<IOContext>
+    class IOContext : public Signals
 	{
 	public:
 		template<typename Type>
         using future = mt::future<Type>;
 		using ptr = std::shared_ptr<IOContext>;
 		using wptr = std::weak_ptr<IOContext>;
-		enum class Event
-		{
-			Invalid = -1,
-			// Parameters: Screen::ptr
-			Resize,
-			// Parameters: Screen::ptr
-			PreRedraw,
-			// Parameters: Screen::ptr
-			PostRedraw,
-			// Parameters: Screen::ptr
-			KeyInput,
-			// Parameters: Screen::ptr
-			KeySequenceInput,
-			// Parameters: Screen::ptr
-			MouseInput,
-			// Parameters: Screen::ptr
-			Update,
-		};
-	private:
-		class EventListenerState : public std::enable_shared_from_this<EventListenerState>
-		{
-		public:
-			using ptr = std::shared_ptr<EventListenerState>;
-			using wptr = std::weak_ptr<EventListenerState>;
-			enum class State
-			{
-				Active,
-				Muted,
-			};
-		protected:
-			IOContext::wptr _obj{};
-		private:
-			std::size_t _idx{ ~0ull };
-			Event _event{};
-			State _state{ State::Active };
-		public:
-			EventListenerState() = default;
-			EventListenerState(EventListenerState&&) = default;
-			EventListenerState(const EventListenerState&) = default;
-			EventListenerState(IOContext::ptr ptr, std::size_t idx, Event ev) :
-				_obj(ptr), _idx(idx), _event(ev)
-			{}
-
-			State state() const
-			{
-				return _state;
-			}
-			Event event() const
-			{
-				return _event;
-			}
-			std::size_t index() const
-			{
-				return _idx;
-			}
-
-			void setstate(State state)
-			{
-				_state = state;
-			}
-
-			void unmute()
-			{
-				auto ptr = _obj.lock();
-				if (ptr)
-				{
-					ptr->_unmute_listener(shared_from_this());
-				}
-			}
-			void mute()
-			{
-				auto ptr = _obj.lock();
-				if (ptr)
-				{
-					ptr->_mute_listener(shared_from_this());
-				}
-			}
-			void destroy()
-			{
-				auto ptr = _obj.lock();
-				if (ptr)
-				{
-					ptr->_destroy_listener(shared_from_this());
-					_idx = ~0ull;
-				}
-			}
-
-			operator bool() const
-			{
-				return !_obj.expired() && _idx != ~0ull;
-			}
-
-			bool operator==(std::nullptr_t) const
-			{
-				return !bool();
-			}
-			bool operator!=(std::nullptr_t) const
-			{
-				return bool();
-			}
-
-			EventListenerState& operator=(EventListenerState&&) = default;
-			EventListenerState& operator=(const EventListenerState&) = default;
-		};
-	public:
-		class EventListener
-		{
-		private:
-			EventListenerState::wptr _ptr{};
-		public:
-			EventListener() = default;
-			EventListener(EventListener&&) = default;
-			EventListener(const EventListener&) = default;
-			EventListener(EventListenerState::ptr ptr)
-				: _ptr(ptr) {}
-
-			Event event() const
-			{
-				if (_ptr.expired())
-					return Event::Invalid;
-				return _ptr.lock()->event();
-			}
-			std::size_t index() const
-			{
-				if (_ptr.expired())
-					return ~0ull;
-				return _ptr.lock()->index();
-			}
-
-			void unmute()
-			{
-				if (!_ptr.expired())
-				{
-					_ptr.lock()->unmute();
-				}
-			}
-			void mute()
-			{
-				if (!_ptr.expired())
-				{
-					_ptr.lock()->mute();
-				}
-			}
-			void destroy()
-			{
-				if (!_ptr.expired())
-				{
-					_ptr.lock()->destroy();
-				}
-			}
-            bool is_muted() const
-            {
-                return !_ptr.expired() && _ptr.lock()->state() == EventListenerState::State::Muted;
-            }
-
-			operator bool() const
-			{
-				return !_ptr.expired();
-			}
-
-			bool operator==(std::nullptr_t) const
-			{
-                return _ptr.expired();
-			}
-			bool operator!=(std::nullptr_t) const
-			{
-                return !_ptr.expired();
-			}
-
-			EventListener& operator=(EventListener&&) = default;
-			EventListener& operator=(const EventListener&) = default;
-		};
-        class AutoEventListener : public EventListener
-        {
-        public:
-            using EventListener::EventListener;
-            using EventListener::operator=;
-            using EventListener::operator==;
-            using EventListener::operator!=;
-            using EventListener::operator bool;
-
-            ~AutoEventListener()
-            {
-                destroy();
-            }
-        };
-	private:
-		template<typename... Argv>
-		class ConcreteEventListenerState : public EventListenerState
-		{
-		public:
-            using callback = std::function<void(EventListener, Argv...)>;
-		private:
-			callback _func{ nullptr };
-		public:
-			template<typename Func>
-			ConcreteEventListenerState(IOContext::ptr ptr, std::size_t idx, Event ev, Func callback)
-				: EventListenerState(ptr, idx, ev), _func(std::forward<Func>(callback)) {}
-
-			template<typename... Argvv>
-			void invoke(Argvv&&... args)
-			{
-				if (_func != nullptr && state() == State::Active)
-                    _func(EventListener(shared_from_this()), std::forward<Argvv>(args)...);
-			}
-		};
-	private:
-		template<Event Ev, typename... Argv>
-		using ev_state = std::vector<std::shared_ptr<ConcreteEventListenerState<Argv...>>>;
-		using event_state_map = util::PackInfo<
-			ev_state<Event::Resize, TreeState::ptr>,
-			ev_state<Event::PreRedraw, TreeState::ptr>,
-			ev_state<Event::PostRedraw, TreeState::ptr>,
-			ev_state<Event::KeyInput, TreeState::ptr>,
-			ev_state<Event::KeySequenceInput, TreeState::ptr>,
-			ev_state<Event::MouseInput, TreeState::ptr>,
-			ev_state<Event::Update, TreeState::ptr>
-		>;
-		template<Event Ev>
-		using event_state = event_state_map::At<Ev>::value_type::element_type;
-		template<Event Ev>
-		using event_callback = event_state<Ev>::callback;
 	private:
         mutable std::shared_mutex _module_mtx{};
         std::vector<std::unique_ptr<sys::SystemComponent>> _components{};
         mt::ThreadPool::ptr _scheduler{ nullptr };
         mt::ThreadPool::Worker _worker{};
-        util::EnumStateMap<Event, event_state_map> _event_states{};
         std::thread::id _main_thread{};
 
-		void _unmute_listener(EventListenerState::ptr listener)
-		{
-            _event_states.apply(listener->event(), [&](auto& state) {
-				D2_ASSERT(listener->index() < state.size());
-				state[listener->index()]->setstate(EventListenerState::State::Active);
-			});
-		}
-		void _mute_listener(EventListenerState::ptr listener)
-		{
-            _event_states.apply(listener->event(), [&](auto& state) {
-				D2_ASSERT(listener->index() < state.size());
-				state[listener->index()]->setstate(EventListenerState::State::Muted);
-			});
-		}
-		void _destroy_listener(EventListenerState::ptr listener)
-		{
-            _event_states.apply(listener->event(), [&](auto& state) {
-				D2_ASSERT(listener->index() < state.size());
-				state[listener->index()] = nullptr;
-				for (auto it = state.begin(); it != state.end();)
-				{
-					const auto beg = it;
-					for (; it != state.end(); ++it)
-					{
-						if (*it != nullptr)
-							break;
-					}
-					if (it == state.end())
-					{
-						state.erase(
-							beg, state.end()
-						);
-						return;
-					}
-					else ++it;
-				}
-			});
-		}
+        std::weak_ptr<const IOContext> _weak() const;
+        std::shared_ptr<const IOContext> _shared() const;
+        std::weak_ptr<IOContext> _weak();
+        std::shared_ptr<IOContext> _shared();
 
 		template<typename Type> Type* _get_component()
 		{
-			const auto uid = Type::uidc;
+            const auto uid = Type::uidc;
             [[ unlikely ]] if (_components.size() < uid)
 				throw std::logic_error{ "Attempt to query inactive component" };
             auto* ptr = _components[uid].get();
@@ -1204,36 +847,18 @@ namespace d2
             return ptr;
 		}
 
-        IOContext(mt::ThreadPool::ptr scheduler)
-            : _scheduler(scheduler) { }
+        IOContext(mt::ThreadPool::ptr scheduler);
 		virtual ~IOContext() = default;
 
         // State
 
-        void initialize()
-        {
-            using wflags = mt::ThreadPool::Worker::Flags;
-            _main_thread = std::this_thread::get_id();
-            _scheduler->start();
-            _worker = _scheduler->worker(wflags::MainWorker | wflags::HandleCyclicTask);
-            _worker.start();
-        }
-        void deinitialize()
-        {
-            _worker.stop();
-            _scheduler->stop();
-        }
-        void wait(std::chrono::milliseconds ms)
-        {
-            _worker.wait(ms);
-        }
+        void initialize();
+        void deinitialize();
+        void wait(std::chrono::milliseconds ms);
 
         // Synchronization
 
-        auto& scheduler()
-        {
-            return _scheduler;
-        }
+        mt::ThreadPool::ptr scheduler();
 
         bool is_synced() const
         {
@@ -1274,15 +899,15 @@ namespace d2
 #				if D2_COMPATIBILITY_MODE == STRICT
 					static_assert(!std::is_same_v<Component, void>, "Attempt to load invalid component");
                     _insert_component(std::make_unique<Component>(
-                        weak_from_this(),
-                        Component::name,
+                        _weak(),
+                        std::string(Component::name),
                         Component::tsafe
                     ));
 #				else
 					if constexpr (!std::is_same_v<Component, void>)
                         _insert_component(std::make_unique<Component>(
-                            weak_from_this(),
-                            Component::name,
+                            _weak(),
+                            std::string(Component::name),
                             Component::tsafe
                         ));
 #				endif
@@ -1290,19 +915,8 @@ namespace d2
 			(insert.template operator()<Components>(), ...);
 		}
 
-		std::size_t syscnt() const
-		{
-            std::shared_lock lock(_module_mtx);
-            std::size_t cnt = 0;
-            for (decltype(auto) it : _components)
-				cnt += (it != nullptr);
-			return cnt;
-		}
-        void sysenum(std::function<void(sys::SystemComponent*)> callback)
-        {
-            for (decltype(auto) it : _components)
-                callback(it.get());
-        }
+        std::size_t syscnt() const;
+        void sysenum(std::function<void(sys::SystemComponent*)> callback);
 
         template<typename Component> void sys_run(
             auto&& callback,
@@ -1342,38 +956,6 @@ namespace d2
 		{
             std::shared_lock lock(_module_mtx);
             return _get_component<sys::SystemOutput>();
-		}
-
-        // Listeners
-
-		template<Event Ev, typename... Argv>
-		void trigger(Argv&&... args)
-		{
-			auto ptr = shared_from_this();
-            auto& v = _event_states.state<Ev>();
-			for (std::size_t i = 0; i < v.size(); i++)
-			{
-				auto c = v[i];
-				if (c != nullptr)
-				{
-					c->invoke(std::forward<Argv>(args)...);
-				}
-			}
-		}
-
-		template<Event Ev>
-		EventListener listen(event_callback<Ev> callback)
-		{
-            auto& v = _event_states.state<Ev>();
-			v.push_back(
-				std::make_shared<event_state<Ev>>(
-					shared_from_this(),
-					v.size(),
-					Ev,
-					std::move(callback)
-				)
-			);
-			return EventListener{ v.back() };
 		}
 	};
 } // d2

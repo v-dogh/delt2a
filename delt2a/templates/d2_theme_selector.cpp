@@ -175,7 +175,6 @@ namespace d2::ctm
 				traverse(),
 				TreeState::make<TreeState>(
 					this->state()->screen(),
-					this->state()->context(),
 					parent()->traverse().asp(),
 					traverse().asp()
 				)

@@ -2,6 +2,7 @@
 #define D2_DEMAND_SCROLLBOX_HPP
 
 #include "d2_slider.hpp"
+#include "d2_element_utils.hpp"
 
 namespace d2
 {
@@ -119,6 +120,8 @@ namespace d2
             std::vector<d2::Element::ptr> _view{};
             mutable int _prev_offset{ 0 };
             mutable int _offset{ 0 };
+
+            void _update_view();
 
             virtual void _signal_write_impl(write_flag type, unsigned int prop, ptr element) override;
             virtual void _state_change_impl(State state, bool value) override;

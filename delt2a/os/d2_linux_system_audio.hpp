@@ -15,10 +15,10 @@
 
 namespace d2::sys::ext
 {
-    class PipewireSystemAudio : public SystemAudio
+    class PipewireSystemAudio :
+        public SystemAudio,
+        public SystemComponentCfg<true>
     {
-    public:
-        static constexpr auto tsafe = true;
     private:
         struct Voice
         {
@@ -127,6 +127,10 @@ namespace d2::sys::ext
     protected:
         virtual Status _load_impl() override
         {
+            if (const auto status = SystemAudio::_load_impl();
+                status != Status::Ok)
+                return status;
+
             std::atomic_flag flag = false;
             flag.test_and_set();
             _thread = std::jthread([this, &flag] {
@@ -150,7 +154,7 @@ namespace d2::sys::ext
             return Status::Ok;
         }
         virtual Status _unload_impl() override
-        {
+        {            
             _stop_stream(Device::Input);
             _stop_stream(Device::Output);
 
@@ -173,7 +177,7 @@ namespace d2::sys::ext
             _active_input = nullptr;
             _input_push = nullptr;
 
-            return Status::Ok;
+            return SystemAudio::_unload_impl();
         }
     public:
         using SystemAudio::SystemAudio;
@@ -188,6 +192,13 @@ namespace d2::sys::ext
         virtual DeviceName active(Device dev) override;
         virtual FormatInfo format(Device dev) override;
         virtual std::vector<DeviceName> enumerate(Device dev) override;
+
+        virtual void filter(Device dev, FilterPipeline filter) override;
+        virtual void filter_push(Device dev, const std::string& after, FilterPipeline filter) override;
+        virtual void filter_push(Device dev, FilterPipeline filter) override;
+        virtual void filter_override(Device dev, const std::string& name, std::function<bool(Stream)> filter) override;
+        virtual void filter_remove(Device dev, const std::string& name) override;
+        virtual void filter_clear(Device dev) override;
     };
 }
 

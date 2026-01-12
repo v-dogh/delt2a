@@ -84,6 +84,7 @@ namespace d2
             Adaptive,
             Auto = Stable,
         };
+        using Event = ScreenEvent;
         using ModelType = MatrixModel::ModelType;
         using ptr = std::shared_ptr<Screen>;
     private:
@@ -96,7 +97,6 @@ namespace d2
             DynamicDependencyManager deps{};
             bool unbuilt{ true };
             bool swapped_out{ true };
-            bool constructed{ false };
         };
         using tree = std::shared_ptr<TreeData>;
         using eptr = TreeIter;
@@ -110,6 +110,7 @@ namespace d2
         ParentElement::DynamicIterator _keynav_iterator{ nullptr };
         eptr _focused{ nullptr };
         eptr _targetted{ nullptr };
+        eptr _clicked{ nullptr };
         tree _current{ nullptr };
 
         std::size_t _fps_avg{ 0 };
@@ -130,16 +131,18 @@ namespace d2
         void _frame();
 
         void _run_interpolators();
-        void _trigger_focused(IOContext::Event ev);
-        void _trigger_hovered(IOContext::Event ev);
+        void _trigger_focused(Event ev);
+        void _trigger_hovered(Event ev);
         void _trigger_events();
         void _trigger_focused_events();
         void _trigger_hovered_events();
 
         void _update_viewport();
         eptr _update_states(eptr container, const std::pair<int, int>& mouse);
+        eptr _update_states_reverse(eptr ptr);
 
         void _apply_impl(const Element::foreach_callback& func, eptr container) const;
+        void _signal(Event ev);
     public:
         template<typename First, typename... Rest>
         static auto make(IOContext::ptr ctx, auto&&... themes)
@@ -159,7 +162,7 @@ namespace d2
             return std::chrono::milliseconds(1000 / c);
         }
 
-        explicit Screen(IOContext::ptr ctx) : _ctx(ctx) {}
+        explicit Screen(IOContext::ptr ctx);
         virtual ~Screen() = default;
 
         IOContext::ptr context() const;

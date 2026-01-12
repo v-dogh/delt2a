@@ -1,4 +1,5 @@
 #include "d2_switch.hpp"
+#include "delt2a/d2_colors.hpp"
 
 namespace d2::dx
 {
@@ -28,9 +29,12 @@ namespace d2::dx
                 );
             }
 
+            const auto [ rw, _1 ] = TextHelper::_text_bounding_box(data::select_pre);
+            const auto [ ow, _2 ] = TextHelper::_text_bounding_box(data::select_post);
             _perfect_dimensions.width =
                 (perfect_width * data::options.size()) +
                 (data::options.size() - 1) + (xbasis + ixbasis) +
+                rw + ow +
                 data::width.raw();
             _perfect_dimensions.height = 1 + (ybasis + iybasis);
 
@@ -87,9 +91,9 @@ namespace d2::dx
             _signal_write(Style);
         }
     }
-    void Switch::_event_impl(IOContext::Event ev)
+    void Switch::_event_impl(Screen::Event ev)
     {
-        if (ev == IOContext::Event::KeyInput)
+        if (ev == Screen::Event::KeyInput)
         {
             if (context()->input()->is_pressed(sys::input::Tab))
             {
@@ -127,10 +131,13 @@ namespace d2::dx
             );
             for (std::size_t i = 0; i < data::options.size(); i++)
             {
+                const auto col = (i == _idx) ? enabled_color : disabled_color;
                 const auto xoff = int(basisx + ((width_slice + 1) * i));
+                if (data::expand_background)
+                    buffer.fill(col, xoff, basisy, width_slice, 1);
                 TextHelper::_render_text_simple(
                     data::options[i],
-                    (i == _idx) ? enabled_color : disabled_color,
+                    col,
                     style::IZText::Alignment::Center,
                     { xoff, basisy }, { width_slice, 1 },
                     buffer
@@ -145,6 +152,8 @@ namespace d2::dx
     }
     void Switch::_submit()
     {
+        if (_old == _idx)
+            return;
         if (data::on_change != nullptr)
             data::on_change(
                 std::static_pointer_cast<Switch>(shared_from_this()),
@@ -208,6 +217,8 @@ namespace d2::dx
             data::height.getunits() == Unit::Auto) &&
             prop == BorderWidth ||
             prop == Options ||
+            prop == SelectPre ||
+            prop == SelectPost ||
             prop == initial_property)
         {
             const auto [ xbasis, ybasis ] = ContainerHelper::_border_base();
@@ -222,11 +233,15 @@ namespace d2::dx
                 );
             }
 
+            const auto [ rw, _1 ] = TextHelper::_text_bounding_box(data::select_pre);
+            const auto [ ow, _2 ] = TextHelper::_text_bounding_box(data::select_post);
             _perfect_dimensions.height =
                 data::options.size() +
                 (data::options.size() - 1) * !data::disable_separator + data::height.raw() +
                 (ybasis + iybasis);
-            _perfect_dimensions.width = perfect_width + (xbasis + ixbasis);
+            _perfect_dimensions.width =
+                perfect_width + (xbasis + ixbasis) +
+                rw + ow;
 
             _signal_write(WriteType::Dimensions);
         }
@@ -286,10 +301,10 @@ namespace d2::dx
             _signal_write(Style);
         }
     }
-    void VerticalSwitch::_event_impl(IOContext::Event ev)
+    void VerticalSwitch::_event_impl(Screen::Event ev)
     {
         Switch::_event_impl(ev);
-        if (ev == IOContext::Event::KeyInput)
+        if (ev == Screen::Event::KeyInput || ev == Screen::Event::MouseInput)
         {
             const auto in = context()->input();
             const auto [ basisx, basisy ] = ContainerHelper::_border_base();
@@ -424,11 +439,40 @@ namespace d2::dx
                             .extend(data::left_connector).alpha(0.f, 1.f);
                     }
                 }
+                int aoff = 0;
+                if (i == _idx || i == _selector)
+                {
+                    if (!data::select_pre.empty())
+                    {
+                        aoff = TextHelper::_text_bounding_box(data::select_pre).width;
+                        TextHelper::_render_text_simple(
+                            data::select_pre,
+                            d2::Pixel::combine(data::pre_color, colors::w::transparent),
+                            Alignment::Left,
+                            { basisx, yoff },
+                            { aoff, 1 },
+                            buffer
+                        );
+                    }
+                    if (!data::select_post.empty())
+                    {
+                        const auto w = TextHelper::_text_bounding_box(data::select_post).width;
+                        TextHelper::_render_text_simple(
+                            data::select_post,
+                            d2::Pixel::combine(data::post_color, colors::w::transparent),
+                            Alignment::Left,
+                            { buffer.width() - w - 1, yoff },
+                            { w, 1 },
+                            buffer
+                        );
+                    }
+                }
                 TextHelper::_render_text_simple(
                     data::options[idx],
                     color.alpha(0.f, 1.f),
-                    style::IZText::Alignment::Center,
-                    { basisx, yoff }, { buffer.width() - basisx - ibasisx - _scrollbar, 1 },
+                    text_alignment,
+                    { basisx + aoff, yoff },
+                    { buffer.width() - basisx - ibasisx - _scrollbar - aoff, 1 },
                     buffer
                 );
                 if (!data::disable_separator)

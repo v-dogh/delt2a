@@ -33,17 +33,17 @@ namespace d2::ctm
     D2_STYLESHEET_BEGIN(button_react)
         D2_STYLE(BackgroundColor, D2_VAR(WidgetTheme, wg_bg_button()))
         D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_fg_button()))
-        D2_INTERPOLATE_TWOWAY_AUTO(Hovered, 500, Linear, BackgroundColor, D2_VAR(WidgetTheme, wg_hbg_button()));
-        D2_INTERPOLATE_TWOWAY_AUTO(Clicked, 100, Linear, BackgroundColor, D2_VAR(WidgetTheme, wg_pbg_button()));
-        D2_INTERPOLATE_TWOWAY_AUTO(Clicked, 100, Linear, ForegroundColor, D2_VAR(WidgetTheme, wg_pfg_button()));
+        D2_INTERP_TWOWAY_AUTO(Hovered, 500, Linear, BackgroundColor, D2_VAR(WidgetTheme, wg_hbg_button()));
+        D2_INTERP_TWOWAY_AUTO(Clicked, 100, Linear, BackgroundColor, D2_VAR(WidgetTheme, wg_pbg_button()));
+        D2_INTERP_TWOWAY_AUTO(Clicked, 100, Linear, ForegroundColor, D2_VAR(WidgetTheme, wg_pfg_button()));
         D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
     D2_STYLESHEET_END
     D2_STYLESHEET_BEGIN(icon_react)
         D2_STYLE(ForegroundColor, D2_DYNAVAR(WidgetTheme, wg_fg_button(), value.stylize(d2::px::foreground::Bold)))
         auto dvar1 = D2_DYNAVAR(WidgetTheme, wg_hbg_button(), value.stylize(d2::px::foreground::Bold));
         auto dvar2 = D2_DYNAVAR(WidgetTheme, wg_pbg_button(), value.stylize(d2::px::foreground::Bold));
-        D2_INTERPOLATE_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, dvar1);
-        D2_INTERPOLATE_TWOWAY_AUTO(Clicked, 100, Linear, ForegroundColor, dvar2);
+        D2_INTERP_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, dvar1);
+        D2_INTERP_TWOWAY_AUTO(Clicked, 100, Linear, ForegroundColor, dvar2);
         D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
     D2_STYLESHEET_END
     D2_STYLESHEET_BEGIN(focus_color)
@@ -67,6 +67,14 @@ namespace d2::ctm
         D2_STYLE(EnabledForegroundColor, D2_VAR(WidgetTheme, wg_hbg_button()))
         D2_STYLE(EnabledBackgroundColor, colors::w::transparent)
         D2_STYLE(DisabledForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+        D2_STYLE(DisabledBackgroundColor, colors::w::transparent)
+        D2_STYLE(SeparatorColor, D2_VAR(WidgetTheme, wg_border_vertical()))
+        D2_STYLE(FocusedColor, D2_DYNAVAR(WidgetTheme, wg_hbg_button(), value.alpha(0.7f)))
+    D2_STYLESHEET_END
+    D2_STYLESHEET_BEGIN(filled_switch_color)
+        D2_STYLE(EnabledForegroundColor, D2_VAR(WidgetTheme, wg_pbg_button()))
+        D2_STYLE(EnabledBackgroundColor, D2_VAR(WidgetTheme, wg_pfg_button()))
+        D2_STYLE(DisabledForegroundColor, D2_VAR(WidgetTheme, wg_fg_button()))
         D2_STYLE(DisabledBackgroundColor, colors::w::transparent)
         D2_STYLE(SeparatorColor, D2_VAR(WidgetTheme, wg_border_vertical()))
         D2_STYLE(FocusedColor, D2_DYNAVAR(WidgetTheme, wg_hbg_button(), value.alpha(0.7f)))
@@ -107,6 +115,12 @@ namespace d2::ctm
         D2_STYLE(ForegroundColor, D2_DYNAVAR(WidgetTheme, wg_fg_button(),
             value.extend(d2::charset::slider_vertical)
         ))
+    D2_STYLESHEET_END
+    D2_STYLESHEET_BEGIN(checkbox_color)
+        D2_STYLE(ColorOn, D2_DYNAVAR(WidgetTheme, wg_text(),
+            px::combined::combine(value | d2::px::foreground::Bold, d2::colors::w::transparent)))
+        D2_STYLE(ColorOff, D2_DYNAVAR(WidgetTheme, wg_text(),
+            px::combined::combine(value | d2::px::foreground::Bold, d2::colors::w::transparent)))
     D2_STYLESHEET_END
 }
 

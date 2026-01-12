@@ -93,7 +93,7 @@ namespace d2
             virtual Unit _layout_impl(Element::Layout type) const override;
             virtual bool _provides_input_impl() const override;
             virtual void _state_change_impl(State state, bool value) override;
-            virtual void _event_impl(IOContext::Event ev) override;
+            virtual void _event_impl(Screen::Event ev) override;
             virtual void _frame_impl(PixelBuffer::View buffer) override;
         public:
             virtual ~Input();

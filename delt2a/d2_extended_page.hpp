@@ -54,7 +54,7 @@ namespace d2
     class ExtendedCodePage
     {
     private:
-        static constexpr auto extended_code_range = 160;
+        static constexpr auto extended_code_range = 159;
         static constexpr auto maximum_code_length = 8;
     private:
         absl::flat_hash_map<std::string, standard_value_type> _map{};
@@ -62,6 +62,7 @@ namespace d2
         std::array<char, extended_code_range * maximum_code_length> _page{};
         std::size_t _append_link{ 0 };
         std::size_t _append_page{ 0 };
+        std::size_t _ctr{ 0 };
         bool _activated{ false };
 
         std::size_t _value_to_index(standard_value_type value) const;

@@ -13,10 +13,10 @@
 
 namespace d2::sys
 {
-	class UnixTerminalInput : public SystemInput
+    class UnixTerminalInput :
+        public SystemInput,
+        public SystemComponentCfg<true>
 	{
-    public:
-        static constexpr auto tsafe = true;
 	private:
 		using keyboard_keymap = std::bitset<SpecialKeyMax + 1>;
 		using mouse_keymap = std::bitset<MouseKeyMax + 1>;
@@ -87,10 +87,10 @@ namespace d2::sys
 		void mask_interrupts();
 		void unmask_interrupts();
 	};
-	class UnixTerminalOutput : public SystemOutput
+    class UnixTerminalOutput :
+        public SystemOutput,
+        public SystemComponentCfg<false>
 	{
-    public:
-        static constexpr auto tsafe = false;
 	private:		
 		static constexpr auto max_color_len_ =
 			std::string_view("\033[RX;RX;RX;RX;RX;RX;RX;m").size() +
@@ -149,14 +149,16 @@ namespace d2::sys
 		using SystemOutput::SystemOutput;
 
 		std::chrono::microseconds frame_time() const;
-		std::size_t buffer_size() const;
 
         virtual void load_image(const std::string& path, ImageInstance img) override;
         virtual void release_image(const std::string& path) override;
         virtual ImageInstance image_info(const std::string& path) override;
-        virtual std::uint32_t image_id(const std::string& path) override;
+        virtual image image_id(const std::string& path) override;
 
 		virtual void write(std::span<const Pixel> buffer, std::size_t width, std::size_t height) override;
+
+        virtual std::size_t delta_size() override;
+        virtual std::size_t swapframe_size() override;
 	};
 } // d2
 

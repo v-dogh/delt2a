@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(thread-pool LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_library(RLOG STATIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_runtime_logs.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_runtime_logs.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_mapper.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_mapper.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_memunits.hpp
+)
+target_include_directories (RLOG PRIVATE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<INSTALL_INTERFACE:include>
+)
+
+install(TARGETS ${_install_targets} RLOG
+    EXPORT  RLOGTargets
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(
+    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(
+    EXPORT      RLOGTargets
+    FILE        RLOGTargets.cmake
+    NAMESPACE   RLOG::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/RLOG-lib
+)

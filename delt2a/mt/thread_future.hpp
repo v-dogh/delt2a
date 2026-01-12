@@ -58,6 +58,19 @@ namespace mt
 			return _block->value();
 		}
 
+        void pause() const noexcept
+        {
+            if (!_block)
+                return;
+            _block->pause();
+        }
+        void unpause() const noexcept
+        {
+            if (!_block)
+                return;
+            _block->unpause();
+        }
+
 		void sync_value() const noexcept
 		{
 			if (!_block)
@@ -76,6 +89,19 @@ namespace mt
 				return;
 			_block->discard();
 		}
+
+        bool is_discarded() const noexcept
+        {
+            if (!_block)
+                return true;
+            return _block->is_discarded();
+        }
+        bool is_paused() const noexcept
+        {
+            if (!_block)
+                return false;
+            return _block->is_paused();
+        }
 
 		bool has_exception() const noexcept
 		{

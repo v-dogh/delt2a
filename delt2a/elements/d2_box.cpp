@@ -89,7 +89,7 @@ namespace d2::dx
         std::size_t idx = 0;
         {
             ptrs.reserve(_elements.size());
-            foreach_internal([&ptrs](ptr ptr) { ptrs.push_back(ptr.get()); });
+            foreach_internal([&ptrs](ptr ptr) { ptrs.push_back(ptr.get()); return true; });
             std::sort(ptrs.begin(), ptrs.end(), [](const auto& a, const auto& b) { return a->getzindex() < b->getzindex(); });
 
             _render_start();

@@ -41,7 +41,7 @@ namespace d2::dx
 
         virtual void _signal_write_impl(write_flag type, unsigned int prop, ptr element) override;
         virtual void _state_change_impl(State state, bool value) override;
-        virtual void _event_impl(IOContext::Event ev) override;
+        virtual void _event_impl(Screen::Event ev) override;
 
         virtual void _frame_impl(PixelBuffer::View buffer) override;
     };

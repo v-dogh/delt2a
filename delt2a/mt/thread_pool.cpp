@@ -4,6 +4,28 @@
 
 namespace mt
 {
+    namespace impl
+    {
+        Futex::Futex()
+        {
+            _flag.test_and_set(std::memory_order::acquire);
+        }
+
+        void Futex::release() noexcept
+        {
+            _flag.clear(std::memory_order::release);
+            _flag.notify_all();
+        }
+        void Futex::wait() noexcept
+        {
+            while (true)
+            {
+                if (!_flag.test_and_set(std::memory_order::acquire)) break;
+                else _flag.wait(true, std::memory_order::relaxed);
+            }
+        }
+    }
+
     ThreadPool::Worker::Worker(wptr ptr, unsigned char flags)
         : _ptr(ptr), _flags(flags)
     {}
@@ -29,6 +51,9 @@ namespace mt
         if (ptr == nullptr)
             return false;
 
+        const auto support =
+            Task::Static * bool(_flags & HandleTask) |
+            Task::Cyclic * bool(_flags & HandleCyclicTask);
         const auto nid = ptr->_node_id();
         auto node = ptr->_nodes[nid];
         auto& main = node->threads[0];
@@ -48,37 +73,44 @@ namespace mt
 
         if (run)
         {
-            std::atomic_flag flag{ false };
-            flag.test_and_set(std::memory_order::acquire);
+            impl::Futex lock;
             main.tasks.enqueue(Task{
-                .callback = [&]() -> Task::Token {
-                    if (!(_flags & MainWorker))
+                .callback = [&](Task::Query query, std::any& out) -> Task::Token {
+                    if (query == Task::Query::Type)
                     {
-                        if (node->thread_cnt < ptr->_cfg.max_threads &&
-                            node->task_cnt / node->thread_cnt > ptr->_cfg.growth_trigger_ratio)
+                        std::any_cast<unsigned char&>(out) = Task::System;
+                        return Task::Token::Continue;
+                    }
+                    else if (query == Task::Query::Task)
+                    {
+                        if (!(_flags & MainWorker))
                         {
-                            ptr->_launch_worker(nid);
-                            _tid = node->thread_cnt - 1;
+                            if (node->thread_cnt < ptr->_cfg.max_threads &&
+                                node->task_cnt / node->thread_cnt > ptr->_cfg.growth_trigger_ratio)
+                            {
+                                ptr->_launch_worker_auto(
+                                    nid,
+                                    1,
+                                    support
+                                );
+                                _tid = node->thread_cnt - 1;
+                            }
+                            else
+                                full = true;
                         }
                         else
-                            full = true;
+                            main.stop = true;
+                        lock.release();
                     }
-                    else
-                        main.stop = true;
-                    flag.clear(std::memory_order::release);
-                    flag.notify_all();
                     return Task::Token::Discard;
                 }
             });
-            while (true)
-            {
-                if (!flag.test_and_set(std::memory_order::acquire)) break;
-                else flag.wait(true, std::memory_order::relaxed);
-            }
+            lock.wait();
         }
         if (_flags & MainWorker)
         {
             main.handle.join();
+            main.task_support = support;
             main.stop = false;
             ++node->thread_cnt;
             node->thread_cnt.notify_all();
@@ -140,7 +172,7 @@ namespace mt
 	{
 		while (cnt--)
 		{
-            if (int(node.thread_cnt) - int(++node.thread_scnt) >= int(_cfg.min_threads))
+            if (int(node.thread_cnt) - int(++node.thread_scnt) > int(_cfg.min_threads))
 			{
 				// Instead of stopping this thread specifically we stop the last one in the list
 				// So access is simpler (i.e. if we have N threads they are the first N in the threads array)
@@ -192,12 +224,12 @@ namespace mt
 		return 0;
 	}
 
-    std::size_t ThreadPool::_distribute_random() noexcept
+    std::size_t ThreadPool::_distribute_random(unsigned char support) noexcept
     {
         // Not implemented yet
-        return _distribute_fast();
+        return _distribute_fast(support);
     }
-    std::size_t ThreadPool::_distribute_fast() noexcept
+    std::size_t ThreadPool::_distribute_fast(unsigned char support) noexcept
     {
         const auto node = _nodes[_node_id()];
 
@@ -213,51 +245,67 @@ namespace mt
 
         std::size_t backoff = 0;
         std::size_t id = 0;
-        while (backoff++ != max_iters &&
-               node->threads[(id = (node->thread_ctr++ % node->thread_cnt))].task_cnt < avg);
+        while (true)
+        {
+            const auto tmp = node->thread_ctr++ % node->thread_cnt;
+            if (backoff++ == max_iters) break;
+            if ((node->threads[tmp].task_support & support) == support) continue;
+            if (node->threads[id = tmp].task_cnt >= avg) break;
+        }
 
         return node->threads[id].stop ? 0 : id;
     }
-    std::size_t ThreadPool::_distribute_optimal() noexcept
+    std::size_t ThreadPool::_distribute_optimal(unsigned char support) noexcept
     {
         // Not implemented yet
-        return _distribute_fast();
+        return _distribute_fast(support);
     }
-    std::size_t ThreadPool::_distribute(Distribution algo) noexcept
+    std::size_t ThreadPool::_distribute(Distribution algo, unsigned char support) noexcept
     {
         static constexpr auto table = std::array{
             &ThreadPool::_distribute_random,
             &ThreadPool::_distribute_fast,
             &ThreadPool::_distribute_optimal
         };
-        return (this->*table[std::size_t(algo)])();
+        return (this->*table[std::size_t(algo)])(support);
     }
 
     void ThreadPool::_schedule(Task task, std::optional<Distribution> dist) noexcept
 	{
         auto node = _nodes[_node_id()];
-        if (_cfg.flags & Config::Flags::MainCyclicWorker)
+        [[ unlikely ]] if (node->thread_cnt == 0)
         {
             auto& thread = node->threads[0];
             ++thread.task_cnt;
             ++node->task_cnt;
-            thread.tasks.enqueue(
-                std::move(task)
-            );
+            thread.tasks.enqueue(std::move(task));
         }
         else
         {
-            auto& thread = node->threads[_distribute(
-                dist.has_value() ?
-                    dist.value() : node->dist.load()
-            )];
-            ++thread.task_cnt;
-            ++node->task_cnt;
-            thread.tasks.enqueue(
-                std::move(task)
-            );
+            if ((_cfg.flags & Config::Flags::MainCyclicWorker) &&
+                task.timing != task.oneoff)
+            {
+                auto& thread = node->threads[0];
+                ++thread.task_cnt;
+                ++node->task_cnt;
+                thread.tasks.enqueue(std::move(task));
+            }
+            else
+            {
+                const auto support =
+                    Task::Static * task.timing == task.oneoff |
+                    Task::Cyclic * task.timing != task.oneoff;
+                auto& thread = node->threads[_distribute(
+                    dist.has_value() ?
+                        dist.value() : node->dist.load(),
+                    support
+                    )];
+                ++thread.task_cnt;
+                ++node->task_cnt;
+                thread.tasks.enqueue(std::move(task));
+            }
         }
-	}
+    }
 	bool ThreadPool::_check_overload() noexcept
 	{
 		if (_cfg.flags & Config::ManageOverload)
@@ -274,7 +322,8 @@ namespace mt
 
 	bool ThreadPool::_worker_handle_task(Task& task, Node& node, Thread& state) noexcept
 	{
-		const auto token = task.callback();
+        std::any out;
+        const auto token = task.callback(Task::Query::Task, out);
 		return token == Task::Token::Continue;
 	}
     void ThreadPool::_worker_wait_task(Node& node, Thread& state, std::chrono::milliseconds wait) noexcept
@@ -304,7 +353,7 @@ namespace mt
 			std::size_t cnt = 1;
 			while (cnt < tasks.size())
 			{
-				if (state.tasks.try_dequeue(tasks[cnt])) cnt++;
+                if (state.tasks.try_dequeue(tasks[cnt])) cnt++;
 				else break;
 			}
 
@@ -313,7 +362,42 @@ namespace mt
                 --state.task_cnt;
                 --node.task_cnt;
 				auto& task = tasks[i];
-                if (task.callback)
+                const auto support = _query_task<unsigned char>(Task::Query::Type, task);
+                if ((state.task_support & support) != support)
+                {
+                    impl::Futex lock;
+                    node.threads[0].tasks.enqueue([&](Task::Query query, std::any& out) {
+                        if (query == Task::Query::Type)
+                        {
+                            std::any_cast<unsigned char&>(out) = Task::Type::System;
+                            return Task::Token::Continue;
+                        }
+                        else if (query == Task::Query::Task)
+                        {
+                            if ((_cfg.flags & Config::AutoGrow) &&
+                                node.thread_cnt < _cfg.max_threads)
+                            {
+                                _launch_worker(
+                                    _node_id(),
+                                    &ThreadPool::_worker_normal,
+                                    1
+                                );
+                            }
+                        }
+                        return Task::Token::Discard;
+                    });
+                    lock.wait();
+
+                    _schedule(std::move(task), _cfg.default_dist);
+                    for (std::size_t j = i + 1; j < cnt; j++)
+                    {
+                        --state.task_cnt;
+                        --node.task_cnt;
+                        _schedule(std::move(tasks[j]), _cfg.default_dist);
+                    }
+                    break;
+                }
+                else if (task.callback)
                 {
                     if (task.timing != task.oneoff)
                     {
@@ -475,7 +559,7 @@ namespace mt
             _schedule(std::move(it), std::nullopt);
     }
 
-    void ThreadPool::_launch_worker(std::size_t nid, std::size_t cnt)
+    void ThreadPool::_launch_worker_auto(std::size_t nid, std::size_t cnt, unsigned char support)
     {
         auto node = _nodes[nid];
         while (cnt--)
@@ -488,6 +572,7 @@ namespace mt
                     node->thread_cnt++;
                     const auto id = i;
                     auto& state = node->threads[id];
+                    state.task_support = support | (i == 0 ? Task::System : 0x00);
                     state.id = id;
                     state.last_task = std::chrono::steady_clock::now();
                     break;
@@ -517,11 +602,11 @@ namespace mt
 		});
 	}
 
-	std::size_t ThreadPool::tasks(std::size_t node) const noexcept
+    std::size_t ThreadPool::tasks(std::size_t node) const noexcept
 	{
 		return _nodes[node]->task_cnt;
 	}
-	std::size_t ThreadPool::tasks() const noexcept
+    std::size_t ThreadPool::tasks() const noexcept
 	{
 		return std::accumulate(_nodes.begin(), _nodes.end(), std::size_t{0}, [](auto c, const auto& n) {
 			return c + n->task_cnt;
@@ -548,11 +633,17 @@ namespace mt
 
     void ThreadPool::start() noexcept
 	{
-        stop();
 		for (std::size_t i = 0; i < _nodes.size(); i++)
 		{
-            _launch_worker(i, &ThreadPool::_worker_main);
-			_launch_worker(i, &ThreadPool::_worker_normal, _cfg.min_threads - 1);
+            auto& node = _nodes[i];
+            if (!node->threads[0].handle.joinable())
+                _launch_worker(i, &ThreadPool::_worker_main);
+            if (node->thread_cnt < _cfg.min_threads)
+                _launch_worker(
+                    i,
+                    &ThreadPool::_worker_normal,
+                    _cfg.min_threads - node->thread_cnt - 1
+                );
 		}
 	}
 	void ThreadPool::stop() noexcept

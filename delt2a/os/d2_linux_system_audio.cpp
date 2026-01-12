@@ -92,8 +92,13 @@ namespace d2::sys::ext
                     };
                     if (!voice.filter.transforms.empty())
                     {
-                        for (decltype(auto) it : voice.filter.transforms)
-                            it(stream);
+                        auto& trans = voice.filter.transforms;
+                        for (std::size_t i = 0; i < trans.size(); i++)
+                            if (!trans[i].second(stream))
+                            {
+                                trans.erase(trans.begin() + i);
+                                i--;
+                            }
                     }
                     s->_run_device_filter(Device::Output, stream);
                 }
@@ -381,7 +386,7 @@ namespace d2::sys::ext
             };
             _run_device_filter(Device::Output, stream);
             for (decltype(auto) it : filter.transforms)
-                it(stream);
+                it.second(stream);
         }
         else
         {
@@ -496,5 +501,42 @@ namespace d2::sys::ext
             vec = (dev == Device::Input) ? _inputs : _outputs;
         });
         return vec;
+    }
+
+    void PipewireSystemAudio::filter(Device dev, FilterPipeline filter)
+    {
+        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*) {
+            _filter(dev, std::move(filter));
+        });
+    }
+    void PipewireSystemAudio::filter_push(Device dev, const std::string& after, FilterPipeline filter)
+    {
+        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*) {
+            _filter_push(dev, after, std::move(filter));
+        });
+    }
+    void PipewireSystemAudio::filter_push(Device dev, FilterPipeline filter)
+    {
+        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*) {
+            _filter_push(dev, std::move(filter));
+        });
+    }
+    void PipewireSystemAudio::filter_override(Device dev, const std::string& name, std::function<bool(Stream)> filter)
+    {
+        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*) {
+            _filter_override(dev, name, std::move(filter));
+        });
+    }
+    void PipewireSystemAudio::filter_remove(Device dev, const std::string& name)
+    {
+        _run_this_async([=, this](SystemAudio*) {
+            _filter_remove(dev, name);
+        });
+    }
+    void PipewireSystemAudio::filter_clear(Device dev)
+    {
+        _run_this_async([=, this](SystemAudio*) {
+            _filter_clear(dev);
+        });
     }
 }

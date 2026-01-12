@@ -52,11 +52,11 @@ namespace d2::dx
             _signal_write(Style);
         }
     }
-    void Slider::_event_impl(IOContext::Event ev)
+    void Slider::_event_impl(Screen::Event ev)
     {
         if (data::max == data::min)
             return;
-        if (ev == IOContext::Event::MouseInput)
+        if (ev == Screen::Event::MouseInput)
         {
             bool write = false;
             float npos = 0;
@@ -96,7 +96,7 @@ namespace d2::dx
                 _submit();
             }
         }
-        else if (ev == IOContext::Event::KeyInput)
+        else if (ev == Screen::Event::KeyInput)
         {
             if (context()->input()->is_pressed(sys::SystemInput::ArrowLeft) ||
                     context()->input()->is_pressed(sys::SystemInput::ArrowDown))

@@ -98,29 +98,19 @@ namespace d2
         virtual TreeIter _at_impl(const std::string&) const = 0;
         virtual TreeIter _create_impl(ptr) = 0;
         virtual TreeIter _override_impl(ptr) = 0;
-        virtual void _remove_impl(const std::string&) = 0;
-        virtual void _remove_impl(ptr) = 0;
+        virtual TreeIter _create_after_impl(ptr p, ptr after) = 0;
+        virtual TreeIter _override_after_impl(ptr p, ptr after) = 0;
+        virtual bool _remove_impl(const std::string&) = 0;
+        virtual bool _remove_impl(ptr) = 0;
         virtual void _clear_impl() = 0;
     public:
         using Element::Element;
 
-        bool empty() const
-        {
-            return _empty_impl();
-        }
-        bool exists(const std::string& name) const
-        {
-            return _exists_impl(name);
-        }
-        bool exists(ptr ptr) const
-        {
-            return _exists_impl(ptr);
-        }
+        bool empty() const;
+        bool exists(const std::string& name) const;
+        bool exists(ptr ptr) const;
 
-        TreeIter at(const std::string& name) const
-        {
-            return _at_impl(name);
-        }
+        TreeIter at(const std::string& name) const;
 
         void layout_for(enum Layout layout, cptr elem)  const;
 
@@ -143,28 +133,35 @@ namespace d2
                                 std::static_pointer_cast<ParentElement>(shared_from_this())
                             ));
         }
-        TreeIter create(ptr ptr)
-        {
-            return _create_impl(ptr);
-        }
-        TreeIter override(ptr ptr)
-        {
-            return _override_impl(ptr);
-        }
+        TreeIter create(ptr ptr);
+        TreeIter override(ptr ptr);
 
-        void clear()
+        template<typename Type> TypedTreeIter<Type> create_after(ptr after, const std::string& name = "")
         {
-            _clear_impl();
+            return create_after(Element::make<Type>(
+                name,
+                state(),
+                std::static_pointer_cast<ParentElement>(shared_from_this())
+            ), after);
         }
+        template<typename Type> TypedTreeIter<Type> override_after(ptr after, const std::string& name = "")
+        {
+            return override_after(Element::make<Type>(
+                name,
+                state(),
+                std::static_pointer_cast<ParentElement>(shared_from_this())
+            ), after);
+        }
+        TreeIter create_after(ptr p, ptr after);
+        TreeIter override_after(ptr p, ptr after);
 
-        void remove(const std::string& name)
-        {
-            _remove_impl(name);
-        }
-        void remove(ptr ptr)
-        {
-            _remove_impl(ptr);
-        }
+        void clear();
+
+        void remove(const std::string& name);
+        void remove(ptr ptr);
+
+        bool remove_if(const std::string& name);
+        bool remove_if(ptr ptr);
 
         int border_for(BorderType type, cptr ptr) const;
 
@@ -187,8 +184,10 @@ namespace d2
         virtual TreeIter _at_impl(const std::string& name) const override;
         virtual TreeIter _create_impl(ptr ptr) override;
         virtual TreeIter _override_impl(ptr ptr) override;
-        virtual void _remove_impl(const std::string& name) override;
-        virtual void _remove_impl(ptr ptr) override;
+        virtual TreeIter _create_after_impl(ptr p, ptr after) override;
+        virtual TreeIter _override_after_impl(ptr p, ptr after) override;
+        virtual bool _remove_impl(const std::string& name) override;
+        virtual bool _remove_impl(ptr ptr) override;
         virtual void _clear_impl() override;
 
         std::size_t _find(const std::string& name) const;
@@ -229,11 +228,20 @@ namespace d2
         {
             return nullptr;
         }
-        virtual void _remove_impl(const std::string& name) override
+        virtual TreeIter _create_after_impl(ptr p, ptr after) override
         {
             throw std::logic_error{ "Not implemented" };
         }
-        virtual void _remove_impl(ptr ptr) override
+        virtual TreeIter _override_after_impl(ptr p, ptr after) override
+        {
+            return nullptr;
+        }
+
+        virtual bool _remove_impl(const std::string& name) override
+        {
+            throw std::logic_error{ "Not implemented" };
+        }
+        virtual bool _remove_impl(ptr ptr) override
         {
             throw std::logic_error{ "Not implemented" };
         }

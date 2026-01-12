@@ -20,6 +20,8 @@ namespace mt
 			Discarded = 1 << 1,
 			// Set when an exception occured
 			Exception = 1 << 2,
+            // Set when the task is to be temporarily paused
+            Paused = 1 << 3,
 		};
 	private:
 		std::variant<
@@ -56,9 +58,34 @@ namespace mt
 			}
 			_flags &= rem;
 		}
+        void _sync_diff_flags(unsigned char flags) const noexcept
+        {
+            auto value = _flags.load();
+            while ((value & flags) == flags)
+            {
+                _flags.wait(value);
+                value = _flags.load();
+            }
+        }
+        void _sync_diff_flags(unsigned char flags, unsigned char rem) noexcept
+        {
+            auto value = _flags.load();
+            while ((value & flags) == flags)
+            {
+                _flags.wait(value);
+                value = _flags.load();
+            }
+            _flags &= rem;
+        }
+
         void _sum_flags(unsigned char flags) noexcept
         {
             _flags |= flags;
+            _flags.notify_all();
+        }
+        void _diff_flags(unsigned char flags) noexcept
+        {
+            _flags &= ~flags;
             _flags.notify_all();
         }
     public:
@@ -96,6 +123,15 @@ namespace mt
             _sum_flags(Discarded | Exception);
 		}
 
+        void pause() noexcept
+        {
+            _sum_flags(Paused);
+        }
+        void unpause() noexcept
+        {
+            _diff_flags(Paused);
+        }
+
 		void sync_value() const noexcept
 		{
             _sync_flags(Updated | Exception | Discarded);
@@ -104,7 +140,15 @@ namespace mt
 		{
 			_sync_flags(Discarded);
 		}
-		void discard() noexcept
+        void sync_pause() const noexcept
+        {
+            _sync_flags(Paused);
+        }
+        void sync_unpause() const noexcept
+        {
+            _sync_diff_flags(Paused);
+        }
+        void discard() noexcept
 		{
             _sum_flags(Discarded);
 		}
@@ -116,6 +160,10 @@ namespace mt
 				return std::move(std::get<0>(_val));
 		}
 
+        bool is_paused() const noexcept
+        {
+            return _flags & Paused;
+        }
 		bool is_discarded() const noexcept
 		{
 			return _flags & Discarded;
@@ -167,7 +215,7 @@ namespace mt
         };
     private:
         std::tuple<State...> _state{};
-        std::array<void(*)(State&..., std::shared_ptr<ManagedControlBlock>), 3> _hooks{};
+        std::array<void(*)(std::shared_ptr<ManagedControlBlock>, State&...), 3> _hooks{};
 
         void _trigger(Event ev) noexcept
         {
@@ -177,10 +225,10 @@ namespace mt
                 {
                     std::apply([&](auto&... args) {
                         hook(
-                            args...,
                             std::static_pointer_cast<ManagedControlBlock>(
                                 base::shared_from_this()
-                            )
+                            ),
+                            args...
                         );
                     }, _state);
                 }
@@ -234,6 +282,12 @@ namespace mt
             base::set_exception();
             _trigger(Event::Exception);
             _trigger(Event::Discarded);
+        }
+
+        template<typename Func>
+        void set_hook(Event ev, Func&& callback)
+        {
+            _hooks[std::size_t(ev)] = callback;
         }
     };
 

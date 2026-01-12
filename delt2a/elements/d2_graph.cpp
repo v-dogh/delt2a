@@ -16,53 +16,81 @@ namespace d2::dx::graph
         if (xres == 0 || yres == 0)
             return;
 
+        const auto inner_w = (width > basex + ibasex) ? (width - basex - ibasex) : 0;
+        const auto inner_h = (height > basey + ibasey) ? (height - basey - ibasey) : 0;
+        if (inner_w == 0 || inner_h == 0)
+            return;
+
         const auto n = _data.size();
         const auto slice = std::max<std::size_t>(1, n / std::max<std::size_t>(1, xres));
-        for (std::size_t i = 0; i < xres; ++i)
+
+        if (data::high_resolution)
         {
-            const auto abs = (_start_offset + slice * i) % n;
+            std::vector<int> cells(inner_w * inner_h, 0x00);
+            std::vector<std::size_t> col_h(inner_w, 0);
 
-            auto sum = 0.f;
-            for (std::size_t k = 0; k < slice; ++k)
-            {
-                const std::size_t idx = (abs + k) % n;
-                sum += _data[idx];
-            }
+            const auto quarters_cap = inner_h * 4;
 
-            const auto data_point = sum / static_cast<float>(slice);
-            const auto yabs = static_cast<float>(yres) * data_point;
-            std::size_t yoff;
-            if (data::high_resolution)
+            for (std::size_t i = 0; i < xres; i++)
             {
-                yoff = static_cast<std::size_t>(
-                    std::floor(yabs / 4.f)
-                );
-            }
-            else
-            {
-                yoff = static_cast<std::size_t>(
-                    std::floor(yabs)
-                );
-            }
-            if (yoff == 0)
-                continue;
+                const auto abs = (_start_offset + slice * i) % n;
 
-            for (std::size_t j = 0; j < yoff; ++j)
-            {
-                const auto t = (yoff <= 1) ? 1.f : static_cast<float>(j) / static_cast<float>(yoff - 1);
-                auto px = Pixel::interpolate(
-                    data::min_color,
-                    data::max_color,
-                    t
-                );
-
-                value_type val = data::min_color.v;
-                if (data::high_resolution)
+                auto sum = 0.f;
+                for (std::size_t k = 0; k < slice; k++)
                 {
-                    if (j == yoff - 1)
+                    const std::size_t idx = (abs + k) % n;
+                    sum += _data[idx];
+                }
+
+                auto data_point = sum / static_cast<float>(slice);
+                if (!std::isfinite(data_point))
+                    continue;
+                data_point = std::clamp(data_point, 0.f, 1.f);
+
+                const auto x = static_cast<std::size_t>(i / 2);
+                if (x >= inner_w)
+                    continue;
+
+                const auto total_quarters = std::min<std::size_t>(
+                    static_cast<std::size_t>(std::floor(static_cast<float>(quarters_cap) * data_point + 1e-6f)),
+                    quarters_cap
+                );
+
+                const auto full = total_quarters / 4;
+                const auto rem = total_quarters % 4;
+                const auto yoff = std::min<std::size_t>(full + (rem ? 1 : 0), inner_h);
+
+                if (yoff == 0)
+                    continue;
+
+                col_h[x] = std::max(col_h[x], yoff);
+
+                for (std::size_t j = 0; j < yoff; j++)
+                {
+                    auto flags = 0x00;
+
+                    if (j < full)
                     {
-                        const auto dot = (j * 2) % 4;
-                        auto flags = 0x00;
+                        if (i % 2 == 0)
+                        {
+                            flags |=
+                                charset::TopLeft |
+                                charset::MidTopLeft |
+                                charset::MidBotLeft |
+                                charset::BotLeft;
+                        }
+                        else
+                        {
+                            flags |=
+                                charset::TopRight |
+                                charset::MidTopRight |
+                                charset::MidBotRight |
+                                charset::BotRight;
+                        }
+                    }
+                    else if (j == full && rem != 0)
+                    {
+                        const auto dot = rem - 1;
                         if (i % 2 == 0)
                         {
                             switch (dot)
@@ -83,46 +111,94 @@ namespace d2::dx::graph
                             case 0: flags |= charset::BotRight; break;
                             }
                         }
-                        val = charset::cell(flags);
                     }
                     else
                     {
-                        if (i % 2 == 0)
-                        {
-                            val = charset::cell(
-                                charset::TopLeft |
-                                charset::MidTopLeft |
-                                charset::MidBotLeft |
-                                charset::BotLeft
-                            );
-                        }
-                        else
-                        {
-                            val = charset::cell(
-                                charset::TopRight |
-                                charset::MidTopRight |
-                                charset::MidBotRight |
-                                charset::BotRight
-                            );
-                        }
+                        continue;
                     }
-                }
 
-                px.v = val;
-                if (data::invert)
+                    const auto y = data::invert ? j : (inner_h - j - 1);
+                    cells[
+                        static_cast<std::size_t>(y) * inner_w +
+                        static_cast<std::size_t>(x)
+                    ] |= flags;
+                }
+            }
+
+            for (std::size_t y = 0; y < inner_h; y++)
+            {
+                for (std::size_t x = 0; x < inner_w; x++)
                 {
+                    const auto flags = cells[y * inner_w + x];
+                    if (flags == 0x00)
+                        continue;
+
+                    const auto j = data::invert ? y : (inner_h - y - 1);
+                    const auto h = col_h[x];
+                    const auto t = (h <= 1) ? 1.f : static_cast<float>(std::min<std::size_t>(j, h - 1)) / static_cast<float>(h - 1);
+
+                    auto px = Pixel::interpolate(
+                        data::min_color,
+                        data::max_color,
+                        t
+                    );
+
+                    px.v = charset::cell(flags);
                     buffer.at(
-                        static_cast<std::size_t>(i / 2) + basex,
-                        height - ibasey - j - 1
+                        x + basex,
+                        y + basey
                     ).blend(px);
                 }
-                else
-                {
-                    buffer.at(
-                        static_cast<std::size_t>(i / 2) + basex,
-                        height - ibasey - j - 1
-                    ).blend(px);
-                }
+            }
+
+            return;
+        }
+
+        for (std::size_t i = 0; i < xres; i++)
+        {
+            const auto abs = (_start_offset + slice * i) % n;
+
+            auto sum = 0.f;
+            for (std::size_t k = 0; k < slice; k++)
+            {
+                const std::size_t idx = (abs + k) % n;
+                sum += _data[idx];
+            }
+
+            auto data_point = sum / static_cast<float>(slice);
+            if (!std::isfinite(data_point))
+                continue;
+            data_point = std::clamp(data_point, 0.f, 1.f);
+
+            const auto x = i;
+            if (x >= inner_w)
+                continue;
+
+            const auto yabs = static_cast<float>(yres) * data_point;
+            auto yoff = static_cast<std::size_t>(std::floor(yabs));
+            if (yoff == 0)
+                continue;
+
+            yoff = std::min<std::size_t>(yoff, inner_h);
+            for (std::size_t j = 0; j < yoff; j++)
+            {
+                const auto t = (yoff <= 1) ? 1.f : static_cast<float>(j) / static_cast<float>(yoff - 1);
+                auto px = Pixel::interpolate(
+                    data::min_color,
+                    data::max_color,
+                    t
+                );
+
+                px.v = data::min_color.v;
+
+                const auto y = data::invert ? (basey + j) : (height - ibasey - j - 1);
+                if (y < basey || y >= height - ibasey)
+                    continue;
+
+                buffer.at(
+                    x + basex,
+                    y
+                ).blend(px);
             }
         }
     }
@@ -162,8 +238,16 @@ namespace d2::dx::graph
     }
     void CyclicVerticalBar::rescale(float scale)
     {
+        if (scale == 1.f) return;
         std::transform(_data.begin(), _data.end(), _data.begin(), [&](float point) {
             return scale * point;
+        });
+    }
+    void CyclicVerticalBar::rescale(float scale, float trans)
+    {
+        if (scale == 1.f && trans == 0.f) return;
+        std::transform(_data.begin(), _data.end(), _data.begin(), [&](float point) {
+            return scale * point + trans;
         });
     }
 

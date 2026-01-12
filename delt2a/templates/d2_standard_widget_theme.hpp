@@ -91,7 +91,7 @@ namespace d2::ctm
                 {
                     return static_cast<std::uint8_t>(
                         static_cast<float>(x) + (static_cast<float>(y) - static_cast<float>(x)) * t
-                        );
+                    );
                 };
                 return d2::px::background{
                     .r = lerp(a.r, b.r),
@@ -100,31 +100,28 @@ namespace d2::ctm
                 };
             };
 
-            // Backgrounds: mostly base
             auto bg_primary   = from_base(0.25f, 0.3f, 0.35f);
-            auto bg_secondary = mix(from_base(0.18f, 0.2f, 0.25f),
-                                    from_accent(0.18f, 0.2f, 0.25f),
-                                    0.3f); // slight accent in secondary
+            auto bg_secondary = mix(
+                from_base(0.18f, 0.2f, 0.25f),
+                from_accent(0.18f, 0.2f, 0.25f),
+                0.3f
+            );
 
-            // Borders: brightened mix leaning toward accent
             auto border_color = mix(
                 from_base(0.9f, 0.9f, 0.9f),
                 from_accent(0.95f, 0.95f, 0.95f),
                 0.6f
-                );
+            );
 
-            // Text: bright derived from base, pointer from accent to distinguish
             auto text_fg      = from_base(0.95f, 0.95f, 0.95f);
             auto text_ptr_fg  = from_accent(0.95f, 0.95f, 0.95f);
 
-            // Buttons: use accent as main color family
-            auto bt_normal    = from_accent(0.55f, 0.55f, 0.55f);
-            auto bt_hover     = from_accent(0.75f, 0.75f, 0.75f);
-            auto bt_press     = from_accent(0.95f, 0.95f, 0.95f);
+            auto bt_normal = from_accent(0.55f, 0.55f, 0.55f);
+            auto bt_hover = from_accent(0.75f, 0.75f, 0.75f);
+            auto bt_press = from_accent(0.95f, 0.95f, 0.95f);
 
-            // Button text: bright from base, react foreground from accent
-            auto bt_fg        = from_base(0.95f, 0.95f, 0.95f);
-            auto bt_react_fg  = from_accent(0.25f, 0.25f, 0.25f);
+            auto bt_fg = from_base(0.95f, 0.95f, 0.95f);
+            auto bt_react_fg = from_accent(0.25f, 0.25f, 0.25f);
 
             theme->accents(
                 bg_primary,
@@ -138,7 +135,7 @@ namespace d2::ctm
                 bt_press,
                 bt_fg,
                 bt_react_fg
-                );
+            );
         }
         static void accent_dynamic_tritone(
             StandardTheme* theme,
@@ -175,7 +172,7 @@ namespace d2::ctm
                 {
                     return static_cast<std::uint8_t>(
                         static_cast<float>(x) + (static_cast<float>(y) - static_cast<float>(x)) * t
-                        );
+                    );
                 };
                 return d2::px::background{
                     .r = lerp(a.r, b.r),
@@ -184,41 +181,32 @@ namespace d2::ctm
                 };
             };
 
-            // Base is the "canvas"
-            auto bg_primary   = from_base(0.22f, 0.26f, 0.3f);
+            auto bg_primary = from_base(0.22f, 0.26f, 0.3f);
             auto bg_secondary = mix(
                 from_base(0.16f, 0.18f, 0.22f),
                 from_a(0.18f, 0.2f, 0.25f),
                 0.35f
-                );
+            );
 
-            // Borders use accent A, slightly mixed with base for readability
             auto border_color = mix(
                 from_a(0.9f, 0.9f, 0.9f),
                 from_base(0.8f, 0.8f, 0.8f),
                 0.4f
-                );
+            );
 
-            // Text = high-contrast from base, cursor = accent B to stand out
-            auto text_fg      = from_base(0.95f, 0.95f, 0.95f);
-            auto text_ptr_fg  = from_b(0.95f, 0.95f, 0.95f);
+            auto text_fg = from_base(0.95f, 0.95f, 0.95f);
+            auto text_ptr_fg = from_b(0.95f, 0.95f, 0.95f);
 
-            // Buttons:
-            //   normal/hover from accent A,
-            //   press from accent B for a stronger "action" feel
-            auto bt_normal    = from_a(0.55f, 0.55f, 0.55f);
-            auto bt_hover     = from_a(0.75f, 0.75f, 0.75f);
-            auto bt_press     = from_b(0.9f, 0.9f, 0.9f);
+            auto bt_normal = from_a(0.55f, 0.55f, 0.55f);
+            auto bt_hover = from_a(0.75f, 0.75f, 0.75f);
+            auto bt_press = from_b(0.9f, 0.9f, 0.9f);
 
-            // Button text: bright neutral (mix of base + accent B)
-            auto bt_fg        = mix(
+            auto bt_fg = mix(
                 from_base(0.95f, 0.95f, 0.95f),
                 from_b(0.95f, 0.95f, 0.95f),
                 0.3f
-                );
-
-            // React foreground: darker accent B
-            auto bt_react_fg  = from_b(0.25f, 0.25f, 0.25f);
+            );
+            auto bt_react_fg = from_b(0.25f, 0.25f, 0.25f);
 
             theme->accents(
                 bg_primary,
@@ -232,7 +220,7 @@ namespace d2::ctm
                 bt_press,
                 bt_fg,
                 bt_react_fg
-                );
+            );
         }
 
         static void accent_dynamic(StandardTheme* theme, d2::px::background tint)
