@@ -11,8 +11,10 @@
 
 #include "d2_signal_handler.hpp"
 #include "d2_screen_frwd.hpp"
+#include "d2_io_handler_frwd.hpp"
 #include "d2_pixel.hpp"
 #include "mt/thread_pool.hpp"
+#include "d2_meta.hpp"
 
 namespace d2
 {
@@ -47,14 +49,14 @@ namespace d2
                 Failure,
                 Offline,
             };
-		protected:
+        private:
             const std::weak_ptr<IOContext> _ctx{};
             const std::string _name{ "<Unknown>" };
             const bool _is_thread_safe{ false };
             Status _status{ Status::Offline };
-
-            virtual Status _load_impl() = 0;
-            virtual Status _unload_impl() = 0;
+        protected:
+            virtual Status _load_impl() { return Status::Ok; }
+            virtual Status _unload_impl() { return Status::Ok; }
 		public:
 			template<typename Component>
             static std::unique_ptr<Component> make(mt::ThreadPool::ptr scheduler)
@@ -64,7 +66,12 @@ namespace d2
 
             SystemComponent(std::weak_ptr<IOContext> ptr, const std::string& name, bool is_thread_safe)
                 : _ctx(ptr), _name(name), _is_thread_safe(is_thread_safe) {}
-			virtual ~SystemComponent() = default;
+            virtual ~SystemComponent() = default;
+
+            std::shared_ptr<IOContext> context() const noexcept
+            {
+                return _ctx.lock();
+            }
 
             Status status();
             void load();
@@ -88,47 +95,47 @@ namespace d2
 			}
 		};
 
-		namespace impl
-		{
-			template<typename Type>
-			struct ComponentUIDGenerator : public SystemComponent
-			{
-				using SystemComponent::SystemComponent;
+        template<meta::ConstString Name, typename Type>
+        struct SystemComponentBase : public SystemComponent
+        {
+            static inline constexpr auto name = Name.view();
+            static inline const auto uidc = impl::component_uidgen();
 
-				static inline const std::size_t uidc = impl::component_uidgen();
-				virtual std::size_t uid() const override
-				{
-					return uidc;
-				}
-			};
-		}
+            using SystemComponent::SystemComponent;
+
+            virtual std::size_t uid() const override
+            {
+                return uidc;
+            }
+        };
+        template<bool ThreadSafe>
+        struct SystemComponentCfg
+        {
+            static inline constexpr auto tsafe = ThreadSafe;
+        };
 
 		// Additional system wrappers (Optional ones)
         namespace ext
         {
-            class SystemClipboard : public impl::ComponentUIDGenerator<SystemClipboard>
+            class SystemClipboard : public SystemComponentBase<"Clipboard", SystemClipboard>
             {
             public:
-                static constexpr auto name = "Clipboard";
-
-                using ComponentUIDGenerator::ComponentUIDGenerator;
+                using SystemComponentBase::SystemComponentBase;
 
                 virtual void clear() = 0;
                 virtual void copy(const string& value) = 0;
                 virtual string paste() = 0;
                 virtual bool empty() = 0;
             };
-            class SystemAudio : public impl::ComponentUIDGenerator<SystemAudio>
+            class SystemAudio : public SystemComponentBase<"Audio", SystemAudio>
             {
-            public:
-                static constexpr auto name = "Audio";
             public:
                 enum class Event
                 {
                     Activate,
                     Deactivate,
                     Create,
-                    Destroy
+                    Destroy,
                 };
                 enum class Device
                 {
@@ -152,77 +159,6 @@ namespace d2
                 {
                     std::string id{ "" };
                     std::string name{ "Unknown" };
-                };
-                class EventListener;
-            private:
-                struct EventListenerState
-                {
-                    enum class State
-                    {
-                        Muted,
-                        Active,
-                        Invalid,
-                    };
-
-                    std::function<void(const DeviceName&, Event, EventListener)> callback{ nullptr };
-                    std::atomic<State> state{ State::Active };
-                };
-            public:
-                class EventListener
-                {
-                private:
-                    std::weak_ptr<EventListenerState> _ptr{};
-                public:
-                    EventListener() = default;
-                    EventListener(EventListener&&) = default;
-                    EventListener(const EventListener&) = default;
-                    EventListener(std::shared_ptr<EventListenerState> ptr)
-                        : _ptr(ptr) {}
-
-                    void unmute()
-                    {
-                        if (!_ptr.expired())
-                        {
-                            _ptr.lock()->state = EventListenerState::State::Active;
-                        }
-                    }
-                    void mute()
-                    {
-                        if (!_ptr.expired())
-                        {
-                            _ptr.lock()->state = EventListenerState::State::Muted;
-                        }
-                    }
-                    void destroy()
-                    {
-                        if (!_ptr.expired())
-                        {
-                            _ptr.lock()->state = EventListenerState::State::Invalid;
-                        }
-                    }
-                    bool is_muted() const
-                    {
-                        return
-                            !_ptr.expired() &&
-                            _ptr.lock()->state == EventListenerState::State::Muted;
-                    }
-
-                    operator bool() const
-                    {
-                        return !_ptr.expired();
-                    }
-
-                    bool operator==(std::nullptr_t) const
-                    {
-                        return _ptr.expired();
-                    }
-                    bool operator!=(std::nullptr_t) const
-                    {
-                        return !_ptr.expired();
-                    }
-
-                    EventListener& operator=(EventListener&&) = default;
-                    EventListener& operator=(const EventListener&) = default;
                 };
                 class Stream
                 {
@@ -254,26 +190,20 @@ namespace d2
                 };
                 struct FilterPipeline
                 {
-                    std::vector<std::function<void(Stream)>> transforms;
+                    std::vector<
+                        std::pair<
+                            std::optional<std::string>,
+                            std::function<bool(Stream) >
+                        >
+                    > transforms;
 
                     FilterPipeline() = default;
-                    FilterPipeline(std::function<void(Stream)> callback)
-                    {
-                        transforms.push_back(std::move(callback));
-                    }
 
-                    FilterPipeline operator|(std::function<void(Stream)> callback) const
-                    {
-                        FilterPipeline pipeline;
-                        pipeline.transforms.reserve(4);
-                        pipeline.transforms.push_back(std::move(callback));
-                        return pipeline;
-                    }
-                    FilterPipeline& operator|(std::function<void(Stream)> callback)
-                    {
-                        transforms.push_back(std::move(callback));
-                        return *this;
-                    }
+                    FilterPipeline operator|(std::function<bool(Stream)> callback) const;
+                    FilterPipeline operator|(const std::string& name) const;
+                    FilterPipeline& operator&&(std::function<bool(Stream)> callback);
+                    FilterPipeline& operator|(const std::string& name);
+                    FilterPipeline& operator|(std::function<bool(Stream)> callback);
                 } static inline const signal;
                 class preset
                 {
@@ -419,6 +349,10 @@ namespace d2
                         }
                     };
                 };
+            private:
+                Signals::Signal _sig_generic{ nullptr };
+                Signals::Signal _sig_in{ nullptr };
+                Signals::Signal _sig_out{ nullptr };
             protected:
                 struct DeviceData
                 {
@@ -430,7 +364,6 @@ namespace d2
                         Closing
                     };
                     FilterPipeline filter;
-                    std::vector<std::shared_ptr<EventListenerState>> listener;
                     Status status{ Status::Closed };
                 };
                 std::array<DeviceData, 2> _device_data{};
@@ -441,6 +374,19 @@ namespace d2
                 DeviceData::Status _get_device_status(Device dev);
                 void _run_device_filter(Device dev, Stream stream);
                 void _trigger_device_event(Device dev, Event ev, const DeviceName&);
+
+                // Helpers for the implementation
+                // We do not implement these publicly because we cannot assume the concurrency model of the implementation
+
+                void _filter(Device dev, FilterPipeline filter);
+                void _filter_push(Device dev, const std::string& after, FilterPipeline filter);
+                void _filter_push(Device dev, FilterPipeline filter);
+                void _filter_override(Device dev, const std::string& name, std::function<bool(Stream)> filter);
+                void _filter_remove(Device dev, const std::string& name);
+                void _filter_clear(Device dev);
+
+                virtual Status _load_impl() override;
+                virtual Status _unload_impl() override;
             public:         
                 static constexpr std::size_t sample_size(Format format)
                 {
@@ -453,7 +399,7 @@ namespace d2
                     }
                 }
 
-                using ComponentUIDGenerator::ComponentUIDGenerator;
+                using SystemComponentBase::SystemComponentBase;
 
                 virtual void flush(Device dev) = 0;
                 virtual void record(std::function<void(std::span<const unsigned char>)> stream) = 0;
@@ -466,21 +412,25 @@ namespace d2
                 virtual FormatInfo format(Device dev) = 0;
                 virtual std::vector<DeviceName> enumerate(Device dev) = 0;
 
-                void filter(Device dev, std::function<void(Stream)> callback) { filter(dev, FilterPipeline(callback)); }
-                void filter(Device dev, FilterPipeline filter);
-                EventListener watch(Device dev, std::function<void(const DeviceName&, Event, EventListener)> callback);
+                virtual void filter(Device dev, FilterPipeline filter) = 0;
+                virtual void filter_push(Device dev, const std::string& after, FilterPipeline filter) = 0;
+                virtual void filter_push(Device dev, FilterPipeline filter) = 0;
+                virtual void filter_override(Device dev, const std::string& name, std::function<bool(Stream)> filter) = 0;
+                virtual void filter_remove(Device dev, const std::string& name) = 0;
+                virtual void filter_clear(Device dev) = 0;
+
+                Signals::Handle watch(Device dev, Event ev, std::function<void(const DeviceName&, SystemAudio&)> callback);
+                Signals::Handle watch(Device dev, std::function<void(const DeviceName&, Event, SystemAudio&)> callback);
             };
-            class SystemNotifications : public impl::ComponentUIDGenerator<SystemNotifications>
+            class SystemNotifications : public SystemComponentBase<"Notifications", SystemNotifications>
             {
             public:
-                static constexpr auto name = "Notifications";
-
-                using ComponentUIDGenerator::ComponentUIDGenerator;
+                using SystemComponentBase::SystemComponentBase;
 
                 virtual void notify(const std::string& title, const std::string& content, const std::vector<unsigned char> icon = {}) = 0;
                 virtual void remind(std::chrono::system_clock::time_point when, const std::string& title, const std::string& content, const std::vector<unsigned char> icon = {}) = 0;
             };
-            class SystemPlugins : public impl::ComponentUIDGenerator<SystemPlugins>
+            class SystemPlugins : public SystemComponentBase<"Plugins", SystemPlugins>
             {
             public:
                 enum class LoadStatus
@@ -500,9 +450,7 @@ namespace d2
 
                 };
             public:
-                static constexpr auto name = "Plugins";
-
-                using ComponentUIDGenerator::ComponentUIDGenerator;
+                using SystemComponentBase::SystemComponentBase;
 
                 template<typename... Components, typename... Argv>
                 Environment sandbox(std::tuple<Argv...>&& params, mt::ThreadPool::ptr pool = nullptr)
@@ -529,15 +477,15 @@ namespace d2
                 virtual LoadStatus load(const std::filesystem::path& path, const std::string& name, Environment ctx = Environment()) = 0;
                 virtual void unload(const std::string& name) = 0;
             };
-            class SystemIO : public impl::ComponentUIDGenerator<SystemPlugins>
+            class SystemIO : public SystemComponentBase<"IO", SystemIO>
             {
 
             };
 
-            class LocalSystemClipboard : public SystemClipboard
+            class LocalSystemClipboard :
+                public SystemClipboard,
+                public SystemComponentCfg<false>
             {
-            public:
-                static constexpr auto tsafe = false;
             private:
                 string value_{};
             protected:
@@ -574,10 +522,8 @@ namespace d2
         }
 
 		// Generic base for system input
-        class SystemInput : public impl::ComponentUIDGenerator<SystemInput>
+        class SystemInput : public SystemComponentBase<"Input", SystemInput>
 		{
-        public:
-            static constexpr auto name = "Input";
 		public:
 			using keytype = short;
 			enum MouseKey : keytype
@@ -676,7 +622,7 @@ namespace d2
 				return _resolve_key(ch);
 			}
 
-			using ComponentUIDGenerator::ComponentUIDGenerator;
+            using SystemComponentBase::SystemComponentBase;
 
 			void begincycle()
 			{
@@ -755,10 +701,8 @@ namespace d2
 
 		// Generic base for system output
 		// Provides interfaces used for rendering to the console and other OS agnostic interfaces
-        class SystemOutput : public impl::ComponentUIDGenerator<SystemOutput>
+        class SystemOutput : public SystemComponentBase<"Output", SystemOutput>
 		{
-        public:
-            static constexpr auto name = "Output";
 		public:
             static constexpr auto image_constant = px::combined{ .v = std::numeric_limits<standard_value_type>::max() };
 			class ImageInstance
@@ -806,7 +750,7 @@ namespace d2
                 PNG,
             };
         public:
-			using ComponentUIDGenerator::ComponentUIDGenerator;
+            using SystemComponentBase::SystemComponentBase;
 
             virtual void load_image(const std::string& path, ImageInstance img) = 0;
             virtual void release_image(const std::string& path) = 0;
@@ -858,7 +802,7 @@ namespace d2
 
 		template<typename Type> Type* _get_component()
 		{
-			const auto uid = Type::uidc;
+            const auto uid = Type::uidc;
             [[ unlikely ]] if (_components.size() < uid)
 				throw std::logic_error{ "Attempt to query inactive component" };
             auto* ptr = _components[uid].get();
@@ -956,14 +900,14 @@ namespace d2
 					static_assert(!std::is_same_v<Component, void>, "Attempt to load invalid component");
                     _insert_component(std::make_unique<Component>(
                         _weak(),
-                        Component::name,
+                        std::string(Component::name),
                         Component::tsafe
                     ));
 #				else
 					if constexpr (!std::is_same_v<Component, void>)
                         _insert_component(std::make_unique<Component>(
                             _weak(),
-                            Component::name,
+                            std::string(Component::name),
                             Component::tsafe
                         ));
 #				endif

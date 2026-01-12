@@ -26,6 +26,7 @@ namespace d2
                 PixelForeground enabled_foreground_color{ .r = 0, .g = 0, .b = 0 };
                 Pixel separator_color{ .a = 0, .v = '|' };
                 bool disable_separator{ false };
+                bool expand_background{ true };
 
                 PixelForeground pre_color{};
                 PixelForeground post_color{};
@@ -44,6 +45,7 @@ namespace d2
                 OnChangeValues,
                 SeparatorColor,
                 DisableSeparator,
+                ExpandBackground,
                 PreColor,
                 PostColor,
                 SelectPre,
@@ -60,6 +62,7 @@ namespace d2
                 D2_UAI_PROP(OnChangeValues, on_change_values, 0x00)
                 D2_UAI_PROP(SeparatorColor, separator_color, Style)
                 D2_UAI_PROP(DisableSeparator, disable_separator, Style)
+                D2_UAI_PROP(ExpandBackground, disable_separator, Style)
                 D2_UAI_PROP(PreColor, pre_color, Style)
                 D2_UAI_PROP(PostColor, post_color, Style)
                 D2_UAI_PROP(SelectPre, select_pre, Style)

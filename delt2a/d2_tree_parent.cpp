@@ -254,6 +254,15 @@ namespace d2
         return _override_impl(ptr);
     }
 
+    TreeIter ParentElement::create_after(ptr p, ptr after)
+    {
+        return _create_after_impl(p, after);
+    }
+    TreeIter ParentElement::override_after(ptr p, ptr after)
+    {
+        return _override_after_impl(p, after);
+    }
+
     void ParentElement::clear()
     {
         _clear_impl();
@@ -361,8 +370,8 @@ namespace d2
         if (_find(ptr->name()) != ~0ull)
             throw std::runtime_error{ "Attempt to create an object with a duplicate name" };
         auto result = _elements.emplace_back(ptr);
-        _elements.back()->initialize();
-        _elements.back()->setstate(Created, true);
+        result->initialize();
+        result->setstate(Created, true);
         ptr->setstate(Swapped, getstate(Swapped));
         _signal_write(Style);
         return result;
@@ -376,7 +385,7 @@ namespace d2
             _elements[f] = ptr;
             _elements[f]->setstate(Created, true);
             _elements[f]->setstate(Swapped, getstate(Swapped));
-            _signal_write();
+            _signal_write(Style);
             return ptr;
         }
         _elements.emplace_back(ptr);
@@ -386,6 +395,44 @@ namespace d2
         _signal_write(Style);
         return ptr;
     }
+
+    TreeIter VecParentElement::_create_after_impl(ptr p, ptr after)
+    {
+        if (_find(p->name()) != ~0ull)
+            throw std::runtime_error{ "Attempt to create an object with a duplicate name" };
+        const auto f = _find(after);
+        if (f == ~0ull)
+            throw std::logic_error{ "Attempt to create an object after a non-existed element" };
+
+        auto result = _elements.insert(_elements.begin() + f + 1, p);
+        p->initialize();
+        p->setstate(Created, true);
+        p->setstate(Swapped, getstate(Swapped));
+        _signal_write(Style);
+        return p;
+    }
+    TreeIter VecParentElement::_override_after_impl(ptr p, ptr after)
+    {
+        const auto f = _find(after);
+        if (f == ~0ull)
+        {
+            throw std::logic_error{ "Attempt to create an object after a non-existed element" };
+        }
+        else if (f == _elements.size() - 1)
+        {
+            return _create_impl(p);
+        }
+        else
+        {
+            _elements[f]->setstate(Created, false);
+            _elements[f] = p;
+            _elements[f]->setstate(Created, true);
+            _elements[f]->setstate(Swapped, getstate(Swapped));
+            _signal_write(Style);
+            return p;
+        }
+    }
+
     bool VecParentElement::_remove_impl(const std::string& name)
     {
         const auto idx = _find(name);

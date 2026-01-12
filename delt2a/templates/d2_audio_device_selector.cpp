@@ -41,7 +41,7 @@ namespace d2::ctm
             D2_ELEM_STR(VerticalSwitch, name)
                 D2_STATIC(ids, std::unordered_map<std::size_t, std::string>)
                 D2_STATIC(names, std::unordered_map<std::string, std::size_t>)
-                D2_STATIC(watch, d2::sys::audio::EventListener)
+                D2_STATIC(watch, d2::Signals::Handle)
                 D2_STYLE(ZIndex, Box::overlap)
                 D2_STYLE(Width, 1.0_pc)
                 D2_STYLE(Height, 3.0_pxi)
@@ -59,9 +59,9 @@ namespace d2::ctm
                 })
                 D2_STYLES_APPLY(border_color)
                 D2_STYLES_APPLY(selector_color)
-                D2_OFF_EXPR(Created, watch->destroy())
+                D2_OFF_EXPR(Created, watch->close())
                 *watch = ptr->state()->context()->sys<d2::sys::audio>()->watch(
-                    dev, [=](const d2::sys::audio::DeviceName& name, d2::sys::audio::Event ev, d2::sys::audio::EventListener) {
+                    dev, [=](const d2::sys::audio::DeviceName& name, d2::sys::audio::Event ev, d2::sys::audio&) {
                         switch (ev)
                         {
                         case d2::sys::ext::SystemAudio::Event::Activate: break;

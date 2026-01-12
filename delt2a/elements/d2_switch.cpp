@@ -131,10 +131,13 @@ namespace d2::dx
             );
             for (std::size_t i = 0; i < data::options.size(); i++)
             {
+                const auto col = (i == _idx) ? enabled_color : disabled_color;
                 const auto xoff = int(basisx + ((width_slice + 1) * i));
+                if (data::expand_background)
+                    buffer.fill(col, xoff, basisy, width_slice, 1);
                 TextHelper::_render_text_simple(
                     data::options[i],
-                    (i == _idx) ? enabled_color : disabled_color,
+                    col,
                     style::IZText::Alignment::Center,
                     { xoff, basisy }, { width_slice, 1 },
                     buffer

@@ -97,7 +97,6 @@ namespace d2
             DynamicDependencyManager deps{};
             bool unbuilt{ true };
             bool swapped_out{ true };
-            bool constructed{ false };
         };
         using tree = std::shared_ptr<TreeData>;
         using eptr = TreeIter;

@@ -71,6 +71,14 @@ namespace d2::ctm
         D2_STYLE(SeparatorColor, D2_VAR(WidgetTheme, wg_border_vertical()))
         D2_STYLE(FocusedColor, D2_DYNAVAR(WidgetTheme, wg_hbg_button(), value.alpha(0.7f)))
     D2_STYLESHEET_END
+    D2_STYLESHEET_BEGIN(filled_switch_color)
+        D2_STYLE(EnabledForegroundColor, D2_VAR(WidgetTheme, wg_pbg_button()))
+        D2_STYLE(EnabledBackgroundColor, D2_VAR(WidgetTheme, wg_pfg_button()))
+        D2_STYLE(DisabledForegroundColor, D2_VAR(WidgetTheme, wg_fg_button()))
+        D2_STYLE(DisabledBackgroundColor, colors::w::transparent)
+        D2_STYLE(SeparatorColor, D2_VAR(WidgetTheme, wg_border_vertical()))
+        D2_STYLE(FocusedColor, D2_DYNAVAR(WidgetTheme, wg_hbg_button(), value.alpha(0.7f)))
+    D2_STYLESHEET_END
     D2_STYLESHEET_BEGIN(selector_color)
         D2_STYLE(EnabledForegroundColor, D2_VAR(WidgetTheme, wg_bg_secondary()))
         D2_STYLE(EnabledBackgroundColor, D2_DYNAVAR(WidgetTheme, wg_border_horizontal(),

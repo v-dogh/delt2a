@@ -4,26 +4,14 @@ namespace d2
 {
     void Signals::SignalInstance::_move_from(SignalInstance&& copy)
     {
-        _length = copy._length;
-        _alignment = copy._alignment;
-        copy._length = 0;
-        copy._alignment = 0;
-        if (_length)
-        {
-            if (_length + _alignment > _static_storage_length)
-            {
-                std::copy(
-                    _static_storage.begin() + _alignment,
-                    copy._static_storage.begin() + _alignment,
-                    copy._static_storage.begin() + _alignment + _length
-                );
-            }
-            else
-            {
-                _buffer = copy._buffer;
-                copy._buffer = nullptr;
-            }
-        }
+        if (copy._manager)
+            copy._manager(
+                &copy,
+                this,
+                nullptr,
+                nullptr,
+                Action::Move
+            );
     }
 
     Signals::SignalInstance::SignalInstance(SignalInstance&& copy)
@@ -39,11 +27,11 @@ namespace d2
 
     bool Signals::SignalInstance::operator==(std::nullptr_t) const
     {
-        return _length == 0;
+        return _manager == nullptr;
     }
     bool Signals::SignalInstance::operator!=(std::nullptr_t) const
     {
-        return _length != 0;
+        return _manager != nullptr;
     }
 
     Signals::Handle::Handle(std::shared_ptr<HandleState> ptr) :
@@ -96,6 +84,11 @@ namespace d2
 
     Signals::HandleState::HandleState(std::function<void(SignalInstance&)> callback) :
         callback(std::move(callback)) {}
+
+    Signals::ptr Signals::make(mt::ThreadPool::ptr pool)
+    {
+        return std::make_shared<Signals>(pool);
+    }
 
     Signals::Signals(mt::ThreadPool::ptr pool) :
         _pool(pool) {}
@@ -212,7 +205,7 @@ namespace d2
         }
         else
         {
-            _sig_apply_all(*f->second, ev);
+            _sig_apply(*f->second, ev, sig);
         }
     }
 

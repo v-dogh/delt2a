@@ -43,8 +43,8 @@ namespace d2::ctm {}
  /// SUBTREES ///
 ////////////////
 
-#define _D2_IMPL_TREE_STATE(...) auto __args_tree_state = std::tuple(__VA_ARGS__);
-#define _D2_IMPL_TREE_ARGS(...)  auto __args_tree       = std::tuple(__VA_ARGS__);
+#define _D2_IMPL_TREE_STATE(...) auto __args_tree_state = std::make_tuple(__VA_ARGS__);
+#define _D2_IMPL_TREE_ARGS(...)  auto __args_tree       = std::make_tuple(__VA_ARGS__);
 
 #define _D2_IMPL_EMBED_NAMED_STR(_type_, _name_, ...) { \
     auto __args_tree = std::tuple(); \
@@ -288,12 +288,18 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 
 #define _D2_IMPL_LISTEN_SIG(_event_, ...) \
     __state->context()->listen(_event_, \
+        [= __VA_OPT__(,) __VA_ARGS__]
+#define _D2_IMPL_SIG_ARGS(...) (__VA_ARGS__) {
+#define _D2_IMPL_LISTEN_SIG_END });
+
+#define _D2_IMPL_LISTEN_EVENT_EEXPR(...) [=]() -> void { _D2_IMPL_LISTEN_EVENT_EXPR(__VA_ARGS__) }()
+#define _D2_IMPL_LISTEN_EVENT_EXPR(...) _D2_IMPL_LISTEN_EVENT (__VA_ARGS__); _D2_IMPL_LISTEN_EVENT_END
+#define _D2_IMPL_LISTEN_EVENT(_event_, ...) \
+    __state->context()->listen(::d2::Screen::Event::_event_, \
         [= __VA_OPT__(,) __VA_ARGS__](::d2::Screen::ptr src) { \
             ::d2::TreeState::ptr state = src->state(); \
             ::d2::IOContext::ptr ctx = src->context();
-#define _D2_IMPL_LISTEN_SIG_EEXPR(_event_, ...) [=]() -> void { _D2_IMPL_LISTEN_SIG_EXPR(_event_, __VA_ARGS__) }()
-#define _D2_IMPL_LISTEN_SIG_EXPR(_event_, ...) _D2_IMPL_LISTEN_SIG(_event_) (__VA_ARGS__); _D2_IMPL_LISTEN_SIG_END
-#define _D2_IMPL_LISTEN_SIG_END });
+#define _D2_IMPL_LISTEN_EVENT_END });
 
 #define _D2_IMPL_ASYNC_EEXPR(...) [=]() -> void { _D2_IMPL_ASYNC_EXPR(__VA_ARGS__) }()
 #define _D2_IMPL_ASYNC_EXPR(...) _D2_IMPL_ASYNC_TASK (__VA_ARGS__); _D2_IMPL_ASYNC_END

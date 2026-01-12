@@ -7,10 +7,9 @@ namespace d2
 {
     TreeState::TreeState(
         std::shared_ptr<Screen> src,
-        std::shared_ptr<IOContext> ctx,
         std::shared_ptr<ParentElement> rptr,
         std::shared_ptr<ParentElement> coreptr
-    ) : src_(src), ctx_(ctx), root_ptr_(rptr), core_ptr_(coreptr)
+    ) : src_(src), root_ptr_(rptr), core_ptr_(coreptr)
     {}
 
     Screen::Screen(IOContext::ptr ctx)
@@ -30,7 +29,7 @@ namespace d2
 
     std::shared_ptr<IOContext> TreeState::context() const
     {
-        return ctx_;
+        return src_->context();
     }
     std::shared_ptr<Screen> TreeState::screen() const
     {
@@ -456,11 +455,6 @@ namespace d2
                 this->root(), _current->state
             );
             _current->unbuilt = false;
-        }
-        if (!_current->constructed)
-        {
-            root->state->construct();
-            _current->constructed = true;
         }
         if (_current->swapped_out)
         {

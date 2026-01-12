@@ -7,7 +7,6 @@
 #include <vector>
 #include <atomic>
 #include <tuple>
-#include <typeinfo>
 #include <memory>
 #include <type_traits>
 #include "mt/thread_pool.hpp"
@@ -15,6 +14,33 @@
 
 namespace d2
 {
+    template<typename Type>
+    class Ref
+    {
+        static_assert(!std::is_reference_v<Type>, "Ref<Type> cannot store a reference Type");
+        Type* _value;
+    public:
+        explicit constexpr Ref(Type& value) noexcept : _value(std::addressof(value)) {}
+        constexpr Type& get() const noexcept { return *_value; }
+
+        constexpr operator Type&() const noexcept { return *_value; }
+
+        constexpr Type* operator&() const noexcept { return _value; }
+        constexpr Type* operator->() const noexcept { return _value; }
+        constexpr Type& operator*()  const noexcept { return *_value; }
+    };
+
+    template<typename Type>
+    Ref<Type> ref(Type& value)
+    {
+        return Ref<Type>(value);
+    }
+    template<typename Type>
+    Ref<const Type> cref(const Type& value)
+    {
+        return Ref<const Type>(value);
+    }
+
     namespace impl
     {
         template<typename>
@@ -38,6 +64,33 @@ namespace d2
 
         template<typename Func>
         struct func_info : func_info<decltype(&std::decay_t<Func>::operator())> {};
+
+        template<typename Type>
+        struct normalize { using type = std::decay_t<Type>; };
+
+        template<typename Type>
+        struct normalize<Type&> { using type = Ref<Type>; };
+
+        template<typename... Argv>
+        struct normalize<std::tuple<Argv...>> { using type = std::tuple<typename normalize<Argv>::type...>; };
+
+        template<typename Type>
+        struct args_normalize { using type = const Type&; };
+
+        template<typename Type>
+        struct args_normalize<Type&> { using type = Type&; };
+
+        template<typename... Argv>
+        struct args_normalize<std::tuple<Argv...>> { using type = std::tuple<typename args_normalize<Argv>::type...>; };
+
+        template<typename Type>
+        struct args_sig_normalize { using type = const Type&; };
+
+        template<typename Type>
+        struct args_sig_normalize<Ref<Type>> { using type = Type&; };
+
+        template<typename... Argv>
+        struct args_sig_normalize<std::tuple<Argv...>> { using type = std::tuple<typename args_sig_normalize<Argv>::type...>; };
     }
 
     class Signals : public std::enable_shared_from_this<Signals>
@@ -68,8 +121,15 @@ namespace d2
         struct SignalInstance
         {
         private:
-            std::size_t _alignment{ 0 };
-            std::size_t _length{ 0 };
+            enum class Action
+            {
+                Destroy,
+                Ptr,
+                Move,
+                Apply,
+            };
+        private:
+            void*(*_manager)(SignalInstance*, SignalInstance*, void*, void*, Action){ nullptr };
             union
             {
                 std::array<unsigned char, _static_storage_length> _static_storage;
@@ -81,9 +141,10 @@ namespace d2
             template<typename... Argv>
             SignalInstance(Argv&&... pack)
             {
+                using func = void(*)(void*, typename impl::args_sig_normalize<Argv>::type...);
                 using type = std::tuple<Argv...>;
                 constexpr auto alignment = alignof(type);
-                const auto total = (sizeof(Argv) + ... + 0);
+                constexpr auto total = sizeof(type);
 
                 auto aligned = static_cast<void*>(_static_storage.data());
                 auto aligned_size = _static_storage.size();
@@ -94,38 +155,106 @@ namespace d2
                         aligned_size
                     ); ptr)
                 {
-                    const auto diff = static_cast<unsigned char*>(ptr) - _static_storage.data();
-                    _alignment = diff;
-                    new (ptr) type{ std::make_tuple(std::forward<Argv>(pack)...) };
+                    new (ptr) type{ std::forward<Argv>(pack)... };
+                    _manager = +[](SignalInstance* ptr, SignalInstance* dest, void* callback, void* block, Action action) -> void* {
+                        auto aligned = static_cast<void*>(ptr->_static_storage.data());
+                        auto aligned_size = ptr->_static_storage.size();
+                        const auto data = std::align(
+                            alignment,
+                            total,
+                            aligned,
+                            aligned_size
+                        );
+                        if (action == Action::Destroy)
+                        {
+                            std::destroy_at(reinterpret_cast<type*>(data));
+                        }
+                        else if (action == Action::Ptr)
+                        {
+                            return data;
+                        }
+                        else if (action == Action::Move)
+                        {
+                            auto* dest_ptr = reinterpret_cast<type*>(ptr->_manager(
+                                dest,
+                                nullptr,
+                                nullptr,
+                                nullptr,
+                                Action::Ptr
+                            ));
+                            new (dest_ptr) type{std::move(
+                                *reinterpret_cast<type*>(data)
+                            )};
+                            ptr->_manager(ptr, nullptr, nullptr, nullptr, Action::Destroy);
+                            dest->_manager = ptr->_manager;
+                            ptr->_manager = nullptr;
+                        }
+                        else if (action == Action::Apply)
+                        {
+                            auto* args = reinterpret_cast<type*>(data);
+                            auto* cb = *reinterpret_cast<func*>(callback);
+                            std::apply([&](auto&... args) {
+                                cb(block, args...);
+                            }, *args);
+                        }
+                        return nullptr;
+                    };
                 }
                 else
                 {
                     _buffer = static_cast<unsigned char*>(
                         ::operator new(total, std::align_val_t{ alignment })
                     );
-                    new (_buffer) type{ std::make_tuple(std::forward<Argv>(pack)...) };
+                    new (_buffer) type{ std::forward<Argv>(pack)... };
+                    _manager = +[](SignalInstance* ptr, SignalInstance* dest, void* callback, void* block, Action action) -> void* {
+                        if (action == Action::Destroy)
+                        {
+                            std::destroy_at(reinterpret_cast<type*>(ptr->_buffer));
+                            ::operator delete(
+                                ptr->_buffer,
+                                std::align_val_t{ alignof(type) }
+                            );
+                        }
+                        else if (action == Action::Ptr)
+                        {
+                            return ptr->_buffer;
+                        }
+                        else if (action == Action::Move)
+                        {
+                            dest->_buffer = ptr->_buffer;
+                            dest->_manager = ptr->_manager;
+                            ptr->_manager = nullptr;
+                        }
+                        else if (action == Action::Apply)
+                        {
+                            auto* args = reinterpret_cast<type*>(ptr->_buffer);
+                            auto* cb = *reinterpret_cast<func*>(callback);
+                            std::apply([&](auto&... args) {
+                                cb(block, args...);
+                            }, *args);
+                        }
+                        return nullptr;
+                    };
                 }
-                _length = total;
             }
             SignalInstance(SignalInstance&& copy);
             SignalInstance(const SignalInstance&) = delete;
             ~SignalInstance()
             {
-                if (_length > _static_storage_length)
-                    delete[] _buffer;
+                if (_manager != nullptr)
+                    _manager(this, nullptr, nullptr, nullptr, Action::Destroy);
             }
 
-            template<typename Tuple>
-            const Tuple& arguments_tuple() const
+            template<typename Func, typename... Argv>
+            void apply(void(*acceptor)(void*, Argv...), Func& callback)
             {
-                if (_length + _alignment > _static_storage_length)
-                    return *reinterpret_cast<const Tuple*>(_buffer + _alignment);
-                return *reinterpret_cast<const Tuple*>(_static_storage.data() + _alignment);
-            }
-            template<typename... Argv>
-            const std::tuple<Argv...>& arguments() const
-            {
-                return arguments_tuple<std::tuple<Argv...>>();
+                _manager(
+                    this,
+                    nullptr,
+                    reinterpret_cast<void*>(&acceptor),
+                    reinterpret_cast<void*>(&callback),
+                    Action::Apply
+                );
             }
 
             SignalInstance& operator=(SignalInstance&& copy);
@@ -202,26 +331,41 @@ namespace d2
         using ptr = std::shared_ptr<Signals>;
     private:
         template<typename Sig>
+        constexpr signal_id _sig_id(std::size_t runtime)
+        {
+            return absl::HashOf(
+                absl::Hash<std::type_index>()(typeid(Sig)),
+                runtime
+            );
+        }
+        template<typename Sig>
         constexpr signal_id _sig_id()
         {
-            return typeid(Sig).hash_code();
+            return absl::Hash<std::type_index>()(typeid(Sig));
         }
+
         template<typename... Argv>
-        constexpr args_code _sig_args_code(std::tuple<Argv...>)
+        struct args_sig
         {
-            using tup = decltype(std::tuple{ std::type_index(typeid(Argv))... });
-            return absl::Hash<tup>()(
-                std::tuple{ std::type_index(typeid(Argv))... }
-            );
-        }
+            static constexpr args_code code()
+            {
+                using tup = decltype(std::tuple{ std::type_index(typeid(Argv))... });
+                return absl::Hash<tup>()(
+                    std::tuple{ std::type_index(typeid(Argv))... }
+                );
+            }
+        };
         template<typename... Argv>
-        constexpr args_code _sig_args_code()
+        struct args_sig<std::tuple<Argv...>>
         {
-            using tup = decltype(std::tuple{ std::type_index(typeid(Argv))... });
-            return absl::Hash<tup>()(
-                std::tuple{ std::type_index(typeid(Argv))... }
-            );
-        }
+            static constexpr args_code code()
+            {
+                using tup = decltype(std::tuple{ std::type_index(typeid(Argv))... });
+                return absl::Hash<tup>()(
+                    std::tuple{ std::type_index(typeid(Argv))... }
+                );
+            }
+        };
 
         Handle _sig_listen(signal_id id, event_idx ev, args_code code, std::function<void(SignalInstance&)> callback);
         void _sig_apply(SignalStorage& storage, event_idx ev, SignalInstance& args);
@@ -231,6 +375,11 @@ namespace d2
         Signal _sig_register(signal_id id, args_code code, std::size_t size, unsigned char flags);
         void _sig_deregister(signal_id id);
     public:
+        template<typename... Argv>
+        static signal_id id(Argv&&... args)
+        {
+            return absl::HashOf(std::forward<Argv>(args)...);
+        }
         static ptr make(mt::ThreadPool::ptr pool = nullptr);
 
         Signals(mt::ThreadPool::ptr pool);
@@ -243,16 +392,34 @@ namespace d2
             static_assert(std::is_enum_v<Sig>, "Signal must be an enum");
             return _sig_register(
                 _sig_id<Sig>(),
-                _sig_args_code<Argv...>(),
-                (sizeof(Argv) + ... + 0),
+                args_sig<typename impl::args_normalize<Argv>::type...>::code(),
+                sizeof(std::tuple<typename impl::normalize<Argv>::type...>),
                 flags
             );
         }
+        template<typename Sig, typename... Argv>
+        Signal connect(signal_id runtime, unsigned char flags = 0x00)
+        {
+            static_assert(std::is_enum_v<Sig>, "Signal must be an enum");
+            return _sig_register(
+                _sig_id<Sig>(runtime),
+                args_sig<typename impl::args_normalize<Argv>::type...>::code(),
+                sizeof(std::tuple<typename impl::normalize<Argv>::type...>),
+                flags
+            );
+        }
+
         template<typename Signal>
         void disconnect()
         {
             static_assert(std::is_enum_v<Signal>, "Signal must be an enum");
             _sig_deregister(_sig_id<Signal>());
+        }
+        template<typename Signal>
+        void disconnect(signal_id runtime)
+        {
+            static_assert(std::is_enum_v<Signal>, "Signal must be an enum");
+            _sig_deregister(_sig_id<Signal>(runtime));
         }
 
         template<typename Signal, typename Func>
@@ -260,15 +427,40 @@ namespace d2
         {
             static_assert(std::is_enum_v<Signal>, "Signal must be an enum");
             using func_info = impl::func_info<Func>;
+            using norm_args = typename impl::args_normalize<typename func_info::args_t>::type;
             return _sig_listen(
                 _sig_id<Signal>(),
                 event_idx(sig),
-                _sig_args_code(typename func_info::args_t()),
-                [callback = std::move(callback)](SignalInstance& args) {
-                    std::apply([&](const auto&... args) {
-                        callback(args...);
-                    }, args.arguments_tuple<typename func_info::args_t>());
-                }
+                args_sig<norm_args>::code(),
+                [&]<typename... Argv>(std::tuple<Argv...>*)
+                {
+                    return [callback = std::move(callback)](SignalInstance& args) mutable {
+                        args.apply(+[](void* ptr, Argv... args) {
+                            (*reinterpret_cast<Func*>(ptr))(args...);
+                        }, callback);
+                    };
+                }.template operator()(static_cast<norm_args*>(nullptr))
+            );
+        }
+        template<typename Signal, typename Func>
+        Handle listen(Signal sig, signal_id runtime, Func&& callback)
+        {
+            static_assert(std::is_enum_v<Signal>, "Signal must be an enum");
+            using func_info = impl::func_info<Func>;
+            using unorm_args = func_info::args_t;
+            using norm_args = typename impl::normalize<unorm_args>::type;
+            return _sig_listen(
+                _sig_id<Signal>(runtime),
+                event_idx(sig),
+                args_sig<unorm_args>::code(),
+                [&]<typename... Argv>(std::tuple<Argv...>*)
+                {
+                    return [callback = std::move(callback)](SignalInstance& args) mutable {
+                        args.apply(+[](void* ptr, typename impl::args_normalize<Argv>::type... args) {
+                            (*reinterpret_cast<Func*>(ptr))(args...);
+                        }, callback);
+                    };
+                }.template operator()(static_cast<unorm_args*>(nullptr))
             );
         }
 
@@ -279,8 +471,19 @@ namespace d2
             _sig_trigger(
                 _sig_id<Signal>(),
                 event_idx(sig),
-                _sig_args_code<Argv...>(),
-                SignalInstance(std::forward<Argv>(args)...)
+                args_sig<typename impl::args_sig_normalize<Argv>::type...>::code(),
+                SignalInstance(typename impl::normalize<Argv>::type(std::forward<Argv>(args))...)
+            );
+        }
+        template<typename Signal, typename... Argv>
+        void signal(Signal sig, signal_id runtime, Argv&&... args)
+        {
+            static_assert(std::is_enum_v<Signal>, "Signal must be an enum");
+            _sig_trigger(
+                _sig_id<Signal>(runtime),
+                event_idx(sig),
+                args_sig<typename impl::args_sig_normalize<Argv>::type...>::code(),
+                SignalInstance(typename impl::normalize<Argv>::type(std::forward<Argv>(args))...)
             );
         }
 

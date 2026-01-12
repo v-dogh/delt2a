@@ -13,10 +13,10 @@
 
 namespace d2::sys
 {
-	class UnixTerminalInput : public SystemInput
+    class UnixTerminalInput :
+        public SystemInput,
+        public SystemComponentCfg<true>
 	{
-    public:
-        static constexpr auto tsafe = true;
 	private:
 		using keyboard_keymap = std::bitset<SpecialKeyMax + 1>;
 		using mouse_keymap = std::bitset<MouseKeyMax + 1>;
@@ -87,10 +87,10 @@ namespace d2::sys
 		void mask_interrupts();
 		void unmask_interrupts();
 	};
-	class UnixTerminalOutput : public SystemOutput
+    class UnixTerminalOutput :
+        public SystemOutput,
+        public SystemComponentCfg<false>
 	{
-    public:
-        static constexpr auto tsafe = false;
 	private:		
 		static constexpr auto max_color_len_ =
 			std::string_view("\033[RX;RX;RX;RX;RX;RX;RX;m").size() +

@@ -26,28 +26,25 @@ namespace d2
 		using ptr = std::shared_ptr<TreeState>;
 	private:
 		std::shared_ptr<Screen> src_{ nullptr };
-		std::shared_ptr<IOContext> ctx_{ nullptr };
 		std::shared_ptr<ParentElement> root_ptr_{ nullptr };
 		std::weak_ptr<ParentElement> core_ptr_{};
 	public:
 		template<typename Type, typename... Argv>
 		static auto make(
 			std::shared_ptr<Screen> src,
-			std::shared_ptr<IOContext> ctx,
 			std::shared_ptr<ParentElement> rptr,
 			std::shared_ptr<ParentElement> coreptr,
 			Argv&&... args
 		)
 		{
 			return std::make_shared<Type>(
-				src, ctx, rptr, coreptr, std::forward<Argv>(args)...
+                src, rptr, coreptr, std::forward<Argv>(args)...
 			);
 		}
 
 		TreeState(
 			std::shared_ptr<Screen> src,
-			std::shared_ptr<IOContext> ctx,
-			std::shared_ptr<ParentElement> rptr,
+            std::shared_ptr<ParentElement> rptr,
             std::shared_ptr<ParentElement> coreptr
         );
         TreeState(const TreeState&) = delete;
@@ -89,11 +86,10 @@ namespace d2
         std::tuple<Argv...> params{};
         TupTreeState(
             std::shared_ptr<Screen> src,
-            std::shared_ptr<IOContext> ctx,
             std::shared_ptr<ParentElement> rptr,
             std::shared_ptr<ParentElement> coreptr,
             Argv... args
-            ) : TreeState(src, ctx, rptr, coreptr), params(std::move(args...))
+            ) : TreeState(src, rptr, coreptr), params(std::move(args...))
         {}
         using TreeState::TreeState;
     };
