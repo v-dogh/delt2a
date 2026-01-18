@@ -501,6 +501,7 @@ namespace d2
                 }
 
                 _internal_state |= IsBeingRendered;
+                _signal_update(WasWritten);
                 _frame_impl(_fetch_pixel_buffer_impl());
                 _internal_state &= ~IsBeingRendered;
 
@@ -510,8 +511,10 @@ namespace d2
                 }
             }
             else
+            {
+                _signal_update(WasWritten);
                 _buffer.clear();
-            _signal_update(WasWritten);
+            }
         }
         return Frame(shared_from_this());
     }
