@@ -239,10 +239,10 @@ namespace d2
     void Screen::_trigger_events()
     {
         auto* input = _ctx->input();
-        const bool is_mouse_input = input->is_mouse_input();
-        const bool is_keyboard_input = input->is_key_input();
-        const bool is_key_seq_input = input->is_key_sequence_input();
-        const bool is_resize = input->is_screen_resize();
+        const auto is_mouse_input = input->is_mouse_input();
+        const auto is_keyboard_input = input->is_key_input();
+        const auto is_key_seq_input = input->is_key_sequence_input();
+        const auto is_resize = input->is_screen_resize();
 
         _signal(Event::Update);
         if (is_mouse_input) _signal(Event::MouseInput);
@@ -413,7 +413,7 @@ namespace d2
     {
         return _ctx;
     }
-    TypedTreeIter<ParentElement> Screen::root() const
+    TreeIter<ParentElement> Screen::root() const
     {
         if (_current == nullptr)
             return nullptr;
@@ -785,7 +785,7 @@ namespace d2
                 _ctx->wait(
                     sleep <= std::chrono::milliseconds(0) ||
                     _refresh_rate == std::chrono::milliseconds(0) ?
-                        std::chrono::milliseconds::max() : sleep
+                        std::chrono::milliseconds(0) : sleep
                 );
             }
         }

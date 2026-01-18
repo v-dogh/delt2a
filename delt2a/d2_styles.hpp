@@ -15,25 +15,6 @@ namespace d2::style
 {
     namespace impl
     {
-#		define D2_UAI_SETUP(type) unsigned char __type = Element::WriteType::type;
-#		define D2_UAI_SETUP_EMPTY unsigned char __type = 0x00;
-#		define D2_UAI_SETUP_MUL(type) unsigned char __type = type;
-
-#		define D2_UAI_VAR_START if constexpr (false) {}
-#		define D2_UAI_GET_VAR(prop, var, type) \
-    else if constexpr (Property == prop) return std::make_pair(&var, ::d2::Element::WriteType::type);
-#		define D2_UAI_GET_VAR_MUL(prop, var, type) \
-    else if constexpr (Property == prop) return std::make_pair(&var, type);
-#		define D2_UAI_GET_VAR_A(prop, var) \
-    else if constexpr (Property == prop) return std::make_pair(&var, __type);
-#		define D2_UAI_GET_VAR_COMPUTED(prop, type, ...) \
-    else if constexpr (Property == prop) return std::make_pair(__VA_ARGS__, ::d2::Element::WriteType::type);
-#		define D2_UAI_GET_VAR_COMPUTED_MUL(prop, type, ...) \
-    else if constexpr (Property == prop) return std::make_pair(__VA_ARGS__, type);
-#		define D2_UAI_GET_VAR_COMPUTED_A(prop, ...) \
-    else if constexpr (Property == prop) return std::make_pair(__VA_ARGS__, __type);
-#		define D2_UAI_VAR_END else static_assert(false, "Invalid Property");
-
         template<typename Type>
         concept chained = requires
         {
@@ -295,8 +276,10 @@ namespace d2::style
             if constexpr(impl::is_var<std::remove_cvref_t<Type>>)
             {
                 _var_flags.set(off);
-                value.subscribe(_handle_impl(), this, [](void* base, const auto& value, bool) -> bool
+                value.subscribe(_handle_impl(), this, [](void* base, const auto& value, bool destroy) -> bool
                 {
+                    if (destroy)
+                        return true;
                     auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
                     if (!base_ptr->_var_flags.test(off))
                         return false;
@@ -308,8 +291,10 @@ namespace d2::style
             else if constexpr(impl::is_dynavar<std::remove_cvref_t<Type>>)
             {
                 _var_flags.set(off);
-                value.dependency.subscribe(_handle_impl(), this, [](void* base, const auto& v, bool) -> bool
+                value.dependency.subscribe(_handle_impl(), this, [](void* base, const auto& v, bool destroy) -> bool
                 {
+                    if (destroy)
+                        return true;
                     auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
                     if (!base_ptr->_var_flags.test(off))
                         return false;
@@ -1039,15 +1024,17 @@ namespace d2::style
     template<typename Type, typename... Argv>
     struct Responsive
     {
-        std::function<void(d2::TypedTreeIter<Type>, Argv...)> on_submit{};
+        std::function<void(d2::TreeIter<Type>, Argv...)> on_submit{};
 
         template<uai_property Property>
         auto get()
         {
-            D2_UAI_SETUP_EMPTY
-            D2_UAI_VAR_START
-            D2_UAI_GET_VAR_A(0, on_submit)
-            D2_UAI_VAR_END;
+            if constexpr (Property == 0) return std::make_pair(&on_submit, static_cast<unsigned char>(0x00));
+            else
+            {
+                static_assert(false, "Invalid Property"); \
+                return std::make_pair(nullptr, static_cast<unsigned char>(0x00)); \
+            }
         }
     };
 

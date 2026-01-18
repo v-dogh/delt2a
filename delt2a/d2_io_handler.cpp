@@ -88,43 +88,6 @@ namespace d2
                 return Status::Ok;
             }
 
-            void SystemAudio::Stream::apply(auto&& func, std::size_t channel, float start, float end)
-            {
-                const auto channel_size = _data.size() / _format->channels;
-                const auto astart = std::size_t(start * channel_size);
-                const auto aend = std::size_t(end * channel_size);
-                for (std::size_t i = astart; i < aend; i += _format->channels)
-                    _data[i + channel] = func(_data[i + channel], float(i + _offset) / _total);
-            }
-            void SystemAudio::Stream::apply(auto&& func, float start, float end)
-            {
-                const auto astart = std::size_t(start * _data.size());
-                const auto aend = std::size_t(end * _data.size());
-                const auto dist = aend - astart;
-                if (_format->channels == 2)
-                {
-                    for (std::size_t i = astart; i < aend; i += 2)
-                    {
-                        _data[i] = func(_data[i], float(i + _offset) / _total);
-                        _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
-                    }
-                }
-                else if (_format->channels == 4)
-                {
-                    for (std::size_t i = astart; i < aend; i += 4)
-                    {
-                        _data[i] = func(_data[i], float(i + _offset) / _total);
-                        _data[i + 1] = func(_data[i + 1], float(i + 1 + _offset) / _total);
-                        _data[i + 2] = func(_data[i + 2], float(i + 2 + _offset) / _total);
-                        _data[i + 3] = func(_data[i + 3], float(i + 3 + _offset) / _total);
-                    }
-                }
-                else
-                {
-                    for (std::size_t i = astart; i < aend; i++)
-                        _data[i] = func(_data[i], float(i + _offset) / _total);
-                }
-            }
             void SystemAudio::Stream::push(std::span<float> in)
             {
                 for (std::size_t i = 0; i < std::min(in.size(), _data.size()); i++)
@@ -135,6 +98,18 @@ namespace d2
                 for (std::size_t i = 0; i < std::min(in.size(), _data.size() / _format->channels); i++)
                     for (std::size_t j = 0; j < _format->channels; j++)
                         _data[i + j] = in[i];
+            }
+
+            void SystemAudio::Stream::push(std::span<float> in, float mul, float shift)
+            {
+                for (std::size_t i = 0; i < std::min(in.size(), _data.size()); i++)
+                    _data[i] = in[i] * mul + shift;
+            }
+            void SystemAudio::Stream::push_expand(std::span<float> in, float mul, float shift)
+            {
+                for (std::size_t i = 0; i < std::min(in.size(), _data.size() / _format->channels); i++)
+                    for (std::size_t j = 0; j < _format->channels; j++)
+                        _data[i + j] = in[i] * mul + shift;
             }
 
             const SystemAudio::FormatInfo& SystemAudio::Stream::info() const
@@ -159,6 +134,11 @@ namespace d2
                 return _data[(idx * _format->channels) + channel];
             }
 
+            float SystemAudio::Stream::mix(float a, float b, float prog)
+            {
+                return a + prog * (b - a);
+            }
+
             template<SystemAudio::Format>
             inline float _convert_sample(const unsigned char* sample);
 
@@ -177,11 +157,6 @@ namespace d2
             template<> inline float _convert_sample<SystemAudio::Format::Float64>(const unsigned char* sample)
             {
                 return static_cast<float>(*reinterpret_cast<const double*>(sample));
-            }
-
-            inline float _lerp(float t, float a, float b)
-            {
-                return a + t * (b - a);
             }
 
             template<SystemAudio::Format Fmt>
@@ -210,9 +185,9 @@ namespace d2
                                 const auto pos = static_cast<std::size_t>(base * format.sample_rate);
                                 const auto a = _convert_sample<Fmt>(&data[i + pos]);
                                 const auto b = _convert_sample<Fmt>(&data[i + pos + 1]);
-                                out[j++] += _lerp(
-                                    base - float(std::size_t(base)),
-                                    a, b
+                                out[j++] += SystemAudio::Stream::mix(
+                                    a, b,
+                                    base - float(std::size_t(base))
                                 );
                             }
                             i += format.sample_rate;
@@ -226,9 +201,9 @@ namespace d2
                             const auto b = _convert_sample<Fmt>(&data[i + 1]);
                             for (std::size_t j = 0; j < expected.sample_rate; j += sample_size)
                             {
-                                out[j++] += _lerp(
-                                    float(j) / expected.sample_rate,
-                                    a, b
+                                out[j++] += SystemAudio::Stream::mix(
+                                    a, b,
+                                    float(j) / expected.sample_rate
                                 );
                             }
                             i += format.sample_rate;
@@ -429,23 +404,37 @@ namespace d2
 
     IOContext::IOContext(mt::ThreadPool::ptr scheduler)
         : _scheduler(scheduler), Signals(scheduler) { }
+    IOContext::~IOContext()
+    {
+        std::lock_guard lock(_module_mtx);
+        for (auto it = _components.rbegin(); it != _components.rend(); ++it)
+            it->reset();
+    }
 
+    void IOContext::preinitialize()
+    {
+        _main_thread = std::this_thread::get_id();
+    }
     void IOContext::initialize()
     {
         using wflags = mt::ThreadPool::Worker::Flags;
         _main_thread = std::this_thread::get_id();
-        _scheduler->start();
         _worker = _scheduler->worker(
             wflags::MainWorker |
             wflags::HandleCyclicTask |
             wflags::HandleDeferredTask
         );
         _worker.start();
+        _scheduler->start();
     }
     void IOContext::deinitialize()
     {
         _worker.stop();
         _scheduler->stop();
+    }
+    void IOContext::ping()
+    {
+        _worker.ping();
     }
     void IOContext::wait(std::chrono::milliseconds ms)
     {

@@ -74,6 +74,17 @@ namespace d2
                 return std::any_cast<dtype&>(f->second);
         }
     };
+    class BindManager
+    {
+    private:
+        struct Bind
+        {
+            std::vector<std::pair<input::keytype, input::mode>> keys{};
+            std::vector<std::pair<input::keytype, std::optional<input::mode>>> whitelist{};
+        };
+    private:
+        absl::flat_hash_map<std::string, Bind> _binds{};
+    };
 
     class Screen : public std::enable_shared_from_this<Screen>
     {
@@ -90,7 +101,7 @@ namespace d2
     private:
         struct TreeData
         {
-            std::function<void(TypedTreeIter<ParentElement>, TreeState::ptr)> rebuild{ nullptr };
+            std::function<void(TreeIter<ParentElement>, TreeState::ptr)> rebuild{ nullptr };
             std::list<interp::Interpolator::ptr> interpolators{};
             TreeState::ptr state{ nullptr };
             TreeTags tags{};
@@ -99,7 +110,7 @@ namespace d2
             bool swapped_out{ true };
         };
         using tree = std::shared_ptr<TreeData>;
-        using eptr = TreeIter;
+        using eptr = TreeIter<>;
     private:
         IOContext::ptr _ctx{ nullptr };
         absl::flat_hash_map<std::string, tree> _trees{};
@@ -149,6 +160,7 @@ namespace d2
         {
             auto ptr = std::make_shared<Screen>(ctx);
             ptr->make_theme(themes...);
+            ctx->preinitialize();
             ptr->set<First, Rest...>();
             return ptr;
         }
@@ -166,7 +178,7 @@ namespace d2
         virtual ~Screen() = default;
 
         IOContext::ptr context() const;
-        TypedTreeIter<ParentElement> root() const;
+        TreeIter<ParentElement> root() const;
 
         // Model Management
 
@@ -212,7 +224,7 @@ namespace d2
                     t->interpolators.clear();
                 }
                 t->state = Set::build(shared_from_this());
-                t->rebuild = [](TypedTreeIter<ParentElement> root, TreeState::ptr state) {
+                t->rebuild = [](TreeIter<ParentElement> root, TreeState::ptr state) {
                     Set::create_at(root, std::static_pointer_cast<typename Set::__state_type>(state));
                 };
             };
@@ -321,11 +333,36 @@ namespace d2
             }
             return dynamic_cast<Type&>(*f->second);
         }
+        template<typename Type>
+        Type& theme(const std::string& id)
+        {
+            const auto code = std::hash<std::string>()(id);
+            auto f = _themes.find(code);
+            if (f == _themes.end())
+            {
+                for (decltype(auto) it : _themes)
+                {
+                    auto ptr = std::dynamic_pointer_cast<Type>(it.second);
+                    if (ptr)
+                    {
+                        auto bptr = it.second;
+                        _themes[code] = bptr;
+                        return *ptr;
+                    }
+                }
+                throw std::logic_error{ std::format("Failed to resolve theme dependency for: {}", typeid(Type).name()) };
+            }
+            return dynamic_cast<Type&>(*f->second);
+        }
 
         template<typename Type>
         bool has_theme()
         {
             return _themes.contains(typeid(Type).hash_code());
+        }
+        bool has_theme(const std::string& id)
+        {
+            return _themes.contains(std::hash<std::string>()(id));
         }
 
         template<typename... Themes>
@@ -333,10 +370,9 @@ namespace d2
         {
             auto create = [this](auto theme)
             {
-                const auto code = typeid(*theme).hash_code();
-                if (_themes.contains(code))
+                if (_themes.contains(theme->code()))
                     throw std::logic_error{ "Double theme initialization (this could be caused by related themes)" };
-                _themes[code] = theme;
+                _themes[theme->code()] = theme;
             };
             ((create(themes)), ...);
         }

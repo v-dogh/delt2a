@@ -2,6 +2,7 @@
 #define D2_SWITCH_HPP
 
 #include "../d2_tree_element.hpp"
+#include "../d2_colors.hpp"
 #include "../d2_styles.hpp"
 #include "d2_element_utils.hpp"
 
@@ -16,11 +17,11 @@ namespace d2
             ),
             D2_UAI_FIELDS(
                 // Ptr | new | old
-                std::function<void(TypedTreeIter<dx::Switch>, int, int)> on_change{ nullptr };
-                std::function<void(TypedTreeIter<dx::Switch>, string, string)> on_change_values{ nullptr };
+                std::function<void(TreeIter<dx::Switch>, int, int)> on_change{ nullptr };
+                std::function<void(TreeIter<dx::Switch>, string, string)> on_change_values{ nullptr };
                 std::vector<string> options{};
 
-                PixelBackground disabled_background_color{};
+                PixelBackground disabled_background_color{ d2::colors::w::transparent };
                 PixelForeground disabled_foreground_color{};
                 PixelBackground enabled_background_color{ .r = 255, .g = 255, .b = 255 };
                 PixelForeground enabled_foreground_color{ .r = 0, .g = 0, .b = 0 };
@@ -109,6 +110,7 @@ namespace d2
             public impl::TextHelper<Switch>
         {
         public:
+            static constexpr auto invalid = -1;
             friend class ContainerHelper<Switch>;
             friend class TextHelper<Switch>;
             using opts = std::vector<string>;
@@ -123,8 +125,8 @@ namespace d2
             using data::data;
         protected:
             BoundingBox _perfect_dimensions{};
-            int _idx{ -1 };
-            int _old{ -1 };
+            int _idx{ invalid };
+            int _old{ invalid };
 
             virtual Unit _layout_impl(Element::Layout type) const override;
             virtual bool _provides_input_impl() const override;

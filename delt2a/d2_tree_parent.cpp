@@ -112,8 +112,8 @@ namespace d2
         const auto border_horizontal = border_left + border_right;
         const auto border_vertical = border_top + border_bottom;
         const auto border_off = dims ? 0 : (horiz ?
-                                 (inv ? -border_right : border_left) :
-                                 (inv ? -border_bottom : border_top));
+            (inv ? -border_right : border_left) :
+            (inv ? -border_bottom : border_top));
 
         int result = 0;
         if ((value.getmods() & Unit::Center) && !dims)
@@ -216,6 +216,14 @@ namespace d2
                 return true;
             });
         }
+        else if (state == Created)
+        {
+            foreach_internal([&](ptr elem)
+            {
+                elem->setstate(state, value);
+                return true;
+            });
+        }
     }
     void ParentElement::_layout_for_impl(enum Layout type, cptr elem) const
     {
@@ -240,26 +248,32 @@ namespace d2
         return _exists_impl(ptr);
     }
 
-    TreeIter ParentElement::at(const std::string& name) const
+    TreeIter<> ParentElement::at(id id) const
     {
-        return _at_impl(name);
+        if (std::holds_alternative<ptr>(id))
+            return _at_impl(std::get<ptr>(id)->name());
+        return _at_impl(id);
     }
 
-    TreeIter ParentElement::create(ptr ptr)
+    TreeIter<> ParentElement::create(ptr ptr)
     {
         return _create_impl(ptr);
     }
-    TreeIter ParentElement::override(ptr ptr)
+    TreeIter<> ParentElement::override(ptr ptr)
     {
         return _override_impl(ptr);
     }
 
-    TreeIter ParentElement::create_after(ptr p, ptr after)
+    TreeIter<> ParentElement::create_after(ptr p, id after)
     {
+        if (std::holds_alternative<ptr>(after))
+            return _create_after_impl(p, std::get<ptr>(after)->name());
         return _create_after_impl(p, after);
     }
-    TreeIter ParentElement::override_after(ptr p, ptr after)
+    TreeIter<> ParentElement::override_after(ptr p, id after)
     {
+        if (std::holds_alternative<ptr>(after))
+            return _create_after_impl(p, std::get<ptr>(after)->name());
         return _override_after_impl(p, after);
     }
 
@@ -268,24 +282,22 @@ namespace d2
         _clear_impl();
     }
 
-    void ParentElement::remove(const std::string& name)
+    void ParentElement::remove(id id)
     {
-        if (!_remove_impl(name))
+        if (std::holds_alternative<ptr>(id))
+        {
+            if (!_remove_impl(std::get<ptr>(id)->name()))
+                throw std::runtime_error{ "Attempt to remove invalid object" };
+            return;
+        }
+        if (!_remove_impl(id))
             throw std::runtime_error{ "Attempt to remove invalid object" };
     }
-    void ParentElement::remove(ptr ptr)
+    bool ParentElement::remove_if(id id)
     {
-        if (!_remove_impl(ptr))
-            throw std::runtime_error{ "Attempt to remove invalid object" };
-    }
-
-    bool ParentElement::remove_if(const std::string& name)
-    {
-        return _remove_impl(name);
-    }
-    bool ParentElement::remove_if(ptr ptr)
-    {
-        return _remove_impl(ptr);
+        if (std::holds_alternative<ptr>(id))
+            return _remove_impl(std::get<ptr>(id)->name());
+        return _remove_impl(id);
     }
 
     //
@@ -358,14 +370,27 @@ namespace d2
         return _find(ptr) != ~0ull;
     }
 
-    TreeIter VecParentElement::_at_impl(const std::string& name) const
+    TreeIter<> VecParentElement::_at_impl(id id) const
     {
-        const auto idx = _find(name);
-        if (idx == ~0ull)
-            throw std::runtime_error{ std::format("Attempt to reference invalid object: {}", name) };
-        return { _elements[idx] };
+        if (std::holds_alternative<std::size_t>(id))
+        {
+            const auto& idx = std::get<std::size_t>(id);
+            if (idx >= _elements.size())
+                throw std::runtime_error{ std::format("Attempt to reference invalid object at index: {}", idx) };
+            return _elements[idx];
+        }
+        else if (std::holds_alternative<std::string>(id))
+        {
+            const auto& name = std::get<std::string>(id);
+            const auto idx = _find(name);
+            if (idx == ~0ull)
+                throw std::runtime_error{ std::format("Attempt to reference invalid object: {}", name) };
+            return { _elements[idx] };
+        }
+        return nullptr;
     }
-    TreeIter VecParentElement::_create_impl(ptr ptr)
+
+    TreeIter<> VecParentElement::_create_impl(ptr ptr)
     {
         if (_find(ptr->name()) != ~0ull)
             throw std::runtime_error{ "Attempt to create an object with a duplicate name" };
@@ -376,7 +401,7 @@ namespace d2
         _signal_write(Style);
         return result;
     }
-    TreeIter VecParentElement::_override_impl(ptr ptr)
+    TreeIter<> VecParentElement::_override_impl(ptr ptr)
     {
         const auto f = _find(ptr->name());
         if (f != ~0ull)
@@ -396,60 +421,81 @@ namespace d2
         return ptr;
     }
 
-    TreeIter VecParentElement::_create_after_impl(ptr p, ptr after)
+    TreeIter<> VecParentElement::_create_after_impl(ptr p, id after)
     {
-        if (_find(p->name()) != ~0ull)
-            throw std::runtime_error{ "Attempt to create an object with a duplicate name" };
-        const auto f = _find(after);
-        if (f == ~0ull)
-            throw std::logic_error{ "Attempt to create an object after a non-existed element" };
-
-        auto result = _elements.insert(_elements.begin() + f + 1, p);
+        std::size_t idx = 0;
+        if (std::holds_alternative<std::size_t>(after))
+        {
+            idx = std::get<std::size_t>(after);
+            if (idx >= _elements.size())
+                throw std::runtime_error{ std::format("Attempt to reference invalid object at index: {}", idx) };
+        }
+        else if (std::holds_alternative<std::string>(after))
+        {
+            const auto& name = std::get<std::string>(after);
+            if (_find(p->name()) != ~0ull)
+                throw std::runtime_error{ "Attempt to create an object with a duplicate name" };
+            const auto f = _find(name);
+            if (f == ~0ull)
+                throw std::runtime_error{ "Attempt to create an object after a non-existent element" };
+        }
+        else
+            return nullptr;
+        _elements.insert(_elements.begin() + idx + 1, p);
+        p->setstate(Created, true);
+        p->setstate(Swapped, getstate(Swapped));
+        _signal_write(Style);
+        return p;
+    }
+    TreeIter<> VecParentElement::_override_after_impl(ptr p, id after)
+    {
+        std::size_t idx = 0;
+        if (std::holds_alternative<std::size_t>(after))
+        {
+            const auto& idx = std::get<std::size_t>(after);
+            if (idx >= _elements.size())
+                throw std::runtime_error{ std::format("Attempt to reference invalid object at index: {}", idx) };
+        }
+        else if (std::holds_alternative<std::string>(after))
+        {
+            const auto& name = std::get<std::string>(after);
+            if (_find(p->name()) != ~0ull)
+                throw std::runtime_error{ "Attempt to create an object with a duplicate name" };
+            idx = _find(name);
+            if (idx == ~0ull)
+                throw std::runtime_error{ "Attempt to create an object after a non-existent element" };
+        }
+        else
+            return nullptr;
+        if (idx == _elements.size() - 1) _elements.push_back(nullptr);
+        else _elements[idx + 1]->setstate(Created, false);
+        _elements[idx + 1] = p;
         p->initialize();
         p->setstate(Created, true);
         p->setstate(Swapped, getstate(Swapped));
         _signal_write(Style);
         return p;
     }
-    TreeIter VecParentElement::_override_after_impl(ptr p, ptr after)
+
+    bool VecParentElement::_remove_impl(id id)
     {
-        const auto f = _find(after);
-        if (f == ~0ull)
+        std::size_t idx = 0;
+        if (std::holds_alternative<std::size_t>(id))
         {
-            throw std::logic_error{ "Attempt to create an object after a non-existed element" };
+            idx = std::get<std::size_t>(id);
+            if (idx >= _elements.size())
+                return false;
         }
-        else if (f == _elements.size() - 1)
+        else if (std::holds_alternative<std::string>(id))
         {
-            return _create_impl(p);
+            const auto& name = std::get<std::string>(id);
+            idx = _find(name);
+            if (idx >= _elements.size())
+                return false;
         }
         else
-        {
-            _elements[f]->setstate(Created, false);
-            _elements[f] = p;
-            _elements[f]->setstate(Created, true);
-            _elements[f]->setstate(Swapped, getstate(Swapped));
-            _signal_write(Style);
-            return p;
-        }
-    }
-
-    bool VecParentElement::_remove_impl(const std::string& name)
-    {
-        const auto idx = _find(name);
-        if (idx >= _elements.size())
             return false;
-        auto ptr = _elements[idx];
-        ptr->setstate(Created, false);
-        _elements.erase(_elements.begin() + idx);
-        _signal_write(Style);
-        return true;
-    }
-    bool VecParentElement::_remove_impl(ptr ptr)
-    {
-        const auto idx = _find(ptr);
-        if (idx >= _elements.size())
-            return false;
-        ptr->setstate(Created, false);
+        _elements[idx]->setstate(Created, false);
         _elements.erase(_elements.begin() + idx);
         _signal_write(Style);
         return true;
@@ -481,8 +527,6 @@ namespace d2
             return ~0ull;
         return f - _elements.begin();
     }
-
-    // Public interface
 
     VecParentElement::DynamicIterator VecParentElement::begin()
     {

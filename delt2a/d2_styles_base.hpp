@@ -167,12 +167,15 @@ namespace d2::style
 			}
 		};
 		using ptr = std::shared_ptr<Theme>;
-	public:
+    private:
+        std::size_t _code{ 0x00 };
+    public:
 		template<typename Type, typename Func, typename... Argv> requires std::is_invocable_v<Func, Type*, Argv...>
 		static auto make(Func&& func, Argv&&... args)
 		{
 			auto theme = std::make_shared<Type>();
 			func(theme.get(), std::forward<Argv>(args)...);
+            theme->_code = typeid(Type).hash_code();
 			return theme;
 		}
 		template<typename Type, typename Arg, typename... Argv>
@@ -180,18 +183,61 @@ namespace d2::style
 		{
 			auto theme = std::make_shared<Type>();
 			theme->accents(std::forward<Arg>(arg), std::forward<Argv>(args)...);
+            theme->_code = typeid(Type).hash_code();
 			return theme;
 		}
+        template<typename Type>
+        static auto make_copy(const Type& theme)
+        {
+            auto ptr = std::make_shared<Type>(theme);
+            ptr->_code = typeid(Type).hash_code();
+            return ptr;
+        }
 		template<typename Type>
 		static auto make()
 		{
-			return std::make_shared<Type>();
-		}
+            auto ptr = std::make_shared<Type>();
+            ptr->_code = typeid(Type).hash_code();
+            return ptr;
+        }
+
+        template<typename Type, typename Func, typename... Argv> requires std::is_invocable_v<Func, Type*, Argv...>
+        static auto make_named(const std::string& name, Func&& func, Argv&&... args)
+        {
+            auto theme = std::make_shared<Type>();
+            func(theme.get(), std::forward<Argv>(args)...);
+            theme->_code = std::hash<std::string>()(name);
+            return theme;
+        }
+        template<typename Type, typename Arg, typename... Argv>
+        static auto make_named(const std::string& name, Arg&& arg, Argv&&... args) requires (!std::is_invocable_v<Arg, Type*, Argv...>)
+        {
+            auto theme = std::make_shared<Type>();
+            theme->accents(std::forward<Arg>(arg), std::forward<Argv>(args)...);
+            theme->_code = std::hash<std::string>()(name);
+            return theme;
+        }
+        template<typename Type>
+        static auto make_named_copy(const std::string& name, const Type& theme)
+        {
+            auto ptr = std::make_shared<Type>(theme);
+            ptr->_code = std::hash<std::string>()(name);
+            return ptr;
+        }
+        template<typename Type>
+        static auto make_named(const std::string& name)
+        {
+            auto ptr = std::make_shared<Type>();
+            ptr->_code = std::hash<std::string>()(name);
+            return ptr;
+        }
 
 		Theme() = default;
-		Theme(const Theme&) = delete;
+        Theme(const Theme&) = default;
 		Theme(Theme&&) = default;
 		virtual ~Theme() = default;
+
+        std::size_t code() const noexcept { return _code; }
 
 		template<typename Theme>
 		Theme& as()
@@ -199,7 +245,7 @@ namespace d2::style
 			return *static_cast<Theme*>(this);
 		}
 
-		Theme& operator=(const Theme&) = delete;
+        Theme& operator=(const Theme&) = default;
 		Theme& operator=(Theme&&) = default;
 	};
 

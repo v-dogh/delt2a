@@ -15,85 +15,6 @@ namespace d2
         _storage[static_cast<std::size_t>(comp)] = value;
     }
 
-    // Traversal Wrapper
-
-    bool TreeIter::is_type_of(TreeIter other) const
-    {
-        if (_elem.expired())
-            return false;
-        return typeid(other._elem.lock().get()) == typeid(_elem.lock().get());
-    }
-
-    TreeIter TreeIter::up() const
-    {
-        return TreeIter(_elem.lock()->parent());
-    }
-    TreeIter TreeIter::up(std::size_t cnt) const
-    {
-        if (!cnt)
-            return _elem.lock();
-        return TreeIter(_elem.lock()->parent()).up(cnt - 1);
-    }
-    TreeIter TreeIter::up(const std::string& name) const
-    {
-        auto current = _elem.lock();
-        while (current->name() != name)
-        {
-            current = current->parent();
-            if (current == nullptr)
-                throw std::runtime_error{ std::format("Failed to locate parent with ID: {}", name) };
-        }
-        return current;
-    }
-
-    TreeIter TreeIter::operator/(const std::string& path)
-    {
-        return as<ParentElement>()->at(path);
-    }
-    TreeIter TreeIter::operator^(std::size_t cnt)
-    {
-        return up(cnt);
-    }
-    TreeIter TreeIter::operator+()
-    {
-        return up();
-    }
-
-    TreeIter::operator std::shared_ptr<Element>()
-    {
-        return _elem.lock();
-    }
-    TreeIter::operator std::weak_ptr<Element>()
-    {
-        return _elem;
-    }
-
-    std::shared_ptr<Element> TreeIter::operator->() const
-    {
-        return _elem.lock();
-    }
-    std::shared_ptr<Element> TreeIter::operator->()
-    {
-        return _elem.lock();
-    }
-
-    Element& TreeIter::operator*() const
-    {
-        return *_elem.lock();
-    }
-    Element& TreeIter::operator*()
-    {
-        return *_elem.lock();
-    }
-
-    void TreeIter::
-    foreach (foreach_callback callback)
-    {
-        auto p = std::dynamic_pointer_cast<ParentElement>(as());
-        if (p) p->foreach(std::move(callback));
-    }
-
-
     // Event Listener
 
     Element::EventListenerState::Mode Element::EventListenerState::state() const
@@ -260,32 +181,39 @@ namespace d2
                 _contextual_change(pos)
             );
         }
-        _signal_write_impl(type, prop, element);
         _invalidate_state(type);
+        _signal_write_impl(type, prop, element);
     }
     void Element::_signal_write_local(write_flag type, unsigned int prop)
     {
         _signal_write_local(type, prop, shared_from_this());
     }
+    void Element::_signal_write_child(write_flag type, unsigned int prop, ptr element)
+    {
+        _signal_write_child_impl(type, prop, element);
+    }
     void Element::_signal_write(write_flag type, unsigned int prop, ptr element)
     {
         _signal_write_local(type, prop, element);
-        if (const auto uptype = WriteType::Style | (type & WriteType::InternalLayout);
-            parent() && !parent()->_is_write_type(uptype))
+        if (parent())
         {
-            // Any layout write to a sub-object will result in a Style write to the parent
-            parent()->_signal_write(uptype, prop, element);
+            if (const auto uptype = WriteType::Style | (type & WriteType::InternalLayout);
+                !parent()->_is_write_type(uptype))
+            {
+                // Any layout write to a sub-object will result in a Style write to the parent
+                parent()->_signal_write(uptype, prop, element);
+            }
+            parent()->_signal_write_child(type, prop, element);
         }
     }
 
     void Element::_signal_context_change_sub(write_flag type, unsigned int prop, ptr element)
     {
-        if (const auto flags = _contextual_change(type);
-            flags)
+        if (const auto flags = _contextual_change(type))
         {
+            _invalidate_state(flags);
             _signal_context_change_impl(type, prop, element);
             _signal_write_impl(flags, prop, element);
-            _invalidate_state(flags);
         }
     }
     void Element::_signal_context_change_sub(write_flag type, unsigned int prop)
@@ -653,11 +581,11 @@ namespace d2
         return _index_impl();
     }
 
-    TreeIter Element::traverse()
+    TreeIter<> Element::traverse()
     {
         return { shared_from_this() };
     }
-    TreeIter Element::operator+()
+    TreeIter<> Element::operator+()
     {
         return traverse();
     }

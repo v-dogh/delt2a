@@ -9,7 +9,7 @@
 
 namespace d2::ctm
 {
-    string _memory_units(std::size_t bytes)
+    static string _memory_units(std::size_t bytes)
 	{
 		constexpr auto gib = 1'073'741'824;
 		constexpr auto mib = 1'048'576;
@@ -23,11 +23,11 @@ namespace d2::ctm
 		else
             return std::format("{}b", bytes);
 	}
-    FilesystemExplorerWindow::eptr<impl::FilesystemExplorerBase> _core(TreeState::ptr state)
+    static FilesystemExplorerWindow::eptr<impl::FilesystemExplorerBase> _core(TreeState::ptr state)
 	{
         return state->core()->traverse().as<impl::FilesystemExplorerBase>();
 	}
-    FilesystemExplorerWindow::eptr<ParentElement> _pcore(TreeState::ptr state)
+    static FilesystemExplorerWindow::eptr<ParentElement> _pcore(TreeState::ptr state)
     {
         return state->core()->traverse().asp();
     }
@@ -424,8 +424,8 @@ namespace d2::ctm
                 D2_STYLE(X, 1.0_pxi)
                 D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
                 D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
-                D2_STYLE(OnSubmit, [state](TreeIter ptr) {
-                    std::static_pointer_cast<FilesystemExplorerWindow>(_core(state))
+                D2_STYLE(OnSubmit, [](TreeIter<Button> ptr) {
+                    std::static_pointer_cast<FilesystemExplorerWindow>(_core(ptr->state()))
                         ->close();
                 })
             D2_ELEM_END
@@ -434,8 +434,8 @@ namespace d2::ctm
             D2_STYLE(X, window ? 5.0_pxi : 1.0_pxi)
             D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
             D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
-            D2_STYLE(OnSubmit, [state](TreeIter ptr) {
-                _core(state)->submit_soft();
+            D2_STYLE(OnSubmit, [](TreeIter<Button> ptr) {
+                _core(ptr->state())->submit_soft();
             })
         D2_ELEM_END
         D2_ELEM(Button)
@@ -443,8 +443,8 @@ namespace d2::ctm
             D2_STYLE(X, 1.0_px)
             D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
             D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
-            D2_STYLE(OnSubmit, [state](TreeIter ptr) {
-                _core(state)->backwards();
+            D2_STYLE(OnSubmit, [](TreeIter<Button> ptr) {
+                _core(ptr->state())->backwards();
             })
         D2_ELEM_END
         D2_ELEM(Button)
@@ -452,8 +452,8 @@ namespace d2::ctm
             D2_STYLE(X, 4.0_px)
             D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
             D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
-            D2_STYLE(OnSubmit, [state](TreeIter ptr) {
-                _core(state)->forwards();
+            D2_STYLE(OnSubmit, [](TreeIter<Button> ptr) {
+                _core(ptr->state())->forwards();
             })
         D2_ELEM_END
         D2_ELEM(Text, info)
@@ -478,22 +478,22 @@ namespace d2::ctm
             D2_STYLE(X, 1.0_relative)
             D2_STYLE(Y, 2.0_px)
             D2_STYLE(Width, 9.0_pxi)
-            D2_STYLE(OnSubmit, [state](TreeIter ptr, const string& filename) {
-                _core(state)->rselect(filename);
+            D2_STYLE(OnSubmit, [](TreeIter<Button> ptr, const string& filename) {
+                _core(ptr->state())->rselect(filename);
             })
         D2_ELEM_END
         D2_ELEM(Button)
             D2_STYLE(Value, "filter")
             D2_STYLE(X, 1.0_relative)
             D2_STYLE(Y, 2.0_px)
-            D2_STYLE(OnSubmit, [state](TreeIter ptr) {
-                const auto path = (*(_pcore(state)->traverse()/"search")
+            D2_STYLE(OnSubmit, [](TreeIter<Button> ptr) {
+                const auto path = (*(_pcore(ptr->state())->traverse()/"search")
                     .as<Input>())
                     .get<Input::Value>();
-                auto folder = (_pcore(state)->traverse()/"folder")
+                auto folder = (_pcore(ptr->state())->traverse()/"folder")
                     .as<FolderView>();
                 folder->filter(path);
-                _core(state)->_update_results();
+                _core(ptr->state())->_update_results();
             })
             D2_STYLES_APPLY(button_react)
         D2_ELEM_END
@@ -503,7 +503,7 @@ namespace d2::ctm
             D2_STYLE(Width, 2.0_pxi)
             D2_ELEM(Checkbox)
                 D2_STYLE(X, 0.0_relative)
-                D2_STYLE(OnSubmit, [](TypedTreeIter<Checkbox> ptr, bool value) {
+                D2_STYLE(OnSubmit, [](TreeIter<Checkbox> ptr, bool value) {
                     (ptr->state()->core()->traverse()/"folder").as<FolderView>()
                         ->setting(FolderView::ShowHidden, value);
                     _core(ptr->state())->_update_results();

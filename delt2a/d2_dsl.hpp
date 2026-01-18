@@ -53,10 +53,10 @@
 #define D2_ANCHOR_STATE(_type_, _name_) _D2_IMPL_ANCHOR_STATE(_type_, _name_)
 #define D2_ELEM_ANCHOR(_name_) _D2_IMPL_ELEM_ANCHOR(_name_)
 
-#define D2_STYLESHEET_BEGIN(_name_) _D2_IMPL_STYLESHEET_BEGIN(_name_)
+#define D2_STYLESHEET_BEGIN(_name_, ...) _D2_IMPL_STYLESHEET_BEGIN(_name_, __VA_ARGS__)
 #define D2_STYLESHEET_END _D2_IMPL_STYLESHEET_END
-#define D2_STYLES_APPLY_MANUAL(_name_, _ptr_, _state_) _D2_IMPL_STYLES_APPLY_MANUAL(_name_, _ptr_, _state_)
-#define D2_STYLES_APPLY(_name_) _D2_IMPL_STYLES_APPLY(_name_)
+#define D2_STYLES_APPLY_MANUAL(_name_, _ptr_, _state_, ...) _D2_IMPL_STYLES_APPLY_MANUAL(_name_, _ptr_, _state_, __VA_ARGS__)
+#define D2_STYLES_APPLY(_name_, ...) _D2_IMPL_STYLES_APPLY(_name_, __VA_ARGS__)
 
 #define D2_THEME(_name_, ...) _D2_IMPL_THEME(_name_, __VA_ARGS__)
 #define D2_THEME_END(...) _D2_IMPL_THEME_END(__VA_ARGS__)
@@ -67,10 +67,17 @@
 #define D2_TDEP(_tree_, _name_, _type_) _D2_IMPL_TDEP(_tree_, _name_, _type_)
 
 #define D2_VAR(_type_, _var_) _D2_IMPL_VAR(_type_, _var_)
-#define D2_VAR_TYPE(_type_, _var_) _D2_IMPL_VAR_TYPE(_type_, _var_)
 #define D2_DYNAVAR(_type_, _var_, ...) _D2_IMPL_DYNAVAR(_type_, _var_, __VA_ARGS__)
 
+#define D2_NVAR_STR(_type_, _var_, _name_) _D2_IMPL_NVAR_STR(_type_, _name_, _var_)
+#define D2_NDYNAVAR_STR(_type_, _var_, _name_, ...) _D2_IMPL_NDYNAVAR_STR(_type_, _var_, _name_, __VA_ARGS__)
+#define D2_NVAR(_type_, _var_, _name_) _D2_IMPL_NVAR(_type_, _name_, _var_)
+#define D2_NDYNAVAR(_type_, _var_, _name_, ...) _D2_IMPL_NDYNAVAR(_type_, _var_, _name_, __VA_ARGS__)
+
 #define D2_STATIC(_name_, ...) _D2_IMPL_STATIC(_name_, __VA_ARGS__)
+#define D2_STATIC_STRUCT(_name_, ...) \
+    struct _StaticStruct##_name_ { __VA_ARGS__; }; \
+    _D2_IMPL_STATIC(_name_, _StaticStruct##_name_)
 
 #define D2_CONTEXT(_ptrv_, _typev_) _D2_IMPL_CONTEXT(_ptrv_, _typev_)
 #define D2_CONTEXT_EXT(_ptrv_, _typev_, _statev_, _stypev_) _D2_IMPL_CONTEXT_EXT(_ptrv_, _typev_, _statev_, _stypev_)
@@ -82,6 +89,9 @@
 #define D2_SYNC_EEXPR(...) _D2_IMPL_SYNC_EEXPR(__VA_ARGS__)
 #define D2_SYNC_EXPR(...) _D2_IMPL_SYNC_EXPR(__VA_ARGS__)
 #define D2_SYNC_BLOCK _D2_IMPL_SYNC_BLOCK
+#define D2_SYNC_ASYNC_EEXPR(...) _D2_IMPL_SYNC_ASYNC_EEXPR(__VA_ARGS__)
+#define D2_SYNC_ASYNC_EXPR(...) _D2_IMPL_SYNC_ASYNC_EXPR(__VA_ARGS__)
+#define D2_SYNC_ASYNC_BLOCK _D2_IMPL_SYNC_ASYNC_BLOCK
 #define D2_SYNC_BLOCK_END _D2_IMPL_SYNC_BLOCK_END
 
 #define D2_ON_EEXPR(_event_, ...) _D2_IMPL_LISTEN_EEXPR(_event_, true, __VA_ARGS__)

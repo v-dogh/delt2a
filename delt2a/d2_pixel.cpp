@@ -274,7 +274,7 @@ namespace d2
 			);
 		};
 
-        const auto special_case = (src.v == ' ' && src.a < a);
+        const auto special_case = false;// (src.v == ' ' && src.a < a);
         const auto src_af = special_case ? src.a : src.af;
         if (src_af == 0 && src.a == 0)
             return;
@@ -520,6 +520,18 @@ namespace d2
 			px, x + xoff_, y + yoff_, width, height
 		);
 	}
+    void PixelBuffer::View::fill_blend(Pixel px)
+    {
+        buffer_->fill_blend(
+            px, xoff_, yoff_, width_, height_
+        );
+    }
+    void PixelBuffer::View::fill_blend(Pixel px, int x, int y, int width, int height)
+    {
+        buffer_->fill_blend(
+            px, x + xoff_, y + yoff_, width, height
+        );
+    }
 
 	bool PixelBuffer::View::compressed() const
 	{
@@ -825,6 +837,19 @@ namespace d2
                 buffer_[(i * width_) + j] = px;
             }
 	}
+    void PixelBuffer::fill_blend(Pixel px)
+    {
+        for (decltype(auto) it : buffer_)
+            it.blend(px);
+    }
+    void PixelBuffer::fill_blend(Pixel px, int x, int y, int width, int height)
+    {
+        for (std::size_t i = y; i < height + y; i++)
+            for (std::size_t j = x; j < width + x; j++)
+            {
+                buffer_[(i * width_) + j].blend(px);
+            }
+    }
 
 	bool PixelBuffer::empty() const
 	{

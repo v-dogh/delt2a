@@ -187,6 +187,8 @@ namespace d2
 			void clear();
 			void fill(Pixel px);
 			void fill(Pixel px, int x, int y, int width, int height);
+            void fill_blend(Pixel px);
+            void fill_blend(Pixel px, int x, int y, int width, int height);
 
 			bool compressed() const;
 			bool empty() const;
@@ -252,6 +254,8 @@ namespace d2
 		void clear();
 		void fill(Pixel px);
 		void fill(Pixel px, int x, int y, int width, int height);
+        void fill_blend(Pixel px);
+        void fill_blend(Pixel px, int x, int y, int width, int height);
 
 		bool empty() const;
 		bool compressed() const;

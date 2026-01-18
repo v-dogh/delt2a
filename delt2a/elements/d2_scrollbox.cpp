@@ -5,7 +5,7 @@ namespace d2::dx
     void ScrollBox::_recompute_height() const
     {
         computed_height_ = layout(Element::Layout::Height);
-        foreach_internal([this](TreeIter it)
+        foreach_internal([this](TreeIter<> it)
         {
             if (it != scrollbar_ && it->getstate(Display))
             {
@@ -51,7 +51,7 @@ namespace d2::dx
                 {
                     offset_ = abs;
                     _signal_write(WriteType::Style);
-                    foreach([](TreeIter ptr) {
+                    foreach([](TreeIter<> ptr) {
                         internal::ElementView::from(ptr)
                             .signal_write(WriteType::LayoutYPos);
                         return true;
@@ -62,6 +62,48 @@ namespace d2::dx
             }
         }
     }
+    bool ScrollBox::_provides_input_impl() const
+    {
+        return true;
+    }
+    void ScrollBox::_event_impl(Screen::Event ev)
+    {
+        const auto height = layout(Element::Layout::Height);
+        const auto bw = (Box::container_options & Box::EnableBorder) ? resolve_units(Box::border_width) : 0;
+        const auto ch = computed_height_ - (bw * 2) - height;
+        if (ev == Screen::Event::MouseInput)
+        {
+            if (getstate(Hovered))
+            {
+                if (context()->input()->is_pressed_mouse(sys::SystemInput::ScrollUp))
+                {
+                    if (offset_ <= ch)
+                        scroll_to(offset_ + 1);
+                }
+                else if (context()->input()->is_pressed_mouse(sys::SystemInput::ScrollDown))
+                {
+                    if (offset_ > 0)
+                        scroll_to(offset_ - 1);
+                }
+            }
+        }
+        else if (ev == Screen::Event::KeyInput)
+        {
+            if (context()->input()->is_pressed(sys::SystemInput::ArrowLeft) ||
+                context()->input()->is_pressed(sys::SystemInput::ArrowDown))
+            {
+                if (offset_ <= ch)
+                    scroll_to(offset_ + 1);
+            }
+            else if (context()->input()->is_pressed(sys::SystemInput::ArrowRight) ||
+                     context()->input()->is_pressed(sys::SystemInput::ArrowUp))
+            {
+                if (offset_ > 0)
+                    scroll_to(offset_ - 1);
+            }
+        }
+    }
+
     void ScrollBox::_update_layout_impl()
     {
         const auto height = layout(Element::Layout::Height);
@@ -75,7 +117,7 @@ namespace d2::dx
         {
             const auto sw = computed_height_ ? ((float(height) / computed_height_) * height) : 0;
             scrollbar_->setstate(Display, true);
-            if (scrollbar_->get<Slider::SliderWidth>() == sw)
+            if (scrollbar_->get<Slider::SliderWidth>() != sw)
             {
                 scrollbar_->set<Slider::SliderWidth>(sw);
                 written = true;
@@ -96,7 +138,7 @@ namespace d2::dx
                 .signal_write(WriteType::Style);
     }
 
-    TypedTreeIter<VerticalSlider> ScrollBox::scrollbar() const
+    TreeIter<VerticalSlider> ScrollBox::scrollbar() const
     {
         return scrollbar_;
     }
@@ -104,7 +146,7 @@ namespace d2::dx
     {
         offset_ = xoffset;
         _signal_write(WriteType::Style);
-        foreach([](TreeIter ptr) {
+        foreach([](TreeIter<> ptr) {
             internal::ElementView::from(ptr)
                 .signal_write(WriteType::LayoutYPos);
             return true;

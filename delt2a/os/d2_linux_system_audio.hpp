@@ -17,7 +17,7 @@ namespace d2::sys::ext
 {
     class PipewireSystemAudio :
         public SystemAudio,
-        public SystemComponentCfg<true>
+        public SystemComponentCfg<true, true>
     {
     private:
         struct Voice
@@ -68,7 +68,7 @@ namespace d2::sys::ext
         DeviceName*& _active_for(Device dev);
         void _event_global_impl(uint32_t id, const char* type, const spa_dict* props);
         void _event_global_remove_impl(uint32_t id);
-        void _start_stream(Device dev, std::string name, std::size_t sample_rate, std::size_t channels);
+        void _start_stream(Device dev, std::string name, DeviceConfig cfg);
         void _stop_stream(Device dev);
         void _push_stream(std::chrono::seconds time, std::span<const unsigned char> data, std::vector<unsigned char> vec, FormatInfo fmt, FilterPipeline filter);
         void _flush_voices();
@@ -188,7 +188,8 @@ namespace d2::sys::ext
         virtual void transmit(std::vector<unsigned char> data, FormatInfo fmt, FilterPipeline filter = {}) override;
         virtual void transmit(std::chrono::seconds time, FilterPipeline filter = {}) override;
         virtual void deactivate(Device dev) override;
-        virtual void activate(Device dev, const std::string& name = "", std::size_t sample_rate = 48'000, std::size_t channels  = 2) override;
+        virtual void activate(Device dev, const std::string& name = "", DeviceConfig cfg = DeviceConfig()) override;
+        virtual void reactivate(Device dev, DeviceConfig cfg = DeviceConfig()) override;
         virtual DeviceName active(Device dev) override;
         virtual FormatInfo format(Device dev) override;
         virtual std::vector<DeviceName> enumerate(Device dev) override;

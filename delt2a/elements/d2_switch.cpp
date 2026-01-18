@@ -134,7 +134,7 @@ namespace d2::dx
                 const auto col = (i == _idx) ? enabled_color : disabled_color;
                 const auto xoff = int(basisx + ((width_slice + 1) * i));
                 if (data::expand_background)
-                    buffer.fill(col, xoff, basisy, width_slice, 1);
+                    buffer.fill_blend(col, xoff, basisy, width_slice, 1);
                 TextHelper::_render_text_simple(
                     data::options[i],
                     col,
@@ -142,9 +142,12 @@ namespace d2::dx
                     { xoff, basisy }, { width_slice, 1 },
                     buffer
                 );
-                if (i < data::options.size() - 1)
-                    buffer.at(xoff + width_slice, basisy)
-                        .blend(data::separator_color);
+                if (!data::disable_separator)
+                {
+                    if (i < data::options.size() - 1)
+                        buffer.at(xoff + width_slice, basisy)
+                            .blend(data::separator_color);
+                }
             }
         }
 
@@ -162,7 +165,7 @@ namespace d2::dx
         else if (data::on_change_values != nullptr)
             data::on_change_values(
                 std::static_pointer_cast<Switch>(shared_from_this()),
-                data::options[_idx], _old == -1 ?
+                data::options[_idx], _old == invalid ?
                     d2::string("") : data::options[_old]
             );
         _old = _idx;
@@ -297,63 +300,80 @@ namespace d2::dx
         }
         else if (state == State::Focused && !value)
         {
-            _selector = -1;
+            _selector = invalid;
             _signal_write(Style);
         }
     }
     void VerticalSwitch::_event_impl(Screen::Event ev)
     {
         Switch::_event_impl(ev);
-        if (ev == Screen::Event::KeyInput || ev == Screen::Event::MouseInput)
+
+        const auto in = context()->input();
+        auto update = false;
+
+        auto scroll_up = [&]
         {
-            const auto in = context()->input();
             const auto [ basisx, basisy ] = ContainerHelper::_border_base();
             const auto [ ibasisx, ibasisy ] = ContainerHelper::_border_base_inv();
             const auto height = layout(Element::Layout::Height) - basisy - ibasisy;
             const auto size = data::options.size();
-            auto update = true;
-            if (in->is_pressed(sys::input::ArrowDown) ||
-                in->is_pressed_mouse(sys::input::ScrollDown))
-            {
-                if (_selector == -1)
-                    _selector = _idx;
 
-                _selector = ++_selector % size;
-                if (_selector == 0)
-                    _scroll_offset = 0;
-                else if (_selector > _scroll_offset + (height - 1) / 2)
-                    _scroll_offset++;
-            }
-            else if (in->is_pressed(sys::input::ArrowUp) ||
-                     in->is_pressed_mouse(sys::input::ScrollUp))
-            {
-                if (_selector == -1)
-                    _selector = _idx;
+            if (_selector == invalid)
+                _selector = _idx;
 
-                if (_selector == 0)
-                {
-                    _scroll_offset =
-                        size > height ? size - height : 0;
-                    _selector = size - 1;
-                }
-                else
-                    --_selector;
-                if (_scroll_offset &&
-                    _selector < _scroll_offset + (height - 1) / 2)
-                    _scroll_offset--;
-            }
-            else if (in->is_pressed(sys::input::Enter) && _selector != -1)
+            if (_selector == 0)
             {
-                _idx = _selector;
+                _scroll_offset =
+                    size > height ? size - height : 0;
+                _selector = size - 1;
             }
             else
-                update = false;
+                --_selector;
+            if (_scroll_offset &&
+                _selector < _scroll_offset + (height - 1) / 2)
+                _scroll_offset--;
 
-            if (update)
+            update = true;
+        };
+        auto scroll_down = [&]
+        {
+            const auto [ basisx, basisy ] = ContainerHelper::_border_base();
+            const auto [ ibasisx, ibasisy ] = ContainerHelper::_border_base_inv();
+            const auto height = layout(Element::Layout::Height) - basisy - ibasisy;
+            const auto size = data::options.size();
+
+            if (_selector == invalid)
+                _selector = _idx;
+
+            _selector = ++_selector % size;
+            if (_selector == 0)
+                _scroll_offset = 0;
+            else if (_selector > _scroll_offset + (height - 1) / 2)
+                _scroll_offset++;
+
+            update = true;
+        };
+
+        if (ev == Screen::Event::KeyInput)
+        {
+            if (in->is_pressed(sys::input::ArrowDown)) scroll_down();
+            else if (in->is_pressed(sys::input::ArrowUp)) scroll_up();
+            else if (in->is_pressed(sys::input::Enter) && _selector != invalid)
             {
-                _signal_write(Style);
-                _submit();
+                _idx = _selector;
+                update = true;
             }
+        }
+        if (ev == Screen::Event::MouseInput)
+        {
+            if (in->is_pressed_mouse(sys::input::ScrollDown)) scroll_down();
+            else if (in->is_pressed_mouse(sys::input::ScrollUp)) scroll_up();
+        }
+
+        if (update)
+        {
+            _signal_write(Style);
+            _submit();
         }
     }
     void VerticalSwitch::_frame_impl(PixelBuffer::View buffer)
@@ -403,7 +423,7 @@ namespace d2::dx
                 {
                     if (_idx == idx || !is_border)
                     {
-                        buffer.fill(
+                        buffer.fill_blend(
                             color,
                             basisx, yoff,
                             width - ibasisx - basisx, 1

@@ -3,6 +3,7 @@
 
 #include "../d2_tree_element.hpp"
 #include "../d2_styles.hpp"
+#include "../d2_colors.hpp"
 #include "d2_element_utils.hpp"
 
 namespace d2
@@ -14,22 +15,28 @@ namespace d2
             D2_UAI_FIELDS(
                 string value_on{ charset::checkbox_true };
                 string value_off{ charset::checkbox_false };
-                Pixel color_on{};
-                Pixel color_off{};
+                PixelForeground color_on_foreground{};
+                PixelBackground color_on_background{ d2::colors::w::transparent };
+                PixelForeground color_off_foreground{};
+                PixelBackground color_off_background{ d2::colors::w::transparent };
                 bool checkbox_value{ false };
             ),
             D2_UAI_PROPS(
                 ValueOn,
                 ValueOff,
-                ColorOn,
-                ColorOff,
+                ColorOnForeground,
+                ColorOnBackground,
+                ColorOffForeground,
+                ColorOffBackground,
                 Value
             ),
             D2_UAI_LINK(
                 D2_UAI_PROP(ValueOn, value_on, Masked)
                 D2_UAI_PROP(ValueOff, value_off, Masked)
-                D2_UAI_PROP(ColorOn, color_on, Style)
-                D2_UAI_PROP(ColorOff, color_off, Style)
+                D2_UAI_PROP(ColorOnForeground, color_on_foreground, Style)
+                D2_UAI_PROP(ColorOnBackground, color_on_background, Style)
+                D2_UAI_PROP(ColorOffForeground, color_off_foreground, Style)
+                D2_UAI_PROP(ColorOffBackground, color_off_background, Style)
                 D2_UAI_PROP(Value, checkbox_value, Masked)
             )
         )

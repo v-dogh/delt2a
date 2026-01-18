@@ -12,177 +12,106 @@
 
 namespace d2
 {
+    template<typename Type = Element>
     class TreeIter
     {
     public:
-        using foreach_callback = std::function<bool(TreeIter)>;
+        using type = Type;
+        using foreach_callback = std::function<bool(TreeIter<>)>;
     private:
-        std::weak_ptr<Element> _elem{};
+        std::weak_ptr<Type> _ptr{};
     public:
         TreeIter() = default;
         TreeIter(std::nullptr_t) {}
         TreeIter(const TreeIter&) = default;
         TreeIter(TreeIter&&) = default;
-        template<typename Type>
-        TreeIter(std::shared_ptr<Type> p) :
-            _elem(std::static_pointer_cast<Element>(p))
-        {}
-
-        std::shared_ptr<Element> shared()
+        TreeIter(std::weak_ptr<Type> ptr) : _ptr(ptr) {}
+        template<typename Other> TreeIter(TreeIter<Other> ptr) : TreeIter(ptr.weak()) {}
+        template<typename Other> TreeIter(std::shared_ptr<Other> ptr) : TreeIter(std::weak_ptr<Other>(ptr)) {}
+        template<typename Other> TreeIter(std::weak_ptr<Other> ptr)
         {
-            return operator std::shared_ptr<Element>();
-        }
-        std::weak_ptr<Element> weak()
-        {
-            return operator std::weak_ptr<Element>();
+            if (!ptr.expired())
+            {
+                auto p = std::dynamic_pointer_cast<Type>(ptr.lock());
+                if (p == nullptr)
+                    throw std::runtime_error{ "Attempt to access an element through an invalid object" };
+                _ptr = p;
+            }
         }
 
-        template<typename Type>
+        std::shared_ptr<Type> shared() const { return _ptr.lock(); }
+        std::weak_ptr<Type> weak() const { return _ptr; }
+
+        template<typename Other>
         bool is_type() const
         {
-            if (_elem.expired())
+            if (_ptr.expired())
                 return false;
-            return dynamic_cast<const Type*>(_elem.lock().get()) != nullptr;
+            return dynamic_cast<const Other*>(_ptr.lock().get()) != nullptr;
         }
-        bool is_type_of(TreeIter other) const;
-
-        template<typename Type>
-        void set(std::shared_ptr<Type> ptr = nullptr)
+        bool is_type_of(TreeIter<> other) const
         {
-            _elem = ptr;
+            if (_ptr.expired())
+                return false;
+            return typeid(other.shared().get()) == typeid(_ptr.lock().get());
         }
 
-        template<typename Type = Element> std::shared_ptr<Type> as() const
+        template<typename Other = Element> TreeIter<Other> as() const
         {
-            auto p = std::dynamic_pointer_cast<Type>(_elem.lock());
+            auto p = std::dynamic_pointer_cast<Other>(_ptr.lock());
             if (p == nullptr)
                 throw std::runtime_error{ "Attempt to access an element through an invalid object" };
             return p;
         }
-        template<typename Type = Element> auto as()
+        TreeIter<ParentElement> asp() const { return as<ParentElement>(); }
+
+        TreeIter<ParentElement> up() const
         {
-            return const_cast<const TreeIter*>(this)->as<Type>();
+            return shared()->parent();
+        }
+        TreeIter<ParentElement> up(std::size_t cnt) const
+        {
+            if (!cnt)
+                return _ptr;
+            return up().up(cnt - 1);
+        }
+        TreeIter<ParentElement> up(const std::string& name) const
+        {
+            auto current = _ptr.lock();
+            while (current->name() != name)
+            {
+                current = current->parent();
+                if (current == nullptr)
+                    throw std::runtime_error{ std::format("Failed to locate parent with ID: {}", name) };
+            }
+            return current;
         }
 
-        std::shared_ptr<ParentElement> asp() const
-        {
-            return as<ParentElement>();
-        }
-        std::shared_ptr<ParentElement> asp()
-        {
-            return as<ParentElement>();
-        }
+        void foreach(foreach_callback callback) const { asp()->foreach(callback); }
 
-        TreeIter up() const;
-        TreeIter up(std::size_t cnt) const;
-        TreeIter up(const std::string& name) const;
-
-        void foreach(foreach_callback);
-
-        std::shared_ptr<Element> operator->() const;
-        std::shared_ptr<Element> operator->();
-
-        Element& operator*() const;
-        Element& operator*();
-
-        operator std::shared_ptr<Element>();
-        operator std::weak_ptr<Element>();
-
-        bool operator==(std::nullptr_t) const
-        {
-            return _elem.expired();
-        }
         bool operator==(const TreeIter& other) const
         {
-            return (_elem.expired() && other._elem.expired()) || (_elem.lock() == other._elem.lock());
+            return (_ptr.expired() && other._ptr.expired()) ||
+                   (_ptr.lock() == other._ptr.lock());
         }
-        bool operator!=(const TreeIter& other) const
-        {
-            return !operator==(other);
-        }
+        bool operator!=(const TreeIter& other) const {  return !operator==(other); }
 
-        TreeIter operator/(const std::string& path);
-        TreeIter operator^(std::size_t cnt);
-        TreeIter operator+();
+        std::shared_ptr<Type> operator->() const { return shared(); }
+        Type& operator*() const { return *shared(); }
+
+        TreeIter<> operator/(const std::string& path) const { return asp()->at(path); }
+        TreeIter<ParentElement> operator^(std::size_t cnt) const { return up(cnt); }
+        TreeIter<ParentElement> operator^(const std::string& name) const { return up(name); }
+
+        operator std::shared_ptr<Element>() const { return shared(); }
+        operator std::weak_ptr<Element>() const { return weak(); }
+
+        operator std::shared_ptr<Type>() const requires (!std::is_same_v<Type, Element>) { return shared(); }
+        operator std::weak_ptr<Type>() const requires (!std::is_same_v<Type, Element>) { return weak(); }
 
         TreeIter& operator=(const TreeIter&) = default;
         TreeIter& operator=(TreeIter&&) = default;
     };
-
-    template<typename Type>
-    class TypedTreeIter : public TreeIter
-    {
-    public:
-        using type = Type;
-    public:
-        TypedTreeIter() = default;
-        TypedTreeIter(std::nullptr_t) {}
-        TypedTreeIter(const TypedTreeIter&) = default;
-        TypedTreeIter(TypedTreeIter&&) = default;
-        TypedTreeIter(const TreeIter& copy) : TreeIter(copy) {}
-        TypedTreeIter(std::shared_ptr<Type> p) :
-            TreeIter(std::static_pointer_cast<Element>(p))
-        {}
-
-        std::shared_ptr<Type> shared()
-        {
-            return operator std::shared_ptr<Type>();
-        }
-        std::weak_ptr<Type> weak()
-        {
-            return operator std::weak_ptr<Type>();
-        }
-
-        TypedTreeIter operator/(const std::string& path)
-        {
-            return TreeIter::operator/(path);
-        }
-        TypedTreeIter operator^(std::size_t cnt)
-        {
-            return TreeIter::operator^(cnt);
-        }
-        TypedTreeIter operator+()
-        {
-            return TreeIter::operator+();
-        }
-
-        std::shared_ptr<Type> operator->() const
-        {
-            return as<Type>();
-        }
-        std::shared_ptr<Type> operator->()
-        {
-            return as<Type>();
-        }
-
-        Type& operator*() const
-        {
-            return *as<Type>();
-        }
-        Type& operator*()
-        {
-            return *as<Type>();
-        }
-
-        operator std::shared_ptr<Type>()
-        {
-            return std::static_pointer_cast<Type>(
-                as<Type>()->shared_from_this()
-            );
-        }
-        operator std::weak_ptr<Type>()
-        {
-            return std::static_pointer_cast<Type>(
-                as<Type>()->shared_from_this()
-            );
-        }
-
-        TypedTreeIter& operator=(const TypedTreeIter&) = default;
-        TypedTreeIter& operator=(TypedTreeIter&&) = default;
-    };
-
-    template<typename Type>
-    using TypedIter = TypedTreeIter<Type>;
 
     namespace internal
     { class ElementView; }
@@ -201,7 +130,7 @@ namespace d2
         using pptr = std::shared_ptr<ParentElement>;
         using cpptr = std::shared_ptr<const ParentElement>;
         using pwptr = std::weak_ptr<ParentElement>;
-        using iptr = TreeIter;
+        using iptr = TreeIter<>;
 
         // Acquires a shared_lock for the buffer for it's lifetime
         // Ensures object lifetime
@@ -245,8 +174,8 @@ namespace d2
         using state_flag = unsigned char;
         using write_flag = element_write_flag;
 
-        using event_callback = std::function<void(EventListener, TreeIter)>;
-        using foreach_callback = TreeIter::foreach_callback;
+        using event_callback = std::function<void(EventListener, TreeIter<>)>;
+        using foreach_callback = TreeIter<>::foreach_callback;
         using foreach_internal_callback = std::function<bool(ptr)>;
 
         // Flags representing the meta state of the object
@@ -539,9 +468,11 @@ namespace d2
 
         bool _is_write_type(write_flag type) const;
 
+        virtual void _signal_write_child_impl(write_flag type, unsigned int prop, ptr element) {}
         virtual void _signal_write_impl(write_flag type, unsigned int prop, ptr element) {}
         virtual void _signal_context_change_impl(write_flag type, unsigned int prop, ptr element) {}
 
+        void _signal_write_child(write_flag type, unsigned int prop, ptr element);
         void _signal_write(write_flag type, unsigned int prop, ptr element);
     protected:
         // Available to the element view
@@ -662,8 +593,8 @@ namespace d2
 
         int resolve_units(Unit unit) const;
 
-        TreeIter traverse();
-        TreeIter operator+();
+        TreeIter<> traverse();
+        TreeIter<> operator+();
 
         Element& operator=(const Element&) = delete;
         Element& operator=(Element&&) = delete;

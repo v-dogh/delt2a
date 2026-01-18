@@ -108,15 +108,43 @@ namespace d2
                 return uidc;
             }
         };
-        template<bool ThreadSafe>
+        template<bool ThreadSafe, bool Lazy = false>
         struct SystemComponentCfg
         {
             static inline constexpr auto tsafe = ThreadSafe;
+            static inline constexpr auto lazy = Lazy;
         };
 
 		// Additional system wrappers (Optional ones)
         namespace ext
         {
+            namespace impl
+            {
+                enum class Format
+                {
+                    PCM16,
+                    PCM32,
+                    Float32,
+                    Float64,
+                };
+
+                // Compiler fucking complaining or whatever
+                struct FormatInfo
+                {
+                    Format format{ Format::Float32 };
+                    std::size_t channels{ 2 };
+                    std::size_t sample_rate{ 48'000 };
+                };
+                struct DeviceConfig
+                {
+                    Format format{ Format::Float32 };
+                    std::size_t channels{ 2 };
+                    std::size_t sample_rate{ 48'000 };
+                    std::chrono::milliseconds latency{ 24 };
+                    bool force_latency{ true };
+                };
+            }
+
             class SystemClipboard : public SystemComponentBase<"Clipboard", SystemClipboard>
             {
             public:
@@ -130,6 +158,10 @@ namespace d2
             class SystemAudio : public SystemComponentBase<"Audio", SystemAudio>
             {
             public:
+                using Format = impl::Format;
+                using FormatInfo = impl::FormatInfo;
+                using DeviceConfig = impl::DeviceConfig;
+
                 enum class Event
                 {
                     Activate,
@@ -142,19 +174,7 @@ namespace d2
                     Input,
                     Output,
                 };
-                enum class Format
-                {
-                    PCM16,
-                    PCM32,
-                    Float32,
-                    Float64,
-                };
-                struct FormatInfo
-                {
-                    Format format{ Format::Float32 };
-                    std::size_t channels{ 1 };
-                    std::size_t sample_rate{ 48'000 };
-                };
+
                 struct DeviceName
                 {
                     std::string id{ "" };
@@ -168,15 +188,56 @@ namespace d2
                     std::size_t _offset{ 0 };
                     const FormatInfo* _format{ nullptr };
                 public:
+                    static float mix(float a, float b, float prog = 0.5f);
+
                     Stream(std::span<float> data, std::size_t offset, std::size_t total, const FormatInfo* format) :
                         _data(data), _format(format), _offset(offset), _total(total) {}
                     Stream(const Stream&) = default;
                     Stream(Stream&&) = default;
 
-                    void apply(auto&& func, std::size_t channel, float start = 0.0f, float end = 1.f);
-                    void apply(auto&& func, float start = 0.0f, float end = 1.f);
+                    void apply(auto&& func, std::size_t channel, float start = 0.f, float end = 1.f)
+                    {
+                        const auto channel_size = _data.size() / _format->channels;
+                        const auto astart = std::size_t(start * channel_size);
+                        const auto aend = std::size_t(end * channel_size);
+                        for (std::size_t i = astart; i < aend; i += _format->channels)
+                            _data[i + channel] = func(float(_data[i + channel]), float(i + _offset) / _total);
+                    }
+                    void apply(auto&& func, float start = 0.f, float end = 1.f)
+                    {
+                        const auto astart = std::size_t(start * _data.size());
+                        const auto aend = std::size_t(end * _data.size());
+                        const auto dist = aend - astart;
+                        if (_format->channels == 2)
+                        {
+                            for (std::size_t i = astart; i < aend; i += 2)
+                            {
+                                _data[i] = func(float(_data[i]), float(i + _offset) / _total);
+                                _data[i + 1] = func(float(_data[i + 1]), float(i + 1 + _offset) / _total);
+                            }
+                        }
+                        else if (_format->channels == 4)
+                        {
+                            for (std::size_t i = astart; i < aend; i += 4)
+                            {
+                                _data[i] = func(float(_data[i]), float(i + _offset) / _total);
+                                _data[i + 1] = func(float(_data[i + 1]), float(i + 1 + _offset) / _total);
+                                _data[i + 2] = func(float(_data[i + 2]), float(i + 2 + _offset) / _total);
+                                _data[i + 3] = func(float(_data[i + 3]), float(i + 3 + _offset) / _total);
+                            }
+                        }
+                        else
+                        {
+                            for (std::size_t i = astart; i < aend; i++)
+                                _data[i] = func(float(_data[i]), float(i + _offset) / _total);
+                        }
+                    }
+
                     void push(std::span<float> in);
                     void push_expand(std::span<float> in);
+
+                    void push(std::span<float> in, float mul, float shift = 0.f);
+                    void push_expand(std::span<float> in, float mul, float shift = 0.f);
 
                     const FormatInfo& info() const;
                     std::size_t size() const;
@@ -215,6 +276,7 @@ namespace d2
                             stream.apply([gain](float x, float) -> float {
                                 return x * gain;
                             });
+                            return true;
                         };
                     }
                     static auto fade(auto func)
@@ -224,6 +286,7 @@ namespace d2
                             stream.apply([&](float x, float p) -> float {
                                 return x * func(p);
                             });
+                            return true;
                         };
                     }
                     static auto fade_in(auto func)
@@ -256,6 +319,7 @@ namespace d2
                                 }
                                 return last;
                             });
+                            return true;
                         };
                     }
                     static auto tremolo(float frequency, float depth = 0.5f)
@@ -267,6 +331,7 @@ namespace d2
                                 const auto gain = 1.f - depth + depth * lfo;
                                 return x * gain;
                             });
+                            return true;
                         };
                     }
 
@@ -277,6 +342,7 @@ namespace d2
                             stream.apply([&](float old, float p) -> float {
                                 return old + func(p) * gain;
                             });
+                            return true;
                         };
                     }
                     static auto wave_am(auto func)
@@ -286,6 +352,7 @@ namespace d2
                             stream.apply([&](float old, float p) -> float {
                                 return old * func(p);
                             });
+                            return true;
                         };
                     }
 
@@ -407,7 +474,8 @@ namespace d2
                 virtual void transmit(std::vector<unsigned char> stream, FormatInfo format, FilterPipeline filter = {}) = 0;
                 virtual void transmit(std::chrono::seconds time, FilterPipeline filter = {}) = 0;
                 virtual void deactivate(Device dev) = 0;
-                virtual void activate(Device dev, const std::string& name = "", std::size_t sample_rate = 48'000, std::size_t channels = 2) = 0;
+                virtual void activate(Device dev, const std::string& name = "", DeviceConfig cfg = {}) = 0;
+                virtual void reactivate(Device dev, DeviceConfig cfg = {}) = 0;
                 virtual DeviceName active(Device dev) = 0;
                 virtual FormatInfo format(Device dev) = 0;
                 virtual std::vector<DeviceName> enumerate(Device dev) = 0;
@@ -484,7 +552,7 @@ namespace d2
 
             class LocalSystemClipboard :
                 public SystemClipboard,
-                public SystemComponentCfg<false>
+                public SystemComponentCfg<false, true>
             {
             private:
                 string value_{};
@@ -775,6 +843,7 @@ namespace d2
 	}
     namespace input
     {
+        using keytype = sys::SystemInput::keytype;
         using mouse = sys::SystemInput::MouseKey;
         using special = sys::SystemInput::SpecialKey;
         using mode = sys::SystemInput::KeyMode;
@@ -806,6 +875,10 @@ namespace d2
             [[ unlikely ]] if (_components.size() < uid)
 				throw std::logic_error{ "Attempt to query inactive component" };
             auto* ptr = _components[uid].get();
+            if (_main_thread != std::thread::id())
+                if (!ptr->thread_safe() &&
+                    std::this_thread::get_id() != _main_thread)
+                    throw std::logic_error{ std::format("Module '{}' must be accessed from the main thread", ptr->name()) };
             if (ptr->status() == sys::SystemComponent::Status::Offline)
                 ptr->load();
             return static_cast<Type*>(ptr);
@@ -816,6 +889,10 @@ namespace d2
             [[ unlikely ]] if (_components.size() < uid)
 				return nullptr;
             auto* ptr = _components[uid].get();
+            if (_main_thread != std::thread::id())
+                if (!ptr->thread_safe() &&
+                    std::this_thread::get_id() != _main_thread)
+                    throw std::logic_error{ std::format("Module '{}' must be accessed from the main thread", ptr->name()) };
             if (ptr->status() == sys::SystemComponent::Status::Offline)
                 ptr->load();
             return static_cast<Type*>(ptr);
@@ -848,12 +925,14 @@ namespace d2
 		}
 
         IOContext(mt::ThreadPool::ptr scheduler);
-		virtual ~IOContext() = default;
+        virtual ~IOContext();
 
         // State
 
+        void preinitialize();
         void initialize();
         void deinitialize();
+        void ping();
         void wait(std::chrono::milliseconds ms);
 
         // Synchronization
@@ -862,7 +941,7 @@ namespace d2
 
         bool is_synced() const
         {
-            return (std::this_thread::get_id() == _main_thread) || !_worker.active();
+            return std::this_thread::get_id() == _main_thread;
         }
         template<typename Func>
         auto sync(Func&& callback) -> mt::future<decltype(callback())>
@@ -871,6 +950,31 @@ namespace d2
             {
                 return callback();
             });
+        }
+        template<typename Func>
+        auto sync_async_if(Func&& callback) -> mt::future<decltype(callback())>
+        {
+            if (is_synced())
+            {
+                using ret = decltype(callback());
+                mt::future<ret> task = mt::future<ret>::make();
+                if constexpr (std::is_same_v<ret, void>)
+                {
+                    task.block()->set_value();
+                }
+                else
+                {
+                    task.block()->set_value(callback());
+                }
+                return task;
+            }
+            else
+            {
+                return scheduler()->launch_deferred(std::chrono::milliseconds(0), [callback = std::forward<Func>(callback)]() -> decltype(auto)
+                {
+                    return callback();
+                });
+            }
         }
         template<typename Func>
         auto sync_if(Func&& callback) -> decltype(callback())
@@ -911,6 +1015,8 @@ namespace d2
                             Component::tsafe
                         ));
 #				endif
+                if (!Component::lazy)
+                    _get_component<Component>();
 			};
 			(insert.template operator()<Components>(), ...);
 		}

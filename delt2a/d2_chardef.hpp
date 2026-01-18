@@ -107,6 +107,8 @@ namespace d2
 
         struct icon
         {
+            static constexpr auto middle_square = "◾";
+
             static constexpr auto triangle_left = "◀";
             static constexpr auto triangle_right = "▶";
             static constexpr auto triangle_up = "▲";
@@ -161,7 +163,6 @@ namespace d2
             static constexpr auto envelope = "✉";
             static constexpr auto phone = "☎";
         };
-
 
         enum Cell
         {

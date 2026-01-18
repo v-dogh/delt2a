@@ -3,173 +3,225 @@
 #include "d2_color_picker.hpp"
 #include "../elements/d2_std.hpp"
 #include "../d2_colors.hpp"
+#include "d2_standard_widget_theme.hpp"
+#include "d2_widget_theme_base.hpp"
 
 namespace d2::ctm
 {
-    ThemeSelector::ThemeSelector(
-        const std::string& name,
-        TreeState::ptr state,
-        pptr parent,
-        std::function<void(TypedTreeIter<ThemeSelector>, theme)> callback
-    ) : data(name, state, parent)
+    static ThemeSelector::eptr<ThemeSelectorWindow> _wcore(TreeState::ptr state)
     {
-        data::on_submit = std::move(callback);
+        return state->core()->traverse().as<ThemeSelectorWindow>();
+    }
+    static ThemeSelector::eptr<impl::ThemeSelectorBase> _bcore(TreeState::ptr state)
+    {
+        return state->core()->traverse().as<impl::ThemeSelectorBase>();
     }
 
-	ThemeSelector::eptr<ThemeSelector> ThemeSelector::_core(TreeState::ptr state)
-	{
-		return state->core()->traverse().as<ThemeSelector>();
-	}
+    D2_STATELESS_TREE(theme_accent, int idx)
+        D2_STYLE(Width, 2.0_pxi)
+        D2_STYLE(Height, 1.0_px)
+        D2_STYLE(X, 0.0_center)
+        D2_STYLE(Y, idx)
+        D2_ELEM(FlowBox)
+            D2_STYLE(X, 0.0_pxi)
+            D2_ELEM(Button)
+                D2_STYLE(Value, charset::icon::arrow_up)
+                D2_STYLE(X, 0.0_relative)
+            D2_ELEM_END
+            D2_ELEM(Button)
+                D2_STYLE(Value, charset::icon::arrow_down)
+                D2_STYLE(X, 0.0_relative)
+            D2_ELEM_END
+            D2_ELEM(Button)
+                D2_STYLE(Value, charset::icon::cross)
+                D2_STYLE(X, 0.0_relative)
+            D2_ELEM_END
+        D2_ELEM_END
+    D2_TREE_END
+    D2_STATELESS_TREE(theme_picker, bool window)
+        D2_ANCHOR(FlowBox, themes)
+        D2_ANCHOR(FlowBox, builder)
+        if (window) D2_ELEM(Button, exit)
+            D2_STYLE(Value, "<X>")
+            D2_STYLE(X, 1.0_pxi)
+            D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
+            D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
+            D2_STYLE(OnSubmit, [](TreeIter<Button> ptr) {
+                _wcore(ptr->state())->close();
+            })
+        D2_ELEM_END
+        D2_ELEM(FlowBox)
+            D2_STYLE(Width, 1.0_pc)
+            D2_STYLE(Height, 1.0_px)
+            D2_STYLE(Y, 0.0_relative)
+            D2_ELEM(Switch)
+                D2_STYLE(Width, 0.0_relative)
+                D2_STYLE(X, 0.0_relative)
+                D2_STYLE(Options, Switch::opts{ "Themes", "Builder" })
+                D2_STYLE(OnChange, [=](TreeIter<Switch> ptr, int idx, int) {
+                    themes->setstate(d2::Element::Display, idx == 0);
+                    builder->setstate(d2::Element::Display, idx == 1);
+                })
+                D2_STYLES_APPLY(switch_color)
+            D2_ELEM_END
+            D2_ELEM(VerticalSeparator)
+                D2_STYLE(X, 0.0_relative)
+                D2_STYLE(Width, 1.0_px)
+                D2_STYLE(Height, 1.0_pc)
+                D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_border_vertical()))
+            D2_ELEM_END
+            D2_ELEM(Box)
+                D2_STYLE(Width, 0.0_relative)
+                D2_STYLE(X, 0.0_relative)
+                D2_ELEM(Text)
+                    D2_STYLE(ZIndex, Box::overlap)
+                    D2_STYLE(Value, "Preview")
+                    D2_STYLE(X, 0.0_center)
+                    D2_STYLES_APPLY(bold_text_color)
+                D2_ELEM_END
+            D2_ELEM_END
+        D2_ELEM_END
+        D2_ELEM(FlowBox, logic)
+            D2_STYLE(Y, 0.0_relative)
+            D2_STYLE(Width, 1.0_pc)
+            D2_STYLE(Height, 0.0_relative)
+            D2_ELEM(FlowBox, main)
+                D2_STYLE(X, 0.0_relative)
+                D2_STYLE(Width, 0.0_relative)
+                D2_STYLE(Height, 1.0_pc)
+                D2_ELEM_ANCHOR(themes)
+                    D2_STYLE(Width, 1.0_pc)
+                    D2_STYLE(Height, 1.0_pc)
+                    D2_ELEM(VerticalSwitch, list)
+                        D2_STYLES_APPLY(selector_color)
+                    D2_ELEM_END
+                D2_ELEM_END
+                D2_ELEM_ANCHOR(builder)
+                    D2_STYLE(Width, 1.0_pc)
+                    D2_STYLE(Height, 1.0_pc)
+                    D2_ELEM(FlowBox, options)
+                        D2_STYLE(X, 0.0_relative)
+                        D2_STYLE(Width, 0.0_relative)
+                        D2_STYLE(Height, 1.0_pc)
+                        D2_ELEM(Checkbox, immediate)
+                            D2_STYLE(X, 1.0_relative)
+                            D2_STYLE(Y, 1.0_px)
+                        D2_ELEM_END
+                        D2_ELEM(Text)
+                            D2_STYLE(X, 1.0_relative)
+                            D2_STYLE(Y, 1.0_px)
+                            D2_STYLE(Value, "Immediate Mode")
+                        D2_ELEM_END
+                        D2_ELEM(Checkbox, preview)
+                            D2_STYLE(X, 1.0_relative)
+                            D2_STYLE(Y, 0.0_relative)
+                        D2_ELEM_END
+                        D2_ELEM(Text)
+                            D2_STYLE(X, 1.0_relative)
+                            D2_STYLE(Value, "Preview Mode")
+                        D2_ELEM_END
+                        D2_EMBED_ELEM_NAMED_BEGIN(ColorPicker, picker)
+                            D2_STYLE(Y, 1.0_relative)
+                            D2_STYLE(Width, 1.0_pc)
+                            D2_STYLE(Height, 0.0_relative)
+                            D2_STYLE(OnSubmit, [](TreeIter<ColorPicker> ptr, px::background color) {
 
-	void ThemeSelector::_state_change_impl(State state, bool value)
+                            })
+                            D2_ELEM(Text)
+                                D2_STYLE(ZIndex, Box::overlap)
+                                D2_STYLE(Value, "Pick Accent")
+                                D2_STYLE(X, 0.0_center)
+                            D2_ELEM_END
+                        D2_EMBED_END
+                    D2_ELEM_END
+                    D2_ELEM(VerticalSeparator)
+                        D2_STYLE(X, 0.0_relative)
+                        D2_STYLE(Width, 1.0_px)
+                        D2_STYLE(Height, 1.0_pc)
+                        D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_border_vertical()))
+                    D2_ELEM_END
+                    D2_ELEM(FlowBox, accents)
+                        D2_STYLE(X, 0.0_relative)
+                        D2_STYLE(Width, 0.0_relative)
+                        D2_STYLE(Height, 1.0_pc)
+                    D2_ELEM_END
+                D2_ELEM_END
+            D2_ELEM_END
+            D2_ELEM(VerticalSeparator)
+                D2_STYLE(X, 0.0_relative)
+                D2_STYLE(Width, 1.0_px)
+                D2_STYLE(Height, 1.0_pc)
+                D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_border_vertical()))
+            D2_ELEM_END
+            D2_ELEM(ScrollFlowBox, preview)
+                if (!state->screen()->has_theme("Preview"))
+                    state->screen()->make_theme(style::Theme::make_named_copy(
+                        "Preview",
+                        state->screen()->theme<StandardTheme>()
+                    ));
+                D2_STYLE(X, 0.0_relative)
+                D2_STYLE(Width, 0.0_relative)
+                D2_STYLE(Height, 1.0_pc)
+                D2_STYLE(BackgroundColor, D2_NVAR(WidgetTheme, Preview, wg_bg_primary()))
+                D2_CONTEXT_AUTO(ptr->scrollbar())
+                    D2_STYLES_APPLY(vertical_slider_color)
+                D2_CONTEXT_END
+                D2_ELEM(FlowBox)
+                    D2_STYLE(Width, 1.0_pc)
+                    D2_STYLE(Height, 1.0_pc)
+                    D2_STYLE(Y, 0.0_relative)
+                D2_ELEM_END
+                D2_ELEM(FlowBox)
+                    D2_STYLE(Width, 1.0_pc)
+                    D2_STYLE(Height, 1.0_pc)
+                    D2_STYLE(Y, 0.0_relative)
+                D2_ELEM_END
+            D2_ELEM_END
+        D2_ELEM_END
+    D2_TREE_END
+
+    void impl::ThemeSelectorBase::push(px::background accent)
+    {
+        _accents.push_back(accent);
+    }
+    void impl::ThemeSelectorBase::clear()
+    {
+        _accents.clear();
+    }
+
+    void ThemeSelectorWindow::_state_change_impl(State state, bool value)
 	{
-		VirtualBox::_state_change_impl(state, value);
+        VirtualFlowBox::_state_change_impl(state, value);
 		if (state == State::Created && value && empty())
 		{
-			VirtualBox::width = 42.0_px;
-			VirtualBox::height = 16.0_px;
-			VirtualBox::zindex = 120;
-            VirtualBox::container_options |= ContainerOptions::EnableBorder;
-			VirtualBox::title = "<Pick Theme>";
+            data::width = 42.0_px;
+            data::height = 16.0_px;
+            data::zindex = 120;
+            data::container_options |= ContainerOptions::EnableBorder;
+            data::title = "<Pick Theme>";
 
 			if (screen()->is_keynav())
 			{
 				const auto [ swidth, sheight ] = context()->input()->screen_size();
 				const auto [ width, height ] = box();
-				VirtualBox::x = ((swidth - width) / 2);
-				VirtualBox::y = ((sheight - height) / 2);
+                data::x = ((swidth - width) / 2);
+                data::y = ((sheight - height) / 2);
 			}
 			else
 			{
 				const auto [ x, y ] = context()->input()->mouse_position();
-				VirtualBox::x = x - (box().width / 2);
-				VirtualBox::y = y;
+                data::x = x - (box().width / 2);
+                data::y = y;
 			}
 
 			auto& theme = this->state()->screen()->theme<WidgetTheme>();
-            data::set<VirtualBox::BorderHorizontalColor>(theme.wg_border_horizontal());
-			data::set<VirtualBox::BorderVerticalColor>(theme.wg_border_vertical());
-			data::set<VirtualBox::FocusedColor>(theme.wg_hbg_button());
-			data::set<VirtualBox::BackgroundColor>(style::dynavar<[](const auto& value) {
-                return value.alpha(0.3f);
-			}>(theme.wg_bg_secondary()));
-            data::set<VirtualBox::BarColor>(style::dynavar<[](const auto& value) {
+            data::set<data::BorderHorizontalColor>(theme.wg_border_horizontal());
+            data::set<data::BorderVerticalColor>(theme.wg_border_vertical());
+            data::set<data::FocusedColor>(theme.wg_hbg_button());
+            data::set<data::BarColor>(style::dynavar<[](const auto& value) {
                 return value.extend(charset::box_top_bar);
             }>(theme.wg_border_horizontal()));
 
-			using namespace dx;
-			D2_STATELESS_TREE(theme_picker)
-				D2_ELEM(Button, exit)
-					D2_STYLE(Value, "<X>")
-					D2_STYLE(X, 1.0_pxi)
-					D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
-					D2_STYLE(FocusedColor, D2_VAR(WidgetTheme, wg_hbg_button()))
-                    D2_STYLE(OnSubmit, [state](TreeIter ptr) {
-						_core(state)->close();
-					})
-				D2_ELEM_END
-				D2_ELEM(Switch)
-					D2_STYLE(Width, 1.0_pc)
-					D2_STYLE(EnabledForegroundColor, D2_VAR(WidgetTheme, wg_hbg_button()))
-					D2_STYLE(EnabledBackgroundColor, d2::colors::w::transparent)
-					D2_STYLE(DisabledForegroundColor, D2_VAR(WidgetTheme, wg_text()))
-					D2_STYLE(DisabledBackgroundColor, d2::colors::w::transparent)
-					D2_STYLE(SeparatorColor, D2_VAR(WidgetTheme, wg_border_vertical()))
-					D2_STYLE(FocusedColor, D2_DYNAVAR(WidgetTheme, wg_hbg_button(), value.alpha(0.7f)))
-					D2_STYLE(Options, Switch::opts{ "Themes", "Accents" })
-                    D2_STYLE(OnChange, [](TreeIter ptr, int idx, int) {
-						(ptr->parent()->traverse()/"logic"/"themes")
-							->setstate(d2::Element::Display, idx == 0);
-						(ptr->parent()->traverse()/"logic"/"accents")
-							->setstate(d2::Element::Display, idx == 1);
-					})
-				D2_ELEM_END
-                D2_ELEM(Box, logic)
-					D2_STYLE(Y, 1.0_px)
-					D2_STYLE(Width, 1.0_pc)
-					D2_STYLE(Height, 3.0_pxi)
-					D2_ELEM(ScrollBox, themes)
-						D2_STYLE(Width, 1.0_pc)
-						D2_STYLE(Height, 1.0_pc)
-						(*ptr.as<ScrollBox>()->scrollbar().as<VerticalSlider>())
-                            .set<VerticalSlider::SliderColor>(D2_VAR(WidgetTheme, wg_bg_button()))
-                            .set<VerticalSlider::BackgroundColor>(D2_VAR(WidgetTheme, wg_bg_button()));
-					D2_ELEM_END
-                    D2_ELEM(FlowBox, accents)
-						D2_STYLE(Width, 1.0_pc)
-						D2_STYLE(Height, 1.0_pc)
-                        D2_ELEM(FlowBox, controls)
-                            D2_STYLE(X, 0.0_relative)
-                            D2_STYLE(Y, 1.0_px)
-                            D2_STYLE(Width, 0.5_pc)
-                            D2_STYLE(Height, 1.0_pxi)
-                            D2_ELEM(Button)
-                                D2_STYLE(Value, "Push Accent")
-                                D2_STYLE(X, 0.0_center)
-                                D2_STYLE(Y, 0.0_relative)
-                                D2_STYLE(OnSubmit, [](TreeIter ptr) {
-                                    auto p = ptr->screen()->traverse().asp()->override<ColorPicker>("__color_picker__");
-                                    p->set<ColorPicker::OnSubmit>([local = ptr->parent()->traverse()](TreeIter ptr, px::background color) {
-                                        _core(local->state())->_accents.push_back(color);
-                                        (*(local->parent()->traverse()/"list"/"accents").asp()
-                                            ->create<Text>())
-                                            .set<Text::X>(0.0_center)
-                                            .set<Text::Y>(0.0_relative)
-                                            .set<Text::ForegroundColor>(color.alpha(std::max(color.a / 255.f, 0.6f)))
-                                            .set<Text::Value>(std::format("[{} {} {} {}]",
-                                                color.r, color.g, color.b, color.a
-                                            ));
-                                    });
-                                })
-                                D2_STYLES_APPLY(button_react)
-                            D2_ELEM_END
-                            D2_ELEM(Button)
-                                D2_STYLE(Value, "Clear Accents")
-                                D2_STYLE(X, 0.0_center)
-                                D2_STYLE(Y, 0.0_relative)
-                                D2_STYLE(OnSubmit, [](TreeIter ptr) {
-                                    (_core(ptr->state())->traverse()/"logic"/"accents"/"list"/"accents").asp()->clear();
-                                    _core(ptr->state())->_accents.clear();
-                                })
-                                D2_STYLES_APPLY(button_react)
-                            D2_ELEM_END
-							D2_ELEM(Button)
-								D2_STYLE(Value, "Submit Accents")
-								D2_STYLE(X, 0.0_center)
-                                D2_STYLE(Y, 0.0_relative)
-                                D2_STYLE(OnSubmit, [](TreeIter ptr) {
-									_core(ptr->state())->submit();
-								})
-                                D2_STYLES_APPLY(button_react)
-							D2_ELEM_END
-                        D2_ELEM_END
-                        D2_ELEM(VerticalSeparator)
-                            D2_STYLE(ZIndex, 1)
-                            D2_STYLE(X, 0.0_center)
-                            D2_STYLE(Width, 1.0_px)
-                            D2_STYLE(Height, 1.0_pc)
-                            D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_border_vertical()))
-                        D2_ELEM_END
-                        D2_ELEM(FlowBox, list)
-                            D2_STYLE(X, 0.0_relative)
-                            D2_STYLE(Y, 1.0_px)
-                            D2_STYLE(Width, 0.5_pc)
-                            D2_STYLE(Height, 1.0_pxi)
-                            D2_ELEM(Text)
-                                D2_STYLE(Value, "Accent List")
-                                D2_STYLE(X, 0.0_center)
-                                D2_STYLE(Y, 0.0_relative)
-                                D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
-                            D2_ELEM_END
-                            D2_ELEM(FlowBox, accents)
-                                D2_STYLE(Width, 1.0_pc)
-                                D2_STYLE(Height, 2.0_pxi)
-                                D2_STYLE(Y, 0.0_relative)
-                            D2_ELEM_END
-                        D2_ELEM_END
-                    D2_ELEM_END
-                D2_ELEM_END
-			D2_TREE_END
 
 			theme_picker::create_at(
 				traverse(),
@@ -177,17 +229,17 @@ namespace d2::ctm
 					this->state()->screen(),
 					parent()->traverse().asp(),
 					traverse().asp()
-				)
+                ),
+                true
 			);
 
-			(at("logic")/"themes")->setstate(Element::Display, true);
-			(at("logic")/"accents")->setstate(Element::Display, false);
+            (at("logic")/"main"/"themes")->setstate(Element::Display, true);
+            (at("logic")/"main"/"builder")->setstate(Element::Display, false);
 
 			_update_theme_list();
 		}
 	}
-
-	void ThemeSelector::_signal_write_impl(write_flag type, unsigned int prop, ptr element)
+    void ThemeSelectorWindow::_signal_write_impl(write_flag type, unsigned int prop, ptr element)
 	{
 		if (element.get() == this)
 		{
@@ -200,47 +252,125 @@ namespace d2::ctm
 				_update_theme_list();
 			}
 		}
-        dx::VirtualBox::_signal_write_impl(type, prop, element);
+        dx::VirtualFlowBox::_signal_write_impl(type, prop, element);
 	}
-
-	void ThemeSelector::_update_theme_list()
+    void ThemeSelectorWindow::_update_theme_list()
 	{
 		using namespace dx;
 		auto& theme = this->state()->screen()->theme<WidgetTheme>();
-		auto list = (at("logic")/"themes").asp();
+        auto list = (at("logic")/"main"/"themes").asp();
 		for (decltype(auto) it : data::themes)
 		{
 			auto elem = list->create<Button>().as<Button>();
 			(*elem)
-				.set<Button::Value>(it)
+                .set<Button::Value>(it.first)
 				.set<Button::ForegroundColor>(theme.wg_text())
 				.set<Button::FocusedColor>(theme.wg_hbg_button())
 				.set<Button::BackgroundColor>(d2::colors::w::transparent)
-                .set<Button::OnSubmit>([](TreeIter elem) {
-					_core(elem->state())->submit(
+                .set<Button::OnSubmit>([](TreeIter<> elem) {
+                    _bcore(elem->state())->submit(
 						elem.as<Button>()->get<Button::Value>()
 					);
 				});
 		}
 	}
 
-	void ThemeSelector::submit(const std::string& name)
+    void ThemeSelectorWindow::submit(const std::string& name)
 	{
 		if (data::on_submit != nullptr)
             data::on_submit(
-                std::static_pointer_cast<ThemeSelector>(shared_from_this()),
+                std::static_pointer_cast<ThemeSelectorWindow>(shared_from_this()),
                 name
             );
 		close();
 	}
-	void ThemeSelector::submit()
+    void ThemeSelectorWindow::submit()
 	{
 		if (data::on_submit != nullptr)
             data::on_submit(
-                std::static_pointer_cast<ThemeSelector>(shared_from_this()),
+                std::static_pointer_cast<ThemeSelectorWindow>(shared_from_this()),
                 _accents
             );
 		close();
 	}
+
+    void ThemeSelector::_state_change_impl(State state, bool value)
+    {
+        FlowBox::_state_change_impl(state, value);
+        if (state == State::Created && value && empty())
+        {
+            auto& theme = this->state()->screen()->theme<WidgetTheme>();
+            data::set<data::ContainerBorder>(true);
+            data::set<data::BorderHorizontalColor>(theme.wg_border_horizontal());
+            data::set<data::BorderVerticalColor>(theme.wg_border_vertical());
+
+            theme_picker::create_at(
+                traverse(),
+                TreeState::make<TreeState>(
+                    this->state()->screen(),
+                    parent()->traverse().asp(),
+                    traverse().asp()
+                ),
+                false
+            );
+
+            (at("logic")/"main"/"themes")->setstate(Element::Display, true);
+            (at("logic")/"main"/"builder")->setstate(Element::Display, false);
+
+            _update_theme_list();
+        }
+    }
+    void ThemeSelector::_signal_write_impl(write_flag type, unsigned int prop, ptr element)
+    {
+        if (element.get() == this)
+        {
+            if (prop == data::MaxAccents)
+            {
+
+            }
+            else if (prop == data::Themes)
+            {
+                _update_theme_list();
+            }
+        }
+        dx::FlowBox::_signal_write_impl(type, prop, element);
+    }
+    void ThemeSelector::_update_theme_list()
+    {
+        using namespace dx;
+        auto& theme = this->state()->screen()->theme<WidgetTheme>();
+        auto list = (at("logic")/"main"/"themes").asp();
+        for (decltype(auto) it : data::themes)
+        {
+            auto elem = list->create<Button>().as<Button>();
+            (*elem)
+                .set<Button::Value>(it.first)
+                .set<Button::ForegroundColor>(theme.wg_text())
+                .set<Button::FocusedColor>(theme.wg_hbg_button())
+                .set<Button::BackgroundColor>(d2::colors::w::transparent)
+                .set<Button::OnSubmit>([](TreeIter<> elem) {
+                    _bcore(elem->state())->submit(
+                        elem.as<Button>()->get<Button::Value>()
+                    );
+                });
+        }
+    }
+
+    void ThemeSelector::submit(const std::string& name)
+    {
+        if (data::on_submit != nullptr)
+            data::on_submit(
+                std::static_pointer_cast<ThemeSelector>(shared_from_this()),
+                name
+            );
+    }
+    void ThemeSelector::submit()
+    {
+        if (data::on_submit != nullptr)
+            data::on_submit(
+                std::static_pointer_cast<ThemeSelector>(shared_from_this()),
+                _accents
+            );
+    }
 }
 
