@@ -1,7 +1,6 @@
 #include "d2_tree_element.hpp"
 #include "d2_tree_parent.hpp"
 #include "d2_exceptions.hpp"
-#include <typeinfo>
 #include <vector>
 
 namespace d2
@@ -14,85 +13,6 @@ namespace d2
     {
         _storage[static_cast<std::size_t>(comp)] = value;
     }
-
-    // Traversal Wrapper
-
-    bool TreeIter::is_type_of(TreeIter other) const
-    {
-        if (_elem.expired())
-            return false;
-        return typeid(other._elem.lock().get()) == typeid(_elem.lock().get());
-    }
-
-    TreeIter TreeIter::up() const
-    {
-        return TreeIter(_elem.lock()->parent());
-    }
-    TreeIter TreeIter::up(std::size_t cnt) const
-    {
-        if (!cnt)
-            return _elem.lock();
-        return TreeIter(_elem.lock()->parent()).up(cnt - 1);
-    }
-    TreeIter TreeIter::up(const std::string& name) const
-    {
-        auto current = _elem.lock();
-        while (current->name() != name)
-        {
-            current = current->parent();
-            if (current == nullptr)
-                throw std::runtime_error{ std::format("Failed to locate parent with ID: {}", name) };
-        }
-        return current;
-    }
-
-    TreeIter TreeIter::operator/(const std::string& path)
-    {
-        return as<ParentElement>()->at(path);
-    }
-    TreeIter TreeIter::operator^(std::size_t cnt)
-    {
-        return up(cnt);
-    }
-    TreeIter TreeIter::operator+()
-    {
-        return up();
-    }
-
-    TreeIter::operator std::shared_ptr<Element>()
-    {
-        return _elem.lock();
-    }
-    TreeIter::operator std::weak_ptr<Element>()
-    {
-        return _elem;
-    }
-
-    std::shared_ptr<Element> TreeIter::operator->() const
-    {
-        return _elem.lock();
-    }
-    std::shared_ptr<Element> TreeIter::operator->()
-    {
-        return _elem.lock();
-    }
-
-    Element& TreeIter::operator*() const
-    {
-        return *_elem.lock();
-    }
-    Element& TreeIter::operator*()
-    {
-        return *_elem.lock();
-    }
-
-    void TreeIter::
-    foreach (foreach_callback callback)
-    {
-        auto p = std::dynamic_pointer_cast<ParentElement>(as());
-        if (p) p->foreach(std::move(callback));
-    }
-
 
     // Event Listener
 
@@ -152,15 +72,15 @@ namespace d2
 
     // Other stuff
 
-    Element::write_flag Element::_contextual_change(write_flag flags) const
+    Element::write_flag Element::_contextual_change(write_flag type) const
     {
         const unit_meta_flag rep = _unit_report_impl();
-        if (flags & WriteType::Dimensions)
+        if (type & (InternalState::DimensionsWidthUpdated | InternalState::DimensionsHeightUpdated))
             return
                 (bool(rep & ContextualXPos) * WriteType::LayoutXPos) |
                 (bool(rep & ContextualYPos) * WriteType::LayoutYPos) |
-                (bool(rep & (ContextualWidth | RelativeWidth)) * WriteType::LayoutWidth) |
-                (bool(rep & ContextualHeight | RelativeHeight) * WriteType::LayoutHeight);
+                (bool(rep & ContextualWidth) * WriteType::LayoutWidth) |
+                (bool(rep & ContextualHeight) * WriteType::LayoutHeight);
         return 0x00;
     }
 
@@ -172,7 +92,6 @@ namespace d2
 
     Element::EventListener Element::_push_listener(State event, bool value, event_callback callback)
     {
-        D2_ASSERT(callback != nullptr);
         auto& l = _subscribers.emplace_back(std::make_shared<EventListenerState>(
             shared_from_this(),
             _subscribers.size(),
@@ -253,39 +172,41 @@ namespace d2
         if ((type & ~(WriteType::Style | WriteType::InternalLayout)) & WriteType::Dimensions)
         {
             _signal_context_change_impl(type, prop, shared_from_this());
-            // Check if after the change of the dimensions the coordinates
-            // on the corresponding axis are not going to change due to the context
-            const auto pos = (type >> 2) & (WriteType::LayoutXPos | WriteType::LayoutYPos);
-            _invalidate_state(
-                _contextual_change(pos)
-            );
+            _invalidate_state(_contextual_change(type));
         }
-        _signal_write_impl(type, prop, element);
         _invalidate_state(type);
+        _signal_write_impl(type, prop, element);
     }
     void Element::_signal_write_local(write_flag type, unsigned int prop)
     {
         _signal_write_local(type, prop, shared_from_this());
     }
+    void Element::_signal_write_child(write_flag type, unsigned int prop, ptr element)
+    {
+        _signal_write_child_impl(type, prop, element);
+    }
     void Element::_signal_write(write_flag type, unsigned int prop, ptr element)
     {
         _signal_write_local(type, prop, element);
-        if (const auto uptype = WriteType::Style | (type & WriteType::InternalLayout);
-            parent() && !parent()->_is_write_type(uptype))
+        if (parent())
         {
-            // Any layout write to a sub-object will result in a Style write to the parent
-            parent()->_signal_write(uptype, prop, element);
+            if (const auto uptype = WriteType::Style | (type & WriteType::InternalLayout);
+                !parent()->_is_write_type(uptype))
+            {
+                // Any layout write to a sub-object will result in a Style write to the parent
+                parent()->_signal_write(uptype, prop, element);
+            }
+            parent()->_signal_write_child(type, prop, element);
         }
     }
 
     void Element::_signal_context_change_sub(write_flag type, unsigned int prop, ptr element)
     {
-        if (const auto flags = _contextual_change(type);
-            flags)
+        if (const auto flags = _contextual_change(type))
         {
+            _invalidate_state(flags);
             _signal_context_change_impl(type, prop, element);
             _signal_write_impl(flags, prop, element);
-            _invalidate_state(flags);
         }
     }
     void Element::_signal_context_change_sub(write_flag type, unsigned int prop)
@@ -320,7 +241,7 @@ namespace d2
     {
         _internal_state &= ~type;
     }
-    void Element::_trigger_event(ScreenEvent ev)
+    void Element::_trigger_event(sys::screen::Event ev)
     {
         _event_impl(ev);
         _trigger(State::Event, true);
@@ -354,7 +275,7 @@ namespace d2
 
     // Metadata
 
-    std::shared_ptr<Screen> Element::screen() const
+    sys::module<sys::screen> Element::screen() const
     {
         return _state_ptr->screen();
     }
@@ -550,7 +471,6 @@ namespace d2
 
     Element::Frame Element::frame()
     {
-        D2_ASSERT((_internal_state & (CachePolicyStatic | CachePolicyDynamic | CachePolicyVolatile)))
         if (_internal_state & WasWrittenLayout)
         {
             _update_layout_impl();
@@ -573,6 +493,7 @@ namespace d2
                 }
 
                 _internal_state |= IsBeingRendered;
+                _signal_update(WasWritten);
                 _frame_impl(_fetch_pixel_buffer_impl());
                 _internal_state &= ~IsBeingRendered;
 
@@ -582,8 +503,10 @@ namespace d2
                 }
             }
             else
+            {
+                _signal_update(WasWritten);
                 _buffer.clear();
-            _signal_update(WasWritten);
+            }
         }
         return Frame(shared_from_this());
     }
@@ -653,11 +576,11 @@ namespace d2
         return _index_impl();
     }
 
-    TreeIter Element::traverse()
+    TreeIter<> Element::traverse()
     {
         return { shared_from_this() };
     }
-    TreeIter Element::operator+()
+    TreeIter<> Element::operator+()
     {
         return traverse();
     }
@@ -701,7 +624,7 @@ namespace d2
         {
             return _ptr->_signal_update(type);
         }
-        void ElementView::trigger_event(ScreenEvent ev)
+        void ElementView::trigger_event(sys::screen::Event ev)
         {
             return _ptr->_trigger_event(ev);
         }

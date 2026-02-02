@@ -28,13 +28,13 @@ namespace mt
 
 		static inline void _yield() noexcept
 		{
-	#		if defined(_MSC_VER)
+#           if defined(_MSC_VER)
 				_mm_pause();
-	#		elif defined(__GNUG__)
+#           elif defined(__GNUG__)
 				__builtin_ia32_pause();
-	#		else
+#           else
 				std::this_thread::yield();
-	#		endif
+#           endif
 		}
 
         bool _enqueue_impl(bool wait, Type& value) noexcept

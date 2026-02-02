@@ -1,24 +1,24 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(thread-pool LANGUAGES CXX)
+project(logd LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_library(RLOG STATIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_runtime_logs.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_runtime_logs.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_mapper.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_mapper.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/rdb_memunits.hpp
+find_package(absl REQUIRED)
+
+add_library(logd STATIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/runtime_logs.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/runtime_logs.cpp
 )
-target_include_directories (RLOG PRIVATE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-    $<INSTALL_INTERFACE:include>
+target_link_libraries(logd PRIVATE
+    absl::stacktrace
+    absl::symbolize
+    absl::base
 )
 
-install(TARGETS ${_install_targets} RLOG
-    EXPORT  RLOGTargets
+install(TARGETS ${_install_targets} logd
+    EXPORT  logdTargets
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
@@ -28,8 +28,8 @@ install(
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 install(
-    EXPORT      RLOGTargets
-    FILE        RLOGTargets.cmake
-    NAMESPACE   RLOG::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/RLOG-lib
+    EXPORT      logdTargets
+    FILE        logdTargets.cmake
+    NAMESPACE   logd::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logd-lib
 )

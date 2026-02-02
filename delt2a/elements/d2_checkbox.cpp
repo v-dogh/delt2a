@@ -57,10 +57,10 @@ namespace d2::dx
                          );
         }
     }
-    void Checkbox::_event_impl(Screen::Event ev)
+    void Checkbox::_event_impl(sys::screen::Event ev)
     {
         if (getstate(State::Keynavi) &&
-                ev == Screen::Event::KeyInput &&
+                ev == sys::screen::Event::KeyInput &&
                 context()->input()->is_pressed(sys::SystemInput::Enter, sys::SystemInput::KeyMode::Press))
         {
             _submit();
@@ -70,13 +70,21 @@ namespace d2::dx
     void Checkbox::_frame_impl(PixelBuffer::View buffer)
     {
         const auto color = Pixel::combine(
-                               data::foreground_color,
-                               getstate(Keynavi) ? data::focused_color : data::background_color
-                           );
+            data::foreground_color,
+            getstate(Keynavi) ? data::focused_color : data::background_color
+        );
         buffer.fill(color);
         TextHelper::_render_text(
             data::checkbox_value ? data::value_on : data::value_off,
-            data::checkbox_value ? data::color_on : data::color_off,
+            data::checkbox_value ?
+                Pixel::combine(
+                    data::color_on_foreground,
+                    data::color_on_background
+                ) :
+                Pixel::combine(
+                    data::color_off_foreground,
+                    data::color_off_background
+                ),
             { 0, 0 },
             box(),
             buffer

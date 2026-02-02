@@ -106,11 +106,11 @@ namespace d2::ctm {}
 
 #define _D2_IMPL_STATEFUL_TREE_ROOT(_alias_, _state_, _root_, ...) \
 struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
-        static ::d2::TreeIter create_at(::d2::TreeIter __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__) { \
+        static ::d2::TreeIter<> create_at(::d2::TreeIter<> __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__) { \
             using __object_type = _root_; \
             using namespace d2::dx; \
             using namespace d2::ctm; \
-            auto  __ptr   = ::d2::TypedTreeIter<_root_>(__uptr); \
+            auto  __ptr   = ::d2::TreeIter<_root_>(__uptr); \
             auto  __state = std::static_pointer_cast<__state_type>(__ustate); \
             auto& state   = __state; \
             auto& ptr     = __ptr;
@@ -121,19 +121,19 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 
 #define _D2_IMPL_STATEFUL_TREE_ROOT_FORWARD(_alias_, _state_, _root_, ...) \
     struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
-        static ::d2::TreeIter create_at(::d2::TreeIter __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__); };
+        static ::d2::TreeIter<> create_at(::d2::TreeIter<> __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__); };
 
 #define _D2_IMPL_STATEFUL_TREE_FORWARD(_alias_, _state_, ...) _D2_IMPL_STATEFUL_TREE_ROOT_FORWARD(_alias_, _state_, ::d2::dx::Box, __VA_ARGS__)
 #define _D2_IMPL_STATELESS_TREE_ROOT_FORWARD(_alias_, _root_, ...) _D2_IMPL_STATEFUL_TREE_ROOT_FORWARD(_alias_, ::d2::TreeState, _root_, __VA_ARGS__)
 #define _D2_IMPL_STATELESS_TREE_FORWARD(_alias_, ...) _D2_IMPL_STATEFUL_TREE_FORWARD(_alias_, ::d2::TreeState, __VA_ARGS__)
 
 #define _D2_IMPL_TREE_DEFINE(_alias_, ...) \
-::d2::TreeIter _alias_::create_at(::d2::TreeIter __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__) { \
+::d2::TreeIter<> _alias_::create_at(::d2::TreeIter<> __uptr, ::d2::TreeState::ptr __ustate __VA_OPT__(,) __VA_ARGS__) { \
         { using __object_type = _alias_::root; \
           using __state_type = _alias_::state; \
         using namespace ::d2::dx; \
         using namespace d2::ctm; \
-        auto  __ptr   = ::d2::TypedTreeIter<_alias_::root>(__uptr); \
+        auto  __ptr   = ::d2::TreeIter<_alias_::root>(__uptr); \
         auto  __state = std::static_pointer_cast<_alias_::state>(__ustate); \
         auto& state   = __state; \
         auto& ptr     = __ptr;
@@ -165,9 +165,9 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
     using __object_type = _type_; \
     auto& __uptr = __ptr; \
     auto  __nptr = ::d2::Element::make<_type_>(_name_, __state, __uptr.asp()); \
-    auto  __ptr  = ::d2::TypedTreeIter<_type_>(__nptr); \
+    auto  __ptr  = ::d2::TreeIter<_type_>(__nptr); \
     auto& state  = __state; \
-    auto  ptr    = ::d2::TypedTreeIter<_type_>(__nptr);
+    auto  ptr    = ::d2::TreeIter<_type_>(__nptr);
 
 #define _D2_IMPL_STYLE(_prop_, ...) __ptr.template as<__object_type>()->template set<__object_type::_prop_>(__VA_ARGS__);
 #define _D2_IMPL_REQUIRE(...) __ptr.template as<__object_type>()->constraint(__VA_ARGS__);
@@ -179,17 +179,17 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 
 #define _D2_IMPL_ANCHOR(_type_, _name_) \
     auto __##_name_ = ::d2::Element::make<_type_>(#_name_, __state, nullptr); \
-    auto _name_     = ::d2::TypedTreeIter<_type_>(__##_name_);
+    auto _name_     = ::d2::TreeIter<_type_>(__##_name_);
 #define _D2_IMPL_ANCHOR_STATE(_type_, _name_) \
     __state->_name_ = ::d2::Element::make<_type_>(#_name_, __state, nullptr); \
     auto __##_name_ = state->_name_; \
-    auto _name_     = ::d2::TypedTreeIter<_type_>(__state->_name_);
+    auto _name_     = ::d2::TreeIter<_type_>(__state->_name_);
 #define _D2_IMPL_ELEM_ANCHOR(_name_) { \
     _name_->setparent(__ptr.asp()); \
     using __object_type = decltype(_name_)::type; \
     auto& __uptr = __ptr; \
     auto  __nptr = __##_name_; \
-    auto  __ptr  = ::d2::TypedTreeIter<__object_type>(__nptr); \
+    auto  __ptr  = ::d2::TreeIter<__object_type>(__nptr); \
     auto& state  = __state; \
     auto  ptr    = _name_;
 
@@ -197,19 +197,20 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
  /// STYLESHEETS ///
 ///////////////////
 
-#define _D2_IMPL_STYLESHEET_BEGIN(_name_) \
+#define _D2_IMPL_STYLESHEET_BEGIN(_name_, ...) \
     struct _name_ { \
         template<typename Type> \
-        static void apply(::d2::TypedTreeIter<Type> __ptr, ::d2::TreeState::ptr __state) { \
+        static void apply(::d2::TreeIter<Type> __ptr, ::d2::TreeState::ptr __state __VA_OPT__(,) __VA_ARGS__) { \
             using __object_type = Type; \
-            auto  __uptr = ::d2::TypedTreeIter<::d2::ParentElement>(__ptr->parent()); \
+            using type = Type; \
+            auto  __uptr = ::d2::TreeIter<::d2::ParentElement>(__ptr->parent()); \
             auto& state  = __state; \
             auto& ptr    = __ptr;
 
 #define _D2_IMPL_STYLESHEET_END }};
 
-#define _D2_IMPL_STYLES_APPLY_MANUAL(_name_, _ptr_, _state_) _name_::apply(::d2::TypedTreeIter(_ptr_), _state_);
-#define _D2_IMPL_STYLES_APPLY(_name_) _D2_IMPL_STYLES_APPLY_MANUAL(_name_, __ptr, __state)
+#define _D2_IMPL_STYLES_APPLY_MANUAL(_name_, _ptr_, _state_, ...) _name_::apply(::d2::TreeIter(_ptr_), _state_ __VA_OPT__(,) __VA_ARGS__);
+#define _D2_IMPL_STYLES_APPLY(_name_, ...) _D2_IMPL_STYLES_APPLY_MANUAL(_name_, __ptr, __state, __VA_ARGS__)
 
   ///////////////
  /// THEMING ///
@@ -226,9 +227,15 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 
 #define _D2_IMPL_VAR(_type_, _var_) __state->screen()->theme<_type_>()._var_
 #define _D2_IMPL_VAR_TYPE(_type_, _var_) typename std::remove_cvref_t<decltype(_D2_IMPL_VAR(_type_, _var_))>::value_type
-
 #define _D2_IMPL_DYNAVAR(_type_, _var_, ...) ::d2::style::dynavar< \
     [](const _D2_IMPL_VAR_TYPE(_type_, _var_)& value) { return __VA_ARGS__; }>(_D2_IMPL_VAR(_type_, _var_))
+
+#define _D2_IMPL_NVAR_STR(_type_, _var_, _name_) __state->screen()->theme<_type_>(_name_)._var_
+#define _D2_IMPL_NDYNAVAR_STR(_type_, _var_, ...) ::d2::style::dynavar< \
+[](const _D2_IMPL_VAR_TYPE(_type_, _var_)& value) { return __VA_ARGS__; }>(_D2_IMPL_NVAR(_type_, _var_, _name_))
+
+#define _D2_IMPL_NVAR(_type_, _var_, _name_) _D2_IMPL_NVAR_STR(_type_, _var_, #_name_)
+#define _D2_IMPL_NDYNAVAR(_type_, _var_, _name_, ...) _D2_IMPL_NDYNAVAR(_type_, _var_, #_name_, __VA_ARGS__)
 
 // Safe per-element storage (no duplicated data across multiple instances)
 #define _D2_IMPL_STATIC(_name_, ...) \
@@ -243,25 +250,26 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
  /// CONTEXT ///
 ///////////////
 
-#define _D2_IMPL_CONTEXT(_ptrv_, _typev_) \
-    { ::d2::TreeIter __ptr = _ptrv_; \
+#define _D2_IMPL_CONTEXT_BASE(_ptrv_, _typev_) \
+    { ::d2::TreeIter<> __ptr = _ptrv_; \
         ::d2::TreeState::ptr __state = __ptr->state(); \
         using __object_type = _typev_; \
-        auto ptr = ::d2::TypedTreeIter<_typev_>(__ptr);
+        auto ptr = ::d2::TreeIter<_typev_>(__ptr); \
+        auto state = __state;
 
+#define _D2_IMPL_CONTEXT(_ptrv_, _typev_) { _D2_IMPL_CONTEXT_BASE(_ptrv_, _typev_)
 #define _D2_IMPL_CONTEXT_EXT(_ptrv_, _typev_, _statev_, _stypev_) \
-    _D2_IMPL_CONTEXT(_ptrv_, _typev_) \
-    auto state = std::static_pointer_cast<_stypev_>(_statev_);
-
-#define _D2_IMPL_CONTEXT_RED(_statev_) { ::d2::TreeState::ptr __state = _statev_;
-
-#define _D2_IMPL_CONTEXT_AUTO(_ptrv_) { \
+    _D2_IMPL_CONTEXT_BASE(_ptrv_, _typev_) \
+    { auto state = std::static_pointer_cast<_stypev_>(_statev_);
+#define _D2_IMPL_CONTEXT_RED(_statev_) {{ ::d2::TreeState::ptr __state = _statev_;
+#define _D2_IMPL_CONTEXT_AUTO(_ptrv_) {{ \
     using __object_type = decltype(_ptrv_)::type; \
-    ::d2::TypedTreeIter __ptr = _ptrv_; \
+    ::d2::TreeIter __ptr = _ptrv_; \
     ::d2::TreeState::ptr __state = __ptr->state(); \
-    auto ptr = __ptr;
+    auto ptr = __ptr; \
+    auto state = __state;
 
-#define _D2_IMPL_CONTEXT_END }
+#define _D2_IMPL_CONTEXT_END }}
 
   ////////////////////////////
  /// HELPERS/UNIFORMATORS ///
@@ -272,17 +280,20 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 // EEXPR variants do not include line breaks
 #define _D2_IMPL_SYNC_EEXPR(...) (state->context()->is_synced() ? \
 (__VA_ARGS__) : state->context()->sync([&]() -> decltype(auto) { return __VA_ARGS__; }).value())
-
+#define _D2_IMPL_SYNC_ASYNC_EEXPR(...) (state->context()->sync_async_if( \
+    [=]() -> decltype(auto) { return __VA_ARGS__; }))
 #define _D2_IMPL_SYNC_EXPR(...) _D2_IMPL_SYNC_EEXPR(__VA_ARGS__);
-#define _D2_IMPL_SYNC_BLOCK     state->context()->sync_if([&]{
+#define _D2_IMPL_SYNC_BLOCK state->context()->sync_if([&]{
+#define _D2_IMPL_SYNC_ASYNC_EXPR(...) _D2_IMPL_SYNC_ASYNC_EEXPR(__VA_ARGS__);
+#define _D2_IMPL_SYNC_ASYNC_BLOCK(...) state->context()->sync_async_if([= __VA_OPT__(,) __VA_ARGS__]{
 #define _D2_IMPL_SYNC_BLOCK_END });
 
 #define _D2_IMPL_LISTEN_EEXPR(_event_, _value_, ...) [=]() -> void { _D2_IMPL_LISTEN_EXPR(_event_, _value_, __VA_ARGS__) }()
-#define _D2_IMPL_LISTEN_EXPR(_event_, _value_, ...)  _D2_IMPL_LISTEN(_event_, _value_) (__VA_ARGS__); _D2_IMPL_LISTEN_END
+#define _D2_IMPL_LISTEN_EXPR(_event_, _value_, ...) _D2_IMPL_LISTEN(_event_, _value_) (__VA_ARGS__); _D2_IMPL_LISTEN_END
 
 #define _D2_IMPL_LISTEN(_event_, _value_, ...) \
     __ptr->listen(::d2::Element::_event_, _value_, \
-    [= __VA_OPT__(,) __VA_ARGS__](::d2::Element::EventListener listener, ::d2::TreeIter __lptr) { _D2_IMPL_CONTEXT(__lptr, __object_type)
+    [= __VA_OPT__(,) __VA_ARGS__](::d2::Element::EventListener listener, ::d2::TreeIter<> __lptr) { _D2_IMPL_CONTEXT(__lptr, __object_type)
 
 #define _D2_IMPL_LISTEN_END _D2_IMPL_CONTEXT_END });
 
@@ -295,10 +306,10 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 #define _D2_IMPL_LISTEN_EVENT_EEXPR(...) [=]() -> void { _D2_IMPL_LISTEN_EVENT_EXPR(__VA_ARGS__) }()
 #define _D2_IMPL_LISTEN_EVENT_EXPR(...) _D2_IMPL_LISTEN_EVENT (__VA_ARGS__); _D2_IMPL_LISTEN_EVENT_END
 #define _D2_IMPL_LISTEN_EVENT(_event_, ...) \
-    __state->context()->listen(::d2::Screen::Event::_event_, \
-        [= __VA_OPT__(,) __VA_ARGS__](::d2::Screen::ptr src) { \
-            ::d2::TreeState::ptr state = src->state(); \
-            ::d2::IOContext::ptr ctx = src->context();
+    __state->context()->listen(::d2::sys::screen::Event::_event_, \
+        [= __VA_OPT__(,) __VA_ARGS__](::d2::IOContext::ptr ctx) { \
+            ::d2::TreeState::ptr state = ctx->screen()->state(); \
+            ::d2::sys::module<::d2::sys::screen> src = ctx->screen();
 #define _D2_IMPL_LISTEN_EVENT_END });
 
 #define _D2_IMPL_ASYNC_EEXPR(...) [=]() -> void { _D2_IMPL_ASYNC_EXPR(__VA_ARGS__) }()
@@ -309,70 +320,64 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 #define _D2_IMPL_CYCLIC_EEXPR(_time_, ...) [=]() -> void { _D2_IMPL_CYCLIC_EXPR(_time_, __VA_ARGS__) }()
 #define _D2_IMPL_CYCLIC_EXPR(_time_, ...) _D2_IMPL_CYCLIC_TASK(_time_) (__VA_ARGS__); _D2_IMPL_CYCLIC_END
 
-#define _D2_IMPL_CYCLIC_TASK(_time_) \
-    { constexpr auto __cyclic_time = std::chrono::milliseconds(_time_); \
-    __state->context()->scheduler()->launch_cyclic([=](auto task) {
-
-#define _D2_IMPL_CYCLIC_END }, __cyclic_time); }
+#define _D2_IMPL_CYCLIC_TASK(_time_) __state->context()->scheduler()->launch_cyclic(std::chrono::milliseconds(_time_), [=](auto task) {
+#define _D2_IMPL_CYCLIC_END });
 
 #define _D2_IMPL_DEFER_EEXPR(_time_, ...) [=]() -> void { _D2_IMPL_DEFER_EXPR(_time_, __VA_ARGS__) }()
 #define _D2_IMPL_DEFER_EXPR(_time_, ...) _D2_IMPL_DEFER_TASK(_time_) (__VA_ARGS__); _D2_IMPL_DEFERRED_TASK_END
 
-#define _D2_IMPL_DEFER_TASK(_time_) \
-    { constexpr auto __defer_time = std::chrono::milliseconds(_time_); \
-    __state->context()->scheduler()->launch_deferred([=]() -> void {
-
-#define _D2_IMPL_DEFERRED_TASK_END }, __defer_time); }
+#define _D2_IMPL_DEFER_TASK(_time_) __state->context()->scheduler()->launch_deferred(std::chrono::milliseconds(_time_), [=]() -> void {
+#define _D2_IMPL_DEFERRED_TASK_END });
 
   /////////////////////
  /// INTERPOLATION ///
 /////////////////////
 
 #define _D2_IMPL_INTERPOLATE_IMPL(_time_, _interpolator_, _ptr_, _style_, _dest_, ...) \
-    [&]() { \
-        using __object_type = decltype(::d2::TypedTreeIter(_ptr_))::type; \
+    [&]{ \
+        using __object_type = decltype(_ptr_)::type; \
         using __type = decltype(std::declval<__object_type>().template get<__object_type::_style_>()); \
         return _ptr_->state()->screen()->template interpolate<::d2::interp::_interpolator_<__object_type, __object_type::_style_>>( \
-                std::chrono::milliseconds(_time_), \
-                _ptr_, \
-                _dest_ \
-                __VA_OPT__(,) __VA_ARGS__ \
+            std::chrono::milliseconds(_time_), \
+            _ptr_, \
+            _dest_ \
+            __VA_OPT__(,) __VA_ARGS__ \
         ); \
     }()
 #define _D2_IMPL_INTERPOLATE_EVENT_IMPL(_event_, _sstate_, _time_, _interpolator_, _ptr_, _style_, _dest_, ...) \
-    { \
-        using __object_type = decltype(::d2::TypedTreeIter(_ptr_))::type; \
+    [&]{ \
+        using __object_type = decltype(_ptr_)::type; \
         using __type = decltype(std::declval<__object_type>().template get<__object_type::_style_>()); \
         _ptr_->listen(::d2::Element::State::_event_, _sstate_, [=](auto, auto ptr) { \
             const auto tptr = ptr.template as<__object_type>(); \
             tptr->state()->screen()->template interpolate<::d2::interp::_interpolator_<__object_type, __object_type::_style_>>( \
-                    std::chrono::milliseconds(_time_), \
-                    tptr, \
-                    _dest_ \
-                    __VA_OPT__(,) __VA_ARGS__ \
+                std::chrono::milliseconds(_time_), \
+                tptr, \
+                _dest_ \
+                __VA_OPT__(,) __VA_ARGS__ \
             ); \
         }); \
-    }
+    }()
 #define _D2_IMPL_INTERPOLATE_EVENT_TWOWAY_IMPL(_event_, _time_, _interpolator_, _ptr_, _style_, _dest_, ...) \
-    { \
-        using __object_type = decltype(::d2::TypedTreeIter(_ptr_))::type; \
+    [&]{ \
+        using __object_type = decltype(_ptr_)::type; \
         using __type = decltype(std::declval<__object_type>().template get<__object_type::_style_>()); \
-        static bool __is_on{ false }; \
+        static auto __is_on{ false }; \
         static __type __saved_initial{}; \
         static std::chrono::steady_clock::time_point __rev_timestamp{}; \
         _ptr_->listen(::d2::Element::State::_event_, true, [=](auto, auto ptr) { \
             const auto tptr = ptr.template as<__object_type>(); \
-            const bool __finished = tptr->template get<__object_type::_style_>() == static_cast<__type>(_dest_); \
+            const auto __finished = tptr->template get<__object_type::_style_>() == static_cast<__type>(_dest_); \
             if (!__is_on && !__finished) \
             { \
                 if ((std::chrono::steady_clock::now() - __rev_timestamp) >= std::chrono::milliseconds(_time_)) \
                     __saved_initial = tptr->template get<__object_type::_style_>(); \
                 __rev_timestamp = std::chrono::steady_clock::time_point(); \
                 tptr->state()->screen()->template interpolate<::d2::interp::_interpolator_<__object_type, __object_type::_style_>>( \
-                        std::chrono::milliseconds(_time_), \
-                        tptr, \
-                        _dest_ \
-                        __VA_OPT__(,) __VA_ARGS__ \
+                    std::chrono::milliseconds(_time_), \
+                    tptr, \
+                    _dest_ \
+                    __VA_OPT__(,) __VA_ARGS__ \
                 ); \
             } \
             else if (__finished) \
@@ -384,16 +389,16 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
             const auto tptr = ptr.template as<__object_type>(); \
             __rev_timestamp = std::chrono::steady_clock::now(); \
             tptr->state()->screen()->template interpolate<::d2::interp::_interpolator_<__object_type, __object_type::_style_>>( \
-                    std::chrono::milliseconds(_time_), \
-                    tptr, \
-                    __saved_initial \
-                    __VA_OPT__(,) __VA_ARGS__ \
+                std::chrono::milliseconds(_time_), \
+                tptr, \
+                __saved_initial \
+                __VA_OPT__(,) __VA_ARGS__ \
             ); \
         }); \
-    }
+    }()
 #define _D2_IMPL_INTERPOLATE_TOGGLE_IMPL(_time_, _interpolator_, _ptr_, _style_, _dest_, ...) \
-    { \
-        using __object_type = decltype(::d2::TypedTreeIter(_ptr_))::type; \
+    [&]{ \
+        using __object_type = decltype(_ptr_)::type; \
         using __type = decltype(std::declval<__object_type>().template get<__object_type::_style_>()); \
         static bool __is_on{ false }; \
         static __type __saved_initial{}; \
@@ -425,7 +430,7 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
             } \
             __is_on = !__is_on; \
         }); \
-    }
+    }()
 
 #define _D2_IMPL_INTERPOLATE(_time_, _interpolator_, _ptr_, _style_, _dest_) _D2_IMPL_INTERPOLATE_IMPL(_time_, _interpolator_, _ptr_, _style_, _dest_)
 #define _D2_IMPL_INTERPOLATE_GEN(_time_, _interpolator_, _ptr_, _style_, _dest_, ...) _D2_IMPL_INTERPOLATE_IMPL(_time_, _interpolator_, _ptr_, _style_, _dest_, __VA_ARGS__)

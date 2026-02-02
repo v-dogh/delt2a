@@ -21,7 +21,7 @@ namespace mt
             while (true)
             {
                 if (!_flag.test_and_set(std::memory_order::acquire)) break;
-                else _flag.wait(true, std::memory_order::relaxed);
+                else _flag.wait(true, std::memory_order::acquire);
             }
         }
     }
@@ -53,7 +53,8 @@ namespace mt
 
         const auto support =
             Task::Static * bool(_flags & HandleTask) |
-            Task::Cyclic * bool(_flags & HandleCyclicTask);
+            Task::Cyclic * bool(_flags & HandleCyclicTask) |
+            Task::Deferred * bool(_flags & HandleDeferredTask);
         const auto nid = ptr->_node_id();
         auto node = ptr->_nodes[nid];
         auto& main = node->threads[0];
@@ -62,17 +63,17 @@ namespace mt
 
         if (_flags & MainWorker)
         {
-            if (main.handle.joinable())
+            if (!main.stop)
                 run = true;
             _tid = 0;
         }
         else
             run = true;
-        ++main.task_cnt;
-        ++node->task_cnt;
 
         if (run)
         {
+            ++main.task_cnt;
+            ++node->task_cnt;
             impl::Futex lock;
             main.tasks.enqueue(Task{
                 .callback = [&](Task::Query query, std::any& out) -> Task::Token {
@@ -109,12 +110,14 @@ namespace mt
         }
         if (_flags & MainWorker)
         {
-            main.handle.join();
+            if (main.handle.joinable())
+                main.handle.join();
             main.task_support = support;
             main.stop = false;
             ++node->thread_cnt;
             node->thread_cnt.notify_all();
         }
+        ptr->_cfg.event_launch(_tid);
 
         return !full;
     }
@@ -162,6 +165,19 @@ namespace mt
     void ThreadPool::Worker::wait() const noexcept
     {
         wait(std::chrono::milliseconds::max());
+    }
+    void ThreadPool::Worker::ping() const noexcept
+    {
+        const auto ptr = _ptr.lock();
+        if (ptr == nullptr)
+            return;
+
+        const auto nid = ptr->_node_id();
+        auto node = ptr->_nodes[nid];
+        auto* state = &node->threads[_tid];
+        ++state->task_cnt;
+        ++node->task_cnt;
+        state->tasks.enqueue(Task{ .callback = nullptr });
     }
     bool ThreadPool::Worker::active() const noexcept
     {
@@ -231,6 +247,11 @@ namespace mt
     }
     std::size_t ThreadPool::_distribute_fast(unsigned char support) noexcept
     {
+        // Not implemented yet lol
+        return _distribute_optimal(support);
+    }
+    std::size_t ThreadPool::_distribute_optimal(unsigned char support) noexcept
+    {
         const auto node = _nodes[_node_id()];
 
         auto expected = node->thread_cnt.load();
@@ -240,25 +261,24 @@ namespace mt
             expected = node->thread_cnt.load();
         }
 
-        const auto max_iters = std::min<std::size_t>(1, node->threads.size() / 3);
         const auto avg = node->task_cnt ? node->thread_cnt / node->task_cnt : 0;
+        if (support & Task::Type::Force)
+            support = 0x00;
 
-        std::size_t backoff = 0;
         std::size_t id = 0;
         while (true)
         {
-            const auto tmp = node->thread_ctr++ % node->thread_cnt;
-            if (backoff++ == max_iters) break;
-            if ((node->threads[tmp].task_support & support) == support) continue;
-            if (node->threads[id = tmp].task_cnt >= avg) break;
+            if (id == node->thread_cnt)
+            {
+                id = 0;
+                break;
+            }
+            if ((node->threads[id].task_support & support) == support &&
+                node->threads[id].task_cnt <= avg) break;
+            id++;
         }
 
         return node->threads[id].stop ? 0 : id;
-    }
-    std::size_t ThreadPool::_distribute_optimal(unsigned char support) noexcept
-    {
-        // Not implemented yet
-        return _distribute_fast(support);
     }
     std::size_t ThreadPool::_distribute(Distribution algo, unsigned char support) noexcept
     {
@@ -292,14 +312,12 @@ namespace mt
             }
             else
             {
-                const auto support =
-                    Task::Static * task.timing == task.oneoff |
-                    Task::Cyclic * task.timing != task.oneoff;
+                const auto support = _query_task<unsigned char>(Task::Query::Type, task);
                 auto& thread = node->threads[_distribute(
                     dist.has_value() ?
                         dist.value() : node->dist.load(),
                     support
-                    )];
+                )];
                 ++thread.task_cnt;
                 ++node->task_cnt;
                 thread.tasks.enqueue(std::move(task));
@@ -348,7 +366,8 @@ namespace mt
 		std::array<Task, 6> tasks;
         if (max == std::chrono::milliseconds::max() ?
 			state.tasks.dequeue(tasks[0]) :
-			state.tasks.dequeue(tasks[0], max))
+            max == std::chrono::milliseconds(0) ?
+                state.tasks.try_dequeue(tasks[0]) : state.tasks.dequeue(tasks[0], max))
 		{
 			std::size_t cnt = 1;
 			while (cnt < tasks.size())
@@ -362,38 +381,75 @@ namespace mt
                 --state.task_cnt;
                 --node.task_cnt;
 				auto& task = tasks[i];
+                if (task.callback == nullptr)
+                    continue;
                 const auto support = _query_task<unsigned char>(Task::Query::Type, task);
-                if ((state.task_support & support) != support)
+                if ((state.task_support & support) != support &&
+                    !(support & (Task::Type::Force | Task::Type::System)))
                 {
-                    impl::Futex lock;
-                    node.threads[0].tasks.enqueue([&](Task::Query query, std::any& out) {
-                        if (query == Task::Query::Type)
-                        {
-                            std::any_cast<unsigned char&>(out) = Task::Type::System;
-                            return Task::Token::Continue;
-                        }
-                        else if (query == Task::Query::Task)
-                        {
-                            if ((_cfg.flags & Config::AutoGrow) &&
-                                node.thread_cnt < _cfg.max_threads)
-                            {
-                                _launch_worker(
-                                    _node_id(),
-                                    &ThreadPool::_worker_normal,
-                                    1
-                                );
-                            }
-                        }
-                        return Task::Token::Discard;
-                    });
-                    lock.wait();
-
-                    _schedule(std::move(task), _cfg.default_dist);
                     for (std::size_t j = i + 1; j < cnt; j++)
                     {
                         --state.task_cnt;
                         --node.task_cnt;
-                        _schedule(std::move(tasks[j]), _cfg.default_dist);
+                    }
+                    tasks[i] = std::move(task);
+                    auto launch = [this, &node, tasks = std::move(tasks)]() {
+                        if ((_cfg.flags & Config::AutoGrow) &&
+                            node.thread_cnt < _cfg.max_threads)
+                        {
+                            _launch_worker(
+                                _node_id(),
+                                &ThreadPool::_worker_normal,
+                                1
+                            );
+                        }
+                        else if (_cfg.flags & Config::OverflowGuardThrow)
+                        {
+                            throw std::logic_error{ "Thread pool incapable of running task" };
+                        }
+                        else if (_cfg.flags & Config::OverflowGuardRun)
+                        {
+                            for (decltype(auto) it : tasks)
+                                if (it.callback != nullptr)
+                                    _schedule(Task{
+                                        .callback = [callback = std::move(it.callback)](Task::Query query, std::any& out) {
+                                            if (query == Task::Query::Type)
+                                            {
+                                                const auto ret = callback(query, out);
+                                                std::any_cast<unsigned char&>(out) |= Task::Type::Force;
+                                                return ret;
+                                            }
+                                            return callback(query, out);
+                                        },
+                                        .timing = it.timing
+                                    }, _cfg.default_dist);
+                        }
+                        else if (_cfg.flags & Config::OverflowGuardDiscard)
+                        {
+                            return;
+                        }
+                        for (decltype(auto) it : tasks)
+                            if (it.callback != nullptr)
+                                _schedule(std::move(it), _cfg.default_dist);
+                    };
+                    if (state.id == 0)
+                    {
+                        launch();
+                    }
+                    else
+                    {
+                        node.threads[0].tasks.enqueue([&](Task::Query query, std::any& out) {
+                            if (query == Task::Query::Type)
+                            {
+                                std::any_cast<unsigned char&>(out) = Task::Type::System;
+                                return Task::Token::Continue;
+                            }
+                            else if (query == Task::Query::Task)
+                            {
+                                launch();
+                            }
+                            return Task::Token::Discard;
+                        });
                     }
                     break;
                 }
@@ -435,7 +491,8 @@ namespace mt
 						removed = true;
                     }
                 }
-                wait = std::min(wait, it.timing - it.left());
+                if (it.callback != nullptr)
+                    wait = std::min(wait, it.timing - it.left());
 			}
             state.task_cnt -= task_cnt;
             node.task_cnt -= task_cnt;
@@ -471,6 +528,7 @@ namespace mt
 			state = &pool->_nodes[nid]->threads[id];
 		}
 		// Wait for tasks
+        _cfg.event_launch(id);
 		while (!state->stop)
 		{
 			auto pool = ptr.lock();
@@ -501,6 +559,7 @@ namespace mt
 			state = &pool->_nodes[nid]->threads[id];
 		}
 		// Wait for tasks
+        _cfg.event_launch(id);
 		while (!state->stop)
 		{
 			auto pool = ptr.lock();
@@ -636,7 +695,7 @@ namespace mt
 		for (std::size_t i = 0; i < _nodes.size(); i++)
 		{
             auto& node = _nodes[i];
-            if (!node->threads[0].handle.joinable())
+            if (node->threads[0].stop)
                 _launch_worker(i, &ThreadPool::_worker_main);
             if (node->thread_cnt < _cfg.min_threads)
                 _launch_worker(

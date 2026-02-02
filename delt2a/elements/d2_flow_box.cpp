@@ -53,12 +53,10 @@ namespace d2::dx
         // A(*, (height - Q_height) / 2) B(*, (height - Q_height) / 2)
         // C(*, (height - Q_height) / 2) D(*, (height - Q_height) / 2)
 
-        int cxpos = basex;
-        int cypos = basey;
-        bool relh = false;
-        bool relv = false;
-        bool is_primary = true;
-
+        auto cxpos = basex;
+        auto cypos = basey;
+        auto relh = false;
+        auto relv = false;
         for (std::size_t i = 0; i < elements.size();)
         {
             auto& elem = elements[i];
@@ -69,8 +67,8 @@ namespace d2::dx
             }
 
             const auto relrep = elem->unit_report();
-            const bool relht = relrep & Element::RelativeXPos;
-            const bool relvt = relrep & Element::RelativeYPos;
+            const auto relht = bool(relrep & Element::RelativeXPos);
+            const auto relvt = bool(relrep & Element::RelativeYPos);
 
             // Break the block if we had an opposite flag on the last element
 
@@ -98,23 +96,24 @@ namespace d2::dx
                 // Calculate group
 
                 auto beg = i;
-                int reldims_pool = 0;
-                int relcount = 0;
-                bool is_pooled = false;
+                auto reldims_pool = 0;
+                auto relcount = 0;
+                auto is_pooled = false;
+                auto is_pooled_vertically = false;
 
-                int cxpos_offset = 0;
-                int cypos_offset = 0;
-                bool is_first = true;
-                bool resetx = false;
-                bool resety = false;
+                auto cxpos_offset = 0;
+                auto cypos_offset = 0;
+                auto is_first = true;
+                auto resetx = false;
+                auto resety = false;
 
                 const auto primary = elements[i];
                 do
                 {
                     auto sub = elements[i];
                     const auto relreps = sub->unit_report();
-                    const bool relhs = relreps & Element::RelativeXPos;
-                    const bool relvs = relreps & Element::RelativeYPos;
+                    const auto relhs = bool(relreps & Element::RelativeXPos);
+                    const auto relvs = bool(relreps & Element::RelativeYPos);
 
                     // Absolute object (skip)
                     if (!(relhs || relvs) ||
@@ -130,7 +129,7 @@ namespace d2::dx
                          (relv && !relvs) ||
                          (relv && relhs) ||
                          (relh && relvs))
-                    )
+                        )
                     {
 
                         if (relv && relhs) resety = true;
@@ -148,6 +147,7 @@ namespace d2::dx
                         {
                             reldims_pool += ptr->box().width;
                             is_pooled = true;
+                            is_pooled_vertically = false;
                         }
                         relcount++;
                     }
@@ -162,6 +162,7 @@ namespace d2::dx
                         {
                             reldims_pool += ptr->box().height;
                             is_pooled = true;
+                            is_pooled_vertically = true;
                         }
                         relcount++;
                     }
@@ -175,13 +176,30 @@ namespace d2::dx
                 }
                 while (i < elements.size());
 
-                const int rel_size = relcount ? reldims_pool / relcount : 0;
+                if (is_pooled)
+                {
+                    if (is_pooled_vertically)
+                    {
+                        reldims_pool -=
+                            ptr->border_for(ParentElement::BorderType::Top, primary) +
+                            ptr->border_for(ParentElement::BorderType::Bottom, primary);
+                    }
+                    else
+                    {
+                        reldims_pool -=
+                            ptr->border_for(ParentElement::BorderType::Left, primary) +
+                            ptr->border_for(ParentElement::BorderType::Right, primary);
+                    }
+                }
+
+                const auto rel_size = relcount ? reldims_pool / relcount : 0;
+                is_first = true;
                 do
                 {
                     auto sub = elements[beg];
                     const auto relreps = sub->unit_report();
-                    const bool relhs = relreps & Element::RelativeXPos;
-                    const bool relvs = relreps & Element::RelativeYPos;
+                    const auto relhs = bool(relreps & Element::RelativeXPos);
+                    const auto relvs = bool(relreps & Element::RelativeYPos);
 
                     if (!(relhs || relvs) ||
                         !sub->getstate(Element::State::Display))
@@ -193,13 +211,12 @@ namespace d2::dx
                     const auto bbox = sub->internal_box();
                     const auto ipos = sub->internal_position();
                     auto pos = ipos;
-                    pos.x += is_primary * relht * ptr->border_for(ParentElement::BorderType::Left, elem);
-                    pos.y += is_primary * relvt * ptr->border_for(ParentElement::BorderType::Top, elem);
+                    pos.x += is_first && relht ? ptr->border_for(ParentElement::BorderType::Left, elem) : 0;
+                    pos.y += is_first && relvt ? ptr->border_for(ParentElement::BorderType::Top, elem) : 0;
                     sub->override_position(
                         pos.x + cxpos,
                         pos.y + cypos
                     );
-                    is_primary = false;
 
                     if (relv)
                     {

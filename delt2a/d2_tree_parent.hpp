@@ -2,81 +2,14 @@
 #define D2_TREE_PARENT_HPP
 
 #include "d2_tree_element.hpp"
+#include <variant>
 
 namespace d2
 {
     class ParentElement : public Element
     {
     public:
-        class DynamicIterator
-        {
-        public:
-            struct DynamicIteratorAdaptor
-            {
-                DynamicIteratorAdaptor() = default;
-                DynamicIteratorAdaptor(const DynamicIteratorAdaptor&) = default;
-                DynamicIteratorAdaptor(DynamicIteratorAdaptor&&) = default;
-                virtual ~DynamicIteratorAdaptor() = default;
-
-                void increment(int cnt, std::shared_ptr<ParentElement> elem)
-                {
-                    for (std::size_t i = 0; i < cnt; i++)
-                        increment(elem);
-                }
-                void decrement(int cnt, std::shared_ptr<ParentElement> elem)
-                {
-                    for (std::size_t i = 0; i < cnt; i++)
-                        decrement(elem);
-                }
-
-                virtual ptr value(std::shared_ptr<ParentElement> elem) const = 0;
-                virtual void increment(std::shared_ptr<ParentElement> elem) = 0;
-                virtual void decrement(std::shared_ptr<ParentElement> elem) = 0;
-                virtual bool is_null(std::shared_ptr<ParentElement> elem) const = 0;
-                virtual bool is_begin(std::shared_ptr<ParentElement> elem) const = 0;
-                virtual bool is_end(std::shared_ptr<ParentElement> elem) const = 0;
-                virtual bool is_equal(DynamicIteratorAdaptor* adapter, std::shared_ptr<ParentElement> elem) const = 0;
-                virtual std::unique_ptr<DynamicIteratorAdaptor> clone() const = 0;
-            };
-        private:
-            std::weak_ptr<ParentElement> _ptr{};
-            std::unique_ptr<DynamicIteratorAdaptor> _adaptor{ nullptr };
-        public:
-            template<typename Adaptor, typename... Argv>
-            static auto make(std::weak_ptr<ParentElement> ptr, Argv&&... args)
-            {
-                return DynamicIterator(
-                           ptr, std::make_unique<Adaptor>(std::forward<Argv>(args)...)
-                       );
-            }
-
-            DynamicIterator() = default;
-            DynamicIterator(std::nullptr_t) {}
-            DynamicIterator(const DynamicIterator& copy) :
-                _ptr(copy._ptr), _adaptor(copy._adaptor->clone()) {}
-            DynamicIterator(DynamicIterator&&) = default;
-            DynamicIterator(std::weak_ptr<ParentElement> ptr, std::unique_ptr<DynamicIteratorAdaptor> adaptor) :
-                _ptr(ptr), _adaptor(std::move(adaptor)) {}
-
-            void increment(int cnt = 1);
-            void decrement(int cnt = 1);
-
-            bool is_begin() const;
-            bool is_end() const;
-            bool is_null() const;
-            bool is_equal(DynamicIterator it) const;
-
-            Element::ptr value() const;
-
-            Element::ptr operator->() const;
-            Element& operator*() const;
-
-            bool operator==(const DynamicIterator& other) const;
-            bool operator!=(const DynamicIterator& other) const;
-
-            DynamicIterator& operator=(const DynamicIterator& copy);
-            DynamicIterator& operator=(DynamicIterator&&) = default;
-        };
+        using DynamicIterator = internal::DynamicIterator;
         enum class BorderType
         {
             Top,
@@ -84,6 +17,7 @@ namespace d2
             Left,
             Right
         };
+        using id = std::variant<ptr, std::size_t, std::string>;
     protected:
         virtual void _layout_for_impl(enum Layout, cptr) const;
 
@@ -95,13 +29,12 @@ namespace d2
         virtual bool _exists_impl(const std::string&) const = 0;
         virtual bool _exists_impl(ptr) const = 0;
 
-        virtual TreeIter _at_impl(const std::string&) const = 0;
-        virtual TreeIter _create_impl(ptr) = 0;
-        virtual TreeIter _override_impl(ptr) = 0;
-        virtual TreeIter _create_after_impl(ptr p, ptr after) = 0;
-        virtual TreeIter _override_after_impl(ptr p, ptr after) = 0;
-        virtual bool _remove_impl(const std::string&) = 0;
-        virtual bool _remove_impl(ptr) = 0;
+        virtual TreeIter<> _at_impl(id id) const = 0;
+        virtual TreeIter<> _create_impl(ptr ptr) = 0;
+        virtual TreeIter<> _override_impl(ptr ptr) = 0;
+        virtual TreeIter<> _create_after_impl(ptr p, id after) = 0;
+        virtual TreeIter<> _override_after_impl(ptr p, id after) = 0;
+        virtual bool _remove_impl(id id) = 0;
         virtual void _clear_impl() = 0;
     public:
         using Element::Element;
@@ -110,14 +43,14 @@ namespace d2
         bool exists(const std::string& name) const;
         bool exists(ptr ptr) const;
 
-        TreeIter at(const std::string& name) const;
+        TreeIter<> at(id id) const;
 
         void layout_for(enum Layout layout, cptr elem)  const;
 
         int resolve_units(Unit, cptr) const;
         using Element::resolve_units;
 
-        template<typename Type> TypedTreeIter<Type> create(const std::string& name = "")
+        template<typename Type> TreeIter<Type> create(const std::string& name = "")
         {
             return create(Element::make<Type>(
                               name,
@@ -125,7 +58,7 @@ namespace d2
                               std::static_pointer_cast<ParentElement>(shared_from_this())
                           ));
         }
-        template<typename Type> TypedTreeIter<Type> override(const std::string& name = "")
+        template<typename Type> TreeIter<Type> override(const std::string& name = "")
         {
             return override(Element::make<Type>(
                                 name,
@@ -133,10 +66,10 @@ namespace d2
                                 std::static_pointer_cast<ParentElement>(shared_from_this())
                             ));
         }
-        TreeIter create(ptr ptr);
-        TreeIter override(ptr ptr);
+        TreeIter<> create(ptr ptr);
+        TreeIter<> override(ptr ptr);
 
-        template<typename Type> TypedTreeIter<Type> create_after(ptr after, const std::string& name = "")
+        template<typename Type> TreeIter<Type> create_after(id after, const std::string& name = "")
         {
             return create_after(Element::make<Type>(
                 name,
@@ -144,7 +77,7 @@ namespace d2
                 std::static_pointer_cast<ParentElement>(shared_from_this())
             ), after);
         }
-        template<typename Type> TypedTreeIter<Type> override_after(ptr after, const std::string& name = "")
+        template<typename Type> TreeIter<Type> override_after(id after, const std::string& name = "")
         {
             return override_after(Element::make<Type>(
                 name,
@@ -152,16 +85,13 @@ namespace d2
                 std::static_pointer_cast<ParentElement>(shared_from_this())
             ), after);
         }
-        TreeIter create_after(ptr p, ptr after);
-        TreeIter override_after(ptr p, ptr after);
+        TreeIter<> create_after(ptr p, id after);
+        TreeIter<> override_after(ptr p, id after);
 
         void clear();
 
-        void remove(const std::string& name);
-        void remove(ptr ptr);
-
-        bool remove_if(const std::string& name);
-        bool remove_if(ptr ptr);
+        void remove(id id);
+        bool remove_if(id id);
 
         int border_for(BorderType type, cptr ptr) const;
 
@@ -181,13 +111,12 @@ namespace d2
         virtual bool _exists_impl(const std::string& name) const override;
         virtual bool _exists_impl(ptr ptr) const override;
 
-        virtual TreeIter _at_impl(const std::string& name) const override;
-        virtual TreeIter _create_impl(ptr ptr) override;
-        virtual TreeIter _override_impl(ptr ptr) override;
-        virtual TreeIter _create_after_impl(ptr p, ptr after) override;
-        virtual TreeIter _override_after_impl(ptr p, ptr after) override;
-        virtual bool _remove_impl(const std::string& name) override;
-        virtual bool _remove_impl(ptr ptr) override;
+        virtual TreeIter<> _at_impl(id id) const override;
+        virtual TreeIter<> _create_impl(ptr ptr) override;
+        virtual TreeIter<> _override_impl(ptr ptr) override;
+        virtual TreeIter<> _create_after_impl(ptr p, id after) override;
+        virtual TreeIter<> _override_after_impl(ptr p, id after) override;
+        virtual bool _remove_impl(id id) override;
         virtual void _clear_impl() override;
 
         std::size_t _find(const std::string& name) const;
@@ -216,32 +145,28 @@ namespace d2
             return false;
         }
 
-        virtual TreeIter _at_impl(const std::string& name) const override
+        virtual TreeIter<> _at_impl(id id) const override
         {
             throw std::logic_error{ "Not implemented" };
         }
-        virtual TreeIter _create_impl(ptr ptr) override
+        virtual TreeIter<> _create_impl(ptr ptr) override
         {
             throw std::logic_error{ "Not implemented" };
         }
-        virtual TreeIter _override_impl(ptr ptr) override
+        virtual TreeIter<> _override_impl(ptr ptr) override
         {
             return nullptr;
         }
-        virtual TreeIter _create_after_impl(ptr p, ptr after) override
+        virtual TreeIter<> _create_after_impl(ptr p, id after) override
         {
             throw std::logic_error{ "Not implemented" };
         }
-        virtual TreeIter _override_after_impl(ptr p, ptr after) override
+        virtual TreeIter<> _override_after_impl(ptr p, id after) override
         {
-            return nullptr;
+            throw std::logic_error{ "Not implemented" };
         }
 
-        virtual bool _remove_impl(const std::string& name) override
-        {
-            throw std::logic_error{ "Not implemented" };
-        }
-        virtual bool _remove_impl(ptr ptr) override
+        virtual bool _remove_impl(id id) override
         {
             throw std::logic_error{ "Not implemented" };
         }

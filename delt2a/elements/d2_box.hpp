@@ -22,6 +22,7 @@ namespace d2::dx
         int _perfect_width() const;
         int _perfect_height() const;
 
+        virtual void _signal_write_child_impl(write_flag type, unsigned int prop, ptr element) override;
         virtual int _get_border_impl(BorderType type, cptr elem) const override;
         virtual Unit _layout_impl(Element::Layout type) const override;
 

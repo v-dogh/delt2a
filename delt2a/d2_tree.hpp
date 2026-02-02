@@ -23,36 +23,35 @@ namespace d2
         static auto build_sub(const std::string& name, TreeState::ptr state, d2::Element::pptr root, Argv&&... args)
         {
             auto s = std::make_shared<State>(
-                state->screen(),
                 state->root(),
                 nullptr,
                 std::forward<Argv>(args)...
             );
-            s->construct();
             auto core = d2::Element::make<Root>(
                 name,
                 s,
                 root
             );
             s->set_core(core);
+            s->construct();
             root->override(core);
             return s;
         }
         template<typename... Argv>
-        static auto build(Screen::ptr src, Argv&&... args)
+        static auto build(IOContext::ptr ctx, Argv&&... args)
         {
             auto state = std::make_shared<State>(
-                src,
                 nullptr,
                 nullptr,
                 std::forward<Argv>(args)...
             );
-            state->construct();
+            state->set_context(ctx);
             state->set_root(d2::Element::make<Root>(
                 "",
                 state,
                 nullptr
             ));
+            state->construct();
             state->root()->initialize();
             state->root()->setstate(Element::Created, true);
             state->set_core(state->root());

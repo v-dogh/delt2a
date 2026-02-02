@@ -5,34 +5,59 @@
 
 namespace d2::ctm
 {
-    class ColorPicker : public style::UAIC<
-            dx::VirtualBox,
+    namespace impl
+    {
+        class ColorPickerBase
+        {
+        private:
+            px::background _color{};
+        public:
+            virtual ~ColorPickerBase() = default;
+            virtual void submit() = 0;
+            void set_color(px::background color);
+            px::background get_color();
+        };
+    }
+
+    class ColorPicker :
+        public style::UAIC<
+            dx::FlowBox,
             ColorPicker,
             style::IResponsive<ColorPicker, px::background>::type
-        >
+        >,
+        public impl::ColorPickerBase
     {
     public:
         using data = style::UAIC<
-            VirtualBox,
+            FlowBox,
             ColorPicker,
             style::IResponsive<ColorPicker, px::background>::type
         >;
-        D2_UAI_CHAIN(VirtualBox)
+        D2_UAI_CHAIN(FlowBox)
     protected:
-        static eptr<ColorPicker> _core(TreeState::ptr state);
-
         virtual void _state_change_impl(State state, bool value) override;
-
-        px::background _get_color() const;
     public:
-        ColorPicker(
-            const std::string& name,
-            TreeState::ptr state,
-            pptr parent,
-            std::function<void(TypedTreeIter<ColorPicker>, px::background)>
-        );
-
-        void submit();
+        virtual void submit() override;
+    };
+    class ColorPickerWindow :
+        public style::UAIC<
+            dx::VirtualFlowBox,
+            ColorPickerWindow,
+            style::IResponsive<ColorPickerWindow, px::background>::type
+        >,
+        public impl::ColorPickerBase
+    {
+    public:
+        using data = style::UAIC<
+            VirtualFlowBox,
+            ColorPickerWindow,
+            style::IResponsive<ColorPickerWindow, px::background>::type
+        >;
+        D2_UAI_CHAIN(VirtualFlowBox)
+    protected:
+        virtual void _state_change_impl(State state, bool value) override;
+    public:
+        virtual void submit() override;
     };
 }
 

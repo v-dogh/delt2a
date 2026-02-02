@@ -66,8 +66,14 @@ namespace mt
                 MainCyclicWorker = 1 << 2,
 				// Discards new tasks (return nullptr) if average tasks exceed pressure trigger ratio
                 ManageOverload = 1 << 3,
+                // <on overflow> Forces the thread pool to throw an exception
+                OverflowGuardThrow = 1 << 4,
+                // <on overflow> Forces the task to run even on an unsupported thread
+                OverflowGuardRun = 1 << 5,
+                // <on overflow> Discards the tasks
+                OverflowGuardDiscard = 1 << 6,
 			};
-			unsigned char flags{ AutoShrink | AutoGrow };
+            unsigned char flags{ AutoShrink | AutoGrow | OverflowGuardRun };
             float growth_trigger_ratio{ 3.5f };
 			float pressure_trigger_ratio{ 10.f };
             Distribution default_dist{ Distribution::Fast };
@@ -79,6 +85,7 @@ namespace mt
                     return cnt > 0 ? cnt * 2 - 1 : 1;
                 }
             };
+            std::function<void(std::size_t)> event_launch{ nullptr };
 			std::function<void(std::size_t)> event_grow{ nullptr };
 			std::function<void(std::size_t)> event_shrink{ nullptr };
 			std::function<void(std::size_t)> event_pressure{ nullptr };
@@ -109,6 +116,7 @@ namespace mt
             void stop() noexcept;
             void wait(std::chrono::milliseconds max) const noexcept;
             void wait() const noexcept;
+            void ping() const noexcept;
             bool active() const noexcept;
 
             Worker& operator=(Worker&&) = default;
@@ -137,6 +145,7 @@ namespace mt
                 Cyclic = 1 << 1,
                 Deferred = 1 << 2,
                 System = 1 << 3,
+                Force = 1 << 4,
             };
 
             static constexpr auto oneoff = std::chrono::milliseconds::max();
@@ -229,9 +238,8 @@ namespace mt
         Type _query_task(Task::Query query, const Task& task)
         {
             std::any out;
-            out.emplace<Type>();
             task.callback(query, out);
-            return std::any_cast<Type&>(out);
+            return std::any_cast<Type>(out);
         }
 
 		template<typename Func, typename... Argv>
@@ -339,7 +347,7 @@ namespace mt
                 ](Task::Query query, std::any& out) mutable -> Task::Token {
                     if (query == Task::Query::Type)
                     {
-                        std::any_cast<unsigned char&>(out) = Task::Type::Static;
+                        out = static_cast<unsigned char>(Task::Type::Static);
                         return Task::Token::Continue;
                     }
                     else if (query == Task::Query::Task)
@@ -392,7 +400,7 @@ namespace mt
                 ](Task::Query query, std::any& out) mutable -> Task::Token {
                     if (query == Task::Query::Type)
                     {
-                        std::any_cast<unsigned char&>(out) = Task::Type::Static;
+                        out = static_cast<unsigned char>(Task::Type::Static);
                         return Task::Token::Continue;
                     }
                     else if (query == Task::Query::Task)
@@ -423,7 +431,7 @@ namespace mt
                 ](Task::Query query, std::any& out) mutable -> Task::Token {
                     if (query == Task::Query::Type)
                     {
-                        std::any_cast<unsigned char&>(out) = Task::Type::Cyclic;
+                               out = static_cast<unsigned char>(Task::Type::Cyclic);
                         return Task::Token::Continue;
                     }
                     else if (query == Task::Query::Task)
@@ -473,7 +481,7 @@ namespace mt
                 ](Task::Query query, std::any& out) mutable -> Task::Token {
                     if (query == Task::Query::Type)
                     {
-                        std::any_cast<unsigned char&>(out) = Task::Type::Deferred;
+                        out = static_cast<unsigned char>(Task::Type::Deferred);
                         return Task::Token::Continue;
                     }
                     else if (query == Task::Query::Task)
@@ -531,7 +539,7 @@ namespace mt
                 ](Task::Query query, std::any& out) mutable -> Task::Token {
                     if (query == Task::Query::Type)
                     {
-                        std::any_cast<unsigned char&>(out) = Task::Type::Static;
+                        out = static_cast<unsigned char>(Task::Type::Static);
                         return Task::Token::Continue;
                     }
                     else if (query == Task::Query::Task)

@@ -98,9 +98,9 @@ namespace d2
         std::shared_lock l1(_mtx);
         auto f = _sigs.find(id);
         if (f == _sigs.end())
-            throw std::runtime_error{ "Signal slot not found" };
+            D2_THRW("Signal slot not found");
         if (f->second->argument_code != code)
-            throw std::runtime_error{ "Invalid signal arguments" };
+            D2_THRW("Invalid signal arguments");
         auto state = std::make_shared<HandleState>(std::move(callback));
         std::lock_guard l2(f->second->mtx);
         f->second->handles[ev].push_back(state);
@@ -153,14 +153,14 @@ namespace d2
         std::shared_lock l1(_mtx);
         auto f = _sigs.find(id);
         if (f == _sigs.end())
-            throw std::runtime_error{ "Signal slot not found" };
+            D2_THRW("Signal slot not found");
         if (f->second->argument_code != code)
-            throw std::runtime_error{ "Invalid signal arguments" };
+            D2_THRW("Invalid signal arguments");
 
-        if (f->second->flags & SignalFlags::Async)
+        if (f->second->flags & (SignalFlags::Async | SignalFlags::Deferred))
         {
             if (!_pool)
-                throw std::logic_error{ "Cannot launch async task without pool" };
+                D2_THRW("Cannot launch async task without pool");
             if (f->second->flags & SignalFlags::Combine)
             {
                 SignalInstance tmp;
@@ -181,7 +181,9 @@ namespace d2
                         return;
                 }
             }
-
+        }
+        if (f->second->flags & SignalFlags::Async)
+        {
             bool expected = false;
             if (f->second->is_queued.compare_exchange_strong(expected, true))
             {
@@ -192,9 +194,6 @@ namespace d2
         }
         else if (f->second->flags & SignalFlags::Deferred)
         {
-            if (!_pool)
-                throw std::logic_error{ "Cannot launch deferred task without pool" };
-
             bool expected = false;
             if (f->second->is_queued.compare_exchange_strong(expected, true))
             {
@@ -214,7 +213,7 @@ namespace d2
         std::lock_guard l1(_mtx);
         const auto [ sig, placed ] = _sigs.emplace(id, std::make_unique<SignalStorage>());
         if (!placed)
-            throw std::runtime_error{ "Signal slot is occupied" };
+            D2_THRW("Signal slot is occupied");
         sig->second->flags = flags;
         sig->second->argument_code = code;
         sig->second->packed_size = size;
@@ -225,7 +224,7 @@ namespace d2
         std::lock_guard l1(_mtx);
         auto f = _sigs.find(id);
         if (f == _sigs.end())
-            throw std::runtime_error{ "Signal slot not found" };
+            D2_THRW("Signal slot not found");
         _sigs.erase(f);
     }
 

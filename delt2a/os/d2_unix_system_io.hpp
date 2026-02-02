@@ -15,7 +15,7 @@ namespace d2::sys
 {
     class UnixTerminalInput :
         public SystemInput,
-        public SystemComponentCfg<true>
+        public SystemComponentCfg<true, false>
 	{
 	private:
 		using keyboard_keymap = std::bitset<SpecialKeyMax + 1>;
@@ -89,7 +89,7 @@ namespace d2::sys
 	};
     class UnixTerminalOutput :
         public SystemOutput,
-        public SystemComponentCfg<false>
+        public SystemComponentCfg<false, false>
 	{
 	private:		
 		static constexpr auto max_color_len_ =

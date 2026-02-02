@@ -1,6 +1,8 @@
 ﻿cmake_minimum_required(VERSION 3.21)
 project(DeltaAscii LANGUAGES CXX VERSION 0.1.0)
 
+include(GNUInstallDirs)
+
 ###########
 # OPTIONS #
 ###########
@@ -11,6 +13,9 @@ option(D2_EXCLUDE_OS_CORE           "Disable default os module"    OFF)
 option(D2_EXCLUDE_OS_EXT            "Disable extended os modules"  OFF)
 option(D2_SANITIZE_MEMORY           "Enable memory sanitizer"      OFF)
 option(D2_SANITIZE_THREAD           "Enable thread sanitizer"      OFF)
+option(D2_SECURITY_WATCH            "Enable runtime debug checks"  ON)
+option(D2_SECURITY_LOG              "Enable runtime logging"       ON)
+option(D2_SECURITY_ASSERT           "Enable debug assertions"      ON)
 option(D2_UNICODE_MODE              "Enable unicode mode"          ON)
 option(D2_STRICT_MODE               "Enable strict component mode" ON)
 
@@ -21,6 +26,9 @@ option(D2_STRICT_MODE               "Enable strict component mode" ON)
 # set(D2_EXCLUDE_OS_EXT            OFF CACHE BOOL "Disable extended os modules"  FORCE)
 # set(D2_SANITIZE_MEMORY           OFF CACHE BOOL "Enable memory sanitizer"      FORCE)
 # set(D2_SANITIZE_THREAD           OFF CACHE BOOL "Enable thread sanitizer"      FORCE)
+# set(D2_SECURITY_WATCH            OFF CACHE BOOL "Enable runtime debug checks"  FORCE)
+# set(D2_SECURITY_LOG              OFF CACHE BOOL "Enable runtime logging"       FORCE)
+# set(D2_SECURITY_ASSERT           OFF CACHE BOOL "Enable debug assertions"      FORCE)
 # set(D2_UNICODE_MODE              OFF CACHE BOOL "Enable unicode mode"          FORCE)
 # set(D2_STRICT_MODE               OFF CACHE BOOL "Enable strict component mode" FORCE)
 
@@ -76,11 +84,17 @@ function(delta_setup_target target)
         ASCII=8
         UNICODE=32
     )
+    if (D2_SECURITY_WATCH)
+        add_compile_definitions(D2_SECURITY_WATCH)
+    endif()
+    if (D2_SECURITY_ASSERT)
+        add_compile_definitions(D2_SECURITY_ASSERT)
+    endif()
+    if (D2_SECURITY_LOG)
+        add_compile_definitions(D2_SECURITY_LOG)
+    endif()
     if (D2_STRICT_MODE)
         add_compile_definitions(D2_COMPATIBILITY_MODE STRICT)
-    endif()
-    if(CMAKE_INTERPROCEDURAL_OPTIMIZATION_SUPPORTED)
-        set_target_properties(${target} PROPERTIES INTERPROCEDURAL_OPTIMIZATION ON)
     endif()
 endfunction()
 
@@ -90,6 +104,8 @@ endfunction()
 
 # Scheduler
 add_subdirectory(delt2a/mt)
+# Logs
+add_subdirectory(delt2a/logs)
 
 # LSX library
 add_library(DeltaLSX STATIC
@@ -111,11 +127,14 @@ add_library(DeltaCore STATIC
     # Core
     delt2a/d2_std.hpp
     delt2a/d2_dsl.hpp
+    delt2a/d2_sdsl.hpp
+    delt2a/d2_cdsl.hpp
     delt2a/d2_exceptions.hpp
     delt2a/d2_styles.hpp
     delt2a/d2_styles_base.hpp
     delt2a/d2_model.hpp
     delt2a/d2_model.cpp
+    delt2a/d2_meta.hpp
     # Platform
     delt2a/d2_locale.hpp
     delt2a/d2_chardef.hpp
@@ -127,28 +146,36 @@ add_library(DeltaCore STATIC
     # Pixel
     delt2a/d2_pixel.hpp
     delt2a/d2_colors.hpp
+    delt2a/d2_interpolator.cpp
     delt2a/d2_interpolator.hpp
     delt2a/d2_pixel.cpp
     delt2a/d2_extended_page.hpp
     delt2a/d2_extended_page.cpp
     # Tree
     delt2a/d2_element_units.hpp
+    delt2a/d2_tree_state.hpp
+    delt2a/d2_tree_state.cpp
     delt2a/d2_tree_element_frwd.hpp
     delt2a/d2_tree_element.hpp
     delt2a/d2_tree_parent.hpp
     delt2a/d2_tree.hpp
     delt2a/d2_tree_element.cpp
     delt2a/d2_tree_parent.cpp
-    # Screen
-    delt2a/d2_screen.hpp
-    delt2a/d2_screen.cpp
-    delt2a/d2_screen_frwd.hpp
+    # Context
+    delt2a/d2_io_handler_frwd.hpp
     delt2a/d2_io_handler.hpp
     delt2a/d2_io_handler.cpp
-    delt2a/d2_io_handler_frwd.hpp
+    delt2a/d2_module.hpp
+    delt2a/d2_module.cpp
+    delt2a/d2_signal_handler.hpp
+    delt2a/d2_signal_handler.cpp
+    delt2a/d2_screen_comps.hpp
+    delt2a/d2_screen.hpp
+    delt2a/d2_screen.cpp
 )
 target_link_libraries(DeltaCore PRIVATE
     TPMP
+    logd
     DeltaLSX
     absl::base
     absl::flat_hash_map
@@ -210,6 +237,7 @@ if (NOT D2_EXCLUDE_LIBRARY_TEMPLATES)
         # Presets
         delt2a/templates/d2_widget_theme_base.hpp
         delt2a/templates/d2_standard_widget_theme.hpp      
+        delt2a/templates/d2_loading_indicators.hpp
         delt2a/templates/d2_file_explorer.hpp
         delt2a/templates/d2_file_explorer.cpp
         delt2a/templates/d2_exit_prompt.hpp
@@ -222,6 +250,7 @@ if (NOT D2_EXCLUDE_LIBRARY_TEMPLATES)
         delt2a/templates/d2_audio_device_selector.cpp
         # Programs
         delt2a/programs/d2_debug_box.hpp
+        delt2a/programs/d2_debug_box.cpp
         delt2a/programs/d2_element_test.hpp
         delt2a/programs/d2_quedits.hpp
     )
@@ -276,9 +305,6 @@ if(TARGET DeltaElements)
 endif()
 if(TARGET DeltaTemplates)
     list(APPEND _install_targets DeltaTemplates)
-endif()
-if(TARGET DeltaCoreUnix)
-    list(APPEND _install_targets DeltaCoreUnix)
 endif()
 
 install(TARGETS ${_install_targets} DeltaAscii

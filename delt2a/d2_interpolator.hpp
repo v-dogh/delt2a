@@ -1,7 +1,9 @@
 #ifndef D2_INTERPOLATOR_HPP
 #define D2_INTERPOLATOR_HPP
 
-#include "d2_tree_element.hpp"
+#include "d2_tree_element_frwd.hpp"
+#include "d2_styles_base.hpp"
+#include "d2_pixel.hpp"
 #include <chrono>
 
 namespace d2::interp
@@ -105,91 +107,33 @@ namespace d2::interp
         std::weak_ptr<Element> ptr_{};
         std::size_t owner_{};
 
-        bool _nptr()
-        {
-            return
-                !ptr_.owner_before(std::weak_ptr<Element> {}) &&
-                !std::weak_ptr<Element> {}.owner_before(ptr_);
-        }
-        bool _vptr()
-        {
-            return _nptr() || !ptr_.expired();
-        }
-        auto _hold()
-        {
-            return ptr_.lock();
-        }
+        bool _nptr();
+        bool _vptr();
+        auto _hold();
     protected:
-        float _progress() const
-        {
-            return
-                duration_.count() == 0 ? 1.f :
-                float(std::chrono::duration_cast<std::chrono::milliseconds>((std::chrono::high_resolution_clock::now() -
-                        start_)).count()) /
-                float(duration_.count());
-        }
-
+        float _progress() const;
         virtual bool _keep_alive_impl(float progress) { return false; }
         virtual void _start_impl() {}
-        virtual void _update_impl(Element::ptr ptr, float progress) {}
+        virtual void _update_impl(std::shared_ptr<Element> ptr, float progress) {}
         // Has to return std::hash of the property that is the target of the interpolation
         virtual std::size_t _hash_code_impl() = 0;
     public:
         Interpolator() = default;
-        Interpolator(std::chrono::milliseconds ms, Element::ptr ptr)
-            : duration_(ms), ptr_(ptr) {}
+        Interpolator(std::chrono::milliseconds ms, std::shared_ptr<Element> ptr);
         virtual ~Interpolator() = default;
 
-        Element* target() const
-        {
-            return ptr_.lock().get();
-        }
+        Element* target() const;
 
-        std::size_t hash_code()
-        {
-            return _hash_code_impl() ^ std::hash<Element*>()(ptr_.lock().get());
-        }
-        void stop()
-        {
-            start_ = start_.max();
-        }
-        void mute()
-        {
-            start_ = start_.min();
-        }
-        void unmute()
-        {
-            start_ = std::chrono::high_resolution_clock::now();
-        }
-        void start()
-        {
-            if (!_vptr()) return;
-            const auto _ = _hold();
-            _start_impl();
-            start_ = std::chrono::high_resolution_clock::now();
-        }
-        void update()
-        {
-            if (start_ != std::chrono::high_resolution_clock::time_point::min())
-            {
-                if (!_vptr()) return;
-                const auto ptr = _hold();
-                _update_impl(ptr, _progress());
-            }
-        }
-        bool keep_alive()
-        {
-            return start_ != start_.max() && _keep_alive_impl(_progress()) && _vptr();
-        }
+        std::size_t hash_code();
+        void stop();
+        void mute();
+        void unmute();
+        void start();
+        void update();
+        bool keep_alive();
 
-        void setowner(std::size_t hash)
-        {
-            owner_ = hash;
-        }
-        std::size_t getowner()
-        {
-            return owner_;
-        }
+        void setowner(std::size_t hash);
+        std::size_t getowner();
     };
 
     template<typename Type, style::uai_property Property>
@@ -204,7 +148,7 @@ namespace d2::interp
         {
             return progress < 1.f;
         }
-        virtual void _update_impl(Element::ptr ptr, float progress) override
+        virtual void _update_impl(std::shared_ptr<Element> ptr, float progress) override
         {
             std::static_pointer_cast<Type>(ptr)->template set<Property>(
                 impl::LinearInterpolationWriter<dest_type>::write(std::min(progress, 1.f)),
@@ -216,7 +160,7 @@ namespace d2::interp
             return std::hash<style::uai_property>()(Property);
         }
     public:
-        Linear(std::chrono::milliseconds ms, Element::ptr ptr, dest_type dest) :
+        Linear(std::chrono::milliseconds ms, std::shared_ptr<Element> ptr, dest_type dest) :
             Interpolator(ms, ptr),
             impl::LinearInterpolationWriter<dest_type>(
                 std::static_pointer_cast<Type>(ptr)->template get<Property>(), dest
@@ -241,7 +185,7 @@ namespace d2::interp
         {
             return !stages_.empty();
         }
-        virtual void _update_impl(Element::ptr ptr, float progress) override
+        virtual void _update_impl(std::shared_ptr<Element> ptr, float progress) override
         {
             if (progress > 1.f)
             {
@@ -263,11 +207,11 @@ namespace d2::interp
             return std::hash<style::uai_property>()(Property);
         }
     public:
-        Sequential(std::chrono::milliseconds ms, Element::ptr ptr, std::initializer_list<dest_type> stages)
+        Sequential(std::chrono::milliseconds ms, std::shared_ptr<Element> ptr, std::initializer_list<dest_type> stages)
             : stages_(std::move(stages)), Interpolator(ms, ptr)
         {}
         template<typename Other>
-        Sequential(std::chrono::milliseconds ms, Element::ptr ptr, Other&& stages)
+        Sequential(std::chrono::milliseconds ms, std::shared_ptr<Element> ptr, Other&& stages)
             : stages_(std::forward<Other>(stages)), Interpolator(ms, ptr)
         {}
     };

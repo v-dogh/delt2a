@@ -9,181 +9,11 @@
 #include "d2_io_handler.hpp"
 #include "d2_pixel.hpp"
 #include "d2_element_units.hpp"
+#include "d2_tree_state.hpp"
+#include "d2_screen.hpp"
 
 namespace d2
 {
-    class TreeIter
-    {
-    public:
-        using foreach_callback = std::function<bool(TreeIter)>;
-    private:
-        std::weak_ptr<Element> _elem{};
-    public:
-        TreeIter() = default;
-        TreeIter(std::nullptr_t) {}
-        TreeIter(const TreeIter&) = default;
-        TreeIter(TreeIter&&) = default;
-        template<typename Type>
-        TreeIter(std::shared_ptr<Type> p) :
-            _elem(std::static_pointer_cast<Element>(p))
-        {}
-
-        std::shared_ptr<Element> shared()
-        {
-            return operator std::shared_ptr<Element>();
-        }
-        std::weak_ptr<Element> weak()
-        {
-            return operator std::weak_ptr<Element>();
-        }
-
-        template<typename Type>
-        bool is_type() const
-        {
-            if (_elem.expired())
-                return false;
-            return dynamic_cast<const Type*>(_elem.lock().get()) != nullptr;
-        }
-        bool is_type_of(TreeIter other) const;
-
-        template<typename Type>
-        void set(std::shared_ptr<Type> ptr = nullptr)
-        {
-            _elem = ptr;
-        }
-
-        template<typename Type = Element> std::shared_ptr<Type> as() const
-        {
-            auto p = std::dynamic_pointer_cast<Type>(_elem.lock());
-            if (p == nullptr)
-                throw std::runtime_error{ "Attempt to access an element through an invalid object" };
-            return p;
-        }
-        template<typename Type = Element> auto as()
-        {
-            return const_cast<const TreeIter*>(this)->as<Type>();
-        }
-
-        std::shared_ptr<ParentElement> asp() const
-        {
-            return as<ParentElement>();
-        }
-        std::shared_ptr<ParentElement> asp()
-        {
-            return as<ParentElement>();
-        }
-
-        TreeIter up() const;
-        TreeIter up(std::size_t cnt) const;
-        TreeIter up(const std::string& name) const;
-
-        void foreach(foreach_callback);
-
-        std::shared_ptr<Element> operator->() const;
-        std::shared_ptr<Element> operator->();
-
-        Element& operator*() const;
-        Element& operator*();
-
-        operator std::shared_ptr<Element>();
-        operator std::weak_ptr<Element>();
-
-        bool operator==(std::nullptr_t) const
-        {
-            return _elem.expired();
-        }
-        bool operator==(const TreeIter& other) const
-        {
-            return (_elem.expired() && other._elem.expired()) || (_elem.lock() == other._elem.lock());
-        }
-        bool operator!=(const TreeIter& other) const
-        {
-            return !operator==(other);
-        }
-
-        TreeIter operator/(const std::string& path);
-        TreeIter operator^(std::size_t cnt);
-        TreeIter operator+();
-
-        TreeIter& operator=(const TreeIter&) = default;
-        TreeIter& operator=(TreeIter&&) = default;
-    };
-
-    template<typename Type>
-    class TypedTreeIter : public TreeIter
-    {
-    public:
-        using type = Type;
-    public:
-        TypedTreeIter() = default;
-        TypedTreeIter(std::nullptr_t) {}
-        TypedTreeIter(const TypedTreeIter&) = default;
-        TypedTreeIter(TypedTreeIter&&) = default;
-        TypedTreeIter(const TreeIter& copy) : TreeIter(copy) {}
-        TypedTreeIter(std::shared_ptr<Type> p) :
-            TreeIter(std::static_pointer_cast<Element>(p))
-        {}
-
-        std::shared_ptr<Type> shared()
-        {
-            return operator std::shared_ptr<Type>();
-        }
-        std::weak_ptr<Type> weak()
-        {
-            return operator std::weak_ptr<Type>();
-        }
-
-        TypedTreeIter operator/(const std::string& path)
-        {
-            return TreeIter::operator/(path);
-        }
-        TypedTreeIter operator^(std::size_t cnt)
-        {
-            return TreeIter::operator^(cnt);
-        }
-        TypedTreeIter operator+()
-        {
-            return TreeIter::operator+();
-        }
-
-        std::shared_ptr<Type> operator->() const
-        {
-            return as<Type>();
-        }
-        std::shared_ptr<Type> operator->()
-        {
-            return as<Type>();
-        }
-
-        Type& operator*() const
-        {
-            return *as<Type>();
-        }
-        Type& operator*()
-        {
-            return *as<Type>();
-        }
-
-        operator std::shared_ptr<Type>()
-        {
-            return std::static_pointer_cast<Type>(
-                as<Type>()->shared_from_this()
-            );
-        }
-        operator std::weak_ptr<Type>()
-        {
-            return std::static_pointer_cast<Type>(
-                as<Type>()->shared_from_this()
-            );
-        }
-
-        TypedTreeIter& operator=(const TypedTreeIter&) = default;
-        TypedTreeIter& operator=(TypedTreeIter&&) = default;
-    };
-
-    template<typename Type>
-    using TypedIter = TypedTreeIter<Type>;
-
     namespace internal
     { class ElementView; }
 
@@ -201,7 +31,7 @@ namespace d2
         using pptr = std::shared_ptr<ParentElement>;
         using cpptr = std::shared_ptr<const ParentElement>;
         using pwptr = std::weak_ptr<ParentElement>;
-        using iptr = TreeIter;
+        using iptr = TreeIter<>;
 
         // Acquires a shared_lock for the buffer for it's lifetime
         // Ensures object lifetime
@@ -245,8 +75,8 @@ namespace d2
         using state_flag = unsigned char;
         using write_flag = element_write_flag;
 
-        using event_callback = std::function<void(EventListener, TreeIter)>;
-        using foreach_callback = TreeIter::foreach_callback;
+        using event_callback = std::function<void(EventListener, TreeIter<>)>;
+        using foreach_callback = TreeIter<>::foreach_callback;
         using foreach_internal_callback = std::function<bool(ptr)>;
 
         // Flags representing the meta state of the object
@@ -539,9 +369,11 @@ namespace d2
 
         bool _is_write_type(write_flag type) const;
 
+        virtual void _signal_write_child_impl(write_flag type, unsigned int prop, ptr element) {}
         virtual void _signal_write_impl(write_flag type, unsigned int prop, ptr element) {}
         virtual void _signal_context_change_impl(write_flag type, unsigned int prop, ptr element) {}
 
+        void _signal_write_child(write_flag type, unsigned int prop, ptr element);
         void _signal_write(write_flag type, unsigned int prop, ptr element);
     protected:
         // Available to the element view
@@ -554,7 +386,7 @@ namespace d2
         void _signal_initialization(unsigned int prop);
         void _signal_write_update(write_flag type) const;
         void _signal_update(internal_flag type) const;
-        void _trigger_event(ScreenEvent ev);
+        void _trigger_event(sys::screen::Event ev);
     protected:
         // Layout
 
@@ -568,7 +400,7 @@ namespace d2
 
         // Events
 
-        virtual void _event_impl(ScreenEvent) {}
+        virtual void _event_impl(sys::screen::Event) {}
         virtual void _state_change_impl(State, bool) {}
 
         // Layout
@@ -610,7 +442,7 @@ namespace d2
 
         // Metadata
 
-        std::shared_ptr<Screen> screen() const;
+        sys::module<sys::screen> screen() const;
         IOContext::ptr context() const;
         TreeState::ptr state() const;
         pptr parent() const;
@@ -662,8 +494,8 @@ namespace d2
 
         int resolve_units(Unit unit) const;
 
-        TreeIter traverse();
-        TreeIter operator+();
+        TreeIter<> traverse();
+        TreeIter<> operator+();
 
         Element& operator=(const Element&) = delete;
         Element& operator=(Element&&) = delete;
@@ -697,7 +529,7 @@ namespace d2
             void signal_initialization(unsigned int prop);
             void signal_write_update(Element::write_flag type) const;
             void signal_update(Element::internal_flag type) const;
-            void trigger_event(ScreenEvent ev);
+            void trigger_event(sys::screen::Event ev);
         };
     }
 }

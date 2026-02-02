@@ -117,10 +117,8 @@ namespace d2::ctm
         ))
     D2_STYLESHEET_END
     D2_STYLESHEET_BEGIN(checkbox_color)
-        D2_STYLE(ColorOn, D2_DYNAVAR(WidgetTheme, wg_text(),
-            px::combined::combine(value | d2::px::foreground::Bold, d2::colors::w::transparent)))
-        D2_STYLE(ColorOff, D2_DYNAVAR(WidgetTheme, wg_text(),
-            px::combined::combine(value | d2::px::foreground::Bold, d2::colors::w::transparent)))
+        D2_STYLE(ColorOnForeground, D2_VAR(WidgetTheme, wg_text()))
+        D2_STYLE(ColorOffForeground, D2_VAR(WidgetTheme, wg_text()))
     D2_STYLESHEET_END
 }
 

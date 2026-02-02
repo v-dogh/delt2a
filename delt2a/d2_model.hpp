@@ -2,12 +2,14 @@
 #define D2_MODEL_HPP
 
 #include "d2_pixel.hpp"
+#include "d2_exceptions.hpp"
 #include <memory>
 
 namespace d2
 {
 	class MatrixModel : public PixelBuffer
 	{
+        D2_TAG_MODULE(matrix)
 	public:
 		enum class ModelType
 		{

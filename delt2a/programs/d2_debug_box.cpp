@@ -2,11 +2,11 @@
 
 namespace d2::prog::impl
 {
-    float MiB(std::uint64_t b)
+    static float MiB(std::uint64_t b)
     {
         return float(b) / (1024.0f * 1024.0f);
     }
-    float KiB(std::uint64_t b)
+    static float KiB(std::uint64_t b)
     {
         return float(b) / 1024.0f;
     }
@@ -23,7 +23,7 @@ namespace d2::prog::impl
 
 namespace d2::prog::impl
 {
-    float cpu_usage()
+    static float cpu_usage()
     {
         static auto ts_to_ns = [](const timespec& ts) -> std::uint64_t
         {
@@ -64,14 +64,14 @@ namespace d2::prog::impl
         const auto pct = (double(cpu_ns_delta) / double(wall_ns_delta)) * 100.0;
         return float(pct);
     }
-    std::uint64_t total_ram_bytes()
+    static std::uint64_t total_ram_bytes()
     {
         struct ::sysinfo info{};
         if (::sysinfo(&info) == 0)
             return std::uint64_t(info.totalram) * std::uint64_t(info.mem_unit);
         return 0;
     }
-    std::uint64_t total_rss_bytes()
+    static std::uint64_t total_rss_bytes()
     {
         auto* f = std::fopen("/proc/self/statm", "r");
         if (!f)
@@ -89,12 +89,12 @@ namespace d2::prog::impl
             return 0;
         return std::uint64_t(resident_pages) * std::uint64_t(page_size);
     }
-    std::uint64_t heap_used_bytes()
+    static std::uint64_t heap_used_bytes()
     {
         auto mi = ::mallinfo2();
         return std::uint64_t(mi.uordblks);
     }
-    std::uint64_t thread_count()
+    static std::uint64_t thread_count()
     {
         std::ifstream file(std::format("/proc/{}/status", getpid()));
         if (!file.is_open())
@@ -117,23 +117,23 @@ namespace d2::prog::impl
 
 namespace d2::prog::impl
 {
-    float cpu_usage()
+    static float cpu_usage()
     {
         return 0;
     }
-    std::uint64_t total_ram_bytes()
+    static std::uint64_t total_ram_bytes()
     {
         return 0;
     }
-    std::uint64_t total_rss_bytes()
+    static std::uint64_t total_rss_bytes()
     {
         return 0;
     }
-    std::uint64_t heap_used_bytes()
+    static std::uint64_t heap_used_bytes()
     {
         return 0;
     }
-    std::uint64_t thread_count()
+    static std::uint64_t thread_count()
     {
         return 0;
     }
@@ -159,7 +159,7 @@ namespace d2::prog
                 D2_STYLE(ZIndex, 0)
                 D2_STYLE(Options, Switch::opts{ "Overview", "Modules", "Inspector", "Logs" })
                 D2_STYLE(Width, 1.0_pc)
-                D2_STYLE(OnChangeValues, [](d2::TypedTreeIter<Switch> ptr, d2::string n, d2::string o) {
+                D2_STYLE(OnChangeValues, [](d2::TreeIter<Switch> ptr, d2::string n, d2::string o) {
                     auto root = ptr->state()->core();
                     if (!o.empty()) root->at(o)->setstate(Element::Display, false);
                     root->at(n)->setstate(Element::Display, true);
@@ -177,8 +177,8 @@ namespace d2::prog
                     std::vector<d2::string>{ "⠇", "⠋", "⠙", "⠸", "⢰", "⣠", "⣄", "⡆" }
                 );
                 D2_ON(Clicked)
-                    state->screen()->suspend(
-                        !state->screen()->is_suspended()
+                    state->context()->suspend(
+                        !state->context()->is_suspended()
                     );
                 D2_ON_END
             D2_ELEM_END
@@ -189,7 +189,7 @@ namespace d2::prog
                 D2_INTERP_TWOWAY_AUTO(
                     Hovered, 500, Linear,
                     ForegroundColor, d2::colors::r::crimson
-                )
+                );
                 D2_ON(Clicked)
                     state->core()->parent()->remove(
                         state->core()
@@ -209,7 +209,7 @@ namespace d2::prog
                 float rescale{ 1.f };
                 float measurement{ 0.f };
                 std::string unit{ "" };
-                std::function<float(Screen::ptr)> callback{ nullptr };
+                std::function<float(IOContext::ptr)> callback{ nullptr };
                 std::chrono::milliseconds resolution{ 100 };
                 IOContext::future<void> task{ nullptr };
 
@@ -301,68 +301,83 @@ namespace d2::prog
             D2_STATIC(metrics, std::unordered_map<std::string, Metric>)
             D2_STATIC(metric_reloads, std::vector<std::function<void()>>)
             D2_STATIC(active_metric, std::pair<std::string, Metric*>)
+            D2_CONTEXT(state->core(), d2::ParentElement)
+                D2_OFF(Created)
+                    for (decltype(auto) it : *metrics)
+                    {
+                        it.second.task.discard();
+                        it.second.task.sync_value();
+                    }
+                D2_ON_END
+            D2_CONTEXT_END
             D2_ANCHOR(FlowBox, output)
             D2_ANCHOR(Text, gvalue)
             D2_ANCHOR(Text, minmax)
             *metrics = {
                 { "Delta", Metric{
                     .unit = "us",
-                    .callback = [](Screen::ptr src) -> float {
-                        return src->delta().count();
+                    .callback = [](IOContext::ptr ctx) -> float {
+                        return ctx->screen()->delta().count();
+                    },
+                }},
+                { "FPS", Metric{
+                    .callback = [](IOContext::ptr ctx) -> float {
+                        return ctx->screen()->fps();
                     },
                 }},
                 { "Elements", Metric{
-                    .callback = [](Screen::ptr src) -> float {
-                        std::function<std::size_t(d2::TreeIter)> func = nullptr;
-                        auto count_elements_recursive = [&](d2::TreeIter elem) -> std::size_t {
+                    .callback = [](IOContext::ptr ctx) -> float {
+                        std::function<std::size_t(d2::TreeIter<>)> func = nullptr;
+                        auto count_elements_recursive = [&](d2::TreeIter<> elem) -> std::size_t {
                             std::size_t cnt = 0;
-                            elem.foreach([&](d2::TreeIter h) {
+                            elem.foreach([&](d2::TreeIter<> h) {
                                 cnt++;
-                                cnt += func(h);
+                                if (h.is_type<ParentElement>())
+                                    cnt += func(h);
                                 return true;
                             });
                             return cnt;
                         };
                         func = count_elements_recursive;
-                        return count_elements_recursive(src->root()) + 1;
+                        return count_elements_recursive(ctx->screen()->root()) + 1;
                     },
                     .resolution = std::chrono::milliseconds(500)
                 }},
                 { "Framebuffer", Metric{
                     .unit = "B",
-                    .callback = [](Screen::ptr src) -> float {
-                        return src->context()->output()->delta_size();
+                    .callback = [](IOContext::ptr ctx) -> float {
+                        return ctx->output()->delta_size();
                     },
                 }},
                 { "Swapframe", Metric{
                     .unit = "B",
-                    .callback = [](Screen::ptr src) -> float {
-                        return src->context()->output()->swapframe_size();
+                    .callback = [](IOContext::ptr ctx) -> float {
+                        return ctx->output()->swapframe_size();
                     },
                 }},
                 { "Threads", Metric{
-                    .callback = [](Screen::ptr src) -> float {
+                    .callback = [](IOContext::ptr ctx) -> float {
                         return impl::thread_count();
                     },
                     .resolution = std::chrono::milliseconds(300)
                 }},
                 { "CPU/AVG", Metric{
                     .unit = "% core",
-                    .callback = [](Screen::ptr) -> float {
+                    .callback = [](IOContext::ptr) -> float {
                         return impl::cpu_usage();
                     },
                 }},
                 { "Heap", Metric{
                     .round = true,
                     .unit = "KiB",
-                    .callback = [](Screen::ptr) -> float {
+                    .callback = [](IOContext::ptr) -> float {
                         return impl::KiB(impl::heap_used_bytes());
                     },
                 }},
                 { "Memory", Metric{
                     .round = true,
                     .unit = "MiB",
-                    .callback = [](Screen::ptr) -> float {
+                    .callback = [](IOContext::ptr) -> float {
                         return impl::MiB(impl::total_rss_bytes());
                     }
                 }},
@@ -391,7 +406,7 @@ namespace d2::prog
                         "Elements", "Animations", "Dynamic Variables",
                         "Logs", "Warnings", "Errors"
                     })
-                    D2_STYLE(OnChangeValues, [=](d2::TypedTreeIter<VerticalSwitch>, d2::string n, d2::string o) {
+                    D2_STYLE(OnChangeValues, [=](d2::TreeIter<VerticalSwitch>, d2::string n, d2::string o) {
                         if (active_metric->second)
                             active_metric->second->task.pause();
                         if (output->exists(o))
@@ -442,8 +457,9 @@ namespace d2::prog
                         D2_ELEM(Checkbox)
                             D2_STYLE(Value, def)
                             D2_STYLE(X, 1.0_relative)
+                            D2_STYLE(BackgroundColor, d2::colors::w::transparent)
                             if (ctr++) D2_STYLE(Y, 0.0_relative)
-                            D2_STYLE(OnSubmit, [=](d2::TypedTreeIter<Checkbox>, bool value) {
+                            D2_STYLE(OnSubmit, [=](d2::TreeIter<Checkbox>, bool value) {
                                 const auto& [ name, metric ] = *active_metric;
                                 if (metric != nullptr)
                                     change(name, *metric, value);
@@ -471,7 +487,7 @@ namespace d2::prog
                             {
                                 metric.task = state->context()->scheduler()->launch_cyclic(metric.resolution, [&](auto&&...) {
                                     auto graph = output->at(name).as<graph::CyclicVerticalBar>();
-                                    const auto measurement = metric.callback(state->screen());
+                                    const auto measurement = metric.callback(state->context());
                                     const auto pmin = metric.min;
                                     const auto pmax = metric.max;
                                     const auto pmes = metric.measurement;
@@ -526,7 +542,7 @@ namespace d2::prog
                 D2_ELEM(Text)
                     D2_STYLE(X, 1.0_px)
                     D2_STYLE(Y, 0.0_relative)
-                    state->context()->scheduler()->launch_cyclic(std::chrono::milliseconds(200), [=](auto&&...) {
+                    auto handle = state->context()->scheduler()->launch_cyclic(std::chrono::milliseconds(200), [=](auto&&...) {
                         auto focused = ptr->screen()->focused();
                         auto info = std::format(
                             "Focused: {}",
@@ -534,6 +550,7 @@ namespace d2::prog
                         );
                         ptr->set<Text::Value>(std::move(info));
                     });
+                    D2_OFF_EXPR(Created, handle.discard())
                 D2_ELEM_END
             D2_ELEM_END
             // Info
@@ -594,12 +611,11 @@ namespace d2::prog
             ptr->setstate(Element::Display, false);
         D2_ELEM_END
         D2_ELEM(ScrollFlowBox, Modules)
-            D2_STATIC(update, IOContext::future<void>)
             D2_STYLE(Y, 1.0_px)
             D2_STYLE(Width, 1.0_pc)
             D2_STYLE(Height, 1.0_pxi)
-            *update = state->context()->scheduler()->launch_cyclic(std::chrono::seconds(5), [=](auto&&...) {
-                auto update_mod_view = [=](TreeIter ptr, sys::SystemComponent* mod)
+            auto handle = state->context()->scheduler()->launch_cyclic(std::chrono::seconds(5), [=](auto&&...) {
+                auto update_mod_view = [=](TreeIter<> ptr, sys::SystemComponent* mod)
                 {
                     px::foreground color;
                     switch (mod->status())
@@ -635,8 +651,8 @@ namespace d2::prog
                         create_mod_view(mod);
                 });
 
-                std::vector<TreeIter> rem;
-                ptr->foreach([&](TreeIter ptr) {
+                std::vector<TreeIter<>> rem;
+                ptr->foreach([&](TreeIter<> ptr) {
                     auto f = mods.find(ptr->name());
                     if (f == mods.end())
                     {
@@ -649,6 +665,7 @@ namespace d2::prog
                     return true;
                 });
             });
+            D2_OFF_EXPR(Created, handle.discard())
             ptr->setstate(Element::Display, false);
         D2_ELEM_END
         D2_ELEM(Box, Inspector)

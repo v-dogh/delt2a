@@ -40,8 +40,8 @@ namespace d2::ctm
                     D2_STYLE(X, 0.0_relative)
                     D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
                     D2_STYLE(FocusedColor, colors::r::red.alpha(0.8f))
-                    D2_STYLE(OnSubmit, [](TreeIter ptr) {
-                        ptr->screen()->stop_blocking();
+                    D2_STYLE(OnSubmit, [](TreeIter<Button> ptr) {
+                        ptr->context()->stop();
                     })
                     D2_INTERP_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, colors::r::red);
                 D2_ELEM_END
@@ -51,7 +51,7 @@ namespace d2::ctm
                     D2_STYLE(BackgroundColor, d2::colors::w::transparent)
                     D2_STYLE(FocusedColor, colors::g::green.alpha(0.8f))
                     D2_STYLE(X, 1.0_relative)
-                    D2_STYLE(OnSubmit, [](TreeIter ptr) {
+                    D2_STYLE(OnSubmit, [](TreeIter<Button> ptr) {
                         auto state = ptr->state();
                         state->root()->remove(state->core());
                     })

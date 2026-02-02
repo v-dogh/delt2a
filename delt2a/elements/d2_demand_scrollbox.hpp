@@ -13,7 +13,7 @@ namespace d2
         {
         private:
             std::size_t _idx{ 0 };
-            d2::TypedTreeIter<DemandScrollBox> _ptr{};
+            d2::TreeIter<DemandScrollBox> _ptr{};
             d2::Element::ptr _element{ nullptr };
             bool _created{ false };
 
@@ -23,11 +23,11 @@ namespace d2
 
             EntrySeed(const EntrySeed&) = delete;
             EntrySeed(EntrySeed&&) = delete;
-            EntrySeed(std::size_t idx, d2::TypedTreeIter<DemandScrollBox> ptr) :
+            EntrySeed(std::size_t idx, d2::TreeIter<DemandScrollBox> ptr) :
                 _idx(idx), _ptr(ptr) {}
 
             template<typename Element, typename... Argv>
-            d2::TypedTreeIter<Element> create(Argv&&... args)
+            d2::TreeIter<Element> create(Argv&&... args)
             {
                 if (_created)
                     throw std::logic_error{ "Seed can only be used once" };
@@ -47,7 +47,7 @@ namespace d2
             }
 
             std::size_t index() const noexcept { return _idx; }
-            d2::TypedTreeIter<DemandScrollBox> parent() const noexcept { return _ptr; }
+            d2::TreeIter<DemandScrollBox> parent() const noexcept { return _ptr; }
 
             EntrySeed& operator=(const EntrySeed&) = delete;
             EntrySeed& operator=(EntrySeed&&) = delete;
@@ -116,15 +116,26 @@ namespace d2
             >;
             using data::data;
         protected:
+            std::size_t _top_index = 0;
+            int _top_inset = 0;
+            int _view_base = 0;
+            int _zero_start = 0;
+
+            std::vector<int> _height_cache;
+            std::size_t _avg_height_cnt = 0;
+            double _avg_height = 0.0;
+
             std::shared_ptr<VerticalSlider> _scrollbar{ nullptr };
             std::vector<d2::Element::ptr> _view{};
-            mutable int _prev_offset{ 0 };
-            mutable int _offset{ 0 };
+            int _prev_offset{ 0 };
+            int _offset{ 0 };
 
             void _update_view();
 
             virtual void _signal_write_impl(write_flag type, unsigned int prop, ptr element) override;
+            virtual bool _provides_input_impl() const override;
             virtual void _state_change_impl(State state, bool value) override;
+            virtual void _event_impl(sys::screen::Event ev) override;
 
             virtual int _get_border_impl(BorderType type, cptr elem) const override;
             virtual Unit _layout_impl(enum Element::Layout type) const override;
@@ -132,7 +143,7 @@ namespace d2
 
             virtual void _frame_impl(PixelBuffer::View buffer) override;
         public:
-            TypedTreeIter<VerticalSlider> scrollbar() const;
+            TreeIter<VerticalSlider> scrollbar() const;
             void scroll_to(int offset);
 
             virtual void foreach(foreach_callback callback) const noexcept override;

@@ -9,6 +9,7 @@
 #include <tuple>
 #include <memory>
 #include <type_traits>
+#include "d2_exceptions.hpp"
 #include "mt/thread_pool.hpp"
 #include "mt/task_ring.hpp"
 
@@ -95,6 +96,7 @@ namespace d2
 
     class Signals : public std::enable_shared_from_this<Signals>
     {
+        D2_TAG_MODULE(sig)
     private:
         static constexpr auto _static_storage_length{ 16 };
         static constexpr auto _max_concurrent_signals{ 8 };
@@ -283,8 +285,8 @@ namespace d2
         {
             Async = 1 << 0,
             Deferred = 1 << 1,
-            Combine = 1 << 2,
-            DropIfFull = 1 << 3,
+            Combine = 1 << 3,
+            DropIfFull = 1 << 4,
         };
         struct Handle
         {
@@ -327,6 +329,10 @@ namespace d2
 
             bool operator==(std::nullptr_t) const;
             bool operator!=(std::nullptr_t) const;
+        };
+        struct Config
+        {
+            unsigned char flags{ 0x00 };
         };
         using ptr = std::shared_ptr<Signals>;
     private:
@@ -387,25 +393,25 @@ namespace d2
         Signals(Signals&&) = delete;
 
         template<typename Sig, typename... Argv>
-        Signal connect(unsigned char flags = 0x00)
+        Signal connect(Config cfg = Config(0x00))
         {
             static_assert(std::is_enum_v<Sig>, "Signal must be an enum");
             return _sig_register(
                 _sig_id<Sig>(),
                 args_sig<typename impl::args_normalize<Argv>::type...>::code(),
                 sizeof(std::tuple<typename impl::normalize<Argv>::type...>),
-                flags
+                cfg.flags
             );
         }
         template<typename Sig, typename... Argv>
-        Signal connect(signal_id runtime, unsigned char flags = 0x00)
+        Signal connect(signal_id runtime, Config cfg = Config(0x00))
         {
             static_assert(std::is_enum_v<Sig>, "Signal must be an enum");
             return _sig_register(
                 _sig_id<Sig>(runtime),
                 args_sig<typename impl::args_normalize<Argv>::type...>::code(),
                 sizeof(std::tuple<typename impl::normalize<Argv>::type...>),
-                flags
+                cfg.flags
             );
         }
 

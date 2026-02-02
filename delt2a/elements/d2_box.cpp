@@ -51,6 +51,18 @@ namespace d2::dx
         return perfect + (bw * 2) + data::height.raw();
     }
 
+    void Box::_signal_write_child_impl(write_flag type, unsigned int prop, ptr element)
+    {
+        if ((prop == initial_property ||
+            (type & (WriteType::Dimensions | WriteType::Offset))))
+        {
+            auto type = 0x00;
+            if (data::width.getunits() == Unit::Auto) type |= WriteType::LayoutWidth;
+            if (data::height.getunits() == Unit::Auto) type |= WriteType::LayoutHeight;
+            if (type && _is_write_type(type))
+                _signal_write(type);
+        }
+    }
     int Box::_get_border_impl(BorderType type, cptr elem) const
     {
         if (

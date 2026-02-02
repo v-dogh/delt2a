@@ -274,7 +274,7 @@ namespace d2
 			);
 		};
 
-        const auto special_case = (src.v == ' ' && src.a < a);
+        const auto special_case = false;// (src.v == ' ' && src.a < a);
         const auto src_af = special_case ? src.a : src.af;
         if (src_af == 0 && src.a == 0)
             return;
@@ -497,7 +497,6 @@ namespace d2
 
 	std::span<const Pixel> PixelBuffer::View::data() const
 	{
-		D2_ASSERT(buffer_ != nullptr)
 		return buffer_->data();
 	}
 
@@ -515,11 +514,24 @@ namespace d2
 	}
 	void PixelBuffer::View::fill(Pixel px, int x, int y, int width, int height)
 	{
-		D2_ASSERT(buffer_ != nullptr)
+        D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
 		buffer_->fill(
 			px, x + xoff_, y + yoff_, width, height
 		);
 	}
+    void PixelBuffer::View::fill_blend(Pixel px)
+    {
+        buffer_->fill_blend(
+            px, xoff_, yoff_, width_, height_
+        );
+    }
+    void PixelBuffer::View::fill_blend(Pixel px, int x, int y, int width, int height)
+    {
+        D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
+        buffer_->fill_blend(
+            px, x + xoff_, y + yoff_, width, height
+        );
+    }
 
 	bool PixelBuffer::View::compressed() const
 	{
@@ -552,20 +564,20 @@ namespace d2
 
 	const Pixel& PixelBuffer::View::at(int x, int y) const
 	{
-		D2_ASSERT(buffer_ != nullptr)
-		return buffer_->buffer_[
+        D2_ASSERT(x < width_ && y < height_ && x >= 0 && y >= 0)
+        return buffer_->buffer_[
 			((y + yoff_) * buffer_->width_) + (x + xoff_)
 		];
 	}
 	Pixel& PixelBuffer::View::at(int x, int y)
-	{
+    {
 		return const_cast<Pixel&>(const_cast<const View*>(this)->at(x, y));
 	}
 
 	const Pixel& PixelBuffer::View::at(int c) const
 	{
-		D2_ASSERT(buffer_ != nullptr)
-		const auto idxx = c % width_;
+        D2_ASSERT(c < width_ * height_ && c >= 0)
+        const auto idxx = c % width_;
 		const auto idxy = c / width_;
 		return at(idxx, idxy);
 	}
@@ -576,8 +588,7 @@ namespace d2
 
 	void PixelBuffer::View::inscribe(int x, int y, const View& sub)
 	{
-		D2_ASSERT(buffer_ != nullptr)
-		return buffer_->inscribe(x, y, sub);
+        return buffer_->inscribe(x, y, sub);
 	}
 
 	// RLE
@@ -819,12 +830,27 @@ namespace d2
 	}
 	void PixelBuffer::fill(Pixel px, int x, int y, int width, int height)
 	{
+        D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
         for (std::size_t i = y; i < height + y; i++)
             for (std::size_t j = x; j < width + x; j++)
             {
                 buffer_[(i * width_) + j] = px;
             }
 	}
+    void PixelBuffer::fill_blend(Pixel px)
+    {
+        for (decltype(auto) it : buffer_)
+            it.blend(px);
+    }
+    void PixelBuffer::fill_blend(Pixel px, int x, int y, int width, int height)
+    {
+        D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
+        for (std::size_t i = y; i < height + y; i++)
+            for (std::size_t j = x; j < width + x; j++)
+            {
+                buffer_[(i * width_) + j].blend(px);
+            }
+    }
 
 	bool PixelBuffer::empty() const
 	{
@@ -878,24 +904,24 @@ namespace d2
 
 	const Pixel& PixelBuffer::at(int x, int y) const
 	{
-		D2_ASSERT(x >= 0 && y >= 0 && x < width_ && y < height_)
-		return buffer_[(y * width_) + x];
+        D2_ASSERT(x < width_ && y < height_ && x >= 0 && y >= 0)
+        return buffer_[(y * width_) + x];
 	}
 	Pixel& PixelBuffer::at(int x, int y)
 	{
-		D2_ASSERT(x >= 0 && y >= 0 && x < width_ && y < height_)
-		return buffer_[(y * width_) + x];
+        D2_ASSERT(x < width_ && y < height_ && x >= 0 && y >= 0)
+        return buffer_[(y * width_) + x];
 	}
 
 	const Pixel& PixelBuffer::at(int c) const
 	{
-		D2_ASSERT(c >= 0 && c < width_ * height_)
-		return buffer_[c];
+        D2_ASSERT(c < width_ * height_ && c >= 0)
+        return buffer_[c];
 	}
 	Pixel& PixelBuffer::at(int c)
 	{
-		D2_ASSERT(c >= 0 && c < width_ * height_)
-		return buffer_[c];
+        D2_ASSERT(c < width_ * height_ && c >= 0)
+        return buffer_[c];
 	}
 
 	void PixelBuffer::inscribe(int xf, int yf, View view)
