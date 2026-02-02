@@ -1,7 +1,6 @@
 #include "d2_tree_element.hpp"
 #include "d2_tree_parent.hpp"
 #include "d2_exceptions.hpp"
-#include <typeinfo>
 #include <vector>
 
 namespace d2
@@ -73,15 +72,15 @@ namespace d2
 
     // Other stuff
 
-    Element::write_flag Element::_contextual_change(write_flag flags) const
+    Element::write_flag Element::_contextual_change(write_flag type) const
     {
         const unit_meta_flag rep = _unit_report_impl();
-        if (flags & WriteType::Dimensions)
+        if (type & (InternalState::DimensionsWidthUpdated | InternalState::DimensionsHeightUpdated))
             return
                 (bool(rep & ContextualXPos) * WriteType::LayoutXPos) |
                 (bool(rep & ContextualYPos) * WriteType::LayoutYPos) |
-                (bool(rep & (ContextualWidth | RelativeWidth)) * WriteType::LayoutWidth) |
-                (bool(rep & ContextualHeight | RelativeHeight) * WriteType::LayoutHeight);
+                (bool(rep & ContextualWidth) * WriteType::LayoutWidth) |
+                (bool(rep & ContextualHeight) * WriteType::LayoutHeight);
         return 0x00;
     }
 
@@ -93,7 +92,6 @@ namespace d2
 
     Element::EventListener Element::_push_listener(State event, bool value, event_callback callback)
     {
-        D2_ASSERT(callback != nullptr);
         auto& l = _subscribers.emplace_back(std::make_shared<EventListenerState>(
             shared_from_this(),
             _subscribers.size(),
@@ -174,12 +172,7 @@ namespace d2
         if ((type & ~(WriteType::Style | WriteType::InternalLayout)) & WriteType::Dimensions)
         {
             _signal_context_change_impl(type, prop, shared_from_this());
-            // Check if after the change of the dimensions the coordinates
-            // on the corresponding axis are not going to change due to the context
-            const auto pos = (type >> 2) & (WriteType::LayoutXPos | WriteType::LayoutYPos);
-            _invalidate_state(
-                _contextual_change(pos)
-            );
+            _invalidate_state(_contextual_change(type));
         }
         _invalidate_state(type);
         _signal_write_impl(type, prop, element);
@@ -248,7 +241,7 @@ namespace d2
     {
         _internal_state &= ~type;
     }
-    void Element::_trigger_event(ScreenEvent ev)
+    void Element::_trigger_event(sys::screen::Event ev)
     {
         _event_impl(ev);
         _trigger(State::Event, true);
@@ -282,7 +275,7 @@ namespace d2
 
     // Metadata
 
-    std::shared_ptr<Screen> Element::screen() const
+    sys::module<sys::screen> Element::screen() const
     {
         return _state_ptr->screen();
     }
@@ -478,7 +471,6 @@ namespace d2
 
     Element::Frame Element::frame()
     {
-        D2_ASSERT((_internal_state & (CachePolicyStatic | CachePolicyDynamic | CachePolicyVolatile)))
         if (_internal_state & WasWrittenLayout)
         {
             _update_layout_impl();
@@ -632,7 +624,7 @@ namespace d2
         {
             return _ptr->_signal_update(type);
         }
-        void ElementView::trigger_event(ScreenEvent ev)
+        void ElementView::trigger_event(sys::screen::Event ev)
         {
             return _ptr->_trigger_event(ev);
         }

@@ -135,7 +135,7 @@ namespace d2
             virtual void _signal_write_impl(write_flag type, unsigned int prop, ptr element) override;
             virtual bool _provides_input_impl() const override;
             virtual void _state_change_impl(State state, bool value) override;
-            virtual void _event_impl(Screen::Event ev) override;
+            virtual void _event_impl(sys::screen::Event ev) override;
 
             virtual int _get_border_impl(BorderType type, cptr elem) const override;
             virtual Unit _layout_impl(enum Element::Layout type) const override;

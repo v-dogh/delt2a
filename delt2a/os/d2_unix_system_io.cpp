@@ -150,111 +150,110 @@ namespace d2::sys
 		return _had_screen_resize;
 	}
 
-	void UnixTerminalInput::_begincycle_impl() { }
-	void UnixTerminalInput::_endcycle_impl()
-	{
-		std::unique_lock lock(_mtx);
+    void UnixTerminalInput::_begincycle_impl()
+    {
+        std::unique_lock lock(_mtx);
 
-		// Update screen size
+        // Update screen size
 
-		{
-			struct winsize ws;
-			if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1)
-			{
-				_screen_size = { 0, 0 };
-				_had_screen_resize = true;
-			}
-			else
-			{
-				const std::pair<std::size_t, std::size_t> src = { ws.ws_col, ws.ws_row };
-				_had_screen_resize =
-					src.first != _screen_size.first ||
-					src.second != _screen_size.second;
-				_screen_size = src;
-			}
-		}
+        {
+            struct winsize ws;
+            if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1)
+            {
+                _screen_size = { 0, 0 };
+                _had_screen_resize = true;
+            }
+            else
+            {
+                const std::pair<std::size_t, std::size_t> src = { ws.ws_col, ws.ws_row };
+                _had_screen_resize =
+                    src.first != _screen_size.first ||
+                    src.second != _screen_size.second;
+                _screen_size = src;
+            }
+        }
 
-		// Clear state
+        // Clear state
 
-		// Reset key state
-		{
-			_input_poll.clear();
-			_p_kpoll().reset();
-		}
-		// Reset mouse state
-		{
-			_p_mpoll() = _c_mpoll();
-			_p_mpoll().reset(MouseKey::ScrollDown);
-			_p_mpoll().reset(MouseKey::ScrollUp);
-		}
-		// Swap
-		_poll_swap_index = !_poll_swap_index;
+        // Reset key state
+        {
+            _input_poll.clear();
+            _p_kpoll().reset();
+        }
+        // Reset mouse state
+        {
+            _p_mpoll() = _c_mpoll();
+            _p_mpoll().reset(MouseKey::ScrollDown);
+            _p_mpoll().reset(MouseKey::ScrollUp);
+        }
+        // Swap
+        _poll_swap_index = !_poll_swap_index;
 
-		// Keyboard input
+        // Keyboard input
 
-		fd_set fds;
-		struct timeval timeout;
-		timeout.tv_sec = 0;
-		timeout.tv_usec = 0;
+        fd_set fds;
+        struct timeval timeout;
+        timeout.tv_sec = 0;
+        timeout.tv_usec = 0;
 
-		FD_ZERO(&fds);
-		FD_SET(STDIN_FILENO, &fds);
+        FD_ZERO(&fds);
+        FD_SET(STDIN_FILENO, &fds);
 
-		bool is_input = ::select(STDIN_FILENO + 1, &fds, nullptr, nullptr, &timeout) > 0;
-		_c_kpoll().set(SpecialKeyMax, is_input);
-		_c_mpoll().reset(MouseKeyMax);
-		while (is_input)
-		{
-			char ch;
-			::read(STDIN_FILENO, &ch, 1);
+        bool is_input = ::select(STDIN_FILENO + 1, &fds, nullptr, nullptr, &timeout) > 0;
+        _c_kpoll().set(SpecialKeyMax, is_input);
+        _c_mpoll().reset(MouseKeyMax);
+        while (is_input)
+        {
+            char ch;
+            ::read(STDIN_FILENO, &ch, 1);
 
-			// Special keys :) (for now only some of them since im sigma skividi rn fr fr)
-			if (ch == '\n')
-			{
-				_set(Enter);
-			}
-			// Tabulator exterminans
-			else if (ch == '\t')
-			{
-				_set(Tab);
-			}
-			// Backspace
-			else if (ch == 127)
-			{
-				_set(Backspace);
-			}
-			// Control
-			else if (ch >= 1 && ch <= 26)
-			{
-				const auto res = 'A' + (ch - 1);
-				_set(LeftControl);
-				_set(res - keymin());
-			}
-			// Escape
-			else if (ch == '\e')
-			{
+            // Special keys :) (for now only some of them since im sigma skividi rn fr fr)
+            if (ch == '\n')
+            {
+                _set(Enter);
+            }
+            // Tabulator exterminans
+            else if (ch == '\t')
+            {
+                _set(Tab);
+            }
+            // Backspace
+            else if (ch == 127)
+            {
+                _set(Backspace);
+            }
+            // Control
+            else if (ch >= 1 && ch <= 26)
+            {
+                const auto res = 'A' + (ch - 1);
+                _set(LeftControl);
+                _set(res - keymin());
+            }
+            // Escape
+            else if (ch == '\e')
+            {
                 std::array<char, 18> seq{ ch };
-				std::size_t i = 1;
+                std::size_t i = 1;
                 while (i < seq.size() &&
                        ::read(STDIN_FILENO, &seq[i], 1) > 0 &&
                        std::tolower(seq[i]) != 'm') i++;
 
-				if (i > 1)
-				{
-					// Other
-					if (seq[1] == 'O')
-					{
-						if (seq[2] >= 'P' && seq[2] <= 'P' + 12)
-						{
-							char n = seq[2] - 'P';
-							_set(Fn + n + 1);
-						}
-					}
-					else if (seq[1] == '[')
-					{
-						// Mouse input
+                if (i > 1)
+                {
+                    // Other
+                    if (seq[1] == 'O')
+                    {
+                        if (seq[2] >= 'P' && seq[2] <= 'P' + 12)
+                        {
+                            char n = seq[2] - 'P';
+                            _set(Fn + n + 1);
+                        }
+                    }
+                    else if (seq[1] == '[')
+                    {
+                        // Mouse input
                         if (seq[2] == '<')
-						{
+                        {
                             int button = 0;
                             const auto off1 = std::find(seq.begin() + 2, seq.end(), ';');
                             const auto off2 = std::find(off1 + 1, seq.end(), ';');
@@ -284,58 +283,62 @@ namespace d2::sys
                                 }
                             }
 
-							_c_mpoll().set(MouseKeyMax);
-						}
-						else if (seq[2] == 'Z')
-						{
-							_set(Shift);
-							_set(Tab);
-						}
-						else
-						{
-							std::size_t basis = 0;
-							if (seq[2] == '1' && seq[3] == ';' && seq[4] == '2')
-							{
-								_set(LeftControl);
-								_set(Shift);
-								basis = 3;
-							}
+                            _c_mpoll().set(MouseKeyMax);
+                        }
+                        else if (seq[2] == 'Z')
+                        {
+                            _set(Shift);
+                            _set(Tab);
+                        }
+                        else
+                        {
+                            std::size_t basis = 0;
+                            if (seq[2] == '1' && seq[3] == ';' && seq[4] == '2')
+                            {
+                                _set(LeftControl);
+                                _set(Shift);
+                                basis = 3;
+                            }
 
-							switch (seq[2 + basis])
-							{
-							case 'A': _set(ArrowUp); break;
-							case 'B': _set(ArrowDown); break;
-							case 'C': _set(ArrowRight); break;
-							case 'D': _set(ArrowLeft); break;
-							case 'H': _set(Home); break;
-							case 'F': _set(End); break;
-							case '3': _set(Delete); break;
-							}
-						}
-					}
-				}
-				// Literally escape
-				else
-				{
-					_set(Escape);
-				}
-			}
-			// Normal keys :(
-			else
-			{
-				// Sequence
-				_input_poll.push_back(ch);
+                            switch (seq[2 + basis])
+                            {
+                            case 'A': _set(ArrowUp); break;
+                            case 'B': _set(ArrowDown); break;
+                            case 'C': _set(ArrowRight); break;
+                            case 'D': _set(ArrowLeft); break;
+                            case 'H': _set(Home); break;
+                            case 'F': _set(End); break;
+                            case '3': _set(Delete); break;
+                            }
+                        }
+                    }
+                }
+                // Literally escape
+                else
+                {
+                    _set(Escape);
+                }
+            }
+            // Normal keys :(
+            else
+            {
+                // Sequence
+                _input_poll.push_back(ch);
 
-				// Key
-				if (ch >= keymin() && ch <= keymax())
-				{
-					if (ch >= 'A' && ch <= 'Z')
-						_set(Shift);
-					_set(_resolve_key(ch));
-				}
-			}
-			is_input = ::select(STDIN_FILENO + 1, &fds, nullptr, nullptr, &timeout) > 0;
-		}
+                // Key
+                if (ch >= keymin() && ch <= keymax())
+                {
+                    if (ch >= 'A' && ch <= 'Z')
+                        _set(Shift);
+                    _set(_resolve_key(ch));
+                }
+            }
+            is_input = ::select(STDIN_FILENO + 1, &fds, nullptr, nullptr, &timeout) > 0;
+        }
+    }
+	void UnixTerminalInput::_endcycle_impl()
+	{
+
 	}
 
 	void UnixTerminalInput::mask_interrupts()

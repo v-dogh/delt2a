@@ -1,6 +1,7 @@
 #ifndef D2_EXTENDED_PAGE_HPP
 #define D2_EXTENDED_PAGE_HPP
 
+#include "d2_exceptions.hpp"
 #include <absl/container/flat_hash_map.h>
 #include <string>
 #include <array>
@@ -53,6 +54,7 @@ namespace d2
 
     class ExtendedCodePage
     {
+        D2_TAG_MODULE(ecp)
     private:
         static constexpr auto extended_code_range = 159;
         static constexpr auto maximum_code_length = 8;

@@ -14,6 +14,7 @@ namespace d2
     {
         using input = sys::UnixTerminalInput;
         using output = sys::UnixTerminalOutput;
+        using screen =  sys::SystemScreen;
         using clipboard = sys::ext::LocalSystemClipboard;
 #       ifndef D2_EXCLUDE_OS_EXT
             using audio = sys::ext::PipewireSystemAudio;

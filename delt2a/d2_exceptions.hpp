@@ -4,51 +4,40 @@
 #include <exception>
 #include <format>
 #include <string>
+#include "logs/runtime_logs.hpp"
 
 namespace d2
 {
-#	define D2_EXPECT(...) (((__VA_ARGS__) == false) ? std::terminate() : void());
-#	ifndef NDEBUG
-#	define D2_ASSERT(...) D2_EXPECT(__VA_ARGS__);
-#	else
-#	define D2_ASSERT(...) void();
-#	endif
-
-#	define D2_EXCEPTION(name, log) \
-		struct name : Exception { name() : Exception(log) { } };
-#	define D2_GEN_EXCEPTION(name, pre) \
-		struct name : Exception \
-		{ \
-			name(const std::string& error) \
-				: Exception(std::format(pre": {}", error)) {} \
-		}; \
-
-	struct Exception : std::exception
-	{
-	private:
-		const std::string error_{};
-	public:
-		Exception(const std::string& error)
-			: error_(error) {}
-
-        virtual const char* what() const noexcept override final
-		{
-			return error_.c_str();
-		}
-	};
-
-	D2_EXCEPTION(ScreenStartException, "Attempt to start the screen frame loop when one is already running");
-
-	D2_GEN_EXCEPTION(GenericElementException, "Generic exception thrown by element");
-	D2_EXCEPTION(CastException, "Access of element through invalid type");
-
-	D2_EXCEPTION(ChildRemovalException, "Child does not exist for removal");
-	D2_EXCEPTION(ChildCreationException, "Child already exists, cannot overwrite");
-	D2_EXCEPTION(InvalidChildReferenceException, "Attempt to access non-existent child");
-
-	D2_GEN_EXCEPTION(IOContextException, "Generic exception thrown by IO context");
-	D2_EXCEPTION(EventIndexException, "Invalid event index provided to IO context");
-	D2_EXCEPTION(EventOverwriteException, "Attempt to override active listener handle");
+#   ifdef D2_SECURITY_ASSERT
+#       define D2_EXPECT(...) (((__VA_ARGS__) == false) ? \
+            [&]() { \
+                D2_LOG(Warning, assert, "Expectation failed: '", #__VA_ARGS__, "'") \
+            }() : \
+            void());
+#       define D2_ASSERT(...) (((__VA_ARGS__) == false) ? \
+            [&]() { \
+                D2_LOG(Warning, assert, "Assertion failed: '", #__VA_ARGS__, "'") \
+                D2_LOG(Debug, assert, std::source_location::current().file_name(), ":", std::source_location::current().line()) \
+                ::rs::ex::thrw("assert", "Assertion failed", #__VA_ARGS__); \
+            }() : \
+        void());
+#   else
+#       define D2_EXPECT(...) (void());
+#       define D2_ASSERT(...) (void());
+#   endif
+#   ifdef D2_SECURITY_LOG
+#       define D2_LOG(_severity_, _mod_, ...) LOG(_severity_, _mod_, __VA_ARGS__)
+#       define D2_TLOG(_severity_, ...) ::rs::context::get().log(::rs::Severity::_severity_, __module__ __VA_OPT__(,) __VA_ARGS__);
+#   else
+#       define D2_LOG(...) (void());
+#       define D2_TLOG(...) (void());
+#   endif
+#   define D2_THRW(_msg_) ::rs::ex::thrw(__module__, _msg_, "")
+#   define D2_THRW_EX(_msg_, _description_) ::rs::ex::thrw(__module__, _msg_, _description_)
+#   define D2_TAG_MODULE(_name_) private: static inline constexpr auto __module__ = std::string_view(#_name_);
+#   define D2_TAG_MODULE_RUNTIME(_name_) const auto __module__ = _name_;
+#   define D2_SAFE_BLOCK_BEGIN ::rs::ex::safe(__module__, [&]() {
+#   define D2_SAFE_BLOCK_END });
 } // d2
 
 #endif // D2_EXCEPTIONS_HPP

@@ -9,75 +9,7 @@ namespace d2
     class ParentElement : public Element
     {
     public:
-        class DynamicIterator
-        {
-        public:
-            struct DynamicIteratorAdaptor
-            {
-                DynamicIteratorAdaptor() = default;
-                DynamicIteratorAdaptor(const DynamicIteratorAdaptor&) = default;
-                DynamicIteratorAdaptor(DynamicIteratorAdaptor&&) = default;
-                virtual ~DynamicIteratorAdaptor() = default;
-
-                void increment(int cnt, std::shared_ptr<ParentElement> elem)
-                {
-                    for (std::size_t i = 0; i < cnt; i++)
-                        increment(elem);
-                }
-                void decrement(int cnt, std::shared_ptr<ParentElement> elem)
-                {
-                    for (std::size_t i = 0; i < cnt; i++)
-                        decrement(elem);
-                }
-
-                virtual ptr value(std::shared_ptr<ParentElement> elem) const = 0;
-                virtual void increment(std::shared_ptr<ParentElement> elem) = 0;
-                virtual void decrement(std::shared_ptr<ParentElement> elem) = 0;
-                virtual bool is_null(std::shared_ptr<ParentElement> elem) const = 0;
-                virtual bool is_begin(std::shared_ptr<ParentElement> elem) const = 0;
-                virtual bool is_end(std::shared_ptr<ParentElement> elem) const = 0;
-                virtual bool is_equal(DynamicIteratorAdaptor* adapter, std::shared_ptr<ParentElement> elem) const = 0;
-                virtual std::unique_ptr<DynamicIteratorAdaptor> clone() const = 0;
-            };
-        private:
-            std::weak_ptr<ParentElement> _ptr{};
-            std::unique_ptr<DynamicIteratorAdaptor> _adaptor{ nullptr };
-        public:
-            template<typename Adaptor, typename... Argv>
-            static auto make(std::weak_ptr<ParentElement> ptr, Argv&&... args)
-            {
-                return DynamicIterator(
-                           ptr, std::make_unique<Adaptor>(std::forward<Argv>(args)...)
-                       );
-            }
-
-            DynamicIterator() = default;
-            DynamicIterator(std::nullptr_t) {}
-            DynamicIterator(const DynamicIterator& copy) :
-                _ptr(copy._ptr), _adaptor(copy._adaptor->clone()) {}
-            DynamicIterator(DynamicIterator&&) = default;
-            DynamicIterator(std::weak_ptr<ParentElement> ptr, std::unique_ptr<DynamicIteratorAdaptor> adaptor) :
-                _ptr(ptr), _adaptor(std::move(adaptor)) {}
-
-            void increment(int cnt = 1);
-            void decrement(int cnt = 1);
-
-            bool is_begin() const;
-            bool is_end() const;
-            bool is_null() const;
-            bool is_equal(DynamicIterator it) const;
-
-            Element::ptr value() const;
-
-            Element::ptr operator->() const;
-            Element& operator*() const;
-
-            bool operator==(const DynamicIterator& other) const;
-            bool operator!=(const DynamicIterator& other) const;
-
-            DynamicIterator& operator=(const DynamicIterator& copy);
-            DynamicIterator& operator=(DynamicIterator&&) = default;
-        };
+        using DynamicIterator = internal::DynamicIterator;
         enum class BorderType
         {
             Top,

@@ -9,110 +9,11 @@
 #include "d2_io_handler.hpp"
 #include "d2_pixel.hpp"
 #include "d2_element_units.hpp"
+#include "d2_tree_state.hpp"
+#include "d2_screen.hpp"
 
 namespace d2
 {
-    template<typename Type = Element>
-    class TreeIter
-    {
-    public:
-        using type = Type;
-        using foreach_callback = std::function<bool(TreeIter<>)>;
-    private:
-        std::weak_ptr<Type> _ptr{};
-    public:
-        TreeIter() = default;
-        TreeIter(std::nullptr_t) {}
-        TreeIter(const TreeIter&) = default;
-        TreeIter(TreeIter&&) = default;
-        TreeIter(std::weak_ptr<Type> ptr) : _ptr(ptr) {}
-        template<typename Other> TreeIter(TreeIter<Other> ptr) : TreeIter(ptr.weak()) {}
-        template<typename Other> TreeIter(std::shared_ptr<Other> ptr) : TreeIter(std::weak_ptr<Other>(ptr)) {}
-        template<typename Other> TreeIter(std::weak_ptr<Other> ptr)
-        {
-            if (!ptr.expired())
-            {
-                auto p = std::dynamic_pointer_cast<Type>(ptr.lock());
-                if (p == nullptr)
-                    throw std::runtime_error{ "Attempt to access an element through an invalid object" };
-                _ptr = p;
-            }
-        }
-
-        std::shared_ptr<Type> shared() const { return _ptr.lock(); }
-        std::weak_ptr<Type> weak() const { return _ptr; }
-
-        template<typename Other>
-        bool is_type() const
-        {
-            if (_ptr.expired())
-                return false;
-            return dynamic_cast<const Other*>(_ptr.lock().get()) != nullptr;
-        }
-        bool is_type_of(TreeIter<> other) const
-        {
-            if (_ptr.expired())
-                return false;
-            return typeid(other.shared().get()) == typeid(_ptr.lock().get());
-        }
-
-        template<typename Other = Element> TreeIter<Other> as() const
-        {
-            auto p = std::dynamic_pointer_cast<Other>(_ptr.lock());
-            if (p == nullptr)
-                throw std::runtime_error{ "Attempt to access an element through an invalid object" };
-            return p;
-        }
-        TreeIter<ParentElement> asp() const { return as<ParentElement>(); }
-
-        TreeIter<ParentElement> up() const
-        {
-            return shared()->parent();
-        }
-        TreeIter<ParentElement> up(std::size_t cnt) const
-        {
-            if (!cnt)
-                return _ptr;
-            return up().up(cnt - 1);
-        }
-        TreeIter<ParentElement> up(const std::string& name) const
-        {
-            auto current = _ptr.lock();
-            while (current->name() != name)
-            {
-                current = current->parent();
-                if (current == nullptr)
-                    throw std::runtime_error{ std::format("Failed to locate parent with ID: {}", name) };
-            }
-            return current;
-        }
-
-        void foreach(foreach_callback callback) const { asp()->foreach(callback); }
-
-        bool operator==(const TreeIter& other) const
-        {
-            return (_ptr.expired() && other._ptr.expired()) ||
-                   (_ptr.lock() == other._ptr.lock());
-        }
-        bool operator!=(const TreeIter& other) const {  return !operator==(other); }
-
-        std::shared_ptr<Type> operator->() const { return shared(); }
-        Type& operator*() const { return *shared(); }
-
-        TreeIter<> operator/(const std::string& path) const { return asp()->at(path); }
-        TreeIter<ParentElement> operator^(std::size_t cnt) const { return up(cnt); }
-        TreeIter<ParentElement> operator^(const std::string& name) const { return up(name); }
-
-        operator std::shared_ptr<Element>() const { return shared(); }
-        operator std::weak_ptr<Element>() const { return weak(); }
-
-        operator std::shared_ptr<Type>() const requires (!std::is_same_v<Type, Element>) { return shared(); }
-        operator std::weak_ptr<Type>() const requires (!std::is_same_v<Type, Element>) { return weak(); }
-
-        TreeIter& operator=(const TreeIter&) = default;
-        TreeIter& operator=(TreeIter&&) = default;
-    };
-
     namespace internal
     { class ElementView; }
 
@@ -485,7 +386,7 @@ namespace d2
         void _signal_initialization(unsigned int prop);
         void _signal_write_update(write_flag type) const;
         void _signal_update(internal_flag type) const;
-        void _trigger_event(ScreenEvent ev);
+        void _trigger_event(sys::screen::Event ev);
     protected:
         // Layout
 
@@ -499,7 +400,7 @@ namespace d2
 
         // Events
 
-        virtual void _event_impl(ScreenEvent) {}
+        virtual void _event_impl(sys::screen::Event) {}
         virtual void _state_change_impl(State, bool) {}
 
         // Layout
@@ -541,7 +442,7 @@ namespace d2
 
         // Metadata
 
-        std::shared_ptr<Screen> screen() const;
+        sys::module<sys::screen> screen() const;
         IOContext::ptr context() const;
         TreeState::ptr state() const;
         pptr parent() const;
@@ -628,7 +529,7 @@ namespace d2
             void signal_initialization(unsigned int prop);
             void signal_write_update(Element::write_flag type) const;
             void signal_update(Element::internal_flag type) const;
-            void trigger_event(ScreenEvent ev);
+            void trigger_event(sys::screen::Event ev);
         };
     }
 }

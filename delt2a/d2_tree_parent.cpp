@@ -9,86 +9,89 @@ namespace d2
 
     // Dynamic Iterator
 
-    void ParentElement::DynamicIterator::increment(int cnt)
+    namespace internal
     {
-        if (!_ptr.expired())
-            _adaptor->increment(cnt, _ptr.lock());
-    }
-    void ParentElement::DynamicIterator::decrement(int cnt)
-    {
-        if (!_ptr.expired())
-            _adaptor->decrement(cnt, _ptr.lock());
-    }
-
-    bool ParentElement::DynamicIterator::is_begin() const
-    {
-        if (_ptr.expired() || _adaptor == nullptr)
-            return false;
-        return _adaptor->is_begin(_ptr.lock());
-    }
-    bool ParentElement::DynamicIterator::is_end() const
-    {
-        if (_ptr.expired() || _adaptor == nullptr)
-            return false;
-        return _adaptor->is_end(_ptr.lock());
-    }
-    bool ParentElement::DynamicIterator::is_null() const
-    {
-        return
-            _ptr.expired() ||
-            _adaptor == nullptr ||
-            _adaptor->is_null(_ptr.lock());
-    }
-    bool ParentElement::DynamicIterator::is_equal(DynamicIterator it) const
-    {
-        if ((it._ptr.expired() && it._ptr.expired()) ||
-                (it._adaptor == nullptr && _adaptor == nullptr))
-            return true;
-        if (!it._ptr.expired() && !_ptr.expired() &&
-                it._ptr.lock() == _ptr.lock())
+        void DynamicIterator::increment(int cnt)
         {
-            return _adaptor->is_equal(
-                       it._adaptor.get(), _ptr.lock()
-                   );
+            if (!_ptr.expired())
+                _adaptor->increment(cnt, _ptr.lock());
         }
-        return false;
-    }
+        void DynamicIterator::decrement(int cnt)
+        {
+            if (!_ptr.expired())
+                _adaptor->decrement(cnt, _ptr.lock());
+        }
 
-    Element::ptr ParentElement::DynamicIterator::value() const
-    {
-        if (_ptr.expired() || _adaptor == nullptr)
-            return nullptr;
-        return _adaptor->value(_ptr.lock());
-    }
+        bool DynamicIterator::is_begin() const
+        {
+            if (_ptr.expired() || _adaptor == nullptr)
+                return false;
+            return _adaptor->is_begin(_ptr.lock());
+        }
+        bool DynamicIterator::is_end() const
+        {
+            if (_ptr.expired() || _adaptor == nullptr)
+                return false;
+            return _adaptor->is_end(_ptr.lock());
+        }
+        bool DynamicIterator::is_null() const
+        {
+            return
+                _ptr.expired() ||
+                _adaptor == nullptr ||
+                _adaptor->is_null(_ptr.lock());
+        }
+        bool DynamicIterator::is_equal(DynamicIterator it) const
+        {
+            if ((it._ptr.expired() && it._ptr.expired()) ||
+                (it._adaptor == nullptr && _adaptor == nullptr))
+                return true;
+            if (!it._ptr.expired() && !_ptr.expired() &&
+                it._ptr.lock() == _ptr.lock())
+            {
+                return _adaptor->is_equal(
+                    it._adaptor.get(), _ptr.lock()
+                    );
+            }
+            return false;
+        }
 
-    Element::ptr ParentElement::DynamicIterator::operator->() const
-    {
-        return _adaptor->value(_ptr.lock());
-    }
-    Element& ParentElement::DynamicIterator::operator*() const
-    {
-        return *_adaptor->value(_ptr.lock());
-    }
+        TreeIter<> DynamicIterator::value() const
+        {
+            if (_ptr.expired() || _adaptor == nullptr)
+                return nullptr;
+            return _adaptor->value(_ptr.lock());
+        }
 
-    bool ParentElement::DynamicIterator::operator==(const DynamicIterator& other) const
-    {
-        return
-            (_ptr.expired() && other._ptr.expired()) ||
-            (_adaptor == nullptr && other._adaptor == nullptr) ||
-            (_adaptor != nullptr && other._adaptor != nullptr &&
-             !_ptr.expired() && !other._ptr.expired() &&
-             _adaptor->is_equal(other._adaptor.get(), _ptr.lock()));
-    }
-    bool ParentElement::DynamicIterator::operator!=(const DynamicIterator& other) const
-    {
-        return !operator==(other);
-    }
+        TreeIter<> DynamicIterator::operator->() const
+        {
+            return _adaptor->value(_ptr.lock());
+        }
+        Element& DynamicIterator::operator*() const
+        {
+            return *_adaptor->value(_ptr.lock());
+        }
 
-    ParentElement::DynamicIterator& ParentElement::DynamicIterator::operator=(const DynamicIterator& copy)
-    {
-        _ptr = copy._ptr;
-        _adaptor = copy._adaptor->clone();
-        return *this;
+        bool DynamicIterator::operator==(const DynamicIterator& other) const
+        {
+            return
+                (_ptr.expired() && other._ptr.expired()) ||
+                (_adaptor == nullptr && other._adaptor == nullptr) ||
+                (_adaptor != nullptr && other._adaptor != nullptr &&
+                 !_ptr.expired() && !other._ptr.expired() &&
+                 _adaptor->is_equal(other._adaptor.get(), _ptr.lock()));
+        }
+        bool DynamicIterator::operator!=(const DynamicIterator& other) const
+        {
+            return !operator==(other);
+        }
+
+        DynamicIterator& DynamicIterator::operator=(const DynamicIterator& copy)
+        {
+            _ptr = copy._ptr;
+            _adaptor = copy._adaptor->clone();
+            return *this;
+        }
     }
 
     int ParentElement::border_for(BorderType type, cptr ptr) const
@@ -319,7 +322,7 @@ namespace d2
             return std::static_pointer_cast<VecParentElement>(elem);
         }
 
-        Element::ptr value(std::shared_ptr<ParentElement> elem) const
+        TreeIter<> value(std::shared_ptr<ParentElement> elem) const
         {
             return *current;
         }
@@ -546,7 +549,7 @@ namespace d2
             if (!callback(it))
                 break;
     }
-    void VecParentElement::foreach (foreach_callback callback) const
+    void VecParentElement::foreach(foreach_callback callback) const
     {
         for (decltype(auto) it : _elements)
             if (!callback(it->traverse()))

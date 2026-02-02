@@ -61,7 +61,7 @@ namespace d2
 
             virtual bool _provides_input_impl() const override;
             virtual void _state_change_impl(State state, bool value) override;
-            virtual void _event_impl(Screen::Event ev) override;
+            virtual void _event_impl(sys::screen::Event ev) override;
 
             virtual void _frame_impl(PixelBuffer::View buffer) override;
 

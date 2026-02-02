@@ -18,13 +18,13 @@ namespace d2
 		std::vector<Pixel> buffer{};
 		std::size_t width = 0;
 		std::size_t height = 0;
-		data.resize(std::filesystem::file_size(path));
-		file.read(data.data(), data.size());
+        data.resize(std::filesystem::file_size(path));
+        file.read(data.data(), data.size());
 
 		if (type == ModelType::Raw)
 		{
 			if (data.size() < sizeof(std::uint32_t) * 2 + 1)
-				throw std::runtime_error{ "Attempt to load invalid model" };
+                D2_THRW("Attempt to load invalid model");
 
 			const auto header = *reinterpret_cast<const std::uint8_t*>(data.data());
 			const bool endian = header & Endian;
@@ -53,11 +53,11 @@ namespace d2
 			off += sizeof(std::uint32_t);
 
 			if (data.size() < width * height + sizeof(std::uint32_t) * 2 + 1)
-				throw std::runtime_error{ "Attempt to load invalid model; size mismatch" };
+                D2_THRW("Attempt to load invalid model; size mismatch");
 
 			if (header & Compressed)
 			{
-				throw std::logic_error{ "Compression is not implemented yet" };
+                D2_THRW("Compression is not implemented yet");
 			}
 			else
 			{

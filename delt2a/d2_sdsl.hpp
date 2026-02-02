@@ -250,25 +250,26 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
  /// CONTEXT ///
 ///////////////
 
-#define _D2_IMPL_CONTEXT(_ptrv_, _typev_) \
+#define _D2_IMPL_CONTEXT_BASE(_ptrv_, _typev_) \
     { ::d2::TreeIter<> __ptr = _ptrv_; \
         ::d2::TreeState::ptr __state = __ptr->state(); \
         using __object_type = _typev_; \
-        auto ptr = ::d2::TreeIter<_typev_>(__ptr);
+        auto ptr = ::d2::TreeIter<_typev_>(__ptr); \
+        auto state = __state;
 
+#define _D2_IMPL_CONTEXT(_ptrv_, _typev_) { _D2_IMPL_CONTEXT_BASE(_ptrv_, _typev_)
 #define _D2_IMPL_CONTEXT_EXT(_ptrv_, _typev_, _statev_, _stypev_) \
-    _D2_IMPL_CONTEXT(_ptrv_, _typev_) \
-    auto state = std::static_pointer_cast<_stypev_>(_statev_);
-
-#define _D2_IMPL_CONTEXT_RED(_statev_) { ::d2::TreeState::ptr __state = _statev_;
-
-#define _D2_IMPL_CONTEXT_AUTO(_ptrv_) { \
+    _D2_IMPL_CONTEXT_BASE(_ptrv_, _typev_) \
+    { auto state = std::static_pointer_cast<_stypev_>(_statev_);
+#define _D2_IMPL_CONTEXT_RED(_statev_) {{ ::d2::TreeState::ptr __state = _statev_;
+#define _D2_IMPL_CONTEXT_AUTO(_ptrv_) {{ \
     using __object_type = decltype(_ptrv_)::type; \
     ::d2::TreeIter __ptr = _ptrv_; \
     ::d2::TreeState::ptr __state = __ptr->state(); \
-    auto ptr = __ptr;
+    auto ptr = __ptr; \
+    auto state = __state;
 
-#define _D2_IMPL_CONTEXT_END }
+#define _D2_IMPL_CONTEXT_END }}
 
   ////////////////////////////
  /// HELPERS/UNIFORMATORS ///
@@ -284,7 +285,7 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 #define _D2_IMPL_SYNC_EXPR(...) _D2_IMPL_SYNC_EEXPR(__VA_ARGS__);
 #define _D2_IMPL_SYNC_BLOCK state->context()->sync_if([&]{
 #define _D2_IMPL_SYNC_ASYNC_EXPR(...) _D2_IMPL_SYNC_ASYNC_EEXPR(__VA_ARGS__);
-#define _D2_IMPL_SYNC_ASYNC_BLOCK state->context()->sync_async_if([=]{
+#define _D2_IMPL_SYNC_ASYNC_BLOCK(...) state->context()->sync_async_if([= __VA_OPT__(,) __VA_ARGS__]{
 #define _D2_IMPL_SYNC_BLOCK_END });
 
 #define _D2_IMPL_LISTEN_EEXPR(_event_, _value_, ...) [=]() -> void { _D2_IMPL_LISTEN_EXPR(_event_, _value_, __VA_ARGS__) }()
@@ -305,10 +306,10 @@ struct _alias_ : ::d2::TreeTemplateInit<#_alias_, _state_, _alias_, _root_> { \
 #define _D2_IMPL_LISTEN_EVENT_EEXPR(...) [=]() -> void { _D2_IMPL_LISTEN_EVENT_EXPR(__VA_ARGS__) }()
 #define _D2_IMPL_LISTEN_EVENT_EXPR(...) _D2_IMPL_LISTEN_EVENT (__VA_ARGS__); _D2_IMPL_LISTEN_EVENT_END
 #define _D2_IMPL_LISTEN_EVENT(_event_, ...) \
-    __state->context()->listen(::d2::Screen::Event::_event_, \
-        [= __VA_OPT__(,) __VA_ARGS__](::d2::Screen::ptr src) { \
-            ::d2::TreeState::ptr state = src->state(); \
-            ::d2::IOContext::ptr ctx = src->context();
+    __state->context()->listen(::d2::sys::screen::Event::_event_, \
+        [= __VA_OPT__(,) __VA_ARGS__](::d2::IOContext::ptr ctx) { \
+            ::d2::TreeState::ptr state = ctx->screen()->state(); \
+            ::d2::sys::module<::d2::sys::screen> src = ctx->screen();
 #define _D2_IMPL_LISTEN_EVENT_END });
 
 #define _D2_IMPL_ASYNC_EEXPR(...) [=]() -> void { _D2_IMPL_ASYNC_EXPR(__VA_ARGS__) }()

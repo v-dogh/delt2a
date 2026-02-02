@@ -1,6 +1,7 @@
 #include "d2_audio_device_selector.hpp"
 #include "d2_widget_theme_base.hpp"
 #include "../elements/d2_switch.hpp"
+#include <absl/container/flat_hash_map.h>
 
 namespace d2::ctm
 {
@@ -39,8 +40,8 @@ namespace d2::ctm
         auto create_device_list = [&](const d2::string& name, d2::sys::audio::Device dev)
         {
             D2_ELEM_STR(VerticalSwitch, name)
-                D2_STATIC(ids, std::unordered_map<std::size_t, std::string>)
-                D2_STATIC(names, std::unordered_map<std::string, std::size_t>)
+                D2_STATIC(ids, absl::flat_hash_map<std::size_t, std::string>)
+                D2_STATIC(names, absl::flat_hash_map<std::string, std::size_t>)
                 D2_STATIC(watch, d2::Signals::Handle)
                 D2_STYLE(ZIndex, Box::overlap)
                 D2_STYLE(Width, 1.0_pc)
@@ -55,16 +56,19 @@ namespace d2::ctm
                     if (n != VerticalSwitch::invalid)
                     {
                         auto audio = ptr->state()->context()->sys<d2::sys::audio>();
-                        audio->flush(dev);
-                        audio->deactivate(dev);
-                        audio->activate(dev, (*ids)[n]);
+                        if (audio->active(dev).id != (*ids)[n])
+                        {
+                            audio->flush(dev);
+                            audio->deactivate(dev);
+                            audio->activate(dev, (*ids)[n]);
+                        }
                     }
                 })
                 D2_STYLES_APPLY(border_color)
                 D2_STYLES_APPLY(selector_color)
-                auto* mod = ptr->state()->context()->sys<d2::sys::audio>();
-                auto watch_cb = [=](const d2::sys::audio::DeviceName& name, d2::sys::audio::Event ev, d2::sys::audio&) {
-                    D2_SYNC_ASYNC_BLOCK
+                auto mod = ptr->state()->context()->sys<d2::sys::audio>();
+                auto watch_cb = [=](const d2::sys::audio::DeviceName& name, d2::sys::audio::Event ev, d2::sys::module<d2::sys::audio>) {
+                    D2_SYNC_ASYNC_BLOCK()
                         switch (ev)
                         {
                         case d2::sys::ext::SystemAudio::Event::Activate:
@@ -76,12 +80,9 @@ namespace d2::ctm
                             break;
                         case d2::sys::ext::SystemAudio::Event::Create:
                             ptr->apply_set<VerticalSwitch::Options>([&](VerticalSwitch::opts& opts) {
-                                if (!(*names).contains(name.id))
-                                {
-                                    (*ids)[opts.size()] = name.id;
-                                    (*names)[name.id] = opts.size();
-                                    opts.push_back(name.name);
-                                }
+                                (*ids)[opts.size()] = name.id;
+                                (*names)[name.id] = opts.size();
+                                opts.push_back(name.name);
                             });
                             break;
                         case d2::sys::ext::SystemAudio::Event::Destroy:
@@ -94,13 +95,14 @@ namespace d2::ctm
                                 }
                             });
                             break;
+                        case sys::ext::SystemAudio::Event::DefaultChange: break;
                         }
                     D2_SYNC_BLOCK_END
                 };
                 *watch = mod->watch(dev, watch_cb);
                 const auto devs = mod->enumerate(dev);
                 for (decltype(auto) it : devs)
-                    watch_cb(it, d2::sys::audio::Event::Create, *mod);
+                    watch_cb(it, d2::sys::audio::Event::Create, mod);
             D2_ELEM_END
         };
         create_device_list("out", d2::sys::audio::Device::Output);

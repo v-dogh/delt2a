@@ -117,6 +117,7 @@ namespace mt
             ++node->thread_cnt;
             node->thread_cnt.notify_all();
         }
+        ptr->_cfg.event_launch(_tid);
 
         return !full;
     }
@@ -246,6 +247,11 @@ namespace mt
     }
     std::size_t ThreadPool::_distribute_fast(unsigned char support) noexcept
     {
+        // Not implemented yet lol
+        return _distribute_optimal(support);
+    }
+    std::size_t ThreadPool::_distribute_optimal(unsigned char support) noexcept
+    {
         const auto node = _nodes[_node_id()];
 
         auto expected = node->thread_cnt.load();
@@ -255,25 +261,24 @@ namespace mt
             expected = node->thread_cnt.load();
         }
 
-        const auto max_iters = std::min<std::size_t>(1, node->threads.size() / 3);
         const auto avg = node->task_cnt ? node->thread_cnt / node->task_cnt : 0;
+        if (support & Task::Type::Force)
+            support = 0x00;
 
-        std::size_t backoff = 0;
         std::size_t id = 0;
         while (true)
         {
-            const auto tmp = node->thread_ctr++ % node->thread_cnt;
-            if (backoff++ == max_iters) break;
-            if ((node->threads[tmp].task_support & support) == support) continue;
-            if (node->threads[id = tmp].task_cnt >= avg) break;
+            if (id == node->thread_cnt)
+            {
+                id = 0;
+                break;
+            }
+            if ((node->threads[id].task_support & support) == support &&
+                node->threads[id].task_cnt <= avg) break;
+            id++;
         }
 
         return node->threads[id].stop ? 0 : id;
-    }
-    std::size_t ThreadPool::_distribute_optimal(unsigned char support) noexcept
-    {
-        // Not implemented yet
-        return _distribute_fast(support);
     }
     std::size_t ThreadPool::_distribute(Distribution algo, unsigned char support) noexcept
     {
@@ -307,14 +312,12 @@ namespace mt
             }
             else
             {
-                const auto support =
-                    Task::Static * task.timing == task.oneoff |
-                    Task::Cyclic * task.timing != task.oneoff;
+                const auto support = _query_task<unsigned char>(Task::Query::Type, task);
                 auto& thread = node->threads[_distribute(
                     dist.has_value() ?
                         dist.value() : node->dist.load(),
                     support
-                    )];
+                )];
                 ++thread.task_cnt;
                 ++node->task_cnt;
                 thread.tasks.enqueue(std::move(task));
@@ -363,7 +366,8 @@ namespace mt
 		std::array<Task, 6> tasks;
         if (max == std::chrono::milliseconds::max() ?
 			state.tasks.dequeue(tasks[0]) :
-			state.tasks.dequeue(tasks[0], max))
+            max == std::chrono::milliseconds(0) ?
+                state.tasks.try_dequeue(tasks[0]) : state.tasks.dequeue(tasks[0], max))
 		{
 			std::size_t cnt = 1;
 			while (cnt < tasks.size())
@@ -424,12 +428,9 @@ namespace mt
                         {
                             return;
                         }
-                        else
-                        {
-                            for (decltype(auto) it : tasks)
-                                if (it.callback != nullptr)
-                                    _schedule(std::move(it), _cfg.default_dist);
-                        }
+                        for (decltype(auto) it : tasks)
+                            if (it.callback != nullptr)
+                                _schedule(std::move(it), _cfg.default_dist);
                     };
                     if (state.id == 0)
                     {
@@ -527,6 +528,7 @@ namespace mt
 			state = &pool->_nodes[nid]->threads[id];
 		}
 		// Wait for tasks
+        _cfg.event_launch(id);
 		while (!state->stop)
 		{
 			auto pool = ptr.lock();
@@ -557,6 +559,7 @@ namespace mt
 			state = &pool->_nodes[nid]->threads[id];
 		}
 		// Wait for tasks
+        _cfg.event_launch(id);
 		while (!state->stop)
 		{
 			auto pool = ptr.lock();

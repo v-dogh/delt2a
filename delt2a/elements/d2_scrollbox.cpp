@@ -66,12 +66,12 @@ namespace d2::dx
     {
         return true;
     }
-    void ScrollBox::_event_impl(Screen::Event ev)
+    void ScrollBox::_event_impl(sys::screen::Event ev)
     {
         const auto height = layout(Element::Layout::Height);
         const auto bw = (Box::container_options & Box::EnableBorder) ? resolve_units(Box::border_width) : 0;
         const auto ch = computed_height_ - (bw * 2) - height;
-        if (ev == Screen::Event::MouseInput)
+        if (ev == sys::screen::Event::MouseInput)
         {
             if (getstate(Hovered))
             {
@@ -87,7 +87,7 @@ namespace d2::dx
                 }
             }
         }
-        else if (ev == Screen::Event::KeyInput)
+        else if (ev == sys::screen::Event::KeyInput)
         {
             if (context()->input()->is_pressed(sys::SystemInput::ArrowLeft) ||
                 context()->input()->is_pressed(sys::SystemInput::ArrowDown))

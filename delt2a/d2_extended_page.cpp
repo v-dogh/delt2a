@@ -31,7 +31,7 @@ namespace d2
     void ExtendedCodePage::deactivate_thread()
     {
 #       if D2_LOCALE_MODE == UTF8
-        global_extended_code_page.deactivate();
+            global_extended_code_page.deactivate();
 #       endif
     }
 
@@ -52,9 +52,14 @@ namespace d2
         auto str = std::string(value);
         if (auto f = _map.find(str);
             f != _map.end())
+        {
             return _index_to_value(f->second);
+        }
         else if (_ctr >= extended_code_range - 1) [[ unlikely ]]
+        {
+            D2_TLOG(Warning, "Extended code page overflow triggered invalid character emission")
             return '?';
+        }
         else [[ likely ]]
             ++_ctr;
         _append_page += value.size();

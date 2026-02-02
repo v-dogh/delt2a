@@ -109,9 +109,9 @@ namespace d2::dx
             _signal_write(Masked);
         }
     }
-    void Dropdown::_event_impl(Screen::Event ev)
+    void Dropdown::_event_impl(sys::screen::Event ev)
     {
-        if (ev == Screen::Event::KeyInput)
+        if (ev == sys::screen::Event::KeyInput)
         {
             if (context()->input()->is_pressed(sys::SystemInput::ArrowLeft) ||
                     context()->input()->is_pressed(sys::SystemInput::ArrowDown))

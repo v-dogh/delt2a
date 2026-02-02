@@ -226,7 +226,6 @@ namespace d2::ctm
 			theme_picker::create_at(
 				traverse(),
 				TreeState::make<TreeState>(
-					this->state()->screen(),
 					parent()->traverse().asp(),
 					traverse().asp()
                 ),
@@ -307,7 +306,6 @@ namespace d2::ctm
             theme_picker::create_at(
                 traverse(),
                 TreeState::make<TreeState>(
-                    this->state()->screen(),
                     parent()->traverse().asp(),
                     traverse().asp()
                 ),

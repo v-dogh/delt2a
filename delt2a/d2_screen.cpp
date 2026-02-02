@@ -1,54 +1,23 @@
 #include "d2_screen.hpp"
+#include "d2_tree_parent.hpp"
 #include "elements/d2_box.hpp"
 #include "d2_exceptions.hpp"
 #include <filesystem>
 
-namespace d2
+namespace d2::sys
 {
-    TreeState::TreeState(
-        std::shared_ptr<Screen> src,
-        std::shared_ptr<ParentElement> rptr,
-        std::shared_ptr<ParentElement> coreptr
-    ) : src_(src), root_ptr_(rptr), core_ptr_(coreptr)
-    {}
-
-    Screen::Screen(IOContext::ptr ctx)
-        : _ctx(ctx)
+    SystemScreen::Status SystemScreen::_load_impl()
     {
-        _ctx->connect<Event, Screen::ptr>();
+        _sig = context()->connect<Event, IOContext::ptr>();
+        return Status::Ok;
+    }
+    SystemScreen::Status SystemScreen::_unload_impl()
+    {
+        _sig.disconnect();
+        return Status::Ok;
     }
 
-    void TreeState::set_root(std::shared_ptr<ParentElement> ptr)
-    {
-        root_ptr_ = ptr;
-    }
-    void TreeState::set_core(std::shared_ptr<ParentElement> ptr)
-    {
-        core_ptr_ = ptr;
-    }
-
-    std::shared_ptr<IOContext> TreeState::context() const
-    {
-        return src_->context();
-    }
-    std::shared_ptr<Screen> TreeState::screen() const
-    {
-        return src_;
-    }
-    std::shared_ptr<ParentElement> TreeState::root() const
-    {
-        return root_ptr_;
-    }
-    std::shared_ptr<TreeState> TreeState::root_state() const
-    {
-        return root()->state();
-    }
-    std::shared_ptr<ParentElement> TreeState::core() const
-    {
-        return core_ptr_.lock();
-    }
-
-    void Screen::_keynav_cycle_up(eptr ptr)
+    void SystemScreen::_keynav_cycle_up(eptr ptr)
     {
         const auto cparent = ptr->parent();
         const auto parent = cparent->parent();
@@ -77,7 +46,7 @@ namespace d2
             }
         }
     }
-    void Screen::_keynav_cycle()
+    void SystemScreen::_keynav_cycle()
     {
         if (_keynav_iterator == nullptr)
         {
@@ -106,7 +75,7 @@ namespace d2
         }
         while (!_keynav_iterator->provides_input());
     }
-    void Screen::_keynav_cycle_up_reverse()
+    void SystemScreen::_keynav_cycle_up_reverse()
     {
         const auto cparent = _keynav_iterator->parent();
         const auto parent = cparent->parent();
@@ -132,7 +101,7 @@ namespace d2
             }
         }
     }
-    void Screen::_keynav_cycle_reverse()
+    void SystemScreen::_keynav_cycle_reverse()
     {
         if (_keynav_iterator == nullptr)
         {
@@ -166,7 +135,7 @@ namespace d2
         while (!_keynav_iterator->provides_input());
     }
 
-    void Screen::_keynav_cycle_macro()
+    void SystemScreen::_keynav_cycle_macro()
     {
         if (_keynav_iterator == nullptr)
         {
@@ -179,7 +148,7 @@ namespace d2
         do _keynav_cycle();
         while (_keynav_iterator->parent() == parent);
     }
-    void Screen::_keynav_cycle_macro_reverse()
+    void SystemScreen::_keynav_cycle_macro_reverse()
     {
         if (_keynav_iterator == nullptr)
         {
@@ -194,14 +163,7 @@ namespace d2
         while (_keynav_iterator->parent() == parent);
     }
 
-    void Screen::_frame()
-    {
-        _ctx->input()->endcycle();
-        update();
-        _ctx->input()->begincycle();
-        render();
-    }
-    void Screen::_run_interpolators()
+    void SystemScreen::_run_interpolators()
     {
         auto& interps = _current->interpolators;
         if (!interps.empty())
@@ -228,17 +190,17 @@ namespace d2
             }
         }
     }
-    void Screen::_trigger_focused(Event ev)
+    void SystemScreen::_trigger_focused(Event ev)
     {
         internal::ElementView::from(_focused).trigger_event(ev);
     }
-    void Screen::_trigger_hovered(Event ev)
+    void SystemScreen::_trigger_hovered(Event ev)
     {
         internal::ElementView::from(_targetted).trigger_event(ev);
     }
-    void Screen::_trigger_events()
+    void SystemScreen::_trigger_events()
     {
-        auto* input = _ctx->input();
+        auto input = context()->input().ptr();
         const auto is_mouse_input = input->is_mouse_input();
         const auto is_keyboard_input = input->is_key_input();
         const auto is_key_seq_input = input->is_key_sequence_input();
@@ -253,9 +215,9 @@ namespace d2
         _trigger_focused_events();
         _trigger_hovered_events();
     }
-    void Screen::_trigger_focused_events()
+    void SystemScreen::_trigger_focused_events()
     {
-        auto* input = _ctx->input();
+        auto input = context()->input().ptr();
         const auto is_mouse_input = input->is_mouse_input();
         const auto is_keyboard_input = input->is_key_input();
         const auto is_key_seq_input = input->is_key_sequence_input();
@@ -270,9 +232,9 @@ namespace d2
             if (is_key_seq_input) _trigger_focused(Event::KeySequenceInput);
         }
     }
-    void Screen::_trigger_hovered_events()
+    void SystemScreen::_trigger_hovered_events()
     {
-        auto* input = _ctx->input();
+        auto input = context()->input().ptr();
         const auto is_mouse_input = input->is_mouse_input();
 
         if (_targetted != nullptr && _targetted != _focused)
@@ -281,11 +243,11 @@ namespace d2
             if (is_mouse_input) _trigger_hovered(Event::MouseInput);
         }
     }
-    void Screen::_update_viewport()
+    void SystemScreen::_update_viewport()
     {
         const auto b = root().as<dx::Box>();
         b->accept_layout();
-        const auto [ width, height ] = _ctx->input()->screen_size();
+        const auto [ width, height ] = context()->input().ptr()->screen_size();
         const auto [ pwidth, pheight ] = b->box();
         const auto is_width = pwidth != width;
         const auto is_height = pheight != height;
@@ -300,7 +262,7 @@ namespace d2
             );
         }
     }
-    Screen::eptr Screen::_update_states(eptr container, const std::pair<int, int>& mouse)
+    SystemScreen::eptr SystemScreen::_update_states(eptr container, const std::pair<int, int>& mouse)
     {
         if (!container.is_type<ParentElement>())
             return nullptr;
@@ -334,7 +296,7 @@ namespace d2
         });
         return mouse_target;
     }
-    Screen::eptr Screen::_update_states_reverse(eptr ptr)
+    SystemScreen::eptr SystemScreen::_update_states_reverse(eptr ptr)
     {
         if (ptr->provides_cursor_sink())
             return ptr;
@@ -343,7 +305,7 @@ namespace d2
         return nullptr;
     }
 
-    void Screen::_apply_impl(const Element::foreach_callback& func, eptr container) const
+    void SystemScreen::_apply_impl(const Element::foreach_callback& func, eptr container) const
     {
         container.foreach([&func, this](eptr it)
         {
@@ -353,21 +315,21 @@ namespace d2
             return true;
         });
     }
-    void Screen::_signal(Event ev)
+    void SystemScreen::_signal(Event ev)
     {
-        _ctx->signal(ev, shared_from_this());
+        context()->signal(ev, context());
     }
 
-    MatrixModel::ptr Screen::fetch_model(const std::string& name, const std::string& path)
+    MatrixModel::ptr SystemScreen::fetch_model(const std::string& name, const std::string& path)
     {
         const auto e = std::filesystem::path(name).extension();
         ModelType type = ModelType::Raw;
         if (e == "d2vm" || e == "ascii" || e == "txt") type = ModelType::Visual;
         else if (e == "d2m") type = ModelType::Raw;
-        else throw std::runtime_error{ "Invalid model type" };
+        else D2_THRW_EX("Invalid model type", "Could not deduce type from file extension");
         return fetch_model(name, path, type);
     }
-    MatrixModel::ptr Screen::fetch_model(const std::string& name, const std::string& path, ModelType type)
+    MatrixModel::ptr SystemScreen::fetch_model(const std::string& name, const std::string& path, ModelType type)
     {
         auto f = _models.find(name);
         if (f != _models.end() && f->second != nullptr)
@@ -378,7 +340,7 @@ namespace d2
         _models[name] = ptr;
         return ptr;
     }
-    MatrixModel::ptr Screen::fetch_model(const std::string& name, int width, int height, std::vector<Pixel> data)
+    MatrixModel::ptr SystemScreen::fetch_model(const std::string& name, int width, int height, std::vector<Pixel> data)
     {
         auto f = _models.find(name);
         if (f != _models.end() && f->second != nullptr)
@@ -389,7 +351,7 @@ namespace d2
         _models[name] = ptr;
         return ptr;
     }
-    MatrixModel::ptr Screen::fetch_model(const std::string& name, int width, int height, std::span<const Pixel> data)
+    MatrixModel::ptr SystemScreen::fetch_model(const std::string& name, int width, int height, std::span<const Pixel> data)
     {
         auto f = _models.find(name);
         if (f != _models.end() && f->second != nullptr)
@@ -400,28 +362,25 @@ namespace d2
         _models[name] = ptr;
         return ptr;
     }
-    MatrixModel::ptr Screen::fetch_model(const std::string& name)
+    MatrixModel::ptr SystemScreen::fetch_model(const std::string& name)
     {
         return _models[name];
     }
-    void Screen::remove_model(const std::string& name)
+    void SystemScreen::remove_model(const std::string& name)
     {
         _models.erase(name);
     }
 
-    IOContext::ptr Screen::context() const
-    {
-        return _ctx;
-    }
-    TreeIter<ParentElement> Screen::root() const
+    TreeIter<ParentElement> SystemScreen::root() const
     {
         if (_current == nullptr)
             return nullptr;
         return _current->state->root();
     }
 
-    void Screen::set(const std::string& name)
+    void SystemScreen::set(const std::string& name)
     {
+        D2_TLOG(Info, "Switching trees to: '", name, "'")
         if (_current != nullptr && name == root()->name())
             return;
 
@@ -430,18 +389,21 @@ namespace d2
         {
             if (_current->tags.tag<bool>("SwapOut"))
             {
+                D2_TLOG(Verbose, "Swapping current tree out")
                 _current->state->swap_out();
                 this->root()->setstate(Element::Swapped, true);
                 _current->swapped_out = true;
             }
             if (_current->tags.tag<bool>("SwapClean"))
             {
+                D2_TLOG(Verbose, "Clearing current tree out")
                 _current->state->root()->clear();
                 _current->unbuilt = true;
             }
             if (const auto value = _current->tags.tag<std::chrono::milliseconds>("OverrideRefresh");
                 value != std::chrono::milliseconds(0))
             {
+                D2_TLOG(Verbose, "Restoring refresh rate to: ", _restore_refresh)
                 set_refresh_rate(_restore_refresh);
             }
         }
@@ -451,6 +413,7 @@ namespace d2
 
         if (_current->unbuilt)
         {
+            D2_TLOG(Verbose, "Building new tree")
             _current->rebuild(
                 this->root(), _current->state
             );
@@ -458,6 +421,7 @@ namespace d2
         }
         if (_current->swapped_out)
         {
+            D2_TLOG(Verbose, "Swapping in tree")
             root->state->swap_in();
             this->root()->setstate(Element::Swapped, false);
             _current->swapped_out = false;
@@ -466,66 +430,69 @@ namespace d2
         if (const auto value = _current->tags.tag<std::chrono::milliseconds>("OverrideRefresh");
             value != std::chrono::milliseconds(0))
         {
+            D2_TLOG(Verbose, "Overriding refresh rate to: ", value)
             _restore_refresh = _refresh_rate;
             set_refresh_rate(value);
         }
 
-        _ctx->input()->endcycle();
-        _ctx->input()->begincycle();
+        D2_TLOG(Verbose, "Recycling")
+        context()->input().ptr()->begincycle();
+        context()->input().ptr()->endcycle();
         _update_viewport();
 
+        D2_TLOG(Verbose, "Initializing tree")
         root->state->root()->initialize(true);
     }
 
-    TreeTags& Screen::tags()
+    TreeTags& SystemScreen::tags()
     {
         return _current->tags;
     }
-    TreeTags& Screen::tags(const std::string& name)
+    TreeTags& SystemScreen::tags(const std::string& name)
     {
         auto f = _trees.find(name);
         if (f == _trees.end())
-            throw std::logic_error{ "Invalid tree" };
+            D2_THRW("Invalid tree name");
         return f->second->tags;
     }
 
-    const TreeTags& Screen::tags() const
+    const TreeTags& SystemScreen::tags() const
     {
         return _current->tags;
     }
-    const TreeTags& Screen::tags(const std::string& name) const
+    const TreeTags& SystemScreen::tags(const std::string& name) const
     {
         auto f = _trees.find(name);
         if (f == _trees.end())
-            throw std::logic_error{ "Invalid tree" };
+            D2_THRW("Invalid tree name");
         return f->second->tags;
     }
 
-    DynamicDependencyManager& Screen::deps()
+    DynamicDependencyManager& SystemScreen::deps()
     {
         return _current->deps;
     }
-    DynamicDependencyManager& Screen::deps(const std::string& name)
+    DynamicDependencyManager& SystemScreen::deps(const std::string& name)
     {
         auto f = _trees.find(name);
         if (f == _trees.end())
-            throw std::logic_error{ "Invalid tree" };
+            D2_THRW("Invalid tree name");
         return f->second->deps;
     }
 
-    const DynamicDependencyManager& Screen::deps() const
+    const DynamicDependencyManager& SystemScreen::deps() const
     {
         return _current->deps;
     }
-    const DynamicDependencyManager& Screen::deps(const std::string& name) const
+    const DynamicDependencyManager& SystemScreen::deps(const std::string& name) const
     {
         auto f = _trees.find(name);
         if (f == _trees.end())
-            throw std::logic_error{ "Invalid tree" };
+            D2_THRW("Invalid tree name");
         return f->second->deps;
     }
 
-    void Screen::focus(eptr p)
+    void SystemScreen::focus(eptr p)
     {
         if (p != _focused)
         {
@@ -543,49 +510,49 @@ namespace d2
             }
         }
     }
-    Screen::eptr Screen::focused() const
+    SystemScreen::eptr SystemScreen::focused() const
     {
         return _focused;
     }
 
-    std::size_t Screen::fps() const
+    std::size_t SystemScreen::fps() const
     {
         return _fps_avg;
     }
-    std::size_t Screen::animations() const
+    std::size_t SystemScreen::animations() const
     {
         if (_current == nullptr)
             return 0;
         return _current->interpolators.size();
     }
-    std::chrono::microseconds Screen::delta() const
+    std::chrono::microseconds SystemScreen::delta() const
     {
         return _prev_delta;
     }
 
-    bool Screen::is_keynav() const
+    bool SystemScreen::is_keynav() const
     {
         return
             _keynav_iterator != nullptr &&
             _focused == _keynav_iterator.value();
     }
 
-    void Screen::apply(const Element::foreach_callback& func) const
+    void SystemScreen::apply(const Element::foreach_callback& func) const
     {
         _apply_impl(func, root());
     }
-    void Screen::apply_all(const Element::foreach_callback& func) const
+    void SystemScreen::apply_all(const Element::foreach_callback& func) const
     {
         for (decltype(auto) it : _trees)
             _apply_impl(func, it.second->state->root());
     }
 
-    void Screen::clear_animations(Element::ptr ptr)
+    void SystemScreen::clear_animations(TreeIter<> ptr)
     {
         auto& interps = _current->interpolators;
         for (auto it = interps.begin(); it != interps.end();)
         {
-            if ((*it)->target() == ptr.get())
+            if ((*it)->target() == ptr.shared().get())
             {
                 const auto saved = it;
                 ++it;
@@ -595,7 +562,7 @@ namespace d2
         }
     }
 
-    void Screen::erase_tree(const std::string& name)
+    void SystemScreen::erase_tree(const std::string& name)
     {
         auto root = _trees[name];
         if (root == _current)
@@ -606,11 +573,11 @@ namespace d2
         }
         _trees.erase(name);
     }
-    void Screen::erase_tree()
+    void SystemScreen::erase_tree()
     {
         erase_tree(_current_name);
     }
-    void Screen::clear_tree()
+    void SystemScreen::clear_tree()
     {
         _trees.clear();
         _current = nullptr;
@@ -618,194 +585,151 @@ namespace d2
         _current_name = "";
     }
 
-    bool Screen::is_suspended() const
-    {
-        return _is_suspended;
-    }
-    void Screen::suspend(bool state)
-    {
-        _is_suspended = state;
-    }
-
-    void Screen::start_blocking(std::chrono::milliseconds refresh_min, Profile profile)
-    {
-        ExtendedCodePage::activate_thread();
-
-        // Adaptive FPS constants
-
-        constexpr auto growth_factor = 1.5;
-        constexpr auto shrink_factor = 0.7;
-        constexpr auto decay_per_second = 20.0;
-
-        double activity = 0.0;
-        const auto in = context()->input();
-        auto prev_measurement = std::chrono::steady_clock::now();
-        auto activity_update = [&]
-        {
-            activity -= decay_per_second *
-                std::chrono::duration<double>(
-                    std::chrono::steady_clock::now() - prev_measurement
-                ).count();
-            if (activity < 0.0) activity = 0.0;
-
-            if (root()->needs_update()) activity += 2.0;
-            if (in->is_key_input() ||
-                in->is_mouse_input()) activity += 0.4;
-            activity += 0.1 * animations();
-
-            if (activity > 50.0) activity = 50.0;
-
-            prev_measurement = std::chrono::steady_clock::now();
-        };
-        auto is_high_activity = [&]
-        {
-            return activity > 25.0;
-        };
-        auto is_low_activity = [&]
-        {
-            return activity < 5.0;
-        };
-
-        auto period_to_fps = [](std::chrono::milliseconds p)
-        {
-            auto ms = std::max<long long>(1, p.count());
-            return 1000.0 / static_cast<double>(ms);
-        };
-        auto fps_to_period = [](double fps)
-        {
-            if (fps <= 0.0)
-                fps = 1.0;
-            auto ms = static_cast<long long>(1000.0 / fps);
-            return std::chrono::milliseconds(std::max<long long>(1, ms));
-        };
-
-        if (_refresh_rate == std::chrono::milliseconds(0))
-            set_refresh_rate(refresh_min);
-        else
-            _restore_refresh = refresh_min;
-
-        auto user_min_fps = 0.0;
-        auto fps_floor = 0.0;
-        auto fps_cap = 0.0;
-        auto refresh = _refresh_rate;
-        auto fps_req = static_cast<std::size_t>(period_to_fps(refresh));
-        auto last_measurement = std::chrono::steady_clock::now();
-
-        auto clamp_refresh = [&](std::chrono::milliseconds r)
-        {
-            auto fps = period_to_fps(r);
-            fps = std::clamp(fps, fps_floor, fps_cap);
-            return fps_to_period(fps);
-        };
-        auto update_vars = [&]
-        {
-            user_min_fps = period_to_fps(refresh);
-            fps_floor = std::max(1.0, user_min_fps);
-            fps_cap = std::max(fps_floor * 3.0, 220.0);
-        };
-
-        if (_is_running)
-            throw ScreenStartException{};
-        _is_running = true;
-        _is_suspended = false;
-        _fps_avg = 0;
-
-        std::size_t fps_counter = 0;
-
-        _ctx->initialize();
-        if (profile == Profile::Adaptive)
-        {
-            while (!_is_stop)
-            {
-                update_vars();
-                const auto beg = std::chrono::steady_clock::now();
-                activity_update();
-
-                _frame();
-
-                fps_counter++;
-                if (beg - last_measurement >
-                    std::chrono::seconds(1))
-                {
-                    _fps_avg = fps_counter;
-                    fps_counter = 0;
-                    last_measurement = std::chrono::steady_clock::now();
-                }
-
-                const auto end = std::chrono::steady_clock::now();
-                const auto delta = end - beg;
-                _prev_delta = std::chrono::duration_cast<std::chrono::microseconds>(delta);
-                auto current_fps = period_to_fps(refresh);
-                if (is_high_activity() && current_fps < fps_cap)
-                {
-                    current_fps = std::min(current_fps * growth_factor, fps_cap);
-                    refresh = fps_to_period(current_fps);
-                    fps_req = static_cast<std::size_t>(current_fps);
-                }
-                else if (is_low_activity() && current_fps > fps_floor)
-                {
-                    current_fps = std::max(current_fps * shrink_factor, fps_floor);
-                    refresh = fps_to_period(current_fps);
-                    fps_req = static_cast<std::size_t>(current_fps);
-                }
-                refresh = std::min(refresh, refresh);
-
-                if (refresh > std::chrono::milliseconds(0))
-                {
-                    auto frame_ms = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
-                    auto sleep = refresh - frame_ms;
-                    if (sleep > std::chrono::milliseconds(0))
-                        _ctx->wait(sleep);
-                }
-            }
-        }
-        else if (profile == Profile::Stable)
-        {
-            while (!_is_stop)
-            {
-                const auto beg = std::chrono::steady_clock::now();
-
-                _frame();
-
-                fps_counter++;
-                if (beg - last_measurement >
-                    std::chrono::seconds(1))
-                {
-                    _fps_avg = fps_counter;
-                    fps_counter = 0;
-                    last_measurement = std::chrono::steady_clock::now();
-                }
-
-                const auto end = std::chrono::steady_clock::now();
-                const auto delta = end - beg;
-                _prev_delta = std::chrono::duration_cast<std::chrono::microseconds>(delta);
-
-                auto frame_ms = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
-                auto sleep = _refresh_rate - frame_ms;
-                _ctx->wait(
-                    sleep <= std::chrono::milliseconds(0) ||
-                    _refresh_rate == std::chrono::milliseconds(0) ?
-                        std::chrono::milliseconds(0) : sleep
-                );
-            }
-        }
-        _ctx->deinitialize();
-        _is_stop = false;
-
-        ExtendedCodePage::deactivate_thread();
-    }
-    void Screen::stop_blocking()
-    {
-        _is_stop = true;
-    }
-    void Screen::set_refresh_rate(std::chrono::milliseconds refresh)
+    void SystemScreen::set_refresh_rate(std::chrono::milliseconds refresh)
     {
         _refresh_rate = refresh;
     }
-
-    void Screen::render()
+    void SystemScreen::tick()
     {
-        if (!_is_suspended && root()->needs_update())
+        const auto ctx = context();
+        // Update
+        {
+            root()->setcache(d2::Element::CachePolicy::Static);
+            if (ctx->input().ptr()->is_screen_resize())
+            {
+                _update_viewport();
+            }
+            if (ctx->input().ptr()->is_mouse_input())
+            {
+                const auto target = _update_states(root(), ctx->input().ptr()->mouse_position());
+                const auto is_released = ctx->input().ptr()->is_pressed_mouse(sys::SystemInput::MouseKey::Left, sys::SystemInput::KeyMode::Release);
+                const auto is_pressed = ctx->input().ptr()->is_pressed_mouse(sys::SystemInput::MouseKey::Left, sys::SystemInput::KeyMode::Press);
+
+                // Autofocus
+
+                auto uptarget = target;
+                if (target != nullptr && is_pressed && !target->provides_cursor_sink() && target->parent() != nullptr)
+                    uptarget = _update_states_reverse(target->parent());
+
+                auto _1 = _targetted.shared();
+                auto _2 = _clicked.shared();
+                auto _3 = _focused.shared();
+                if (_targetted != target)
+                {
+                    if (_targetted != nullptr)
+                    {
+                        _targetted->setstate(Element::State::Hovered, false);
+                        _trigger_hovered_events();
+                    }
+                    if (target != nullptr)
+                        target->setstate(Element::State::Hovered, true);
+                    _targetted = target;
+                }
+                if (_clicked != uptarget)
+                {
+                    if (_clicked != nullptr)
+                        _clicked->setstate(Element::State::Clicked, false);
+                    _clicked = uptarget;
+                }
+                if (_focused != uptarget && is_pressed)
+                {
+                    if (_focused != nullptr)
+                    {
+                        _trigger_focused_events();
+                    }
+                    if (_keynav_iterator != nullptr)
+                    {
+                        _keynav_iterator->setstate(Element::State::Keynavi, false);
+                    }
+                    focus(uptarget);
+                }
+                if (_clicked != nullptr)
+                {
+                    if (is_released)
+                    {
+                        _clicked->setstate(Element::State::Clicked, false);
+                    }
+                    else if (is_pressed)
+                    {
+                        _clicked->setstate(Element::State::Clicked, true);
+                    }
+                }
+            }
+            if (ctx->input().ptr()->is_key_input())
+            {
+                // Micro forwards
+                if (ctx->input().ptr()->is_pressed(sys::SystemInput::LeftControl) &&
+                    ctx->input().ptr()->is_pressed(sys::SystemInput::key('W'), sys::SystemInput::KeyMode::Press))
+                {
+                    if (_keynav_iterator != nullptr)
+                    {
+                        _keynav_iterator->setstate(Element::State::Keynavi, false);
+                    }
+                    else if (focused() != nullptr)
+                    {
+                        _keynav_iterator = focused()->parent()->traverse().asp()->begin();
+                        while (_keynav_iterator->traverse() != focused())
+                            _keynav_iterator.increment();
+                    }
+                    _keynav_cycle();
+                    _keynav_iterator->setstate(Element::State::Keynavi, true);
+                    focus(_keynav_iterator->traverse());
+                }
+                // Micro reverse
+                else if (ctx->input().ptr()->is_pressed(sys::SystemInput::LeftControl) &&
+                         ctx->input().ptr()->is_pressed(sys::SystemInput::key('E'), sys::SystemInput::KeyMode::Press))
+                {
+                    if (_keynav_iterator != nullptr)
+                    {
+                        _keynav_iterator->setstate(Element::State::Keynavi, false);
+                    }
+                    else if (focused() != nullptr)
+                    {
+                        _keynav_iterator = focused()->parent()->traverse().asp()->begin();
+                        while (_keynav_iterator->traverse() != focused())
+                            _keynav_iterator.increment();
+                    }
+                    _keynav_cycle_reverse();
+                    _keynav_iterator->setstate(Element::State::Keynavi, true);
+                    focus(_keynav_iterator->traverse());
+                }
+                // Macro movement
+                else if (ctx->input().ptr()->is_pressed(sys::SystemInput::Shift) &&
+                         ctx->input().ptr()->is_pressed(sys::SystemInput::Tab, sys::SystemInput::KeyMode::Press))
+                {
+                    if (_keynav_iterator != nullptr)
+                    {
+                        _keynav_iterator->setstate(Element::State::Keynavi, false);
+                    }
+                    else if (focused() != nullptr)
+                    {
+                        _keynav_iterator = focused()->parent()->traverse().asp()->begin();
+                        while (_keynav_iterator->traverse() != focused())
+                            _keynav_iterator.increment();
+                    }
+                    _keynav_cycle_macro();
+                    _keynav_iterator->setstate(Element::State::Keynavi, true);
+                    focus(_keynav_iterator->traverse());
+                }
+                else if (ctx->input().ptr()->is_pressed(sys::SystemInput::Escape, sys::SystemInput::KeyMode::Press))
+                {
+                    if (_keynav_iterator != nullptr)
+                    {
+                        _keynav_iterator->setstate(Element::State::Keynavi, false);
+                        focus(nullptr);
+                    }
+                    _keynav_iterator = nullptr;
+                }
+            }
+
+            _run_interpolators();
+            _trigger_events();
+
+            _current->state->update();
+        }
+        const auto beg = std::chrono::steady_clock::now();
+        // Render
+        if (!ctx->is_suspended() && root()->needs_update())
         {
             _signal(Event::PreRedraw);
 
@@ -813,153 +737,37 @@ namespace d2
             auto frame = root.frame();
 
             const auto [ bwidth, bheight ] = root.box();
-            auto* output = _ctx->output();
+            auto output = ctx->output().ptr();
             output->write(frame.data(), bwidth, bheight);
 
             _signal(Event::PostRedraw);
         }
-    }
-    void Screen::update()
-    {
-        root()->setcache(d2::Element::CachePolicy::Static);
-        if (_ctx->input()->is_screen_resize())
         {
-            _update_viewport();
+            _fps_ctr++;
+            if (beg - _last_mes >
+                std::chrono::seconds(1))
+            {
+                _fps_avg = _fps_ctr;
+                _fps_ctr = 0;
+                _last_mes = std::chrono::steady_clock::now();
+            }
+
+            const auto end = std::chrono::steady_clock::now();
+            const auto delta = end - beg;
+            _prev_delta = std::chrono::duration_cast<std::chrono::microseconds>(delta);
+
+            ctx->deadline(
+                _refresh_rate -
+                std::chrono::duration_cast<std::chrono::milliseconds>(delta)
+            );
         }
-        if (_ctx->input()->is_mouse_input())
-        {
-            const auto target = _update_states(root(), _ctx->input()->mouse_position());
-            const auto is_released = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left, sys::SystemInput::KeyMode::Release);
-            const auto is_pressed = _ctx->input()->is_pressed_mouse(sys::SystemInput::MouseKey::Left, sys::SystemInput::KeyMode::Press);
-
-            // Autofocus
-
-            auto uptarget = target;
-            if (target != nullptr && is_pressed && !target->provides_cursor_sink() && target->parent() != nullptr)
-                uptarget = _update_states_reverse(target->parent());
-
-            auto _1 = _targetted.shared();
-            auto _2 = _clicked.shared();
-            auto _3 = _focused.shared();
-            if (_targetted != target)
-            {
-                if (_targetted != nullptr)
-                {
-                    _targetted->setstate(Element::State::Hovered, false);
-                    _trigger_hovered_events();
-                }
-                if (target != nullptr)
-                    target->setstate(Element::State::Hovered, true);
-                _targetted = target;
-            }
-            if (_clicked != uptarget)
-            {
-                if (_clicked != nullptr)
-                    _clicked->setstate(Element::State::Clicked, false);
-                _clicked = uptarget;
-            }
-            if (_focused != uptarget && is_pressed)
-            {
-                if (_focused != nullptr)
-                {
-                    _trigger_focused_events();
-                }
-                if (_keynav_iterator != nullptr)
-                {
-                    _keynav_iterator->setstate(Element::State::Keynavi, false);
-                }
-                focus(uptarget);
-            }
-            if (_clicked != nullptr)
-            {
-                if (is_released)
-                {
-                    _clicked->setstate(Element::State::Clicked, false);
-                }
-                else if (is_pressed)
-                {
-                    _clicked->setstate(Element::State::Clicked, true);
-                }
-            }
-        }
-        if (_ctx->input()->is_key_input())
-        {
-            // Micro forwards
-            if (_ctx->input()->is_pressed(sys::SystemInput::LeftControl) &&
-                _ctx->input()->is_pressed(sys::SystemInput::key('W'), sys::SystemInput::KeyMode::Press))
-            {
-                if (_keynav_iterator != nullptr)
-                {
-                    _keynav_iterator->setstate(Element::State::Keynavi, false);
-                }
-                else if (focused() != nullptr)
-                {
-                    _keynav_iterator = focused()->parent()->traverse().asp()->begin();
-                    while (_keynav_iterator->traverse() != focused())
-                        _keynav_iterator.increment();
-                }
-                _keynav_cycle();
-                _keynav_iterator->setstate(Element::State::Keynavi, true);
-                focus(_keynav_iterator->traverse());
-            }
-            // Micro reverse
-            else if (_ctx->input()->is_pressed(sys::SystemInput::LeftControl) &&
-                     _ctx->input()->is_pressed(sys::SystemInput::key('E'), sys::SystemInput::KeyMode::Press))
-            {
-                if (_keynav_iterator != nullptr)
-                {
-                    _keynav_iterator->setstate(Element::State::Keynavi, false);
-                }
-                else if (focused() != nullptr)
-                {
-                    _keynav_iterator = focused()->parent()->traverse().asp()->begin();
-                    while (_keynav_iterator->traverse() != focused())
-                        _keynav_iterator.increment();
-                }
-                _keynav_cycle_reverse();
-                _keynav_iterator->setstate(Element::State::Keynavi, true);
-                focus(_keynav_iterator->traverse());
-            }
-            // Macro movement
-            else if (_ctx->input()->is_pressed(sys::SystemInput::Shift) &&
-                     _ctx->input()->is_pressed(sys::SystemInput::Tab, sys::SystemInput::KeyMode::Press))
-            {
-                if (_keynav_iterator != nullptr)
-                {
-                    _keynav_iterator->setstate(Element::State::Keynavi, false);
-                }
-                else if (focused() != nullptr)
-                {
-                    _keynav_iterator = focused()->parent()->traverse().asp()->begin();
-                    while (_keynav_iterator->traverse() != focused())
-                        _keynav_iterator.increment();
-                }
-                _keynav_cycle_macro();
-                _keynav_iterator->setstate(Element::State::Keynavi, true);
-                focus(_keynav_iterator->traverse());
-            }
-            else if (_ctx->input()->is_pressed(sys::SystemInput::Escape, sys::SystemInput::KeyMode::Press))
-            {
-                if (_keynav_iterator != nullptr)
-                {
-                    _keynav_iterator->setstate(Element::State::Keynavi, false);
-                    focus(nullptr);
-                }
-                _keynav_iterator = nullptr;
-            }
-        }
-
-        _run_interpolators();
-        _trigger_events();
-
-        _current->state->update();
     }
 
-    Screen::eptr Screen::traverse()
+    SystemScreen::eptr SystemScreen::traverse()
     {
         return root();
     }
-    Screen::eptr Screen::operator/(const std::string& path)
+    SystemScreen::eptr SystemScreen::operator/(const std::string& path)
     {
         return eptr(
                    root()/path

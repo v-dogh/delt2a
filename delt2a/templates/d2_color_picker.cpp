@@ -239,7 +239,6 @@ namespace d2::ctm
             color_picker::create_at(
                 traverse(),
                 TreeState::make<TreeState>(
-                    this->state()->screen(),
                     parent()->traverse().asp(),
                     traverse().asp()
                 ),
@@ -260,7 +259,6 @@ namespace d2::ctm
             color_picker::create_at(
                 traverse(),
                 TreeState::make<TreeState>(
-                    this->state()->screen(),
                     parent()->traverse().asp(),
                     traverse().asp()
                 ),

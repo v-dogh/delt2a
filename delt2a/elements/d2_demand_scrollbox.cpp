@@ -79,10 +79,10 @@ namespace d2::dx
     {
         return true;
     }
-    void DemandScrollBox::_event_impl(Screen::Event ev)
+    void DemandScrollBox::_event_impl(sys::screen::Event ev)
     {
         const auto ch = scrollbar()->get<Slider::Max>();
-        if (ev == Screen::Event::MouseInput)
+        if (ev == sys::screen::Event::MouseInput)
         {
             if (getstate(Hovered))
             {
@@ -98,7 +98,7 @@ namespace d2::dx
                 }
             }
         }
-        else if (ev == Screen::Event::KeyInput)
+        else if (ev == sys::screen::Event::KeyInput)
         {
             if (context()->input()->is_pressed(sys::SystemInput::ArrowLeft) ||
                 context()->input()->is_pressed(sys::SystemInput::ArrowDown))
@@ -363,7 +363,7 @@ namespace d2::dx
                 _scrollbar->setstate(Display, true);
                 if (sw != rsw)
                     _scrollbar->set<Slider::SliderWidth>(rsw);
-                if (sm != est_height)
+                if (sm != est_height - height)
                     _scrollbar->set<Slider::Max>(est_height - height);
                 const auto frame = _scrollbar->frame();
                 const auto [ x, y ] = _scrollbar->position();

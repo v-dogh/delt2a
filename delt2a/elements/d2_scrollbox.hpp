@@ -17,7 +17,7 @@ namespace d2::dx
 
         virtual bool _provides_input_impl() const override;
         virtual void _state_change_impl(State state, bool value) override;
-        virtual void _event_impl(Screen::Event ev) override;
+        virtual void _event_impl(sys::screen::Event ev) override;
 
         virtual int _get_border_impl(BorderType type, Element::cptr elem) const override;
         virtual void _layout_for_impl(enum Element::Layout type, cptr ptr) const override;

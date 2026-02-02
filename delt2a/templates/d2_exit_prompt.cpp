@@ -41,7 +41,7 @@ namespace d2::ctm
                     D2_STYLE(ForegroundColor, D2_VAR(WidgetTheme, wg_text()))
                     D2_STYLE(FocusedColor, colors::r::red.alpha(0.8f))
                     D2_STYLE(OnSubmit, [](TreeIter<Button> ptr) {
-                        ptr->screen()->stop_blocking();
+                        ptr->context()->stop();
                     })
                     D2_INTERP_TWOWAY_AUTO(Hovered, 500, Linear, ForegroundColor, colors::r::red);
                 D2_ELEM_END

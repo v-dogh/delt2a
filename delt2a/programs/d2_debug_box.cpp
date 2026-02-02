@@ -177,8 +177,8 @@ namespace d2::prog
                     std::vector<d2::string>{ "⠇", "⠋", "⠙", "⠸", "⢰", "⣠", "⣄", "⡆" }
                 );
                 D2_ON(Clicked)
-                    state->screen()->suspend(
-                        !state->screen()->is_suspended()
+                    state->context()->suspend(
+                        !state->context()->is_suspended()
                     );
                 D2_ON_END
             D2_ELEM_END
@@ -209,7 +209,7 @@ namespace d2::prog
                 float rescale{ 1.f };
                 float measurement{ 0.f };
                 std::string unit{ "" };
-                std::function<float(Screen::ptr)> callback{ nullptr };
+                std::function<float(IOContext::ptr)> callback{ nullptr };
                 std::chrono::milliseconds resolution{ 100 };
                 IOContext::future<void> task{ nullptr };
 
@@ -316,17 +316,17 @@ namespace d2::prog
             *metrics = {
                 { "Delta", Metric{
                     .unit = "us",
-                    .callback = [](Screen::ptr src) -> float {
-                        return src->delta().count();
+                    .callback = [](IOContext::ptr ctx) -> float {
+                        return ctx->screen()->delta().count();
                     },
                 }},
                 { "FPS", Metric{
-                    .callback = [](Screen::ptr src) -> float {
-                        return src->fps();
+                    .callback = [](IOContext::ptr ctx) -> float {
+                        return ctx->screen()->fps();
                     },
                 }},
                 { "Elements", Metric{
-                    .callback = [](Screen::ptr src) -> float {
+                    .callback = [](IOContext::ptr ctx) -> float {
                         std::function<std::size_t(d2::TreeIter<>)> func = nullptr;
                         auto count_elements_recursive = [&](d2::TreeIter<> elem) -> std::size_t {
                             std::size_t cnt = 0;
@@ -339,45 +339,45 @@ namespace d2::prog
                             return cnt;
                         };
                         func = count_elements_recursive;
-                        return count_elements_recursive(src->root()) + 1;
+                        return count_elements_recursive(ctx->screen()->root()) + 1;
                     },
                     .resolution = std::chrono::milliseconds(500)
                 }},
                 { "Framebuffer", Metric{
                     .unit = "B",
-                    .callback = [](Screen::ptr src) -> float {
-                        return src->context()->output()->delta_size();
+                    .callback = [](IOContext::ptr ctx) -> float {
+                        return ctx->output()->delta_size();
                     },
                 }},
                 { "Swapframe", Metric{
                     .unit = "B",
-                    .callback = [](Screen::ptr src) -> float {
-                        return src->context()->output()->swapframe_size();
+                    .callback = [](IOContext::ptr ctx) -> float {
+                        return ctx->output()->swapframe_size();
                     },
                 }},
                 { "Threads", Metric{
-                    .callback = [](Screen::ptr src) -> float {
+                    .callback = [](IOContext::ptr ctx) -> float {
                         return impl::thread_count();
                     },
                     .resolution = std::chrono::milliseconds(300)
                 }},
                 { "CPU/AVG", Metric{
                     .unit = "% core",
-                    .callback = [](Screen::ptr) -> float {
+                    .callback = [](IOContext::ptr) -> float {
                         return impl::cpu_usage();
                     },
                 }},
                 { "Heap", Metric{
                     .round = true,
                     .unit = "KiB",
-                    .callback = [](Screen::ptr) -> float {
+                    .callback = [](IOContext::ptr) -> float {
                         return impl::KiB(impl::heap_used_bytes());
                     },
                 }},
                 { "Memory", Metric{
                     .round = true,
                     .unit = "MiB",
-                    .callback = [](Screen::ptr) -> float {
+                    .callback = [](IOContext::ptr) -> float {
                         return impl::MiB(impl::total_rss_bytes());
                     }
                 }},
@@ -487,7 +487,7 @@ namespace d2::prog
                             {
                                 metric.task = state->context()->scheduler()->launch_cyclic(metric.resolution, [&](auto&&...) {
                                     auto graph = output->at(name).as<graph::CyclicVerticalBar>();
-                                    const auto measurement = metric.callback(state->screen());
+                                    const auto measurement = metric.callback(state->context());
                                     const auto pmin = metric.min;
                                     const auto pmax = metric.max;
                                     const auto pmes = metric.measurement;

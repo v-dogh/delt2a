@@ -179,10 +179,10 @@ namespace d2::ctm
 				}
 			}
 		}
-        virtual void _event_impl(Screen::Event ev) override
+        virtual void _event_impl(sys::screen::Event ev) override
 		{
             Box::_event_impl(ev);
-            if (ev == Screen::Event::KeyInput)
+            if (ev == sys::screen::Event::KeyInput)
 			{
 				if (context()->input()->is_pressed(sys::SystemInput::ArrowDown) ||
 					context()->input()->is_pressed(sys::SystemInput::ArrowRight))
@@ -658,7 +658,6 @@ namespace d2::ctm
             interface::create_at(
 				traverse(),
 				TreeState::make<TreeState>(
-					this->state()->screen(),
 					parent()->traverse().asp(),
                     traverse().asp()
                 ),
@@ -712,7 +711,6 @@ namespace d2::ctm
             interface::create_at(
                 traverse(),
                 TreeState::make<TreeState>(
-                    this->state()->screen(),
                     parent()->traverse().asp(),
                     traverse().asp()
                 ),

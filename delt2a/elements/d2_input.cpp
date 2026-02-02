@@ -216,13 +216,13 @@ namespace d2::dx
             }
         }
     }
-    void Input::_event_impl(Screen::Event ev)
+    void Input::_event_impl(sys::screen::Event ev)
     {
         write_flag flag = WriteType::Style;
         bool write = false;
 
         const auto input = context()->input();
-        if (ev == Screen::Event::MouseInput)
+        if (ev == sys::screen::Event::MouseInput)
         {
             if (input->is_pressed_mouse(sys::SystemInput::Left))
             {
@@ -234,7 +234,7 @@ namespace d2::dx
                 }
             }
         }
-        else if (ev == Screen::Event::KeyInput)
+        else if (ev == sys::screen::Event::KeyInput)
         {
             if (input->is_pressed(sys::SystemInput::Enter))
             {
@@ -355,7 +355,7 @@ namespace d2::dx
                 }
             }
         }
-        else if (ev == Screen::Event::KeySequenceInput)
+        else if (ev == sys::screen::Event::KeySequenceInput)
         {
             if (_is_highlighted())
                 _remove_highlighted();

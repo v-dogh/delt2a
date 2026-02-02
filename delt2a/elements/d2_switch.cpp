@@ -91,9 +91,9 @@ namespace d2::dx
             _signal_write(Style);
         }
     }
-    void Switch::_event_impl(Screen::Event ev)
+    void Switch::_event_impl(sys::screen::Event ev)
     {
-        if (ev == Screen::Event::KeyInput)
+        if (ev == sys::screen::Event::KeyInput)
         {
             if (context()->input()->is_pressed(sys::input::Tab))
             {
@@ -187,7 +187,7 @@ namespace d2::dx
     }
     string Switch::choice()
     {
-        return data::options[_idx];
+        return _idx == -1 ? "" : data::options[_idx];
     }
     int Switch::index()
     {
@@ -198,6 +198,11 @@ namespace d2::dx
     {
         if (element.get() != this)
             return;
+        if (prop == Options)
+        {
+            if (_idx >= data::options.size())
+                _idx = -1;
+        }
         if (type & WriteType::Dimensions)
         {
             const auto [ basisx, basisy ] = ContainerHelper::_border_base();
@@ -304,7 +309,7 @@ namespace d2::dx
             _signal_write(Style);
         }
     }
-    void VerticalSwitch::_event_impl(Screen::Event ev)
+    void VerticalSwitch::_event_impl(sys::screen::Event ev)
     {
         Switch::_event_impl(ev);
 
@@ -354,7 +359,7 @@ namespace d2::dx
             update = true;
         };
 
-        if (ev == Screen::Event::KeyInput)
+        if (ev == sys::screen::Event::KeyInput)
         {
             if (in->is_pressed(sys::input::ArrowDown)) scroll_down();
             else if (in->is_pressed(sys::input::ArrowUp)) scroll_up();
@@ -364,7 +369,7 @@ namespace d2::dx
                 update = true;
             }
         }
-        if (ev == Screen::Event::MouseInput)
+        if (ev == sys::screen::Event::MouseInput)
         {
             if (in->is_pressed_mouse(sys::input::ScrollDown)) scroll_down();
             else if (in->is_pressed_mouse(sys::input::ScrollUp)) scroll_up();

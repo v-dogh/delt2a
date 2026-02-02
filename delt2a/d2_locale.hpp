@@ -27,6 +27,7 @@ namespace d2
 	{
 		using input = void;
 		using output = void;
+        using screen = void;
 		using clipboard = void;
 		using audio = void;
 		using notifications = void;
