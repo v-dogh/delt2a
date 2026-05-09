@@ -1,0 +1,34 @@
+cmake_minimum_required(VERSION 3.16)
+
+project(thread-pool LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_library(TPMP STATIC
+    # ${CMAKE_CURRENT_SOURCE_DIR}/pool_old.cpp
+    # ${CMAKE_CURRENT_SOURCE_DIR}/pool_old.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/pool.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/pool.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/control.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/defer.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/future.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/task_ring.hpp
+)
+
+install(TARGETS ${_install_targets} TPMP
+    EXPORT  TPMPTargets
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(
+    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(
+    EXPORT      TPMPTargets
+    FILE        TPMPTargets.cmake
+    NAMESPACE   TPMP::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/TPMP-lib
+)
