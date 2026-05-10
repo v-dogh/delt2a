@@ -174,11 +174,7 @@ namespace d2::sys
                     _ts = std::move(backup);
                 }
                 t->rebuild = [](TreeIter<ParentElement> root, TreeState::ptr state)
-                {
-                    Set::create_at(
-                        root, std::static_pointer_cast<typename Set::__state_type>(state)
-                    );
-                };
+                { Set::create_at(root, std::static_pointer_cast<typename Set::state>(state)); };
             };
             load.template operator()<First>();
             (load.template operator()<Rest>(), ...);
