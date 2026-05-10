@@ -377,7 +377,7 @@ namespace d2
     {
         static void create_at(TreeIter<> root, TreeState::ptr state, Argv... args)
         {
-            Base::construct(root, state, std::move(args)...);
+            Base::construct(d2::TreeCtx<Root, State>(root), std::move(args)...);
         }
     };
 } // namespace d2
