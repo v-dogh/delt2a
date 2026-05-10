@@ -141,9 +141,6 @@ delta_setup_target(DeltaLSX)
 add_library(DeltaCore STATIC
     # Core
     d2_std.hpp
-    d2_dsl.hpp
-    d2_sdsl.hpp
-    d2_cdsl.hpp
     d2_exceptions.hpp
     d2_styles.hpp
     d2_styles_base.hpp
