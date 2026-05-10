@@ -4,7 +4,7 @@
 #include <elements/d2_draggable_box.hpp>
 #include <elements/d2_flow_box.hpp>
 
-namespace d2::ctm
+namespace d2::ex
 {
     namespace impl
     {
@@ -53,6 +53,6 @@ namespace d2::ctm
     public:
         virtual void submit() override;
     };
-} // namespace d2::ctm
+} // namespace d2::ex
 
 #endif // D2_COLOR_PICKER_HPP

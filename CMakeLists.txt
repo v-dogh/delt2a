@@ -7,7 +7,7 @@ include(GNUInstallDirs)
 # OPTIONS #
 ###########
 
-option(D2_EXCLUDE_LIBRARY_TEMPLATES "Disable templates module"     OFF)
+option(D2_EXCLUDE_LIBRARY_EXTRAS    "Disable extras    module"     OFF)
 option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"      OFF)
 option(D2_EXCLUDE_OS_CORE           "Disable default os module"    OFF)
 option(D2_EXCLUDE_OS_EXT            "Disable extended os modules"  ON)
@@ -20,7 +20,7 @@ option(D2_UNICODE_MODE              "Enable unicode mode"          ON)
 option(D2_STRICT_MODE               "Enable strict component mode" ON)
 
 # Force reset cache
-# set(D2_EXCLUDE_LIBRARY_TEMPLATES OFF CACHE BOOL "Disable templates module"     FORCE)
+# set(D2_EXCLUDE_LIBRARY_EXTRAS    OFF CACHE BOOL "Disable extras    module"     FORCE)
 # set(D2_EXCLUDE_LIBRARY_ELEMENTS  OFF CACHE BOOL "Disable elements module"      FORCE)
 # set(D2_EXCLUDE_OS_CORE           OFF CACHE BOOL "Disable default os module"    FORCE)
 # set(D2_EXCLUDE_OS_EXT            OFF CACHE BOOL "Disable extended os modules"  FORCE)
@@ -263,33 +263,31 @@ if (NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
     delta_setup_target(DeltaElements)
 endif()
 
-# Standard templates library
-if (NOT D2_EXCLUDE_LIBRARY_TEMPLATES)
-    add_library(DeltaTemplates STATIC
+# Some funtime extras
+if (NOT D2_EXCLUDE_LIBRARY_EXTRAS)
+    add_library(DeltaExtras STATIC
         # Presets
-        templates/d2_default_theme.hpp
-        templates/d2_default_theme.cpp
-        templates/d2_default_styles.hpp
+        extras/d2_default_theme.hpp
+        extras/d2_default_theme.cpp
+        extras/d2_default_styles.hpp
         # Widgets
-        # templates/d2_loading_indicators.hpp
-        # templates/d2_file_explorer.hpp
-        # templates/d2_file_explorer.cpp
-        # templates/d2_exit_prompt.hpp
-        # templates/d2_exit_prompt.cpp
-        # templates/d2_color_picker.hpp
-        # templates/d2_color_picker.cpp
-        # templates/d2_theme_selector.hpp
-        # templates/d2_theme_selector.cpp
-        # templates/d2_audio_device_selector.hpp
-        # templates/d2_audio_device_selector.cpp
-        # Programs
-        programs/d2_debug_box.hpp
-        programs/d2_debug_box.cpp
-        programs/d2_element_test.hpp
-        programs/d2_quedits.hpp
+        # extras/d2_loading_indicators.hpp
+        # extras/d2_file_explorer.hpp
+        # extras/d2_file_explorer.cpp
+        # extras/d2_exit_prompt.hpp
+        # extras/d2_exit_prompt.cpp
+        # extras/d2_color_picker.hpp
+        # extras/d2_color_picker.cpp
+        # extras/d2_theme_selector.hpp
+        # extras/d2_theme_selector.cpp
+        # extras/d2_audio_device_selector.hpp
+        # extras/d2_audio_device_selector.cpp
+        # Other stuff 
+        extras/d2_debug_box.hpp
+        extras/d2_debug_box.cpp
     )
-    target_link_libraries(DeltaTemplates PUBLIC DeltaCore DeltaElements)
-    delta_setup_target(DeltaTemplates)
+    target_link_libraries(DeltaExtras PUBLIC DeltaCore DeltaElements)
+    delta_setup_target(DeltaExtras)
 endif()
 
 # Platform library
@@ -329,7 +327,7 @@ add_library(DeltaAscii::Core ALIAS DeltaAscii)
 target_link_libraries(DeltaAscii INTERFACE
     DeltaCore
     $<$<TARGET_EXISTS:DeltaElements>:DeltaElements>
-    $<$<TARGET_EXISTS:DeltaTemplates>:DeltaTemplates>
+    $<$<TARGET_EXISTS:DeltaTemplates>:DeltaExtras>
     $<$<TARGET_EXISTS:DeltaCoreOS>:DeltaCoreOS>
 )
 
@@ -338,7 +336,7 @@ if(TARGET DeltaElements)
     list(APPEND _install_targets DeltaElements)
 endif()
 if(TARGET DeltaTemplates)
-    list(APPEND _install_targets DeltaTemplates)
+    list(APPEND _install_targets DeltaExtras)
 endif()
 
 install(TARGETS ${_install_targets} DeltaAscii

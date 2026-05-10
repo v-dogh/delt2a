@@ -3,10 +3,10 @@
 
 #include <d2_colors.hpp>
 #include <d2_tree_construct.hpp>
-#include <templates/d2_default_theme.hpp>
 #include <elements/d2_slider.hpp>
+#include <templates/d2_default_theme.hpp>
 
-namespace d2::ctm::df
+namespace d2::ex::df
 {
     using text = Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
                             { dstylev(ForegroundColor, DefaultTheme::Text); }>;
@@ -706,6 +706,6 @@ namespace d2::ctm::df
                                                   );
                                               }
                                           }>;
-} // namespace d2::ctm::df
+} // namespace d2::ex::df
 
 #endif

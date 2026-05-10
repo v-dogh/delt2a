@@ -9,7 +9,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace d2::ctm
+namespace d2::ex
 {
     using component = px::component;
 
@@ -422,4 +422,4 @@ namespace d2::ctm
         get<Highlight>() = highlight;
         get<HighlightInactive>() = highlight_inactive;
     }
-} // namespace d2::ctm
+} // namespace d2::ex

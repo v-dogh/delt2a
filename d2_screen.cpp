@@ -1,8 +1,8 @@
 #include "d2_screen.hpp"
+
 #include <d2_exceptions.hpp>
 #include <d2_input_base.hpp>
 #include <d2_tree_parent.hpp>
-#include <elements/d2_box.hpp>
 #include <filesystem>
 
 namespace d2::sys
@@ -310,7 +310,7 @@ namespace d2::sys
 
     void SystemScreen::_update_viewport()
     {
-        const auto b = root().as<dx::Box>();
+        const auto b = root().as<d2::ParentElement>();
         b->accept_layout();
         const auto [width, height] = context()->input().ptr()->screen_size();
         const auto [pwidth, pheight] = b->box();
@@ -350,7 +350,7 @@ namespace d2::sys
                             mouse_target = it;
                             auto res =
                                 _update_states(it, std::pair(mouse.first - x, mouse.second - y));
-                            if (res != nullptr && res->getzindex() > dx::Box::underlap)
+                            if (res != nullptr && res->getzindex() > d2::ParentElement::underlap)
                                 mouse_target = std::move(res);
                         }
                     }

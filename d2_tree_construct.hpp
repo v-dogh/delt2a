@@ -1,12 +1,11 @@
 #ifndef D2_TREE_CONSTRUCT_HPP
 #define D2_TREE_CONSTRUCT_HPP
 
-#include "d2_theme.hpp"
 #include <d2_io_handler.hpp>
 #include <d2_meta.hpp>
+#include <d2_theme.hpp>
 #include <d2_tree.hpp>
 #include <d2_tree_state.hpp>
-#include <elements/d2_flow_box.hpp>
 #include <mods/d2_core.hpp>
 
 #include <type_traits>
@@ -361,9 +360,6 @@ namespace d2
         }
     };
 
-    using DefState = TreeState;
-    using DefRoot = dx::FlowBox;
-
     template<meta::ConstString Name, typename State, typename Root, auto Build, typename... Argv>
     struct Tree : d2::TreeTemplateInit<Name, State, void, Root>
     {
@@ -376,13 +372,12 @@ namespace d2
             Build(TreeCtx<Root, State>(root.as<Root>()), std::move(args)...);
         }
     };
-    template<meta::ConstString Name, typename State, typename Root, typename... Argv>
+    template<meta::ConstString Name, typename Base, typename State, typename Root, typename... Argv>
     struct TreeForward : d2::TreeTemplateInit<Name, State, void, Root>
     {
-        static void construct(TreeCtx<Root, State> ctx, Argv... args);
         static void create_at(TreeIter<> root, TreeState::ptr state, Argv... args)
         {
-            construct(root, state, std::move(args)...);
+            Base::construct(root, state, std::move(args)...);
         }
     };
 } // namespace d2

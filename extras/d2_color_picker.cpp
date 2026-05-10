@@ -3,7 +3,7 @@
 #include <d2_pixel.hpp>
 #include <d2_tree_element_frwd.hpp>
 
-namespace d2::ctm
+namespace d2::ex
 {
     class ColorPickerDiamond : public style::
                                    UAI<ColorPickerDiamond,
@@ -281,10 +281,11 @@ namespace d2::ctm
             data::set<data::BorderHorizontalColor>(src.wg_border_horizontal());
             data::set<data::BorderVerticalColor>(src.wg_border_vertical());
             data::set<data::FocusedColor>(src.wg_hbg_button());
-            data::set<data::BarColor>(style::dynavar<[](const auto& value)
-                                                     {
-                                                         return value.extend('.');
-                                                     }>(src.wg_border_horizontal()));
+            data::set<data::BarColor>(
+                style::dynavar<[](const auto& value) { return value.extend('.'); }>(
+                    src.wg_border_horizontal()
+                )
+            );
 
             color_picker::create_at(
                 traverse(), TreeState::make<TreeState>(nullptr, traverse().asp(), context()), true
@@ -327,4 +328,4 @@ namespace d2::ctm
         if (data::on_submit != nullptr)
             data::on_submit(std::static_pointer_cast<ColorPicker>(shared_from_this()), get_color());
     }
-} // namespace d2::ctm
+} // namespace d2::ex

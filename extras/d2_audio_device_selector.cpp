@@ -1,10 +1,10 @@
 #include "d2_audio_device_selector.hpp"
-#include <elements/d2_switch.hpp>
-#include <mods/d2_audio.hpp>
 #include "d2_widget_theme_base.hpp"
 #include <absl/container/flat_hash_map.h>
+#include <elements/d2_switch.hpp>
+#include <mods/d2_audio.hpp>
 
-namespace d2::ctm
+namespace d2::ex
 {
     // clang-format off
     D2_TREE_DEFINE(audio_device_selector)
@@ -112,4 +112,4 @@ namespace d2::ctm
         ptr->at("in")->setstate(d2::Element::State::Display, false);
     D2_TREE_DEFINITION_END
     // clang-format on
-} // namespace d2::ctm
+} // namespace d2::ex

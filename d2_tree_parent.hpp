@@ -9,6 +9,10 @@ namespace d2
     class ParentElement : public Element
     {
     public:
+        // For borders
+        static constexpr auto overlap = 66;
+        static constexpr auto underlap = -66;
+
         using DynamicIterator = internal::DynamicIterator;
         enum class BorderType
         {
@@ -21,8 +25,12 @@ namespace d2
     protected:
         virtual void _layout_for_impl(enum Layout, cptr) const;
 
-        virtual int _get_border_impl(BorderType, cptr) const { return 0; }
-        virtual void _signal_context_change_impl(write_flag type, unsigned int prop, ptr element) override;
+        virtual int _get_border_impl(BorderType, cptr) const
+        {
+            return 0;
+        }
+        virtual void
+        _signal_context_change_impl(write_flag type, unsigned int prop, ptr element) override;
         virtual void _state_change_impl(State state, bool value) override;
 
         virtual std::size_t _index_of_impl(id) const = 0;
@@ -45,7 +53,6 @@ namespace d2
         void _extract_setstate(ptr ptr);
         void _remove_setstate(ptr ptr);
     public:
-
         using Element::Element;
 
         bool empty() const;
@@ -54,46 +61,46 @@ namespace d2
 
         std::size_t index_of(id id);
 
-        template<typename Type> TreeIter<Type> at(id id) { return at(id).as<Type>(); }
+        template<typename Type> TreeIter<Type> at(id id)
+        {
+            return at(id).as<Type>();
+        }
         TreeIter<> at(id id) const;
 
-        void layout_for(enum Layout layout, cptr elem)  const;
+        void layout_for(enum Layout layout, cptr elem) const;
 
         int resolve_units(Unit, cptr) const;
         using Element::resolve_units;
 
         template<typename Type> TreeIter<Type> create(const std::string& name = "")
         {
-            return create(Element::make<Type>(
-                name,
-                state()
-            ));
+            return create(Element::make<Type>(name, state()));
         }
         template<typename Type> TreeIter<Type> override(const std::string& name = "")
         {
-            return override(Element::make<Type>(
-                name,
-                state()
-            ));
+            return override(Element::make<Type>(name, state()));
         }
         TreeIter<> create(ptr ptr);
         TreeIter<> override(ptr ptr);
 
         template<typename Type> TreeIter<Type> create_after(id after, const std::string& name = "")
         {
-            return create_after(after, Element::make<Type>(
-                name,
-                state(),
-                std::static_pointer_cast<ParentElement>(shared_from_this())
-            ));
+            return create_after(
+                after,
+                Element::make<Type>(
+                    name, state(), std::static_pointer_cast<ParentElement>(shared_from_this())
+                )
+            );
         }
-        template<typename Type> TreeIter<Type> override_after(id after, const std::string& name = "")
+        template<typename Type>
+        TreeIter<Type> override_after(id after, const std::string& name = "")
         {
-            return override_after(after, Element::make<Type>(
-                name,
-                state(),
-                std::static_pointer_cast<ParentElement>(shared_from_this())
-            ));
+            return override_after(
+                after,
+                Element::make<Type>(
+                    name, state(), std::static_pointer_cast<ParentElement>(shared_from_this())
+                )
+            );
         }
         TreeIter<> create_after(id after, ptr p);
         TreeIter<> override_after(id after, ptr p);
@@ -107,10 +114,16 @@ namespace d2
 
         int border_for(BorderType type, cptr ptr) const;
 
-        virtual DynamicIterator begin() { return nullptr; }
-        virtual DynamicIterator end() { return nullptr; }
+        virtual DynamicIterator begin()
+        {
+            return nullptr;
+        }
+        virtual DynamicIterator end()
+        {
+            return nullptr;
+        }
         virtual void foreach_internal(foreach_internal_callback callback) const = 0;
-        virtual void foreach(foreach_callback callback) const = 0;
+        virtual void foreach (foreach_callback callback) const = 0;
     };
     class VecParentElement : public ParentElement
     {
@@ -142,14 +155,14 @@ namespace d2
         virtual DynamicIterator begin() override;
         virtual DynamicIterator end() override;
         virtual void foreach_internal(foreach_internal_callback callback) const override;
-        virtual void foreach(foreach_callback callback) const override;
+        virtual void foreach (foreach_callback callback) const override;
     };
     class MetaParentElement : public ParentElement
     {
     protected:
         virtual std::size_t _index_of_impl(id) const override
         {
-            throw std::logic_error{ "Not implemented" };
+            throw std::logic_error{"Not implemented"};
         }
 
         virtual bool _empty_impl() const override
@@ -167,11 +180,11 @@ namespace d2
 
         virtual TreeIter<> _at_impl(id id) const override
         {
-            throw std::logic_error{ "Not implemented" };
+            throw std::logic_error{"Not implemented"};
         }
         virtual TreeIter<> _create_impl(ptr ptr) override
         {
-            throw std::logic_error{ "Not implemented" };
+            throw std::logic_error{"Not implemented"};
         }
         virtual TreeIter<> _override_impl(ptr ptr) override
         {
@@ -179,20 +192,20 @@ namespace d2
         }
         virtual TreeIter<> _create_after_impl(ptr p, id after) override
         {
-            throw std::logic_error{ "Not implemented" };
+            throw std::logic_error{"Not implemented"};
         }
         virtual TreeIter<> _override_after_impl(ptr p, id after) override
         {
-            throw std::logic_error{ "Not implemented" };
+            throw std::logic_error{"Not implemented"};
         }
 
         virtual bool _remove_impl(id id) override
         {
-            throw std::logic_error{ "Not implemented" };
+            throw std::logic_error{"Not implemented"};
         }
         virtual ptr _extract_impl(id id) override
         {
-            throw std::logic_error{ "Not implemented" };
+            throw std::logic_error{"Not implemented"};
         }
         virtual void _clear_impl() override {}
     public:
@@ -201,6 +214,6 @@ namespace d2
         virtual void foreach_internal(foreach_internal_callback callback) const override {}
         virtual void foreach (foreach_callback callback) const override {}
     };
-}
+} // namespace d2
 
 #endif // D2_TREE_PARENT_HPP

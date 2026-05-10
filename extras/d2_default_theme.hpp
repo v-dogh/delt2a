@@ -4,7 +4,7 @@
 #include <d2_pixel.hpp>
 #include <d2_theme.hpp>
 
-namespace d2::ctm
+namespace d2::ex
 {
     struct DefaultThemeDeps
     {
@@ -139,7 +139,7 @@ namespace d2::ctm
     {
         void from(std::vector<px::background> accents);
     };
-} // namespace d2::ctm
+} // namespace d2::ex
 
 namespace d2::style
 {

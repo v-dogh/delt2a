@@ -1,28 +1,28 @@
 #ifndef D2_BOX_HPP
 #define D2_BOX_HPP
 
+#include <d2_styles.hpp>
 #include <d2_tree_element.hpp>
 #include <d2_tree_parent.hpp>
-#include <d2_styles.hpp>
 #include <elements/d2_element_utils.hpp>
 
 namespace d2::dx
 {
-    class Box :
-        public style::UAIE<VecParentElement, Box, style::ILayout, style::IContainer, style::IColors>,
-        public impl::ContainerHelper<Box>
+    class Box : public style::
+                    UAIE<VecParentElement, Box, style::ILayout, style::IContainer, style::IColors>,
+                public impl::ContainerHelper<Box>
     {
     public:
-        static constexpr auto overlap = 66;
-        static constexpr auto underlap = -66;
         friend class ContainerHelper<Box>;
-        using data = style::UAIE<VecParentElement, Box, style::ILayout, style::IContainer, style::IColors>;
+        using data =
+            style::UAIE<VecParentElement, Box, style::ILayout, style::IContainer, style::IColors>;
         using data::data;
-    protected:        
+    protected:
         int _perfect_width() const;
         int _perfect_height() const;
 
-        virtual void _signal_write_child_impl(write_flag type, unsigned int prop, ptr element) override;
+        virtual void
+        _signal_write_child_impl(write_flag type, unsigned int prop, ptr element) override;
         virtual int _get_border_impl(BorderType type, cptr elem) const override;
         virtual Unit _layout_impl(Element::Layout type) const override;
 
@@ -31,6 +31,6 @@ namespace d2::dx
         virtual void _render_start() {}
         virtual void _object_render(PixelBuffer::View buffer, ptr obj);
     };
-}
+} // namespace d2::dx
 
 #endif // D2_BOX_HPP
