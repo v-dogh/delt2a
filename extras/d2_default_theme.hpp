@@ -143,9 +143,9 @@ namespace d2::ex
 
 namespace d2::style
 {
-    template<> struct ThemeRegistry<ctm::DefaultTheme::Deps>
+    template<> struct ThemeRegistry<ex::DefaultTheme::Deps>
     {
-        using type = ctm::DefaultTheme;
+        using type = ex::DefaultTheme;
     };
 } // namespace d2::style
 
