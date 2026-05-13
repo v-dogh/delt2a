@@ -324,7 +324,7 @@ add_library(DeltaAscii::Core ALIAS DeltaAscii)
 target_link_libraries(DeltaAscii INTERFACE
     DeltaCore
     $<$<TARGET_EXISTS:DeltaElements>:DeltaElements>
-    $<$<TARGET_EXISTS:DeltaTemplates>:DeltaExtras>
+    $<$<TARGET_EXISTS:DeltaExtras>:DeltaExtras>
     $<$<TARGET_EXISTS:DeltaCoreOS>:DeltaCoreOS>
 )
 
@@ -332,7 +332,7 @@ set(_install_targets DeltaCore DeltaLSX)
 if(TARGET DeltaElements)
     list(APPEND _install_targets DeltaElements)
 endif()
-if(TARGET DeltaTemplates)
+if(TARGET DeltaExtras)
     list(APPEND _install_targets DeltaExtras)
 endif()
 
