@@ -750,15 +750,15 @@ protected:                                                                      
         return std::size_t(PropCnt::Count);                                                        \
     }();                                                                                           \
 public:                                                                                            \
-    enum Property : uai_property                                                                   \
+    enum Property : ::d2::style::uai_property                                                      \
     {                                                                                              \
         _first_ = base,                                                                            \
         __VA_ARGS__                                                                                \
     };
 #define D2_UAI_LINK(...)                                                                           \
-    template<uai_property Property> auto get()                                                     \
+    template<::d2::style::uai_property Property> auto get()                                        \
     {                                                                                              \
-        using enum Element::WriteType;                                                             \
+        using enum ::d2::Element::WriteType;                                                       \
         if constexpr (false)                                                                       \
         {                                                                                          \
         }                                                                                          \
