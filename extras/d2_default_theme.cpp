@@ -181,19 +181,19 @@ namespace d2::ex
             auto white = rgb(255, 255, 255);
 
             get<Surface>() = black;
-            get<SurfaceAlt>() = rgb(24, 24, 24);
-            get<SurfaceRaised>() = rgb(36, 36, 36);
-            get<SurfaceSunken>() = rgb(12, 12, 12);
-            get<SurfaceOverlay>() = rgb(48, 48, 48);
-            get<SurfaceDisabled>() = rgb(28, 28, 28);
+            get<SurfaceAlt>() = rgb(8, 8, 8);
+            get<SurfaceRaised>() = rgb(17, 17, 17);
+            get<SurfaceSunken>() = black;
+            get<SurfaceOverlay>() = rgb(27, 27, 27);
+            get<SurfaceDisabled>() = rgb(12, 12, 12);
 
             get<SurfaceContrast>() = white;
 
-            get<BorderHoriz>() = to_border_horizontal(black);
-            get<BorderVert>() = to_border_vertical(black);
+            get<BorderHoriz>() = to_border_horizontal(white);
+            get<BorderVert>() = to_border_vertical(white);
 
-            get<BorderMutedHoriz>() = to_border_horizontal(rgb(160, 160, 160));
-            get<BorderMutedVert>() = to_border_vertical(rgb(160, 160, 160));
+            get<BorderMutedHoriz>() = to_border_horizontal(rgb(165, 165, 165));
+            get<BorderMutedVert>() = to_border_vertical(rgb(165, 165, 165));
 
             get<BorderStrongHoriz>() = to_border_horizontal(white);
             get<BorderStrongVert>() = to_border_vertical(white);
@@ -201,12 +201,12 @@ namespace d2::ex
             get<BorderFocusHoriz>() = to_border_horizontal(white);
             get<BorderFocusVert>() = to_border_vertical(white);
 
-            get<BorderContrastHoriz>() = to_border_horizontal(white);
-            get<BorderContrastVert>() = to_border_vertical(white);
+            get<BorderContrastHoriz>() = to_border_horizontal(black);
+            get<BorderContrastVert>() = to_border_vertical(black);
 
             get<Text>() = to_foreground(white);
             get<TextMuted>() = to_foreground(rgb(200, 200, 200));
-            get<TextDisabled>() = to_foreground(rgb(110, 110, 110));
+            get<TextDisabled>() = to_foreground(rgb(105, 105, 105));
             get<TextInverse>() = to_foreground(black);
             get<TextAccent>() = to_foreground(white);
             get<TextContrast>() = to_foreground(black);
@@ -220,7 +220,7 @@ namespace d2::ex
             get<Cursor>() = to_combined(black, white, '_');
 
             get<Selection>() = white;
-            get<SelectionInactive>() = rgb(90, 90, 90);
+            get<SelectionInactive>() = rgb(85, 85, 85);
             get<SelectionText>() = to_foreground(black);
 
             get<Info>() = white;
@@ -235,8 +235,8 @@ namespace d2::ex
             get<Error>() = white;
             get<ErrorText>() = to_foreground(black);
 
-            get<Highlight>() = rgb(55, 55, 55);
-            get<HighlightInactive>() = rgb(35, 35, 35);
+            get<Highlight>() = rgb(45, 45, 45);
+            get<HighlightInactive>() = rgb(20, 20, 20);
 
             return;
         }
