@@ -180,20 +180,20 @@ namespace d2::ex
             auto black = rgb(0, 0, 0);
             auto white = rgb(255, 255, 255);
 
-            get<Surface>() = white;
-            get<SurfaceAlt>() = rgb(247, 247, 247);
-            get<SurfaceRaised>() = rgb(238, 238, 238);
-            get<SurfaceSunken>() = white;
-            get<SurfaceOverlay>() = rgb(228, 228, 228);
-            get<SurfaceDisabled>() = rgb(243, 243, 243);
+            get<Surface>() = black;
+            get<SurfaceAlt>() = rgb(24, 24, 24);
+            get<SurfaceRaised>() = rgb(36, 36, 36);
+            get<SurfaceSunken>() = rgb(12, 12, 12);
+            get<SurfaceOverlay>() = rgb(48, 48, 48);
+            get<SurfaceDisabled>() = rgb(28, 28, 28);
 
-            get<SurfaceContrast>() = black;
+            get<SurfaceContrast>() = white;
 
-            get<BorderHoriz>() = to_border_horizontal(white);
-            get<BorderVert>() = to_border_vertical(white);
+            get<BorderHoriz>() = to_border_horizontal(black);
+            get<BorderVert>() = to_border_vertical(black);
 
-            get<BorderMutedHoriz>() = to_border_horizontal(rgb(90, 90, 90));
-            get<BorderMutedVert>() = to_border_vertical(rgb(90, 90, 90));
+            get<BorderMutedHoriz>() = to_border_horizontal(rgb(160, 160, 160));
+            get<BorderMutedVert>() = to_border_vertical(rgb(160, 160, 160));
 
             get<BorderStrongHoriz>() = to_border_horizontal(white);
             get<BorderStrongVert>() = to_border_vertical(white);
@@ -201,42 +201,42 @@ namespace d2::ex
             get<BorderFocusHoriz>() = to_border_horizontal(white);
             get<BorderFocusVert>() = to_border_vertical(white);
 
-            get<BorderContrastHoriz>() = to_border_horizontal(black);
-            get<BorderContrastVert>() = to_border_vertical(black);
+            get<BorderContrastHoriz>() = to_border_horizontal(white);
+            get<BorderContrastVert>() = to_border_vertical(white);
 
-            get<Text>() = to_foreground(black);
-            get<TextMuted>() = to_foreground(rgb(55, 55, 55));
-            get<TextDisabled>() = to_foreground(rgb(150, 150, 150));
-            get<TextInverse>() = to_foreground(white);
-            get<TextAccent>() = to_foreground(black);
-            get<TextContrast>() = to_foreground(white);
+            get<Text>() = to_foreground(white);
+            get<TextMuted>() = to_foreground(rgb(200, 200, 200));
+            get<TextDisabled>() = to_foreground(rgb(110, 110, 110));
+            get<TextInverse>() = to_foreground(black);
+            get<TextAccent>() = to_foreground(white);
+            get<TextContrast>() = to_foreground(black);
 
-            get<Accent>() = black;
-            get<AccentHover>() = rgb(35, 35, 35);
-            get<AccentActive>() = rgb(75, 75, 75);
-            get<AccentMuted>() = rgb(165, 165, 165);
-            get<AccentText>() = to_foreground(white);
+            get<Accent>() = white;
+            get<AccentHover>() = rgb(220, 220, 220);
+            get<AccentActive>() = rgb(180, 180, 180);
+            get<AccentMuted>() = rgb(90, 90, 90);
+            get<AccentText>() = to_foreground(black);
 
-            get<Cursor>() = to_combined(white, black, '_');
+            get<Cursor>() = to_combined(black, white, '_');
 
-            get<Selection>() = black;
-            get<SelectionInactive>() = rgb(170, 170, 170);
-            get<SelectionText>() = to_foreground(white);
+            get<Selection>() = white;
+            get<SelectionInactive>() = rgb(90, 90, 90);
+            get<SelectionText>() = to_foreground(black);
 
-            get<Info>() = black;
-            get<InfoText>() = to_foreground(white);
+            get<Info>() = white;
+            get<InfoText>() = to_foreground(black);
 
-            get<Success>() = black;
-            get<SuccessText>() = to_foreground(white);
+            get<Success>() = white;
+            get<SuccessText>() = to_foreground(black);
 
-            get<Warning>() = black;
-            get<WarningText>() = to_foreground(white);
+            get<Warning>() = white;
+            get<WarningText>() = to_foreground(black);
 
-            get<Error>() = black;
-            get<ErrorText>() = to_foreground(white);
+            get<Error>() = white;
+            get<ErrorText>() = to_foreground(black);
 
-            get<Highlight>() = rgb(210, 210, 210);
-            get<HighlightInactive>() = rgb(235, 235, 235);
+            get<Highlight>() = rgb(55, 55, 55);
+            get<HighlightInactive>() = rgb(35, 35, 35);
 
             return;
         }
