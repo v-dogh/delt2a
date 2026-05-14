@@ -92,7 +92,7 @@ namespace d2
         bool is_synced() const;
 
         template<typename Func, typename... Argv>
-        auto sync(Func&& callback, Argv&&... args) -> decltype(callback())
+        auto sync(Func&& callback, Argv&&... args) -> std::invoke_result_t<Func&, Argv...>
         {
             if (is_synced())
             {
@@ -139,7 +139,8 @@ namespace d2
             }
         }
         template<typename Func, typename... Argv>
-        auto sync_async(Func&& callback, Argv&&... args) -> mt::future<std::invoke_result_t<Func&>>
+        auto sync_async(Func&& callback, Argv&&... args)
+            -> mt::future<std::invoke_result_t<Func&, Argv...>>
         {
             using ret = std::invoke_result_t<Func, Argv...>;
             mt::future<ret> task = mt::future<ret>::make();
