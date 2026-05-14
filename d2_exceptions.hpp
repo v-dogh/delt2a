@@ -35,8 +35,9 @@ namespace d2
 #   endif
 #   define D2_THRW(_msg_) ::rs::ex::thrw(__module__, _msg_, "")
 #   define D2_THRW_EX(_msg_, _description_) ::rs::ex::thrw(__module__, _msg_, _description_)
-#   define D2_TAG_MODULE(_name_) private: static inline constexpr auto __module__ = std::string_view(#_name_);
-#   define D2_TAG_MODULE_RUNTIME(_name_) const auto __module__ = _name_;
+#   define D2_TAG_MODULE(_name_) protected: static inline constexpr auto __module__ = std::string_view(#_name_);
+#   define D2_TAG_MODULE_VALUE(_name_) protected: static inline constexpr auto __module__ = std::string_view(_name_);
+#   define D2_TAG_MODULE_RUNTIME(_name_) const auto __module__ = std::string_view(_name_);
 #   define D2_SAFE_BLOCK_BEGIN ::rs::ex::safe(__module__, [&]() {
 #   define D2_SAFE_BLOCK_END });
     // clang-format on

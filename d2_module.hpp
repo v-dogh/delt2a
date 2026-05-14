@@ -5,9 +5,9 @@
 #include <atomic>
 #include <memory>
 #include <span>
-#include <string_view>
 #include <thread>
 
+#include <d2_exceptions.hpp>
 #include <d2_io_handler_frwd.hpp>
 #include <d2_meta.hpp>
 
@@ -135,6 +135,8 @@ namespace d2
 
         template<meta::ConstString Name> struct AbstractModule : public SystemModule
         {
+            D2_TAG_MODULE_VALUE(Name.view());
+        public:
             static inline constexpr auto name = Name.view();
             static inline const auto uidc = impl::component_uidgen();
 
