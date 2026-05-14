@@ -160,8 +160,8 @@ namespace d2
             {
                 _worker->accept(
                     {[callback = std::forward<Func>(callback),
-                      ... args =
-                          std::forward<Argv>(args)](mt::Task::Query query, std::any& out) mutable
+                      ... args = std::forward<Argv>(args),
+                      task](mt::Task::Query query, std::any& out) mutable
                      {
                          if (query == mt::Task::Query::Type)
                          {
