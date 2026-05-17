@@ -15,7 +15,7 @@
 
 namespace d2::sys
 {
-    class SystemScreen : public AbstractModule<"Screen">,
+    class SystemScreen : public AbstractModule<SystemScreen, "Screen">,
                          public ConcreteModule<
                              SystemScreen,
                              Access::TUnsafe,

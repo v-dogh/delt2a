@@ -301,8 +301,9 @@ namespace d2::sys::ext
     }
     void SystemAudio::_trigger_device_event(Device dev, Event ev, const DeviceName& name)
     {
-        context()->signal(dev, name, ev, module(this));
-        context()->signal(ev, Signals::id(dev), name, module(this));
+        const auto ptr = std::static_pointer_cast<SystemAudio>(shared_from_this());
+        context()->signal(dev, name, ev, module(ptr));
+        context()->signal(ev, Signals::id(dev), name, module(ptr));
     }
 
     void SystemAudio::_filter(Device dev, FilterPipeline filter)
@@ -313,12 +314,7 @@ namespace d2::sys::ext
     {
         auto& trans = _device_data[std::size_t(dev)].filter.transforms;
         auto f = std::find_if(
-            trans.begin(),
-            trans.end(),
-            [&](const auto& v)
-            {
-                return v.first == after;
-            }
+            trans.begin(), trans.end(), [&](const auto& v) { return v.first == after; }
         );
         if (f == trans.end())
         {
@@ -352,12 +348,7 @@ namespace d2::sys::ext
     {
         auto& trans = _device_data[std::size_t(dev)].filter.transforms;
         auto f = std::find_if(
-            trans.begin(),
-            trans.end(),
-            [&](const auto& v)
-            {
-                return v.first == name;
-            }
+            trans.begin(), trans.end(), [&](const auto& v) { return v.first == name; }
         );
         if (f != trans.end())
             f->second = filter;
@@ -366,12 +357,7 @@ namespace d2::sys::ext
     {
         auto& trans = _device_data[std::size_t(dev)].filter.transforms;
         auto f = std::find_if(
-            trans.begin(),
-            trans.end(),
-            [&](const auto& v)
-            {
-                return v.first == name;
-            }
+            trans.begin(), trans.end(), [&](const auto& v) { return v.first == name; }
         );
         if (f != trans.end())
             trans.erase(f);

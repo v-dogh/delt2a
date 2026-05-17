@@ -1,11 +1,13 @@
 #include "d2_io_handler.hpp"
-#include "logs/runtime_logs.hpp"
-#include "mods/d2_core.hpp"
-#include "mt/pool.hpp"
+
+#include <logs/runtime_logs.hpp>
+#include <mods/d2_core.hpp>
+#include <mt/pool.hpp>
 
 #include <algorithm>
 #include <d2_module.hpp>
 #include <d2_screen.hpp>
+#include <features.h>
 
 namespace d2
 {
@@ -26,90 +28,233 @@ namespace d2
         return std::static_pointer_cast<IOContext>(shared_from_this());
     }
 
-    sys::SystemModule* IOContext::_get_component_if_uc(std::size_t uid)
+    void IOContext::_remove_module(std::type_index idx, std::optional<std::string> id)
+    {
+        if (id.has_value())
+        {
+            if (id.value().empty())
+                D2_THRW("Cannot remove dynamic module with empty ID");
+            D2_TLOG(Info, "Removing module at ", id.value());
+            const auto f = _named_modules.find(std::make_pair(idx, id.value()));
+            if (f == _named_modules.end())
+                D2_THRW("Failed to remove module ", id.value(), "; Not present");
+            _named_modules.erase(f);
+        }
+        else
+        {
+            D2_TLOG(Info, "Removing module");
+            const auto f = _modules.find(idx);
+            if (f == _modules.end())
+                D2_THRW("Failed to remove module; Not present");
+
+            // Check for dependencies
+            for (const auto& [idx, ptr] : _modules)
+            {
+                if (idx != idx)
+                {
+                    const auto deps = ptr->dependencies();
+                    if (std::find(deps.begin(), deps.end(), idx) != deps.end())
+                        D2_THRW(
+                            "Failed to remove module ",
+                            f->second->info().name,
+                            "; Dependency ",
+                            ptr->info().name
+                        );
+                }
+            }
+            _modules.erase(f);
+        }
+    }
+    void
+    IOContext::_insert_module(std::shared_ptr<sys::SystemModule> ptr, std::optional<std::string> id)
+    {
+        if (id.has_value())
+        {
+            if (id.value().empty())
+                D2_THRW("Cannot insert dynamic module with empty ID");
+            D2_TLOG(Info, "Inserting new module ", ptr->info().name, " at ", id.value())
+            auto [_, created] =
+                _named_modules.emplace(std::make_pair(ptr->info().index, id.value()), ptr);
+            if (!created)
+                D2_THRW(
+                    "Failed to insert module ",
+                    ptr->info().name,
+                    " at ",
+                    id.value(),
+                    "; Already present"
+                );
+        }
+        else
+        {
+            D2_TLOG(Info, "Inserting new module ", ptr->info().name)
+            auto [_, created] = _modules.emplace(ptr->info().index, ptr);
+            if (!created)
+                D2_THRW("Failed to insert module ", ptr->info().name, "; Already present");
+        }
+    }
+
+    std::shared_ptr<sys::SystemModule>
+    IOContext::_get_module_if_uc(std::type_index idx, std::optional<std::string> id)
     {
         std::shared_lock lock(_module_mtx);
-        if (_components.size() < uid)
+        if (id.has_value() && id.value().empty())
+        {
+            D2_TLOG(Warning, "Empty module ID")
             return nullptr;
-        auto* ptr = _components[uid].get();
+        }
+        std::shared_ptr<sys::SystemModule> ptr = nullptr;
+        if (id.has_value())
+        {
+            auto f = _named_modules.find(std::make_pair(idx, id.value()));
+            if (f == _named_modules.end())
+                return nullptr;
+            ptr = f->second;
+        }
+        else
+        {
+            auto f = _modules.find(idx);
+            if (f == _modules.end())
+                return nullptr;
+            ptr = f->second;
+        }
         lock.release();
         if (ptr)
         {
             if (ptr->status() == sys::SystemModule::Status::Offline)
             {
-                D2_TLOG(Info, "Dynamically loading module: ", ptr->name())
+                D2_TLOG(
+                    Info,
+                    "Dynamically loading module: ",
+                    ptr->info().name,
+                    (id.has_value() ? " at " : ""),
+                    (id.has_value() ? id.value() : "")
+                )
                 ptr->load();
             }
             else if (ptr->status() != sys::SystemModule::Status::Ok)
             {
-                D2_TLOG(Warning, "Attempt to use a failed module: ", ptr->name());
+                D2_TLOG(
+                    Warning,
+                    "Attempt to use a failed module: ",
+                    ptr->info().name,
+                    (id.has_value() ? " at " : ""),
+                    (id.has_value() ? id.value() : "")
+                );
                 return nullptr;
             }
         }
         return ptr;
     }
-    void IOContext::_load_modules(std::vector<std::unique_ptr<sys::SystemModule>> comps)
+    void IOContext::_load_modules(
+        std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::optional<std::string>>> comps
+    )
     {
-        std::vector<std::size_t> load_list;
-        std::vector<bool> visit_map;
-        const auto max = std::max_element(
-            comps.begin(),
-            comps.end(),
-            [](const auto& v, const auto& m) { return v->uid() < m->uid(); }
-        );
+        std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::optional<std::string>>>
+            load_list;
+        absl::flat_hash_set<std::type_index> visit_map;
         {
             std::lock_guard lock(_module_mtx);
-            _components.resize(std::max(_components.size(), (*max)->uid() + 1));
             load_list.reserve(comps.size());
-            visit_map.resize(_components.size());
-            std::fill(visit_map.begin(), visit_map.end(), false);
-            for (decltype(auto) it : comps)
+            for (auto& [ptr, id] : comps)
             {
-                load_list.push_back(it->uid());
-                _components[it->uid()] = std::move(it);
+                _insert_module(ptr, id);
+                if (ptr->load_spec().type == sys::Load::Spec::Type::Immediate)
+                    load_list.push_back({ptr, std::move(id)});
             }
         }
-        for (decltype(auto) it : load_list)
+        for (const auto& [ptr, id] : load_list)
         {
-            const auto result = _load_module_recursive(it, visit_map);
-#if D2_COMPATIBILITY_MODE == STRICT
+            bool result = false;
+            if (id.has_value())
+            {
+                std::unique_lock lock(_module_mtx);
+                visit_map.insert(ptr->info().index);
+                const auto deps = ptr->dependencies();
+                lock.unlock();
+                result = true;
+                for (decltype(auto) it : deps)
+                    if (!_load_module_recursive(it, visit_map))
+                    {
+                        D2_TLOG(
+                            Warning,
+                            "Detected cycle in module: ",
+                            _modules[it]->info().name,
+                            "; Required by: ",
+                            ptr->info().name
+                        )
+                        result = false;
+                        break;
+                    }
+                if (result)
+                    ptr->load();
+                visit_map.erase(ptr->info().index);
+            }
+            else
+                result = _load_module_recursive(ptr->info().index, visit_map);
             if (!result)
-                D2_THRW(
-                    std::format(
-                        "Cycle detected, failed to load module: {}", _components[it]->name()
-                    )
-                );
+            {
+#if D2_COMPATIBILITY_MODE == STRICT
+                if (id.has_value())
+                    D2_THRW(
+                        "Cycle detected or bad condition, failed to load module: ",
+                        ptr->info().name,
+                        " at ",
+                        id.value()
+                    );
+                else
+                    D2_THRW(
+                        "Cycle detected or bad condition, failed to load module: ", ptr->info().name
+                    );
+#else
+                if (id.has_value())
+                    D2_TLOG(
+                        Warning,
+                        "Cycle detected or bad condition, failed to load module: ",
+                        ptr->name(),
+                        " at ",
+                        id.value()
+                    );
+                else
+                    D2_TLOG(
+                        Warning,
+                        "Cycle detected or bad condition, failed to load module: ",
+                        ptr->name()
+                    );
 #endif
+            }
         }
     }
-    bool IOContext::_load_module_recursive(std::size_t uid, std::vector<bool>& visit_map)
+    bool IOContext::_load_module_recursive(
+        std::type_index idx, absl::flat_hash_set<std::type_index>& visit_map
+    )
     {
-        if (visit_map[uid])
+        if (visit_map.contains(idx))
             return false;
-        if (_components[uid]->status() != sys::SystemModule::Status::Offline)
-            return true;
-        visit_map[uid] = true;
         std::unique_lock lock(_module_mtx);
-        const auto dv = _components[uid]->dependencies();
-        const auto deps = std::vector(dv.begin(), dv.end());
-        const auto addr = _components[uid].get();
+        const auto f = _modules.find(idx);
+        if (f == _modules.end())
+            return false;
+        const auto ptr = f->second;
+        if (ptr->status() != sys::SystemModule::Status::Offline)
+            return true;
+        visit_map.insert(idx);
+        const auto deps = ptr->dependencies();
         lock.unlock();
         for (decltype(auto) it : deps)
             if (!_load_module_recursive(it, visit_map))
             {
+                auto f = _modules.find(it);
                 D2_TLOG(
                     Warning,
                     "Detected cycle in module: ",
-                    _components[it]->name(),
-                    "; Required by: ",
-                    _components[uid]->name()
+                    ptr->info().name,
+                    "; Requires: ",
+                    (f == _modules.end() ? "Unknown" : f->second->info().name)
                 )
                 return false;
             }
-        lock.lock();
-        if (addr == _components[uid].get())
-            _components[uid]->load();
-        visit_map[uid] = false;
+        ptr->load();
+        visit_map.erase(idx);
         return true;
     }
 
@@ -121,8 +266,10 @@ namespace d2
     IOContext::~IOContext()
     {
         std::lock_guard lock(_module_mtx);
-        for (auto it = _components.rbegin(); it != _components.rend(); ++it)
-            it->reset();
+        for (decltype(auto) it : _modules)
+            it.second->unload();
+        for (decltype(auto) it : _named_modules)
+            it.second->unload();
     }
 
     void IOContext::_initialize()
@@ -201,15 +348,6 @@ namespace d2
         D2_TLOG(Module, "Stopped IOContext")
     }
 
-    void IOContext::_insert_component(std::unique_ptr<sys::SystemModule> ptr)
-    {
-        D2_TLOG(Info, "Inserting new component: ", ptr->name())
-        const auto idx = ptr->uid();
-        std::lock_guard lock(_module_mtx);
-        _components.resize(std::max(_components.size(), idx + 1));
-        _components[idx] = std::move(ptr);
-    }
-
     bool IOContext::is_synced() const
     {
         return std::this_thread::get_id() == _main_thread;
@@ -248,29 +386,43 @@ namespace d2
     {
         std::shared_lock lock(_module_mtx);
         std::size_t cnt = 0;
-        for (decltype(auto) it : _components)
-            cnt += (it != nullptr);
+        cnt += _modules.size();
+        cnt += _named_modules.size();
         return cnt;
     }
-    void IOContext::sysenum(std::function<void(sys::SystemModule*)> callback)
+    void IOContext::sysenum(
+        std::function<void(sys::module<sys::SystemModule>, std::optional<std::string>)> callback
+    )
     {
-        for (decltype(auto) it : _components)
-            callback(it.get());
+        std::shared_lock lock(_module_mtx);
+        std::vector<std::shared_ptr<sys::SystemModule>> unnamed;
+        std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::string>> named;
+        unnamed.reserve(_modules.size());
+        named.reserve(_named_modules.size());
+        for (decltype(auto) it : _modules)
+            unnamed.push_back(it.second);
+        for (decltype(auto) it : _named_modules)
+            named.push_back({it.second, it.first.second});
+        lock.unlock();
+        for (decltype(auto) it : _modules)
+            callback(it.second, std::nullopt);
+        for (decltype(auto) it : _named_modules)
+            callback(it.second, it.first.second);
     }
 
     IOContext::module<sys::input> IOContext::input()
     {
         std::shared_lock lock(_module_mtx);
-        return _get_component<sys::SystemInput>();
+        return _get_module<sys::SystemInput>();
     }
     IOContext::module<sys::output> IOContext::output()
     {
         std::shared_lock lock(_module_mtx);
-        return _get_component<sys::SystemOutput>();
+        return _get_module<sys::SystemOutput>();
     }
     IOContext::module<sys::screen> IOContext::screen()
     {
         std::shared_lock lock(_module_mtx);
-        return _get_component<sys::SystemScreen>();
+        return _get_module<sys::SystemScreen>();
     }
 } // namespace d2

@@ -39,6 +39,16 @@ namespace rs
         state.code = std::numeric_limits<std::uint32_t>::max();
         return *this;
     }
+    std::string RuntimeLogs::InputStream::operator<<(StringOp)
+    {
+        auto result = std::string(state.stream.buffer());
+        state.stream.reset();
+        state.severity = Severity::Debug;
+        state.data = "";
+        state.filter = false;
+        state.code = std::numeric_limits<std::uint32_t>::max();
+        return result;
+    }
 
     std::string_view signal_to_str(int sig) noexcept
     {
@@ -430,13 +440,9 @@ namespace rs
             std::chrono::steady_clock::time_point timestamp;
         };
         auto entry_size = [](const LogHeader& header) -> std::size_t
-        {
-            return LogHeader::size() + header.md_length + header.length + sizeof(std::uint16_t);
-        };
+        { return LogHeader::size() + header.md_length + header.length + sizeof(std::uint16_t); };
         auto entry_ptr = [](unsigned char* base, std::size_t off) -> unsigned char*
-        {
-            return base + off;
-        };
+        { return base + off; };
         auto entry_next = [&](unsigned char* base, std::size_t off) -> std::size_t
         {
             const auto header = LogHeader::from(entry_ptr(base, off));
@@ -470,10 +476,7 @@ namespace rs
         std::sort(
             logs.begin(),
             logs.end(),
-            [](const auto& a, const auto& b)
-            {
-                return a.timestamp < b.timestamp;
-            }
+            [](const auto& a, const auto& b) { return a.timestamp < b.timestamp; }
         );
         for (const auto& it : logs)
         {

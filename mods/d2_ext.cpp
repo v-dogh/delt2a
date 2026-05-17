@@ -13,25 +13,25 @@ namespace d2::sys::ext
     }
     LocalSystemClipboard::Status LocalSystemClipboard::_unload_impl()
     {
-        value_.clear();
-        value_.shrink_to_fit();
+        _value.clear();
+        _value.shrink_to_fit();
         return Status::Ok;
     }
 
     void LocalSystemClipboard::clear()
     {
-        value_.clear();
+        _value.clear();
     }
     void LocalSystemClipboard::copy(const string& value)
     {
-        value_ = value;
+        _value = value;
     }
     string LocalSystemClipboard::paste()
     {
-        return value_;
+        return _value;
     }
     bool LocalSystemClipboard::empty()
     {
-        return value_.empty();
+        return _value.empty();
     }
 } // namespace d2::sys::ext

@@ -1,5 +1,7 @@
 #include "d2_debug_box.hpp"
+#include "d2_module.hpp"
 
+#include <absl/container/flat_hash_map.h>
 #include <d2_std.hpp>
 #include <elements/d2_std.hpp>
 #include <logs/runtime_logs.hpp>
@@ -298,11 +300,9 @@ namespace d2::ex
             TreeIter<Text> minmax{};
 
             bool grabbed{false};
-            IOContext::Handle listener{};
         };
 
         auto& data = ctx.declare<DebugState>();
-
         data.metrics = {
             {"Delta",
              Metric{
@@ -466,14 +466,6 @@ namespace d2::ex
                         dstyle(ZIndex, 1);
                         dstyle(Value, "<X>");
                         dstyle(X, 1.0_pxi);
-
-                        // D2_INTERP_TWOWAY_AUTO(
-                        //     Hovered,
-                        //     500,
-                        //     Linear,
-                        //     ForegroundColor,
-                        //     colors::r::crimson
-                        // );
 
                         ctx.onv(
                             Element::State::Clicked,
@@ -803,18 +795,6 @@ namespace d2::ex
                           }
                       );
                       ctx.onv(
-                          Element::State::Swapped,
-                          false,
-                          [&data](Element::EventListener, TreeIter<FlowBox>)
-                          { data.listener.unmute(); }
-                      );
-                      ctx.onv(
-                          Element::State::Swapped,
-                          true,
-                          [&data](Element::EventListener, TreeIter<FlowBox>)
-                          { data.listener.mute(); }
-                      );
-                      ctx.onv(
                           Element::State::Event,
                           true,
                           [&data](Element::EventListener, TreeIter<FlowBox> ptr)
@@ -825,11 +805,7 @@ namespace d2::ex
                                   if (data.grabbed)
                                   {
                                       const auto pos = ptr->parent()->mouse_object_space().x;
-                                      const auto w = ptr->layout(Element::Layout::Width);
                                       const auto pw = ptr->parent()->layout(Element::Layout::Width);
-
-                                      (void)w;
-
                                       const auto position = Unit(float(pos) / pw, Unit::Pc);
 
                                       ptr->set<Box::Width>(Unit(1.f - position.raw(), Unit::Pc));
@@ -895,11 +871,14 @@ namespace d2::ex
                 dstyle(Width, 1.0_pc);
                 dstyle(Height, 1.0_pxi);
 
+                using key = std::pair<std::type_index, std::string>;
+                auto& inv = ctx.declare<absl::flat_hash_map<key, TreeIter<>>>();
                 auto handle = ctx->context()->scheduler()->launch_cyclic(
-                    std::chrono::seconds(5),
-                    [ptr = ctx.ptr()](auto&&...)
+                    std::chrono::seconds(2),
+                    [ptr = ctx.ptr(), &inv](auto&&...) -> void
                     {
-                        auto update_mod_view = [=](TreeIter<> ptr, sys::SystemModule* mod)
+                        auto update_mod_view =
+                            [=](TreeIter<> ptr, sys::module<sys::SystemModule> mod)
                         {
                             px::foreground color;
                             switch (mod->status())
@@ -925,13 +904,15 @@ namespace d2::ex
                                 .template as<Text>()
                                 ->template set<Text::ForegroundColor>(color);
                         };
-
-                        auto create_mod_view = [=](sys::SystemModule* mod)
+                        auto create_mod_view = [=](sys::module<sys::SystemModule> mod,
+                                                   std::optional<std::string> id) -> TreeIter<>
                         {
                             TreeCtx<ParentElement> ctx(ptr);
-
-                            ctx.elem<FlowBox>(
-                                mod->name(),
+                            const auto name = id.has_value()
+                                                  ? std::format("{}#{}", mod->info().name, *id)
+                                                  : std::string(mod->info().name);
+                            return ctx.elem<FlowBox>(
+                                name,
                                 [=](TreeCtx<FlowBox> ctx)
                                 {
                                     std::string load_type = "";
@@ -958,7 +939,7 @@ namespace d2::ex
                                         [=](TreeCtx<Text> ctx)
                                         {
                                             dstyle(ZIndex, Box::overlap);
-                                            dstyle(Value, std::format("<{}>", mod->name()));
+                                            dstyle(Value, std::format("<{}>", mod->info().name));
                                             dstyle(X, 0.0_center);
                                         }
                                     );
@@ -1007,6 +988,7 @@ namespace d2::ex
                                             dstyle(Y, 0.0_relative);
                                         }
                                     );
+
                                     const auto deps = mod->dependency_names();
                                     for (const auto& dep : deps)
                                     {
@@ -1019,41 +1001,44 @@ namespace d2::ex
                                             }
                                         );
                                     }
+
                                     update_mod_view(ctx.ptr(), mod);
                                 }
                             );
                         };
 
-                        std::unordered_map<std::string, sys::SystemModule*> mods;
+                        absl::flat_hash_set<key> used;
                         ptr->state()->context()->sysenum(
-                            [&](sys::SystemModule* mod)
+                            [&](sys::module<sys::SystemModule> mod, std::optional<std::string> id)
                             {
-                                mods[mod->name()] = mod;
+                                const key key{mod->info().index, id.value_or("")};
 
-                                if (!ptr->exists(mod->name()))
-                                    create_mod_view(mod);
-                            }
-                        );
-                        std::vector<TreeIter<>> rem;
-                        ptr->foreach (
-                            [&](TreeIter<> child)
-                            {
-                                auto f = mods.find(child->name());
+                                used.emplace(key);
 
-                                if (f == mods.end())
+                                auto f = inv.find(key);
+                                if (f == inv.end())
                                 {
-                                    rem.push_back(child);
+                                    const auto elem = create_mod_view(mod, id);
+                                    inv.emplace(key, elem);
                                 }
                                 else
                                 {
-                                    update_mod_view(child, f->second);
+                                    update_mod_view(f->second, mod);
                                 }
-
-                                return true;
                             }
                         );
-                        for (auto child : rem)
-                            ptr.asp()->remove(child);
+
+                        std::vector<key> rem;
+                        for (const auto& [key, elem] : inv)
+                        {
+                            if (!used.contains(key))
+                            {
+                                ptr.asp()->remove(elem);
+                                rem.push_back(key);
+                            }
+                        }
+                        for (const auto& key : rem)
+                            inv.erase(key);
                     }
                 );
                 ctx.onv(

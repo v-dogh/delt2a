@@ -21,7 +21,7 @@
 namespace d2::sys
 {
     class SystemBinder
-        : public AbstractModule<"Binder">,
+        : public AbstractModule<SystemBinder, "Binder">,
           public ConcreteModule<SystemBinder, Access::TUnsafe, Load::Lazy, sys::SystemScreen>
     {
         D2_TAG_MODULE(bdr)

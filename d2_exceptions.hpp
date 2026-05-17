@@ -1,9 +1,9 @@
 #ifndef D2_EXCEPTIONS_HPP
 #define D2_EXCEPTIONS_HPP
 
-#include "logs/runtime_logs.hpp"
 #include <exception>
 #include <format>
+#include <logs/runtime_logs.hpp>
 #include <string>
 
 namespace d2
@@ -33,11 +33,11 @@ namespace d2
 #       define D2_LOG(...) (void());
 #       define D2_TLOG(...) (void());
 #   endif
-#   define D2_THRW(_msg_) ::rs::ex::thrw(__module__, _msg_, "")
+#   define D2_THRW(...) ::rs::ex::thrw(__module__, ::rs::RuntimeLogs::stringify(__VA_ARGS__), "")
 #   define D2_THRW_EX(_msg_, _description_) ::rs::ex::thrw(__module__, _msg_, _description_)
 #   define D2_TAG_MODULE(_name_) protected: static inline constexpr auto __module__ = std::string_view(#_name_);
 #   define D2_TAG_MODULE_VALUE(_name_) protected: static inline constexpr auto __module__ = std::string_view(_name_);
-#   define D2_TAG_MODULE_RUNTIME(_name_) const auto __module__ = std::string_view(_name_);
+#   define D2_TAG_MODULE_RUNTIME(_name_) const auto __module__ = _name_;
 #   define D2_SAFE_BLOCK_BEGIN ::rs::ex::safe(__module__, [&]() {
 #   define D2_SAFE_BLOCK_END });
     // clang-format on

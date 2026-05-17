@@ -5,12 +5,11 @@
 #include <d2_module.hpp>
 #include <mt/pool.hpp>
 
-#include <tuple>
 #include <vector>
 
 namespace d2::sys::ext
 {
-    class SystemClipboard : public AbstractModule<"Clipboard">
+    class SystemClipboard : public AbstractModule<SystemClipboard, "Clipboard">
     {
     public:
         using AbstractModule::AbstractModule;
@@ -20,7 +19,7 @@ namespace d2::sys::ext
         virtual d2::string paste() = 0;
         virtual bool empty() = 0;
     };
-    class SystemNotifications : public AbstractModule<"Notifications">
+    class SystemNotifications : public AbstractModule<SystemNotifications, "Notifications">
     {
     public:
         enum Targets : unsigned char
@@ -47,64 +46,13 @@ namespace d2::sys::ext
             const std::vector<unsigned char> icon = {}
         ) = 0;
     };
-    class SystemPlugins : public AbstractModule<"Plugins">
-    {
-    public:
-        enum class LoadStatus
-        {
-            VersionMismatch,
-            InvalidResponse,
-            Ok
-        };
-    private:
-        struct Environment
-        {
-            std::shared_ptr<IOContext> ctx;
-            std::vector<unsigned char> params;
-        };
-        struct Pipe
-        {
-        };
-    public:
-        using AbstractModule::AbstractModule;
-
-        template<typename... Components, typename... Argv>
-        Environment sandbox(std::tuple<Argv...>&& params, mt::ConcurrentPool::ptr pool = nullptr)
-        {
-            return Environment();
-        }
-        template<typename... Components, typename... Argv>
-        Environment sandbox(mt::ConcurrentPool::ptr pool = nullptr)
-        {
-            return Environment();
-        }
-
-        template<typename Ret, typename... Argv>
-        mt::future<Ret> send(const std::string& name, const std::string& endpoint, Argv&&... args)
-        {
-        }
-        template<typename Ret>
-        mt::future<Ret> receive(const std::string& name, const std::string& endpoint)
-        {
-        }
-
-        virtual LoadStatus load(
-            const std::filesystem::path& path,
-            const std::string& name,
-            Environment ctx = Environment()
-        ) = 0;
-        virtual void unload(const std::string& name) = 0;
-    };
-    class SystemIO : public AbstractModule<"IO">
-    {
-    };
 
     class LocalSystemClipboard
         : public SystemClipboard,
           public ConcreteModule<LocalSystemClipboard, Access::TUnsafe, Load::Lazy>
     {
     private:
-        string value_{};
+        string _value{};
     protected:
         virtual Status _load_impl() override;
         virtual Status _unload_impl() override;
@@ -120,7 +68,6 @@ namespace d2::sys::ext
 } // namespace d2::sys::ext
 namespace d2::sys
 {
-    using plugins = ext::SystemPlugins;
     using clipboard = ext::SystemClipboard;
     using notifications = ext::SystemNotifications;
 } // namespace d2::sys

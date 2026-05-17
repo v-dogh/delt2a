@@ -33,7 +33,7 @@ namespace d2::sys::ext
         };
     } // namespace impl
 
-    class SystemAudio : public AbstractModule<"Audio">
+    class SystemAudio : public AbstractModule<SystemAudio, "Audio">
     {
     public:
         using Format = impl::Format;

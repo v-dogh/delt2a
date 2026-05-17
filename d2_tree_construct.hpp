@@ -260,7 +260,7 @@ namespace d2
 
         template<typename Type, typename Func, typename... Arge, typename... Args>
             requires std::invocable<Func, TreeCtx<Type, State>>
-        void embed(
+        auto embed(
             const std::string& name,
             Func&& callback,
             std::tuple<Arge...> arge = {},
@@ -279,52 +279,56 @@ namespace d2
                 arge
             );
             nsrc->swap_in();
+            return cptr;
         }
         template<typename Type, typename Func, typename... Arge, typename... Args>
             requires std::invocable<Func, TreeCtx<Type, State>>
-        void
+        auto
         embed(Func&& callback, std::tuple<Arge...> arge = {}, std::tuple<Args...> args = {}) const
         {
-            embed<Type>("", std::forward<Func>(callback), std::move(arge), std::move(args));
+            return embed<Type>("", std::forward<Func>(callback), std::move(arge), std::move(args));
         }
         template<typename Type, typename... Args, typename... Arge>
-        void embed(
+        auto embed(
             const std::string& name, std::tuple<Arge...> arge = {}, std::tuple<Args...> args = {}
         ) const
         {
-            embed<Type>(name, [](auto) {}, std::move(arge), std::move(args));
+            return embed<Type>(name, [](auto) {}, std::move(arge), std::move(args));
         }
         template<typename Type, typename... Arge, typename... Args>
-        void embed(std::tuple<Arge...> arge = {}, std::tuple<Args...> args = {}) const
+        auto embed(std::tuple<Arge...> arge = {}, std::tuple<Args...> args = {}) const
         {
-            embed<Type>("", [](auto) {}, std::move(arge), std::move(args));
+            return embed<Type>("", [](auto) {}, std::move(arge), std::move(args));
         }
 
         template<typename Type, typename Func, typename... Argv>
             requires std::invocable<Func, TreeCtx<Type, State>>
-        void elem(Func&& callback, Argv&&... args) const
+        auto elem(Func&& callback, Argv&&... args) const
         {
             auto ptr = Element::make<Type>("", state(), std::forward<Argv>(args)...);
             internal::ElementView::from(ptr).setparent(_ptr.asp());
             callback(TreeCtx<Type, State>(ptr));
             _ptr.asp()->override(ptr);
+            return TreeIter<Type>(ptr);
         }
         template<typename Type, typename Func, typename... Argv>
             requires std::invocable<Func, TreeCtx<Type, State>>
-        void elem(std::string name, Func&& callback, Argv&&... args) const
+        auto elem(std::string name, Func&& callback, Argv&&... args) const
         {
             auto ptr = Element::make<Type>(std::move(name), state(), std::forward<Argv>(args)...);
             internal::ElementView::from(ptr).setparent(_ptr.asp());
             callback(TreeCtx<Type, State>(ptr));
             _ptr.asp()->override(ptr);
+            return TreeIter<Type>(ptr);
         }
         template<typename Type, typename Func>
             requires std::invocable<Func, TreeCtx<Type, State>>
-        void elem(Element::eptr<Type> ptr, Func&& callback) const
+        auto elem(Element::eptr<Type> ptr, Func&& callback) const
         {
             internal::ElementView::from(ptr).setparent(_ptr.asp());
             callback(TreeCtx<Type, State>(ptr));
             _ptr.asp()->override(ptr);
+            return TreeIter<Type>(ptr);
         }
 
         // Styles

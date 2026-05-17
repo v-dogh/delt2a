@@ -106,6 +106,15 @@ namespace rs
             return CodeOp(v);
         }
     } inline code;
+    class StringOp
+    {
+    public:
+        std::uint32_t value;
+        StringOp operator()(std::uint32_t v)
+        {
+            return StringOp(v);
+        }
+    } inline str;
 
     class RuntimeLogSink;
     class RuntimeLogs : std::enable_shared_from_this<RuntimeLogs>
@@ -223,6 +232,7 @@ namespace rs
             InputStream& operator<<(LogOp data);
             InputStream& operator<<(DataOp md);
             InputStream& operator<<(FlushOp);
+            std::string operator<<(StringOp);
         };
 
         // stacktrace_type length
@@ -272,6 +282,12 @@ namespace rs
         static ptr make(Config cfg);
         static ptr make();
 
+        template<typename... Argv> static std::string stringify(Argv&&... args)
+        {
+            InputStream in(nullptr);
+            return ((in << ... << std::forward<Argv>(args)) << str);
+        }
+
         ~RuntimeLogs()
         {
             sync();
@@ -286,10 +302,7 @@ namespace rs
             auto f = std::find_if(
                 _sinks.begin(),
                 _sinks.end(),
-                [](const auto& v)
-                {
-                    return typeid(v.get()) == typeid(Type);
-                }
+                [](const auto& v) { return typeid(v.get()) == typeid(Type); }
             );
             if (f != _sinks.end())
             {
@@ -307,10 +320,7 @@ namespace rs
             auto f = std::find_if(
                 _sinks.begin(),
                 _sinks.end(),
-                [](const auto& v)
-                {
-                    return typeid(v.get()) == typeid(Type);
-                }
+                [](const auto& v) { return typeid(v.get()) == typeid(Type); }
             );
             if (f != _sinks.end())
                 _sinks.erase(f);

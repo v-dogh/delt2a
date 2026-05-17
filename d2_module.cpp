@@ -1,6 +1,6 @@
 #include "d2_module.hpp"
 #include <d2_io_handler.hpp>
-#include <limits>
+#include <typeindex>
 
 namespace d2::sys
 {
@@ -8,14 +8,14 @@ namespace d2::sys
     {
         if (_status == Status::Ok)
         {
-            D2_TAG_MODULE_RUNTIME(name())
+            D2_TAG_MODULE_RUNTIME(info().name)
             D2_THRW("Cannot add safe threads after initialization");
         }
         _safe_threads.insert(id);
     }
     void SystemModule::_ensure_loaded(std::function<Status()> callback)
     {
-        D2_TAG_MODULE_RUNTIME(name())
+        D2_TAG_MODULE_RUNTIME(info().name)
         Status s = _status.load(std::memory_order::acquire);
         while (true)
         {
@@ -60,11 +60,8 @@ namespace d2::sys
     }
 
     SystemModule::SystemModule(
-        std::weak_ptr<IOContext> ptr,
-        const std::string& name,
-        ModPreset preset,
-        std::size_t static_usage
-    ) : _ctx(ptr), _name(name), _preset(std::move(preset)), _static_usage(static_usage)
+        std::weak_ptr<IOContext> ptr, ModPreset preset, std::size_t static_usage
+    ) : _ctx(ptr), _preset(std::move(preset)), _static_usage(static_usage)
     {
     }
 
@@ -80,7 +77,7 @@ namespace d2::sys
     {
         return _static_usage;
     }
-    std::span<const std::size_t> SystemModule::dependencies() const noexcept
+    std::span<const std::type_index> SystemModule::dependencies() const noexcept
     {
         return _preset.deps;
     }
@@ -102,7 +99,7 @@ namespace d2::sys
         _ensure_loaded(
             [this]()
             {
-                D2_TAG_MODULE_RUNTIME(name())
+                D2_TAG_MODULE_RUNTIME(info().name)
                 const auto stat = _load_impl();
                 if (_status == Status::Offline)
                 {
@@ -120,7 +117,7 @@ namespace d2::sys
         _ensure_loaded(
             [this]()
             {
-                D2_TAG_MODULE_RUNTIME(name())
+                D2_TAG_MODULE_RUNTIME(info().name)
                 const auto stat = _unload_impl();
                 if (_status == Status::Ok)
                     return Status::Offline;
@@ -134,9 +131,5 @@ namespace d2::sys
             return _ctx.lock()->is_synced();
         return _preset.access == Access::TSafe ||
                _safe_threads.contains(std::this_thread::get_id());
-    }
-    std::string SystemModule::name() const
-    {
-        return _name;
     }
 } // namespace d2::sys

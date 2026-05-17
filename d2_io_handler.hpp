@@ -1,18 +1,20 @@
 #ifndef D2_IO_HANDLER_HPP
 #define D2_IO_HANDLER_HPP
 
+#include "logs/runtime_logs.hpp"
+#include <absl/container/flat_hash_map.h>
 #include <absl/container/flat_hash_set.h>
 #include <chrono>
 #include <memory>
 #include <shared_mutex>
 
-#include "mt/pool.hpp"
 #include <d2_exceptions.hpp>
 #include <d2_io_handler_frwd.hpp>
 #include <d2_main_worker.hpp>
 #include <d2_module.hpp>
 #include <d2_signal_handler.hpp>
 #include <mods/d2_core.hpp>
+#include <mt/pool.hpp>
 
 namespace d2
 {
@@ -26,14 +28,22 @@ namespace d2
         using wptr = std::weak_ptr<IOContext>;
     private:
         mutable std::shared_mutex _module_mtx{};
-        std::vector<std::unique_ptr<sys::SystemModule>> _components{};
+        absl::flat_hash_map<std::type_index, std::shared_ptr<sys::SystemModule>> _modules{};
+        absl::flat_hash_map<
+            std::pair<std::type_index, std::string>,
+            std::shared_ptr<sys::SystemModule>
+        >
+            _named_modules{};
+
         rs::RuntimeLogs::ptr _logs{nullptr};
+
         MainWorker::ptr _worker{nullptr};
         mt::ConcurrentPool::ptr _scheduler{nullptr};
         std::thread::id _main_thread{};
         std::chrono::steady_clock::time_point _deadline{
             std::chrono::steady_clock::time_point::max()
         };
+
         std::atomic<bool> _stop{true};
         std::atomic<bool> _suspended{false};
 
@@ -46,28 +56,39 @@ namespace d2
         void _deinitialize();
         void _run();
 
-        template<typename Type> module<Type> _get_component()
+        template<typename Type> module<Type> _get_module()
         {
-            auto* mod = _get_component_if<Type>();
+            auto mod = _get_module_if<Type>();
             if (mod == nullptr)
                 D2_THRW("Attempt to query inactive component");
             return mod;
         }
-        template<typename Type> Type* _get_component_if()
+        template<typename Type> module<Type> _get_module_if()
         {
-            return static_cast<Type*>(_get_component_if_uc(Type::uidc));
+            return std::static_pointer_cast<Type>(_get_module_if_uc(typeid(Type)));
         }
-        void _insert_component(std::unique_ptr<sys::SystemModule> ptr);
 
-        sys::SystemModule* _get_component_if_uc(std::size_t id);
-        void _load_modules(std::vector<std::unique_ptr<sys::SystemModule>> comps);
-        bool _load_module_recursive(std::size_t uid, std::vector<bool>& visit_map);
+        void _remove_module(std::type_index idx, std::optional<std::string> id = std::nullopt);
+        void _insert_module(
+            std::shared_ptr<sys::SystemModule> ptr, std::optional<std::string> id = std::nullopt
+        );
+
+        std::shared_ptr<sys::SystemModule>
+        _get_module_if_uc(std::type_index idx, std::optional<std::string> id = std::nullopt);
+        void _load_modules(
+            std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::optional<std::string>>>
+                comps
+        );
+        bool _load_module_recursive(
+            std::type_index idx, absl::flat_hash_set<std::type_index>& visit_map
+        );
     public:
         template<typename... Components> static ptr make(rs::Config logs_cfg = {})
         {
             auto logs = rs::RuntimeLogs::make(logs_cfg);
             auto scheduler = mt::ConcurrentPool::make<mt::SimpleTopology>();
             auto ptr = std::make_shared<IOContext>(scheduler, logs);
+            logs->sink<rs::ColoredConsoleSink>();
             ptr->load<Components...>();
             return ptr;
         }
@@ -187,65 +208,78 @@ namespace d2
 
         // Modules
 
-        template<typename... Components> void load()
+        template<typename Module> void unload()
         {
-            std::vector<std::unique_ptr<sys::SystemModule>> modules{};
-            modules.reserve(sizeof...(Components));
-            auto insert = [&]<typename Component>()
+            std::lock_guard lock(_module_mtx);
+            _remove_module(Module::module_info().index);
+        }
+        template<typename Module> void unload(const std::string& id)
+        {
+            std::lock_guard lock(_module_mtx);
+            _remove_module(Module::module_info().index, id);
+        }
+        template<typename... Modules> void load()
+        {
+            std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::optional<std::string>>>
+                modules{};
+            auto insert = [&]<typename Module>()
             {
 #if D2_COMPATIBILITY_MODE == STRICT
-                static_assert(
-                    !std::is_same_v<Component, void>, "Attempt to load invalid component"
-                );
+                static_assert(!std::is_same_v<Module, void>, "Attempt to load invalid component");
 #endif
-                if constexpr (!std::is_same_v<Component, void>)
+                if constexpr (!std::is_same_v<Module, void>)
                 {
-                    if (Component::module_preset.spec.type == sys::Load::Spec::Type::Deferred)
+                    if (Module::module_preset.spec.type == sys::Load::Spec::Type::Deferred)
                     {
                         scheduler()->launch_deferred(
-                            std::chrono::milliseconds{Component::module_preset.spec.ms},
+                            std::chrono::milliseconds{Module::module_preset.spec.ms},
                             [this](auto&&...)
                             {
-                                std::vector<std::unique_ptr<sys::SystemModule>> v;
-                                v.push_back(sys::SystemModule::make<Component>(_weak()));
-                                _load_modules(std::move(v));
+                                // Force load it
+                                _get_module_if<Module>();
                             }
                         );
                     }
-                    else
-                    {
-                        auto ptr = sys::SystemModule::make<Component>(_weak());
-                        if (Component::module_preset.spec.type == sys::Load::Spec::Type::Lazy)
-                            _insert_component(std::move(ptr));
-                        else
-                            modules.push_back(std::move(ptr));
-                    }
+                    auto ptr = sys::SystemModule::make<Module>(_weak());
+                    modules.push_back({std::move(ptr), std::nullopt});
                 }
             };
-            (insert.template operator()<Components>(), ...);
-            _load_modules(std::move(modules));
+            (insert.template operator()<Modules>(), ...);
+            if (!modules.empty())
+            {
+                // If the module is Lazy or Deferred this is only a "preload"
+                // That is, we only allocate the space for the module and not initialize it
+                _load_modules(std::move(modules));
+            }
+        }
+        template<typename Module> void load(const std::string& id)
+        {
+            if (Module::module_preset.spec.type == sys::Load::Spec::Type::Deferred)
+            {
+                scheduler()->launch_deferred(
+                    std::chrono::milliseconds{Module::module_preset.spec.ms},
+                    [this](auto&&...) { _get_module_if<Module>(); }
+                );
+            }
+            auto ptr = sys::SystemModule::make<Module>(_weak());
+            _load_modules({std::make_pair(ptr, id)});
         }
 
         std::size_t syscnt() const;
-        void sysenum(std::function<void(sys::SystemModule*)> callback);
+        void sysenum(
+            std::function<void(sys::module<sys::SystemModule>, std::optional<std::string>)> callback
+        );
 
-        template<typename Component>
-        void sys_run(auto&& callback, auto&& fallback = [](sys::SystemModule::Status) {})
+        template<typename Module> auto sys()
         {
-            if (auto* ptr = sys_if<Component>();
-                ptr && ptr->status() == sys::SystemModule::Status::Ok)
-                sync_if(callback, ptr);
-            else
-                fallback(ptr ? ptr->status() : sys::SystemModule::Status::Offline);
+            return _get_module<Module>();
         }
-        template<typename Component> auto sys()
+        template<typename Module> auto sys_if()
         {
-            return _get_component<Component>();
-        }
-        template<typename Component> auto sys_if()
-        {
-            auto* ptr = _get_component_if<Component>();
-            return ptr ? (ptr->status() == sys::SystemModule::Status::Ok ? ptr : nullptr) : nullptr;
+            auto ptr = _get_module_if<Module>();
+            return (ptr != nullptr)
+                       ? (ptr->status() == sys::SystemModule::Status::Ok ? ptr : nullptr)
+                       : nullptr;
         }
 
         module<sys::input> input();

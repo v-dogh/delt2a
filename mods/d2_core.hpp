@@ -10,7 +10,7 @@
 namespace d2::sys
 {
     // Generic base for system input
-    class SystemInput : public AbstractModule<"Input">
+    class SystemInput : public AbstractModule<SystemInput, "Input">
     {
     private:
         struct FrameLock
@@ -83,7 +83,7 @@ namespace d2::sys
 
     // Generic base for system output
     // Provides interfaces used for rendering to the console and other OS agnostic interfaces
-    class SystemOutput : public AbstractModule<"Output">
+    class SystemOutput : public AbstractModule<SystemOutput, "Output">
     {
     public:
         static constexpr auto image_constant =

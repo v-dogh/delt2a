@@ -6,6 +6,7 @@
 #include <memory>
 #include <span>
 #include <thread>
+#include <typeindex>
 
 #include <d2_exceptions.hpp>
 #include <d2_io_handler_frwd.hpp>
@@ -15,24 +16,6 @@ namespace d2
 {
     namespace sys
     {
-        namespace impl
-        {
-            inline std::atomic<std::size_t> component_uid_track = 0;
-            inline std::size_t component_uidgen()
-            {
-                return component_uid_track++;
-            }
-
-            struct ComponentUIDGeneratorBase
-            {
-                virtual std::size_t uid() const = 0;
-                std::size_t uid()
-                {
-                    return const_cast<const ComponentUIDGeneratorBase*>(this)->uid();
-                }
-            };
-        } // namespace impl
-
         struct Load
         {
             struct Spec
@@ -60,7 +43,7 @@ namespace d2
             TUnsafe,
         };
 
-        class SystemModule : public impl::ComponentUIDGeneratorBase
+        class SystemModule : public std::enable_shared_from_this<SystemModule>
         {
         public:
             enum class Status
@@ -75,12 +58,16 @@ namespace d2
             {
                 Access access{Access::TUnsafe};
                 Load::Spec spec{};
-                std::vector<std::size_t> deps{};
+                std::vector<std::type_index> deps{};
                 std::vector<std::string> dep_names{};
+            };
+            struct ModInfo
+            {
+                std::string_view name;
+                std::type_index index;
             };
         private:
             const std::weak_ptr<IOContext> _ctx{};
-            const std::string _name{"<Unknown>"};
             const ModPreset _preset{};
             const std::size_t _static_usage{0};
             absl::flat_hash_set<std::thread::id> _safe_threads{};
@@ -95,24 +82,18 @@ namespace d2
         public:
             template<typename Type> static std::unique_ptr<Type> make(std::weak_ptr<IOContext> ctx)
             {
-                return std::make_unique<Type>(
-                    ctx, std::string(Type::name), Type::module_preset, sizeof(Type)
-                );
+                return std::make_unique<Type>(ctx, Type::module_preset, sizeof(Type));
             }
 
-            SystemModule(
-                std::weak_ptr<IOContext> ptr,
-                const std::string& name,
-                ModPreset preset,
-                std::size_t static_usage
-            );
+            SystemModule(std::weak_ptr<IOContext> ptr, ModPreset preset, std::size_t static_usage);
             virtual ~SystemModule() = default;
 
+            virtual ModInfo info() const = 0;
             Load::Spec load_spec() const noexcept;
             Access access() const noexcept;
             std::size_t static_usage() const noexcept;
 
-            std::span<const std::size_t> dependencies() const noexcept;
+            std::span<const std::type_index> dependencies() const noexcept;
             std::span<const std::string> dependency_names() const noexcept;
             std::shared_ptr<IOContext> context() const noexcept;
 
@@ -120,7 +101,6 @@ namespace d2
             void load();
             void unload();
             bool accessible() const;
-            std::string name() const;
 
             template<typename Type> Type* as()
             {
@@ -133,55 +113,75 @@ namespace d2
             }
         };
 
-        template<meta::ConstString Name> struct AbstractModule : public SystemModule
+        template<typename Base, meta::ConstString Name> struct AbstractModule : public SystemModule
         {
             D2_TAG_MODULE_VALUE(Name.view());
         public:
-            static inline constexpr auto name = Name.view();
-            static inline const auto uidc = impl::component_uidgen();
-
             using SystemModule::SystemModule;
 
-            virtual std::size_t uid() const override
+            static ModInfo module_info()
             {
-                return uidc;
+                return {.name = Name.view(), .index = typeid(Base)};
+            }
+
+            virtual ModInfo info() const override final
+            {
+                return module_info();
             }
         };
-        template<typename Type, Access Ac, Load::Spec LoadSpec, typename... Deps>
+        template<typename Base, Access Ac, Load::Spec LoadSpec, typename... Deps>
         struct ConcreteModule
         {
             static inline const SystemModule::ModPreset module_preset{
                 .access = Ac,
                 .spec = LoadSpec,
-                .deps = {Deps::uidc...},
-                .dep_names = {std::string(Deps::name)...}
+                .deps = {typeid(Deps)...},
+                .dep_names = {std::string(Deps::module_info().name)...}
             };
+
+            std::shared_ptr<Base> shared_from_this() const noexcept
+            {
+                return std::static_pointer_cast<Base>(
+                    static_cast<SystemModule*>(this)->shared_from_this()
+                );
+            }
+            std::weak_ptr<Base> weak_from_this() const noexcept
+            {
+                return std::static_pointer_cast<Base>(
+                    static_cast<SystemModule*>(this)->weak_from_this()
+                );
+            }
         };
 
         template<typename Module> class ModulePtr
         {
         private:
-            Module* _ptr{nullptr};
+            std::shared_ptr<Module> _ptr{nullptr};
         public:
             ModulePtr(std::nullptr_t) {}
             ModulePtr() = default;
             ModulePtr(const ModulePtr&) = default;
             ModulePtr(ModulePtr&&) = default;
-            ModulePtr(Module* ptr) : _ptr(ptr) {}
+            ModulePtr(std::shared_ptr<Module> ptr) : _ptr(ptr) {}
 
-            Module* ptr() const
+            std::shared_ptr<Module> ptr() const
             {
-                auto bptr = static_cast<SystemModule*>(_ptr);
+                auto bptr = std::static_pointer_cast<SystemModule>(_ptr);
                 if (!bptr->accessible())
                     throw std::logic_error{std::format(
-                        "Module '{}' must be accessed from the main thread", bptr->name()
+                        "Module '{}' must be accessed from the main thread", bptr->info().name
                     )};
                 return _ptr;
             }
 
-            Module* operator->() const
+            std::shared_ptr<Module> operator->() const
             {
                 return ptr();
+            }
+
+            operator bool() const noexcept
+            {
+                return _ptr != nullptr;
             }
 
             bool operator==(const ModulePtr& ptr) const noexcept
@@ -196,7 +196,6 @@ namespace d2
             ModulePtr& operator=(const ModulePtr&) = default;
             ModulePtr& operator=(ModulePtr&&) = default;
         };
-
         template<typename Type> using module = ModulePtr<Type>;
     } // namespace sys
 } // namespace d2
