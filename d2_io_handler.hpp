@@ -134,6 +134,7 @@ namespace d2
                                          else if (query == mt::Task::Query::Run)
                                          {
                                              callback(std::forward<Argv>(args)...);
+                                             out = mt::Task::Token::Discard;
                                              lock.release();
                                          }
                                      }});
@@ -151,6 +152,7 @@ namespace d2
                                          else if (query == mt::Task::Query::Run)
                                          {
                                              out = callback(std::forward<Argv>(args)...);
+                                             out = mt::Task::Token::Discard;
                                              lock.release();
                                          }
                                      }});
@@ -199,6 +201,7 @@ namespace d2
                              {
                                  task.block()->set_value(callback(std::forward<Argv>(args)...));
                              }
+                             out = mt::Task::Token::Discard;
                          }
                      }}
                 );
