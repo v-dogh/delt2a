@@ -1,6 +1,7 @@
 #include "d2_io_handler.hpp"
 
 #include <logs/runtime_logs.hpp>
+#include <memory>
 #include <mods/d2_core.hpp>
 #include <mt/pool.hpp>
 
@@ -258,6 +259,15 @@ namespace d2
         return true;
     }
 
+    void IOContext::set(ptr ptr) noexcept
+    {
+        _ptr = ptr;
+    }
+    IOContext::ptr IOContext::get() noexcept
+    {
+        return _ptr;
+    }
+
     IOContext::IOContext(mt::ConcurrentPool::ptr scheduler, rs::RuntimeLogs::ptr logs) :
         _scheduler(scheduler), _logs(logs), Signals(scheduler)
     {
@@ -301,9 +311,19 @@ namespace d2
                     );
                     return out;
                 };
-                cfg.on_worker_start.emplace_back([logs =
-                                                      _logs](mt::Worker&, const mt::Node::Snapshot&)
-                                                 { rs::context::set(logs); });
+                cfg.on_worker_start.emplace_back(
+                    [ctx = std::weak_ptr(std::static_pointer_cast<IOContext>(shared_from_this()))](
+                        mt::Worker&, const mt::Node::Snapshot&
+                    )
+                    {
+                        const auto lock = ctx.lock();
+                        if (lock)
+                        {
+                            rs::context::set(lock->_logs);
+                            set(lock);
+                        }
+                    }
+                );
             }
         );
         D2_TLOG(Module, "Success in initialization")

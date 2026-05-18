@@ -4,29 +4,31 @@ namespace d2::sys::ext
 {
     PipewireSystemAudio::Status PipewireSystemAudio::_load_impl()
     {
-        if (const auto status = SystemAudio::_load_impl();
-            status != Status::Ok)
+        if (const auto status = SystemAudio::_load_impl(); status != Status::Ok)
             return status;
 
         std::atomic_flag flag = false;
         flag.test_and_set();
-        _thread = std::jthread([this, &flag] {
-            pw_init(nullptr, nullptr);
-            _main_thread = std::this_thread::get_id();
-            _loop = pw_main_loop_new(nullptr);
-            _context = pw_context_new(pw_main_loop_get_loop(_loop), nullptr, 0);
-            _core = pw_context_connect(_context, nullptr, 0);
+        _thread = context()->launch_thread(
+            [this, &flag]
+            {
+                pw_init(nullptr, nullptr);
+                _main_thread = std::this_thread::get_id();
+                _loop = pw_main_loop_new(nullptr);
+                _context = pw_context_new(pw_main_loop_get_loop(_loop), nullptr, 0);
+                _core = pw_context_connect(_context, nullptr, 0);
 
-            _registry = pw_core_get_registry(_core, PW_VERSION_REGISTRY, 0);
-            const pw_registry_events reg_events = {
-                .version = PW_VERSION_REGISTRY_EVENTS,
-                .global = &_event_global,
-                .global_remove = &_event_global_remove,
-            };
-            pw_registry_add_listener(_registry, &_reg_listener, &reg_events, this);
-            flag.clear();
-            pw_main_loop_run(_loop);
-        });
+                _registry = pw_core_get_registry(_core, PW_VERSION_REGISTRY, 0);
+                const pw_registry_events reg_events = {
+                    .version = PW_VERSION_REGISTRY_EVENTS,
+                    .global = &_event_global,
+                    .global_remove = &_event_global_remove,
+                };
+                pw_registry_add_listener(_registry, &_reg_listener, &reg_events, this);
+                flag.clear();
+                pw_main_loop_run(_loop);
+            }
+        );
         while (flag.test_and_set())
             std::this_thread::yield();
         return Status::Ok;
@@ -37,8 +39,10 @@ namespace d2::sys::ext
         _stop_stream(Device::Output);
 
         // if (_registry) pw_registry_destroy(_registry);
-        if (_core) pw_core_disconnect(_core);
-        if (_context) pw_context_destroy(_context);
+        if (_core)
+            pw_core_disconnect(_core);
+        if (_context)
+            pw_context_destroy(_context);
         if (_loop)
         {
             pw_main_loop_quit(_loop);
@@ -79,7 +83,9 @@ namespace d2::sys::ext
             if (s->_in_info.format == SPA_AUDIO_FORMAT_F32)
             {
                 FormatInfo fi{SystemAudio::Format::Float32, s->_in_info.channels, s->_in_info.rate};
-                std::span<float> f{reinterpret_cast<float*>(b->datas[0].data), bytes / sizeof(float)};
+                std::span<float> f{
+                    reinterpret_cast<float*>(b->datas[0].data), bytes / sizeof(float)
+                };
                 Stream stream(f, 0, f.size(), &fi);
                 s->_run_device_filter(Device::Input, stream);
             }
@@ -92,13 +98,11 @@ namespace d2::sys::ext
     void PipewireSystemAudio::_process_callback_output(void* data)
     {
         auto* s = static_cast<PipewireSystemAudio*>(data);
-        if (s->_out_info.format != SPA_AUDIO_FORMAT_F32 || s->_voices.empty()) return;
+        if (s->_out_info.format != SPA_AUDIO_FORMAT_F32 || s->_voices.empty())
+            return;
         if (auto* buf = pw_stream_dequeue_buffer(s->_out_stream); buf && buf->buffer)
         {
-            std::memset(
-                buf->buffer->datas[0].data, 0,
-                buf->buffer->datas[0].maxsize
-            );
+            std::memset(buf->buffer->datas[0].data, 0, buf->buffer->datas[0].maxsize);
 
             for (auto it = s->_voices.begin(); it != s->_voices.end();)
             {
@@ -109,11 +113,12 @@ namespace d2::sys::ext
                 auto& buffer = buf->buffer->datas[0];
                 const auto block_sample = s->_out_info.channels * sizeof(float);
                 const auto block = s->_out_info.rate * block_sample;
-                const auto total = voice.samples.empty() ? voice.time.count() * block : voice.samples.size() * sizeof(float);
+                const auto total = voice.samples.empty() ? voice.time.count() * block
+                                                         : voice.samples.size() * sizeof(float);
                 const auto ex_fmt = FormatInfo{
                     .format = Format::Float32,
                     .channels = s->_out_info.channels,
-                    .sample_rate = s-> _out_info.rate
+                    .sample_rate = s->_out_info.rate
                 };
 
                 std::size_t offset = total * voice.progress;
@@ -121,8 +126,7 @@ namespace d2::sys::ext
                     break;
 
                 const auto chunk_size = (std::min<std::size_t>(
-                    total - offset,
-                    (buffer.maxsize / (block_sample)) * block_sample
+                    total - offset, (buffer.maxsize / (block_sample)) * block_sample
                 ));
                 auto* chunk_data = static_cast<float*>(buffer.data);
                 auto* chunk_metadata = buffer.chunk;
@@ -134,7 +138,7 @@ namespace d2::sys::ext
                 const auto sample_offset = offset / sizeof(float);
                 const auto sample_count = chunk_size / sizeof(float);
                 Stream stream{
-                    { chunk_data, sample_count },
+                    {chunk_data, sample_count},
                     offset / sizeof(float),
                     total / sizeof(float),
                     &ex_fmt
@@ -168,7 +172,14 @@ namespace d2::sys::ext
         }
     }
 
-    void PipewireSystemAudio::_event_global(void* data, uint32_t id, uint32_t perms, const char* type, uint32_t ver, const struct spa_dict* props)
+    void PipewireSystemAudio::_event_global(
+        void* data,
+        uint32_t id,
+        uint32_t perms,
+        const char* type,
+        uint32_t ver,
+        const struct spa_dict* props
+    )
     {
         static_cast<PipewireSystemAudio*>(data)->_event_global_impl(id, type, props);
     }
@@ -176,7 +187,8 @@ namespace d2::sys::ext
     {
         static_cast<PipewireSystemAudio*>(data)->_event_global_remove_impl(id);
     }
-    void PipewireSystemAudio::_event_global_impl(uint32_t id, const char* type, const spa_dict* props)
+    void
+    PipewireSystemAudio::_event_global_impl(uint32_t id, const char* type, const spa_dict* props)
     {
         if (std::string_view(type) == PW_TYPE_INTERFACE_Metadata)
         {
@@ -185,12 +197,11 @@ namespace d2::sys::ext
             std::string_view name = spa_dict_lookup(props, PW_KEY_METADATA_NAME);
             if (name == "default")
             {
-                _metadata = static_cast<pw_metadata*>(
-                    pw_registry_bind(_registry, id, PW_TYPE_INTERFACE_Metadata, PW_VERSION_METADATA, 0)
-                    );
+                _metadata = static_cast<pw_metadata*>(pw_registry_bind(
+                    _registry, id, PW_TYPE_INTERFACE_Metadata, PW_VERSION_METADATA, 0
+                ));
                 _metadata_events = pw_metadata_events{
-                    .version = PW_VERSION_METADATA_EVENTS,
-                    .property = &_event_metadata
+                    .version = PW_VERSION_METADATA_EVENTS, .property = &_event_metadata
                 };
                 pw_metadata_add_listener(_metadata, &_metadata_listener, &_metadata_events, this);
             }
@@ -208,13 +219,16 @@ namespace d2::sys::ext
         const auto nid = std::string(spa_dict_lookup(props, PW_KEY_NODE_NAME));
         const auto name = std::string(spa_dict_lookup(props, PW_KEY_NODE_DESCRIPTION));
 
-        DeviceName device{ nid, name };
+        DeviceName device{nid, name};
         {
             DeviceName* device_ptr = nullptr;
-            if (media == "Audio/Source") device_ptr = &_add_device(_inputs, nid, name);
-            else if (media == "Audio/Sink") device_ptr = &_add_device(_outputs, nid, name);
-            else return;
-            _nodes[id] = { media, device_ptr };
+            if (media == "Audio/Source")
+                device_ptr = &_add_device(_inputs, nid, name);
+            else if (media == "Audio/Sink")
+                device_ptr = &_add_device(_outputs, nid, name);
+            else
+                return;
+            _nodes[id] = {media, device_ptr};
         }
         if (media == "Audio/Source")
         {
@@ -238,28 +252,40 @@ namespace d2::sys::ext
                 return;
             gone = it->second;
             _nodes.erase(it);
-            if (gone->first == "Audio/Source") { _remove_device(_inputs, gone->second->id); }
-            else if (gone->first == "Audio/Sink") { _remove_device(_outputs, gone->second->id); }
-            else return;
+            if (gone->first == "Audio/Source")
+            {
+                _remove_device(_inputs, gone->second->id);
+            }
+            else if (gone->first == "Audio/Sink")
+            {
+                _remove_device(_outputs, gone->second->id);
+            }
+            else
+                return;
         }
-        if (!gone) return;
-        if (gone->first == "Audio/Source") _trigger_device_event(Device::Input, Event::Destroy, *gone->second);
-        if (gone->first == "Audio/Sink") _trigger_device_event(Device::Output, Event::Destroy, *gone->second);
+        if (!gone)
+            return;
+        if (gone->first == "Audio/Source")
+            _trigger_device_event(Device::Input, Event::Destroy, *gone->second);
+        if (gone->first == "Audio/Sink")
+            _trigger_device_event(Device::Output, Event::Destroy, *gone->second);
     }
-    int PipewireSystemAudio::_event_metadata(void *data, uint32_t id, const char* key, const char* type, const char* value)
+    int PipewireSystemAudio::_event_metadata(
+        void* data, uint32_t id, const char* key, const char* type, const char* value
+    )
     {
         static_cast<PipewireSystemAudio*>(data)->_event_metadata_impl(id, key, type, value);
         return 0;
     }
-    void PipewireSystemAudio::_event_metadata_impl(uint32_t id, const char* key, const char* type, const char* value)
+    void PipewireSystemAudio::_event_metadata_impl(
+        uint32_t id, const char* key, const char* type, const char* value
+    )
     {
-        static auto extract_id = [](std::string_view js) -> std::string_view {
+        static auto extract_id = [](std::string_view js) -> std::string_view
+        {
             // Trim it first
-            while (!js.empty() &&
-                   (js.front()==' ' ||
-                    js.front()=='\t' ||
-                    js.front()=='\n' ||
-                    js.front()=='\r'))
+            while (!js.empty() && (js.front() == ' ' || js.front() == '\t' || js.front() == '\n' ||
+                                   js.front() == '\r'))
                 js.remove_prefix(1);
 
             // No json, just id
@@ -288,10 +314,7 @@ namespace d2::sys::ext
             if (quote_end >= js.size())
                 return "";
 
-            return js.substr(
-                quote_start + 1,
-                quote_end - (quote_start + 1)
-            );
+            return js.substr(quote_start + 1, quote_end - (quote_start + 1));
         };
 
         if (key == nullptr || value == nullptr)
@@ -303,7 +326,8 @@ namespace d2::sys::ext
             {
                 const auto* dev = _find_device(_outputs, id);
                 _default_output_id = id;
-                if (dev) _trigger_device_event(Device::Output, Event::DefaultChange, *dev);
+                if (dev)
+                    _trigger_device_event(Device::Output, Event::DefaultChange, *dev);
             }
         }
         else if (!std::strcmp(key, "default.audio.source"))
@@ -312,28 +336,28 @@ namespace d2::sys::ext
             {
                 const auto* dev = _find_device(_inputs, id);
                 _default_input_id = id;
-                if (dev) _trigger_device_event(Device::Input, Event::DefaultChange, *dev);
+                if (dev)
+                    _trigger_device_event(Device::Input, Event::DefaultChange, *dev);
             }
         }
     }
 
-    SystemAudio::DeviceName* PipewireSystemAudio::_find_device(std::vector<DeviceName>& v, const std::string& id)
+    SystemAudio::DeviceName*
+    PipewireSystemAudio::_find_device(std::vector<DeviceName>& v, const std::string& id)
     {
-        auto it = std::find_if(v.begin(), v.end(), [&](const auto& v) {
-            return v.id == id;
-        });
+        auto it = std::find_if(v.begin(), v.end(), [&](const auto& v) { return v.id == id; });
         if (it == v.end())
             return nullptr;
         return &*it;
     }
-    SystemAudio::DeviceName& PipewireSystemAudio::_add_device(std::vector<DeviceName>& v, const std::string& id, const std::string name)
+    SystemAudio::DeviceName& PipewireSystemAudio::_add_device(
+        std::vector<DeviceName>& v, const std::string& id, const std::string name
+    )
     {
-        auto it = std::find_if(v.begin(), v.end(), [&](const auto& v) {
-            return v.id == id;
-        });
+        auto it = std::find_if(v.begin(), v.end(), [&](const auto& v) { return v.id == id; });
         if (it == v.end())
         {
-            v.push_back({ id, name });
+            v.push_back({id, name});
             return v.back();
         }
         else
@@ -344,9 +368,7 @@ namespace d2::sys::ext
     }
     void PipewireSystemAudio::_remove_device(std::vector<DeviceName>& v, const std::string& id)
     {
-        auto it = std::find_if(v.begin(), v.end(), [&](const auto& v) {
-            return v.id == id;
-        });
+        auto it = std::find_if(v.begin(), v.end(), [&](const auto& v) { return v.id == id; });
         if (it != v.end())
             v.erase(it);
     }
@@ -372,21 +394,27 @@ namespace d2::sys::ext
             pw_properties* props = nullptr;
             {
                 props = pw_properties_new(
-                    PW_KEY_MEDIA_TYPE, "Audio",
-                    PW_KEY_MEDIA_CATEGORY, "Capture",
-                    PW_KEY_MEDIA_ROLE, "Music",
-                    PW_KEY_NODE_DESCRIPTION, "D2A System Audio Input",
+                    PW_KEY_MEDIA_TYPE,
+                    "Audio",
+                    PW_KEY_MEDIA_CATEGORY,
+                    "Capture",
+                    PW_KEY_MEDIA_ROLE,
+                    "Music",
+                    PW_KEY_NODE_DESCRIPTION,
+                    "D2A System Audio Input",
                     nullptr
                 );
                 if (!name.empty())
                     pw_properties_set(props, PW_KEY_TARGET_OBJECT, name.c_str());
 
-                auto frames = static_cast<std::size_t>((cfg.latency.count() / 1000.0) * cfg.sample_rate);
+                auto frames =
+                    static_cast<std::size_t>((cfg.latency.count() / 1000.0) * cfg.sample_rate);
                 std::size_t pw2 = 1;
                 while (pw2 < frames)
                     pw2 <<= 1;
                 frames = pw2;
-                const auto latency_str = std::to_string(frames) + "/" + std::to_string(cfg.sample_rate);
+                const auto latency_str =
+                    std::to_string(frames) + "/" + std::to_string(cfg.sample_rate);
                 pw_properties_set(props, "node.latency", latency_str.c_str());
                 if (cfg.force_latency)
                     pw_properties_set(props, "node.lock-quantum", "true");
@@ -394,26 +422,31 @@ namespace d2::sys::ext
             // Stream
             {
                 _in_events = pw_stream_events{
-                    .version = PW_VERSION_STREAM_EVENTS,
-                    .process = _process_callback_input
+                    .version = PW_VERSION_STREAM_EVENTS, .process = _process_callback_input
                 };
                 _in_stream = pw_stream_new_simple(
-                    pw_main_loop_get_loop(_loop), "sysaudio-in",
-                    props,
-                    &_in_events,
-                    this
-                    );
+                    pw_main_loop_get_loop(_loop), "sysaudio-in", props, &_in_events, this
+                );
                 if (_get_device_status(dev) != stat::Opening)
                     return;
 
                 spa_audio_info_raw info{};
                 switch (cfg.format)
                 {
-                case Format::Float32: info.format = SPA_AUDIO_FORMAT_F32; break;
-                case Format::Float64: info.format = SPA_AUDIO_FORMAT_F64; break;
-                case Format::PCM16: info.format = SPA_AUDIO_FORMAT_S16; break;
-                case Format::PCM32: info.format = SPA_AUDIO_FORMAT_S32; break;
-                default: throw std::logic_error{ "Unuspported format" };
+                case Format::Float32:
+                    info.format = SPA_AUDIO_FORMAT_F32;
+                    break;
+                case Format::Float64:
+                    info.format = SPA_AUDIO_FORMAT_F64;
+                    break;
+                case Format::PCM16:
+                    info.format = SPA_AUDIO_FORMAT_S16;
+                    break;
+                case Format::PCM32:
+                    info.format = SPA_AUDIO_FORMAT_S32;
+                    break;
+                default:
+                    throw std::logic_error{"Unuspported format"};
                 }
                 info.rate = cfg.sample_rate;
                 info.channels = cfg.channels;
@@ -437,8 +470,9 @@ namespace d2::sys::ext
                     PW_DIRECTION_INPUT,
                     PW_ID_ANY,
                     pw_stream_flags(PW_STREAM_FLAG_AUTOCONNECT | PW_STREAM_FLAG_MAP_BUFFERS),
-                    params, 1
-                    );
+                    params,
+                    1
+                );
                 if (_get_device_status(dev) != stat::Opening)
                     return;
 
@@ -461,21 +495,27 @@ namespace d2::sys::ext
             pw_properties* props = nullptr;
             {
                 props = pw_properties_new(
-                    PW_KEY_MEDIA_TYPE, "Audio",
-                    PW_KEY_MEDIA_CATEGORY, "Playback",
-                    PW_KEY_MEDIA_ROLE, "Music",
-                    PW_KEY_NODE_DESCRIPTION, "D2A System Audio Output",
+                    PW_KEY_MEDIA_TYPE,
+                    "Audio",
+                    PW_KEY_MEDIA_CATEGORY,
+                    "Playback",
+                    PW_KEY_MEDIA_ROLE,
+                    "Music",
+                    PW_KEY_NODE_DESCRIPTION,
+                    "D2A System Audio Output",
                     nullptr
-                    );
+                );
                 if (!name.empty())
                     pw_properties_set(props, PW_KEY_TARGET_OBJECT, name.c_str());
 
-                auto frames = static_cast<std::size_t>((cfg.latency.count() / 1000.0) * cfg.sample_rate);
+                auto frames =
+                    static_cast<std::size_t>((cfg.latency.count() / 1000.0) * cfg.sample_rate);
                 std::size_t pw2 = 1;
                 while (pw2 < frames)
                     pw2 <<= 1;
                 frames = pw2;
-                const auto latency_str = std::to_string(frames) + "/" + std::to_string(cfg.sample_rate);
+                const auto latency_str =
+                    std::to_string(frames) + "/" + std::to_string(cfg.sample_rate);
                 pw_properties_set(props, "node.latency", latency_str.c_str());
                 if (cfg.force_latency)
                     pw_properties_set(props, "node.lock-quantum", "true");
@@ -483,26 +523,31 @@ namespace d2::sys::ext
             // Stream
             {
                 _out_events = {
-                    .version = PW_VERSION_STREAM_EVENTS,
-                    .process = _process_callback_output
+                    .version = PW_VERSION_STREAM_EVENTS, .process = _process_callback_output
                 };
                 _out_stream = pw_stream_new_simple(
-                    pw_main_loop_get_loop(_loop), "sysaudio-out",
-                    props,
-                    &_out_events,
-                    this
-                    );
+                    pw_main_loop_get_loop(_loop), "sysaudio-out", props, &_out_events, this
+                );
                 if (_get_device_status(dev) != stat::Opening)
                     return;
 
                 spa_audio_info_raw info{};
                 switch (cfg.format)
                 {
-                case Format::Float32: info.format = SPA_AUDIO_FORMAT_F32; break;
-                case Format::Float64: info.format = SPA_AUDIO_FORMAT_F64; break;
-                case Format::PCM16: info.format = SPA_AUDIO_FORMAT_S16; break;
-                case Format::PCM32: info.format = SPA_AUDIO_FORMAT_S32; break;
-                default: throw std::logic_error{ "Unuspported format" };
+                case Format::Float32:
+                    info.format = SPA_AUDIO_FORMAT_F32;
+                    break;
+                case Format::Float64:
+                    info.format = SPA_AUDIO_FORMAT_F64;
+                    break;
+                case Format::PCM16:
+                    info.format = SPA_AUDIO_FORMAT_S16;
+                    break;
+                case Format::PCM32:
+                    info.format = SPA_AUDIO_FORMAT_S32;
+                    break;
+                default:
+                    throw std::logic_error{"Unuspported format"};
                 }
                 info.rate = cfg.sample_rate;
                 info.channels = cfg.channels;
@@ -526,8 +571,9 @@ namespace d2::sys::ext
                     PW_DIRECTION_OUTPUT,
                     PW_ID_ANY,
                     pw_stream_flags(PW_STREAM_FLAG_AUTOCONNECT | PW_STREAM_FLAG_MAP_BUFFERS),
-                    params, 1
-                    );
+                    params,
+                    1
+                );
                 if (_get_device_status(dev) != stat::Opening)
                     return;
 
@@ -565,40 +611,36 @@ namespace d2::sys::ext
             _set_device_status(dev, stat::Closed);
         }
     }
-    void PipewireSystemAudio::_push_stream(std::chrono::seconds time, std::span<const unsigned char> data, std::vector<unsigned char> vec, FormatInfo fmt, FilterPipeline filter)
+    void PipewireSystemAudio::_push_stream(
+        std::chrono::seconds time,
+        std::span<const unsigned char> data,
+        std::vector<unsigned char> vec,
+        FormatInfo fmt,
+        FilterPipeline filter
+    )
     {
         const auto block_sample = _out_info.channels * sizeof(float);
         const auto block = _out_info.rate * block_sample;
-        const auto total = data.empty() ? time.count() * block : _stream_normalize_required(data, fmt);
+        const auto total =
+            data.empty() ? time.count() * block : _stream_normalize_required(data, fmt);
         const auto ex_fmt = FormatInfo{
-            .format = Format::Float32,
-            .channels = _out_info.channels,
-            .sample_rate = _out_info.rate
+            .format = Format::Float32, .channels = _out_info.channels, .sample_rate = _out_info.rate
         };
 
         if (!data.empty())
         {
-            auto& voice = _voices.emplace_back(Voice{ .samples = std::vector<float>(total) });
+            auto& voice = _voices.emplace_back(Voice{.samples = std::vector<float>(total)});
 
-            _stream_normalize(
-                std::span(voice.samples),
-                data,
-                fmt
-            );
+            _stream_normalize(std::span(voice.samples), data, fmt);
 
-            Stream stream{
-                std::span(voice.samples),
-                0,
-                voice.samples.size(),
-                &ex_fmt
-            };
+            Stream stream{std::span(voice.samples), 0, voice.samples.size(), &ex_fmt};
             _run_device_filter(Device::Output, stream);
             for (decltype(auto) it : filter.transforms)
                 it.second(stream);
         }
         else
         {
-            _voices.emplace_back(Voice{ .time = time, .filter = std::move(filter) });
+            _voices.emplace_back(Voice{.time = time, .filter = std::move(filter)});
         }
     }
     void PipewireSystemAudio::_flush_voices()
@@ -613,11 +655,11 @@ namespace d2::sys::ext
     }
     void PipewireSystemAudio::record(std::function<void(std::span<const unsigned char>)> stream)
     {
-        _run_this([&](SystemAudio*) {
-           _input_push = std::move(stream);
-        });
+        _run_this([&](SystemAudio*) { _input_push = std::move(stream); });
     }
-    void PipewireSystemAudio::transmit(std::span<const unsigned char> data, FormatInfo fmt, FilterPipeline filter)
+    void PipewireSystemAudio::transmit(
+        std::span<const unsigned char> data, FormatInfo fmt, FilterPipeline filter
+    )
     {
         _run_this_async(
             &PipewireSystemAudio::_push_stream,
@@ -628,7 +670,9 @@ namespace d2::sys::ext
             std::move(filter)
         );
     }
-    void PipewireSystemAudio::transmit(std::vector<unsigned char> data, FormatInfo fmt, FilterPipeline filter)
+    void PipewireSystemAudio::transmit(
+        std::vector<unsigned char> data, FormatInfo fmt, FilterPipeline filter
+    )
     {
         _run_this_async(
             &PipewireSystemAudio::_push_stream,
@@ -655,23 +699,30 @@ namespace d2::sys::ext
 
     void PipewireSystemAudio::deactivate(Device dev)
     {
-        _run_this_async([](PipewireSystemAudio* ptr, Device dev) {
-            auto& active = ptr->_active_for(dev);
-            if (active)
+        _run_this_async(
+            [](PipewireSystemAudio* ptr, Device dev)
             {
-                const auto tmp = *active;
-                active = nullptr;
-                ptr->_stop_stream(dev);
-                ptr->_trigger_device_event(dev, Event::Deactivate, tmp);
-            }
-        }, dev);
+                auto& active = ptr->_active_for(dev);
+                if (active)
+                {
+                    const auto tmp = *active;
+                    active = nullptr;
+                    ptr->_stop_stream(dev);
+                    ptr->_trigger_device_event(dev, Event::Deactivate, tmp);
+                }
+            },
+            dev
+        );
     }
     void PipewireSystemAudio::activate(Device dev, const std::string& id, DeviceConfig cfg)
     {
         _run_this_async(
-            [](PipewireSystemAudio* ptr, Device dev, std::string id, DeviceConfig cfg) {
-                if (const auto active = ptr->_active_for(dev); active && active->id == id) return;
-                if (const auto name = _find_device(dev == Device::Input ? ptr->_inputs : ptr->_outputs, id);
+            [](PipewireSystemAudio* ptr, Device dev, std::string id, DeviceConfig cfg)
+            {
+                if (const auto active = ptr->_active_for(dev); active && active->id == id)
+                    return;
+                if (const auto name =
+                        _find_device(dev == Device::Input ? ptr->_inputs : ptr->_outputs, id);
                     name != nullptr)
                 {
                     ptr->_active_for(dev) = name;
@@ -679,34 +730,46 @@ namespace d2::sys::ext
                     ptr->_trigger_device_event(dev, Event::Activate, *name);
                 }
             },
-            dev, id, cfg
+            dev,
+            id,
+            cfg
         );
     }
     void PipewireSystemAudio::reactivate(Device dev, DeviceConfig cfg)
     {
-        _run_this_async([](PipewireSystemAudio* ptr, Device dev, DeviceConfig cfg) {
-            auto& active = ptr->_active_for(dev);
-            if (active)
+        _run_this_async(
+            [](PipewireSystemAudio* ptr, Device dev, DeviceConfig cfg)
             {
-                ptr->_stop_stream(dev);
-                ptr->_trigger_device_event(dev, Event::Deactivate, *active);
-                if (const auto name = _find_device(dev == Device::Input ? ptr->_inputs : ptr->_outputs, active->id);
-                    name != nullptr)
+                auto& active = ptr->_active_for(dev);
+                if (active)
                 {
-                    ptr->_active_for(dev) = name;
-                    ptr->_start_stream(dev, active->id, cfg);
-                    ptr->_trigger_device_event(dev, Event::Activate, *name);
+                    ptr->_stop_stream(dev);
+                    ptr->_trigger_device_event(dev, Event::Deactivate, *active);
+                    if (const auto name = _find_device(
+                            dev == Device::Input ? ptr->_inputs : ptr->_outputs, active->id
+                        );
+                        name != nullptr)
+                    {
+                        ptr->_active_for(dev) = name;
+                        ptr->_start_stream(dev, active->id, cfg);
+                        ptr->_trigger_device_event(dev, Event::Activate, *name);
+                    }
                 }
-            }
-        }, dev, cfg);
+            },
+            dev,
+            cfg
+        );
     }
     SystemAudio::DeviceName PipewireSystemAudio::active(Device dev)
     {
         SystemAudio::DeviceName name;
-        _run_this([&](SystemAudio*) {
-            auto active = _active_for(dev);
-            name = active == nullptr ? DeviceName() : *active;
-        });
+        _run_this(
+            [&](SystemAudio*)
+            {
+                auto active = _active_for(dev);
+                name = active == nullptr ? DeviceName() : *active;
+            }
+        );
         return name;
     }
     SystemAudio::DeviceName PipewireSystemAudio::default_device(Device dev)
@@ -720,58 +783,54 @@ namespace d2::sys::ext
     SystemAudio::FormatInfo PipewireSystemAudio::format(Device dev)
     {
         FormatInfo info;
-        _run_this([&](SystemAudio*) {
-            info = {
-                .format = Format::Float32,
-                .channels = _out_info.channels,
-                .sample_rate = _out_info.rate
-            };
-        });
+        _run_this(
+            [&](SystemAudio*)
+            {
+                info = {
+                    .format = Format::Float32,
+                    .channels = _out_info.channels,
+                    .sample_rate = _out_info.rate
+                };
+            }
+        );
         return info;
     }
     std::vector<SystemAudio::DeviceName> PipewireSystemAudio::enumerate(Device dev)
     {
         std::vector<SystemAudio::DeviceName> vec;
-        _run_this([&](SystemAudio*) {
-            vec = (dev == Device::Input) ? _inputs : _outputs;
-        });
+        _run_this([&](SystemAudio*) { vec = (dev == Device::Input) ? _inputs : _outputs; });
         return vec;
     }
 
     void PipewireSystemAudio::filter(Device dev, FilterPipeline filter)
     {
-        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*) {
-            _filter(dev, std::move(filter));
-        });
+        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*)
+                        { _filter(dev, std::move(filter)); });
     }
-    void PipewireSystemAudio::filter_push(Device dev, const std::string& after, FilterPipeline filter)
+    void
+    PipewireSystemAudio::filter_push(Device dev, const std::string& after, FilterPipeline filter)
     {
-        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*) {
-            _filter_push(dev, after, std::move(filter));
-        });
+        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*)
+                        { _filter_push(dev, after, std::move(filter)); });
     }
     void PipewireSystemAudio::filter_push(Device dev, FilterPipeline filter)
     {
-        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*) {
-            _filter_push(dev, std::move(filter));
-        });
+        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*)
+                        { _filter_push(dev, std::move(filter)); });
     }
-    void PipewireSystemAudio::filter_override(Device dev, const std::string& name, std::function<bool(Stream)> filter)
+    void PipewireSystemAudio::filter_override(
+        Device dev, const std::string& name, std::function<bool(Stream)> filter
+    )
     {
-        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*) {
-            _filter_override(dev, name, std::move(filter));
-        });
+        _run_this_async([=, this, filter = std::move(filter)](SystemAudio*)
+                        { _filter_override(dev, name, std::move(filter)); });
     }
     void PipewireSystemAudio::filter_remove(Device dev, const std::string& name)
     {
-        _run_this_async([=, this](SystemAudio*) {
-            _filter_remove(dev, name);
-        });
+        _run_this_async([=, this](SystemAudio*) { _filter_remove(dev, name); });
     }
     void PipewireSystemAudio::filter_clear(Device dev)
     {
-        _run_this_async([=, this](SystemAudio*) {
-            _filter_clear(dev);
-        });
+        _run_this_async([=, this](SystemAudio*) { _filter_clear(dev); });
     }
-}
+} // namespace d2::sys::ext

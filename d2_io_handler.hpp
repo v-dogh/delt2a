@@ -27,6 +27,8 @@ namespace d2
         using ptr = std::shared_ptr<IOContext>;
         using wptr = std::weak_ptr<IOContext>;
     private:
+        static inline thread_local ptr _ptr{nullptr};
+
         mutable std::shared_mutex _module_mtx{};
         absl::flat_hash_map<std::type_index, std::shared_ptr<sys::SystemModule>> _modules{};
         absl::flat_hash_map<
@@ -83,6 +85,9 @@ namespace d2
             std::type_index idx, absl::flat_hash_set<std::type_index>& visit_map
         );
     public:
+        static void set(ptr) noexcept;
+        static ptr get() noexcept;
+
         template<typename... Components> static ptr make(rs::Config logs_cfg = {})
         {
             auto logs = rs::RuntimeLogs::make(logs_cfg);
@@ -206,6 +211,27 @@ namespace d2
                 );
             }
             return task;
+        }
+
+        // Allocate and automatically initialize a thread
+        // (stuff like logs, pool etc.)
+        template<typename Func, typename... Argv>
+        std::jthread launch_thread(Func&& callback, Argv&&... args)
+        {
+            return std::jthread(
+                [callback = std::forward<Func>(callback),
+                 ... args = std::forward<Argv>(args),
+                 ctx = std::weak_ptr(std::static_pointer_cast<IOContext>(shared_from_this()))]()
+                {
+                    if (const auto lock = ctx.lock(); lock != nullptr)
+                    {
+                        rs::context::set(lock->_logs);
+                        mt::context::set(lock->_scheduler);
+                        set(lock);
+                    }
+                    callback(std::forward<Argv>(args)...);
+                }
+            );
         }
 
         // Modules
