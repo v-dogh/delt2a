@@ -127,6 +127,14 @@ namespace d2::in
         return _sequence;
     }
 
+    void InputFrame::mask()
+    {
+        _active_consume.consumed_scroll = true;
+        _active_consume.consumed_sequence = true;
+        _active_consume.keys_consumed.set();
+        _active_consume.mouse_consumed.set();
+    }
+
     namespace internal
     {
         void InputFrameView::swap()

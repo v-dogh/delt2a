@@ -186,6 +186,8 @@ namespace d2::in
 
         std::string_view sequence();
 
+        void mask();
+
         InputFrame& operator=(const InputFrame&) = default;
         InputFrame& operator=(InputFrame&&) = default;
     };
