@@ -15,6 +15,7 @@
 #include <d2_signal_handler.hpp>
 #include <mods/d2_core.hpp>
 #include <mt/pool.hpp>
+#include <stop_token>
 
 namespace d2
 {
@@ -218,20 +219,44 @@ namespace d2
         template<typename Func, typename... Argv>
         std::jthread launch_thread(Func&& callback, Argv&&... args)
         {
-            return std::jthread(
-                [callback = std::forward<Func>(callback),
-                 ... args = std::forward<Argv>(args),
-                 ctx = std::weak_ptr(std::static_pointer_cast<IOContext>(shared_from_this()))]()
-                {
-                    if (const auto lock = ctx.lock(); lock != nullptr)
+            static constexpr auto uses_stop_token =
+                std::is_invocable_v<Func, std::stop_token, Argv...>;
+            if constexpr (uses_stop_token)
+            {
+                return std::jthread(
+                    [callback = std::forward<Func>(callback),
+                     ... args = std::forward<Argv>(args),
+                     ctx = std::weak_ptr(std::static_pointer_cast<IOContext>(shared_from_this()))](
+                        std::stop_token stop
+                    )
                     {
-                        rs::context::set(lock->_logs);
-                        mt::context::set(lock->_scheduler);
-                        set(lock);
+                        if (const auto lock = ctx.lock(); lock != nullptr)
+                        {
+                            rs::context::set(lock->_logs);
+                            mt::context::set(lock->_scheduler);
+                            set(lock);
+                        }
+                        callback(stop, std::forward<Argv>(args)...);
                     }
-                    callback(std::forward<Argv>(args)...);
-                }
-            );
+                );
+            }
+            else
+            {
+                return std::jthread(
+                    [callback = std::forward<Func>(callback),
+                     ... args = std::forward<Argv>(args),
+                     ctx = std::weak_ptr(std::static_pointer_cast<IOContext>(shared_from_this()))]()
+                    {
+                        if (const auto lock = ctx.lock(); lock != nullptr)
+                        {
+                            rs::context::set(lock->_logs);
+                            mt::context::set(lock->_scheduler);
+                            set(lock);
+                        }
+                        callback(std::forward<Argv>(args)...);
+                    }
+                );
+            }
         }
 
         // Modules
