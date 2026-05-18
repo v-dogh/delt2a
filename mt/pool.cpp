@@ -185,10 +185,20 @@ namespace mt
 
     bool Worker::try_accept(Task& task) noexcept
     {
-        return _try_accept_impl(task);
+        context::ptr()->node()->_task_cnt++;
+        _task_cnt++;
+        const auto result = _try_accept_impl(task);
+        if (!result)
+        {
+            context::ptr()->node()->_task_cnt--;
+            _task_cnt--;
+        }
+        return result;
     }
     void Worker::accept(Task task)
     {
+        context::ptr()->node()->_task_cnt++;
+        _task_cnt++;
         _accept_impl(std::move(task));
     }
     void Worker::ping()
