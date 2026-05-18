@@ -171,6 +171,8 @@ namespace mt
 
         const unsigned char _cap{0x00};
 
+        std::weak_ptr<Node> _node{};
+
         std::vector<PeriodicTask> _periodic_tasks{};
 
         std::atomic<bool> _stop{true};
@@ -180,6 +182,9 @@ namespace mt
         std::atomic<std::chrono::steady_clock::time_point::rep> _last_task{_tmax};
         std::atomic<std::chrono::steady_clock::time_point::rep> _last_task_np{_tmax};
         std::atomic<std::chrono::steady_clock::time_point::rep> _periodic_deadline{_tmax};
+    private:
+        void _task_cnt_inc();
+        void _task_cnt_dec();
     protected:
         bool _process(PeriodicTask& task);
         bool _process(Task& task);

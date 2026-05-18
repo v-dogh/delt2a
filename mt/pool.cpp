@@ -105,6 +105,21 @@ namespace mt
 
     // Worker
 
+    void Worker::_task_cnt_inc()
+    {
+        const auto ptr = _node.lock();
+        if (ptr != nullptr)
+            ptr->_task_cnt++;
+        _task_cnt++;
+    }
+    void Worker::_task_cnt_dec()
+    {
+        const auto ptr = _node.lock();
+        if (ptr != nullptr)
+            ptr->_task_cnt--;
+        _task_cnt--;
+    }
+
     bool Worker::_process(PeriodicTask& task)
     {
         const auto type = task.query<Task::Query::Type>();
@@ -133,8 +148,7 @@ namespace mt
             _last_task = tp_to_itg(std::chrono::steady_clock::now());
         }
         _last_task_np = tp_to_itg(std::chrono::steady_clock::now());
-        context::ptr()->node()->_task_cnt--;
-        _task_cnt--;
+        _task_cnt_dec();
         return token == Task::Token::Continue;
     }
     void Worker::_tick()
@@ -185,20 +199,15 @@ namespace mt
 
     bool Worker::try_accept(Task& task) noexcept
     {
-        context::ptr()->node()->_task_cnt++;
-        _task_cnt++;
+        _task_cnt_inc();
         const auto result = _try_accept_impl(task);
         if (!result)
-        {
-            context::ptr()->node()->_task_cnt--;
-            _task_cnt--;
-        }
+            _task_cnt_dec();
         return result;
     }
     void Worker::accept(Task task)
     {
-        context::ptr()->node()->_task_cnt++;
-        _task_cnt++;
+        _task_cnt_inc();
         _accept_impl(std::move(task));
     }
     void Worker::ping()
@@ -284,7 +293,7 @@ namespace mt
     }
     void RingWorker::_ping_impl()
     {
-        _tasks.enqueue(Task{});
+        accept(Task{});
     }
     void RingWorker::_start_impl()
     {
@@ -349,7 +358,7 @@ namespace mt
         }
         std::lock_guard lock(_startup_mtx);
         _stop_handle = true;
-        _tasks.enqueue(Task{});
+        _ping_impl();
         _handle.join();
     }
     Worker::ptr RingWorker::_clone_impl() const
@@ -450,6 +459,8 @@ namespace mt
     {
         if (workers.empty() || _stop)
             return;
+        for (decltype(auto) it : workers)
+            it->_node = weak_from_this();
         static auto populate = [](WorkerList& list)
         {
             for (decltype(auto) it : list.categories)
@@ -684,11 +695,6 @@ namespace mt
                 }
             }
             _throw(PoolException{code, "Failed to accept task with no fallback policy"});
-        }
-        else
-        {
-            workers[idx]->_task_cnt++;
-            _task_cnt++;
         }
     }
 
