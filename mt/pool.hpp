@@ -130,7 +130,7 @@ namespace mt
     private:
         static constexpr auto _cyclic_epsilon = std::chrono::milliseconds(5);
 
-        std::chrono::steady_clock::time_point _last{};
+        std::chrono::steady_clock::time_point _last{std::chrono::steady_clock::now()};
     public:
         using Task::Task;
 
