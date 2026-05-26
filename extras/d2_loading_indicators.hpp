@@ -13,7 +13,7 @@ namespace d2::ex
                        std::chrono::milliseconds period = std::chrono::milliseconds(1000)
                    )
                    {
-                       ctx.template interpolate<interp::Sequential, Type::Value>(
+                       ctx.template interpolate<anim::Sequential, Type::Value>(
                            period, std::vector<d2::string>{"⠇", "⠋", "⠙", "⠸", "⢰", "⣠", "⣄", "⡆"}
                        );
                    }>;
@@ -23,7 +23,7 @@ namespace d2::ex
                        std::chrono::milliseconds period = std::chrono::milliseconds(1000)
                    )
                    {
-                       ctx.template interpolate<interp::Sequential, Type::Value>(
+                       ctx.template interpolate<anim::Sequential, Type::Value>(
                            period,
                            std::vector<d2::string>{
                                ".",
@@ -42,7 +42,7 @@ namespace d2::ex
                        std::chrono::milliseconds period = std::chrono::milliseconds(1000)
                    )
                    {
-                       ctx.template interpolate<interp::Sequential, Type::Value>(
+                       ctx.template interpolate<anim::Sequential, Type::Value>(
                            period, std::vector<d2::string>{"|", "/", "-", "\\"}
                        );
                    }>;
@@ -52,7 +52,7 @@ namespace d2::ex
                        std::chrono::milliseconds period = std::chrono::milliseconds(1000)
                    )
                    {
-                       ctx.template interpolate<interp::Sequential, Type::Value>(
+                       ctx.template interpolate<anim::Sequential, Type::Value>(
                            period, std::vector<d2::string>{"┤", "┘", "┴", "└", "├", "┌", "┬", "┐"}
                        );
                    }>;
@@ -62,7 +62,7 @@ namespace d2::ex
                        std::chrono::milliseconds period = std::chrono::milliseconds(1000)
                    )
                    {
-                       ctx.template interpolate<interp::Sequential, Type::Value>(
+                       ctx.template interpolate<anim::Sequential, Type::Value>(
                            period,
                            std::vector<d2::string>{
                                "(   )", "(=  )", "(== )", "(===)", "( ==)", "(  =)"
@@ -75,7 +75,7 @@ namespace d2::ex
                        std::chrono::milliseconds period = std::chrono::milliseconds(1000)
                    )
                    {
-                       ctx.template interpolate<interp::Sequential, Type::Value>(
+                       ctx.template interpolate<anim::Sequential, Type::Value>(
                            period,
                            std::vector<d2::string>{
                                "1000", "0010", "1010", "0101", "0100", "0001", "1001", "0110"

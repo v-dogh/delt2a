@@ -45,8 +45,8 @@ namespace d2::sys
         struct TreeData
         {
             std::function<void(TreeIter<ParentElement>, TreeState::ptr)> rebuild{nullptr};
-            absl::node_hash_map<std::pair<Element*, style::uai_property>, interp::Interpolator::ptr>
-                interpolators{};
+            absl::node_hash_map<std::pair<Element*, style::uai_property>, Animation::ptr>
+                animations{};
             TreeState::ptr state{nullptr};
             TreeTags tags{};
             DynamicDependencyManager deps{};
@@ -235,9 +235,9 @@ namespace d2::sys
         // Interpolation
 
         template<typename Type, typename... Argv>
-        interp::Interpolator::ptr interpolate(std::chrono::milliseconds time, Argv&&... args)
+        Animation::ptr animate(std::chrono::milliseconds time, Argv&&... args)
         {
-            auto& interps = _ts.current->interpolators;
+            auto& interps = _ts.current->animations;
             const auto ptr = std::make_shared<Type>(time, std::forward<Argv>(args)...);
             const auto target = ptr->target();
 

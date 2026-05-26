@@ -214,6 +214,9 @@ namespace d2::style
             using interface = SearchPropertyOwner<base_offset_, Property>::type;
             constexpr auto off = Property - base_offset_;
 
+            // We drop any animations on this property
+            _context()->screen()->clear_animations(_base()->traverse(), Property);
+
             if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
             {
                 _var_flags.set(off);

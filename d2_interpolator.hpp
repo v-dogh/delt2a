@@ -8,7 +8,7 @@
 #include <d2_tree_element_frwd.hpp>
 #include <limits>
 
-namespace d2::interp
+namespace d2
 {
     namespace impl
     {
@@ -100,9 +100,9 @@ namespace d2::interp
         };
     } // namespace impl
 
-    class Interpolator
+    class Animation
     {
-        D2_TAG_MODULE(interp)
+        D2_TAG_MODULE(anim)
     public:
         struct Wake
         {
@@ -110,7 +110,7 @@ namespace d2::interp
             static constexpr auto never = std::numeric_limits<float>::max();
             static constexpr auto refresh = std::chrono::milliseconds{-1};
         };
-        using ptr = std::shared_ptr<Interpolator>;
+        using ptr = std::shared_ptr<Animation>;
     private:
         std::chrono::steady_clock::time_point _start{};
         std::chrono::steady_clock::time_point _deadline{};
@@ -130,10 +130,10 @@ namespace d2::interp
             return false;
         }
     public:
-        Interpolator(
+        Animation(
             std::chrono::milliseconds ms, std::shared_ptr<Element> ptr, style::uai_property prop
         );
-        virtual ~Interpolator() = default;
+        virtual ~Animation() = default;
 
         std::pair<Element*, style::uai_property> target() const;
 
@@ -146,84 +146,90 @@ namespace d2::interp
         std::chrono::milliseconds duration() const noexcept;
     };
 
-    template<typename Type, style::uai_property Property>
-    class Linear : public Interpolator,
-                   public impl::LinearInterpolationWriter<impl::style_type<Type, Property>>
+    namespace anim
     {
-    private:
-        using dest_type = impl::style_type<Type, Property>;
-    protected:
-        virtual bool _keep_alive_impl(float progress) override
+        template<typename Type, style::uai_property Property>
+        class Linear : public Animation,
+                       public impl::LinearInterpolationWriter<impl::style_type<Type, Property>>
         {
-            return progress < 1.f;
-        }
-        virtual float _update_impl(std::shared_ptr<Element> ptr, float progress) override
-        {
-            std::static_pointer_cast<Type>(ptr)->template set<Property>(
-                impl::LinearInterpolationWriter<dest_type>::write(std::min(progress, 1.f)), true
-            );
-            return Wake::now;
-        }
-    public:
-        Linear(std::chrono::milliseconds ms, std::shared_ptr<Element> ptr, dest_type dest) :
-            Interpolator(ms, ptr, Property),
-            impl::LinearInterpolationWriter<dest_type>(
-                std::static_pointer_cast<Type>(ptr)->template get<Property>(), dest
-            )
-        {
-        }
-        virtual ~Linear()
-        {
-            update();
-        }
-    };
-
-    template<typename Type, style::uai_property Property> class Sequential : public Interpolator
-    {
-    private:
-        using dest_type = impl::style_type<Type, Property>;
-    private:
-        std::vector<dest_type> _stages{};
-        std::size_t _idx{~0ull};
-    protected:
-        virtual bool _keep_alive_impl(float progress) override
-        {
-            return !_stages.empty();
-        }
-        virtual float _update_impl(std::shared_ptr<Element> ptr, float progress) override
-        {
-            if (progress >= 1.f)
+        private:
+            using dest_type = impl::style_type<Type, Property>;
+        protected:
+            virtual bool _keep_alive_impl(float progress) override
             {
-                progress = 0.f;
-                start();
+                return progress < 1.f;
             }
-
-            const auto count = _stages.size();
-            const auto nidx =
-                std::min<std::size_t>(static_cast<std::size_t>(count * progress), count - 1);
-
-            const auto changed = nidx != _idx;
-            if (changed)
+            virtual float _update_impl(std::shared_ptr<Element> ptr, float progress) override
             {
-                _idx = nidx;
-                std::static_pointer_cast<Type>(ptr)->template set<Property>(_stages[_idx], true);
+                std::static_pointer_cast<Type>(ptr)->template set<Property>(
+                    impl::LinearInterpolationWriter<dest_type>::write(std::min(progress, 1.f)), true
+                );
+                return Wake::now;
             }
-            return float(nidx + 1) / float(count);
-        }
-    public:
-        Sequential(
-            std::chrono::milliseconds ms,
-            std::shared_ptr<Element> ptr,
-            std::initializer_list<dest_type> stages
-        ) : _stages(std::move(stages)), Interpolator(ms, ptr, Property)
+        public:
+            Linear(std::chrono::milliseconds ms, std::shared_ptr<Element> ptr, dest_type dest) :
+                Animation(ms, ptr, Property),
+                impl::LinearInterpolationWriter<dest_type>(
+                    std::static_pointer_cast<Type>(ptr)->template get<Property>(), dest
+                )
+            {
+            }
+            virtual ~Linear()
+            {
+                update();
+            }
+        };
+
+        template<typename Type, style::uai_property Property> class Sequential : public Animation
         {
-        }
-        template<typename Other>
-        Sequential(std::chrono::milliseconds ms, std::shared_ptr<Element> ptr, Other&& stages) :
-            _stages(std::forward<Other>(stages)), Interpolator(ms, ptr, Property)
-        {
-        }
-    };
-} // namespace d2::interp
+        private:
+            using dest_type = impl::style_type<Type, Property>;
+        private:
+            std::vector<dest_type> _stages{};
+            std::size_t _idx{~0ull};
+        protected:
+            virtual bool _keep_alive_impl(float progress) override
+            {
+                return !_stages.empty();
+            }
+            virtual float _update_impl(std::shared_ptr<Element> ptr, float progress) override
+            {
+                if (progress >= 1.f)
+                {
+                    progress = 0.f;
+                    start();
+                }
+
+                const auto count = _stages.size();
+                const auto nidx =
+                    std::min<std::size_t>(static_cast<std::size_t>(count * progress), count - 1);
+
+                const auto changed = nidx != _idx;
+                if (changed)
+                {
+                    _idx = nidx;
+                    std::static_pointer_cast<Type>(ptr)->template set<Property>(
+                        _stages[_idx], true
+                    );
+                }
+                return float(nidx + 1) / float(count);
+            }
+        public:
+            Sequential(
+                std::chrono::milliseconds ms,
+                std::shared_ptr<Element> ptr,
+                std::initializer_list<dest_type> stages
+            ) : _stages(std::move(stages)), Animation(ms, ptr, Property)
+            {
+            }
+            template<typename Other>
+            Sequential(std::chrono::milliseconds ms, std::shared_ptr<Element> ptr, Other&& stages) :
+                _stages(std::forward<Other>(stages)), Animation(ms, ptr, Property)
+            {
+            }
+        };
+
+    } // namespace anim
+} // namespace d2
 
 #endif // D2_INTERPOLATOR_HPP

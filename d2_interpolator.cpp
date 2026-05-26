@@ -5,22 +5,22 @@
 #include <d2_exceptions.hpp>
 #include <d2_tree_element.hpp>
 
-namespace d2::interp
+namespace d2
 {
-    bool Interpolator::_nptr()
+    bool Animation::_nptr()
     {
         return !_ptr.owner_before(std::weak_ptr<Element>{}) &&
                !std::weak_ptr<Element>{}.owner_before(_ptr);
     }
-    bool Interpolator::_vptr()
+    bool Animation::_vptr()
     {
         return _nptr() || !_ptr.expired();
     }
-    std::shared_ptr<Element> Interpolator::_hold()
+    std::shared_ptr<Element> Animation::_hold()
     {
         return _ptr.lock();
     }
-    float Interpolator::_progress() const
+    float Animation::_progress() const
     {
         return _duration.count() == 0 ? 1.f
                                       : float(std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -30,30 +30,30 @@ namespace d2::interp
                                             float(_duration.count());
     }
 
-    Interpolator::Interpolator(
+    Animation::Animation(
         std::chrono::milliseconds ms, std::shared_ptr<Element> ptr, style::uai_property prop
     ) : _duration(ms), _ptr(ptr), _prop(prop)
     {
     }
 
-    std::pair<Element*, style::uai_property> Interpolator::target() const
+    std::pair<Element*, style::uai_property> Animation::target() const
     {
         return {_ptr.lock().get(), _prop};
     }
 
-    void Interpolator::stop()
+    void Animation::stop()
     {
         _start = _start.max();
     }
-    void Interpolator::mute()
+    void Animation::mute()
     {
         _start = _start.min();
     }
-    void Interpolator::unmute()
+    void Animation::unmute()
     {
         _start = std::chrono::steady_clock::now();
     }
-    void Interpolator::start()
+    void Animation::start()
     {
         if (!_vptr())
             return;
@@ -61,7 +61,7 @@ namespace d2::interp
         _start_impl();
         _start = std::chrono::steady_clock::now();
     }
-    std::chrono::milliseconds Interpolator::update()
+    std::chrono::milliseconds Animation::update()
     {
         if (_deadline > std::chrono::steady_clock::now())
             return std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -90,12 +90,12 @@ namespace d2::interp
         }
         return std::chrono::milliseconds::max();
     }
-    bool Interpolator::keep_alive()
+    bool Animation::keep_alive()
     {
         return _start != _start.max() && _keep_alive_impl(_progress()) && _vptr();
     }
-    std::chrono::milliseconds Interpolator::duration() const noexcept
+    std::chrono::milliseconds Animation::duration() const noexcept
     {
         return _duration;
     }
-} // namespace d2::interp
+} // namespace d2

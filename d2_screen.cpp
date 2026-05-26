@@ -184,7 +184,7 @@ namespace d2::sys
     std::chrono::milliseconds SystemScreen::_run_interpolators()
     {
         std::chrono::milliseconds deadline{std::chrono::milliseconds::max()};
-        auto& interps = _ts.current->interpolators;
+        auto& interps = _ts.current->animations;
         if (!interps.empty())
         {
             const auto end = interps.end();
@@ -608,7 +608,7 @@ namespace d2::sys
     {
         if (_ts.current == nullptr)
             return 0;
-        return _ts.current->interpolators.size();
+        return _ts.current->animations.size();
     }
     std::chrono::microseconds SystemScreen::delta() const
     {
@@ -632,7 +632,7 @@ namespace d2::sys
 
     void SystemScreen::clear_animations(TreeIter<> ptr)
     {
-        auto& interps = _ts.current->interpolators;
+        auto& interps = _ts.current->animations;
         for (auto it = interps.begin(); it != interps.end();)
         {
             if (it->second->target().first == ptr.shared().get())
@@ -647,7 +647,7 @@ namespace d2::sys
     }
     void SystemScreen::clear_animations(TreeIter<> ptr, style::uai_property prop)
     {
-        auto& interps = _ts.current->interpolators;
+        auto& interps = _ts.current->animations;
         auto f = interps.find(std::make_pair(ptr.shared().get(), prop));
         if (f != interps.end())
             interps.erase(f);
@@ -840,9 +840,7 @@ namespace d2::sys
             _trigger_events();
 
             const auto interp_ms = _run_interpolators();
-            ctx->deadline(
-                interp_ms == interp::Interpolator::Wake::refresh ? _refresh_rate : interp_ms
-            );
+            ctx->deadline(interp_ms == Animation::Wake::refresh ? _refresh_rate : interp_ms);
         }
         // Render
         if (!ctx->is_suspended() && root()->needs_update())

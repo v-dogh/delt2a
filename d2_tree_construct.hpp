@@ -267,7 +267,7 @@ namespace d2
             Element::property Prop,
             typename... Argv
         >
-        interp::Interpolator::ptr interpolate(std::chrono::milliseconds time, Argv&&... args)
+        Animation::ptr interpolate(std::chrono::milliseconds time, Argv&&... args)
         {
             return screen()->template interpolate<Interpolator<Parent, Prop>>(
                 time, _ptr.as<Parent>(), std::forward<Argv>(args)...
@@ -279,7 +279,7 @@ namespace d2
             Element::property Prop,
             typename... Argv
         >
-        interp::Interpolator::ptr interpolate_twoway(std::chrono::milliseconds time, Argv&&... args)
+        Animation::ptr interpolate_twoway(std::chrono::milliseconds time, Argv&&... args)
         {
             return interpolate_twoway<Interpolator, Interpolator>(
                 time, time, std::forward<Argv>(args)...
@@ -291,7 +291,7 @@ namespace d2
             Element::property Prop,
             typename... Argv
         >
-        interp::Interpolator::ptr interpolate_twoway(
+        Animation::ptr interpolate_twoway(
             std::chrono::milliseconds time_to, std::chrono::milliseconds time_from, Argv&&... args
         )
         {
@@ -317,9 +317,9 @@ namespace d2
             Element::property Prop,
             typename... Argv
         >
-        interp::Interpolator::ptr interpolate_toggle(std::chrono::milliseconds time, Argv&&... args)
+        Animation::ptr interpolate_toggle(std::chrono::milliseconds time, Argv&&... args)
         {
-            return interpolate_toggle<Interpolator, interp::Linear>(
+            return interpolate_toggle<Interpolator, anim::Linear>(
                 time, std::chrono::milliseconds{0}, std::forward<Argv>(args)...
             );
         }
@@ -329,7 +329,7 @@ namespace d2
             Element::property Prop,
             typename... Argv
         >
-        interp::Interpolator::ptr interpolate_toggle(
+        Animation::ptr interpolate_toggle(
             std::chrono::milliseconds time_to, std::chrono::milliseconds time_from, Argv&&... args
         )
         {
