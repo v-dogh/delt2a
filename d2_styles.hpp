@@ -207,6 +207,11 @@ namespace d2::style
             return _base()->state()->context();
         }
 
+        void _clear_anims(uai_property prop)
+        {
+            _context()->screen()->clear_animations(_base()->traverse(), prop);
+        }
+
         template<property Property, typename Type>
         auto _int_set(Type&& value, bool temporary = false)
         {
@@ -214,8 +219,7 @@ namespace d2::style
             using interface = SearchPropertyOwner<base_offset_, Property>::type;
             constexpr auto off = Property - base_offset_;
 
-            // We drop any animations on this property
-            _context()->screen()->clear_animations(_base()->traverse(), Property);
+            _clear_anims(Property);
 
             if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
             {
@@ -230,6 +234,7 @@ namespace d2::style
                         auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
                         if (!base_ptr->_var_flags.test(off))
                             return false;
+                        base_ptr->_clear_anims(Property);
                         base_ptr->template set<Property>(value);
                         base_ptr->_var_flags.set(off);
                         return true;
@@ -252,6 +257,7 @@ namespace d2::style
                         auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
                         if (!base_ptr->_var_flags.test(off))
                             return false;
+                        base_ptr->_clear_anims(Property);
                         base_ptr->template set<Property>(
                             std::remove_cvref_t<decltype(value)>::filter(v)
                         );
