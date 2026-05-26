@@ -1,5 +1,8 @@
 #include "d2_screen.hpp"
+#include "d2_interpolator.hpp"
 
+#include <absl/strings/internal/str_format/extension.h>
+#include <chrono>
 #include <d2_exceptions.hpp>
 #include <d2_input_base.hpp>
 #include <d2_tree_parent.hpp>
@@ -178,8 +181,9 @@ namespace d2::sys
         return a;
     }
 
-    void SystemScreen::_run_interpolators()
+    std::chrono::milliseconds SystemScreen::_run_interpolators()
     {
+        std::chrono::milliseconds deadline{std::chrono::milliseconds::max()};
         auto& interps = _ts.current->interpolators;
         if (!interps.empty())
         {
@@ -187,24 +191,22 @@ namespace d2::sys
             const auto beg = interps.begin();
             for (auto it = beg; it != end;)
             {
-                if ((*it)->getowner() == std::hash<tree>()(_ts.current))
+                if (!it->second->keep_alive())
                 {
-                    if (!(*it)->keep_alive())
-                    {
-                        const auto saved = it;
-                        ++it;
-                        interps.erase(saved);
-                        if (it == interps.end())
-                            break;
-                    }
-                    else
-                    {
-                        (*it)->update();
-                        ++it;
-                    }
+                    const auto saved = it;
+                    ++it;
+                    interps.erase(saved);
+                    if (it == interps.end())
+                        break;
+                }
+                else
+                {
+                    deadline = std::min(deadline, it->second->update());
+                    ++it;
                 }
             }
         }
+        return deadline;
     }
     void SystemScreen::_trigger_events()
     {
@@ -633,7 +635,7 @@ namespace d2::sys
         auto& interps = _ts.current->interpolators;
         for (auto it = interps.begin(); it != interps.end();)
         {
-            if ((*it)->target() == ptr.shared().get())
+            if (it->second->target().first == ptr.shared().get())
             {
                 const auto saved = it;
                 ++it;
@@ -642,6 +644,13 @@ namespace d2::sys
             else
                 ++it;
         }
+    }
+    void SystemScreen::clear_animations(TreeIter<> ptr, style::uai_property prop)
+    {
+        auto& interps = _ts.current->interpolators;
+        auto f = interps.find(std::make_pair(ptr.shared().get(), prop));
+        if (f != interps.end())
+            interps.erase(f);
     }
 
     void SystemScreen::erase_tree(const std::string& name)
@@ -680,8 +689,12 @@ namespace d2::sys
     }
     void SystemScreen::tick()
     {
+        const auto beg = std::chrono::steady_clock::now();
         const auto ctx = context();
         const auto input = ctx->input();
+        std::chrono::steady_clock::time_point interp_deadline{
+            std::chrono::steady_clock::time_point::max()
+        };
         // Update
         {
             root()->setcache(d2::Element::CachePolicy::Static);
@@ -822,12 +835,15 @@ namespace d2::sys
                 }
             }
 
-            _run_interpolators();
+            _ts.current->state->update();
+
             _trigger_events();
 
-            _ts.current->state->update();
+            const auto interp_ms = _run_interpolators();
+            ctx->deadline(
+                interp_ms == interp::Interpolator::Wake::refresh ? _refresh_rate : interp_ms
+            );
         }
-        const auto beg = std::chrono::steady_clock::now();
         // Render
         if (!ctx->is_suspended() && root()->needs_update())
         {

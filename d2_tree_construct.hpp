@@ -1,8 +1,12 @@
 #ifndef D2_TREE_CONSTRUCT_HPP
 #define D2_TREE_CONSTRUCT_HPP
 
+#include "d2_interpolator.hpp"
+#include "d2_tree_element.hpp"
+#include <chrono>
 #include <d2_io_handler.hpp>
 #include <d2_meta.hpp>
+#include <d2_screen.hpp>
 #include <d2_theme.hpp>
 #include <d2_tree.hpp>
 #include <d2_tree_state.hpp>
@@ -254,6 +258,102 @@ namespace d2
         auto anchor(std::string name = "", Argv&&... args) const
         {
             return Element::make<Type>(std::move(name), state(), std::forward<Argv>(args)...);
+        }
+
+        // Animations
+
+        template<
+            template<typename, Element::property> typename Interpolator,
+            Element::property Prop,
+            typename... Argv
+        >
+        interp::Interpolator::ptr interpolate(std::chrono::milliseconds time, Argv&&... args)
+        {
+            return screen()->template interpolate<Interpolator<Parent, Prop>>(
+                time, _ptr.as<Parent>(), std::forward<Argv>(args)...
+            );
+        }
+
+        template<
+            template<typename, Element::property> typename Interpolator,
+            Element::property Prop,
+            typename... Argv
+        >
+        interp::Interpolator::ptr interpolate_twoway(std::chrono::milliseconds time, Argv&&... args)
+        {
+            return interpolate_twoway<Interpolator, Interpolator>(
+                time, time, std::forward<Argv>(args)...
+            );
+        }
+        template<
+            template<typename, Element::property> typename InterpolatorTo,
+            template<typename, Element::property> typename InterpolatorFrom,
+            Element::property Prop,
+            typename... Argv
+        >
+        interp::Interpolator::ptr interpolate_twoway(
+            std::chrono::milliseconds time_to, std::chrono::milliseconds time_from, Argv&&... args
+        )
+        {
+            onv(Element::State::Clicked,
+                [=,
+                 ... args =
+                     std::forward<Argv>(args)](Element::EventListener listener, TreeIter<> ptr)
+                {
+                    auto ctx = TreeCtx<Parent, State>(ptr);
+                    if (ptr->getstate(Element::State::Clicked))
+                    {
+                        ctx.template interpolate<InterpolatorTo>(time_to, args...);
+                    }
+                    else
+                    {
+                        ctx.template interpolate<InterpolatorFrom>(time_from, args...);
+                    }
+                });
+        }
+
+        template<
+            template<typename, Element::property> typename Interpolator,
+            Element::property Prop,
+            typename... Argv
+        >
+        interp::Interpolator::ptr interpolate_toggle(std::chrono::milliseconds time, Argv&&... args)
+        {
+            return interpolate_toggle<Interpolator, interp::Linear>(
+                time, std::chrono::milliseconds{0}, std::forward<Argv>(args)...
+            );
+        }
+        template<
+            template<typename, Element::property> typename InterpolatorTo,
+            template<typename, Element::property> typename InterpolatorFrom,
+            Element::property Prop,
+            typename... Argv
+        >
+        interp::Interpolator::ptr interpolate_toggle(
+            std::chrono::milliseconds time_to, std::chrono::milliseconds time_from, Argv&&... args
+        )
+        {
+            onv(Element::State::Clicked,
+                true,
+                [=,
+                 saved = Parent::template type_of<Prop>(),
+                 state = false,
+                 ... args = std::forward<Argv>(args)](
+                    Element::EventListener listener, TreeIter<> ptr
+                ) mutable
+                {
+                    auto ctx = TreeCtx<Parent, State>(ptr);
+                    if (state)
+                    {
+                        saved = ctx->template get<Prop>();
+                        ctx.template interpolate<InterpolatorTo>(time_to, args...);
+                    }
+                    else
+                    {
+                        ctx.template interpolate<InterpolatorFrom>(time_from, saved);
+                    }
+                    state = !state;
+                });
         }
 
         // Children

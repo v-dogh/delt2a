@@ -105,8 +105,10 @@ namespace d2
 
         template<typename Tree, typename... Trees> void run(auto&&... themes);
         void stop();
-        void deadline(std::chrono::milliseconds ms);
         void ping();
+
+        std::chrono::steady_clock::time_point deadline(std::chrono::steady_clock::time_point tp);
+        std::chrono::steady_clock::time_point deadline(std::chrono::milliseconds ms);
 
         bool is_suspended() const;
         void suspend(bool state);

@@ -1,5 +1,6 @@
 #include "d2_io_handler.hpp"
 
+#include <chrono>
 #include <logs/runtime_logs.hpp>
 #include <memory>
 #include <mods/d2_core.hpp>
@@ -382,10 +383,21 @@ namespace d2
         _stop = true;
         ping();
     }
-    void IOContext::deadline(std::chrono::milliseconds ms)
+
+    std::chrono::steady_clock::time_point
+    IOContext::deadline(std::chrono::steady_clock::time_point tp)
     {
-        const auto n = std::chrono::steady_clock::now() + ms;
+        _deadline = std::min(tp, _deadline);
+        return _deadline;
+    }
+    std::chrono::steady_clock::time_point IOContext::deadline(std::chrono::milliseconds ms)
+    {
+        if (ms == std::chrono::milliseconds::max())
+            return _deadline;
+        const auto t = std::chrono::steady_clock::now();
+        const auto n = ms + t;
         _deadline = std::min(n, _deadline);
+        return _deadline;
     }
 
     bool IOContext::is_suspended() const

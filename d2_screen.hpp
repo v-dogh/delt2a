@@ -1,6 +1,8 @@
 #ifndef D2_SCREEN_HPP
 #define D2_SCREEN_HPP
 
+#include "d2_styles_base.hpp"
+#include <absl/container/node_hash_map.h>
 #include <chrono>
 #include <d2_input_base.hpp>
 #include <d2_interpolator.hpp>
@@ -43,7 +45,8 @@ namespace d2::sys
         struct TreeData
         {
             std::function<void(TreeIter<ParentElement>, TreeState::ptr)> rebuild{nullptr};
-            std::list<interp::Interpolator::ptr> interpolators{};
+            absl::node_hash_map<std::pair<Element*, style::uai_property>, interp::Interpolator::ptr>
+                interpolators{};
             TreeState::ptr state{nullptr};
             TreeTags tags{};
             DynamicDependencyManager deps{};
@@ -93,7 +96,6 @@ namespace d2::sys
         void _keynav_cycle_macro();
         void _keynav_cycle_macro_reverse();
 
-        void _run_interpolators();
         void _trigger_events();
         void _trigger_focused_events(in::InputFrame& frame, eptr ptr);
         void _trigger_focused_events(in::InputFrame& frame);
@@ -106,6 +108,8 @@ namespace d2::sys
         void _update_viewport();
         eptr _update_states(eptr container, const std::pair<int, int>& mouse);
         eptr _update_states_reverse(eptr ptr);
+
+        std::chrono::milliseconds _run_interpolators();
 
         void _apply_impl(const TreeIter<>::foreach_callback& func, eptr container) const;
         void _signal(Event ev);
@@ -235,27 +239,23 @@ namespace d2::sys
         {
             auto& interps = _ts.current->interpolators;
             const auto ptr = std::make_shared<Type>(time, std::forward<Argv>(args)...);
-            const auto code = ptr->hash_code();
+            const auto target = ptr->target();
 
-            for (auto it = interps.begin(); it != interps.end();)
-            {
-                if ((*it)->hash_code() == code)
-                {
-                    const auto saved = it;
-                    ++it;
-                    interps.erase(saved);
-                }
-                else
-                    ++it;
-            }
+            auto f = interps.find(target);
+            if (f != interps.end())
+                interps.erase(f);
 
-            interps.push_front(ptr);
-            interps.front()->setowner(std::hash<tree>()(_ts.current));
-            interps.front()->start();
-            return interps.front();
+            auto& slot = interps[target];
+            slot = ptr;
+            slot->start();
+
+            context()->deadline(std::chrono::steady_clock::now());
+
+            return ptr;
         }
 
         void clear_animations(TreeIter<> ptr);
+        void clear_animations(TreeIter<> ptr, style::uai_property prop);
 
         void erase_tree(const std::string& name);
         void erase_tree();
