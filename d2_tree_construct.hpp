@@ -180,7 +180,7 @@ namespace d2
         {
             return screen()->template themev<Var>();
         }
-        template<auto Var, auto Callback> auto& dynavar() const
+        template<auto Var, auto Callback> auto dynavar() const
         {
             return style::dynavar<Callback>(var<Var>());
         }
