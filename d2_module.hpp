@@ -183,7 +183,7 @@ namespace d2
                 .dep_names = {std::string(Deps::module_info().name)...}
             };
 
-            module<Base> ptr() const noexcept
+            module<Base> ptr() noexcept
             {
                 return module<Base>(
                     std::static_pointer_cast<Base>(static_cast<Base*>(this)->shared_from_this())
