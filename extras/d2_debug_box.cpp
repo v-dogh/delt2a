@@ -403,7 +403,7 @@ namespace d2::ex
         );
 
         // Controls
-        ctx.elem<FlowBox>(
+        ctx.elem(
             [](TreeCtx<FlowBox> ctx)
             {
                 dstyle(X, 0.0_px);
@@ -411,7 +411,7 @@ namespace d2::ex
                 dstyle(Width, 1.0_pc);
                 dstyle(Height, 1.0_px);
 
-                ctx.elem<Switch>(
+                ctx.elem(
                     [](TreeCtx<Switch> ctx)
                     {
                         dstyle(ZIndex, 0);
@@ -431,7 +431,7 @@ namespace d2::ex
                         );
                     }
                 );
-                ctx.elem<Text>(
+                ctx.elem(
                     [](TreeCtx<Text> ctx)
                     {
                         dstyle(ZIndex, 1);
@@ -460,7 +460,7 @@ namespace d2::ex
                         );
                     }
                 );
-                ctx.elem<Text>(
+                ctx.elem(
                     [](TreeCtx<Text> ctx)
                     {
                         dstyle(ZIndex, 1);
@@ -478,392 +478,404 @@ namespace d2::ex
             }
         );
         // Overview
-        ctx.elem<
-            FlowBox
-        >("Overview",
-          [&data](TreeCtx<FlowBox> ctx)
-          {
-              dstyle(Y, 1.0_px);
-              dstyle(Width, 1.0_pc);
-              dstyle(Height, 1.0_pxi);
+        ctx.elem(
+            "Overview",
+            [&data](TreeCtx<FlowBox> ctx)
+            {
+                dstyle(Y, 1.0_px);
+                dstyle(Width, 1.0_pc);
+                dstyle(Height, 1.0_pxi);
 
-              // Setup
-              ctx.elem<FlowBox>(
-                  [&data](TreeCtx<FlowBox> ctx)
-                  {
-                      dstyle(ZIndex, 0);
-                      dstyle(Width, 0.5_pc);
-                      dstyle(Height, 1.0_pc);
-                      dstyle(ContainerBorder, true);
+                // Setup
+                ctx.elem(
+                    [&data](TreeCtx<FlowBox> ctx)
+                    {
+                        dstyle(ZIndex, 0);
+                        dstyle(Width, 0.5_pc);
+                        dstyle(Height, 1.0_pc);
+                        dstyle(ContainerBorder, true);
 
-                      ctx.elem<Text>(
-                          [](TreeCtx<Text> ctx)
-                          {
-                              dstyle(ZIndex, Box::overlap);
-                              dstyle(Value, "<setup>");
-                              dstyle(X, 0.0_center);
-                          }
-                      );
-                      ctx.elem<VerticalSwitch>(
-                          [&data](TreeCtx<VerticalSwitch> ctx)
-                          {
-                              dstyle(Width, 1.0_pc);
-                              dstyle(Height, 5.0_px);
-                              dstyle(Y, 1.0_relative);
-                              dstyle(
-                                  Options,
-                                  VerticalSwitch::opts{
-                                      "Threads",
-                                      "CPU/AVG",
-                                      "Memory",
-                                      "Heap",
-                                      "Framebuffer",
-                                      "Swapframe",
-                                      "Delta",
-                                      "FPS",
-                                      "Elements",
-                                      "Animations",
-                                      "Dynamic Variables",
-                                      "Logs",
-                                      "Warnings",
-                                      "Errors",
-                                  }
-                              );
-                              dstyle(
-                                  OnChangeValues,
-                                  [&data](TreeIter<VerticalSwitch> ptr, string n, string o)
-                                  {
-                                      if (data.active_metric.second)
-                                          data.active_metric.second->task.pause();
-                                      if (data.output != nullptr && data.output->exists(o))
-                                          data.output->at(o)->setstate(Element::Display, false);
+                        ctx.elem(
+                            [](TreeCtx<Text> ctx)
+                            {
+                                dstyle(ZIndex, Box::overlap);
+                                dstyle(Value, "<setup>");
+                                dstyle(X, 0.0_center);
+                            }
+                        );
+                        ctx.elem(
+                            [&data](TreeCtx<VerticalSwitch> ctx)
+                            {
+                                dstyle(Width, 1.0_pc);
+                                dstyle(Height, 5.0_px);
+                                dstyle(Y, 1.0_relative);
+                                dstyle(
+                                    Options,
+                                    VerticalSwitch::opts{
+                                        "Threads",
+                                        "CPU/AVG",
+                                        "Memory",
+                                        "Heap",
+                                        "Framebuffer",
+                                        "Swapframe",
+                                        "Delta",
+                                        "FPS",
+                                        "Elements",
+                                        "Animations",
+                                        "Dynamic Variables",
+                                        "Logs",
+                                        "Warnings",
+                                        "Errors",
+                                    }
+                                );
+                                dstyle(
+                                    OnChangeValues,
+                                    [&data](TreeIter<VerticalSwitch> ptr, string n, string o)
+                                    {
+                                        if (data.active_metric.second)
+                                            data.active_metric.second->task.pause();
+                                        if (data.output != nullptr && data.output->exists(o))
+                                            data.output->at(o)->setstate(Element::Display, false);
 
-                                      auto f = data.metrics.find(n);
+                                        auto f = data.metrics.find(n);
 
-                                      if (f != data.metrics.end())
-                                      {
-                                          TreeCtx<FlowBox> output_ctx(data.output);
+                                        if (f != data.metrics.end())
+                                        {
+                                            TreeCtx<FlowBox> output_ctx(data.output);
 
-                                          if (!data.output->exists(n))
-                                          {
-                                              output_ctx.elem<graph::CyclicVerticalBar>(
-                                                  n,
-                                                  [](TreeCtx<graph::CyclicVerticalBar> ctx)
-                                                  {
-                                                      dstyle(Width, 1.0_pc);
-                                                      dstyle(Height, 1.0_pc);
-                                                  }
-                                              );
-                                          }
-                                          else
-                                          {
-                                              data.output->at(n)->setstate(Element::Display, true);
-                                          }
+                                            if (!data.output->exists(n))
+                                            {
+                                                output_ctx.elem(
+                                                    n,
+                                                    [](TreeCtx<graph::CyclicVerticalBar> ctx)
+                                                    {
+                                                        dstyle(Width, 1.0_pc);
+                                                        dstyle(Height, 1.0_pc);
+                                                    }
+                                                );
+                                            }
+                                            else
+                                            {
+                                                data.output->at(n)->setstate(
+                                                    Element::Display, true
+                                                );
+                                            }
 
-                                          f->second.task.unpause();
-                                          data.active_metric = {n, &f->second};
+                                            f->second.task.unpause();
+                                            data.active_metric = {n, &f->second};
 
-                                          data.gvalue->set<Text::Value>(std::format(
-                                              "Value: {}{}", f->second.measurement, f->second.unit
-                                          ));
-                                          data.minmax->set<Text::Value>(std::format(
-                                              "Min/Max: [ {} {} ]{}",
-                                              f->second.min,
-                                              f->second.max,
-                                              f->second.unit
-                                          ));
-                                      }
-                                      else
-                                      {
-                                          data.gvalue->set<Text::Value>("Value:");
-                                          data.minmax->set<Text::Value>("Min/Max:");
-                                          data.active_metric = {"", nullptr};
+                                            data.gvalue->set<Text::Value>(std::format(
+                                                "Value: {}{}", f->second.measurement, f->second.unit
+                                            ));
+                                            data.minmax->set<Text::Value>(std::format(
+                                                "Min/Max: [ {} {} ]{}",
+                                                f->second.min,
+                                                f->second.max,
+                                                f->second.unit
+                                            ));
+                                        }
+                                        else
+                                        {
+                                            data.gvalue->set<Text::Value>("Value:");
+                                            data.minmax->set<Text::Value>("Min/Max:");
+                                            data.active_metric = {"", nullptr};
 
-                                          if (data.output != nullptr && data.output->exists(o))
-                                              data.output->at(o)->setstate(Element::Display, false);
-                                      }
+                                            if (data.output != nullptr && data.output->exists(o))
+                                                data.output->at(o)->setstate(
+                                                    Element::Display, false
+                                                );
+                                        }
 
-                                      for (auto& reload : data.metric_reloads)
-                                          reload();
-                                  }
-                              );
-                          }
-                      );
+                                        for (auto& reload : data.metric_reloads)
+                                            reload();
+                                    }
+                                );
+                            }
+                        );
 
-                      ctx.elem<ScrollFlowBox>(
-                          [&data](TreeCtx<ScrollFlowBox> ctx)
-                          {
-                              dstyle(Width, 1.0_pc);
-                              dstyle(Height, 7.0_pxi);
-                              dstyle(Y, 1.0_relative);
-                              dstyle(ContainerBorder, true);
+                        ctx.elem(
+                            [&data](TreeCtx<ScrollFlowBox> ctx)
+                            {
+                                dstyle(Width, 1.0_pc);
+                                dstyle(Height, 7.0_pxi);
+                                dstyle(Y, 1.0_relative);
+                                dstyle(ContainerBorder, true);
 
-                              ctx.elem<Text>(
-                                  [](TreeCtx<Text> ctx)
-                                  {
-                                      dstyle(ZIndex, Box::overlap);
-                                      dstyle(Value, "<options>");
-                                      dstyle(X, 0.0_center);
-                                  }
-                              );
+                                ctx.elem(
+                                    [](TreeCtx<Text> ctx)
+                                    {
+                                        dstyle(ZIndex, Box::overlap);
+                                        dstyle(Value, "<options>");
+                                        dstyle(X, 0.0_center);
+                                    }
+                                );
 
-                              int ctr = 0;
-                              auto option =
-                                  [&](string label, auto&& change, auto&& val, bool def = false)
-                              {
-                                  ctx.elem<Checkbox>(
-                                      [&,
-                                       label,
-                                       change = std::forward<decltype(change)>(change),
-                                       val = std::forward<decltype(val)>(val),
-                                       def](TreeCtx<Checkbox> ctx)
-                                      {
-                                          dstyle(Value, def);
-                                          dstyle(X, 1.0_relative);
-                                          dstyle(BackgroundColor, colors::w::transparent);
-                                          if (ctr++)
-                                              dstyle(Y, 0.0_relative);
-                                          dstyle(
-                                              OnSubmit,
-                                              [&data, change](TreeIter<Checkbox>, bool value)
-                                              {
-                                                  auto& [name, metric] = data.active_metric;
+                                int ctr = 0;
+                                auto option =
+                                    [&](string label, auto&& change, auto&& val, bool def = false)
+                                {
+                                    ctx.elem(
+                                        [&,
+                                         label,
+                                         change = std::forward<decltype(change)>(change),
+                                         val = std::forward<decltype(val)>(val),
+                                         def](TreeCtx<Checkbox> ctx)
+                                        {
+                                            dstyle(Value, def);
+                                            dstyle(X, 1.0_relative);
+                                            dstyle(BackgroundColor, colors::w::transparent);
+                                            if (ctr++)
+                                                dstyle(Y, 0.0_relative);
+                                            dstyle(
+                                                OnSubmit,
+                                                [&data, change](TreeIter<Checkbox>, bool value)
+                                                {
+                                                    auto& [name, metric] = data.active_metric;
 
-                                                  if (metric != nullptr)
-                                                      change(name, *metric, value);
-                                              }
-                                          );
+                                                    if (metric != nullptr)
+                                                        change(name, *metric, value);
+                                                }
+                                            );
 
-                                          auto ptr = ctx.ptr();
-                                          data.metric_reloads.push_back(
-                                              [&data, ptr, val, def]()
-                                              {
-                                                  if (data.active_metric.second == nullptr)
-                                                  {
-                                                      ptr.template as<Checkbox>()
-                                                          ->template set<Checkbox::Value>(def);
-                                                  }
-                                                  else
-                                                  {
-                                                      ptr.template as<Checkbox>()
-                                                          ->template set<Checkbox::Value>(
-                                                              val(*data.active_metric.second)
-                                                          );
-                                                  }
-                                              }
-                                          );
-                                      }
-                                  );
-                                  ctx.elem<Text>(
-                                      [label = std::move(label)](TreeCtx<Text> ctx)
-                                      {
-                                          dstyle(Value, label);
-                                          dstyle(X, 1.0_relative);
-                                      }
-                                  );
-                              };
+                                            auto ptr = ctx.ptr();
+                                            data.metric_reloads.push_back(
+                                                [&data, ptr, val, def]()
+                                                {
+                                                    if (data.active_metric.second == nullptr)
+                                                    {
+                                                        ptr.template as<Checkbox>()
+                                                            ->template set<Checkbox::Value>(def);
+                                                    }
+                                                    else
+                                                    {
+                                                        ptr.template as<Checkbox>()
+                                                            ->template set<Checkbox::Value>(
+                                                                val(*data.active_metric.second)
+                                                            );
+                                                    }
+                                                }
+                                            );
+                                        }
+                                    );
+                                    ctx.elem(
+                                        [label = std::move(label)](TreeCtx<Text> ctx)
+                                        {
+                                            dstyle(Value, label);
+                                            dstyle(X, 1.0_relative);
+                                        }
+                                    );
+                                };
 
-                              option(
-                                  "track",
-                                  [&data](const std::string& name, Metric& metric, bool value)
-                                  {
-                                      if (value)
-                                      {
-                                          metric.task =
-                                              data.output->context()->scheduler()->launch_cyclic(
-                                                  metric.resolution,
-                                                  [&data, name, &metric](auto&&...)
-                                                  {
-                                                      auto graph = data.output->at(name)
-                                                                       .template as<
-                                                                           graph::CyclicVerticalBar
-                                                                       >();
+                                option(
+                                    "track",
+                                    [&data](const std::string& name, Metric& metric, bool value)
+                                    {
+                                        if (value)
+                                        {
+                                            metric.task =
+                                                data.output->context()->scheduler()->launch_cyclic(
+                                                    metric.resolution,
+                                                    [&data, name, &metric](auto&&...)
+                                                    {
+                                                        auto graph =
+                                                            data.output->at(name)
+                                                                .template as<
+                                                                    graph::CyclicVerticalBar
+                                                                >();
 
-                                                      const auto measurement =
-                                                          metric.callback(data.output->context());
+                                                        const auto measurement =
+                                                            metric.callback(data.output->context());
 
-                                                      const auto pmin = metric.min;
-                                                      const auto pmax = metric.max;
-                                                      const auto pmes = metric.measurement;
+                                                        const auto pmin = metric.min;
+                                                        const auto pmax = metric.max;
+                                                        const auto pmes = metric.measurement;
 
-                                                      metric.update(measurement);
+                                                        metric.update(measurement);
 
-                                                      if (pmin != metric.min || pmax != metric.max)
-                                                      {
-                                                          data.minmax->set<Text::Value>(std::format(
-                                                              "[ {} {} ]{}",
-                                                              std::floor(metric.min),
-                                                              std::floor(metric.max),
-                                                              metric.unit
-                                                          ));
-                                                      }
+                                                        if (pmin != metric.min ||
+                                                            pmax != metric.max)
+                                                        {
+                                                            data.minmax->set<Text::Value>(
+                                                                std::format(
+                                                                    "[ {} {} ]{}",
+                                                                    std::floor(metric.min),
+                                                                    std::floor(metric.max),
+                                                                    metric.unit
+                                                                )
+                                                            );
+                                                        }
 
-                                                      if (pmes != metric.measurement)
-                                                      {
-                                                          data.gvalue->set<Text::Value>(std::format(
-                                                              "Value: {}{}",
-                                                              metric.round ? std::floor(measurement)
-                                                                           : measurement,
-                                                              metric.unit
-                                                          ));
-                                                      }
+                                                        if (pmes != metric.measurement)
+                                                        {
+                                                            data.gvalue->set<Text::Value>(
+                                                                std::format(
+                                                                    "Value: {}{}",
+                                                                    metric.round
+                                                                        ? std::floor(measurement)
+                                                                        : measurement,
+                                                                    metric.unit
+                                                                )
+                                                            );
+                                                        }
 
-                                                      graph->rescale(metric.rescale);
-                                                      graph->push(metric.normalized());
-                                                  }
-                                              );
-                                      }
-                                      else
-                                      {
-                                          metric.task.discard();
-                                      }
+                                                        graph->rescale(metric.rescale);
+                                                        graph->push(metric.normalized());
+                                                    }
+                                                );
+                                        }
+                                        else
+                                        {
+                                            metric.task.discard();
+                                        }
 
-                                      metric.enabled = value;
-                                  },
-                                  [](Metric& metric) { return metric.enabled; },
-                                  false
-                              );
-                          }
-                      );
-                  }
-              );
-              // Core
-              ctx.elem<FlowBox>(
-                  [](TreeCtx<FlowBox> ctx)
-                  {
-                      dstyle(Width, 0.5_pc);
-                      dstyle(Height, 0.5_pc);
-                      dstyle(X, 0.5_pc);
-                      dstyle(ContainerBorder, true);
+                                        metric.enabled = value;
+                                    },
+                                    [](Metric& metric) { return metric.enabled; },
+                                    false
+                                );
+                            }
+                        );
+                    }
+                );
+                // Core
+                ctx.elem(
+                    [](TreeCtx<FlowBox> ctx)
+                    {
+                        dstyle(Width, 0.5_pc);
+                        dstyle(Height, 0.5_pc);
+                        dstyle(X, 0.5_pc);
+                        dstyle(ContainerBorder, true);
 
-                      ctx.elem<Text>(
-                          [](TreeCtx<Text> ctx)
-                          {
-                              dstyle(ZIndex, Box::overlap);
-                              dstyle(Value, "<core>");
-                              dstyle(X, 0.0_center);
-                          }
-                      );
-                      ctx.elem<Text>(
-                          [](TreeCtx<Text> ctx)
-                          {
-                              dstyle(X, 1.0_px);
-                              dstyle(Y, 0.0_relative);
+                        ctx.elem(
+                            [](TreeCtx<Text> ctx)
+                            {
+                                dstyle(ZIndex, Box::overlap);
+                                dstyle(Value, "<core>");
+                                dstyle(X, 0.0_center);
+                            }
+                        );
+                        ctx.elem(
+                            [](TreeCtx<Text> ctx)
+                            {
+                                dstyle(X, 1.0_px);
+                                dstyle(Y, 0.0_relative);
 
-                              auto handle = ctx->context()->scheduler()->launch_cyclic(
-                                  std::chrono::milliseconds(200),
-                                  [ptr = ctx.ptr()](auto&&...)
-                                  {
-                                      auto focused = ptr->screen()->focused();
-                                      auto info = std::format(
-                                          "Focused: {}",
-                                          focused == nullptr ? "<Unknown>" : focused->name()
-                                      );
+                                auto handle = ctx->context()->scheduler()->launch_cyclic(
+                                    std::chrono::milliseconds(200),
+                                    [ptr = ctx.ptr()](auto&&...)
+                                    {
+                                        auto focused = ptr->screen()->focused();
+                                        auto info = std::format(
+                                            "Focused: {}",
+                                            focused == nullptr ? "<Unknown>" : focused->name()
+                                        );
 
-                                      ptr->set<Text::Value>(std::move(info));
-                                  }
-                              );
+                                        ptr->set<Text::Value>(std::move(info));
+                                    }
+                                );
 
-                              ctx.onv(
-                                  Element::State::Created,
-                                  false,
-                                  [handle](Element::EventListener, TreeIter<Text>) mutable
-                                  { handle.discard(); }
-                              );
-                          }
-                      );
-                  }
-              );
-              // Info
-              ctx.elem<FlowBox>(
-                  [&data](TreeCtx<FlowBox> ctx)
-                  {
-                      dstyle(ZIndex, 1);
-                      dstyle(X, 0.5_pc);
-                      dstyle(Y, 0.5_pc);
-                      dstyle(Width, 0.5_pc);
-                      dstyle(Height, 0.5_pc);
-                      dstyle(ContainerBorder, true);
+                                ctx.onv(
+                                    Element::State::Created,
+                                    false,
+                                    [handle](Element::EventListener, TreeIter<Text>) mutable
+                                    { handle.discard(); }
+                                );
+                            }
+                        );
+                    }
+                );
+                // Info
+                ctx.elem(
+                    [&data](TreeCtx<FlowBox> ctx)
+                    {
+                        dstyle(ZIndex, 1);
+                        dstyle(X, 0.5_pc);
+                        dstyle(Y, 0.5_pc);
+                        dstyle(Width, 0.5_pc);
+                        dstyle(Height, 0.5_pc);
+                        dstyle(ContainerBorder, true);
 
-                      ctx.onv(
-                          Element::State::Clicked,
-                          true,
-                          [&data](Element::EventListener, TreeIter<FlowBox> ptr)
-                          {
-                              if (ptr->mouse_object_space().x == 0)
-                                  data.grabbed = true;
-                          }
-                      );
-                      ctx.onv(
-                          Element::State::Event,
-                          true,
-                          [&data](Element::EventListener, TreeIter<FlowBox> ptr)
-                          {
-                              auto& in = ptr->input_frame();
-                              if (in.active(in::mouse::Left, in::mode::Press))
-                              {
-                                  if (data.grabbed)
-                                  {
-                                      const auto pos = ptr->parent()->mouse_object_space().x;
-                                      const auto pw = ptr->parent()->layout(Element::Layout::Width);
-                                      const auto position = Unit(float(pos) / pw, Unit::Pc);
+                        ctx.onv(
+                            Element::State::Clicked,
+                            true,
+                            [&data](Element::EventListener, TreeIter<FlowBox> ptr)
+                            {
+                                if (ptr->mouse_object_space().x == 0)
+                                    data.grabbed = true;
+                            }
+                        );
+                        ctx.onv(
+                            Element::State::Event,
+                            true,
+                            [&data](Element::EventListener, TreeIter<FlowBox> ptr)
+                            {
+                                auto& in = ptr->input_frame();
+                                if (in.active(in::mouse::Left, in::mode::Press))
+                                {
+                                    if (data.grabbed)
+                                    {
+                                        const auto pos = ptr->parent()->mouse_object_space().x;
+                                        const auto pw =
+                                            ptr->parent()->layout(Element::Layout::Width);
+                                        const auto position = Unit(float(pos) / pw, Unit::Pc);
 
-                                      ptr->set<Box::Width>(Unit(1.f - position.raw(), Unit::Pc));
-                                      ptr->set<Box::X>(position);
-                                  }
-                              }
-                              else
-                              {
-                                  data.grabbed = false;
-                              }
-                          }
-                      );
+                                        ptr->set<Box::Width>(Unit(1.f - position.raw(), Unit::Pc));
+                                        ptr->set<Box::X>(position);
+                                    }
+                                }
+                                else
+                                {
+                                    data.grabbed = false;
+                                }
+                            }
+                        );
 
-                      ctx.elem<Text>(
-                          [](TreeCtx<Text> ctx)
-                          {
-                              dstyle(ZIndex, Box::overlap);
-                              dstyle(Value, "<info>");
-                              dstyle(X, 0.0_center);
-                          }
-                      );
-                      ctx.elem<Text>(
-                          [&data](TreeCtx<Text> ctx)
-                          {
-                              data.gvalue = ctx.ptr();
+                        ctx.elem(
+                            [](TreeCtx<Text> ctx)
+                            {
+                                dstyle(ZIndex, Box::overlap);
+                                dstyle(Value, "<info>");
+                                dstyle(X, 0.0_center);
+                            }
+                        );
+                        ctx.elem(
+                            [&data](TreeCtx<Text> ctx)
+                            {
+                                data.gvalue = ctx.ptr();
 
-                              dstyle(Value, "Value:");
-                              dstyle(X, 1.0_relative);
-                          }
-                      );
-                      ctx.elem<Text>(
-                          [&data](TreeCtx<Text> ctx)
-                          {
-                              data.minmax = ctx.ptr();
+                                dstyle(Value, "Value:");
+                                dstyle(X, 1.0_relative);
+                            }
+                        );
+                        ctx.elem(
+                            [&data](TreeCtx<Text> ctx)
+                            {
+                                data.minmax = ctx.ptr();
 
-                              dstyle(Value, "Min/Max:");
-                              dstyle(X, 1.0_relative);
-                              dstyle(Y, 0.0_relative);
-                          }
-                      );
-                      ctx.elem<FlowBox>(
-                          [&data](TreeCtx<FlowBox> ctx)
-                          {
-                              data.output = ctx.ptr();
+                                dstyle(Value, "Min/Max:");
+                                dstyle(X, 1.0_relative);
+                                dstyle(Y, 0.0_relative);
+                            }
+                        );
+                        ctx.elem(
+                            [&data](TreeCtx<FlowBox> ctx)
+                            {
+                                data.output = ctx.ptr();
 
-                              dstyle(Width, 1.0_pc);
-                              dstyle(Height, 2.0_pxi);
-                              dstyle(Y, 2.0_px);
-                              dstyle(ContainerBorder, true);
-                          }
-                      );
-                  }
-              );
-              ctx->setstate(Element::Display, false);
-          });
+                                dstyle(Width, 1.0_pc);
+                                dstyle(Height, 2.0_pxi);
+                                dstyle(Y, 2.0_px);
+                                dstyle(ContainerBorder, true);
+                            }
+                        );
+                    }
+                );
+                ctx->setstate(Element::Display, false);
+            }
+        );
 
         // Modules
-        ctx.elem<ScrollFlowBox>(
+        ctx.elem(
             "Modules",
             [](TreeCtx<ScrollFlowBox> ctx)
             {
@@ -911,7 +923,7 @@ namespace d2::ex
                             const auto name = id.has_value()
                                                   ? std::format("{}#{}", mod->info().name, *id)
                                                   : std::string(mod->info().name);
-                            return ctx.elem<FlowBox>(
+                            return ctx.elem(
                                 name,
                                 [=](TreeCtx<FlowBox> ctx)
                                 {
@@ -934,7 +946,7 @@ namespace d2::ex
                                     dstyle(Y, 0.0_relative);
                                     dstyle(ContainerBorder, true);
 
-                                    ctx.elem<Text>(
+                                    ctx.elem(
                                         "indicator",
                                         [=](TreeCtx<Text> ctx)
                                         {
@@ -943,7 +955,7 @@ namespace d2::ex
                                             dstyle(X, 0.0_center);
                                         }
                                     );
-                                    ctx.elem<Text>(
+                                    ctx.elem(
                                         "static-memory",
                                         [=](TreeCtx<Text> ctx)
                                         {
@@ -957,7 +969,7 @@ namespace d2::ex
                                             dstyle(Y, 0.0_relative);
                                         }
                                     );
-                                    ctx.elem<Text>(
+                                    ctx.elem(
                                         "load",
                                         [=](TreeCtx<Text> ctx)
                                         {
@@ -965,7 +977,7 @@ namespace d2::ex
                                             dstyle(Y, 0.0_relative);
                                         }
                                     );
-                                    ctx.elem<Text>(
+                                    ctx.elem(
                                         "access",
                                         [=](TreeCtx<Text> ctx)
                                         {
@@ -981,7 +993,7 @@ namespace d2::ex
                                             dstyle(Y, 0.0_relative);
                                         }
                                     );
-                                    ctx.elem<Text>(
+                                    ctx.elem(
                                         [](TreeCtx<Text> ctx)
                                         {
                                             dstyle(Value, "Dependencies:");
@@ -992,7 +1004,7 @@ namespace d2::ex
                                     const auto deps = mod->dependency_names();
                                     for (const auto& dep : deps)
                                     {
-                                        ctx.elem<Text>(
+                                        ctx.elem(
                                             [dep](TreeCtx<Text> ctx)
                                             {
                                                 dstyle(Value, dep);
@@ -1052,7 +1064,7 @@ namespace d2::ex
         );
 
         // Inspector
-        ctx.elem<Box>(
+        ctx.elem(
             "Inspector",
             [](TreeCtx<Box> ctx)
             {
@@ -1064,7 +1076,7 @@ namespace d2::ex
             }
         );
         // Logs
-        ctx.elem<Box>(
+        ctx.elem(
             "Logs",
             [](TreeCtx<Box> ctx)
             {
@@ -1072,7 +1084,7 @@ namespace d2::ex
                 dstyle(Width, 1.0_pc);
                 dstyle(Height, 1.0_pxi);
 
-                ctx.elem<MultiInput>(
+                ctx.elem(
                     [](TreeCtx<MultiInput> ctx)
                     {
                         dstyle(InputOptions, MultiInput::ReadOnly);

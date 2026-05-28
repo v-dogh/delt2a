@@ -33,6 +33,27 @@ namespace d2
 #define dmstyle(_elem_, _style_, ...)                                                              \
     _elem_->template set<decltype(_elem_)::type::_style_>(__VA_ARGS__)
 
+    namespace impl
+    {
+        template<typename> struct lambda_arg;
+        template<typename Type, typename Ret, typename Arg>
+        struct lambda_arg<Ret (Type::*)(Arg) const>
+        {
+            using type = Arg;
+        };
+        template<typename Type, typename Ret, typename Arg> struct lambda_arg<Ret (Type::*)(Arg)>
+        {
+            using type = Arg;
+        };
+
+        template<typename Func>
+        using lambda_arg_t =
+            typename lambda_arg<decltype(&std::remove_reference_t<Func>::operator())>::type;
+
+        template<typename Func> using deduced_type_t = typename lambda_arg_t<Func>::element_type;
+        template<typename Func> using deduced_state_t = typename lambda_arg_t<Func>::state_type;
+    } // namespace impl
+
     class TreeCtxBase
     {
     protected:
@@ -358,8 +379,7 @@ namespace d2
 
         // Children
 
-        template<typename Type, typename Func, typename... Arge, typename... Args>
-            requires std::invocable<Func, TreeCtx<Type, State>>
+        template<typename Func, typename... Arge, typename... Args>
         auto embed(
             const std::string& name,
             Func&& callback,
@@ -367,60 +387,72 @@ namespace d2
             std::tuple<Args...> args = {}
         ) const
         {
+            using type = impl::deduced_type_t<Func>;
             auto nsrc = std::apply(
                 [&](auto... args)
-                { return Type::build_sub(name, state(), _ptr.asp(), std::move(args)...); },
+                { return type::build_sub(name, state(), _ptr.asp(), std::move(args)...); },
                 args
             );
             auto cptr = nsrc->core();
             std::apply(
                 [&](auto... args)
-                { Type::create_at(nsrc->core(), nsrc, std::forward<Args>(args)...); },
+                { type::create_at(nsrc->core(), nsrc, std::forward<Args>(args)...); },
                 arge
             );
             nsrc->swap_in();
             return cptr;
         }
-        template<typename Type, typename Func, typename... Arge, typename... Args>
-            requires std::invocable<Func, TreeCtx<Type, State>>
+
+        template<typename Func, typename... Arge, typename... Args>
         auto
         embed(Func&& callback, std::tuple<Arge...> arge = {}, std::tuple<Args...> args = {}) const
         {
-            return embed<Type>("", std::forward<Func>(callback), std::move(arge), std::move(args));
+            return embed("", std::forward<Func>(callback), std::move(arge), std::move(args));
         }
         template<typename Type, typename... Args, typename... Arge>
         auto embed(
             const std::string& name, std::tuple<Arge...> arge = {}, std::tuple<Args...> args = {}
         ) const
         {
-            return embed<Type>(name, [](auto) {}, std::move(arge), std::move(args));
+            return embed<Type>(
+                name, [](d2::TreeCtx<Type, State>) {}, std::move(arge), std::move(args)
+            );
         }
         template<typename Type, typename... Arge, typename... Args>
         auto embed(std::tuple<Arge...> arge = {}, std::tuple<Args...> args = {}) const
         {
-            return embed<Type>("", [](auto) {}, std::move(arge), std::move(args));
+            return embed<Type>(
+                "", [](d2::TreeCtx<Type, State>) {}, std::move(arge), std::move(args)
+            );
         }
 
-        template<typename Type, typename Func, typename... Argv>
-            requires std::invocable<Func, TreeCtx<Type, State>>
+        // Deduced
+
+        template<typename Func, typename... Argv>
+            requires std::invocable<Func&, d2::TreeIter<>>
         auto elem(Func&& callback, Argv&&... args) const
         {
-            auto ptr = Element::make<Type>("", state(), std::forward<Argv>(args)...);
+            using type = impl::deduced_type_t<Func>;
+            using state_type = impl::deduced_state_t<Func>;
+            auto ptr = Element::make<type>("", state(), std::forward<Argv>(args)...);
             internal::ElementView::from(ptr).setparent(_ptr.asp());
-            callback(TreeCtx<Type, State>(ptr));
+            callback(TreeCtx<type, state_type>(ptr));
             _ptr.asp()->override(ptr);
-            return TreeIter<Type>(ptr);
+            return TreeIter<type>(ptr);
         }
-        template<typename Type, typename Func, typename... Argv>
-            requires std::invocable<Func, TreeCtx<Type, State>>
+        template<typename Func, typename... Argv>
+            requires std::invocable<Func&, d2::TreeIter<>>
         auto elem(std::string name, Func&& callback, Argv&&... args) const
         {
-            auto ptr = Element::make<Type>(std::move(name), state(), std::forward<Argv>(args)...);
+            using type = impl::deduced_type_t<Func>;
+            using state_type = impl::deduced_state_t<Func>;
+            auto ptr = Element::make<type>(std::move(name), state(), std::forward<Argv>(args)...);
             internal::ElementView::from(ptr).setparent(_ptr.asp());
-            callback(TreeCtx<Type, State>(ptr));
+            callback(TreeCtx<type, state_type>(ptr));
             _ptr.asp()->override(ptr);
-            return TreeIter<Type>(ptr);
+            return TreeIter<type>(ptr);
         }
+
         template<typename Type, typename Func>
             requires std::invocable<Func, TreeCtx<Type, State>>
         auto elem(Element::eptr<Type> ptr, Func&& callback) const
