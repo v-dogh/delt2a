@@ -16,9 +16,9 @@ namespace d2
     {
         return _nptr() || !_ptr.expired();
     }
-    std::shared_ptr<Element> Animation::_hold()
+    std::pair<std::shared_ptr<Element>, std::shared_ptr<Animation>> Animation::_hold()
     {
-        return _ptr.lock();
+        return {_ptr.lock(), shared_from_this()};
     }
     float Animation::_progress() const
     {
@@ -71,7 +71,7 @@ namespace d2
         {
             if (!_vptr())
                 return std::chrono::milliseconds::max();
-            const auto ptr = _hold();
+            const auto [ptr, _] = _hold();
             if (!ptr->getstate(Element::State::Display))
                 return std::chrono::milliseconds::max();
             const auto prog = _progress();

@@ -212,14 +212,15 @@ namespace d2::style
             _context()->screen()->clear_animations(_base()->traverse(), prop);
         }
 
-        template<property Property, typename Type>
+        template<property Property, bool Temporary, typename Type>
         auto _int_set(Type&& value, bool temporary = false)
         {
             static_assert(Property <= last_offset_, "Invalid Property");
             using interface = SearchPropertyOwner<base_offset_, Property>::type;
             constexpr auto off = Property - base_offset_;
 
-            _clear_anims(Property);
+            if (!Temporary)
+                _clear_anims(Property);
 
             if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
             {
@@ -234,7 +235,8 @@ namespace d2::style
                         auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
                         if (!base_ptr->_var_flags.test(off))
                             return false;
-                        base_ptr->_clear_anims(Property);
+                        if (!Temporary)
+                            base_ptr->_clear_anims(Property);
                         base_ptr->template set<Property>(value);
                         base_ptr->_var_flags.set(off);
                         return true;
@@ -257,7 +259,8 @@ namespace d2::style
                         auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
                         if (!base_ptr->_var_flags.test(off))
                             return false;
-                        base_ptr->_clear_anims(Property);
+                        if (!Temporary)
+                            base_ptr->_clear_anims(Property);
                         base_ptr->template set<Property>(
                             std::remove_cvref_t<decltype(value)>::filter(v)
                         );
@@ -268,7 +271,7 @@ namespace d2::style
             }
             else
             {
-                _var_flags.set(off, _var_flags.test(off) && temporary);
+                _var_flags.set(off, _var_flags.test(off) && Temporary);
                 auto [ptr, type] = interface::template get<Property - interface::base>();
                 *ptr = std::forward<Type>(value);
                 _signal_base_impl(type, Property);
@@ -311,13 +314,13 @@ namespace d2::style
             }
         }
 
-        template<property Property, typename Type>
+        template<property Property, bool Temporary, typename Type>
         void _int_set_synced(Type&& value, bool temporary = false)
         {
             const auto ctx = _context();
             if (ctx->is_synced())
             {
-                _int_set<Property>(std::forward<Type>(value), temporary);
+                _int_set<Property, Temporary>(std::forward<Type>(value));
             }
             else
             {
@@ -325,13 +328,13 @@ namespace d2::style
                 if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
                 {
                     static_assert(std::is_reference_v<Type>, "Dependency must be a reference");
-                    ctx->sync([this, &value, &temporary]()
-                              { _int_set<Property>(std::move(value), temporary); });
+                    ctx->sync([this, &value]()
+                              { _int_set<Property, Temporary>(std::move(value)); });
                 }
                 else
                 {
-                    ctx->sync([this, value = std::forward<Type>(value), &temporary]()
-                              { _int_set<Property>(std::move(value), temporary); });
+                    ctx->sync([this, value = std::forward<Type>(value)]()
+                              { _int_set<Property, Temporary>(std::move(value)); });
                 }
             }
         }
@@ -456,23 +459,23 @@ namespace d2::style
             }
         }
 
-        template<property Property, typename Type> auto& set(Type&& value, bool temporary = false)
+        template<property Property, bool Temporary = false, typename Type> auto& set(Type&& value)
         {
             if constexpr (chain_)
             {
                 if constexpr (Property < chain_base_)
                 {
                     static_cast<Chain&>(static_cast<Base&>(*this))
-                        .template set<Property>(std::forward<Type>(value), temporary);
+                        .template set<Property, Temporary>(std::forward<Type>(value));
                 }
                 else
                 {
-                    _int_set_synced<Property>(std::forward<Type>(value), temporary);
+                    _int_set_synced<Property, Temporary>(std::forward<Type>(value));
                 }
             }
             else
             {
-                _int_set_synced<Property>(std::forward<Type>(value), temporary);
+                _int_set_synced<Property, Temporary>(std::forward<Type>(value));
             }
             return static_cast<Base&>(*this);
         }

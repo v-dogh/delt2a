@@ -100,7 +100,7 @@ namespace d2
         };
     } // namespace impl
 
-    class Animation
+    class Animation : public std::enable_shared_from_this<Animation>
     {
         D2_TAG_MODULE(anim)
     public:
@@ -120,7 +120,7 @@ namespace d2
 
         bool _nptr();
         bool _vptr();
-        std::shared_ptr<Element> _hold();
+        std::pair<std::shared_ptr<Element>, std::shared_ptr<Animation>> _hold();
     protected:
         float _progress() const;
         virtual void _start_impl() {}
@@ -228,7 +228,6 @@ namespace d2
             {
             }
         };
-
     } // namespace anim
 } // namespace d2
 
