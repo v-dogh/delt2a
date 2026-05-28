@@ -113,46 +113,6 @@ namespace d2
             }
         };
 
-        template<typename Base, meta::ConstString Name> struct AbstractModule : public SystemModule
-        {
-            D2_TAG_MODULE_VALUE(Name.view());
-        public:
-            using SystemModule::SystemModule;
-
-            static ModInfo module_info()
-            {
-                return {.name = Name.view(), .index = typeid(Base)};
-            }
-
-            virtual ModInfo info() const override final
-            {
-                return module_info();
-            }
-        };
-        template<typename Base, Access Ac, Load::Spec LoadSpec, typename... Deps>
-        struct ConcreteModule
-        {
-            static inline const SystemModule::ModPreset module_preset{
-                .access = Ac,
-                .spec = LoadSpec,
-                .deps = {typeid(Deps)...},
-                .dep_names = {std::string(Deps::module_info().name)...}
-            };
-
-            std::shared_ptr<Base> shared_from_this() const noexcept
-            {
-                return std::static_pointer_cast<Base>(
-                    static_cast<SystemModule*>(this)->shared_from_this()
-                );
-            }
-            std::weak_ptr<Base> weak_from_this() const noexcept
-            {
-                return std::static_pointer_cast<Base>(
-                    static_cast<SystemModule*>(this)->weak_from_this()
-                );
-            }
-        };
-
         template<typename Module> class ModulePtr
         {
         private:
@@ -197,6 +157,39 @@ namespace d2
             ModulePtr& operator=(ModulePtr&&) = default;
         };
         template<typename Type> using module = ModulePtr<Type>;
+
+        template<typename Base, meta::ConstString Name> struct AbstractModule : public SystemModule
+        {
+            D2_TAG_MODULE_VALUE(Name.view());
+        public:
+            using SystemModule::SystemModule;
+
+            static ModInfo module_info()
+            {
+                return {.name = Name.view(), .index = typeid(Base)};
+            }
+            virtual ModInfo info() const override final
+            {
+                return module_info();
+            }
+        };
+        template<typename Base, Access Ac, Load::Spec LoadSpec, typename... Deps>
+        struct ConcreteModule
+        {
+            static inline const SystemModule::ModPreset module_preset{
+                .access = Ac,
+                .spec = LoadSpec,
+                .deps = {typeid(Deps)...},
+                .dep_names = {std::string(Deps::module_info().name)...}
+            };
+
+            module<Base> ptr() const noexcept
+            {
+                return module<Base>(
+                    std::static_pointer_cast<Base>(static_cast<Base*>(this)->shared_from_this())
+                );
+            }
+        };
     } // namespace sys
 } // namespace d2
 #endif // D2_MODULE_HPP
