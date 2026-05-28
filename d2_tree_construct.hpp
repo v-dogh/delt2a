@@ -421,9 +421,7 @@ namespace d2
         template<typename Type, typename... Arge, typename... Args>
         auto embed(std::tuple<Arge...> arge = {}, std::tuple<Args...> args = {}) const
         {
-            return embed<Type>(
-                "", [](d2::TreeCtx<Type, State>) {}, std::move(arge), std::move(args)
-            );
+            return embed("", [](d2::TreeCtx<Type, State>) {}, std::move(arge), std::move(args));
         }
 
         // Deduced
