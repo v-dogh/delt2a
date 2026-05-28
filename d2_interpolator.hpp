@@ -161,7 +161,7 @@ namespace d2
             }
             virtual float _update_impl(std::shared_ptr<Element> ptr, float progress) override
             {
-                std::static_pointer_cast<Type>(ptr)->template set<Property>(
+                std::static_pointer_cast<Type>(ptr)->template set<Property, true>(
                     impl::LinearInterpolationWriter<dest_type>::write(std::min(progress, 1.f)), true
                 );
                 return Wake::now;
@@ -208,7 +208,7 @@ namespace d2
                 if (changed)
                 {
                     _idx = nidx;
-                    std::static_pointer_cast<Type>(ptr)->template set<Property>(
+                    std::static_pointer_cast<Type>(ptr)->template set<Property, true>(
                         _stages[_idx], true
                     );
                 }
