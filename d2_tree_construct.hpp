@@ -25,7 +25,7 @@ namespace d2
         _style_,                                                                                   \
         ctx.template dynavar<                                                                      \
             _var_,                                                                                 \
-            [](const std::remove_cvref_t<decltype(ctx.template var<_var_>())>& value)              \
+            [](const std::remove_cvref_t<decltype(ctx.template var<_var_>())>::value_type& value)  \
             { return __VA_ARGS__; }                                                                \
         >()                                                                                        \
     )
