@@ -499,7 +499,7 @@ namespace d2::style
     class DeclTheme : public Theme, public Deps
     {
     private:
-        std::tuple<typename Ts::type...> _deps{};
+        std::tuple<Dependency<typename Ts::type>...> _deps{};
     public:
         static inline const auto tc = typeid(typename Deps::Deps).hash_code();
 
