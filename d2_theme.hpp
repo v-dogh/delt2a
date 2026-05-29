@@ -112,7 +112,7 @@ namespace d2::style
             }
 
             template<typename Data, typename Elem, typename Func>
-            void subscribe(std::weak_ptr<Elem> handle, Func&& callback, Data&& def = {})
+            void subscribe(std::weak_ptr<Elem> handle, Data&& def, Func&& callback)
             {
                 struct State
                 {
@@ -156,7 +156,7 @@ namespace d2::style
             template<typename Elem, typename Func>
             void subscribe(std::weak_ptr<Elem> handle, Func&& callback)
             {
-                subscribe<Dummy>(handle, std::forward<Func>(callback));
+                subscribe<Dummy>(handle, Dummy(), std::forward<Func>(callback));
             }
             void subscribe(std::weak_ptr<void> handle, void* base, manager_callback func)
             {
