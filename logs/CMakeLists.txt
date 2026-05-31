@@ -5,7 +5,11 @@ project(logd LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(absl REQUIRED)
+option(LOGS_ENABLE_INSTALL "Enable install" ON)
+
+if (NOT TARGET absl::base)
+    find_package(absl REQUIRED)
+endif()
 
 add_library(logd STATIC
     ${CMAKE_CURRENT_SOURCE_DIR}/runtime_logs.hpp
@@ -17,19 +21,21 @@ target_link_libraries(logd PRIVATE
     absl::base
 )
 
-install(TARGETS ${_install_targets} logd
-    EXPORT  logdTargets
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-install(
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-install(
-    EXPORT      logdTargets
-    FILE        logdTargets.cmake
-    NAMESPACE   logd::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logd-lib
-)
+if (LOGS_ENABLE_INSTALL)
+    install(TARGETS ${_install_targets} logd
+        EXPORT  logdTargets
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
+    install(
+        DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
+    install(
+        EXPORT      logdTargets
+        FILE        logdTargets.cmake
+        NAMESPACE   logd::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/logd-lib
+    )
+endif()

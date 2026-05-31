@@ -2,6 +2,7 @@
 project(DeltaAscii LANGUAGES CXX VERSION 0.1.0)
 
 include(GNUInstallDirs)
+include(FetchContent)
 
 ###########
 # OPTIONS #
@@ -11,36 +12,135 @@ option(D2_EXCLUDE_LIBRARY_EXTRAS    "Disable extras    module"     OFF)
 option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"      OFF)
 option(D2_EXCLUDE_OS_CORE           "Disable default os module"    OFF)
 option(D2_EXCLUDE_OS_EXT            "Disable extended os modules"  ON)
-option(D2_SANITIZE_MEMORY           "Enable memory sanitizer"      OFF)
-option(D2_SANITIZE_THREAD           "Enable thread sanitizer"      OFF)
 option(D2_SECURITY_WATCH            "Enable runtime debug checks"  ON)
 option(D2_SECURITY_LOG              "Enable runtime logging"       ON)
 option(D2_SECURITY_ASSERT           "Enable debug assertions"      ON)
 option(D2_UNICODE_MODE              "Enable unicode mode"          ON)
 option(D2_STRICT_MODE               "Enable strict component mode" ON)
+option(D2_ENABLE_INSTALL            "Enable install for cmake"     OFF)
 
-# Force reset cache
-# set(D2_EXCLUDE_LIBRARY_EXTRAS    OFF CACHE BOOL "Disable extras    module"     FORCE)
-# set(D2_EXCLUDE_LIBRARY_ELEMENTS  OFF CACHE BOOL "Disable elements module"      FORCE)
-# set(D2_EXCLUDE_OS_CORE           OFF CACHE BOOL "Disable default os module"    FORCE)
-# set(D2_EXCLUDE_OS_EXT            OFF CACHE BOOL "Disable extended os modules"  FORCE)
-# set(D2_SANITIZE_MEMORY           OFF CACHE BOOL "Enable memory sanitizer"      FORCE)
-# set(D2_SANITIZE_THREAD           OFF CACHE BOOL "Enable thread sanitizer"      FORCE)
-# set(D2_SECURITY_WATCH            OFF CACHE BOOL "Enable runtime debug checks"  FORCE)
-# set(D2_SECURITY_LOG              OFF CACHE BOOL "Enable runtime logging"       FORCE)
-# set(D2_SECURITY_ASSERT           OFF CACHE BOOL "Enable debug assertions"      FORCE)
-# set(D2_UNICODE_MODE              OFF CACHE BOOL "Enable unicode mode"          FORCE)
-# set(D2_STRICT_MODE               OFF CACHE BOOL "Enable strict component mode" FORCE)
+set(D2_SANITIZER "none" CACHE STRING "Sanitizer: none, address, memory, thread, undefined")
+set_property(CACHE D2_SANITIZER PROPERTY STRINGS
+    none
+    address
+    memory
+    thread
+    undefined
+)
 
-set(D2_SANITIZER_FLAGS "")
-if(D2_SANITIZE_MEMORY AND D2_SANITIZE_THREAD)
-    message(FATAL_ERROR "ASAN and TSAN cannot be enabled together")
+option(D2_SANITIZER_RECOVER         "Enable sanitizer recovery where supported"      ON)
+option(D2_MSAN_TRACK_ORIGINS        "Enable MSAN origin tracking"                    ON)
+option(D2_ASAN_USE_AFTER_SCOPE      "Enable ASAN use-after-scope checks"             ON)
+
+######################
+# SANITIZER SETTINGS #
+######################
+
+set(D2_SANITIZER_COMPILE_FLAGS "")
+set(D2_SANITIZER_LINK_FLAGS    "")
+set(D2_SANITIZER_DEFINITIONS   "")
+
+if (NOT D2_SANITIZER STREQUAL "none")
+    if (NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
+        message(FATAL_ERROR "Sanitizers require Clang or GCC")
+    endif()
+    list(APPEND D2_SANITIZER_COMPILE_FLAGS
+        -g
+        -fno-omit-frame-pointer
+        -fno-optimize-sibling-calls
+    )
+    list(APPEND D2_SANITIZER_DEFINITIONS
+        D2_SANITIZER_ENABLED
+    )
+    if (D2_SANITIZER STREQUAL "address")
+        list(APPEND D2_SANITIZER_COMPILE_FLAGS
+            -fsanitize=address,undefined
+        )
+        list(APPEND D2_SANITIZER_LINK_FLAGS
+            -fsanitize=address,undefined
+        )
+        list(APPEND D2_SANITIZER_DEFINITIONS
+            D2_SANITIZER_ADDRESS
+            D2_SANITIZER_UNDEFINED
+        )
+        if (D2_ASAN_USE_AFTER_SCOPE)
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS
+                -fsanitize-address-use-after-scope
+            )
+        endif()
+        if (D2_SANITIZER_RECOVER)
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS
+                -fsanitize-recover=undefined
+            )
+        endif()
+    elseif (D2_SANITIZER STREQUAL "undefined")
+        list(APPEND D2_SANITIZER_COMPILE_FLAGS
+            -fsanitize=undefined
+        )
+        list(APPEND D2_SANITIZER_LINK_FLAGS
+            -fsanitize=undefined
+        )
+        list(APPEND D2_SANITIZER_DEFINITIONS
+            D2_SANITIZER_UNDEFINED
+        )
+        if (D2_SANITIZER_RECOVER)
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS
+                -fsanitize-recover=undefined
+            )
+        endif()
+    elseif (D2_SANITIZER STREQUAL "memory")
+        if (NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+            message(FATAL_ERROR "MSAN requires Clang")
+        endif()
+        list(APPEND D2_SANITIZER_COMPILE_FLAGS
+            -fsanitize=memory
+        )
+        list(APPEND D2_SANITIZER_LINK_FLAGS
+            -fsanitize=memory
+        )
+        list(APPEND D2_SANITIZER_DEFINITIONS
+            D2_SANITIZER_MEMORY
+        )
+        if (D2_MSAN_TRACK_ORIGINS)
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS
+                -fsanitize-memory-track-origins=2
+            )
+        endif()
+        if (D2_SANITIZER_RECOVER)
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS
+                -fsanitize-recover=memory
+            )
+        endif()
+    elseif (D2_SANITIZER STREQUAL "thread")
+        list(APPEND D2_SANITIZER_COMPILE_FLAGS
+            -fsanitize=thread
+        )
+        list(APPEND D2_SANITIZER_LINK_FLAGS
+            -fsanitize=thread
+        )
+        list(APPEND D2_SANITIZER_DEFINITIONS
+            D2_SANITIZER_THREAD
+        )
+    else()
+        message(FATAL_ERROR "Unknown sanitizer: ${D2_SANITIZER}")
+    endif()
+    message(STATUS "Sanitizer: ${D2_SANITIZER}")
 endif()
-if(D2_SANITIZE_MEMORY)
-    list(APPEND D2_SANITIZER_FLAGS -fsanitize=memory -fsanitize-recover=memory)
-endif()
-if(D2_SANITIZE_THREAD)
-    list(APPEND D2_SANITIZER_FLAGS -fsanitize=thread)
+
+add_library(DeltaSan INTERFACE)
+
+if (NOT D2_SANITIZER STREQUAL "none")
+    target_compile_options(DeltaSan INTERFACE
+        ${D2_SANITIZER_COMPILE_FLAGS}
+    )
+    target_link_options(DeltaSan INTERFACE
+        ${D2_SANITIZER_LINK_FLAGS}
+    )
+    target_compile_definitions(DeltaSan INTERFACE
+        ${D2_SANITIZER_DEFINITIONS}
+    )
+    add_compile_options(${D2_SANITIZER_COMPILE_FLAGS})
+    add_link_options(${D2_SANITIZER_LINK_FLAGS})
 endif()
 
 #########################
@@ -48,17 +148,32 @@ endif()
 #########################
 
 # DeltaLSX | DeltaCore | DeltaCoreOS (Unix)
-find_package(absl REQUIRED)
+if (NOT TARGET absl::base)
+    if (NOT D2_SANITIZER STREQUAL "none")
+        FetchContent_Declare(
+            absl
+            GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
+            GIT_TAG        master
+        )
+        set(ABSL_PROPAGATE_CXX_STD ON  CACHE BOOL "" FORCE)
+        set(ABSL_ENABLE_INSTALL    OFF CACHE BOOL "" FORCE)
+        set(ABSL_BUILD_TESTING     OFF CACHE BOOL "" FORCE)
+        FetchContent_MakeAvailable(absl)
+    else()
+        find_package(absl REQUIRED)
+    endif()
+endif()
+
 if (D2_UNICODE_MODE)
     # DeltaCore (for unicode support)
     find_package(uni-algo REQUIRED)
 endif()
+
 if (NOT D2_EXCLUDE_OS_CORE AND NOT D2_EXCLUDE_OS_EXT)
     # DeltaCoreOS (for linux audio)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(PIPEWIRE REQUIRED libpipewire-0.3)
 endif()
-
 
 #########################
 # SUBLIBRARY PROPERTIES #
@@ -70,14 +185,8 @@ function(delta_setup_target target)
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
         $<INSTALL_INTERFACE:include>
     )
-    if (D2_SANITIZE_MEMORY OR D2_SANITIZE_THREAD)
-        target_compile_options(${target} PUBLIC
-            -fno-omit-frame-pointer
-            ${D2_SANITIZER_FLAGS}
-        )
-        target_link_options(${target} PUBLIC
-            ${D2_SANITIZER_FLAGS}
-        )
+    if (NOT D2_SANITIZER STREQUAL "none")
+        target_link_libraries(${target} PUBLIC DeltaSan)
     endif()
     if (D2_UNICODE_MODE)
         target_compile_definitions(${target} PUBLIC D2_LOCALE_MODE=32)
@@ -96,6 +205,7 @@ function(delta_setup_target target)
     if (D2_SECURITY_ASSERT)
         target_compile_definitions(${target} PUBLIC D2_SECURITY_ASSERT)
     endif()
+
     if (D2_SECURITY_LOG)
         target_compile_definitions(${target} PUBLIC D2_SECURITY_LOG)
     endif()
@@ -108,6 +218,7 @@ function(delta_setup_target target)
     if (D2_EXCLUDE_OS_CORE)
         target_compile_definitions(${target} PUBLIC D2_EXCLUDE_OS_CORE)
     endif()
+
     if (D2_EXCLUDE_OS_EXT)
         target_compile_definitions(${target} PUBLIC D2_EXCLUDE_OS_EXT)
     endif()
@@ -117,8 +228,15 @@ endfunction()
 # LIBRARIES #
 #############
 
+# Export stuff
+if (NOT D2_SANITIZER STREQUAL "none" OR NOT D2_ENABLE_INSTALL)
+    set(TPMP_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+    set(LOGS_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+endif()
+
 # Scheduler
 add_subdirectory(mt)
+
 # Logs
 add_subdirectory(logs)
 
@@ -131,7 +249,7 @@ add_library(DeltaLSX STATIC
     lsx/d2_solver_ops.hpp
     lsx/d2_solver_ops.cpp
 )
-target_link_libraries(DeltaLSX PRIVATE
+target_link_libraries(DeltaLSX PUBLIC
     absl::base
     absl::flat_hash_map
 )
@@ -202,7 +320,7 @@ add_library(DeltaCore STATIC
     mods/d2_binder.hpp
     mods/d2_binder.cpp
 )
-target_link_libraries(DeltaCore PRIVATE
+target_link_libraries(DeltaCore PUBLIC
     TPMP
     logd
     DeltaLSX
@@ -290,25 +408,27 @@ endif()
 # Platform library
 add_library(DeltaCoreOS STATIC)
 target_link_libraries(DeltaCoreOS PUBLIC DeltaCore)
+
 if (NOT D2_EXCLUDE_OS_CORE AND UNIX)
-    target_sources(DeltaCoreOS PUBLIC
+    target_sources(DeltaCoreOS PRIVATE
         os/d2_unix_system_io.hpp
         os/d2_unix_system_io.cpp
     )
     target_link_libraries(DeltaCoreOS PRIVATE absl::strings)
     if (LINUX)
-        target_sources(DeltaCoreOS PUBLIC
+        target_sources(DeltaCoreOS PRIVATE
             os/d2_linux_system_input.hpp
             os/d2_linux_system_input.cpp
         )
+
         if (NOT D2_EXCLUDE_OS_EXT)
-            target_sources(DeltaCoreOS PUBLIC
+            target_sources(DeltaCoreOS PRIVATE
                 os/d2_linux_system_audio.hpp
                 os/d2_linux_system_audio.cpp
             )
-            target_include_directories (DeltaCoreOS PUBLIC ${PIPEWIRE_INCLUDE_DIRS})
-            target_compile_options     (DeltaCoreOS PUBLIC ${PIPEWIRE_CFLAGS_OTHER})
-            target_link_libraries      (DeltaCoreOS PUBLIC ${PIPEWIRE_LIBRARIES})
+            target_include_directories(DeltaCoreOS PUBLIC ${PIPEWIRE_INCLUDE_DIRS})
+            target_compile_options    (DeltaCoreOS PUBLIC ${PIPEWIRE_CFLAGS_OTHER})
+            target_link_libraries     (DeltaCoreOS PUBLIC ${PIPEWIRE_LIBRARIES})
         endif()
     endif()
 endif()
@@ -328,27 +448,30 @@ target_link_libraries(DeltaAscii INTERFACE
     $<$<TARGET_EXISTS:DeltaCoreOS>:DeltaCoreOS>
 )
 
-set(_install_targets DeltaCore DeltaLSX)
-if(TARGET DeltaElements)
-    list(APPEND _install_targets DeltaElements)
+if (NOT D2_SANITIZER STREQUAL "none")
+    target_link_libraries(DeltaAscii INTERFACE DeltaSan)
+elseif(D2_ENABLE_INSTALL)
+    set(_install_targets DeltaCore DeltaLSX DeltaCoreOS)
+    if(TARGET DeltaElements)
+        list(APPEND _install_targets DeltaElements)
+    endif()
+    if(TARGET DeltaExtras)
+        list(APPEND _install_targets DeltaExtras)
+    endif()
+    install(TARGETS ${_install_targets} DeltaAscii
+        EXPORT  DeltaAsciiTargets
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
+    install(
+        DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/delt2a
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    )
+    install(
+        EXPORT      DeltaAsciiTargets
+        FILE        DeltaAsciiTargets.cmake
+        NAMESPACE   DeltaAscii::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/DeltaAscii
+    )
 endif()
-if(TARGET DeltaExtras)
-    list(APPEND _install_targets DeltaExtras)
-endif()
-
-install(TARGETS ${_install_targets} DeltaAscii
-    EXPORT  DeltaAsciiTargets
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-install(
-    DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/delt2a
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-install(
-    EXPORT      DeltaAsciiTargets
-    FILE        DeltaAsciiTargets.cmake
-    NAMESPACE   DeltaAscii::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/DeltaAscii
-)
