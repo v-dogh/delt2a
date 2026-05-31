@@ -163,12 +163,10 @@ if (NOT TARGET absl::base)
         find_package(absl REQUIRED)
     endif()
 endif()
-
 if (D2_UNICODE_MODE)
     # DeltaCore (for unicode support)
     find_package(uni-algo REQUIRED)
 endif()
-
 if (NOT D2_EXCLUDE_OS_CORE AND NOT D2_EXCLUDE_OS_EXT)
     # DeltaCoreOS (for linux audio)
     find_package(PkgConfig REQUIRED)
@@ -415,22 +413,25 @@ if (NOT D2_EXCLUDE_OS_CORE AND UNIX)
         os/d2_unix_system_io.cpp
     )
     target_link_libraries(DeltaCoreOS PRIVATE absl::strings)
+endif()
+if (NOT D2_EXCLUDE_OS_EXT)
     if (LINUX)
         target_sources(DeltaCoreOS PRIVATE
-            os/d2_linux_system_input.hpp
-            os/d2_linux_system_input.cpp
+            os/d2_linux_system_audio.hpp
+            os/d2_linux_system_audio.cpp
         )
-
-        if (NOT D2_EXCLUDE_OS_EXT)
-            target_sources(DeltaCoreOS PRIVATE
-                os/d2_linux_system_audio.hpp
-                os/d2_linux_system_audio.cpp
-            )
-            target_include_directories(DeltaCoreOS PUBLIC ${PIPEWIRE_INCLUDE_DIRS})
-            target_compile_options    (DeltaCoreOS PUBLIC ${PIPEWIRE_CFLAGS_OTHER})
-            target_link_libraries     (DeltaCoreOS PUBLIC ${PIPEWIRE_LIBRARIES})
-        endif()
+        target_include_directories(DeltaCoreOS PUBLIC ${PIPEWIRE_INCLUDE_DIRS})
+        target_compile_options    (DeltaCoreOS PUBLIC ${PIPEWIRE_CFLAGS_OTHER})
+        target_link_libraries     (DeltaCoreOS PUBLIC ${PIPEWIRE_LIBRARIES})
     endif()
+    find_package(CURL REQUIRED)
+    target_sources(DeltaCoreOS PRIVATE
+        os/d2_http_curl.hpp
+        os/d2_http_curl.cpp
+        os/d2_ws_curl.hpp
+        os/d2_ws_curl.cpp
+    )
+    target_link_libraries(DeltaCoreOS PUBLIC CURL::libcurl)
 endif()
 delta_setup_target(DeltaCoreOS)
 
