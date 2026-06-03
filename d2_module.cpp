@@ -1,6 +1,9 @@
 #include "d2_module.hpp"
+#include "d2_exceptions.hpp"
 #include <d2_io_handler.hpp>
+#include <memory>
 #include <typeindex>
+#include <variant>
 
 namespace d2::sys
 {
@@ -59,12 +62,21 @@ namespace d2::sys
         return Status::Ok;
     }
 
+    SystemModule::Compat SystemModule::compatible()
+    {
+        return Compat::Unknown;
+    }
+
     SystemModule::SystemModule(
         std::weak_ptr<IOContext> ptr, ModPreset preset, std::size_t static_usage
     ) : _ctx(ptr), _preset(std::move(preset)), _static_usage(static_usage)
     {
     }
 
+    SystemModule::ModPreset SystemModule::preset() const
+    {
+        return _preset;
+    }
     Load::Spec SystemModule::load_spec() const noexcept
     {
         return _preset.spec;
@@ -131,5 +143,61 @@ namespace d2::sys
             return _ctx.lock()->is_synced();
         return _preset.access == Access::TSafe ||
                _safe_threads.contains(std::this_thread::get_id());
+    }
+
+    void ModuleStub::commit(std::shared_ptr<IOContext> ctx)
+    {
+        if (std::holds_alternative<std::monostate>(_module))
+            D2_THRW("Module stub is null");
+        if (!std::holds_alternative<std::shared_ptr<SystemModule>>(_module))
+            _module = std::get<std::shared_ptr<SystemModule>>(
+                std::get<handle_type>(_module)(Query::Commit, ctx)
+            );
+    }
+    std::shared_ptr<SystemModule> ModuleStub::ptr() const
+    {
+        if (std::holds_alternative<std::monostate>(_module))
+            D2_THRW("Module stub is null");
+        return std::get<std::shared_ptr<SystemModule>>(_module);
+    }
+    SystemModule::ModInfo ModuleStub::info() const
+    {
+        if (std::holds_alternative<std::monostate>(_module))
+            D2_THRW("Module stub is null");
+        if (std::holds_alternative<std::shared_ptr<SystemModule>>(_module))
+            return ptr()->info();
+        else
+            return std::get<SystemModule::ModInfo>(
+                std::get<handle_type>(_module)(Query::Info, nullptr)
+            );
+    }
+    SystemModule::ModPreset ModuleStub::preset() const
+    {
+        if (std::holds_alternative<std::monostate>(_module))
+            D2_THRW("Module stub is null");
+        if (std::holds_alternative<std::shared_ptr<SystemModule>>(_module))
+            return ptr()->preset();
+        else
+            return std::get<SystemModule::ModPreset>(
+                std::get<handle_type>(_module)(Query::Preset, nullptr)
+            );
+    }
+    SystemModule::Status ModuleStub::status() const
+    {
+        if (std::holds_alternative<std::monostate>(_module))
+            D2_THRW("Module stub is null");
+        if (std::holds_alternative<std::shared_ptr<SystemModule>>(_module))
+            return ptr()->status();
+        else
+            return SystemModule::Status::Offline;
+    }
+
+    bool ModuleStub::operator==(std::nullptr_t) const noexcept
+    {
+        return std::holds_alternative<std::monostate>(_module);
+    }
+    bool ModuleStub::operator!=(std::nullptr_t) const noexcept
+    {
+        return !std::holds_alternative<std::monostate>(_module);
     }
 } // namespace d2::sys

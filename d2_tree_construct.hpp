@@ -1,5 +1,4 @@
-#ifndef D2_TREE_CONSTRUCT_HPP
-#define D2_TREE_CONSTRUCT_HPP
+#pragma once
 
 #include "d2_interpolator.hpp"
 #include "d2_tree_element.hpp"
@@ -516,4 +515,3 @@ namespace d2
     };
 } // namespace d2
 
-#endif

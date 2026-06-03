@@ -325,7 +325,7 @@ namespace d2::dx
             }
             else if (frame.active(in::special::LeftControl, in::mode::Hold))
             {
-                auto clipboard = context()->sys_if<sys::ext::SystemClipboard>();
+                auto clipboard = context()->sys_if<sys::SystemClipboard>();
                 if (clipboard)
                 {
                     if (frame.active(in::key('a'), in::mode::Press))

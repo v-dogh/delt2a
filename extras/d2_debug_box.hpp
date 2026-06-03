@@ -1,5 +1,4 @@
-#ifndef D2_DEBUG_BOX_HPP
-#define D2_DEBUG_BOX_HPP
+#pragma once
 
 #include <d2_std.hpp>
 #include <elements/d2_draggable_box.hpp>
@@ -12,4 +11,3 @@ namespace d2::ex
     };
 } // namespace d2::ex
 
-#endif // D2_DEBUG_BOX_HPP

@@ -1,10 +1,9 @@
-#ifndef D2_MODS_AUDIO_HPP
-#define D2_MODS_AUDIO_HPP
+#pragma once
 
 #include <d2_io_handler.hpp>
 #include <d2_module.hpp>
 
-namespace d2::sys::ext
+namespace d2::sys
 {
     namespace impl
     {
@@ -407,10 +406,8 @@ namespace d2::sys::ext
         );
     };
 
-} // namespace d2::sys::ext
+} // namespace d2::sys
 namespace d2::sys
 {
-    using audio = ext::SystemAudio;
+    using audio = SystemAudio;
 }
-
-#endif

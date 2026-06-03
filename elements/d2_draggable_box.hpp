@@ -1,5 +1,4 @@
-#ifndef D2_DRAGGABLE_BOX_HPP
-#define D2_DRAGGABLE_BOX_HPP
+#pragma once
 
 #include <elements/d2_box.hpp>
 
@@ -68,4 +67,3 @@ namespace d2
     }
 }
 
-#endif // D2_DRAGGABLE_BOX_HPP

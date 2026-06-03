@@ -1,6 +1,6 @@
 #include "d2_audio.hpp"
 
-namespace d2::sys::ext
+namespace d2::sys
 {
     SystemAudio::FilterPipeline
     SystemAudio::FilterPipeline::operator|(std::function<bool(Stream)> callback) const
@@ -380,4 +380,4 @@ namespace d2::sys::ext
         return context()->listen(dev, std::move(callback));
     }
 
-} // namespace d2::sys::ext
+} // namespace d2::sys

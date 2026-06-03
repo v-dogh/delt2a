@@ -1,5 +1,4 @@
-#ifndef D2_TREE_HPP
-#define D2_TREE_HPP
+#pragma once
 
 #include <d2_meta.hpp>
 #include <d2_screen.hpp>
@@ -50,4 +49,3 @@ namespace d2
     };
 } // namespace d2
 
-#endif // D2_TREE_HPP

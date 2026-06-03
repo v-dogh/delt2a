@@ -1,5 +1,4 @@
-#ifndef D2_FLOW_BOX_HPP
-#define D2_FLOW_BOX_HPP
+#pragma once
 
 #include <elements/d2_box.hpp>
 #include <elements/d2_scrollbox.hpp>
@@ -34,4 +33,3 @@ namespace d2::dx
 }
 
 
-#endif // D2_FLOW_BOX_H

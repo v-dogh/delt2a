@@ -1,5 +1,4 @@
-#ifndef D2_SWITCH_HPP
-#define D2_SWITCH_HPP
+#pragma once
 
 #include <d2_tree_element.hpp>
 #include <d2_colors.hpp>
@@ -178,4 +177,3 @@ namespace d2
     }
 }
 
-#endif // D2_SWITCH_HPP

@@ -1,5 +1,4 @@
-#ifndef D2_LOADING_INDICATORS_HPP
-#define D2_LOADING_INDICATORS_HPP
+#pragma once
 
 #include <chrono>
 #include <d2_tree_construct.hpp>
@@ -84,4 +83,3 @@ namespace d2::ex
                    }>;
 } // namespace d2::ex
 
-#endif // D2_LOADING_INDICATORS_HPP

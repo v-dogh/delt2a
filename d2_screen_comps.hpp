@@ -1,5 +1,4 @@
-#ifndef D2_SCREEN_COMPS_HPP
-#define D2_SCREEN_COMPS_HPP
+#pragma once
 
 #include <d2_input_base.hpp>
 #include <d2_io_handler_frwd.hpp>
@@ -81,4 +80,3 @@ namespace d2
     };
 } // namespace d2
 
-#endif // D2_SCREEN_COMPS_HPP

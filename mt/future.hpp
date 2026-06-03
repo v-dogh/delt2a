@@ -1,5 +1,4 @@
-#ifndef THREAD_FUTURE_HPP
-#define THREAD_FUTURE_HPP
+#pragma once
 
 #include "control.hpp"
 #include <coroutine>
@@ -252,4 +251,3 @@ namespace mt
     };
 } // namespace mt
 
-#endif // THREAD_FUTURE_HPP

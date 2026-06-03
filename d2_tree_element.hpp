@@ -1,5 +1,4 @@
-#ifndef D2_TREE_ELEMENT_HPP
-#define D2_TREE_ELEMENT_HPP
+#pragma once
 
 #include <d2_element_units.hpp>
 #include <d2_input_base.hpp>
@@ -563,4 +562,3 @@ namespace d2
     } // namespace internal
 } // namespace d2
 
-#endif // D2_TREE_ELEMENT_HPP

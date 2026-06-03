@@ -1,5 +1,4 @@
-#ifndef D2_STYLES_BASE_HPP
-#define D2_STYLES_BASE_HPP
+#pragma once
 
 #include <algorithm>
 #include <d2_io_handler.hpp>
@@ -227,4 +226,3 @@ namespace d2::style
     };
 } // namespace d2::style
 
-#endif // D2_STYLES_BASE_HPP

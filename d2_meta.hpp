@@ -1,5 +1,4 @@
-#ifndef D2_META_HPP
-#define D2_META_HPP
+#pragma once
 
 #include <algorithm>
 #include <string_view>
@@ -31,4 +30,3 @@ namespace d2::meta
     };
 }
 
-#endif // D2_META_HPP

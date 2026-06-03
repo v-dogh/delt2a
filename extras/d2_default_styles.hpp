@@ -1,5 +1,4 @@
-#ifndef D2_DEFAULT_STYLES_HPP
-#define D2_DEFAULT_STYLES_HPP
+#pragma once
 
 #include <d2_colors.hpp>
 #include <d2_tree_construct.hpp>
@@ -708,4 +707,3 @@ namespace d2::ex::df
                                           }>;
 } // namespace d2::ex::df
 
-#endif

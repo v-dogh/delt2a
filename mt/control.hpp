@@ -1,5 +1,4 @@
-#ifndef THREAD_CONTROL_HPP
-#define THREAD_CONTROL_HPP
+#pragma once
 
 #include <coroutine>
 #include <memory>
@@ -344,4 +343,3 @@ namespace mt
 	};
 }
 
-#endif // THREAD_CONTROL_HPP

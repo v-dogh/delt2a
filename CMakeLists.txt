@@ -3,6 +3,8 @@ project(DeltaAscii LANGUAGES CXX VERSION 0.1.0)
 
 include(GNUInstallDirs)
 include(FetchContent)
+include(cmake/target.cmake)
+include(cmake/system.cmake)
 
 ###########
 # OPTIONS #
@@ -10,13 +12,10 @@ include(FetchContent)
 
 option(D2_EXCLUDE_LIBRARY_EXTRAS    "Disable extras    module"     OFF)
 option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"      OFF)
-option(D2_EXCLUDE_OS_CORE           "Disable default os module"    OFF)
-option(D2_EXCLUDE_OS_EXT            "Disable extended os modules"  ON)
 option(D2_SECURITY_WATCH            "Enable runtime debug checks"  ON)
 option(D2_SECURITY_LOG              "Enable runtime logging"       ON)
 option(D2_SECURITY_ASSERT           "Enable debug assertions"      ON)
 option(D2_UNICODE_MODE              "Enable unicode mode"          ON)
-option(D2_STRICT_MODE               "Enable strict component mode" ON)
 option(D2_ENABLE_INSTALL            "Enable install for cmake"     OFF)
 
 set(D2_SANITIZER "none" CACHE STRING "Sanitizer: none, address, memory, thread, undefined")
@@ -128,7 +127,6 @@ if (NOT D2_SANITIZER STREQUAL "none")
 endif()
 
 add_library(DeltaSan INTERFACE)
-
 if (NOT D2_SANITIZER STREQUAL "none")
     target_compile_options(DeltaSan INTERFACE
         ${D2_SANITIZER_COMPILE_FLAGS}
@@ -147,7 +145,6 @@ endif()
 # EXTERNAL DEPENDENCIES #
 #########################
 
-# DeltaLSX | DeltaCore | DeltaCoreOS (Unix)
 if (NOT TARGET absl::base)
     if (NOT D2_SANITIZER STREQUAL "none")
         FetchContent_Declare(
@@ -164,63 +161,8 @@ if (NOT TARGET absl::base)
     endif()
 endif()
 if (D2_UNICODE_MODE)
-    # DeltaCore (for unicode support)
     find_package(uni-algo REQUIRED)
 endif()
-if (NOT D2_EXCLUDE_OS_CORE AND NOT D2_EXCLUDE_OS_EXT)
-    # DeltaCoreOS (for linux audio)
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(PIPEWIRE REQUIRED libpipewire-0.3)
-endif()
-
-#########################
-# SUBLIBRARY PROPERTIES #
-#########################
-
-function(delta_setup_target target)
-    target_compile_features(${target} PUBLIC cxx_std_20)
-    target_include_directories(${target} PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-        $<INSTALL_INTERFACE:include>
-    )
-    if (NOT D2_SANITIZER STREQUAL "none")
-        target_link_libraries(${target} PUBLIC DeltaSan)
-    endif()
-    if (D2_UNICODE_MODE)
-        target_compile_definitions(${target} PUBLIC D2_LOCALE_MODE=32)
-        target_link_libraries(${target} PUBLIC uni-algo)
-    else()
-        target_compile_definitions(${target} PUBLIC D2_LOCALE_MODE=8)
-    endif()
-    target_compile_definitions(${target} PUBLIC
-        ASCII=8
-        UNICODE=32
-    )
-    if (D2_SECURITY_WATCH)
-        target_compile_definitions(${target} PUBLIC D2_SECURITY_WATCH)
-    endif()
-
-    if (D2_SECURITY_ASSERT)
-        target_compile_definitions(${target} PUBLIC D2_SECURITY_ASSERT)
-    endif()
-
-    if (D2_SECURITY_LOG)
-        target_compile_definitions(${target} PUBLIC D2_SECURITY_LOG)
-    endif()
-    if (D2_STRICT_MODE)
-        target_compile_definitions(${target} PUBLIC
-            D2_COMPATIBILITY_MODE
-            STRICT
-        )
-    endif()
-    if (D2_EXCLUDE_OS_CORE)
-        target_compile_definitions(${target} PUBLIC D2_EXCLUDE_OS_CORE)
-    endif()
-
-    if (D2_EXCLUDE_OS_EXT)
-        target_compile_definitions(${target} PUBLIC D2_EXCLUDE_OS_EXT)
-    endif()
-endfunction()
 
 #############
 # LIBRARIES #
@@ -268,7 +210,6 @@ add_library(DeltaCore STATIC
     # Platform
     d2_locale.hpp
     d2_chardef.hpp
-    d2_platform.hpp
     d2_platform_string.hpp
     d2_platform_string.cpp
     d2_fragmented_buffer.hpp
@@ -404,36 +345,27 @@ if (NOT D2_EXCLUDE_LIBRARY_EXTRAS)
 endif()
 
 # Platform library
-add_library(DeltaCoreOS STATIC)
+add_library(DeltaCoreOS STATIC
+    os/d2_registry.cpp
+    os/d2_registry.hpp
+)
 target_link_libraries(DeltaCoreOS PUBLIC DeltaCore)
-
-if (NOT D2_EXCLUDE_OS_CORE AND UNIX)
-    target_sources(DeltaCoreOS PRIVATE
-        os/d2_unix_system_io.hpp
-        os/d2_unix_system_io.cpp
-    )
-    target_link_libraries(DeltaCoreOS PRIVATE absl::strings)
-endif()
-if (NOT D2_EXCLUDE_OS_EXT)
-    if (LINUX)
-        target_sources(DeltaCoreOS PRIVATE
-            os/d2_linux_system_audio.hpp
-            os/d2_linux_system_audio.cpp
-        )
-        target_include_directories(DeltaCoreOS PUBLIC ${PIPEWIRE_INCLUDE_DIRS})
-        target_compile_options    (DeltaCoreOS PUBLIC ${PIPEWIRE_CFLAGS_OTHER})
-        target_link_libraries     (DeltaCoreOS PUBLIC ${PIPEWIRE_LIBRARIES})
-    endif()
-    find_package(CURL REQUIRED)
-    target_sources(DeltaCoreOS PRIVATE
-        os/d2_http_curl.hpp
-        os/d2_http_curl.cpp
-        os/d2_ws_curl.hpp
-        os/d2_ws_curl.cpp
-    )
-    target_link_libraries(DeltaCoreOS PUBLIC CURL::libcurl)
-endif()
 delta_setup_target(DeltaCoreOS)
+delta_discover_modules(
+    TARGET DeltaCoreOS
+    DEPS DeltaCore
+    ROOTS
+        "${CMAKE_CURRENT_SOURCE_DIR}/os"
+        ${D2_MODULE_ROOTS}
+    EXCLUDE_BASES ${D2_MODULE_EXCLUDE_BASES}
+    EXCLUDE_TYPES ${D2_MODULE_EXCLUDE_TYPES}
+    EXCLUDE_DIRS ${D2_MODULE_EXCLUDE_DIRS}
+)
+delta_generate_module_registry(
+    TARGET DeltaCoreOS
+    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/generated/d2_platform.hpp"
+    INCLUDE_ROOT "${CMAKE_CURRENT_BINARY_DIR}/generated"
+)
 
 ######################
 # EXPORTED INTERFACE #

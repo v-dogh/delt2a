@@ -1,5 +1,4 @@
-#ifndef D2_ELEMENT_UNITS_HPP
-#define D2_ELEMENT_UNITS_HPP
+#pragma once
 
 namespace d2
 {
@@ -358,4 +357,3 @@ constexpr d2::Unit operator""_relative(long double value)
     return d2::Unit(value, d2::Unit::Px, d2::Unit::Mods::Relative);
 }
 
-#endif // D2_ELEMENT_UNITS_HPP

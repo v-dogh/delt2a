@@ -1,5 +1,4 @@
-#ifndef TASK_RING_HPP
-#define TASK_RING_HPP
+#pragma once
 
 #include <atomic>
 #include <array>
@@ -147,4 +146,3 @@ namespace mt
 	};
 }
 
-#endif // TASK_RING_HPP

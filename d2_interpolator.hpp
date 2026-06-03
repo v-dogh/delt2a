@@ -1,5 +1,4 @@
-#ifndef D2_INTERPOLATOR_HPP
-#define D2_INTERPOLATOR_HPP
+#pragma once
 
 #include "d2_exceptions.hpp"
 #include <chrono>
@@ -231,4 +230,3 @@ namespace d2
     } // namespace anim
 } // namespace d2
 
-#endif // D2_INTERPOLATOR_HPP

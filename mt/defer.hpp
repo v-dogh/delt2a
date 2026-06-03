@@ -1,5 +1,4 @@
-#ifndef THREAD_DEFER_HPP
-#define THREAD_DEFER_HPP
+#pragma once
 
 #include "pool.hpp"
 
@@ -70,4 +69,3 @@ namespace mt
     using cdefer = DeferDecision<ContextDefer>;
 } // namespace mt
 
-#endif // THREAD_DEFER_HPP

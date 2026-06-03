@@ -1,5 +1,4 @@
-#ifndef D2_SOLVER_HPP
-#define D2_SOLVER_HPP
+#pragma once
 
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/flat_hash_set.h>
@@ -227,4 +226,3 @@ namespace d2::lsx
     };
 } // namespace d2::lsx
 
-#endif

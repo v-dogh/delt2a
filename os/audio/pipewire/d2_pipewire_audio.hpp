@@ -1,5 +1,4 @@
-#ifndef D2_LINUX_SYSTEM_AUDIO_HPP
-#define D2_LINUX_SYSTEM_AUDIO_HPP
+#pragma once
 
 #include <d2_io_handler.hpp>
 #include <mods/d2_audio.hpp>
@@ -16,7 +15,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace d2::sys::ext
+namespace d2::sys
 {
     class PipewireSystemAudio
         : public SystemAudio,
@@ -223,4 +222,3 @@ namespace d2::sys::ext
     };
 } // namespace d2::sys::ext
 
-#endif // D2_LINUX_SYSTEM_AUDIO_HPP

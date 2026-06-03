@@ -1,5 +1,4 @@
-#ifndef D2_BOX_HPP
-#define D2_BOX_HPP
+#pragma once
 
 #include <d2_styles.hpp>
 #include <d2_tree_element.hpp>
@@ -33,4 +32,3 @@ namespace d2::dx
     };
 } // namespace d2::dx
 
-#endif // D2_BOX_HPP

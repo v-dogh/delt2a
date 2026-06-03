@@ -1,10 +1,9 @@
-#ifndef D2_WS_HPP
-#define D2_WS_HPP
+#pragma once
 
 #include <d2_io_handler.hpp>
 #include <d2_module.hpp>
 
-namespace d2::sys
+namespace d2::sys::net
 {
     class SystemWS : public d2::sys::AbstractModule<SystemWS, "WebSockets">
     {
@@ -67,6 +66,5 @@ namespace d2::sys
         using AbstractModule::AbstractModule;
     };
     using ws = SystemWS;
-} // namespace d2::sys
+} // namespace d2::sys::net
 
-#endif

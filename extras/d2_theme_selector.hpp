@@ -1,5 +1,4 @@
-#ifndef D2_THEME_SELECTOR_HPP
-#define D2_THEME_SELECTOR_HPP
+#pragma once
 
 #include <elements/d2_flow_box.hpp>
 #include <variant>
@@ -110,4 +109,3 @@ namespace d2
     } // namespace ex
 } // namespace d2
 
-#endif // D2_THEME_SELECTOR_HPP

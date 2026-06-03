@@ -1,5 +1,4 @@
-#ifndef POOL_HPP
-#define POOL_HPP
+#pragma once
 
 #include "future.hpp"
 #include "task_ring.hpp"
@@ -869,4 +868,3 @@ namespace mt
     };
 } // namespace mt
 
-#endif

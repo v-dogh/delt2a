@@ -1,15 +1,14 @@
 #include "d2_io_handler.hpp"
 
+#include <algorithm>
 #include <chrono>
+#include <d2_module.hpp>
+#include <d2_screen.hpp>
+#include <features.h>
 #include <logs/runtime_logs.hpp>
 #include <memory>
 #include <mods/d2_core.hpp>
 #include <mt/pool.hpp>
-
-#include <algorithm>
-#include <d2_module.hpp>
-#include <d2_screen.hpp>
-#include <features.h>
 
 namespace d2
 {
@@ -37,16 +36,19 @@ namespace d2
             if (id.value().empty())
                 D2_THRW("Cannot remove dynamic module with empty ID");
             D2_TLOG(Info, "Removing module at ", id.value());
-            const auto f = _named_modules.find(std::make_pair(idx, id.value()));
-            if (f == _named_modules.end())
+            const auto f = _modules.find(idx);
+            if (f == _modules.end())
                 D2_THRW("Failed to remove module ", id.value(), "; Not present");
-            _named_modules.erase(f);
+            auto ff = f->second.named.find(id.value());
+            if (ff == f->second.named.end())
+                D2_THRW("Failed to remove module ", id.value(), "; Not present");
+            f->second.named.erase(ff);
         }
         else
         {
             D2_TLOG(Info, "Removing module");
             const auto f = _modules.find(idx);
-            if (f == _modules.end())
+            if (f == _modules.end() || f->second.unnamed == nullptr)
                 D2_THRW("Failed to remove module; Not present");
 
             // Check for dependencies
@@ -54,44 +56,46 @@ namespace d2
             {
                 if (idx != idx)
                 {
-                    const auto deps = ptr->dependencies();
+                    const auto deps = ptr.unnamed.preset().deps;
                     if (std::find(deps.begin(), deps.end(), idx) != deps.end())
                         D2_THRW(
                             "Failed to remove module ",
-                            f->second->info().name,
+                            f->second.unnamed.info().name,
                             "; Dependency ",
-                            ptr->info().name
+                            ptr.unnamed.info().name
                         );
                 }
             }
             _modules.erase(f);
         }
     }
-    void
-    IOContext::_insert_module(std::shared_ptr<sys::SystemModule> ptr, std::optional<std::string> id)
+    sys::ModuleStub* IOContext::_insert_module(sys::ModuleStub ptr, std::optional<std::string> id)
     {
         if (id.has_value())
         {
             if (id.value().empty())
                 D2_THRW("Cannot insert dynamic module with empty ID");
-            D2_TLOG(Info, "Inserting new module ", ptr->info().name, " at ", id.value())
-            auto [_, created] =
-                _named_modules.emplace(std::make_pair(ptr->info().index, id.value()), ptr);
+            D2_TLOG(Info, "Inserting new module ", ptr.info().name, " at ", id.value());
+            auto f = _modules.emplace(ptr.info().index, ModuleEntry{}).first;
+            auto [ff, created] = f->second.named.emplace(id.value(), ptr);
             if (!created)
                 D2_THRW(
                     "Failed to insert module ",
-                    ptr->info().name,
+                    ptr.info().name,
                     " at ",
                     id.value(),
                     "; Already present"
                 );
+            return &ff->second;
         }
         else
         {
-            D2_TLOG(Info, "Inserting new module ", ptr->info().name)
-            auto [_, created] = _modules.emplace(ptr->info().index, ptr);
-            if (!created)
-                D2_THRW("Failed to insert module ", ptr->info().name, "; Already present");
+            D2_TLOG(Info, "Inserting new module ", ptr.info().name)
+            auto [f, created] = _modules.emplace(ptr.info().index, ModuleEntry{});
+            if (!created && f->second.unnamed != nullptr)
+                D2_THRW("Failed to insert module ", ptr.info().name, "; Already present");
+            f->second.unnamed = ptr;
+            return &f->second.unnamed;
         }
     }
 
@@ -104,74 +108,77 @@ namespace d2
             D2_TLOG(Warning, "Empty module ID")
             return nullptr;
         }
-        std::shared_ptr<sys::SystemModule> ptr = nullptr;
+        sys::ModuleStub* stub = nullptr;
         if (id.has_value())
-        {
-            auto f = _named_modules.find(std::make_pair(idx, id.value()));
-            if (f == _named_modules.end())
-                return nullptr;
-            ptr = f->second;
-        }
-        else
         {
             auto f = _modules.find(idx);
             if (f == _modules.end())
                 return nullptr;
-            ptr = f->second;
+            auto ff = f->second.named.find(id.value());
+            if (ff == f->second.named.end())
+                return nullptr;
+            stub = &ff->second;
+        }
+        else
+        {
+            auto f = _modules.find(idx);
+            if (f == _modules.end() || f->second.unnamed == nullptr)
+                return nullptr;
+            stub = &f->second.unnamed;
         }
         lock.release();
-        if (ptr)
+        if (stub)
         {
-            if (ptr->status() == sys::SystemModule::Status::Offline)
+            if (stub->status() == sys::SystemModule::Status::Offline)
             {
                 D2_TLOG(
                     Info,
                     "Dynamically loading module: ",
-                    ptr->info().name,
+                    stub->info().name,
                     (id.has_value() ? " at " : ""),
                     (id.has_value() ? id.value() : "")
                 )
-                ptr->load();
+                stub->commit(_shared());
+                stub->ptr()->load();
             }
-            else if (ptr->status() != sys::SystemModule::Status::Ok)
+            else if (stub->status() != sys::SystemModule::Status::Ok)
             {
                 D2_TLOG(
                     Warning,
                     "Attempt to use a failed module: ",
-                    ptr->info().name,
+                    stub->info().name,
                     (id.has_value() ? " at " : ""),
                     (id.has_value() ? id.value() : "")
                 );
                 return nullptr;
             }
         }
-        return ptr;
+        return stub->ptr();
     }
     void IOContext::_load_modules(
-        std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::optional<std::string>>> comps
+        std::vector<std::pair<sys::ModuleStub, std::optional<std::string>>> comps
     )
     {
-        std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::optional<std::string>>>
-            load_list;
+        std::vector<std::pair<sys::ModuleStub*, std::optional<std::string>>> load_list;
         absl::flat_hash_set<std::type_index> visit_map;
         {
             std::lock_guard lock(_module_mtx);
             load_list.reserve(comps.size());
             for (auto& [ptr, id] : comps)
             {
-                _insert_module(ptr, id);
-                if (ptr->load_spec().type == sys::Load::Spec::Type::Immediate)
-                    load_list.push_back({ptr, std::move(id)});
+                auto* stub = _insert_module(ptr, id);
+                if (ptr.preset().spec.type == sys::Load::Spec::Type::Immediate)
+                    load_list.push_back({stub, std::move(id)});
             }
         }
-        for (const auto& [ptr, id] : load_list)
+        for (const auto& [stub, id] : load_list)
         {
             bool result = false;
             if (id.has_value())
             {
                 std::unique_lock lock(_module_mtx);
-                visit_map.insert(ptr->info().index);
-                const auto deps = ptr->dependencies();
+                visit_map.insert(stub->info().index);
+                const auto deps = stub->preset().deps;
                 lock.unlock();
                 result = true;
                 for (decltype(auto) it : deps)
@@ -180,39 +187,43 @@ namespace d2
                         D2_TLOG(
                             Warning,
                             "Detected cycle in module: ",
-                            _modules[it]->info().name,
+                            _modules[it].unnamed.info().name,
                             "; Required by: ",
-                            ptr->info().name
+                            stub->info().name
                         )
                         result = false;
                         break;
                     }
                 if (result)
-                    ptr->load();
-                visit_map.erase(ptr->info().index);
+                {
+                    stub->commit(_shared());
+                    stub->ptr()->load();
+                }
+                visit_map.erase(stub->info().index);
             }
             else
-                result = _load_module_recursive(ptr->info().index, visit_map);
+                result = _load_module_recursive(stub->info().index, visit_map);
             if (!result)
             {
 #if D2_COMPATIBILITY_MODE == STRICT
                 if (id.has_value())
                     D2_THRW(
                         "Cycle detected or bad condition, failed to load module: ",
-                        ptr->info().name,
+                        stub->info().name,
                         " at ",
                         id.value()
                     );
                 else
                     D2_THRW(
-                        "Cycle detected or bad condition, failed to load module: ", ptr->info().name
+                        "Cycle detected or bad condition, failed to load module: ",
+                        stub->info().name
                     );
 #else
                 if (id.has_value())
                     D2_TLOG(
                         Warning,
                         "Cycle detected or bad condition, failed to load module: ",
-                        ptr->name(),
+                        stub->info().name,
                         " at ",
                         id.value()
                     );
@@ -220,7 +231,7 @@ namespace d2
                     D2_TLOG(
                         Warning,
                         "Cycle detected or bad condition, failed to load module: ",
-                        ptr->name()
+                        stub->info().name
                     );
 #endif
             }
@@ -234,13 +245,13 @@ namespace d2
             return false;
         std::unique_lock lock(_module_mtx);
         const auto f = _modules.find(idx);
-        if (f == _modules.end())
+        if (f == _modules.end() || f->second.unnamed == nullptr)
             return false;
-        const auto ptr = f->second;
-        if (ptr->status() != sys::SystemModule::Status::Offline)
+        auto ptr = f->second;
+        if (ptr.unnamed.status() != sys::SystemModule::Status::Offline)
             return true;
         visit_map.insert(idx);
-        const auto deps = ptr->dependencies();
+        const auto deps = ptr.unnamed.preset().deps;
         lock.unlock();
         for (decltype(auto) it : deps)
             if (!_load_module_recursive(it, visit_map))
@@ -249,15 +260,75 @@ namespace d2
                 D2_TLOG(
                     Warning,
                     "Detected cycle in module: ",
-                    ptr->info().name,
+                    ptr.unnamed.info().name,
                     "; Requires: ",
-                    (f == _modules.end() ? "Unknown" : f->second->info().name)
+                    ((f == _modules.end() || f->second.unnamed == nullptr)
+                         ? "Unknown"
+                         : f->second.unnamed.info().name)
                 )
                 return false;
             }
-        ptr->load();
+        ptr.unnamed.commit(_shared());
+        ptr.unnamed.ptr()->load();
         visit_map.erase(idx);
         return true;
+    }
+
+    void IOContext::_sysenum(
+        std::optional<std::type_index> index,
+        std::function<void(
+            sys::SystemModule::ModInfo,
+            sys::SystemModule::ModPreset,
+            std::optional<sys::module<sys::SystemModule>>,
+            std::optional<std::string>
+        )> callback
+    )
+    {
+        std::shared_lock lock(_module_mtx);
+        std::vector<std::tuple<
+            sys::SystemModule::ModInfo,
+            sys::SystemModule::ModPreset,
+            std::optional<sys::module<sys::SystemModule>>,
+            std::optional<std::string>
+        >>
+            mods;
+        auto sub = [&](const auto& it)
+        {
+            if (it.second.unnamed != nullptr)
+            {
+                const auto ptr = it.second.unnamed.ptr();
+                mods.push_back(
+                    {it.second.unnamed.info(),
+                     it.second.unnamed.preset(),
+                     ptr ? std::optional(ptr) : std::nullopt,
+                     std::nullopt}
+                );
+            }
+            for (decltype(auto) it : it.second.named)
+            {
+                const auto ptr = it.second.ptr();
+                mods.push_back(
+                    {it.second.info(),
+                     it.second.preset(),
+                     ptr ? std::optional(ptr) : std::nullopt,
+                     it.first}
+                );
+            }
+        };
+        if (index.has_value())
+        {
+            auto f = _modules.find(index.value());
+            if (f != _modules.end())
+                sub(*f);
+        }
+        else
+        {
+            for (decltype(auto) it : _modules)
+                sub(it);
+        }
+        lock.unlock();
+        for (const auto& [info, preset, ptr, name] : mods)
+            callback(info, preset, ptr, name);
     }
 
     void IOContext::set(ptr ptr) noexcept
@@ -278,9 +349,20 @@ namespace d2
     {
         std::lock_guard lock(_module_mtx);
         for (decltype(auto) it : _modules)
-            it.second->unload();
-        for (decltype(auto) it : _named_modules)
-            it.second->unload();
+        {
+            if (it.second.unnamed != nullptr)
+            {
+                const auto ptr = it.second.unnamed.ptr();
+                if (ptr)
+                    ptr->unload();
+            }
+            for (decltype(auto) it : it.second.named)
+            {
+                const auto ptr = it.second.ptr();
+                if (ptr)
+                    ptr->unload();
+            }
+        }
     }
 
     void IOContext::_initialize()
@@ -414,32 +496,16 @@ namespace d2
         return _scheduler;
     }
 
-    std::size_t IOContext::syscnt() const
-    {
-        std::shared_lock lock(_module_mtx);
-        std::size_t cnt = 0;
-        cnt += _modules.size();
-        cnt += _named_modules.size();
-        return cnt;
-    }
     void IOContext::sysenum(
-        std::function<void(sys::module<sys::SystemModule>, std::optional<std::string>)> callback
+        std::function<void(
+            sys::SystemModule::ModInfo,
+            sys::SystemModule::ModPreset,
+            std::optional<sys::module<sys::SystemModule>>,
+            std::optional<std::string>
+        )> callback
     )
     {
-        std::shared_lock lock(_module_mtx);
-        std::vector<std::shared_ptr<sys::SystemModule>> unnamed;
-        std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::string>> named;
-        unnamed.reserve(_modules.size());
-        named.reserve(_named_modules.size());
-        for (decltype(auto) it : _modules)
-            unnamed.push_back(it.second);
-        for (decltype(auto) it : _named_modules)
-            named.push_back({it.second, it.first.second});
-        lock.unlock();
-        for (decltype(auto) it : _modules)
-            callback(it.second, std::nullopt);
-        for (decltype(auto) it : _named_modules)
-            callback(it.second, it.first.second);
+        _sysenum(std::nullopt, std::move(callback));
     }
 
     IOContext::module<sys::input> IOContext::input()

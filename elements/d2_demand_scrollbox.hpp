@@ -1,5 +1,4 @@
-#ifndef D2_DEMAND_SCROLLBOX_HPP
-#define D2_DEMAND_SCROLLBOX_HPP
+#pragma once
 
 #include <elements/d2_slider.hpp>
 #include <elements/d2_element_utils.hpp>
@@ -151,4 +150,3 @@ namespace d2
     }
 }
 
-#endif // D2_DEMAND_SCROLLBOX_HPP

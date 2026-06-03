@@ -1,5 +1,4 @@
-#ifndef D2_MAIN_WORKER_HPP
-#define D2_MAIN_WORKER_HPP
+#pragma once
 
 #include <mt/pool.hpp>
 
@@ -15,4 +14,3 @@ namespace d2
     };
 } // namespace d2
 
-#endif

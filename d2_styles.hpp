@@ -1,5 +1,4 @@
-#ifndef D2_STYLES_HPP
-#define D2_STYLES_HPP
+#pragma once
 
 #include <bitset>
 #include <d2_chardef.hpp>
@@ -962,4 +961,3 @@ public:                                                                         
     using IZResponsive = IResponsive<d2::Element>::type<0>;
 } // namespace d2::style
 
-#endif // D2_STYLES_HPP

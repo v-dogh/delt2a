@@ -1,5 +1,4 @@
-#ifndef D2_FILE_EXPLORER_HPP
-#define D2_FILE_EXPLORER_HPP
+#pragma once
 
 #include <delt2a/d2_dsl.hpp>
 #include <elements/d2_flow_box.hpp>
@@ -89,4 +88,3 @@ namespace d2::ex
     };
 } // namespace d2::ex
 
-#endif // D2_FILE_EXPLORER_HPP

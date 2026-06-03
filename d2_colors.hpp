@@ -1,5 +1,4 @@
-#ifndef D2_COLORS_HPP
-#define D2_COLORS_HPP
+#pragma once
 
 #include <d2_pixel.hpp>
 
@@ -51,4 +50,3 @@ namespace d2::colors
 	}
 }
 
-#endif // D2_COLORS_HPP

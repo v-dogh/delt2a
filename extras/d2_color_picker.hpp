@@ -1,5 +1,4 @@
-#ifndef D2_COLOR_PICKER_HPP
-#define D2_COLOR_PICKER_HPP
+#pragma once
 
 #include <elements/d2_draggable_box.hpp>
 #include <elements/d2_flow_box.hpp>
@@ -55,4 +54,3 @@ namespace d2::ex
     };
 } // namespace d2::ex
 
-#endif // D2_COLOR_PICKER_HPP

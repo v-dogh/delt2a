@@ -1,5 +1,4 @@
-#ifndef D2_SIGNAL_HANDLER_HPP
-#define D2_SIGNAL_HANDLER_HPP
+#pragma once
 
 #include "mt/pool.hpp"
 #include "mt/task_ring.hpp"
@@ -514,4 +513,3 @@ namespace d2
     };
 } // namespace d2
 
-#endif // D2_SIGNAL_HANDLER_HPP

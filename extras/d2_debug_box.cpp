@@ -1,7 +1,7 @@
 #include "d2_debug_box.hpp"
-#include "d2_module.hpp"
 
 #include <absl/container/flat_hash_map.h>
+#include <d2_module.hpp>
 #include <d2_std.hpp>
 #include <elements/d2_std.hpp>
 #include <logs/runtime_logs.hpp>
@@ -893,7 +893,9 @@ namespace d2::ex
                             [=](TreeIter<> ptr, sys::module<sys::SystemModule> mod)
                         {
                             px::foreground color;
-                            switch (mod->status())
+                            const auto status =
+                                mod == nullptr ? sys::SystemModule::Status::Offline : mod->status();
+                            switch (status)
                             {
                             case sys::SystemModule::Status::Ok:
                                 color = colors::g::green;
@@ -916,19 +918,21 @@ namespace d2::ex
                                 .template as<Text>()
                                 ->template set<Text::ForegroundColor>(color);
                         };
-                        auto create_mod_view = [=](sys::module<sys::SystemModule> mod,
-                                                   std::optional<std::string> id) -> TreeIter<>
+                        auto create_mod_view =
+                            [=](sys::SystemModule::ModInfo info,
+                                sys::SystemModule::ModPreset preset,
+                                std::optional<sys::module<sys::SystemModule>> mod,
+                                std::optional<std::string> id) -> TreeIter<>
                         {
                             TreeCtx<ParentElement> ctx(ptr);
-                            const auto name = id.has_value()
-                                                  ? std::format("{}#{}", mod->info().name, *id)
-                                                  : std::string(mod->info().name);
+                            const auto name = id.has_value() ? std::format("{}#{}", info.name, *id)
+                                                             : std::string(info.name);
                             return ctx.elem(
                                 name,
                                 [=](TreeCtx<FlowBox> ctx)
                                 {
                                     std::string load_type = "";
-                                    switch (mod->load_spec().type)
+                                    switch (preset.spec.type)
                                     {
                                     case sys::Load::Spec::Type::Immediate:
                                         load_type = "Immediate";
@@ -937,8 +941,7 @@ namespace d2::ex
                                         load_type = "Lazy";
                                         break;
                                     case sys::Load::Spec::Type::Deferred:
-                                        load_type =
-                                            std::format("Deferred ({})", mod->load_spec().ms);
+                                        load_type = std::format("Deferred ({})", preset.spec.ms);
                                         break;
                                     }
 
@@ -951,7 +954,7 @@ namespace d2::ex
                                         [=](TreeCtx<Text> ctx)
                                         {
                                             dstyle(ZIndex, Box::overlap);
-                                            dstyle(Value, std::format("<{}>", mod->info().name));
+                                            dstyle(Value, std::format("<{}>", info.name));
                                             dstyle(X, 0.0_center);
                                         }
                                     );
@@ -963,7 +966,11 @@ namespace d2::ex
                                                 Value,
                                                 std::format(
                                                     "Static Memory: {}",
-                                                    impl::MeM(mod->static_usage())
+                                                    impl::MeM(
+                                                        mod.has_value()
+                                                            ? mod.value()->static_usage()
+                                                            : 0
+                                                    )
                                                 )
                                             );
                                             dstyle(Y, 0.0_relative);
@@ -985,7 +992,7 @@ namespace d2::ex
                                                 Value,
                                                 std::format(
                                                     "Access: {}",
-                                                    mod->access() == sys::Access::TSafe
+                                                    preset.access == sys::Access::TSafe
                                                         ? "Thread Safe"
                                                         : "Not Thread Safe"
                                                 )
@@ -1001,7 +1008,7 @@ namespace d2::ex
                                         }
                                     );
 
-                                    const auto deps = mod->dependency_names();
+                                    const auto deps = preset.dep_names;
                                     for (const auto& dep : deps)
                                     {
                                         ctx.elem(
@@ -1014,28 +1021,31 @@ namespace d2::ex
                                         );
                                     }
 
-                                    update_mod_view(ctx.ptr(), mod);
+                                    update_mod_view(ctx.ptr(), mod.value_or(nullptr));
                                 }
                             );
                         };
 
                         absl::flat_hash_set<key> used;
                         ptr->state()->context()->sysenum(
-                            [&](sys::module<sys::SystemModule> mod, std::optional<std::string> id)
+                            [&](sys::SystemModule::ModInfo info,
+                                sys::SystemModule::ModPreset preset,
+                                std::optional<sys::module<sys::SystemModule>> mod,
+                                std::optional<std::string> id)
                             {
-                                const key key{mod->info().index, id.value_or("")};
+                                const key key{info.index, id.value_or("")};
 
                                 used.emplace(key);
 
                                 auto f = inv.find(key);
                                 if (f == inv.end())
                                 {
-                                    const auto elem = create_mod_view(mod, id);
+                                    const auto elem = create_mod_view(info, preset, mod, id);
                                     inv.emplace(key, elem);
                                 }
                                 else
                                 {
-                                    update_mod_view(f->second, mod);
+                                    update_mod_view(f->second, mod.value_or(nullptr));
                                 }
                             }
                         );

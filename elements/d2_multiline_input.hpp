@@ -1,5 +1,4 @@
-#ifndef D2_MULTILINE_INPUT_HPP
-#define D2_MULTILINE_INPUT_HPP
+#pragma once
 
 #include <d2_fragmented_buffer.hpp>
 #include <d2_styles.hpp>
@@ -193,4 +192,3 @@ namespace d2
     } // namespace dx
 } // namespace d2
 
-#endif // D2_MULTILINE_INPUT_HPP

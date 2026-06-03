@@ -1,5 +1,4 @@
-#ifndef D2_PLATFORM_STRING_HPP
-#define D2_PLATFORM_STRING_HPP
+#pragma once
 
 #if D2_LOCALE_MODE == UNICODE
 #include <uni_algo/ranges_grapheme.h>
@@ -79,4 +78,3 @@ namespace d2
 #   endif
 }
 
-#endif // D2_PLATFORM_STRING_HPP

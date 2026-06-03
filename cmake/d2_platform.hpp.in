@@ -1,0 +1,12 @@
+#pragma once
+
+#include <os/d2_registry.hpp>
+
+@D2_GENERATED_MODULE_INCLUDES@
+
+namespace d2::sys
+{
+    using module_list = Registry<
+@D2_GENERATED_MODULE_TYPES@
+>;
+}

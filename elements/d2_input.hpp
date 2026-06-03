@@ -1,5 +1,4 @@
-#ifndef D2_INPUT_HPP
-#define D2_INPUT_HPP
+#pragma once
 
 #include <d2_styles.hpp>
 #include <d2_tree_element.hpp>
@@ -103,4 +102,3 @@ namespace d2
     } // namespace dx
 } // namespace d2
 
-#endif // D2_INPUT_HPP

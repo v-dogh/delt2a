@@ -1,5 +1,4 @@
-#ifndef D2_CHARDEF_HPP
-#define D2_CHARDEF_HPP
+#pragma once
 
 #include <d2_locale.hpp>
 
@@ -197,4 +196,3 @@ namespace d2
     using charset = Charset<encoding>;
 } // namespace d2
 
-#endif // D2_CHARDEF_HPP

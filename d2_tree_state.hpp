@@ -1,5 +1,4 @@
-#ifndef D2_TREE_STATE_HPP
-#define D2_TREE_STATE_HPP
+#pragma once
 
 #include <absl/container/flat_hash_map.h>
 #include <d2_exceptions.hpp>
@@ -91,4 +90,3 @@ namespace d2
     template<typename Type> using tree_state_ptr = std::shared_ptr<Type>;
 } // namespace d2
 
-#endif // D2_TREE_STATE_HPP

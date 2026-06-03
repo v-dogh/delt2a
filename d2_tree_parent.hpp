@@ -1,5 +1,4 @@
-#ifndef D2_TREE_PARENT_HPP
-#define D2_TREE_PARENT_HPP
+#pragma once
 
 #include <d2_tree_element.hpp>
 #include <variant>
@@ -216,4 +215,3 @@ namespace d2
     };
 } // namespace d2
 
-#endif // D2_TREE_PARENT_HPP

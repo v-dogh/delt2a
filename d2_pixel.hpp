@@ -1,5 +1,4 @@
-#ifndef D2_PIXEL_HPP
-#define D2_PIXEL_HPP
+#pragma once
 
 #include <functional>
 #include <cstdint>
@@ -280,4 +279,3 @@ namespace d2
 	};
 }
 
-#endif // D2_PIXEL_HPP

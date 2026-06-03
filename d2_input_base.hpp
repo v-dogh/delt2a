@@ -1,5 +1,4 @@
-#ifndef D2_INPUT_BASE_H
-#define D2_INPUT_BASE_H
+#pragma once
 
 #include <array>
 #include <bitset>
@@ -238,4 +237,3 @@ namespace d2::in
     } // namespace internal
 } // namespace d2::in
 
-#endif // D2_INPUT_BASE_H

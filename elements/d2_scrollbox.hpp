@@ -1,5 +1,4 @@
-#ifndef D2_SCROLLBOX_HPP
-#define D2_SCROLLBOX_HPP
+#pragma once
 
 #include <elements/d2_box.hpp>
 #include <elements/d2_slider.hpp>
@@ -38,4 +37,3 @@ namespace d2::dx
     };
 } // namespace d2::dx
 
-#endif // D2_SCROLLBOX_HPP

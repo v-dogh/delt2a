@@ -1,5 +1,4 @@
-#ifndef D2_TREE_ELEMENT_FRWD_HPP
-#define D2_TREE_ELEMENT_FRWD_HPP
+#pragma once
 
 #include <functional>
 #include <memory>
@@ -187,4 +186,3 @@ namespace d2
     }
 }
 
-#endif // D2_TREE_ELEMENT_FRWD_HPP

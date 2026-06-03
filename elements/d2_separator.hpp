@@ -1,5 +1,4 @@
-#ifndef D2_SEPARATOR_HPP
-#define D2_SEPARATOR_HPP
+#pragma once
 
 #include <d2_tree_element.hpp>
 #include <d2_styles.hpp>
@@ -69,4 +68,3 @@ namespace d2
     } // dx
 } // d2
 
-#endif // D2_SEPARATOR_HPP

@@ -1,21 +1,21 @@
-#ifndef D2_IO_HANDLER_HPP
-#define D2_IO_HANDLER_HPP
+#pragma once
 
-#include "logs/runtime_logs.hpp"
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/flat_hash_set.h>
 #include <chrono>
 #include <memory>
 #include <shared_mutex>
+#include <stop_token>
 
 #include <d2_exceptions.hpp>
 #include <d2_io_handler_frwd.hpp>
 #include <d2_main_worker.hpp>
 #include <d2_module.hpp>
 #include <d2_signal_handler.hpp>
+#include <logs/runtime_logs.hpp>
 #include <mods/d2_core.hpp>
 #include <mt/pool.hpp>
-#include <stop_token>
+#include <os/d2_registry.hpp>
 
 namespace d2
 {
@@ -28,15 +28,16 @@ namespace d2
         using ptr = std::shared_ptr<IOContext>;
         using wptr = std::weak_ptr<IOContext>;
     private:
+        struct ModuleEntry
+        {
+            sys::ModuleStub unnamed;
+            absl::flat_hash_map<std::string, sys::ModuleStub> named;
+        };
+    private:
         static inline thread_local ptr _ptr{nullptr};
 
-        mutable std::shared_mutex _module_mtx{};
-        absl::flat_hash_map<std::type_index, std::shared_ptr<sys::SystemModule>> _modules{};
-        absl::flat_hash_map<
-            std::pair<std::type_index, std::string>,
-            std::shared_ptr<sys::SystemModule>
-        >
-            _named_modules{};
+        std::shared_mutex _module_mtx{};
+        absl::flat_hash_map<std::type_index, ModuleEntry> _modules{};
 
         rs::RuntimeLogs::ptr _logs{nullptr};
 
@@ -72,18 +73,25 @@ namespace d2
         }
 
         void _remove_module(std::type_index idx, std::optional<std::string> id = std::nullopt);
-        void _insert_module(
-            std::shared_ptr<sys::SystemModule> ptr, std::optional<std::string> id = std::nullopt
-        );
+        sys::ModuleStub*
+        _insert_module(sys::ModuleStub stub, std::optional<std::string> id = std::nullopt);
 
         std::shared_ptr<sys::SystemModule>
         _get_module_if_uc(std::type_index idx, std::optional<std::string> id = std::nullopt);
-        void _load_modules(
-            std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::optional<std::string>>>
-                comps
-        );
+        void
+        _load_modules(std::vector<std::pair<sys::ModuleStub, std::optional<std::string>>> comps);
         bool _load_module_recursive(
             std::type_index idx, absl::flat_hash_set<std::type_index>& visit_map
+        );
+
+        void _sysenum(
+            std::optional<std::type_index> index,
+            std::function<void(
+                sys::SystemModule::ModInfo,
+                sys::SystemModule::ModPreset,
+                std::optional<sys::module<sys::SystemModule>>,
+                std::optional<std::string>
+            )> callback
         );
     public:
         static void set(ptr) noexcept;
@@ -275,29 +283,23 @@ namespace d2
         }
         template<typename... Modules> void load()
         {
-            std::vector<std::pair<std::shared_ptr<sys::SystemModule>, std::optional<std::string>>>
-                modules{};
+            std::vector<std::pair<sys::ModuleStub, std::optional<std::string>>> modules{};
             auto insert = [&]<typename Module>()
             {
-#if D2_COMPATIBILITY_MODE == STRICT
-                static_assert(!std::is_same_v<Module, void>, "Attempt to load invalid component");
-#endif
-                if constexpr (!std::is_same_v<Module, void>)
+                auto stub = sys::Platform::resolve<Module>();
+                const auto spec = stub.preset().spec;
+                if (spec.type == sys::Load::Spec::Type::Deferred)
                 {
-                    if (Module::module_preset.spec.type == sys::Load::Spec::Type::Deferred)
-                    {
-                        scheduler()->launch_deferred(
-                            std::chrono::milliseconds{Module::module_preset.spec.ms},
-                            [this](auto&&...)
-                            {
-                                // Force load it
-                                _get_module_if<Module>();
-                            }
-                        );
-                    }
-                    auto ptr = sys::SystemModule::make<Module>(_weak());
-                    modules.push_back({std::move(ptr), std::nullopt});
+                    scheduler()->launch_deferred(
+                        std::chrono::milliseconds{spec.ms},
+                        [this](auto&&...)
+                        {
+                            // Force load it
+                            _get_module_if<Module>();
+                        }
+                    );
                 }
+                modules.push_back({std::move(stub), std::nullopt});
             };
             (insert.template operator()<Modules>(), ...);
             if (!modules.empty())
@@ -309,21 +311,38 @@ namespace d2
         }
         template<typename Module> void load(const std::string& id)
         {
-            if (Module::module_preset.spec.type == sys::Load::Spec::Type::Deferred)
+            auto stub = sys::Platform::resolve<Module>();
+            const auto spec = stub.preset().spec;
+            if (spec.type == sys::Load::Spec::Type::Deferred)
             {
                 scheduler()->launch_deferred(
-                    std::chrono::milliseconds{Module::module_preset.spec.ms},
+                    std::chrono::milliseconds{spec.ms},
                     [this](auto&&...) { _get_module_if<Module>(); }
                 );
             }
-            auto ptr = sys::SystemModule::make<Module>(_weak());
-            _load_modules({std::make_pair(ptr, id)});
+            _load_modules({std::move(stub), id});
         }
 
-        std::size_t syscnt() const;
         void sysenum(
-            std::function<void(sys::module<sys::SystemModule>, std::optional<std::string>)> callback
+            std::function<void(
+                sys::SystemModule::ModInfo,
+                sys::SystemModule::ModPreset,
+                std::optional<sys::module<sys::SystemModule>>,
+                std::optional<std::string>
+            )> callback
         );
+        template<typename Module>
+        void sysenum(
+            std::function<void(
+                sys::SystemModule::ModInfo,
+                sys::SystemModule::ModPreset,
+                std::optional<sys::module<sys::SystemModule>>,
+                std::optional<std::string>
+            )> callback
+        )
+        {
+            _sysenum_mod(Module::module_info().index, std::move(callback));
+        }
 
         template<typename Module> auto sys()
         {
@@ -342,5 +361,3 @@ namespace d2
         module<sys::screen> screen();
     };
 } // namespace d2
-
-#endif // D2_IO_HANDLER_HPP

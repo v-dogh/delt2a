@@ -1,5 +1,4 @@
-#ifndef D2_FRAGMENTED_BUFFER_HPP
-#define D2_FRAGMENTED_BUFFER_HPP
+#pragma once
 
 #include <cstring>
 #include <functional>
@@ -361,4 +360,3 @@ namespace d2::fb
     };
 } // namespace d2::fb
 
-#endif // D2_FRAGMENTED_BUFFER_HPP

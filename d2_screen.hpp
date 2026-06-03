@@ -1,5 +1,4 @@
-#ifndef D2_SCREEN_HPP
-#define D2_SCREEN_HPP
+#pragma once
 
 #include "d2_styles_base.hpp"
 #include <absl/container/node_hash_map.h>
@@ -361,4 +360,3 @@ namespace d2
     }
 } // namespace d2
 
-#endif // D2_SCREEN_HPP

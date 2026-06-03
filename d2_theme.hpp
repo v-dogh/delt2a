@@ -1,5 +1,4 @@
-#ifndef D2_THEME_HPP
-#define D2_THEME_HPP
+#pragma once
 
 #include <algorithm>
 #include <d2_meta.hpp>
@@ -524,4 +523,3 @@ namespace d2::style
     };
 } // namespace d2::style
 
-#endif

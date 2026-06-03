@@ -1,5 +1,4 @@
-#ifndef D2_EXTENDED_PAGE_HPP
-#define D2_EXTENDED_PAGE_HPP
+#pragma once
 
 #include <d2_exceptions.hpp>
 #include <absl/container/flat_hash_map.h>
@@ -94,4 +93,3 @@ namespace d2
 #   endif
 }
 
-#endif // D2_EXTENDED_PAGE_HPP

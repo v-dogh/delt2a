@@ -1,5 +1,4 @@
-#ifndef D2_DEFAULT_THEME_HPP
-#define D2_DEFAULT_THEME_HPP
+#pragma once
 
 #include <d2_pixel.hpp>
 #include <d2_theme.hpp>
@@ -149,4 +148,3 @@ namespace d2::style
     };
 } // namespace d2::style
 
-#endif

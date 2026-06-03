@@ -1,5 +1,4 @@
-#ifndef D2_MODEL_HPP
-#define D2_MODEL_HPP
+#pragma once
 
 #include <d2_pixel.hpp>
 #include <d2_exceptions.hpp>
@@ -34,4 +33,3 @@ namespace d2
 
 }
 
-#endif // D2_MODEL_HPP

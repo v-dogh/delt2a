@@ -1,5 +1,4 @@
-#ifndef D2_MODS_CORE_HPP
-#define D2_MODS_CORE_HPP
+#pragma once
 
 #include <d2_input_base.hpp>
 #include <d2_main_worker.hpp>
@@ -157,4 +156,3 @@ namespace d2::sys
     using screen = SystemScreen;
 } // namespace d2::sys
 
-#endif

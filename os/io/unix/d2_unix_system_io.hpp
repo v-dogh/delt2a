@@ -1,5 +1,4 @@
-#ifndef LINUX_IO_HANDLERS_HPP
-#define LINUX_IO_HANDLERS_HPP
+#pragma once
 
 #include <any>
 #include <shared_mutex>
@@ -144,4 +143,3 @@ namespace d2::sys
     };
 } // namespace d2::sys
 
-#endif // LINUX_IO_HANDLERS_HPP

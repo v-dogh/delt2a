@@ -1,5 +1,4 @@
-#ifndef D2_EXCEPTIONS_HPP
-#define D2_EXCEPTIONS_HPP
+#pragma once
 
 #include <exception>
 #include <format>
@@ -43,4 +42,3 @@ namespace d2
     // clang-format on
 } // namespace d2
 
-#endif // D2_EXCEPTIONS_HPP

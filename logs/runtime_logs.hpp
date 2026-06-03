@@ -1,5 +1,4 @@
-#ifndef RUNTIME_LOGS_HPP
-#define RUNTIME_LOGS_HPP
+#pragma once
 
 #include <algorithm>
 #include <array>
@@ -516,4 +515,3 @@ namespace rs
     } // namespace ex
 } // namespace rs
 
-#endif // RUNTIME_LOGS_HPP

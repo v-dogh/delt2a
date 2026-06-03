@@ -1,5 +1,4 @@
-#ifndef D2_SOLVER_TYPES_HPP
-#define D2_SOLVER_TYPES_HPP
+#pragma once
 
 #include <array>
 #include <cstdint>
@@ -423,4 +422,3 @@ namespace d2::lsx
 }
 
 
-#endif // D2_SOLVER_TYPES_HPP

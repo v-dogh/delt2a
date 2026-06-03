@@ -1,5 +1,4 @@
-#ifndef D2_GRAPH_HPP
-#define D2_GRAPH_HPP
+#pragma once
 
 #include <d2_tree_element.hpp>
 #include <d2_styles.hpp>
@@ -154,4 +153,3 @@ namespace d2
     }
 }
 
-#endif // D2_GRAPH_HPP

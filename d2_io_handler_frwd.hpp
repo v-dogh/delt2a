@@ -1,9 +1,6 @@
-#ifndef D2_IO_HANDLER_FRWD_HPP
-#define D2_IO_HANDLER_FRWD_HPP
+#pragma once
 
 namespace d2
 {
-	class IOContext;
+    class IOContext;
 }
-
-#endif // D2_IO_HANDLER_FRWD_HPP
