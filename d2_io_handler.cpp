@@ -29,6 +29,20 @@ namespace d2
         return std::static_pointer_cast<IOContext>(shared_from_this());
     }
 
+    d2::sys::ModuleStub*
+    IOContext::_find_module(std::type_index index, std::optional<std::string> id)
+    {
+        auto module_it = _modules.find(index);
+        if (module_it == _modules.end())
+            return nullptr;
+        if (!id.has_value())
+            return &module_it->second.unnamed;
+        auto named_it = module_it->second.named.find(*id);
+        if (named_it == module_it->second.named.end())
+            return nullptr;
+        return &named_it->second;
+    }
+
     void IOContext::_remove_module(std::type_index idx, std::optional<std::string> id)
     {
         if (id.has_value())
@@ -69,7 +83,7 @@ namespace d2
             _modules.erase(f);
         }
     }
-    sys::ModuleStub* IOContext::_insert_module(sys::ModuleStub ptr, std::optional<std::string> id)
+    void IOContext::_insert_module(sys::ModuleStub ptr, std::optional<std::string> id)
     {
         if (id.has_value())
         {
@@ -86,7 +100,6 @@ namespace d2
                     id.value(),
                     "; Already present"
                 );
-            return &ff->second;
         }
         else
         {
@@ -95,7 +108,6 @@ namespace d2
             if (!created && f->second.unnamed != nullptr)
                 D2_THRW("Failed to insert module ", ptr.info().name, "; Already present");
             f->second.unnamed = ptr;
-            return &f->second.unnamed;
         }
     }
 
@@ -108,24 +120,7 @@ namespace d2
             D2_TLOG(Warning, "Empty module ID")
             return nullptr;
         }
-        sys::ModuleStub* stub = nullptr;
-        if (id.has_value())
-        {
-            auto f = _modules.find(idx);
-            if (f == _modules.end())
-                return nullptr;
-            auto ff = f->second.named.find(id.value());
-            if (ff == f->second.named.end())
-                return nullptr;
-            stub = &ff->second;
-        }
-        else
-        {
-            auto f = _modules.find(idx);
-            if (f == _modules.end() || f->second.unnamed == nullptr)
-                return nullptr;
-            stub = &f->second.unnamed;
-        }
+        sys::ModuleStub* stub = _find_module(idx, id);
         lock.release();
         if (stub)
         {
@@ -159,79 +154,123 @@ namespace d2
         std::vector<std::pair<sys::ModuleStub, std::optional<std::string>>> comps
     )
     {
-        std::vector<std::pair<sys::ModuleStub*, std::optional<std::string>>> load_list;
+        struct ModuleLoadRef
+        {
+            std::type_index index;
+            std::optional<std::string> id;
+        };
+        std::vector<ModuleLoadRef> load_list;
         absl::flat_hash_set<std::type_index> visit_map;
         {
             std::lock_guard lock(_module_mtx);
             load_list.reserve(comps.size());
-            for (auto& [ptr, id] : comps)
+            for (const auto& [stub, id] : comps)
             {
-                auto* stub = _insert_module(ptr, id);
-                if (ptr.preset().spec.type == sys::Load::Spec::Type::Immediate)
-                    load_list.push_back({stub, std::move(id)});
+                const auto info = stub.info();
+                const auto preset = stub.preset();
+                _insert_module(stub, id);
+                if (preset.spec.type == sys::Load::Spec::Type::Immediate)
+                {
+                    load_list.push_back({info.index, id});
+                }
             }
         }
-        for (const auto& [stub, id] : load_list)
+        for (decltype(auto) load_ref : load_list)
         {
             bool result = false;
-            if (id.has_value())
+            if (load_ref.id.has_value())
             {
                 std::unique_lock lock(_module_mtx);
-                visit_map.insert(stub->info().index);
-                const auto deps = stub->preset().deps;
+                auto* stub = _find_module(load_ref.index, load_ref.id);
+                if (!stub)
+                {
+                    D2_THRW("Module disappeared before load: ", load_ref.id.value());
+                }
+
+                const auto info = stub->info();
+                const auto preset = stub->preset();
+                const auto deps = preset.deps;
+
+                visit_map.insert(info.index);
+
                 lock.unlock();
                 result = true;
-                for (decltype(auto) it : deps)
-                    if (!_load_module_recursive(it, visit_map))
+                for (decltype(auto) dep : deps)
+                {
+                    if (!_load_module_recursive(dep, visit_map))
                     {
+                        std::string required_by = std::string(info.name);
+                        std::string dependency_name = "<unknown>";
+                        {
+                            std::lock_guard relock(_module_mtx);
+                            auto dep_it = _modules.find(dep);
+                            if (dep_it != _modules.end())
+                                dependency_name = dep_it->second.unnamed.info().name;
+                        }
                         D2_TLOG(
                             Warning,
                             "Detected cycle in module: ",
-                            _modules[it].unnamed.info().name,
+                            dependency_name,
                             "; Required by: ",
-                            stub->info().name
+                            required_by
                         )
                         result = false;
                         break;
                     }
+                }
                 if (result)
                 {
+                    std::unique_lock commit_lock(_module_mtx);
+                    stub = _find_module(load_ref.index, load_ref.id);
+                    if (!stub)
+                    {
+                        D2_THRW("Module disappeared before commit: ", load_ref.id.value());
+                    }
                     stub->commit(_shared());
                     stub->ptr()->load();
                 }
-                visit_map.erase(stub->info().index);
+                visit_map.erase(info.index);
             }
             else
-                result = _load_module_recursive(stub->info().index, visit_map);
+            {
+                result = _load_module_recursive(load_ref.index, visit_map);
+            }
+
             if (!result)
             {
+                std::string module_name = "<Unknown>";
+                {
+                    std::lock_guard lock(_module_mtx);
+                    auto* stub = _find_module(load_ref.index, load_ref.id);
+                    if (stub)
+                        module_name = stub->info().name;
+                }
 #if D2_COMPATIBILITY_MODE == STRICT
-                if (id.has_value())
+                if (load_ref.id.has_value())
                     D2_THRW(
                         "Cycle detected or bad condition, failed to load module: ",
-                        stub->info().name,
+                        module_name,
                         " at ",
-                        id.value()
+                        load_ref.id.value()
                     );
                 else
                     D2_THRW(
-                        "Cycle detected or bad condition, failed to load module: ",
-                        stub->info().name
+                        "Cycle detected or bad condition, failed to load module: ", module_name
                     );
 #else
-                if (id.has_value())
+                if (load_ref.id.has_value())
                     D2_TLOG(
                         Warning,
                         "Cycle detected or bad condition, failed to load module: ",
-                        stub->info().name,
+                        module_name,
                         " at ",
-                        id.value()
+                        load_ref.id.value()
                     );
                 else
                     D2_TLOG(
                         Warning,
                         "Cycle detected or bad condition, failed to load module: ",
-                        stub->info().name
+                        module_name
                     );
 #endif
             }

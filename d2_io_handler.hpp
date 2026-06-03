@@ -72,9 +72,10 @@ namespace d2
             return std::static_pointer_cast<Type>(_get_module_if_uc(typeid(Type)));
         }
 
+        d2::sys::ModuleStub* _find_module(std::type_index index, std::optional<std::string> id);
+
         void _remove_module(std::type_index idx, std::optional<std::string> id = std::nullopt);
-        sys::ModuleStub*
-        _insert_module(sys::ModuleStub stub, std::optional<std::string> id = std::nullopt);
+        void _insert_module(sys::ModuleStub stub, std::optional<std::string> id = std::nullopt);
 
         std::shared_ptr<sys::SystemModule>
         _get_module_if_uc(std::type_index idx, std::optional<std::string> id = std::nullopt);
