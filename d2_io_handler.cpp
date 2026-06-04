@@ -80,7 +80,10 @@ namespace d2
                         );
                 }
             }
-            _modules.erase(f);
+            if (f->second.named.empty())
+                _modules.erase(f);
+            else
+                f->second.unnamed = sys::ModuleStub{};
         }
     }
     void IOContext::_insert_module(sys::ModuleStub ptr, std::optional<std::string> id)
@@ -114,41 +117,62 @@ namespace d2
     std::shared_ptr<sys::SystemModule>
     IOContext::_get_module_if_uc(std::type_index idx, std::optional<std::string> id)
     {
-        std::shared_lock lock(_module_mtx);
-        if (id.has_value() && id.value().empty())
+        if (id.has_value() && id->empty())
         {
-            D2_TLOG(Warning, "Empty module ID")
+            D2_TLOG(Warning, "Empty module ID");
             return nullptr;
         }
-        sys::ModuleStub* stub = _find_module(idx, id);
-        lock.release();
-        if (stub)
+        std::shared_ptr<sys::SystemModule> ptr;
         {
+            std::shared_lock read_lock(_module_mtx);
+            sys::ModuleStub* stub = _find_module(idx, id);
+            if (!stub)
+                return nullptr;
             if (stub->status() == sys::SystemModule::Status::Offline)
             {
-                D2_TLOG(
-                    Info,
-                    "Dynamically loading module: ",
-                    stub->info().name,
-                    (id.has_value() ? " at " : ""),
-                    (id.has_value() ? id.value() : "")
-                )
-                stub->commit(_shared());
-                stub->ptr()->load();
-            }
-            else if (stub->status() != sys::SystemModule::Status::Ok)
-            {
-                D2_TLOG(
-                    Warning,
-                    "Attempt to use a failed module: ",
-                    stub->info().name,
-                    (id.has_value() ? " at " : ""),
-                    (id.has_value() ? id.value() : "")
-                );
-                return nullptr;
+                read_lock.unlock();
+                std::lock_guard write_lock(_module_mtx);
+                stub = _find_module(idx, id);
+                if (!stub)
+                    return nullptr;
+                if (stub->status() == sys::SystemModule::Status::Offline)
+                {
+                    D2_TLOG(
+                        Info,
+                        "Dynamically loading module: ",
+                        stub->info().name,
+                        (id.has_value() ? " at " : ""),
+                        (id.has_value() ? id.value() : "")
+                    );
+                    stub->commit(_shared());
+                }
             }
         }
-        return stub->ptr();
+        {
+            std::shared_lock read_lock(_module_mtx);
+            sys::ModuleStub* stub = _find_module(idx, id);
+            if (!stub)
+                return nullptr;
+            ptr = stub->ptr();
+        }
+        if (!ptr)
+            return nullptr;
+        if (ptr->status() == sys::SystemModule::Status::Offline)
+        {
+            ptr->load();
+        }
+        else if (ptr->status() != sys::SystemModule::Status::Ok)
+        {
+            D2_TLOG(
+                Warning,
+                "Attempt to use a failed module: ",
+                ptr->info().name,
+                (id.has_value() ? " at " : ""),
+                (id.has_value() ? id.value() : "")
+            );
+            return nullptr;
+        }
+        return ptr;
     }
     void IOContext::_load_modules(
         std::vector<std::pair<sys::ModuleStub, std::optional<std::string>>> comps
@@ -562,17 +586,14 @@ namespace d2
 
     IOContext::module<sys::input> IOContext::input()
     {
-        std::shared_lock lock(_module_mtx);
         return _get_module<sys::SystemInput>();
     }
     IOContext::module<sys::output> IOContext::output()
     {
-        std::shared_lock lock(_module_mtx);
         return _get_module<sys::SystemOutput>();
     }
     IOContext::module<sys::screen> IOContext::screen()
     {
-        std::shared_lock lock(_module_mtx);
         return _get_module<sys::SystemScreen>();
     }
 } // namespace d2
