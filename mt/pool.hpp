@@ -694,7 +694,12 @@ namespace mt
                      else if (query == Task::Query::Run)
                      {
                          const auto fut = future<ret>(block);
-                         if (!block->is_discarded() && !block->is_paused())
+                         if (block->is_discarded())
+                         {
+                             out = Task::Token::Discard;
+                             return;
+                         }
+                         if (!block->is_paused())
                          {
                              try
                              {
@@ -717,9 +722,8 @@ namespace mt
                                      return;
                                  }
                              }
-                             out = block->is_discarded() ? Task::Token::Discard
-                                                         : Task::Token::Continue;
                          }
+                         out = block->is_discarded() ? Task::Token::Discard : Task::Token::Continue;
                      }
                  }},
                 cfg.distribution
