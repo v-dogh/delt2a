@@ -16,7 +16,7 @@ namespace d2::sys
                 {
                     const auto in = ctx->screen()->input();
                     bool any = false;
-                    std::vector<callback_type> cbs;
+                    std::vector<callback_type*> cbs;
                     std::vector<std::string> active_names;
 
                     active_names.reserve(_active_set.size());
@@ -64,7 +64,7 @@ namespace d2::sys
                         }
                         if (bind.sequence_idx >= bind.bind.sequences.size())
                         {
-                            cbs.push_back(bind.callback);
+                            cbs.push_back(&bind.callback);
                             bind.sequence_idx = 0;
                         }
                     }
@@ -72,7 +72,7 @@ namespace d2::sys
                     if (any) [[maybe_unused]]
                         const auto seq = in->sequence();
                     for (decltype(auto) it : cbs)
-                        it(ctx);
+                        (*it)(ctx);
                 }
             );
         }
@@ -82,7 +82,6 @@ namespace d2::sys
             _key_event = nullptr;
         }
     }
-
     std::optional<SystemBinder::BindError>
     SystemBinder::_bind_dcheck(absl::flat_hash_map<std::string, BindValue>::iterator it)
     {
@@ -264,7 +263,6 @@ namespace d2::sys
 
         return err;
     }
-
     std::optional<SystemBinder::BindError> SystemBinder::rebind(const std::string& name, Bind value)
     {
         auto f = _binds.find(name);
@@ -288,7 +286,6 @@ namespace d2::sys
 
         return _bind_dcheck(f);
     }
-
     const SystemBinder::Bind& SystemBinder::check(const std::string& name) const noexcept
     {
         static const Bind empty{};
@@ -297,7 +294,6 @@ namespace d2::sys
             return empty;
         return f->second.bind;
     }
-
     void SystemBinder::freeze(const std::string& name)
     {
         auto f = _binds.find(name);
@@ -318,7 +314,6 @@ namespace d2::sys
         f->second.bind.enabled = false;
         _check_event();
     }
-
     void SystemBinder::unfreeze(const std::string& name)
     {
         auto f = _binds.find(name);
@@ -327,7 +322,6 @@ namespace d2::sys
         f->second.bind.enabled = true;
         _bind_dcheck(f);
     }
-
     void SystemBinder::unbind(const std::string& name)
     {
         auto f = _binds.find(name);
@@ -337,7 +331,6 @@ namespace d2::sys
         _binds.erase(f);
         _check_event();
     }
-
     std::vector<SystemBinder::Bind> SystemBinder::list() const
     {
         std::vector<Bind> out;
