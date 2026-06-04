@@ -289,6 +289,13 @@ namespace d2
 
     // Public interface
 
+    void Element::remove()
+    {
+        if (parent() == nullptr)
+            D2_THRW("Cannot remove root element");
+        parent()->remove(traverse());
+    }
+
     // Metadata
 
     sys::module<sys::screen> Element::screen() const

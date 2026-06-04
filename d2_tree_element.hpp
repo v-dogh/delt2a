@@ -458,6 +458,9 @@ namespace d2
         Element(const Element&) = delete;
         virtual ~Element() = default;
 
+        // Just calls parent()->remove(...)
+        void remove();
+
         // Metadata
 
         sys::module<sys::screen> screen() const;
@@ -561,4 +564,3 @@ namespace d2
         };
     } // namespace internal
 } // namespace d2
-
