@@ -74,8 +74,10 @@ namespace d2::style
                 value.subscribe_base(
                     _handle_impl(),
                     this,
-                    [](void* base, const auto& value) -> bool
+                    [](void* base, const auto& value, Theme::Query query) -> bool
                     {
+                        if (query == Theme::Query::Destroy)
+                            return false;
                         auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
                         if (!base_ptr->_test_dynamic_impl(Property))
                             return false;
@@ -91,8 +93,10 @@ namespace d2::style
                 value.dependency.subscribe_base(
                     _handle_impl(),
                     this,
-                    [](void* base, const auto& v) -> bool
+                    [](void* base, const auto& v, Theme::Query query) -> bool
                     {
+                        if (query == Theme::Query::Destroy)
+                            return false;
                         auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
                         if (!base_ptr->_test_dynamic_impl(Property))
                             return false;

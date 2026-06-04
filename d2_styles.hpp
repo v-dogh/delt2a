@@ -1,5 +1,6 @@
 #pragma once
 
+#include "d2_theme.hpp"
 #include <bitset>
 #include <d2_chardef.hpp>
 #include <d2_element_units.hpp>
@@ -227,9 +228,10 @@ namespace d2::style
                 value.subscribe_base(
                     _handle_impl(),
                     this,
-                    [](std::shared_ptr<void> ptr, void* base, const auto& value) -> bool
+                    [](std::shared_ptr<void> ptr, void* base, const auto& value, Theme::Query query)
+                        -> bool
                     {
-                        if (ptr == nullptr)
+                        if (ptr == nullptr || query == Theme::Query::Destroy)
                             return false;
                         auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
                         if (!base_ptr->_var_flags.test(off))
@@ -251,9 +253,10 @@ namespace d2::style
                 value.dependency.subscribe_base(
                     _handle_impl(),
                     this,
-                    [](std::shared_ptr<void> ptr, void* base, const auto& v) -> bool
+                    [](std::shared_ptr<void> ptr, void* base, const auto& v, Theme::Query query)
+                        -> bool
                     {
-                        if (ptr == nullptr)
+                        if (ptr == nullptr || query == Theme::Query::Destroy)
                             return false;
                         auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
                         if (!base_ptr->_var_flags.test(off))
