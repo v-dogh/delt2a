@@ -695,7 +695,6 @@ namespace d2::sys::net
         {
             if (auto* multi = _handle.load())
                 curl_multi_remove_handle(multi, op->handle);
-
             _connecting.erase(op->handle);
             _open.erase(op->handle);
         }
@@ -758,11 +757,11 @@ namespace d2::sys::net
 
                         auto op = it->second;
                         _connecting.erase(it);
-                        curl_multi_remove_handle(multi, easy);
 
                         op->curl_code = msg->data.result;
                         if (op->curl_code != CURLE_OK)
                         {
+                            curl_multi_remove_handle(multi, easy);
                             _transport_error(op, _curl_error(*op, op->curl_code));
                             continue;
                         }
@@ -820,6 +819,9 @@ namespace d2::sys::net
                     op->user_close_requested = true;
                     op->phase = Phase::Closed;
                     op->public_state = State::Closed;
+
+                    if (op->handle)
+                        curl_multi_remove_handle(multi, op->handle);
                     if (op->on_close)
                         op->on_close(1001, "WebSocket module unloaded", op->ctx);
                     op->reset_handle();
