@@ -224,7 +224,7 @@ namespace d2::style
             if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
             {
                 _var_flags.set(off);
-                value.subscribe(
+                value.subscribe_base(
                     _handle_impl(),
                     this,
                     [](std::shared_ptr<void> ptr, void* base, const auto& value) -> bool
@@ -248,7 +248,7 @@ namespace d2::style
                 // TODO: I don't think this is entirely right
                 // like what if we change this prop to another var, then test will work
                 // but technically it should destroy the previous dependency
-                value.dependency.subscribe(
+                value.dependency.subscribe_base(
                     _handle_impl(),
                     this,
                     [](std::shared_ptr<void> ptr, void* base, const auto& v) -> bool
@@ -960,4 +960,3 @@ public:                                                                         
     };
     using IZResponsive = IResponsive<d2::Element>::type<0>;
 } // namespace d2::style
-

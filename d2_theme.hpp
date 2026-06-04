@@ -305,7 +305,7 @@ namespace d2::style
             {
                 subscribe<Dummy>(handle, Dummy{}, std::forward<Func>(callback));
             }
-            void subscribe(std::weak_ptr<void> handle, void* base, manager_callback func)
+            void subscribe_base(std::weak_ptr<void> handle, void* base, manager_callback func)
             {
                 Deps dependency{handle, base, func};
                 bool keep = false;

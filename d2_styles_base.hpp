@@ -71,7 +71,7 @@ namespace d2::style
             if constexpr (impl::is_var<Type>)
             {
                 _set_dynamic_impl(Property, true);
-                value.subscribe(
+                value.subscribe_base(
                     _handle_impl(),
                     this,
                     [](void* base, const auto& value) -> bool
@@ -88,7 +88,7 @@ namespace d2::style
             else if constexpr (impl::is_dynavar<std::remove_cvref_t<Type>>)
             {
                 _set_dynamic_impl(Property, true);
-                value.dependency.subscribe(
+                value.dependency.subscribe_base(
                     _handle_impl(),
                     this,
                     [](void* base, const auto& v) -> bool
@@ -225,4 +225,3 @@ namespace d2::style
         }
     };
 } // namespace d2::style
-
