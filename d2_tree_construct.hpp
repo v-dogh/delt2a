@@ -379,6 +379,7 @@ namespace d2
         // Children
 
         template<typename Func, typename... Arge, typename... Args>
+            requires std::invocable<Func&&, TreeCtx<impl::deduced_type_t<Func>, State>>
         auto embed(
             const std::string& name,
             Func&& callback,
@@ -403,6 +404,7 @@ namespace d2
         }
 
         template<typename Func, typename... Arge, typename... Args>
+            requires std::invocable<Func&&, TreeCtx<impl::deduced_type_t<Func>, State>>
         auto
         embed(Func&& callback, std::tuple<Arge...> arge = {}, std::tuple<Args...> args = {}) const
         {
@@ -514,4 +516,3 @@ namespace d2
         }
     };
 } // namespace d2
-
