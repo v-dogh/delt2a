@@ -697,6 +697,11 @@ namespace mt
                     ));
                     return;
                 }
+                else if (token->action == RejectionToken::Action::Wait)
+                {
+                    workers[idx]->accept(task);
+                    return;
+                }
                 else if (token->action == RejectionToken::Action::Discard)
                 {
                     return;

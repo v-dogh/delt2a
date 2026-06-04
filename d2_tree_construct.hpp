@@ -218,19 +218,13 @@ namespace d2
         template<typename Func, typename... Argv> auto sync(Func&& callback, Argv&&... args) const
         {
             const auto ctx = context();
-            (ctx->is_synced()
-                 ? (std::forward<Func>(callback)(std::forward<Argv>(args)...))
-                 : ctx->sync(std::bind(std::forward<Func>(callback), std::forward<Argv>(args)...)));
+            ctx->sync(std::forward<Func>(callback), std::forward<Argv>(args)...);
         }
         template<typename Func, typename... Argv>
         auto sync_async(Func&& callback, Argv&&... args) const
         {
             const auto ctx = context();
-            (ctx->is_synced()
-                 ? (std::forward<Func>(callback)(std::forward<Argv>(args)...))
-                 : ctx->sync_async(
-                       std::bind(std::forward<Func>(callback), std::forward<Argv>(args)...)
-                   ));
+            ctx->sync_async(std::forward<Func>(callback), std::forward<Argv>(args)...);
         }
 
         template<typename Event, typename Func> Signals::Handle on(Event ev, Func&& callback) const
@@ -249,6 +243,15 @@ namespace d2
 
         TreeCtxBase& operator=(const TreeCtxBase&) = default;
         TreeCtxBase& operator=(TreeCtxBase&&) = default;
+
+        bool operator==(std::nullptr_t) const noexcept
+        {
+            return _ptr == nullptr;
+        }
+        bool operator!=(std::nullptr_t) const noexcept
+        {
+            return _ptr != nullptr;
+        }
     };
     template<typename Parent, typename State = d2::TreeState> class TreeCtx : public TreeCtxBase
     {

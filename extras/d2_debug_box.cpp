@@ -1106,35 +1106,36 @@ namespace d2::ex
                         class Sink : public rs::RuntimeLogSink
                         {
                         public:
-                            explicit Sink(TreeIter<MultiInput> ptr) : ptr(ptr) {}
+                            explicit Sink(TreeCtx<MultiInput> ctx) : ctx(ctx) {}
 
-                            TreeIter<MultiInput> ptr;
+                            TreeCtx<MultiInput> ctx;
 
                             void accept(rs::LogEntry entry) noexcept override
                             {
-                                if (ptr.weak().expired())
+                                if (ctx == nullptr)
                                     return;
-
-                                const auto value = std::format(
+                                auto value = std::format(
                                     "{0:}({1:})<{2:}> : {3:}\n",
                                     "",
                                     severity_to_str(entry.severity),
                                     entry.module,
                                     entry.msg
                                 );
-
-                                const auto scroll = ptr->vertical_scollbar();
-                                const auto synced = !scroll->getstate(Element::Display) ||
-                                                    scroll->relative_value() == 1.f;
-
-                                ptr->append(value);
-
-                                if (synced)
-                                    ptr->sync();
+                                ctx.sync_async(
+                                    [ctx = this->ctx, value = std::move(value)]()
+                                    {
+                                        const auto scroll = ctx->vertical_scollbar();
+                                        const auto synced = !scroll->getstate(Element::Display) ||
+                                                            scroll->relative_value() == 1.f;
+                                        ctx->append(value);
+                                        if (synced)
+                                            ctx->sync();
+                                    }
+                                );
                             }
                         };
                         ctx->disable_history();
-                        rs::context::get().sink<Sink>(ctx.ptr());
+                        rs::context::get().sink<Sink>(ctx);
                         Sink tmp(ctx.ptr());
                         rs::context::get().page([&](rs::LogEntry entry) { tmp.accept(entry); });
                         ctx.onv(

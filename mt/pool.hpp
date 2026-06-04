@@ -259,6 +259,7 @@ namespace mt
                 Reschedule,
                 Discard,
                 Throw,
+                Wait,
             } action;
             std::chrono::milliseconds delay{};
         };

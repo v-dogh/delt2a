@@ -123,39 +123,40 @@ namespace d2
             return nullptr;
         }
         std::shared_ptr<sys::SystemModule> ptr;
+        bool dyna = false;
         {
             std::shared_lock read_lock(_module_mtx);
             sys::ModuleStub* stub = _find_module(idx, id);
-            if (!stub)
+            if (stub == nullptr)
                 return nullptr;
             if (stub->status() == sys::SystemModule::Status::Offline)
             {
                 read_lock.unlock();
                 std::lock_guard write_lock(_module_mtx);
                 stub = _find_module(idx, id);
-                if (!stub)
+                if (stub == nullptr)
                     return nullptr;
                 if (stub->status() == sys::SystemModule::Status::Offline)
                 {
-                    D2_TLOG(
-                        Info,
-                        "Dynamically loading module: ",
-                        stub->info().name,
-                        (id.has_value() ? " at " : ""),
-                        (id.has_value() ? id.value() : "")
-                    );
                     stub->commit(_shared());
+                    ptr = stub->ptr();
+                    dyna = true;
                 }
             }
+            else
+                ptr = stub->ptr();
         }
+        if (dyna)
         {
-            std::shared_lock read_lock(_module_mtx);
-            sys::ModuleStub* stub = _find_module(idx, id);
-            if (!stub)
-                return nullptr;
-            ptr = stub->ptr();
+            D2_TLOG(
+                Info,
+                "Dynamically loading module: ",
+                ptr->info().name,
+                (id.has_value() ? " at " : ""),
+                (id.has_value() ? id.value() : "")
+            );
         }
-        if (!ptr)
+        else if (ptr == nullptr)
             return nullptr;
         if (ptr->status() == sys::SystemModule::Status::Offline)
         {
@@ -472,6 +473,24 @@ namespace d2
                 );
             }
         );
+        _scheduler->reconfigure(
+            [](mt::Node::Config& cfg)
+            {
+                cfg.on_exception = {[](std::exception_ptr ex)
+                                    {
+                                        D2_SAFE_BLOCK_BEGIN
+                                        std::rethrow_exception(ex);
+                                        D2_SAFE_BLOCK_END
+                                        return true;
+                                    }};
+                cfg.reject_callback = {[](mt::Task&, mt::ErrorCode, const mt::Node::Snapshot&)
+                                       {
+                                           return mt::Node::RejectionToken{
+                                               .action = mt::Node::RejectionToken::Action::Wait
+                                           };
+                                       }};
+            }
+        );
         D2_TLOG(Module, "Success in initialization")
     }
     void IOContext::_deinitialize()
@@ -489,18 +508,6 @@ namespace d2
         D2_TLOG(Info, "Activating extended code page")
 
         ExtendedCodePage::activate_thread();
-        _scheduler->reconfigure(
-            [](mt::Node::Config& cfg)
-            {
-                cfg.on_exception = {[](std::exception_ptr ex)
-                                    {
-                                        D2_SAFE_BLOCK_BEGIN
-                                        std::rethrow_exception(ex);
-                                        D2_SAFE_BLOCK_END
-                                        return true;
-                                    }};
-            }
-        );
 
         const auto in = input();
         const auto src = screen();
