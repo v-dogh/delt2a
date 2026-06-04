@@ -48,7 +48,7 @@ namespace d2::sys::net
         std::uint16_t close_code{1000};
         std::string close_reason{};
 
-        std::vector<Outgoing> outgoing{};
+        std::deque<Outgoing> outgoing{};
         std::optional<Outgoing> pending_send{};
 
         std::string message_buffer{};
@@ -368,11 +368,17 @@ namespace d2::sys::net
         op->last_ping = op->last_rx;
 
         _open.emplace(op->handle, op);
-
         if (op->on_open)
         {
             if (auto client = op->client.lock())
                 op->on_open(client);
+        }
+
+        while (!op->outgoing.empty() && op->phase == Phase::Open && !op->pending_send)
+        {
+            auto packet = std::move(op->outgoing.front());
+            op->outgoing.pop_front();
+            _send_outgoing(op, std::move(packet));
         }
     }
     void SystemWSCurl::_drive_open(std::shared_ptr<Operation> op)
@@ -419,10 +425,11 @@ namespace d2::sys::net
             op->outgoing.push_back(std::move(packet));
             return;
         }
+        if (!op->pending_send)
+            op->pending_send = std::move(packet);
 
         auto& msg = *op->pending_send;
         const auto flags = msg.type == Type::Text ? CURLWS_TEXT : CURLWS_BINARY;
-
         while (msg.offset < msg.payload.size())
         {
             std::size_t sent = 0;
@@ -437,6 +444,7 @@ namespace d2::sys::net
 
             if (code == CURLE_AGAIN)
                 return;
+
             if (code != CURLE_OK)
             {
                 _transport_error(op, _curl_error(*op, code));
@@ -448,6 +456,14 @@ namespace d2::sys::net
 
             if (sent == 0)
                 return;
+        }
+
+        op->pending_send.reset();
+        if (!op->outgoing.empty())
+        {
+            auto next = std::move(op->outgoing.front());
+            op->outgoing.pop_front();
+            _send_outgoing(op, std::move(next));
         }
     }
     void SystemWSCurl::_recv_available(std::shared_ptr<Operation> op)
