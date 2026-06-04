@@ -463,7 +463,20 @@ namespace d2
             D2_THRW("Another instance is already running");
         D2_TLOG(Module, "Starting IOContext")
         D2_TLOG(Info, "Activating extended code page")
+
         ExtendedCodePage::activate_thread();
+        _scheduler->reconfigure(
+            [](mt::Node::Config& cfg)
+            {
+                cfg.on_exception = {[](std::exception_ptr ex)
+                                    {
+                                        D2_SAFE_BLOCK_BEGIN
+                                        std::rethrow_exception(ex);
+                                        D2_SAFE_BLOCK_END
+                                        return true;
+                                    }};
+            }
+        );
 
         const auto in = input();
         const auto src = screen();

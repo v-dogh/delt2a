@@ -158,7 +158,9 @@ namespace d2::sys
     {
         if (std::holds_alternative<std::monostate>(_module))
             D2_THRW("Module stub is null");
-        return std::get<std::shared_ptr<SystemModule>>(_module);
+        else if (std::holds_alternative<std::shared_ptr<SystemModule>>(_module))
+            return std::get<std::shared_ptr<SystemModule>>(_module);
+        return nullptr;
     }
     SystemModule::ModInfo ModuleStub::info() const
     {

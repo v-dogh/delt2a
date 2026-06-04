@@ -3,6 +3,7 @@
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/flat_hash_set.h>
 #include <chrono>
+#include <exception>
 #include <memory>
 #include <shared_mutex>
 #include <stop_token>

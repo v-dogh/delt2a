@@ -122,13 +122,15 @@ namespace mt
 
     bool Worker::_process(PeriodicTask& task)
     {
+        const auto node = _node.lock();
         const auto type = task.query<Task::Query::Type>();
-        const auto token = task.query<Task::Query::Run>();
+        const auto token = task.query<Task::Query::Run>(Node::ExceptionHandler(node));
         _last_task = tp_to_itg(std::chrono::steady_clock::now());
         return token == Task::Token::Continue;
     }
     bool Worker::_process(Task& task)
     {
+        const auto node = _node.lock();
         const auto type = task.query<Task::Query::Type>();
         Task::Token token = Task::Token::Discard;
         if ((type & (Task::Periodic | Task::Delayed)) && task != nullptr)
@@ -144,7 +146,7 @@ namespace mt
         else
         {
             if (task != nullptr)
-                token = task.query<Task::Query::Run>();
+                token = task.query<Task::Query::Run>(Node::ExceptionHandler(node));
             _last_task = tp_to_itg(std::chrono::steady_clock::now());
         }
         _last_task_np = tp_to_itg(std::chrono::steady_clock::now());
@@ -367,6 +369,12 @@ namespace mt
     }
 
     // Node
+
+    bool Node::ExceptionHandler::handle(std::exception_ptr ptr)
+    {
+        auto cfg = _node->_cfg.load();
+        return _node->_event(cfg->on_exception, *cfg, ptr);
+    }
 
     std::size_t
     Node::_schedule_random(std::span<const std::shared_ptr<Worker>> workers, std::size_t samples)

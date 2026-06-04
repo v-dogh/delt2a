@@ -1034,9 +1034,7 @@ namespace d2::ex
                                 std::optional<std::string> id)
                             {
                                 const key key{info.index, id.value_or("")};
-
                                 used.emplace(key);
-
                                 auto f = inv.find(key);
                                 if (f == inv.end())
                                 {

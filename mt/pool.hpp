@@ -95,9 +95,9 @@ namespace mt
         Task(Task&&) = default;
         Task(const Task&) = default;
 
-        template<Query Qt> auto query() const
+        template<Query Qt, typename Input = std::any> auto query(Input&& in = std::any{}) const
         {
-            std::any out;
+            std::any out = in;
             if constexpr (Qt == Query::Run)
             {
                 _cb(Query::Run, out);
@@ -309,6 +309,21 @@ namespace mt
 
             event<void, ErrorCode> on_error{};
             event<void, ErrorCode, const Snapshot&> on_reject{};
+            event<bool, std::exception_ptr> on_exception{};
+        };
+        class ExceptionHandler
+        {
+        private:
+            std::shared_ptr<Node> _node{};
+        public:
+            ExceptionHandler(std::shared_ptr<Node> ptr) : _node(ptr) {}
+            ExceptionHandler(const ExceptionHandler&) = default;
+            ExceptionHandler(ExceptionHandler&&) = default;
+
+            bool handle(std::exception_ptr ptr);
+
+            ExceptionHandler& operator=(const ExceptionHandler&) = default;
+            ExceptionHandler& operator=(ExceptionHandler&&) = default;
         };
         using reconfigure_callback = std::function<void(Config&)>;
     private:
@@ -383,11 +398,11 @@ namespace mt
         template<typename Type, typename... Argv>
         auto _event(Type& ev, const Config& cfg, Argv&&... args)
         {
-            if (ev.empty())
-                return;
             using ret = std::invoke_result_t<typename Type::value_type, Argv...>;
             if constexpr (std::is_same_v<ret, void>)
             {
+                if (ev.empty())
+                    return;
                 _safe(
                     [&]()
                     {
@@ -397,8 +412,10 @@ namespace mt
                     cfg
                 );
             }
-            else if (std::is_same_v<ret, bool>)
+            else if constexpr (std::is_same_v<ret, bool>)
             {
+                if (ev.empty())
+                    return true;
                 bool out = true;
                 _safe(
                     [&]()
@@ -641,6 +658,8 @@ namespace mt
                          }
                          catch (...)
                          {
+                             auto& exh = std::any_cast<Node::ExceptionHandler&>(out);
+                             exh.handle(std::current_exception());
                          }
                          out = Task::Token::Discard;
                      }
@@ -689,10 +708,18 @@ namespace mt
                              }
                              catch (...)
                              {
+                                 auto& exh = std::any_cast<Node::ExceptionHandler&>(out);
                                  block->set_tick_exception(std::current_exception());
+                                 if (!exh.handle(std::current_exception()))
+                                 {
+                                     Future(block).discard();
+                                     out = Task::Token::Discard;
+                                     return;
+                                 }
                              }
+                             out = block->is_discarded() ? Task::Token::Discard
+                                                         : Task::Token::Continue;
                          }
-                         out = block->is_discarded() ? Task::Token::Discard : Task::Token::Continue;
                      }
                  }},
                 cfg.distribution
@@ -753,7 +780,14 @@ namespace mt
                              catch (...)
                              {
                                  if (ptr)
+                                 {
                                      ptr->set_exception(std::current_exception());
+                                 }
+                                 else
+                                 {
+                                     auto& exh = std::any_cast<Node::ExceptionHandler&>(out);
+                                     exh.handle(std::current_exception());
+                                 }
                              }
                          }
                          out = Task::Token::Discard;
@@ -805,7 +839,14 @@ namespace mt
                              catch (...)
                              {
                                  if (ptr)
+                                 {
                                      ptr->set_exception(std::current_exception());
+                                 }
+                                 else
+                                 {
+                                     auto& exh = std::any_cast<Node::ExceptionHandler&>(out);
+                                     exh.handle(std::current_exception());
+                                 }
                              }
                          }
                          out = Task::Token::Discard;
@@ -867,4 +908,3 @@ namespace mt
         ConcurrentPool& operator=(ConcurrentPool&&) = delete;
     };
 } // namespace mt
-
