@@ -4,6 +4,7 @@
 #include <absl/container/flat_hash_set.h>
 #include <atomic>
 #include <cstddef>
+#include <initializer_list>
 #include <memory>
 #include <span>
 #include <thread>
@@ -168,10 +169,38 @@ namespace d2::sys
     };
     template<typename Type> using module = ModulePtr<Type>;
 
-    template<typename Base, meta::ConstString Name> struct AbstractModule : public SystemModule
+    template<typename Base, Access Ac, Load::Spec LoadSpec, typename... Deps> struct ConcreteModule;
+
+    namespace impl
+    {
+        template<typename DepsA, typename... DepsB> struct MergeDeps;
+
+        template<typename... DepsA, typename... DepsB>
+        struct MergeDeps<std::tuple<DepsA...>, DepsB...>
+        {
+            static auto list()
+            {
+                return std::vector<std::type_index>{typeid(DepsA)..., typeid(DepsB)...};
+            }
+            static auto names()
+            {
+                return std::vector<std::string>{
+                    std::string(DepsA::module_info().name)...,
+                    std::string(DepsB::module_info().name)...
+                };
+            }
+        };
+    } // namespace impl
+
+    template<typename Base, meta::ConstString Name, typename... Deps>
+    struct AbstractModule : public SystemModule
     {
         D2_TAG_MODULE_VALUE(Name.view());
+    private:
+        using abstract_deps = std::tuple<Deps...>;
     public:
+        template<typename B, Access A, Load::Spec L, typename... D> friend struct ConcreteModule;
+
         using SystemModule::SystemModule;
 
         static ModInfo module_info()
@@ -192,8 +221,8 @@ namespace d2::sys
         static inline const SystemModule::ModPreset module_preset{
             .access = Ac,
             .spec = LoadSpec,
-            .deps = {typeid(Deps)...},
-            .dep_names = {std::string(Deps::module_info().name)...}
+            .deps = impl::MergeDeps<typename Base::abstract_deps, Deps...>::list(),
+            .dep_names = impl::MergeDeps<typename Base::abstract_deps, Deps...>::names()
         };
 
         module<Base> ptr() noexcept
