@@ -8,7 +8,7 @@
 
 namespace d2::sys
 {
-    class SystemClipboard : public AbstractModule<SystemClipboard, "Clipboard">
+    class SystemClipboard : public AbstractModule<SystemClipboard, "Clipboard", Access::TUnsafe>
     {
     public:
         using AbstractModule::AbstractModule;
@@ -18,7 +18,8 @@ namespace d2::sys
         virtual d2::string paste() = 0;
         virtual bool empty() = 0;
     };
-    class SystemNotifications : public AbstractModule<SystemNotifications, "Notifications">
+    class SystemNotifications
+        : public AbstractModule<SystemNotifications, "Notifications", Access::TSafe>
     {
     public:
         enum Targets : unsigned char
@@ -51,4 +52,3 @@ namespace d2::sys
     using clipboard = SystemClipboard;
     using notifications = SystemNotifications;
 } // namespace d2::sys
-

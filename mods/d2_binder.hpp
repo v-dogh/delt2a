@@ -19,9 +19,8 @@
 
 namespace d2::sys
 {
-    class SystemBinder
-        : public AbstractModule<SystemBinder, "Binder">,
-          public ConcreteModule<SystemBinder, Access::TUnsafe, Load::Lazy, sys::SystemScreen>
+    class SystemBinder : public AbstractModule<SystemBinder, "Binder", Access::TUnsafe>,
+                         public ConcreteModule<SystemBinder, Load::Lazy, sys::SystemScreen>
     {
         D2_TAG_MODULE(bdr)
     public:
@@ -99,4 +98,3 @@ namespace d2::sys
     };
     using binder = SystemBinder;
 } // namespace d2::sys
-

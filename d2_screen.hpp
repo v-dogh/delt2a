@@ -16,14 +16,9 @@
 
 namespace d2::sys
 {
-    class SystemScreen : public AbstractModule<SystemScreen, "Screen">,
-                         public ConcreteModule<
-                             SystemScreen,
-                             Access::TUnsafe,
-                             Load::Immediate,
-                             SystemInput,
-                             SystemOutput
-                         >
+    class SystemScreen
+        : public AbstractModule<SystemScreen, "Screen", Access::TUnsafe>,
+          public ConcreteModule<SystemScreen, Load::Immediate, SystemInput, SystemOutput>
     {
         D2_TAG_MODULE(src)
     public:

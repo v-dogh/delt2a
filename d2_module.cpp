@@ -1,5 +1,6 @@
 #include "d2_module.hpp"
-#include "d2_exceptions.hpp"
+
+#include <d2_exceptions.hpp>
 #include <d2_io_handler.hpp>
 #include <memory>
 #include <typeindex>
@@ -51,6 +52,15 @@ namespace d2::sys
     void SystemModule::_stat(Status status)
     {
         _status = status;
+    }
+
+    SystemModule::Status SystemModule::_pre_load_impl()
+    {
+        return Status::Ok;
+    }
+    SystemModule::Status SystemModule::_post_unload_impl()
+    {
+        return Status::Ok;
     }
 
     SystemModule::Status SystemModule::_load_impl()
@@ -112,7 +122,13 @@ namespace d2::sys
             [this]()
             {
                 D2_TAG_MODULE_RUNTIME(info().name)
-                const auto stat = _load_impl();
+                auto stat = _pre_load_impl();
+                if (_status == Status::Offline)
+                {
+                    D2_TLOG(Warning, "Module degraded at pre load")
+                    return Status::Degraded;
+                }
+                stat = _load_impl();
                 if (_status == Status::Offline)
                 {
                     D2_TLOG(Warning, "Module degraded")
@@ -130,8 +146,16 @@ namespace d2::sys
             [this]()
             {
                 D2_TAG_MODULE_RUNTIME(info().name)
-                const auto stat = _unload_impl();
-                if (_status == Status::Ok)
+                auto stat = _unload_impl();
+                if (_status != Status::Ok)
+                {
+                    D2_TLOG(Warning, "Failed to unload module");
+                    stat = _post_unload_impl();
+                    if (_status != Status::Ok)
+                        D2_TLOG(Warning, "Failed to post unload as well");
+                }
+                stat = _post_unload_impl();
+                if (stat == Status::Ok)
                     return Status::Offline;
                 return stat;
             }

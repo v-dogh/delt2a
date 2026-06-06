@@ -12,10 +12,8 @@
 
 namespace d2::sys::net
 {
-    class SystemHTTPCurl
-        : public SystemHTTP,
-          public d2::sys::
-              ConcreteModule<SystemHTTPCurl, d2::sys::Access::TSafe, d2::sys::Load::Lazy>
+    class SystemHTTPCurl : public SystemHTTP,
+                           public d2::sys::ConcreteModule<SystemHTTPCurl, d2::sys::Load::Lazy>
     {
     private:
         enum class BodyMode
@@ -63,4 +61,3 @@ namespace d2::sys::net
     };
     using http_curl = SystemHTTPCurl;
 } // namespace d2::sys::net
-

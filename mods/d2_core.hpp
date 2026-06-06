@@ -9,7 +9,7 @@
 namespace d2::sys
 {
     // Generic base for system input
-    class SystemInput : public AbstractModule<SystemInput, "Input">
+    class SystemInput : public AbstractModule<SystemInput, "Input", Access::TSafe>
     {
     private:
         struct FrameLock
@@ -82,7 +82,7 @@ namespace d2::sys
 
     // Generic base for system output
     // Provides interfaces used for rendering to the console and other OS agnostic interfaces
-    class SystemOutput : public AbstractModule<SystemOutput, "Output">
+    class SystemOutput : public AbstractModule<SystemOutput, "Output", Access::TUnsafe>
     {
     public:
         static constexpr auto image_constant =
@@ -155,4 +155,3 @@ namespace d2::sys
     using output = SystemOutput;
     using screen = SystemScreen;
 } // namespace d2::sys
-

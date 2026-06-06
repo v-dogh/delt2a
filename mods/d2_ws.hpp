@@ -5,7 +5,7 @@
 
 namespace d2::sys::net
 {
-    class SystemWS : public d2::sys::AbstractModule<SystemWS, "WebSockets">
+    class SystemWS : public d2::sys::AbstractModule<SystemWS, "WebSockets", d2::sys::Access::TSafe>
     {
     public:
         enum class State
@@ -67,4 +67,3 @@ namespace d2::sys::net
     };
     using ws = SystemWS;
 } // namespace d2::sys::net
-

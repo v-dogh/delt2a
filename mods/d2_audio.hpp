@@ -32,7 +32,7 @@ namespace d2::sys
         };
     } // namespace impl
 
-    class SystemAudio : public AbstractModule<SystemAudio, "Audio">
+    class SystemAudio : public AbstractModule<SystemAudio, "Audio", Access::TSafe>
     {
     public:
         using Format = impl::Format;

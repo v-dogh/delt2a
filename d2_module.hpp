@@ -4,7 +4,6 @@
 #include <absl/container/flat_hash_set.h>
 #include <atomic>
 #include <cstddef>
-#include <initializer_list>
 #include <memory>
 #include <span>
 #include <thread>
@@ -43,6 +42,8 @@ namespace d2::sys
         TSafe,
         TUnsafe,
     };
+
+    template<typename Base, Load::Spec LoadSpec, typename... Deps> struct ConcreteModule;
 
     class SystemModule : public std::enable_shared_from_this<SystemModule>
     {
@@ -84,6 +85,9 @@ namespace d2::sys
         void _mark_safe(std::thread::id id = std::this_thread::get_id());
         void _ensure_loaded(std::function<Status()> callback);
         void _stat(Status status);
+
+        virtual Status _pre_load_impl();
+        virtual Status _post_unload_impl();
 
         virtual Status _load_impl();
         virtual Status _unload_impl();
@@ -169,8 +173,6 @@ namespace d2::sys
     };
     template<typename Type> using module = ModulePtr<Type>;
 
-    template<typename Base, Access Ac, Load::Spec LoadSpec, typename... Deps> struct ConcreteModule;
-
     namespace impl
     {
         template<typename DepsA, typename... DepsB> struct MergeDeps;
@@ -192,14 +194,15 @@ namespace d2::sys
         };
     } // namespace impl
 
-    template<typename Base, meta::ConstString Name, typename... Deps>
+    template<typename Base, meta::ConstString Name, Access Ac, typename... Deps>
     struct AbstractModule : public SystemModule
     {
         D2_TAG_MODULE_VALUE(Name.view());
     private:
-        using abstract_deps = std::tuple<Deps...>;
+        static constexpr auto module_access = Ac;
+        using module_deps = std::tuple<Deps...>;
     public:
-        template<typename B, Access A, Load::Spec L, typename... D> friend struct ConcreteModule;
+        template<typename B, Load::Spec L, typename... D> friend struct ConcreteModule;
 
         using SystemModule::SystemModule;
 
@@ -215,14 +218,20 @@ namespace d2::sys
     struct ConcreteModuleTag
     {
     };
-    template<typename Base, Access Ac, Load::Spec LoadSpec, typename... Deps>
+
+    template<typename Module>
+    static constexpr bool is_abstract = !std::is_base_of_v<ConcreteModuleTag, Module>;
+
+    template<typename Base, Load::Spec LoadSpec, typename... Deps>
     struct ConcreteModule : private ConcreteModuleTag
     {
+        template<typename B, Load::Spec L, typename... D> friend struct ConcreteModule;
+
         static inline const SystemModule::ModPreset module_preset{
-            .access = Ac,
+            .access = Base::module_access,
             .spec = LoadSpec,
-            .deps = impl::MergeDeps<typename Base::abstract_deps, Deps...>::list(),
-            .dep_names = impl::MergeDeps<typename Base::abstract_deps, Deps...>::names()
+            .deps = impl::MergeDeps<typename Base::module_deps, Deps...>::list(),
+            .dep_names = impl::MergeDeps<typename Base::module_deps, Deps...>::names()
         };
 
         module<Base> ptr() noexcept
@@ -232,9 +241,6 @@ namespace d2::sys
             );
         }
     };
-
-    template<typename Module>
-    static constexpr bool is_abstract = !std::is_base_of_v<ConcreteModuleTag, Module>;
 
     struct ModuleStub
     {

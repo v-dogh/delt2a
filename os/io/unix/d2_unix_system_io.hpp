@@ -38,9 +38,8 @@ namespace d2::sys
         virtual void wait(std::chrono::steady_clock::time_point deadline) noexcept override;
     };
 
-    class UnixTerminalInput
-        : public SystemInput,
-          public ConcreteModule<UnixTerminalInput, Access::TSafe, Load::Immediate>
+    class UnixTerminalInput : public SystemInput,
+                              public ConcreteModule<UnixTerminalInput, Load::Immediate>
     {
     private:
         std::shared_mutex _mtx{};
@@ -69,9 +68,8 @@ namespace d2::sys
         void mask_interrupts();
         void unmask_interrupts();
     };
-    class UnixTerminalOutput
-        : public SystemOutput,
-          public ConcreteModule<UnixTerminalOutput, Access::TUnsafe, Load::Immediate>
+    class UnixTerminalOutput : public SystemOutput,
+                               public ConcreteModule<UnixTerminalOutput, Load::Immediate>
     {
     private:
         static constexpr auto max_color_len_ =
@@ -142,4 +140,3 @@ namespace d2::sys
         virtual std::size_t swapframe_size() override;
     };
 } // namespace d2::sys
-

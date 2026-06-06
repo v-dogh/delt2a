@@ -15,9 +15,8 @@
 
 namespace d2::sys::net
 {
-    class SystemWSCurl
-        : public SystemWS,
-          public d2::sys::ConcreteModule<SystemWSCurl, d2::sys::Access::TSafe, d2::sys::Load::Lazy>
+    class SystemWSCurl : public SystemWS,
+                         public d2::sys::ConcreteModule<SystemWSCurl, d2::sys::Load::Lazy>
     {
     private:
         enum class Phase

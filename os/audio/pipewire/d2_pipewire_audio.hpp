@@ -1,8 +1,8 @@
 #pragma once
 
 #include <d2_io_handler.hpp>
-#include <mods/d2_audio.hpp>
 #include <d2_module.hpp>
+#include <mods/d2_audio.hpp>
 
 #include <pipewire/extensions/metadata.h>
 #include <pipewire/pipewire.h>
@@ -17,9 +17,8 @@
 
 namespace d2::sys
 {
-    class PipewireSystemAudio
-        : public SystemAudio,
-          public ConcreteModule<PipewireSystemAudio, Access::TSafe, Load::Lazy>
+    class PipewireSystemAudio : public SystemAudio,
+                                public ConcreteModule<PipewireSystemAudio, Load::Lazy>
     {
     private:
         struct Voice
@@ -220,5 +219,4 @@ namespace d2::sys
         virtual void filter_remove(Device dev, const std::string& name) override;
         virtual void filter_clear(Device dev) override;
     };
-} // namespace d2::sys::ext
-
+} // namespace d2::sys
