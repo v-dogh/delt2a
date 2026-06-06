@@ -1,5 +1,6 @@
 #pragma once
 
+#include "d2_exceptions.hpp"
 #include "d2_theme.hpp"
 #include <bitset>
 #include <d2_chardef.hpp>
@@ -10,6 +11,7 @@
 #include <d2_tree_element.hpp>
 #include <d2_tree_parent.hpp>
 #include <type_traits>
+#include <utility>
 
 namespace d2::style
 {
@@ -111,6 +113,7 @@ namespace d2::style
                                          Interfaces...
                                      >::offset>...
     {
+        D2_TAG_MODULE(tree)
     public:
         using property = uai_property;
         template<property Property> using type_of = decltype(get<Property>());
@@ -207,73 +210,72 @@ namespace d2::style
             return _base()->state()->context();
         }
 
-        void _clear_anims(uai_property prop)
-        {
-            _context()->screen()->clear_animations(_base()->traverse(), prop);
-        }
-
-        template<property Property, bool Temporary, typename Type>
-        auto _int_set(Type&& value, bool temporary = false)
+        template<property Property, typename Type> auto _int_set(Type&& value, bool temporary)
         {
             static_assert(Property <= last_offset_, "Invalid Property");
             using interface = SearchPropertyOwner<base_offset_, Property>::type;
             constexpr auto off = Property - base_offset_;
 
-            if (!Temporary)
-                _clear_anims(Property);
+            if (!temporary)
+                _clear_anims_impl(Property);
 
             if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
             {
+                if (temporary)
+                    D2_THRW("A variable cannot be used in a temporary set");
                 _var_flags.set(off);
-                value.subscribe_base(
-                    _handle_impl(),
-                    this,
-                    [](std::shared_ptr<void> ptr, void* base, const auto& value, Theme::Query query)
-                        -> bool
-                    {
-                        if (ptr == nullptr || query == Theme::Query::Destroy)
-                            return false;
-                        auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
-                        if (!base_ptr->_var_flags.test(off))
-                            return false;
-                        if (!Temporary)
-                            base_ptr->_clear_anims(Property);
-                        base_ptr->template set<Property>(value);
-                        base_ptr->_var_flags.set(off);
-                        return true;
-                    }
+                _register_dep_bind(
+                    Property,
+                    value.subscribe_base(
+                        _handle_impl(),
+                        this,
+                        [](std::shared_ptr<void> ptr, void* base, const auto& value, DepQuery query)
+                            -> bool
+                        {
+                            if (ptr == nullptr || query == DepQuery::Destroy)
+                                return false;
+                            auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
+                            base_ptr->_clear_anims_impl(Property);
+                            base_ptr->template set<Property, true>(value);
+                            return true;
+                        }
+                    )
                 );
             }
             else if constexpr (impl::is_dynavar<std::remove_cvref_t<Type>>)
             {
+                if (temporary)
+                    D2_THRW("A dynamic variable cannot be used in a temporary set");
                 _var_flags.set(off);
-                // TODO: I don't think this is entirely right
-                // like what if we change this prop to another var, then test will work
-                // but technically it should destroy the previous dependency
-                value.dependency.subscribe_base(
-                    _handle_impl(),
-                    this,
-                    [](std::shared_ptr<void> ptr, void* base, const auto& v, Theme::Query query)
-                        -> bool
-                    {
-                        if (ptr == nullptr || query == Theme::Query::Destroy)
-                            return false;
-                        auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
-                        if (!base_ptr->_var_flags.test(off))
-                            return false;
-                        if (!Temporary)
-                            base_ptr->_clear_anims(Property);
-                        base_ptr->template set<Property>(
-                            std::remove_cvref_t<decltype(value)>::filter(v)
-                        );
-                        base_ptr->_var_flags.set(off);
-                        return true;
-                    }
+                _register_dep_bind(
+                    Property,
+                    value.dependency.subscribe_base(
+                        _handle_impl(),
+                        this,
+                        [](std::shared_ptr<void> ptr, void* base, const auto& value, DepQuery query)
+                            -> bool
+                        {
+                            if (ptr == nullptr || query == DepQuery::Destroy)
+                                return false;
+                            auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
+                            base_ptr->_clear_anims_impl(Property);
+                            base_ptr->template set<Property, true>(
+                                std::remove_cvref_t<decltype(value)>::filter(value)
+                            );
+                            return true;
+                        }
+                    )
                 );
             }
             else
             {
-                _var_flags.set(off, _var_flags.test(off) && Temporary);
+                if (!temporary)
+                {
+                    if (_var_flags.test(off))
+                        _deregister_dep_bind(Property);
+                }
+                else
+                    _var_flags.set(off, false);
                 auto [ptr, type] = interface::template get<Property - interface::base>();
                 *ptr = std::forward<Type>(value);
                 _signal_base_impl(type, Property);
@@ -316,13 +318,13 @@ namespace d2::style
             }
         }
 
-        template<property Property, bool Temporary, typename Type>
-        void _int_set_synced(Type&& value, bool temporary = false)
+        template<property Property, typename Type>
+        void _int_set_synced(Type&& value, bool temporary)
         {
             const auto ctx = _context();
             if (ctx->is_synced())
             {
-                _int_set<Property, Temporary>(std::forward<Type>(value));
+                _int_set<Property>(std::forward<Type>(value), temporary);
             }
             else
             {
@@ -330,13 +332,13 @@ namespace d2::style
                 if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
                 {
                     static_assert(std::is_reference_v<Type>, "Dependency must be a reference");
-                    ctx->sync([this, &value]()
-                              { _int_set<Property, Temporary>(std::move(value)); });
+                    ctx->sync([this, value, temporary]() mutable
+                              { _int_set<Property>(std::move(value), temporary); });
                 }
                 else
                 {
-                    ctx->sync([this, value = std::forward<Type>(value)]()
-                              { _int_set<Property, Temporary>(std::move(value)); });
+                    ctx->sync([this, value, temporary]() mutable
+                              { _int_set<Property>(std::move(value), temporary); });
                 }
             }
         }
@@ -377,10 +379,25 @@ namespace d2::style
                 }
             }
         }
+        virtual void _clear_anims_impl(uai_property prop) override
+        {
+            _context()->screen()->clear_animations(_base()->traverse(), prop);
+        }
         virtual void _signal_base_impl(Element::write_flag type, property prop) override
         {
             if (type != 0x00 && !this->getistate(Element::InternalState::IsBeingInitialized))
                 internal::ElementView::from(_base()->shared_from_this()).signal_write(type, prop);
+        }
+        virtual void _register_dep_bind(property prop, DependencyHandle handle) override
+        {
+            internal::ElementView::from(_base()->shared_from_this())
+                .register_bind(prop, std::move(handle));
+        }
+        virtual void _deregister_dep_bind(property prop) override
+        {
+            const auto off = prop - base_offset_;
+            if (_var_flags.test(off))
+                internal::ElementView::from(_base()->shared_from_this()).deregister_bind(prop);
         }
         virtual void _set_dynamic_impl(property prop, bool value) override
         {
@@ -472,12 +489,12 @@ namespace d2::style
                 }
                 else
                 {
-                    _int_set_synced<Property, Temporary>(std::forward<Type>(value));
+                    _int_set_synced<Property>(std::forward<Type>(value), Temporary);
                 }
             }
             else
             {
-                _int_set_synced<Property, Temporary>(std::forward<Type>(value));
+                _int_set_synced<Property>(std::forward<Type>(value), Temporary);
             }
             return static_cast<Base&>(*this);
         }

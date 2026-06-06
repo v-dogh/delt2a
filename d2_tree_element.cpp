@@ -218,6 +218,24 @@ namespace d2
         }
     }
 
+    void Element::_obliterate_dep_bind(style::uai_property prop)
+    {
+        if (_deps == nullptr)
+            D2_THRW("There are no binds to obliterate");
+        auto f = std::find_if(
+            _deps->buf.begin(), _deps->buf.end(), [&](const auto& v) { return v.property == prop; }
+        );
+        if (f == _deps->buf.end())
+            D2_THRW("Invalid bind passed to obliterate, not found");
+        _deps->buf.erase(f);
+    }
+    void Element::_bind_dep(style::uai_property prop, style::DependencyHandle handle)
+    {
+        if (_deps == nullptr)
+            _deps = std::make_unique<BindStorage>();
+        _deps->buf.push_back({.handle = std::move(handle), .property = prop});
+    }
+
     void Element::_signal_context_change_sub(write_flag type, unsigned int prop, ptr element)
     {
         if (const auto flags = _contextual_change(type))
@@ -739,6 +757,14 @@ namespace d2
         void ElementView::signal_update(Element::internal_flag type) const
         {
             return _ptr->_signal_update(type);
+        }
+        void ElementView::register_bind(style::uai_property prop, style::DependencyHandle handle)
+        {
+            _ptr->_bind_dep(prop, std::move(handle));
+        }
+        void ElementView::deregister_bind(style::uai_property prop)
+        {
+            _ptr->_obliterate_dep_bind(prop);
         }
         void ElementView::trigger_event(in::InputFrame& frame, bool recursive)
         {

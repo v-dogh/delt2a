@@ -60,15 +60,15 @@ namespace d2
     public:
         template<typename Type> void set(const std::string& name, Type value)
         {
-            using dtype = style::Theme::Dependency<std::remove_cvref_t<Type>>;
+            using dtype = style::Dependency<std::remove_cvref_t<Type>>;
             auto [it, created] = _deps.emplace(name, std::any{});
             if (created)
                 it->second.emplace<dtype>();
             std::any_cast<dtype&>(it->second) = std::forward<Type>(value);
         }
-        template<typename Type> style::Theme::Dependency<Type>& get(const std::string& name)
+        template<typename Type> style::Dependency<Type>& get(const std::string& name)
         {
-            using dtype = style::Theme::Dependency<std::remove_cvref_t<Type>>;
+            using dtype = style::Dependency<std::remove_cvref_t<Type>>;
             if (auto f = _deps.find(name); f == _deps.end())
             {
                 set(name, Type());
@@ -79,4 +79,3 @@ namespace d2
         }
     };
 } // namespace d2
-

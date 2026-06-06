@@ -1,6 +1,6 @@
 #pragma once
 
-#include <algorithm>
+#include <d2_exceptions.hpp>
 #include <d2_meta.hpp>
 #include <d2_pixel.hpp>
 #include <memory>
@@ -9,493 +9,651 @@
 
 namespace d2::style
 {
-    class Theme : public std::enable_shared_from_this<Theme>
+    enum class DepQuery
     {
-    public:
-        enum class Query
+        Invoke,
+        Destroy,
+    };
+
+    class DependencyBase
+    {
+        D2_TAG_MODULE(react)
+    protected:
+        struct Deps
         {
-            Invoke,
-            Destroy,
+            std::weak_ptr<void> obj{};
+            void* base{nullptr};
+            void (*func)(){nullptr};
+            std::uint32_t generation{0};
         };
-        template<typename Type> class Dependency
+    private:
+        struct StateData
+        {
+            DependencyBase* owner{nullptr};
+            std::size_t recursion_ctr{0};
+            std::uint32_t next_generation{1};
+            bool destroying{false};
+
+            std::vector<Deps> dependencies{};
+            std::vector<std::uint32_t> free_slots{};
+            std::vector<std::uint32_t> pending_free{};
+            std::vector<Deps> pending_destroy{};
+        };
+    public:
+        class Handle
         {
         public:
-            using value_type = Type;
-            using manager_callback = bool (*)(std::shared_ptr<void>, void*, const Type&, Query);
+            enum class State
+            {
+                Inactive,
+                Active
+            };
         private:
-            struct Dummy
-            {
-            };
-            struct Deps
-            {
-                std::weak_ptr<void> obj{};
-                void* base{nullptr};
-                manager_callback func{nullptr};
-            };
-            // trampoline | callback | ptr
-            using dynalink =
-                // callback | provider | this
-                std::tuple<Type (*)(void (*)(), void*, void*, bool), void (*)(), void*>;
-        private:
-            std::size_t _recursion_ctr{0};
-            std::variant<Type, Dependency<Type>*, dynalink> _value{Type()};
-            std::vector<Deps> _dependencies{};
-            std::vector<Deps> _pending_sub{};
-            std::vector<Deps> _pending_unsub{};
+            std::weak_ptr<StateData> _state{};
+            std::uint32_t _index{0};
+            std::uint32_t _generation{0};
 
-            struct InvokeGuard
+            Handle(std::weak_ptr<StateData> state, std::uint32_t index, std::uint32_t generation) :
+                _state(std::move(state)), _index(index), _generation(generation)
             {
-                Dependency& self;
-
-                explicit InvokeGuard(Dependency& self) : self(self)
-                {
-                    ++self._recursion_ctr;
-                }
-                ~InvokeGuard()
-                {
-                    --self._recursion_ctr;
-                    if (self._recursion_ctr == 0)
-                        self._flush_pending();
-                }
-
-                InvokeGuard(const InvokeGuard&) = delete;
-                InvokeGuard& operator=(const InvokeGuard&) = delete;
-            };
-
-            Dependency& _source()
-            {
-                auto* current = this;
-                while (std::holds_alternative<Dependency<Type>*>(current->_value))
-                {
-                    auto* next = std::get<Dependency<Type>*>(current->_value);
-                    if (next == nullptr)
-                        throw std::logic_error("Dependency link is null");
-                    current = next;
-                }
-                return *current;
-            }
-            const Dependency& _source() const
-            {
-                auto* current = this;
-                while (std::holds_alternative<Dependency<Type>*>(current->_value))
-                {
-                    auto* next = std::get<Dependency<Type>*>(current->_value);
-                    if (next == nullptr)
-                        throw std::logic_error("Dependency link is null");
-                    current = next;
-                }
-                return *current;
-            }
-            Type _read() const
-            {
-                const auto& src = _source();
-                if (std::holds_alternative<Type>(src._value))
-                    return std::get<Type>(src._value);
-                const auto& [callback, icb, ptr] = std::get<dynalink>(src._value);
-                return callback(icb, ptr, const_cast<Dependency<Type>*>(&src), false);
-            }
-            template<typename Func> decltype(auto) _with_value(Func&& func) const
-            {
-                const auto& src = _source();
-                if (std::holds_alternative<Type>(src._value))
-                    return std::forward<Func>(func)(std::get<Type>(src._value));
-                const auto v = _read();
-                return std::forward<Func>(func)(v);
             }
 
-            bool _invoke_raw(const Deps& dependency, Query query) const
+            friend class DependencyBase;
+        public:
+            Handle() = default;
+            Handle(const Handle&) = delete;
+            Handle(Handle&& other) noexcept :
+                _state(std::move(other._state)), _index(std::exchange(other._index, 0)),
+                _generation(std::exchange(other._generation, 0))
             {
-                const auto obj = dependency.obj;
-                auto* const base = dependency.base;
-                const auto func = dependency.func;
-                if (func == nullptr)
-                    return false;
-                return _with_value([&](const Type& v) { return func(obj.lock(), base, v, query); });
             }
-            bool _invoke(Deps& dependency, Query query)
+            ~Handle()
             {
-                InvokeGuard guard(*this);
-                return _invoke_raw(dependency, query);
+                close();
             }
 
-            void _destroy(Deps dependency)
+            void close()
             {
-                const auto obj = dependency.obj;
-                auto* const base = dependency.base;
-                const auto func = dependency.func;
-                if (func == nullptr)
+                const auto state = _state.lock();
+                const auto index = _index;
+                const auto generation = _generation;
+
+                release();
+                if (state == nullptr || state->owner == nullptr || state->destroying)
                     return;
-                _with_value([&](const Type& v) { func(obj.lock(), base, v, Query::Destroy); });
+                state->owner->_close_slot(index, generation);
             }
-            void _queue_sub(Deps dependency)
+            void release() noexcept
             {
-                if (_recursion_ctr != 0)
-                    _pending_sub.push_back(std::move(dependency));
-                else
-                    _dependencies.push_back(std::move(dependency));
+                _state = std::weak_ptr<StateData>();
+                _index = 0;
+                _generation = 0;
             }
-            void _queue_unsub(Deps& dependency)
+            State state() const noexcept
             {
+                auto state = _state.lock();
+                if (state == nullptr || state->owner == nullptr || state->destroying)
+                    return State::Inactive;
+                if (_index >= state->dependencies.size())
+                    return State::Inactive;
+
+                const auto& dependency = state->dependencies[_index];
                 if (dependency.func == nullptr)
-                    return;
-
-                if (_recursion_ctr != 0)
-                {
-                    _pending_unsub.push_back(dependency);
-                    dependency.obj = std::weak_ptr<void>();
-                    dependency.base = nullptr;
-                    dependency.func = nullptr;
-                }
-                else
-                {
-                    auto copy = dependency;
-                    dependency.obj = std::weak_ptr<void>();
-                    dependency.base = nullptr;
-                    dependency.func = nullptr;
-                    _destroy(copy);
-                }
+                    return State::Inactive;
+                if (dependency.generation != _generation)
+                    return State::Inactive;
+                return State::Active;
             }
 
-            template<typename Pred> void _unsubscribe_if(Pred&& pred)
+            Handle& operator=(const Handle&) = delete;
+            Handle& operator=(Handle&& other) noexcept
             {
-                std::vector<Deps> destroy{};
-                for (auto it = _pending_sub.begin(); it != _pending_sub.end();)
+                if (this == &other)
+                    return *this;
+
+                close();
+
+                _state = std::move(other._state);
+                _index = std::exchange(other._index, 0);
+                _generation = std::exchange(other._generation, 0);
+
+                return *this;
+            }
+
+            operator bool() const noexcept
+            {
+                return state() == State::Active;
+            }
+        };
+    protected:
+        std::shared_ptr<StateData> _state{};
+
+        struct InvokeGuard
+        {
+            DependencyBase& self;
+            std::shared_ptr<StateData> state;
+
+            InvokeGuard(DependencyBase& self) : self(self), state(self._state)
+            {
+                if (state != nullptr)
+                    ++state->recursion_ctr;
+            }
+            InvokeGuard(const InvokeGuard&) = delete;
+            InvokeGuard(DependencyBase& self, std::shared_ptr<StateData> state) :
+                self(self), state(std::move(state))
+            {
+                if (this->state != nullptr)
+                    ++this->state->recursion_ctr;
+            }
+            ~InvokeGuard()
+            {
+                if (state == nullptr)
+                    return;
+                --state->recursion_ctr;
+                if (state->recursion_ctr == 0 && state->owner == &self && !state->destroying)
+                    self._flush_pending();
+            }
+
+            InvokeGuard& operator=(const InvokeGuard&) = delete;
+        };
+
+        DependencyBase() = default;
+        DependencyBase(const DependencyBase&) {}
+        DependencyBase(DependencyBase&&) = delete;
+        ~DependencyBase()
+        {
+            if (_state != nullptr)
+            {
+                _state->destroying = true;
+                _state->owner = nullptr;
+            }
+        }
+
+        std::shared_ptr<StateData> _ensure_state()
+        {
+            if (_state == nullptr)
+            {
+                _state = std::make_shared<StateData>();
+                _state->owner = this;
+            }
+            return _state;
+        }
+        std::uint32_t _next_generation()
+        {
+            auto generation = _state->next_generation++;
+            if (_state->next_generation == 0)
+                _state->next_generation = 1;
+            return generation;
+        }
+        Handle _make_handle(std::uint32_t index)
+        {
+            return Handle{_state, index, _state->dependencies[index].generation};
+        }
+        Handle _insert_slot(Deps dependency)
+        {
+            auto state = _ensure_state();
+            std::uint32_t index = 0;
+            bool found = false;
+            if (state->recursion_ctr == 0)
+            {
+                while (!state->free_slots.empty())
                 {
-                    if (std::forward<Pred>(pred)(*it))
+                    index = state->free_slots.back();
+                    state->free_slots.pop_back();
+
+                    if (index < state->dependencies.size() &&
+                        state->dependencies[index].func == nullptr)
                     {
-                        destroy.push_back(*it);
-                        it = _pending_sub.erase(it);
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            dependency.generation = _next_generation();
+            if (!found)
+            {
+                if (state->dependencies.size() >= std::numeric_limits<std::uint32_t>::max())
+                    D2_THRW("Dependency subscription storage overflow");
+
+                index = static_cast<std::uint32_t>(state->dependencies.size());
+                state->dependencies.push_back(std::move(dependency));
+            }
+            else
+                state->dependencies[index] = std::move(dependency);
+            return _make_handle(index);
+        }
+        void _close_slot(std::uint32_t index, std::uint32_t generation)
+        {
+            if (_state == nullptr)
+                return;
+
+            auto state = _state;
+            if (state->destroying)
+                return;
+            if (index >= state->dependencies.size())
+                return;
+            auto& slot = state->dependencies[index];
+            if (slot.func == nullptr)
+                return;
+            if (slot.generation != generation)
+                return;
+
+            auto dependency = slot;
+            slot = Deps{};
+            slot.generation = _next_generation();
+            if (state->recursion_ctr != 0)
+            {
+                state->pending_destroy.push_back(dependency);
+                state->pending_free.push_back(index);
+            }
+            else
+            {
+                _destroy(dependency);
+                state->free_slots.push_back(index);
+                _cleanup();
+            }
+        }
+        void _cleanup()
+        {
+            if (_state == nullptr)
+                return;
+            auto state = _state;
+            if (state->recursion_ctr != 0 || state->destroying)
+                return;
+            while (!state->dependencies.empty() && state->dependencies.back().func == nullptr)
+                state->dependencies.pop_back();
+        }
+        void _flush_pending()
+        {
+            if (_state == nullptr)
+                return;
+            auto state = _state;
+            if (state->recursion_ctr != 0 || state->destroying)
+                return;
+
+            if (!state->pending_destroy.empty())
+            {
+                auto pending = std::move(state->pending_destroy);
+                state->pending_destroy.clear();
+
+                for (auto& it : pending)
+                    _destroy(it);
+            }
+            if (!state->pending_free.empty())
+            {
+                auto pending = std::move(state->pending_free);
+                state->pending_free.clear();
+                for (decltype(auto) index : pending)
+                {
+                    if (index < state->dependencies.size() &&
+                        state->dependencies[index].func == nullptr)
+                        state->free_slots.push_back(index);
+                }
+            }
+            _cleanup();
+        }
+        void _destroy_state()
+        {
+            auto state = std::move(_state);
+            if (state == nullptr)
+                return;
+
+            state->destroying = true;
+            state->owner = nullptr;
+
+            auto dependencies = std::move(state->dependencies);
+            auto pending_destroy = std::move(state->pending_destroy);
+
+            state->dependencies.clear();
+            state->free_slots.clear();
+            state->pending_free.clear();
+            state->pending_destroy.clear();
+
+            for (auto& it : dependencies)
+                _destroy(it);
+            for (auto& it : pending_destroy)
+                _destroy(it);
+        }
+
+        virtual void _destroy(Deps dependency) = 0;
+    };
+    using DependencyHandle = DependencyBase::Handle;
+
+    template<typename Type> class Dependency : public DependencyBase
+    {
+        D2_TAG_MODULE(react)
+    public:
+        using Query = DepQuery;
+        using value_type = Type;
+        using manager_callback = bool (*)(std::shared_ptr<void>, void*, const Type&, Query);
+        using Handle = DependencyBase::Handle;
+    private:
+        struct Dummy
+        {
+        };
+        // trampoline | callback | ptr
+        using dynalink =
+            // callback | provider | this
+            std::tuple<Type (*)(void (*)(), void*, void*, bool), void (*)(), void*>;
+    private:
+        Handle _link{};
+        std::variant<Type, Dependency<Type>*, dynalink> _value{Type()};
+
+        Dependency& _source()
+        {
+            auto* current = this;
+            while (std::holds_alternative<Dependency<Type>*>(current->_value))
+            {
+                auto* next = std::get<Dependency<Type>*>(current->_value);
+                if (next == nullptr)
+                    D2_THRW("Dependency link is null");
+                current = next;
+            }
+            return *current;
+        }
+        const Dependency& _source() const
+        {
+            auto* current = this;
+            while (std::holds_alternative<Dependency<Type>*>(current->_value))
+            {
+                auto* next = std::get<Dependency<Type>*>(current->_value);
+                if (next == nullptr)
+                    D2_THRW("Dependency link is null");
+                current = next;
+            }
+            return *current;
+        }
+
+        Type _read() const
+        {
+            const auto& src = _source();
+            if (std::holds_alternative<Type>(src._value))
+                return std::get<Type>(src._value);
+            const auto& [callback, icb, ptr] = std::get<dynalink>(src._value);
+            return callback(icb, ptr, const_cast<Dependency<Type>*>(&src), false);
+        }
+
+        template<typename Func> decltype(auto) _with_value(Func&& func) const
+        {
+            const auto& src = _source();
+            if (std::holds_alternative<Type>(src._value))
+                return std::forward<Func>(func)(std::get<Type>(src._value));
+            const auto v = _read();
+            return std::forward<Func>(func)(v);
+        }
+
+        bool _invoke_raw(const Deps& dependency, Query query) const
+        {
+            const auto obj = dependency.obj;
+            auto* const base = dependency.base;
+            const auto func = reinterpret_cast<manager_callback>(dependency.func);
+            if (func == nullptr)
+                return false;
+            return _with_value([&](const Type& v) { return func(obj.lock(), base, v, query); });
+        }
+
+        void _destroy(Deps dependency) override
+        {
+            const auto obj = dependency.obj;
+            auto* const base = dependency.base;
+            const auto func = reinterpret_cast<manager_callback>(dependency.func);
+            if (func == nullptr)
+                return;
+            _with_value([&](const Type& v) { func(obj.lock(), base, v, Query::Destroy); });
+        }
+        void _provider_destroyed()
+        {
+            _link.release();
+            _value = Type{};
+        }
+    public:
+        template<typename Other> friend class Dependency;
+
+        Dependency() = default;
+        Dependency(const Dependency& copy) : DependencyBase(), _value(copy._read()) {}
+        Dependency(Dependency&&) = delete;
+        ~Dependency()
+        {
+            unlink();
+            _destroy_state();
+        }
+
+        template<typename Data, typename Elem, typename Func>
+        Handle subscribe(std::weak_ptr<Elem> handle, Data&& def, Func&& callback)
+        {
+            using DataT = std::remove_cvref_t<Data>;
+            using FuncT = std::remove_cvref_t<Func>;
+            struct State
+            {
+                FuncT callback;
+                [[no_unique_address]] DataT data;
+            };
+            auto* state = new State{
+                .callback = std::forward<Func>(callback), .data = std::forward<Data>(def)
+            };
+            return subscribe_base(
+                handle,
+                state,
+                +[](std::shared_ptr<void> handle, void* ptr, const Type& value, Query query) -> bool
+                {
+                    auto* state = static_cast<State*>(ptr);
+                    if (query == Query::Destroy)
+                    {
+                        delete state;
+                        return false;
+                    }
+                    if (handle == nullptr)
+                        return false;
+                    if constexpr (std::is_same_v<Dummy, DataT>)
+                    {
+                        return bool(state->callback(std::static_pointer_cast<Elem>(handle), value));
                     }
                     else
-                        ++it;
-                }
-                if (_recursion_ctr != 0)
-                {
-                    for (auto& it : _dependencies)
                     {
-                        if (it.func != nullptr && std::forward<Pred>(pred)(it))
-                            _queue_unsub(it);
+                        return bool(state->callback(
+                            std::static_pointer_cast<Elem>(handle), state->data, value
+                        ));
                     }
                 }
-                else
+            );
+        }
+        template<typename Elem, typename Func>
+        Handle subscribe(std::weak_ptr<Elem> handle, Func&& callback)
+        {
+            return subscribe<Dummy>(handle, Dummy{}, std::forward<Func>(callback));
+        }
+        Handle subscribe_base(std::weak_ptr<void> handle, void* base, manager_callback func)
+        {
+            Deps dependency{handle, base, reinterpret_cast<void (*)()>(func)};
+            bool keep = false;
+
+            auto state = _ensure_state();
+            {
+                InvokeGuard guard(*this, state);
+                keep = _invoke_raw(dependency, Query::Invoke);
+            }
+
+            if (!keep)
+            {
+                _destroy(dependency);
+                return {};
+            }
+
+            return _insert_slot(std::move(dependency));
+        }
+        void cleanup()
+        {
+            _cleanup();
+        }
+        void apply()
+        {
+            if (_state == nullptr)
+                return;
+
+            auto state = _state;
+            InvokeGuard guard(*this, state);
+            const auto end = state->dependencies.size();
+
+            _with_value(
+                [&](const Type& v)
                 {
-                    for (auto it = _dependencies.begin(); it != _dependencies.end();)
+                    for (std::size_t i = 0; i < end && i < state->dependencies.size(); ++i)
                     {
-                        if (it->func != nullptr && std::forward<Pred>(pred)(*it))
-                        {
-                            destroy.push_back(*it);
-                            it = _dependencies.erase(it);
-                        }
-                        else
-                            ++it;
+                        auto& it = state->dependencies[i];
+                        if (it.func == nullptr)
+                            continue;
+
+                        const auto obj = it.obj;
+                        auto* const base = it.base;
+                        const auto func = reinterpret_cast<manager_callback>(it.func);
+                        const auto generation = it.generation;
+
+                        if (!func(obj.lock(), base, v, Query::Invoke))
+                            _close_slot(static_cast<std::uint32_t>(i), generation);
                     }
                 }
-                for (auto& it : destroy)
-                    _destroy(it);
-            }
-            void _flush_pending()
-            {
-                if (_recursion_ctr != 0)
-                    return;
-                if (!_pending_unsub.empty())
+            );
+        }
+
+        template<typename Value> void set(Value&& value)
+        {
+            unlink();
+            _value = std::forward<Value>(value);
+            apply();
+        }
+
+        Type& value()
+        {
+            auto& src = _source();
+            if (!std::holds_alternative<Type>(src._value))
+                D2_THRW("Dependency value is dynamic and cannot be referenced");
+            return std::get<Type>(src._value);
+        }
+        const Type& value() const
+        {
+            const auto& src = _source();
+            if (!std::holds_alternative<Type>(src._value))
+                D2_THRW("Dependency value is dynamic and cannot be referenced");
+            return std::get<Type>(src._value);
+        }
+
+        void unlink()
+        {
+            if (std::holds_alternative<Type>(_value))
+                return;
+            _link.close();
+            _value = Type{};
+        }
+        void link(Dependency<Type>& provider)
+        {
+            unlink();
+            _value = &provider;
+            _link = provider.subscribe_base(
+                std::weak_ptr<void>{},
+                this,
+                [](std::shared_ptr<void>, void* ptr, const Type&, Query query) -> bool
                 {
-                    _dependencies.erase(
-                        std::remove_if(
-                            _dependencies.begin(),
-                            _dependencies.end(),
-                            [&](const auto& v) { return v.func == nullptr; }
-                        ),
-                        _dependencies.end()
-                    );
-
-                    auto pending = std::move(_pending_unsub);
-                    _pending_unsub.clear();
-
-                    for (auto& it : pending)
-                        _destroy(it);
+                    if (query == Query::Destroy)
+                        static_cast<Dependency<Type>*>(ptr)->_provider_destroyed();
+                    else
+                        static_cast<Dependency<Type>*>(ptr)->apply();
+                    return true;
                 }
-                if (!_pending_sub.empty())
+            );
+        }
+        template<typename Other>
+        void link(Dependency<Other>& provider, Type (*callback)(const Other&))
+        {
+            unlink();
+            _value = dynalink{
+                +[](void (*icb)(), void* ptr, void*, bool destroy)
                 {
-                    _dependencies.reserve(_dependencies.size() + _pending_sub.size());
-                    std::move(
-                        _pending_sub.begin(), _pending_sub.end(), std::back_inserter(_dependencies)
-                    );
-                    _pending_sub.clear();
+                    const auto callback = reinterpret_cast<Type (*)(const Other&)>(icb);
+                    const auto provider = static_cast<Dependency<Other>*>(ptr);
+                    if (destroy)
+                        return Type{};
+                    return callback(provider->_read());
+                },
+                reinterpret_cast<void (*)()>(callback),
+                static_cast<void*>(&provider)
+            };
+            _link = provider.subscribe_base(
+                std::weak_ptr<void>{},
+                this,
+                [](std::shared_ptr<void>, void* ptr, const Other&, Query query) -> bool
+                {
+                    if (query == Query::Destroy)
+                        static_cast<Dependency<Type>*>(ptr)->_provider_destroyed();
+                    else
+                        static_cast<Dependency<Type>*>(ptr)->apply();
+                    return true;
                 }
-            }
-        public:
-            template<typename Other> friend class Dependency;
+            );
+        }
 
-            Dependency() = default;
-            Dependency(const Dependency& copy) : _value(copy._read()) {}
-            Dependency(Dependency&&) = default;
-            ~Dependency()
-            {
-                unlink();
+        template<typename Value>
+        operator Value() const
+            requires(!std::is_reference_v<Value> || std::is_const_v<Value>)
+        {
+            if constexpr (std::is_reference_v<Value>)
+                return static_cast<Value>(value());
+            else
+                return static_cast<Value>(_read());
+        }
 
-                auto dependencies = std::move(_dependencies);
-                auto pending_sub = std::move(_pending_sub);
-                auto pending_unsub = std::move(_pending_unsub);
+        //
+        // Operators
+        //
 
-                _dependencies.clear();
-                _pending_sub.clear();
-                _pending_unsub.clear();
+        constexpr auto operator+()
+            requires requires(Type& v) { +v; }
+        {
+            return +value();
+        }
+        constexpr auto operator-()
+            requires requires(Type& v) { -v; }
+        {
+            return -value();
+        }
+        constexpr auto operator~()
+            requires requires(Type& v) { ~v; }
+        {
+            return ~value();
+        }
+        constexpr auto operator!()
+            requires requires(Type& v) { !v; }
+        {
+            return !value();
+        }
 
-                for (auto& it : dependencies)
-                    _destroy(it);
-                for (auto& it : pending_sub)
-                    _destroy(it);
-                for (auto& it : pending_unsub)
-                    _destroy(it);
-            }
-
-            template<typename Data, typename Elem, typename Func>
-            void subscribe(std::weak_ptr<Elem> handle, Data&& def, Func&& callback)
-            {
-                using DataT = std::remove_cvref_t<Data>;
-                using FuncT = std::remove_cvref_t<Func>;
-                struct State
-                {
-                    FuncT callback;
-                    [[no_unique_address]] DataT data;
-                };
-                auto* state = new State{
-                    .callback = std::forward<Func>(callback), .data = std::forward<Data>(def)
-                };
-                Deps dependency{
-                    handle,
-                    state,
-                    +[](std::shared_ptr<void> handle, void* ptr, const Type& value, Query query)
-                        -> bool
-                    {
-                        auto* state = static_cast<State*>(ptr);
-                        if (query == Query::Destroy)
-                        {
-                            delete state;
-                            return false;
-                        }
-                        if (handle == nullptr)
-                            return false;
-                        if constexpr (std::is_same_v<Dummy, DataT>)
-                        {
-                            return bool(
-                                state->callback(std::static_pointer_cast<Elem>(handle), value)
-                            );
-                        }
-                        else
-                        {
-                            return bool(state->callback(
-                                std::static_pointer_cast<Elem>(handle), &state->data, value
-                            ));
-                        }
-                    }
-                };
-                bool keep = false;
-                {
-                    InvokeGuard guard(*this);
-                    keep = _invoke_raw(dependency, Query::Invoke);
-                    if (keep)
-                        _pending_sub.push_back(dependency);
-                }
-                if (!keep)
-                    _destroy(dependency);
-            }
-            template<typename Elem, typename Func>
-            void subscribe(std::weak_ptr<Elem> handle, Func&& callback)
-            {
-                subscribe<Dummy>(handle, Dummy{}, std::forward<Func>(callback));
-            }
-            void subscribe_base(std::weak_ptr<void> handle, void* base, manager_callback func)
-            {
-                Deps dependency{handle, base, func};
-                bool keep = false;
-                {
-                    InvokeGuard guard(*this);
-                    keep = _invoke_raw(dependency, Query::Invoke);
-                    if (keep)
-                        _pending_sub.push_back(dependency);
-                }
-                if (!keep)
-                    _destroy(dependency);
-            }
-            void apply()
-            {
-                InvokeGuard guard(*this);
-
-                _with_value(
-                    [&](const Type& v)
-                    {
-                        for (auto& it : _dependencies)
-                        {
-                            if (it.func == nullptr)
-                                continue;
-
-                            const auto obj = it.obj;
-                            auto* const base = it.base;
-                            const auto func = it.func;
-
-                            if (!func(obj.lock(), base, v, Query::Invoke))
-                                _queue_unsub(it);
-                        }
-                    }
-                );
-            }
-
-            template<typename Value> void set(Value&& value)
-            {
-                unlink();
-                _value = std::forward<Value>(value);
-                apply();
-            }
-
-            Type& value()
-            {
-                auto& src = _source();
-                if (!std::holds_alternative<Type>(src._value))
-                    throw std::logic_error("Dependency value is dynamic and cannot be referenced");
-                return std::get<Type>(src._value);
-            }
-            const Type& value() const
-            {
-                const auto& src = _source();
-                if (!std::holds_alternative<Type>(src._value))
-                    throw std::logic_error("Dependency value is dynamic and cannot be referenced");
-                return std::get<Type>(src._value);
-            }
-
-            void unlink()
-            {
-                if (std::holds_alternative<Type>(_value))
-                    return;
-                if (std::holds_alternative<Dependency<Type>*>(_value))
-                {
-                    auto* provider = std::get<Dependency<Type>*>(_value);
-                    if (provider != nullptr)
-                    {
-                        provider->_unsubscribe_if([&](const auto& v) { return v.base == this; });
-                    }
-                }
-                else if (std::holds_alternative<dynalink>(_value))
-                {
-                    const auto& [callback, icb, ptr] = std::get<dynalink>(_value);
-                    callback(icb, ptr, this, true);
-                }
-                _value = Type{};
-            }
-            void link(Dependency<Type>& provider)
-            {
-                unlink();
-                _value = &provider;
-                provider.subscribe(
-                    std::weak_ptr<void>{},
-                    this,
-                    [](std::shared_ptr<void>, void* ptr, const Type&, Query query) -> bool
-                    {
-                        if (query == Query::Destroy)
-                            static_cast<Dependency<Type>*>(ptr)->unlink();
-                        else
-                            static_cast<Dependency<Type>*>(ptr)->apply();
-                        return true;
-                    }
-                );
-            }
-            template<typename Other>
-            void link(Dependency<Other>& provider, Type (*callback)(const Other&))
-            {
-                unlink();
-                _value = dynalink{
-                    +[](void (*icb)(), void* ptr, void* tptr, bool destroy)
-                    {
-                        auto callback = reinterpret_cast<Type (*)(const Other&)>(icb);
-                        auto provider = static_cast<Dependency<Other>*>(ptr);
-                        if (destroy)
-                        {
-                            provider->_unsubscribe_if([&](const auto& v)
-                                                      { return v.base == tptr; });
-                            return Type{};
-                        }
-                        return callback(provider->_read());
-                    },
-                    reinterpret_cast<void (*)()>(callback),
-                    static_cast<void*>(&provider)
-                };
-                provider.subscribe(
-                    std::weak_ptr<void>{},
-                    this,
-                    [](std::shared_ptr<void>, void* ptr, const Other&, Query query) -> bool
-                    {
-                        if (query == Query::Destroy)
-                            static_cast<Dependency<Type>*>(ptr)->unlink();
-                        else
-                            static_cast<Dependency<Type>*>(ptr)->apply();
-                        return true;
-                    }
-                );
-            }
-
-            template<typename Value>
-            operator Value() const
-                requires(!std::is_reference_v<Value> || std::is_const_v<Value>)
-            {
-                if constexpr (std::is_reference_v<Value>)
-                    return static_cast<Value>(value());
-                else
-                    return static_cast<Value>(_read());
-            }
-
-            //
-            // Operators
-            //
-
-            constexpr auto operator+()
-                requires requires(Type& v) { +v; }
-            {
-                return +value();
-            }
-            constexpr auto operator-()
-                requires requires(Type& v) { -v; }
-            {
-                return -value();
-            }
-            constexpr auto operator~()
-                requires requires(Type& v) { ~v; }
-            {
-                return ~value();
-            }
-            constexpr auto operator!()
-                requires requires(Type& v) { !v; }
-            {
-                return !value();
-            }
-
-            constexpr auto operator++()
-                requires requires(Type& v) { ++v; }
-            {
-                auto v = ++value();
-                apply();
-                return v;
-            }
-            constexpr auto operator--()
-                requires requires(Type& v) { --v; }
-            {
-                auto v = --value();
-                apply();
-                return v;
-            }
-            constexpr auto operator++(int)
-                requires requires(Type& v) { v++; }
-            {
-                auto v = value()++;
-                apply();
-                return v;
-            }
-            constexpr auto operator--(int)
-                requires requires(Type& v) { v--; }
-            {
-                auto v = value()--;
-                apply();
-                return v;
-            }
+        constexpr auto operator++()
+            requires requires(Type& v) { ++v; }
+        {
+            auto v = ++value();
+            apply();
+            return v;
+        }
+        constexpr auto operator--()
+            requires requires(Type& v) { --v; }
+        {
+            auto v = --value();
+            apply();
+            return v;
+        }
+        constexpr auto operator++(int)
+            requires requires(Type& v) { v++; }
+        {
+            auto v = value()++;
+            apply();
+            return v;
+        }
+        constexpr auto operator--(int)
+            requires requires(Type& v) { v--; }
+        {
+            auto v = value()--;
+            apply();
+            return v;
+        }
 
 #define FORWARD_ASSIGN_OP(op)                                                                      \
     template<typename Other>                                                                       \
@@ -507,52 +665,56 @@ namespace d2::style
         return v;                                                                                  \
     }
 
-            FORWARD_ASSIGN_OP(+=)
-            FORWARD_ASSIGN_OP(-=)
-            FORWARD_ASSIGN_OP(*=)
-            FORWARD_ASSIGN_OP(/=)
-            FORWARD_ASSIGN_OP(%=)
-            FORWARD_ASSIGN_OP(&=)
-            FORWARD_ASSIGN_OP(|=)
-            FORWARD_ASSIGN_OP(^=)
-            FORWARD_ASSIGN_OP(<<=)
-            FORWARD_ASSIGN_OP(>>=)
+        FORWARD_ASSIGN_OP(+=)
+        FORWARD_ASSIGN_OP(-=)
+        FORWARD_ASSIGN_OP(*=)
+        FORWARD_ASSIGN_OP(/=)
+        FORWARD_ASSIGN_OP(%=)
+        FORWARD_ASSIGN_OP(&=)
+        FORWARD_ASSIGN_OP(|=)
+        FORWARD_ASSIGN_OP(^=)
+        FORWARD_ASSIGN_OP(<<=)
+        FORWARD_ASSIGN_OP(>>=)
 
 #undef FORWARD_ASSIGN_OP
 
-            template<class Index>
-            constexpr auto operator[](Index&& index)
-                requires requires(Type& v, Index&& i) { v[std::forward<Index>(i)]; }
-            {
-                return value()[std::forward<Index>(index)];
-            }
+        template<class Index>
+        constexpr auto operator[](Index&& index)
+            requires requires(Type& v, Index&& i) { v[std::forward<Index>(i)]; }
+        {
+            return value()[std::forward<Index>(index)];
+        }
 
-            template<class... Args>
-            constexpr auto operator()(Args&&... args)
-                requires requires(Type& v, Args&&... as) { v(std::forward<Args>(as)...); }
-            {
-                return value()(std::forward<Args>(args)...);
-            }
+        template<class... Args>
+        constexpr auto operator()(Args&&... args)
+            requires requires(Type& v, Args&&... as) { v(std::forward<Args>(as)...); }
+        {
+            return value()(std::forward<Args>(args)...);
+        }
 
-            //
-            //
-            //
+        //
+        //
+        //
 
-            Dependency& operator=(const Dependency& copy)
-            {
-                set(copy._read());
-                return *this;
-            }
-            Dependency& operator=(Dependency&&) = default;
+        Dependency& operator=(const Dependency& copy)
+        {
+            set(copy._read());
+            return *this;
+        }
+        Dependency& operator=(Dependency&&) = delete;
 
-            template<typename Value>
-                requires std::is_assignable_v<Type&, Value>
-            Dependency& operator=(Value&& value)
-            {
-                set(std::forward<Value>(value));
-                return *this;
-            }
-        };
+        template<typename Value>
+            requires std::is_assignable_v<Type&, Value>
+        Dependency& operator=(Value&& value)
+        {
+            set(std::forward<Value>(value));
+            return *this;
+        }
+    };
+
+    class Theme : public std::enable_shared_from_this<Theme>
+    {
+    public:
         using ptr = std::shared_ptr<Theme>;
     private:
         std::size_t _code{0x00};

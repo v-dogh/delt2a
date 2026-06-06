@@ -1,6 +1,5 @@
 #pragma once
 
-#include "d2_styles_base.hpp"
 #include <absl/container/node_hash_map.h>
 #include <chrono>
 #include <d2_input_base.hpp>
@@ -9,6 +8,7 @@
 #include <d2_model.hpp>
 #include <d2_module.hpp>
 #include <d2_screen_comps.hpp>
+#include <d2_styles_base.hpp>
 #include <d2_theme.hpp>
 #include <d2_tree_element_frwd.hpp>
 #include <d2_tree_state.hpp>
@@ -359,4 +359,3 @@ namespace d2
         _deinitialize();
     }
 } // namespace d2
-

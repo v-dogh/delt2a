@@ -2,6 +2,7 @@
 
 #include "d2_interpolator.hpp"
 #include "d2_tree_element.hpp"
+#include "d2_tree_element_frwd.hpp"
 #include <chrono>
 #include <d2_io_handler.hpp>
 #include <d2_meta.hpp>
@@ -11,7 +12,9 @@
 #include <d2_tree_state.hpp>
 #include <mods/d2_core.hpp>
 
+#include <optional>
 #include <type_traits>
+#include <utility>
 
 namespace d2
 {
@@ -117,62 +120,34 @@ namespace d2
         }
 
         template<typename Type, typename Func>
-        void subscribe(const std::string& name, Func&& callback) const
+        style::DependencyHandle subscribe(style::Dependency<Type>& dep, Func&& callback) const
         {
-            dep<Type>(name).subscribe(
+            return dep.subscribe(
                 _ptr.weak(),
-                [callback](d2::TreeIter<> ptr, Type value)
+                [callback](d2::TreeIter<> ptr, const Type& value)
                 {
                     if constexpr (
                         std::is_same_v<std::invoke_result_t<Func, decltype(ptr), Type>, void>
                     )
                     {
-                        callback(ptr, std::move(value));
+                        callback(ptr, value);
                         return true;
                     }
                     else
-                        return callback(ptr, std::move(value));
+                        return callback(ptr, value);
                 }
             );
         }
         template<typename Type, typename Func>
-        void subscribe(const std::string& tree, const std::string& name, Func&& callback) const
+        style::DependencyHandle subscribe(const std::string& name, Func&& callback) const
         {
-            dep<Type>(tree, name)
-                .subscribe(
-                    _ptr.weak(),
-                    [callback](d2::TreeIter<> ptr, Type value)
-                    {
-                        if constexpr (
-                            std::is_same_v<std::invoke_result_t<Func, decltype(ptr), Type>, void>
-                        )
-                        {
-                            callback(ptr, std::move(value));
-                            return true;
-                        }
-                        else
-                            return callback(ptr, std::move(value));
-                    }
-                );
+            return subscribe(dep<Type>(name), std::forward<Func>(callback));
         }
         template<typename Type, typename Func>
-        void subscribe(style::Theme::Dependency<Type>& dep, Func&& callback) const
+        style::DependencyHandle
+        subscribe(const std::string& tree, const std::string& name, Func&& callback) const
         {
-            dep.subscribe(
-                _ptr.weak(),
-                [callback](d2::TreeIter<> ptr, Type value)
-                {
-                    if constexpr (
-                        std::is_same_v<std::invoke_result_t<Func, decltype(ptr), Type>, void>
-                    )
-                    {
-                        callback(ptr, std::move(value));
-                        return true;
-                    }
-                    else
-                        return callback(ptr, std::move(value));
-                }
-            );
+            return subscribe(dep<Type>(tree, name), std::forward<Func>(callback));
         }
 
         template<auto Var> auto& var() const
@@ -454,7 +429,6 @@ namespace d2
             _ptr.asp()->override(ptr);
             return TreeIter<type>(ptr);
         }
-
         template<typename Type, typename Func>
             requires std::invocable<Func, TreeCtx<Type, State>>
         auto elem(Element::eptr<Type> ptr, Func&& callback) const

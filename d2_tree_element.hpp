@@ -1,5 +1,7 @@
 #pragma once
 
+#include "d2_theme.hpp"
+#include <absl/container/inlined_vector.h>
 #include <d2_element_units.hpp>
 #include <d2_input_base.hpp>
 #include <d2_io_handler.hpp>
@@ -192,6 +194,15 @@ namespace d2
             LayoutStorage& operator=(const LayoutStorage&) = default;
             LayoutStorage& operator=(LayoutStorage&&) = default;
         };
+        struct BindStorage
+        {
+            struct Bind
+            {
+                style::DependencyHandle handle;
+                style::uai_property property;
+            };
+            absl::InlinedVector<Bind, 4> buf;
+        };
     private:
         class EventListenerState : public std::enable_shared_from_this<EventListenerState>
         {
@@ -342,6 +353,7 @@ namespace d2
 
         // Listeners and State
 
+        std::unique_ptr<BindStorage> _deps{nullptr};
         std::vector<EventListenerState::ptr> _subscribers{};
         std::size_t _cursor_sink_listener_cnt{0};
         std::size_t _dynamic_input_listener_cnt{0};
@@ -393,6 +405,9 @@ namespace d2
 
         void _signal_write_child(write_flag type, unsigned int prop, ptr element);
         void _signal_write(write_flag type, unsigned int prop, ptr element);
+
+        void _obliterate_dep_bind(style::uai_property prop);
+        void _bind_dep(style::uai_property prop, style::DependencyHandle handle);
     protected:
         // Available to the element view
 
@@ -559,6 +574,8 @@ namespace d2
             void signal_initialization(unsigned int prop);
             void signal_write_update(Element::write_flag type) const;
             void signal_update(Element::internal_flag type) const;
+            void register_bind(style::uai_property prop, style::DependencyHandle handle);
+            void deregister_bind(style::uai_property prop);
             void trigger_event(in::InputFrame& frame, bool recursive);
             void setparent(Element::pptr ptr);
         };

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "d2_exceptions.hpp"
 #include <algorithm>
 #include <d2_io_handler.hpp>
 #include <d2_theme.hpp>
@@ -30,7 +31,7 @@ namespace d2::style
         {
         };
 
-        template<typename Arg> struct is_var_impl<Theme::Dependency<Arg>> : std::true_type
+        template<typename Arg> struct is_var_impl<Dependency<Arg>> : std::true_type
         {
         };
 
@@ -51,6 +52,7 @@ namespace d2::style
 
     class UniversalAccessInterfaceBase
     {
+        D2_TAG_MODULE(tree)
     public:
         using property = unsigned int;
         static constexpr auto initial_property = std::numeric_limits<property>::max() - 1;
@@ -66,51 +68,68 @@ namespace d2::style
         {
             auto* interface = _interface_for<Interface>();
             if (interface == nullptr)
-                throw std::logic_error{"Type does not implement interface"};
+                D2_THRW("Type does not implement interface");
 
-            if constexpr (impl::is_var<Type>)
+            if (!temporary)
+                _clear_anims(Property);
+
+            if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
             {
+                if (temporary)
+                    D2_THRW("A variable cannot be used in a temporary set");
                 _set_dynamic_impl(Property, true);
-                value.subscribe_base(
-                    _handle_impl(),
-                    this,
-                    [](void* base, const auto& value, Theme::Query query) -> bool
-                    {
-                        if (query == Theme::Query::Destroy)
-                            return false;
-                        auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
-                        if (!base_ptr->_test_dynamic_impl(Property))
-                            return false;
-                        base_ptr->set_for<Interface, Property>(value);
-                        base_ptr->_set_dynamic_impl(Property, true);
-                        return true;
-                    }
+                _register_dep_bind(
+                    Property,
+                    value.subscribe_base(
+                        _handle_impl(),
+                        this,
+                        [](std::shared_ptr<void> ptr, void* base, const auto& value, DepQuery query)
+                            -> bool
+                        {
+                            if (ptr == nullptr || query == DepQuery::Destroy)
+                                return false;
+                            auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
+                            base_ptr->_clear_anims_impl(Property);
+                            base_ptr->set_for<Interface, Property>(value);
+                            return true;
+                        }
+                    )
                 );
             }
             else if constexpr (impl::is_dynavar<std::remove_cvref_t<Type>>)
             {
+                if (temporary)
+                    D2_THRW("A dynamic variable cannot be used in a temporary set");
                 _set_dynamic_impl(Property, true);
-                value.dependency.subscribe_base(
-                    _handle_impl(),
-                    this,
-                    [](void* base, const auto& v, Theme::Query query) -> bool
-                    {
-                        if (query == Theme::Query::Destroy)
-                            return false;
-                        auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
-                        if (!base_ptr->_test_dynamic_impl(Property))
-                            return false;
-                        base_ptr->set_for<Interface, Property>(
-                            std::remove_cvref_t<decltype(value)>::filter(v)
-                        );
-                        base_ptr->_set_dynamic_impl(Property, true);
-                        return true;
-                    }
+                _register_dep_bind(
+                    Property,
+                    value.dependency.subscribe_base(
+                        _handle_impl(),
+                        this,
+                        [](std::shared_ptr<void> ptr, void* base, const auto& value, DepQuery query)
+                            -> bool
+                        {
+                            if (ptr == nullptr || query == DepQuery::Destroy)
+                                return false;
+                            auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
+                            base_ptr->_clear_anims_impl(Property);
+                            base_ptr->set_for<Interface, Property>(
+                                std::remove_cvref_t<decltype(value)>::filter(value)
+                            );
+                            return true;
+                        }
+                    )
                 );
             }
             else
             {
-                _set_dynamic_impl(Property, _test_dynamic_impl(Property) && temporary);
+                if (!temporary)
+                {
+                    if (_get_dynamic_impl(Property))
+                        _deregister_dep_bind(Property);
+                }
+                else
+                    _set_dynamic_impl(Property, false);
                 auto [ptr, type] = interface->template get<Property>();
                 *ptr = std::forward<Type>(value);
                 _signal_base_impl(type, Property);
@@ -125,9 +144,12 @@ namespace d2::style
     protected:
         virtual void _initialize_impl(bool force) = 0;
         virtual void _signal_base_impl(element_write_flag, property) = 0;
+        virtual void _clear_anims_impl(uai_property prop) = 0;
         virtual void _set_dynamic_impl(property, bool) = 0;
         virtual bool _test_dynamic_impl(property) = 0;
         virtual void* _has_interface_impl(std::size_t) = 0;
+        virtual void _register_dep_bind(property prop, DependencyHandle handle) = 0;
+        virtual void _deregister_dep_bind(property prop) = 0;
         virtual std::shared_ptr<IOContext> _context_impl() const = 0;
         virtual std::weak_ptr<void> _handle_impl() = 0;
     public:
@@ -136,19 +158,24 @@ namespace d2::style
             return _interface_for<Interface>() != nullptr;
         }
 
-        template<D2_UAI_INTERFACE_TEMPL Interface, Interface<0>::Property Property, typename Type>
-        auto& set_for(Type&& value, bool temporary = false)
+        template<
+            D2_UAI_INTERFACE_TEMPL Interface,
+            Interface<0>::Property Property,
+            bool Temporary,
+            typename Type
+        >
+        auto& set_for(Type&& value)
         {
             auto ctx = _context_impl();
             if (ctx->is_synced())
             {
-                _int_set_for<Interface, Property>(std::forward<Type>(value), temporary);
+                _int_set_for<Interface, Property>(std::forward<Type>(value), Temporary);
             }
             else
             {
                 ctx->sync(
-                       [value = std::forward<Type>(value), &temporary, this]() mutable
-                       { _int_set_for<Interface, Property>(std::forward<Type>(value), temporary); }
+                       [value = std::forward<Type>(value), this]() mutable
+                       { _int_set_for<Interface, Property>(std::forward<Type>(value), Temporary); }
                 ).value();
             }
             return *this;
