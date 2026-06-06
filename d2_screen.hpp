@@ -277,9 +277,9 @@ namespace d2::sys
                         return *ptr;
                     }
                 }
-                throw std::logic_error{
+                D2_THRW(
                     std::format("Failed to resolve theme dependency for: {}", typeid(Type).name())
-                };
+                );
             }
             return dynamic_cast<Type&>(*f->second);
         }
@@ -299,9 +299,9 @@ namespace d2::sys
                         return *ptr;
                     }
                 }
-                throw std::logic_error{
+                D2_THRW(
                     std::format("Failed to resolve theme dependency for: {}", typeid(Type).name())
-                };
+                );
             }
             return dynamic_cast<Type&>(*f->second);
         }
@@ -329,9 +329,7 @@ namespace d2::sys
             auto create = [this](auto theme)
             {
                 if (_themes.contains(theme->code()))
-                    throw std::logic_error{
-                        "Double theme initialization (this could be caused by related themes)"
-                    };
+                    D2_THRW("Double theme initialization (this could be caused by related themes)");
                 _themes[theme->code()] = theme;
             };
             ((create(themes)), ...);

@@ -4,6 +4,7 @@
 #include "d2_tree_element.hpp"
 #include "d2_tree_element_frwd.hpp"
 #include <chrono>
+#include <cstdint>
 #include <d2_io_handler.hpp>
 #include <d2_meta.hpp>
 #include <d2_screen.hpp>
@@ -11,8 +12,6 @@
 #include <d2_tree.hpp>
 #include <d2_tree_state.hpp>
 #include <mods/d2_core.hpp>
-
-#include <optional>
 #include <type_traits>
 #include <utility>
 
@@ -56,10 +55,44 @@ namespace d2
         template<typename Func> using deduced_state_t = typename lambda_arg_t<Func>::state_type;
     } // namespace impl
 
+    // For TreeCtx::branch
+    template<typename First, typename Second> using Case = std::pair<First, Second>;
+
     class TreeCtxBase
     {
+    private:
+        struct BranchState
+        {
+            std::vector<TreeIter<>> ptrs;
+            std::uintptr_t origin;
+        };
+        static inline thread_local std::optional<BranchState> _bstate{std::nullopt};
+    protected:
+        struct BranchGuard
+        {
+            std::optional<BranchState> saved;
+            BranchGuard()
+            {
+                saved = _bstate;
+                _bstate = BranchState{.origin = std::uintptr_t(this)};
+            }
+            ~BranchGuard()
+            {
+                _bstate = saved;
+            }
+        };
     protected:
         TreeIter<> _ptr{};
+
+        void _reg_elem(TreeIter<> ptr) const
+        {
+            if (_bstate.has_value() && _bstate->origin == std::uintptr_t(this))
+                _bstate->ptrs.push_back(ptr);
+        }
+        static std::vector<TreeIter<>> _get_branch()
+        {
+            return _bstate->ptrs;
+        }
     public:
         TreeCtxBase(d2::TreeIter<> ptr) : _ptr(ptr) {}
         TreeCtxBase(const TreeCtxBase&) = default;
@@ -119,6 +152,15 @@ namespace d2
             return screen()->deps(tree).template get<Type>(name);
         }
 
+        template<auto Var> auto& var() const
+        {
+            return screen()->template themev<Var>();
+        }
+        template<auto Var, auto Callback> auto dynavar() const
+        {
+            return style::dynavar<Callback>(var<Var>());
+        }
+
         template<typename Type, typename Func>
         style::DependencyHandle subscribe(style::Dependency<Type>& dep, Func&& callback) const
         {
@@ -149,14 +191,11 @@ namespace d2
         {
             return subscribe(dep<Type>(tree, name), std::forward<Func>(callback));
         }
-
-        template<auto Var> auto& var() const
+        template<auto Var, typename Func>
+        style::DependencyHandle
+        subscribe(const std::string& tree, const std::string& name, Func&& callback) const
         {
-            return screen()->template themev<Var>();
-        }
-        template<auto Var, auto Callback> auto dynavar() const
-        {
-            return style::dynavar<Callback>(var<Var>());
+            return subscribe(var<Var>(), std::forward<Func>(callback));
         }
 
         template<typename Type, typename... Argv> Type& declare(Argv&&... args) const
@@ -378,6 +417,7 @@ namespace d2
                 arge
             );
             nsrc->swap_in();
+            _reg_elem(cptr);
             return cptr;
         }
 
@@ -415,6 +455,7 @@ namespace d2
             internal::ElementView::from(ptr).setparent(_ptr.asp());
             callback(TreeCtx<type, state_type>(ptr));
             _ptr.asp()->override(ptr);
+            _reg_elem(ptr);
             return TreeIter<type>(ptr);
         }
         template<typename Func, typename... Argv>
@@ -427,6 +468,7 @@ namespace d2
             internal::ElementView::from(ptr).setparent(_ptr.asp());
             callback(TreeCtx<type, state_type>(ptr));
             _ptr.asp()->override(ptr);
+            _reg_elem(ptr);
             return TreeIter<type>(ptr);
         }
         template<typename Type, typename Func>
@@ -436,7 +478,62 @@ namespace d2
             internal::ElementView::from(ptr).setparent(_ptr.asp());
             callback(TreeCtx<Type, State>(ptr));
             _ptr.asp()->override(ptr);
+            _reg_elem(ptr);
             return TreeIter<Type>(ptr);
+        }
+
+        template<typename Var, typename... Branch>
+            requires(std::invocable<Branch, TreeCtx<Parent, State>> && ...)
+        void branch(Var& var, std::pair<typename Var::value_type, Branch>... branches)
+        {
+            auto handle = subscribe(
+                var,
+                [... branches = std::move(branches),
+                 current = d2::TreeIter<>{},
+                 ptrs = std::vector<TreeIter<>>{}](
+                    d2::TreeIter<> ptr, const Var::value_type& value
+                ) mutable
+                {
+                    for (decltype(auto) it : ptrs)
+                        ptr.asp()->remove(it);
+                    ptrs.clear();
+                    (
+                        [&]()
+                        {
+                            if (branches.first == value)
+                            {
+                                BranchGuard guard;
+                                branches.second(TreeCtx<Parent, State>(ptr));
+                                ptrs = TreeCtxBase::_get_branch();
+                                return true;
+                            }
+                            return false;
+                        }() ||
+                        ...);
+                }
+            );
+            declare<style::DependencyHandle>() = std::move(handle);
+        }
+        template<typename Type, typename... Branch>
+            requires(std::invocable<Branch, TreeCtx<Parent, State>> && ...)
+        void branch(
+            const std::string& tree, const std::string& name, std::pair<Type, Branch>... branches
+        )
+        {
+            branch(dep<Type>(tree, name), std::move(branches)...);
+        }
+        template<typename Type, typename... Value, typename... Branch>
+            requires(std::invocable<Branch, TreeCtx<Parent, State>> && ...)
+        void branch(const std::string& name, std::pair<Type, Branch>... branches)
+        {
+            branch(dep<Type>(name), std::move(branches)...);
+        }
+        template<auto Var, typename... Value, typename... Branch>
+            requires(std::invocable<Branch, TreeCtx<Parent, State>> && ...)
+        void
+        branch(std::pair<typename style::ThemeRegistry<decltype(Var)>::type, Branch>... branches)
+        {
+            branch(var<Var>(), std::move(branches)...);
         }
 
         // Styles
