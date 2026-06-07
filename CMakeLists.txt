@@ -10,7 +10,7 @@ include(cmake/system.cmake)
 # OPTIONS #
 ###########
 
-option(D2_EXCLUDE_LIBRARY_EXTRAS    "Disable extras    module"     OFF)
+option(D2_EXCLUDE_LIBRARY_EXTRAS    "Disable extras module"        OFF)
 option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"      OFF)
 option(D2_SECURITY_WATCH            "Enable runtime debug checks"  ON)
 option(D2_SECURITY_LOG              "Enable runtime logging"       ON)
@@ -351,15 +351,25 @@ add_library(DeltaCoreOS STATIC
 )
 target_link_libraries(DeltaCoreOS PUBLIC DeltaCore)
 delta_setup_target(DeltaCoreOS)
+
 delta_discover_modules(
     TARGET DeltaCoreOS
-    DEPS DeltaCore
+    DEPS 
+        DeltaCore
+        $<$<TARGET_EXISTS:DeltaElements>:DeltaElements>
+        $<$<TARGET_EXISTS:DeltaExtras>:DeltaExtras>
     ROOTS
         "${CMAKE_CURRENT_SOURCE_DIR}/os"
-        ${D2_MODULE_ROOTS}
     EXCLUDE_BASES ${D2_MODULE_EXCLUDE_BASES}
     EXCLUDE_TYPES ${D2_MODULE_EXCLUDE_TYPES}
     EXCLUDE_DIRS ${D2_MODULE_EXCLUDE_DIRS}
+)
+delta_discover_module_root_groups(
+    TARGET DeltaCoreOS
+    DEPS
+        DeltaCore
+        $<$<TARGET_EXISTS:DeltaElements>:DeltaElements>
+        $<$<TARGET_EXISTS:DeltaExtras>:DeltaExtras>
 )
 delta_generate_module_registry(
     TARGET DeltaCoreOS

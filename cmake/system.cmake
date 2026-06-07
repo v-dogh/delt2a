@@ -5,7 +5,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/target.cmake")
 set(D2_MODULE_EXCLUDE_BASES "" CACHE STRING "Delta module abstract base types to exclude")
 set(D2_MODULE_EXCLUDE_TYPES "" CACHE STRING "Delta concrete module types to exclude")
 set(D2_MODULE_EXCLUDE_DIRS "" CACHE STRING "Delta module directory groups to exclude")
-set(D2_MODULE_ROOTS "" CACHE STRING "Extra Delta module roots")
+set(D2_MODULE_ROOTS "" CACHE STRING "Extra Delta module root groups: absolute root followed by dependency targets")
 
 function(delta_register_module)
     set(options
@@ -241,6 +241,81 @@ function(delta_discover_modules)
         list(REMOVE_DUPLICATES delta_module_targets)
         target_link_libraries("${DELTA_DISCOVER_TARGET}" PRIVATE
             ${delta_module_targets}
+        )
+    endif()
+endfunction()
+function(delta_discover_module_root_groups)
+    set(options)
+    set(one_value_args
+        TARGET
+    )
+    set(multi_value_args
+        DEPS
+    )
+    cmake_parse_arguments(
+        DELTA_MODULE_ROOT_GROUPS
+        "${options}"
+        "${one_value_args}"
+        "${multi_value_args}"
+        ${ARGN}
+    )
+
+    if(NOT DELTA_MODULE_ROOT_GROUPS_TARGET)
+        message(FATAL_ERROR "delta_discover_module_root_groups requires TARGET")
+    endif()
+    if(NOT TARGET "${DELTA_MODULE_ROOT_GROUPS_TARGET}")
+        message(FATAL_ERROR "delta_discover_module_root_groups: target '${DELTA_MODULE_ROOT_GROUPS_TARGET}' does not exist")
+    endif()
+    if(NOT D2_MODULE_ROOTS)
+        return()
+    endif()
+
+    set(delta_current_module_root "")
+    set(delta_current_module_deps "")
+
+    foreach(item IN LISTS D2_MODULE_ROOTS)
+        if(IS_ABSOLUTE "${item}")
+            if(delta_current_module_root)
+                delta_discover_modules(
+                    TARGET "${DELTA_MODULE_ROOT_GROUPS_TARGET}"
+                    ROOTS "${delta_current_module_root}"
+                    DEPS
+                        ${DELTA_MODULE_ROOT_GROUPS_DEPS}
+                        ${delta_current_module_deps}
+                    EXCLUDE_BASES ${D2_MODULE_EXCLUDE_BASES}
+                    EXCLUDE_TYPES ${D2_MODULE_EXCLUDE_TYPES}
+                    EXCLUDE_DIRS ${D2_MODULE_EXCLUDE_DIRS}
+                )
+            endif()
+
+            if(NOT IS_DIRECTORY "${item}")
+                message(FATAL_ERROR "delta_discover_module_root_groups: root does not exist: ${item}")
+            endif()
+
+            set(delta_current_module_root "${item}")
+            set(delta_current_module_deps "")
+        else()
+            if(NOT delta_current_module_root)
+                message(FATAL_ERROR "delta_discover_module_root_groups: dependency '${item}' appears before any absolute module root")
+            endif()
+            if(NOT TARGET "${item}")
+                message(FATAL_ERROR "delta_discover_module_root_groups: dependency '${item}' is not a target")
+            endif()
+
+            list(APPEND delta_current_module_deps "${item}")
+        endif()
+    endforeach()
+
+    if(delta_current_module_root)
+        delta_discover_modules(
+            TARGET "${DELTA_MODULE_ROOT_GROUPS_TARGET}"
+            ROOTS "${delta_current_module_root}"
+            DEPS
+                ${DELTA_MODULE_ROOT_GROUPS_DEPS}
+                ${delta_current_module_deps}
+            EXCLUDE_BASES ${D2_MODULE_EXCLUDE_BASES}
+            EXCLUDE_TYPES ${D2_MODULE_EXCLUDE_TYPES}
+            EXCLUDE_DIRS ${D2_MODULE_EXCLUDE_DIRS}
         )
     endif()
 endfunction()
