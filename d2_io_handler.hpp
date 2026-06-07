@@ -322,7 +322,7 @@ namespace d2
                     [this](auto&&...) { _get_module_if<Module>(); }
                 );
             }
-            _load_modules({std::move(stub), id});
+            _load_modules({std::pair{std::move(stub), id}});
         }
 
         void sysenum(
