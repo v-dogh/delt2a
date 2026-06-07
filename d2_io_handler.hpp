@@ -73,6 +73,18 @@ namespace d2
             return std::static_pointer_cast<Type>(_get_module_if_uc(typeid(Type)));
         }
 
+        template<typename Type> module<Type> _get_module(const std::string& id)
+        {
+            auto mod = _get_module_if<Type>(id);
+            if (mod == nullptr)
+                D2_THRW("Attempt to query inactive component: ", id);
+            return mod;
+        }
+        template<typename Type> module<Type> _get_module_if(const std::string& id)
+        {
+            return std::static_pointer_cast<Type>(_get_module_if_uc(typeid(Type), id));
+        }
+
         d2::sys::ModuleStub* _find_module(std::type_index index, std::optional<std::string> id);
 
         void _remove_module(std::type_index idx, std::optional<std::string> id = std::nullopt);
@@ -353,6 +365,18 @@ namespace d2
         template<typename Module> auto sys_if()
         {
             auto ptr = _get_module_if<Module>();
+            return (ptr != nullptr)
+                       ? (ptr->status() == sys::SystemModule::Status::Ok ? ptr : nullptr)
+                       : nullptr;
+        }
+
+        template<typename Module> auto sys(const std::string& id)
+        {
+            return _get_module<Module>(id);
+        }
+        template<typename Module> auto sys_if(const std::string& id)
+        {
+            auto ptr = _get_module_if<Module>(id);
             return (ptr != nullptr)
                        ? (ptr->status() == sys::SystemModule::Status::Ok ? ptr : nullptr)
                        : nullptr;
