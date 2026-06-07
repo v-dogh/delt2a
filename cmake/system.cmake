@@ -105,18 +105,10 @@ function(delta_register_module)
         )
     endif()
 
-    set_property(GLOBAL APPEND PROPERTY DELTA_REGISTERED_MODULE_TYPES
-        "${DELTA_MODULE_TYPE}"
-    )
-    set_property(GLOBAL APPEND PROPERTY DELTA_REGISTERED_MODULE_BASES
-        "${DELTA_MODULE_BASE}"
-    )
-    set_property(GLOBAL APPEND PROPERTY DELTA_REGISTERED_MODULE_HEADERS
-        "${delta_module_include_header}"
-    )
-    set_property(GLOBAL APPEND PROPERTY DELTA_REGISTERED_MODULE_TARGETS
-        "${DELTA_MODULE_TARGET}"
-    )
+    set_property(GLOBAL APPEND PROPERTY DELTA_REGISTERED_MODULE_TYPES "::${DELTA_MODULE_TYPE}")
+    set_property(GLOBAL APPEND PROPERTY DELTA_REGISTERED_MODULE_BASES "::${DELTA_MODULE_BASE}")
+    set_property(GLOBAL APPEND PROPERTY DELTA_REGISTERED_MODULE_HEADERS "${delta_module_include_header}")
+    set_property(GLOBAL APPEND PROPERTY DELTA_REGISTERED_MODULE_TARGETS "${DELTA_MODULE_TARGET}")
 endfunction()
 
 function(delta_add_module_subdirectory source_dir)
