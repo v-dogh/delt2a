@@ -1,7 +1,5 @@
-#ifndef RUNTIME_LOGS_CPP
-#define RUNTIME_LOGS_CPP
-
 #include "runtime_logs.hpp"
+
 #include <absl/debugging/stacktrace.h>
 #include <atomic>
 #include <charconv>
@@ -228,6 +226,7 @@ namespace rs
             }
         }
 
+        _sinks = std::make_shared<SinkState>();
         _root = std::make_shared<ThreadNode>();
         _root.load()->next = _root.load();
         _root.load()->prev = _root.load();
@@ -362,7 +361,6 @@ namespace rs
             state->memlock.notify_one();
             return;
         }
-
         if (state->head + total > _cfg.max_log_memory)
         {
             state->head = 0;
@@ -424,12 +422,30 @@ namespace rs
                 .msg = msg,
                 .data = data
             };
-            for (decltype(auto) it : _sinks)
+            const auto acq = _sinks.load();
+            for (decltype(auto) it : acq->sinks)
                 it->accept(entry);
         }
 
         state->memlock.clear(std::memory_order::release);
         state->memlock.notify_one();
+    }
+
+    std::shared_ptr<const RuntimeLogs::SinkState> RuntimeLogs::_acquire_sink()
+    {
+        while (true)
+        {
+            if (!_sink_wlock.test_and_set(std::memory_order::acquire))
+                break;
+            else
+                _sink_wlock.wait(true, std::memory_order::acquire);
+        }
+        return _sinks.load();
+    }
+    void RuntimeLogs::_release_sink()
+    {
+        _sink_wlock.clear(std::memory_order::release);
+        _sink_wlock.notify_all();
     }
 
     void RuntimeLogs::page(std::function<void(LogEntry)> callback) const
@@ -478,7 +494,7 @@ namespace rs
             logs.end(),
             [](const auto& a, const auto& b) { return a.timestamp < b.timestamp; }
         );
-        for (const auto& it : logs)
+        for (decltype(auto) it : logs)
         {
             const auto header = LogHeader::from(it.ptr);
             const auto msg_size = entry_size(header);
@@ -597,5 +613,3 @@ namespace rs
         );
     }
 } // namespace rs
-
-#endif // RUNTIME_LOGS_CPP

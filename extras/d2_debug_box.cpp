@@ -1106,39 +1106,61 @@ namespace d2::ex
                         class Sink : public rs::RuntimeLogSink
                         {
                         public:
-                            explicit Sink(TreeCtx<MultiInput> ctx) : ctx(ctx) {}
+                            IOContext::future<void> task;
+                            std::mutex mtx;
+                            std::vector<std::string> logs;
+                            std::atomic<std::size_t> logs_size = 0;
 
-                            TreeCtx<MultiInput> ctx;
-
-                            void accept(rs::LogEntry entry) noexcept override
+                            Sink(TreeCtx<MultiInput> ctx)
                             {
-                                if (ctx == nullptr)
-                                    return;
-                                auto value = std::format(
-                                    "{0:}({1:})<{2:}> : {3:}\n",
-                                    "",
-                                    severity_to_str(entry.severity),
-                                    entry.module,
-                                    entry.msg
-                                );
-                                ctx.defer(
-                                    std::chrono::milliseconds{0},
-                                    [ctx = this->ctx, value = std::move(value)]()
+                                task = ctx.repeat(
+                                    std::chrono::milliseconds{500},
+                                    [this, ctx](auto)
                                     {
+                                        if (!logs_size)
+                                            return;
+                                        std::string out;
+                                        {
+                                            std::lock_guard lock(mtx);
+                                            out.reserve(logs_size);
+                                            for (decltype(auto) it : logs)
+                                                out += it;
+                                            logs.clear();
+                                            logs_size = 0;
+                                        }
                                         const auto scroll = ctx->vertical_scollbar();
                                         const auto synced = !scroll->getstate(Element::Display) ||
                                                             scroll->relative_value() == 1.f;
-                                        ctx->append(value);
+                                        ctx->append(std::move(out));
                                         if (synced)
                                             ctx->sync();
                                     }
                                 );
                             }
+                            ~Sink()
+                            {
+                                task.discard();
+                                task.sync();
+                            }
+
+                            void accept(rs::LogEntry entry) noexcept override
+                            {
+                                std::lock_guard lock(mtx);
+                                logs.push_back(
+                                    std::format(
+                                        "{0:}({1:})<{2:}> : {3:}\n",
+                                        "",
+                                        severity_to_str(entry.severity),
+                                        entry.module,
+                                        entry.msg
+                                    )
+                                );
+                                logs_size += logs.back().size();
+                            }
                         };
                         ctx->disable_history();
-                        rs::context::get().sink<Sink>(ctx);
-                        Sink tmp(ctx.ptr());
-                        rs::context::get().page([&](rs::LogEntry entry) { tmp.accept(entry); });
+                        auto sink = rs::context::get().sink<Sink>(ctx);
+                        rs::context::get().page([&](rs::LogEntry entry) { sink->accept(entry); });
                         ctx.onv(
                             Element::State::Created,
                             false,

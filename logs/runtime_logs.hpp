@@ -233,6 +233,10 @@ namespace rs
             InputStream& operator<<(FlushOp);
             std::string operator<<(StringOp);
         };
+        struct SinkState
+        {
+            std::vector<std::shared_ptr<RuntimeLogSink>> sinks;
+        };
 
         // stacktrace_type length
         // '#XXX: '  - 6 bytes (max stacktrace depth)
@@ -258,7 +262,8 @@ namespace rs
         std::chrono::system_clock::time_point _baseline_sys{};
         std::chrono::steady_clock::time_point _baseline_mono{};
 
-        std::vector<std::unique_ptr<RuntimeLogSink>> _sinks{};
+        std::atomic_flag _sink_wlock{};
+        std::atomic<std::shared_ptr<const SinkState>> _sinks{};
         std::atomic<Filter> _filter{Filter::Clear};
         std::atomic<Filter> _sink_filter{Filter::Clear};
         std::atomic<std::shared_ptr<ThreadNode>> _root{};
@@ -270,6 +275,9 @@ namespace rs
             std::string_view data,
             std::string_view msg
         ) noexcept;
+
+        std::shared_ptr<const SinkState> _acquire_sink();
+        void _release_sink();
 
         explicit RuntimeLogs(Config cfg);
         RuntimeLogs() : RuntimeLogs(Config{}) {}
@@ -296,33 +304,37 @@ namespace rs
         void filter(Filter filter) noexcept;
         void sink_filter(Filter filter) noexcept;
 
-        template<typename Type, typename... Argv> Type& sink(Argv&&... args)
+        template<typename Type, typename... Argv> std::shared_ptr<Type> sink(Argv&&... args)
         {
+            auto ptr = std::make_shared<Type>(std::forward<Argv>(args)...);
+            auto acq = _acquire_sink();
+            auto cpy = std::make_shared<SinkState>(*acq);
             auto f = std::find_if(
-                _sinks.begin(),
-                _sinks.end(),
+                cpy->sinks.begin(),
+                cpy->sinks.end(),
                 [](const auto& v) { return typeid(v.get()) == typeid(Type); }
             );
-            if (f != _sinks.end())
-            {
-                *f = std::make_unique<Type>(std::forward<Argv>(args)...);
-                return static_cast<Type&>(*f->get());
-            }
+            if (f != cpy->sinks.end())
+                *f = ptr;
             else
-            {
-                _sinks.push_back(std::make_unique<Type>(std::forward<Argv>(args)...));
-                return static_cast<Type&>(*_sinks.back());
-            }
+                cpy->sinks.push_back(ptr);
+            _sinks = cpy;
+            _release_sink();
+            return ptr;
         }
         template<typename Type> void unsink()
         {
+            auto acq = _acquire_sink();
+            auto cpy = std::make_shared<SinkState>(*acq);
             auto f = std::find_if(
-                _sinks.begin(),
-                _sinks.end(),
+                cpy->sinks.begin(),
+                cpy->sinks.end(),
                 [](const auto& v) { return typeid(v.get()) == typeid(Type); }
             );
-            if (f != _sinks.end())
-                _sinks.erase(f);
+            if (f != cpy->sinks.end())
+                cpy->sinks.erase(f);
+            _sinks = cpy;
+            _release_sink();
         }
 
         void page(std::function<void(LogEntry)> callback) const;
@@ -514,4 +526,3 @@ namespace rs
         }
     } // namespace ex
 } // namespace rs
-
