@@ -1121,7 +1121,8 @@ namespace d2::ex
                                     entry.module,
                                     entry.msg
                                 );
-                                ctx.sync_async(
+                                ctx.defer(
+                                    std::chrono::milliseconds{0},
                                     [ctx = this->ctx, value = std::move(value)]()
                                     {
                                         const auto scroll = ctx->vertical_scollbar();
