@@ -218,6 +218,12 @@ namespace d2
         }
     }
 
+    void Element::_clone_state_if(ptr parent)
+    {
+        if (_state_ptr == nullptr)
+            _state_ptr = parent->state();
+    }
+
     void Element::_obliterate_dep_bind(style::uai_property prop)
     {
         if (_deps == nullptr)
@@ -773,6 +779,10 @@ namespace d2
         void ElementView::setparent(Element::pptr ptr)
         {
             _ptr->_setparent(ptr);
+        }
+        void ElementView::clone_state_if(Element::ptr parent)
+        {
+            _ptr->_clone_state_if(parent);
         }
     } // namespace internal
 } // namespace d2

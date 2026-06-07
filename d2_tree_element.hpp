@@ -338,7 +338,7 @@ namespace d2
         // Metadata
 
         const std::string _name{};
-        const TreeState::ptr _state_ptr{nullptr};
+        TreeState::ptr _state_ptr{nullptr};
         pwptr _parent{};
 
         // Flags
@@ -405,6 +405,8 @@ namespace d2
 
         void _signal_write_child(write_flag type, unsigned int prop, ptr element);
         void _signal_write(write_flag type, unsigned int prop, ptr element);
+
+        void _clone_state_if(ptr parent);
 
         void _obliterate_dep_bind(style::uai_property prop);
         void _bind_dep(style::uai_property prop, style::DependencyHandle handle);
@@ -578,6 +580,7 @@ namespace d2
             void deregister_bind(style::uai_property prop);
             void trigger_event(in::InputFrame& frame, bool recursive);
             void setparent(Element::pptr ptr);
+            void clone_state_if(Element::ptr parent);
         };
     } // namespace internal
 } // namespace d2

@@ -1,4 +1,5 @@
 #include "d2_tree_parent.hpp"
+#include "d2_tree_element.hpp"
 #include <cmath>
 
 namespace d2
@@ -95,6 +96,7 @@ namespace d2
     void ParentElement::_insert_setstate(ptr ptr)
     {
         _setparent_of(ptr);
+        internal::ElementView::from(ptr).clone_state_if(shared_from_this());
         ptr->initialize();
         ptr->setstate(Created, true);
         ptr->setstate(Embedded, getstate(Embedded));
