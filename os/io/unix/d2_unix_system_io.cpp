@@ -465,14 +465,14 @@ namespace d2::sys
         const auto [end, _] = std::to_chars(id_out.data(), id_out.data() + id_out.size(), id);
         const auto c2 = sp(std::string_view(id_out.data(), end));
 
-        out_.insert(out_.end(), c1.begin(), c1.end());
-        out_.insert(out_.end(), c2.begin(), c2.end());
-        out_.insert(out_.end(), c3.begin(), c3.end());
+        _out.insert(_out.end(), c1.begin(), c1.end());
+        _out.insert(_out.end(), c2.begin(), c2.end());
+        _out.insert(_out.end(), c3.begin(), c3.end());
     }
     std::optional<std::string> _make_shm(const void* data, std::size_t len)
     {
         static std::atomic<std::uint64_t> counter = 0;
-        for (std::size_t attempt = 0; attempt < 64; ++attempt)
+        for (std::size_t attempt = 0; attempt < 64; attempt++)
         {
             const auto name = std::format("/tty-graphics-protocol-{}-{}", ::getpid(), ++counter);
             const auto fd = ::shm_open(
@@ -516,7 +516,7 @@ namespace d2::sys
     UnixTerminalOutput::position_type
     UnixTerminalOutput::_generate_position(int x, int y, bool skip)
     {
-        using buffer = std::array<char, max_pos_len_>;
+        using buffer = std::array<char, _max_pos_len>;
 
         if (skip)
             return std::make_pair(buffer(), 0);
@@ -533,7 +533,7 @@ namespace d2::sys
     }
     UnixTerminalOutput::color_type UnixTerminalOutput::_generate_color(const Pixel& px, bool force)
     {
-        using buffer = std::array<char, max_color_len_>;
+        using buffer = std::array<char, _max_color_len>;
 
         constexpr std::array<const char*, 7> style_on = {"1", "4", "3", "9", "5", "7", "8"};
         constexpr std::array<const char*, 7> style_off = {"22", "24", "23", "29", "25", "27", "28"};
@@ -543,12 +543,12 @@ namespace d2::sys
 
         // Preds
 
-        const auto do_background = force || px.r != track_background_.r ||
-                                   px.g != track_background_.g || px.b != track_background_.b;
-        const auto do_foreground = force || px.rf != track_foreground_.r ||
-                                   px.gf != track_foreground_.g || px.bf != track_foreground_.b;
+        const auto do_background = force || px.r != _track_background.r ||
+                                   px.g != _track_background.g || px.b != _track_background.b;
+        const auto do_foreground = force || px.rf != _track_foreground.r ||
+                                   px.gf != _track_foreground.g || px.bf != _track_foreground.b;
 
-        if (px.style == track_style_ && !do_background && !do_foreground)
+        if (px.style == _track_style && !do_background && !do_foreground)
             return std::make_pair(buffer(), 0);
 
         buffer code{"\033["};
@@ -556,12 +556,12 @@ namespace d2::sys
         // Styles
 
         buffer::iterator ptr = code.begin() + style_code.size();
-        if (force || px.style != track_style_)
+        if (force || px.style != _track_style)
         {
             for (std::size_t i = 0; i < 7; i++)
             {
                 const auto ns = px.style & (1 << i);
-                const auto ps = track_style_ & (1 << i);
+                const auto ps = _track_style & (1 << i);
                 if (ns != ps)
                 {
                     if (ns)
@@ -576,7 +576,7 @@ namespace d2::sys
                     *(ptr++) = ';';
                 }
             }
-            track_style_ = px.style;
+            _track_style = px.style;
         }
 
         if (!(do_foreground || do_background))
@@ -598,9 +598,9 @@ namespace d2::sys
 
             ptrbe = ptr3b + 1;
 
-            track_background_.r = px.r;
-            track_background_.g = px.g;
-            track_background_.b = px.b;
+            _track_background.r = px.r;
+            _track_background.g = px.g;
+            _track_background.b = px.b;
         }
 
         // Foreground
@@ -619,9 +619,9 @@ namespace d2::sys
 
             ptrfe = ptr3f;
 
-            track_foreground_.r = px.rf;
-            track_foreground_.g = px.gf;
-            track_foreground_.b = px.bf;
+            _track_foreground.r = px.rf;
+            _track_foreground.g = px.gf;
+            _track_foreground.b = px.bf;
         }
 
         return std::make_pair(code, int(ptrfe - code.begin() + 1));
@@ -629,15 +629,21 @@ namespace d2::sys
 
     void UnixTerminalOutput::_push(const Pixel& px)
     {
+        if (px.v == '\t')
+        {
+            _out.push_back(' ');
+            return;
+        }
+
 #if D2_LOCALE_MODE == UNICODE
         if (global_extended_code_page.is_extended(px.v))
         {
             const auto ext = global_extended_code_page.read(px.v);
-            out_.insert(out_.end(), ext.begin(), ext.end());
+            _out.insert(_out.end(), ext.begin(), ext.end());
         }
         else
         {
-            out_.push_back(px.v);
+            _out.push_back(px.v);
         }
 #else
         out_.push_back(px.v);
@@ -654,7 +660,7 @@ namespace d2::sys
 
     std::chrono::microseconds UnixTerminalOutput::frame_time() const
     {
-        return frame_time_;
+        return _frame_time;
     }
 
     void UnixTerminalOutput::_release_image(std::any data)
@@ -722,33 +728,26 @@ namespace d2::sys
 
         const auto beg = std::chrono::high_resolution_clock::now();
 
-        track_style_ = 0x00;
-        track_foreground_ = PixelForeground(255, 255, 255);
-        track_background_ = PixelBackground(0, 0, 0);
+        _track_style = 0x00;
+        _track_foreground = PixelForeground(255, 255, 255);
+        _track_background = PixelBackground(0, 0, 0);
 
-        out_.reserve((buffer.size()) * sizeof(value_type) + (height + 1) + max_color_len_ * 2);
+        _out.reserve((buffer.size()) * sizeof(value_type) + (height + 1) + _max_color_len * 2);
 
         const auto compressed = PixelBuffer::rle_pack(buffer);
-
-        bool corner_check = false;
-        if (!swapframe_.empty())
-        {
-            PixelBuffer::RleIterator it(swapframe_);
-            corner_check = it.value() != buffer[0] && swapframe_.back() != buffer.back();
-        }
 
         // Move to zero
         {
             const auto [pos, plen] = _generate_position(0, 0, false);
-            _write(pos);
+            _write(std::span<const char>(pos.data(), plen));
         }
 
         // Clean redraw
-        if (buffer.size() != pbuffer_size_ || corner_check)
+        if (buffer.size() != _pbuffer_size)
         {
             std::size_t x = 0;
             std::size_t y = 0;
-            out_.insert(out_.end(), cls_code_.begin(), cls_code_.end());
+            _out.insert(_out.end(), _cls_code.begin(), _cls_code.end());
             for (auto it = buffer.begin(); it != buffer.end();)
             {
                 const auto& px = *it;
@@ -762,15 +761,15 @@ namespace d2::sys
                 const auto abs_end = sit - buffer.begin();
                 const auto edls = (abs_end - abs_start) / width;
 
-                out_.reserve(out_.size() + len + ((sit - it) * sizeof(value_type)) + edls);
-                out_.insert(out_.end(), code.begin(), code.begin() + len);
+                _out.reserve(_out.size() + len + ((sit - it) * sizeof(value_type)) + edls);
+                _out.insert(_out.end(), code.begin(), code.begin() + len);
 
                 while (it != sit)
                 {
                     const auto abs = it - buffer.begin();
                     if (abs && !(abs % width) && abs != abs_start)
                     {
-                        out_.push_back('\n');
+                        _out.push_back('\n');
                         y++;
                         x = 0;
                     }
@@ -782,7 +781,7 @@ namespace d2::sys
                     {
                         // Explicitly move cursor
                         const auto [pos, plen] = _generate_position(x + 1, y + 1, false);
-                        out_.insert(out_.end(), pos.begin(), pos.begin() + plen);
+                        _out.insert(_out.end(), pos.begin(), pos.begin() + plen);
                         ++it;
                         // Get ID
                         std::uint32_t id = 0;
@@ -813,7 +812,7 @@ namespace d2::sys
         {
             bool sequential = false;
             bool linear = false;
-            PixelBuffer::RleIterator pv_it(swapframe_);
+            PixelBuffer::RleIterator pv_it(_swapframe);
             for (auto it = buffer.begin(); it != buffer.end();)
             {
                 if (const auto& px = *it; px != pv_it.value())
@@ -834,11 +833,11 @@ namespace d2::sys
                     const auto end = sit - buffer.begin();
                     const auto edls = (end - idx) / width;
 
-                    out_.reserve(
-                        out_.size() + len + plen + ((sit - it) * sizeof(value_type)) + edls
+                    _out.reserve(
+                        _out.size() + len + plen + ((sit - it) * sizeof(value_type)) + edls
                     );
-                    out_.insert(out_.end(), pos.begin(), pos.begin() + plen);
-                    out_.insert(out_.end(), code.begin(), code.begin() + len);
+                    _out.insert(_out.end(), pos.begin(), pos.begin() + plen);
+                    _out.insert(_out.end(), code.begin(), code.begin() + len);
 
                     linear = true;
                     sequential = true;
@@ -848,14 +847,14 @@ namespace d2::sys
                         if (abs && !(abs % width) && abs != idx)
                         {
                             linear = false;
-                            out_.push_back('\n');
+                            _out.push_back('\n');
                         }
                         // Image support
                         [[unlikely]] if (it->v == image_constant.v)
                         {
                             // Explicitly move cursor
                             const auto [pos, plen] = _generate_position(x + 1, y + 1, false);
-                            out_.insert(out_.end(), pos.begin(), pos.begin() + plen);
+                            _out.insert(_out.end(), pos.begin(), pos.begin() + plen);
                             ++it;
                             // Get ID
                             std::uint32_t id = 0;
@@ -891,38 +890,52 @@ namespace d2::sys
             }
         }
 
-        if (!out_.empty())
+        if (!_out.empty())
         {
             constexpr std::size_t chunk = 1024;
-            for (std::size_t idx = 0; idx < out_.size();)
+            for (std::size_t idx = 0; idx < _out.size();)
             {
-                const auto size = std::min(chunk, out_.size() - idx);
+                const auto size = std::min(chunk, _out.size() - idx);
                 std::size_t off = 0;
                 while (off < size)
                 {
-                    off += _write({out_.data() + idx + off, size - off});
+                    const auto written = _write({_out.data() + idx + off, size - off});
+
+                    if (written > 0)
+                    {
+                        off += static_cast<std::size_t>(written);
+                        continue;
+                    }
+
+                    if (written == -1 && errno == EINTR)
+                        continue;
+
+                    if (written == -1 && (errno == EAGAIN || errno == EWOULDBLOCK))
+                        continue;
+
+                    break;
                 }
                 idx += size;
             }
 
-            pbuffer_size_ = width * height;
-            swapframe_.clear();
-            swapframe_.insert(swapframe_.end(), compressed.begin(), compressed.end());
+            _pbuffer_size = width * height;
+            _swapframe.clear();
+            _swapframe.insert(_swapframe.end(), compressed.begin(), compressed.end());
         }
-        buffer_size_ = out_.size();
-        out_.clear();
+        _buffer_size = _out.size();
+        _out.clear();
 
-        frame_time_ = std::chrono::duration_cast<std::chrono::microseconds>(
+        _frame_time = std::chrono::duration_cast<std::chrono::microseconds>(
             std::chrono::high_resolution_clock::now() - beg
         );
     }
 
     std::size_t UnixTerminalOutput::delta_size()
     {
-        return buffer_size_;
+        return _buffer_size;
     }
     std::size_t UnixTerminalOutput::swapframe_size()
     {
-        return swapframe_.size();
+        return _swapframe.size();
     }
 } // namespace d2::sys

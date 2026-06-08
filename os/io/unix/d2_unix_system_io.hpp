@@ -72,11 +72,11 @@ namespace d2::sys
                                public ConcreteModule<UnixTerminalOutput, Load::Immediate>
     {
     private:
-        static constexpr auto max_color_len_ =
+        static constexpr auto _max_color_len =
             std::string_view("\033[RX;RX;RX;RX;RX;RX;RX;m").size() +
             (std::string_view("38;2;255;255;255").size() * 2);
-        static constexpr auto max_pos_len_ = std::string_view("\x1b[XXXX;XXXXH").size();
-        static constexpr auto cls_code_ = std::string_view("\033[H");
+        static constexpr auto _max_pos_len = std::string_view("\x1b[XXXX;XXXXH").size();
+        static constexpr auto _cls_code = std::string_view("\033[H");
     private:
         struct KittyImageState
         {
@@ -85,18 +85,18 @@ namespace d2::sys
             std::size_t height{0};
         };
         using position_type =
-            std::pair<std::array<char, UnixTerminalOutput::max_pos_len_>, std::size_t>;
+            std::pair<std::array<char, UnixTerminalOutput::_max_pos_len>, std::size_t>;
         using color_type =
-            std::pair<std::array<char, UnixTerminalOutput::max_color_len_>, std::size_t>;
+            std::pair<std::array<char, UnixTerminalOutput::_max_color_len>, std::size_t>;
     private:
-        std::chrono::microseconds frame_time_{0};
-        std::vector<unsigned char> out_{};
-        std::vector<Pixel> swapframe_{};
-        std::size_t pbuffer_size_{0};
-        std::size_t buffer_size_{0};
-        std::uint8_t track_style_{};
-        PixelForeground track_foreground_{};
-        PixelBackground track_background_{};
+        std::chrono::microseconds _frame_time{0};
+        std::vector<unsigned char> _out{};
+        std::vector<Pixel> _swapframe{};
+        std::size_t _pbuffer_size{0};
+        std::size_t _buffer_size{0};
+        std::uint8_t _track_style{};
+        PixelForeground _track_foreground{};
+        PixelBackground _track_background{};
 
         std::mutex mtx_{};
         std::unordered_map<std::string, std::any> images_{};
