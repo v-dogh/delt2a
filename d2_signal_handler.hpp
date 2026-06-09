@@ -1,11 +1,11 @@
 #pragma once
 
-#include "mt/pool.hpp"
-#include "mt/task_ring.hpp"
 #include <absl/container/flat_hash_map.h>
 #include <atomic>
 #include <d2_exceptions.hpp>
 #include <memory>
+#include <mt/pool.hpp>
+#include <mt/task_ring.hpp>
 #include <shared_mutex>
 #include <tuple>
 #include <type_traits>
@@ -218,7 +218,13 @@ namespace d2
                         {
                             auto* args = reinterpret_cast<type*>(data);
                             auto* cb = *reinterpret_cast<func*>(callback);
-                            std::apply([&](auto&... args) { cb(block, args...); }, *args);
+                            std::apply(
+                                [&](auto&... args)
+                                {
+                                    cb(block, args...);
+                                },
+                                *args
+                            );
                         }
                         return nullptr;
                     };
@@ -254,7 +260,13 @@ namespace d2
                         {
                             auto* args = reinterpret_cast<type*>(ptr->_buffer);
                             auto* cb = *reinterpret_cast<func*>(callback);
-                            std::apply([&](auto&... args) { cb(block, args...); }, *args);
+                            std::apply(
+                                [&](auto&... args)
+                                {
+                                    cb(block, args...);
+                                },
+                                *args
+                            );
                         }
                         return nullptr;
                     };
@@ -389,8 +401,14 @@ namespace d2
             args_code code,
             std::function<void(SignalInstance&)> callback
         );
+
         void _sig_apply(SignalStorage& storage, event_idx ev, SignalInstance& args);
         void _sig_apply_all(SignalStorage& storage, event_idx ev);
+
+        bool _sig_pending(const SignalStorage& storage) const;
+        void _sig_drain_queued(std::shared_ptr<SignalStorage> storage, event_idx ev);
+        void _sig_schedule_drain(std::shared_ptr<SignalStorage> storage, event_idx ev);
+
         void _sig_trigger(signal_id id, event_idx ev, args_code code, SignalInstance sig);
 
         Signal _sig_register(signal_id id, args_code code, std::size_t size, unsigned char flags);
@@ -454,7 +472,9 @@ namespace d2
                     {
                         args.apply(
                             +[](void* ptr, Argv... args)
-                            { (*reinterpret_cast<Func*>(ptr))(args...); },
+                            {
+                                (*reinterpret_cast<Func*>(ptr))(args...);
+                            },
                             callback
                         );
                     };
@@ -478,7 +498,9 @@ namespace d2
                     {
                         args.apply(
                             +[](void* ptr, typename impl::args_normalize<Argv>::type... args)
-                            { (*reinterpret_cast<Func*>(ptr))(args...); },
+                            {
+                                (*reinterpret_cast<Func*>(ptr))(args...);
+                            },
                             callback
                         );
                     };
@@ -512,4 +534,3 @@ namespace d2
         Signals& operator=(Signals&&) = delete;
     };
 } // namespace d2
-

@@ -1,5 +1,4 @@
 #include "d2_signal_handler.hpp"
-#include "mt/pool.hpp"
 
 namespace d2
 {
@@ -129,37 +128,45 @@ namespace d2
     }
     void Signals::_sig_apply(SignalStorage& storage, event_idx ev, SignalInstance& args)
     {
-        auto f = storage.handles.find(ev);
-        if (f == storage.handles.end())
-            return;
+        std::vector<std::shared_ptr<HandleState>> callbacks;
 
-        bool cleanup = false;
-        for (decltype(auto) it : f->second)
         {
-            auto ptr = it.lock();
-            if (ptr == nullptr || ptr->state == Handle::State::Inactive)
-            {
-                cleanup = true;
-                continue;
-            }
-            if (ptr->state != Handle::State::Muted)
-                ptr->callback(args);
-        }
+            std::lock_guard lock(storage.mtx);
+            auto f = storage.handles.find(ev);
+            if (f == storage.handles.end())
+                return;
 
-        if (cleanup)
-        {
-            f->second.erase(
+            auto& list = f->second;
+            list.erase(
                 std::remove_if(
-                    f->second.begin(),
-                    f->second.end(),
-                    [](const auto& ptr)
+                    list.begin(),
+                    list.end(),
+                    [](const std::weak_ptr<HandleState>& weak)
                     {
-                        auto v = ptr.lock();
-                        return v == nullptr || v->state == Handle::State::Inactive;
+                        auto ptr = weak.lock();
+                        return ptr == nullptr || ptr->state.load(std::memory_order_acquire) ==
+                                                     Handle::State::Inactive;
                     }
                 ),
-                f->second.end()
+                list.end()
             );
+            callbacks.reserve(list.size());
+            for (auto& weak : list)
+            {
+                auto ptr = weak.lock();
+                if (ptr == nullptr)
+                    continue;
+
+                const auto state = ptr->state.load(std::memory_order_acquire);
+                if (state == Handle::State::Active)
+                    callbacks.push_back(std::move(ptr));
+            }
+        }
+
+        for (decltype(auto) ptr : callbacks)
+        {
+            if (ptr->state.load(std::memory_order_acquire) == Handle::State::Active)
+                ptr->callback(args);
         }
     }
     void Signals::_sig_apply_all(SignalStorage& storage, event_idx ev)
@@ -169,89 +176,116 @@ namespace d2
             SignalInstance sig;
             if (storage.combined.try_dequeue(sig))
                 _sig_apply(storage, ev, sig);
+            return;
         }
-        else
+        SignalInstance sig;
+        while (storage.instances.try_dequeue(sig))
+            _sig_apply(storage, ev, sig);
+    }
+
+    bool Signals::_sig_pending(const SignalStorage& storage) const
+    {
+        if (storage.flags & SignalFlags::Combine)
+            return !storage.combined.empty();
+        return !storage.instances.empty();
+    }
+    void Signals::_sig_drain_queued(std::shared_ptr<SignalStorage> storage, event_idx ev)
+    {
+        while (true)
         {
-            SignalInstance sig;
-            while (storage.instances.try_dequeue(sig))
-                _sig_apply(storage, ev, sig);
+            while (_sig_pending(*storage))
+                _sig_apply_all(*storage, ev);
+
+            storage->is_queued.store(false, std::memory_order_release);
+            if (!_sig_pending(*storage))
+                break;
+
+            bool expected = false;
+            if (storage->is_queued.compare_exchange_strong(
+                    expected, true, std::memory_order_acq_rel, std::memory_order_acquire
+                ))
+            {
+                continue;
+            }
+            break;
         }
     }
+    void Signals::_sig_schedule_drain(std::shared_ptr<SignalStorage> storage, event_idx ev)
+    {
+        bool expected = false;
+        if (!storage->is_queued.compare_exchange_strong(
+                expected, true, std::memory_order_acq_rel, std::memory_order_acquire
+            ))
+        {
+            return;
+        }
+
+        auto self = shared_from_this();
+        if (storage->flags & SignalFlags::Async)
+        {
+            _pool->launch_void(
+                [self = std::move(self), storage = std::move(storage), ev]()
+                {
+                    self->_sig_drain_queued(std::move(storage), ev);
+                }
+            );
+
+            return;
+        }
+        if (storage->flags & SignalFlags::Deferred)
+        {
+            _pool->launch_deferred(
+                std::chrono::milliseconds(0),
+                [self = std::move(self), storage = std::move(storage), ev]()
+                {
+                    self->_sig_drain_queued(std::move(storage), ev);
+                }
+            );
+
+            return;
+        }
+        storage->is_queued.store(false, std::memory_order_release);
+    }
+
     void Signals::_sig_trigger(signal_id id, event_idx ev, args_code code, SignalInstance sig)
     {
-        std::shared_lock l1(_mtx);
-        auto f = _sigs.find(id);
-        if (f == _sigs.end())
-            D2_THRW("Signal slot not found");
-        if (f->second->argument_code != code)
-            D2_THRW("Invalid signal arguments");
+        std::shared_ptr<SignalStorage> storage;
+        {
+            std::shared_lock lock(_mtx);
+            auto f = _sigs.find(id);
+            if (f == _sigs.end())
+                D2_THRW("Signal slot not found");
+            if (f->second->argument_code != code)
+                D2_THRW("Invalid signal arguments");
+            storage = f->second;
+        }
 
-        if (f->second->flags & (SignalFlags::Async | SignalFlags::Deferred))
+        const bool queued = storage->flags & (SignalFlags::Async | SignalFlags::Deferred);
+        if (!queued)
         {
-            if (!_pool)
-                D2_THRW("Cannot launch async task without pool");
-            if (f->second->flags & SignalFlags::Combine)
-            {
-                SignalInstance tmp;
-                while (!f->second->combined.try_enqueue_ref(sig))
-                    f->second->combined.try_dequeue(tmp);
-            }
-            else
-            {
-                while (sig != nullptr && !f->second->instances.try_enqueue_ref(sig))
-                {
-                    if (!(f->second->flags & SignalFlags::DropIfFull))
-                    {
-                        SignalInstance value;
-                        f->second->instances.try_dequeue(value);
-                        f->second->instances.try_enqueue_ref(sig);
-                    }
-                    else
-                        return;
-                }
-            }
+            _sig_apply(*storage, ev, sig);
+            return;
         }
-        if (f->second->flags & SignalFlags::Async)
+        if (!_pool)
+            D2_THRW("Cannot launch async task without pool");
+
+        if (storage->flags & SignalFlags::Combine)
         {
-            bool expected = false;
-            if (f->second->is_queued.compare_exchange_strong(expected, true))
-            {
-                _pool->launch_void(
-                    [ptr = shared_from_this(), this, ev, storage = f->second]()
-                    {
-                        std::shared_lock lock(_mtx);
-                        while (!storage->instances.empty())
-                        {
-                            _sig_apply_all(*storage, ev);
-                            storage->is_queued.store(false);
-                        }
-                    }
-                );
-            }
-        }
-        else if (f->second->flags & SignalFlags::Deferred)
-        {
-            bool expected = false;
-            if (f->second->is_queued.compare_exchange_strong(expected, true))
-            {
-                _pool->launch_deferred(
-                    std::chrono::milliseconds(0),
-                    [ptr = shared_from_this(), this, ev, storage = f->second]()
-                    {
-                        std::shared_lock lock(_mtx);
-                        while (!storage->instances.empty())
-                        {
-                            _sig_apply_all(*storage, ev);
-                            storage->is_queued.store(false);
-                        }
-                    }
-                );
-            }
+            SignalInstance tmp;
+            while (!storage->combined.try_enqueue_ref(sig))
+                storage->combined.try_dequeue(tmp);
         }
         else
         {
-            _sig_apply(*f->second, ev, sig);
+            while (sig != nullptr && !storage->instances.try_enqueue_ref(sig))
+            {
+                if (storage->flags & SignalFlags::DropIfFull)
+                    return;
+                SignalInstance old;
+                storage->instances.try_dequeue(old);
+            }
         }
+        _sig_schedule_drain(std::move(storage), ev);
     }
 
     Signals::Signal
