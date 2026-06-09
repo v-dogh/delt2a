@@ -223,7 +223,6 @@ namespace d2::style
             {
                 if (temporary)
                     D2_THRW("A variable cannot be used in a temporary set");
-                _var_flags.set(off);
                 _register_dep_bind(
                     Property,
                     value.subscribe_base(
@@ -232,9 +231,15 @@ namespace d2::style
                         [](std::shared_ptr<void> ptr, void* base, const auto& value, DepQuery query)
                             -> bool
                         {
-                            if (ptr == nullptr || query == DepQuery::Destroy)
+                            if (ptr == nullptr)
                                 return false;
                             auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
+                            if (query == DepQuery::Destroy)
+                            {
+                                if (base_ptr->_var_flags.test(off))
+                                    base_ptr->_deregister_dep_bind(Property);
+                                return false;
+                            }
                             base_ptr->_clear_anims_impl(Property);
                             base_ptr->template set<Property, true>(value);
                             return true;
@@ -246,7 +251,6 @@ namespace d2::style
             {
                 if (temporary)
                     D2_THRW("A dynamic variable cannot be used in a temporary set");
-                _var_flags.set(off);
                 _register_dep_bind(
                     Property,
                     value.dependency.subscribe_base(
@@ -255,9 +259,15 @@ namespace d2::style
                         [](std::shared_ptr<void> ptr, void* base, const auto& value, DepQuery query)
                             -> bool
                         {
-                            if (ptr == nullptr || query == DepQuery::Destroy)
+                            if (ptr == nullptr)
                                 return false;
                             auto* base_ptr = static_cast<UniversalAccessInterface*>(base);
+                            if (query == DepQuery::Destroy)
+                            {
+                                if (base_ptr->_var_flags.test(off))
+                                    base_ptr->_deregister_dep_bind(Property);
+                                return false;
+                            }
                             base_ptr->_clear_anims_impl(Property);
                             base_ptr->template set<Property, true>(
                                 std::remove_cvref_t<decltype(value)>::filter(value)
@@ -274,8 +284,6 @@ namespace d2::style
                     if (_var_flags.test(off))
                         _deregister_dep_bind(Property);
                 }
-                else
-                    _var_flags.set(off, false);
                 auto [ptr, type] = interface::template get<Property - interface::base>();
                 *ptr = std::forward<Type>(value);
                 _signal_base_impl(type, Property);
@@ -332,13 +340,21 @@ namespace d2::style
                 if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
                 {
                     static_assert(std::is_reference_v<Type>, "Dependency must be a reference");
-                    ctx->sync([this, value, temporary]() mutable
-                              { _int_set<Property>(std::move(value), temporary); });
+                    ctx->sync(
+                        [this, value, temporary]() mutable
+                        {
+                            _int_set<Property>(std::move(value), temporary);
+                        }
+                    );
                 }
                 else
                 {
-                    ctx->sync([this, value, temporary]() mutable
-                              { _int_set<Property>(std::move(value), temporary); });
+                    ctx->sync(
+                        [this, value, temporary]() mutable
+                        {
+                            _int_set<Property>(std::move(value), temporary);
+                        }
+                    );
                 }
             }
         }
@@ -352,7 +368,12 @@ namespace d2::style
             else
             {
                 const auto _ = _base()->shared_from_this();
-                return ctx->sync([this]() { return _int_get<Property>(); });
+                return ctx->sync(
+                    [this]()
+                    {
+                        return _int_get<Property>();
+                    }
+                );
             }
         }
     protected:
@@ -392,12 +413,14 @@ namespace d2::style
         {
             internal::ElementView::from(_base()->shared_from_this())
                 .register_bind(prop, std::move(handle));
+            _var_flags.set(off, true);
         }
         virtual void _deregister_dep_bind(property prop) override
         {
             const auto off = prop - base_offset_;
             if (_var_flags.test(off))
                 internal::ElementView::from(_base()->shared_from_this()).deregister_bind(prop);
+            _var_flags.set(off, false);
         }
         virtual void _set_dynamic_impl(property prop, bool value) override
         {
@@ -542,8 +565,12 @@ namespace d2::style
             const auto ctx = _context();
             if (ctx->is_synced())
                 return func(*getref<Property>());
-            return ctx->sync([this, func = std::forward<Func>(func)]
-                             { return func(*getref<Property>()); });
+            return ctx->sync(
+                [this, func = std::forward<Func>(func)]
+                {
+                    return func(*getref<Property>());
+                }
+            );
         }
         template<property Property, typename Func> auto apply_set(Func&& func)
         {

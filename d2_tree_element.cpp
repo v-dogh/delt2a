@@ -226,14 +226,16 @@ namespace d2
 
     void Element::_obliterate_dep_bind(style::uai_property prop)
     {
-        if (_deps == nullptr)
-            D2_THRW("There are no binds to obliterate");
         auto f = std::find_if(
-            _deps->buf.begin(), _deps->buf.end(), [&](const auto& v) { return v.property == prop; }
+            _deps->buf.begin(),
+            _deps->buf.end(),
+            [&](const auto& v)
+            {
+                return v.property == prop;
+            }
         );
-        if (f == _deps->buf.end())
-            D2_THRW("Invalid bind passed to obliterate, not found");
-        _deps->buf.erase(f);
+        if (f != _deps->buf.end())
+            _deps->buf.erase(f);
     }
     void Element::_bind_dep(style::uai_property prop, style::DependencyHandle handle)
     {

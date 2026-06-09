@@ -77,7 +77,6 @@ namespace d2::style
             {
                 if (temporary)
                     D2_THRW("A variable cannot be used in a temporary set");
-                _set_dynamic_impl(Property, true);
                 _register_dep_bind(
                     Property,
                     value.subscribe_base(
@@ -86,9 +85,15 @@ namespace d2::style
                         [](std::shared_ptr<void> ptr, void* base, const auto& value, DepQuery query)
                             -> bool
                         {
-                            if (ptr == nullptr || query == DepQuery::Destroy)
+                            if (ptr == nullptr)
                                 return false;
                             auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
+                            if (query == DepQuery::Destroy)
+                            {
+                                if (base_ptr->_get_dynamic_impl(Property))
+                                    base_ptr->_deregister_dep_bind(Property);
+                                return false;
+                            }
                             base_ptr->_clear_anims_impl(Property);
                             base_ptr->set_for<Interface, Property>(value);
                             return true;
@@ -100,7 +105,6 @@ namespace d2::style
             {
                 if (temporary)
                     D2_THRW("A dynamic variable cannot be used in a temporary set");
-                _set_dynamic_impl(Property, true);
                 _register_dep_bind(
                     Property,
                     value.dependency.subscribe_base(
@@ -109,9 +113,15 @@ namespace d2::style
                         [](std::shared_ptr<void> ptr, void* base, const auto& value, DepQuery query)
                             -> bool
                         {
-                            if (ptr == nullptr || query == DepQuery::Destroy)
+                            if (ptr == nullptr)
                                 return false;
                             auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
+                            if (query == DepQuery::Destroy)
+                            {
+                                if (base_ptr->_get_dynamic_impl(Property))
+                                    base_ptr->_deregister_dep_bind(Property);
+                                return false;
+                            }
                             base_ptr->_clear_anims_impl(Property);
                             base_ptr->set_for<Interface, Property>(
                                 std::remove_cvref_t<decltype(value)>::filter(value)
@@ -128,8 +138,6 @@ namespace d2::style
                     if (_get_dynamic_impl(Property))
                         _deregister_dep_bind(Property);
                 }
-                else
-                    _set_dynamic_impl(Property, false);
                 auto [ptr, type] = interface->template get<Property>();
                 *ptr = std::forward<Type>(value);
                 _signal_base_impl(type, Property);
@@ -175,7 +183,9 @@ namespace d2::style
             {
                 ctx->sync(
                        [value = std::forward<Type>(value), this]() mutable
-                       { _int_set_for<Interface, Property>(std::forward<Type>(value), Temporary); }
+                       {
+                           _int_set_for<Interface, Property>(std::forward<Type>(value), Temporary);
+                       }
                 ).value();
             }
             return *this;
@@ -193,7 +203,10 @@ namespace d2::style
             else
             {
                 result = ctx->sync(
-                                [&result, this]() { result = _int_get_for<Interface, Property>(); }
+                                [&result, this]()
+                                {
+                                    result = _int_get_for<Interface, Property>();
+                                }
                 ).value();
             }
             return result;
@@ -219,8 +232,12 @@ namespace d2::style
             else
             {
                 return ctx
-                    ->sync([this, func = std::forward<Func>(func)]
-                           { return func(*getref_for<Interface, Property>()); })
+                    ->sync(
+                        [this, func = std::forward<Func>(func)]
+                        {
+                            return func(*getref_for<Interface, Property>());
+                        }
+                    )
                     .value();
             }
         }
