@@ -340,21 +340,13 @@ namespace d2::style
                 if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
                 {
                     static_assert(std::is_reference_v<Type>, "Dependency must be a reference");
-                    ctx->sync(
-                        [this, value, temporary]() mutable
-                        {
-                            _int_set<Property>(std::move(value), temporary);
-                        }
-                    );
+                    ctx->sync([this, value, temporary]() mutable
+                              { _int_set<Property>(std::move(value), temporary); });
                 }
                 else
                 {
-                    ctx->sync(
-                        [this, value, temporary]() mutable
-                        {
-                            _int_set<Property>(std::move(value), temporary);
-                        }
-                    );
+                    ctx->sync([this, value, temporary]() mutable
+                              { _int_set<Property>(std::move(value), temporary); });
                 }
             }
         }
@@ -368,12 +360,7 @@ namespace d2::style
             else
             {
                 const auto _ = _base()->shared_from_this();
-                return ctx->sync(
-                    [this]()
-                    {
-                        return _int_get<Property>();
-                    }
-                );
+                return ctx->sync([this]() { return _int_get<Property>(); });
             }
         }
     protected:
@@ -413,7 +400,7 @@ namespace d2::style
         {
             internal::ElementView::from(_base()->shared_from_this())
                 .register_bind(prop, std::move(handle));
-            _var_flags.set(off, true);
+            _var_flags.set(prop - base_offset_, true);
         }
         virtual void _deregister_dep_bind(property prop) override
         {
@@ -565,12 +552,8 @@ namespace d2::style
             const auto ctx = _context();
             if (ctx->is_synced())
                 return func(*getref<Property>());
-            return ctx->sync(
-                [this, func = std::forward<Func>(func)]
-                {
-                    return func(*getref<Property>());
-                }
-            );
+            return ctx->sync([this, func = std::forward<Func>(func)]
+                             { return func(*getref<Property>()); });
         }
         template<property Property, typename Func> auto apply_set(Func&& func)
         {

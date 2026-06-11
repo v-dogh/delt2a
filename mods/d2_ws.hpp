@@ -60,8 +60,10 @@ namespace d2::sys::net
             std::function<void(std::string, d2::IOContext::ptr)> on_error{};
             std::function<void(std::uint16_t, std::string_view, d2::IOContext::ptr)> on_close{};
         };
+    protected:
+        virtual Client::ptr _connect_impl(Connection connection) = 0;
     public:
-        virtual Client::ptr connect(Connection connection) = 0;
+        Client::ptr connect(Connection connection);
 
         using AbstractModule::AbstractModule;
     };

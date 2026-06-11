@@ -858,7 +858,7 @@ namespace d2::sys::net
         return Status::Ok;
     }
 
-    SystemWSCurl::Client::ptr SystemWSCurl::connect(Connection connection)
+    SystemWSCurl::Client::ptr SystemWSCurl::_connect_impl(Connection connection)
     {
         auto op = std::make_shared<Operation>();
         op->owner = this;

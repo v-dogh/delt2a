@@ -76,4 +76,4 @@ int main()
 }
 ```
 
-More examples are in the project's examples directory
+More examples are in the project's 'examples' directory

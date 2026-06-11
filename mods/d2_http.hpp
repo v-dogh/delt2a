@@ -74,8 +74,10 @@ namespace d2::sys::net
             std::function<void(std::string, d2::IOContext::ptr)> on_error{nullptr};
             std::function<void(Chunk&)> on_chunk{nullptr};
         };
+    private:
+        virtual Stream::ptr _request_impl(Request request) = 0;
     public:
-        virtual Stream::ptr request(Request request) = 0;
+        Stream::ptr request(Request request);
 
         using AbstractModule::AbstractModule;
     };

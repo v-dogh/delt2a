@@ -90,7 +90,7 @@ namespace d2::style
                             auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
                             if (query == DepQuery::Destroy)
                             {
-                                if (base_ptr->_get_dynamic_impl(Property))
+                                if (base_ptr->_test_dynamic_impl(Property))
                                     base_ptr->_deregister_dep_bind(Property);
                                 return false;
                             }
@@ -118,7 +118,7 @@ namespace d2::style
                             auto* base_ptr = static_cast<UniversalAccessInterfaceBase*>(base);
                             if (query == DepQuery::Destroy)
                             {
-                                if (base_ptr->_get_dynamic_impl(Property))
+                                if (base_ptr->_test_dynamic_impl(Property))
                                     base_ptr->_deregister_dep_bind(Property);
                                 return false;
                             }
@@ -183,9 +183,7 @@ namespace d2::style
             {
                 ctx->sync(
                        [value = std::forward<Type>(value), this]() mutable
-                       {
-                           _int_set_for<Interface, Property>(std::forward<Type>(value), Temporary);
-                       }
+                       { _int_set_for<Interface, Property>(std::forward<Type>(value), Temporary); }
                 ).value();
             }
             return *this;
@@ -203,10 +201,7 @@ namespace d2::style
             else
             {
                 result = ctx->sync(
-                                [&result, this]()
-                                {
-                                    result = _int_get_for<Interface, Property>();
-                                }
+                                [&result, this]() { result = _int_get_for<Interface, Property>(); }
                 ).value();
             }
             return result;
@@ -232,12 +227,8 @@ namespace d2::style
             else
             {
                 return ctx
-                    ->sync(
-                        [this, func = std::forward<Func>(func)]
-                        {
-                            return func(*getref_for<Interface, Property>());
-                        }
-                    )
+                    ->sync([this, func = std::forward<Func>(func)]
+                           { return func(*getref_for<Interface, Property>()); })
                     .value();
             }
         }

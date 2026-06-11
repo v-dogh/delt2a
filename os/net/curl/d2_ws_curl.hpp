@@ -73,9 +73,9 @@ namespace d2::sys::net
 
         virtual Status _load_impl() override;
         virtual Status _unload_impl() override;
-    public:
-        virtual Client::ptr connect(Connection connection) override;
 
+        virtual Client::ptr _connect_impl(Connection connection) override;
+    public:
         using SystemWS::SystemWS;
     };
 

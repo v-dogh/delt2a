@@ -17,6 +17,7 @@ option(D2_SECURITY_LOG              "Enable runtime logging"       ON)
 option(D2_SECURITY_ASSERT           "Enable debug assertions"      ON)
 option(D2_UNICODE_MODE              "Enable unicode mode"          ON)
 option(D2_ENABLE_INSTALL            "Enable install for cmake"     OFF)
+option(D2_TEST                      "Enable building of examples"  OFF)
 
 set(D2_SANITIZER "none" CACHE STRING "Sanitizer: none, address, memory, thread, undefined")
 set_property(CACHE D2_SANITIZER PROPERTY STRINGS
@@ -48,78 +49,44 @@ if (NOT D2_SANITIZER STREQUAL "none")
         -fno-omit-frame-pointer
         -fno-optimize-sibling-calls
     )
-    list(APPEND D2_SANITIZER_DEFINITIONS
-        D2_SANITIZER_ENABLED
-    )
+    list(APPEND D2_SANITIZER_DEFINITIONS D2_SANITIZER_ENABLED)
     if (D2_SANITIZER STREQUAL "address")
-        list(APPEND D2_SANITIZER_COMPILE_FLAGS
-            -fsanitize=address,undefined
-        )
-        list(APPEND D2_SANITIZER_LINK_FLAGS
-            -fsanitize=address,undefined
-        )
+        list(APPEND D2_SANITIZER_COMPILE_FLAGS -fsanitize=address,undefined)
+        list(APPEND D2_SANITIZER_LINK_FLAGS    -fsanitize=address,undefined)
         list(APPEND D2_SANITIZER_DEFINITIONS
             D2_SANITIZER_ADDRESS
             D2_SANITIZER_UNDEFINED
         )
         if (D2_ASAN_USE_AFTER_SCOPE)
-            list(APPEND D2_SANITIZER_COMPILE_FLAGS
-                -fsanitize-address-use-after-scope
-            )
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS -fsanitize-address-use-after-scope)
         endif()
         if (D2_SANITIZER_RECOVER)
-            list(APPEND D2_SANITIZER_COMPILE_FLAGS
-                -fsanitize-recover=undefined
-            )
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS -fsanitize-recover=undefined)
         endif()
     elseif (D2_SANITIZER STREQUAL "undefined")
-        list(APPEND D2_SANITIZER_COMPILE_FLAGS
-            -fsanitize=undefined
-        )
-        list(APPEND D2_SANITIZER_LINK_FLAGS
-            -fsanitize=undefined
-        )
-        list(APPEND D2_SANITIZER_DEFINITIONS
-            D2_SANITIZER_UNDEFINED
-        )
+        list(APPEND D2_SANITIZER_COMPILE_FLAGS -fsanitize=undefined)
+        list(APPEND D2_SANITIZER_LINK_FLAGS    -fsanitize=undefined)
+        list(APPEND D2_SANITIZER_DEFINITIONS D2_SANITIZER_UNDEFINED)
         if (D2_SANITIZER_RECOVER)
-            list(APPEND D2_SANITIZER_COMPILE_FLAGS
-                -fsanitize-recover=undefined
-            )
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS -fsanitize-recover=undefined)
         endif()
     elseif (D2_SANITIZER STREQUAL "memory")
         if (NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
             message(FATAL_ERROR "MSAN requires Clang")
         endif()
-        list(APPEND D2_SANITIZER_COMPILE_FLAGS
-            -fsanitize=memory
-        )
-        list(APPEND D2_SANITIZER_LINK_FLAGS
-            -fsanitize=memory
-        )
-        list(APPEND D2_SANITIZER_DEFINITIONS
-            D2_SANITIZER_MEMORY
-        )
+        list(APPEND D2_SANITIZER_COMPILE_FLAGS -fsanitize=memory)
+        list(APPEND D2_SANITIZER_LINK_FLAGS    -fsanitize=memory)
+        list(APPEND D2_SANITIZER_DEFINITIONS D2_SANITIZER_MEMORY)
         if (D2_MSAN_TRACK_ORIGINS)
-            list(APPEND D2_SANITIZER_COMPILE_FLAGS
-                -fsanitize-memory-track-origins=2
-            )
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS -fsanitize-memory-track-origins=2)
         endif()
         if (D2_SANITIZER_RECOVER)
-            list(APPEND D2_SANITIZER_COMPILE_FLAGS
-                -fsanitize-recover=memory
-            )
+            list(APPEND D2_SANITIZER_COMPILE_FLAGS -fsanitize-recover=memory)
         endif()
     elseif (D2_SANITIZER STREQUAL "thread")
-        list(APPEND D2_SANITIZER_COMPILE_FLAGS
-            -fsanitize=thread
-        )
-        list(APPEND D2_SANITIZER_LINK_FLAGS
-            -fsanitize=thread
-        )
-        list(APPEND D2_SANITIZER_DEFINITIONS
-            D2_SANITIZER_THREAD
-        )
+        list(APPEND D2_SANITIZER_COMPILE_FLAGS -fsanitize=thread)
+        list(APPEND D2_SANITIZER_LINK_FLAGS    -fsanitize=thread)
+        list(APPEND D2_SANITIZER_DEFINITIONS D2_SANITIZER_THREAD)
     else()
         message(FATAL_ERROR "Unknown sanitizer: ${D2_SANITIZER}")
     endif()
@@ -128,15 +95,9 @@ endif()
 
 add_library(DeltaSan INTERFACE)
 if (NOT D2_SANITIZER STREQUAL "none")
-    target_compile_options(DeltaSan INTERFACE
-        ${D2_SANITIZER_COMPILE_FLAGS}
-    )
-    target_link_options(DeltaSan INTERFACE
-        ${D2_SANITIZER_LINK_FLAGS}
-    )
-    target_compile_definitions(DeltaSan INTERFACE
-        ${D2_SANITIZER_DEFINITIONS}
-    )
+    target_compile_options(DeltaSan     INTERFACE ${D2_SANITIZER_COMPILE_FLAGS})
+    target_link_options(DeltaSan        INTERFACE ${D2_SANITIZER_LINK_FLAGS})
+    target_compile_definitions(DeltaSan INTERFACE ${D2_SANITIZER_DEFINITIONS})
     add_compile_options(${D2_SANITIZER_COMPILE_FLAGS})
     add_link_options(${D2_SANITIZER_LINK_FLAGS})
 endif()
@@ -163,6 +124,7 @@ endif()
 if (D2_UNICODE_MODE)
     find_package(uni-algo REQUIRED)
 endif()
+find_package(ada REQUIRED)
 
 #############
 # LIBRARIES #
@@ -258,11 +220,18 @@ add_library(DeltaCore STATIC
     mods/d2_audio.cpp
     mods/d2_binder.hpp
     mods/d2_binder.cpp
+    mods/d2_http.hpp
+    mods/d2_http.cpp
+    mods/d2_ws.hpp
+    mods/d2_ws.cpp
+    mods/d2_session.hpp
+    mods/d2_session.cpp
 )
 target_link_libraries(DeltaCore PUBLIC
     TPMP
     logd
     DeltaLSX
+    ada::ada
     absl::base
     absl::flat_hash_map
 )
@@ -340,6 +309,9 @@ if (NOT D2_EXCLUDE_LIBRARY_EXTRAS)
         extras/d2_debug_box.hpp
         extras/d2_debug_box.cpp
     )
+    if(D2_TEST)
+        target_sources(DeltaExtras PRIVATE examples/all.cpp)
+    endif()
     target_link_libraries(DeltaExtras PUBLIC DeltaCore DeltaElements)
     delta_setup_target(DeltaExtras)
 endif()

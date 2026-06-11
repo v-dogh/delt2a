@@ -788,7 +788,7 @@ namespace d2::sys::net
         return Status::Ok;
     }
 
-    SystemHTTPCurl::Stream::ptr SystemHTTPCurl::request(Request request)
+    SystemHTTPCurl::Stream::ptr SystemHTTPCurl::_request_impl(Request request)
     {
         auto op = std::make_shared<Operation>();
 

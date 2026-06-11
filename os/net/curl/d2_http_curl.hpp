@@ -54,9 +54,9 @@ namespace d2::sys::net
 
         virtual Status _load_impl() override;
         virtual Status _unload_impl() override;
-    public:
-        virtual Stream::ptr request(Request request) override;
 
+        virtual Stream::ptr _request_impl(Request request) override;
+    public:
         using SystemHTTP::SystemHTTP;
     };
     using http_curl = SystemHTTPCurl;
