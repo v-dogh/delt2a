@@ -1,4 +1,4 @@
-#include "runtime_logs.hpp"
+#include "logd.hpp"
 
 #include <absl/debugging/stacktrace.h>
 #include <atomic>
@@ -212,18 +212,6 @@ namespace rs
 
             _baseline_sys = std::chrono::system_clock::now();
             _baseline_mono = std::chrono::steady_clock::now();
-
-            if (_cfg.min_sync_count != std::numeric_limits<std::size_t>::max())
-            {
-                _out.open(
-                    _cfg.root / "logs.dat",
-                    std::ios::out | std::ios::app | std::ios::trunc | std::ios::binary
-                );
-                _out << DumpHeader{
-                    .baseline_system = _baseline_sys.time_since_epoch().count(),
-                    .baseline_mono = _baseline_mono.time_since_epoch().count()
-                }.bin();
-            }
         }
 
         _sinks = std::make_shared<SinkState>();

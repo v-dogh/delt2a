@@ -56,9 +56,7 @@ namespace rs
         std::filesystem::path root{};
         std::size_t max_log_data_memory{2 * 1024};
         std::size_t max_log_memory{10 * 1024};
-        std::size_t min_sync_count{std::numeric_limits<std::size_t>::max()};
         bool handle_signals{true};
-        bool synchronize{false};
     };
     struct LogEntry
     {
@@ -116,7 +114,7 @@ namespace rs
     } inline str;
 
     class RuntimeLogSink;
-    class RuntimeLogs : std::enable_shared_from_this<RuntimeLogs>
+    class RuntimeLogs : public std::enable_shared_from_this<RuntimeLogs>
     {
     public:
         static constexpr auto invalid_code = std::numeric_limits<std::uint32_t>::max();
@@ -257,8 +255,6 @@ namespace rs
     private:
         const Config _cfg{};
 
-        std::fstream _out{};
-
         std::chrono::system_clock::time_point _baseline_sys{};
         std::chrono::steady_clock::time_point _baseline_mono{};
 
@@ -278,7 +274,7 @@ namespace rs
 
         std::shared_ptr<const SinkState> _acquire_sink();
         void _release_sink();
-
+    protected:
         explicit RuntimeLogs(Config cfg);
         RuntimeLogs() : RuntimeLogs(Config{}) {}
     public:

@@ -1,10 +1,10 @@
 #include "d2_debug_box.hpp"
 
 #include <absl/container/flat_hash_map.h>
+#include <d2_exceptions.hpp>
 #include <d2_module.hpp>
 #include <d2_std.hpp>
 #include <elements/d2_std.hpp>
-#include <logs/runtime_logs.hpp>
 
 namespace d2::ex::impl
 {

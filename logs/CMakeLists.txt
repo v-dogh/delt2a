@@ -5,15 +5,19 @@ project(logd LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(LOGS_ENABLE_INSTALL "Enable install" ON)
+option(LOGD_ENABLE_INSTALL "Enable install" OFF)
 
 if (NOT TARGET absl::base)
     find_package(absl REQUIRED)
 endif()
 
 add_library(logd STATIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/runtime_logs.hpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/runtime_logs.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/logd.hpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/logd.cpp
+)
+target_include_directories(logd PUBLIC 
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<INSTALL_INTERFACE:include>
 )
 target_link_libraries(logd PRIVATE
     absl::stacktrace
@@ -21,7 +25,7 @@ target_link_libraries(logd PRIVATE
     absl::base
 )
 
-if (LOGS_ENABLE_INSTALL)
+if (LOGD_ENABLE_INSTALL)
     install(TARGETS ${_install_targets} logd
         EXPORT  logdTargets
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}

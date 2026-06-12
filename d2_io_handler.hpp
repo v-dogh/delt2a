@@ -13,7 +13,6 @@
 #include <d2_main_worker.hpp>
 #include <d2_module.hpp>
 #include <d2_signal_handler.hpp>
-#include <logs/runtime_logs.hpp>
 #include <mods/d2_core.hpp>
 #include <mt/pool.hpp>
 #include <os/d2_registry.hpp>

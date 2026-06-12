@@ -5,7 +5,6 @@
 #include <d2_module.hpp>
 #include <d2_screen.hpp>
 #include <features.h>
-#include <logs/runtime_logs.hpp>
 #include <memory>
 #include <mods/d2_core.hpp>
 #include <mt/pool.hpp>

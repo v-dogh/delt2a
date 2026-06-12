@@ -2,7 +2,7 @@
 
 #include <exception>
 #include <format>
-#include <logs/runtime_logs.hpp>
+#include <logs/logd.hpp>
 #include <string>
 
 namespace d2
@@ -41,4 +41,3 @@ namespace d2
 #   define D2_SAFE_BLOCK_END });
     // clang-format on
 } // namespace d2
-
