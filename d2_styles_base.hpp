@@ -123,9 +123,7 @@ namespace d2::style
                                 return false;
                             }
                             base_ptr->_clear_anims_impl(Property);
-                            base_ptr->set_for<Interface, Property>(
-                                std::remove_cvref_t<decltype(value)>::filter(value)
-                            );
+                            base_ptr->set_for<Interface, Property>(Type::filter(value));
                             return true;
                         }
                     )

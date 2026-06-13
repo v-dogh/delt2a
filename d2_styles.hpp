@@ -269,9 +269,7 @@ namespace d2::style
                                 return false;
                             }
                             base_ptr->_clear_anims_impl(Property);
-                            base_ptr->template set<Property, true>(
-                                std::remove_cvref_t<decltype(value)>::filter(value)
-                            );
+                            base_ptr->template set<Property, true>(Type::filter(value));
                             return true;
                         }
                     )
