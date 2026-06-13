@@ -54,6 +54,9 @@ namespace d2
     public:
         using Element::Element;
 
+        using Element::extract;
+        using Element::remove;
+
         bool empty() const;
         bool exists(const std::string& name) const;
         bool exists(ptr ptr) const;
@@ -214,4 +217,3 @@ namespace d2
         virtual void foreach (foreach_callback callback) const override {}
     };
 } // namespace d2
-
