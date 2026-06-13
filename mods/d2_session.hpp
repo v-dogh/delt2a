@@ -25,13 +25,12 @@ namespace d2::sys::net
     private:
         struct ScopeLookup
         {
-            Scope scope;
-            std::vector<std::string> headers;
+            Scope scope{};
+            absl::flat_hash_map<std::string, std::string> headers{};
         };
     private:
         mutable std::shared_mutex _mtx{};
         absl::flat_hash_map<std::string, ScopeLookup> _scopes{};
-        absl::flat_hash_map<std::string, std::string> _headers{};
     public:
         using AbstractModule::AbstractModule;
 
@@ -41,6 +40,7 @@ namespace d2::sys::net
             absl::flat_hash_map<std::string, std::string> headers = {}
         );
         void set_header(std::string_view name, std::string_view header, std::string value);
+        std::optional<std::string> get_header(std::string_view name, std::string_view header);
 
         void reset(std::string_view name);
         void reset();

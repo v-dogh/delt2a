@@ -36,8 +36,19 @@ namespace d2::sys::net
         auto f = _scopes.find(name);
         if (f == _scopes.end())
             D2_THRW("Invalid scope: '", name, "'");
-        f->second.headers.push_back(std::string(header));
-        _headers[header] = std::move(value);
+        f->second.headers[header] = std::move(value);
+    }
+    std::optional<std::string>
+    SystemSession::get_header(std::string_view name, std::string_view header)
+    {
+        std::shared_lock lock(_mtx);
+        auto f = _scopes.find(name);
+        if (f == _scopes.end())
+            return std::nullopt;
+        auto ff = f->second.headers.find(header);
+        if (ff == f->second.headers.end())
+            return std::nullopt;
+        return ff->second;
     }
 
     void SystemSession::reset(std::string_view name)
@@ -46,15 +57,12 @@ namespace d2::sys::net
         auto f = _scopes.find(name);
         if (f == _scopes.end())
             return;
-        for (decltype(auto) it : f->second.headers)
-            _headers.erase(it);
         _scopes.erase(f);
     }
     void SystemSession::reset()
     {
         std::lock_guard lock(_mtx);
         _scopes.clear();
-        _headers.clear();
     }
 
     void SystemSession::process(
@@ -80,8 +88,8 @@ namespace d2::sys::net
                 Scope::parse(scope.path, result->get_pathname()) &&
                 Scope::parse(scope.port, result->get_port()))
             {
-                for (decltype(auto) header : it.second.headers)
-                    callback(header, _headers.at(header));
+                for (const auto& [key, value] : it.second.headers)
+                    callback(key, value);
             }
         }
     }
