@@ -33,6 +33,7 @@ namespace d2::sys
             MouseMoved,
             MouseInput,
             Update,
+            TreeSwap,
         };
         using ModelType = MatrixModel::ModelType;
     private:

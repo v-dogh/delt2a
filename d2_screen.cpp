@@ -517,6 +517,8 @@ namespace d2::sys
 
         D2_TLOG(Verbose, "Initializing tree")
         root->state->root()->initialize(true);
+
+        _signal(Event::TreeSwap);
     }
 
     TreeTags& SystemScreen::tags()
