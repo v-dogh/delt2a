@@ -45,7 +45,7 @@ namespace d2::sys::net
         std::lock_guard lock(_mtx);
         auto f = _scopes.find(name);
         if (f == _scopes.end())
-            D2_THRW("Invalid scope to reset: '", name, "'");
+            return;
         for (decltype(auto) it : f->second.headers)
             _headers.erase(it);
         _scopes.erase(f);
