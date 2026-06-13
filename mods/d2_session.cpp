@@ -82,7 +82,7 @@ namespace d2::sys::net
         for (decltype(auto) it : _scopes)
         {
             auto& scope = it.second.scope;
-            if (Scope::parse(scope.protocol, result->get_protocol()) &&
+            if (!scope.short_circuit && Scope::parse(scope.protocol, result->get_protocol()) &&
                 Scope::parse(scope.method, method) &&
                 Scope::parse(scope.domain, result->get_hostname()) &&
                 Scope::parse(scope.path, result->get_pathname()) &&

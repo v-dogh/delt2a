@@ -19,6 +19,7 @@ namespace d2::sys::net
             rule domain{std::monostate{}};
             rule path{std::monostate{}};
             rule port{std::monostate{}};
+            bool short_circuit{false};
 
             static bool parse(const rule& rule, std::string_view input);
         };
