@@ -475,8 +475,10 @@ namespace d2
         Element(const Element&) = delete;
         virtual ~Element() = default;
 
-        // Just calls parent()->remove(...)
+        // Convenience for ParentElement stuff
+
         void remove();
+        ptr extract();
 
         // Metadata
 

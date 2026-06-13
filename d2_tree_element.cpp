@@ -227,12 +227,7 @@ namespace d2
     void Element::_obliterate_dep_bind(style::uai_property prop)
     {
         auto f = std::find_if(
-            _deps->buf.begin(),
-            _deps->buf.end(),
-            [&](const auto& v)
-            {
-                return v.property == prop;
-            }
+            _deps->buf.begin(), _deps->buf.end(), [&](const auto& v) { return v.property == prop; }
         );
         if (f != _deps->buf.end())
             _deps->buf.erase(f);
@@ -320,6 +315,12 @@ namespace d2
         if (parent() == nullptr)
             D2_THRW("Cannot remove root element");
         parent()->remove(traverse());
+    }
+    Element::ptr Element::extract()
+    {
+        if (parent() == nullptr)
+            D2_THRW("Cannot extract disowned element");
+        return parent()->extract(shared_from_this());
     }
 
     // Metadata
