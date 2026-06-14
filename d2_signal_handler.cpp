@@ -66,9 +66,12 @@ namespace d2
     }
     void Signals::Handle::close()
     {
-        _state->state = State::Inactive;
-        _state = nullptr;
-        _storage = nullptr;
+        if (_state)
+        {
+            _state->state = State::Inactive;
+            _state = nullptr;
+            _storage = nullptr;
+        }
     }
     Signals::Handle::State Signals::Handle::state() const
     {
