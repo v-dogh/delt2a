@@ -218,13 +218,7 @@ namespace d2
                         {
                             auto* args = reinterpret_cast<type*>(data);
                             auto* cb = *reinterpret_cast<func*>(callback);
-                            std::apply(
-                                [&](auto&... args)
-                                {
-                                    cb(block, args...);
-                                },
-                                *args
-                            );
+                            std::apply([&](auto&... args) { cb(block, args...); }, *args);
                         }
                         return nullptr;
                     };
@@ -260,13 +254,7 @@ namespace d2
                         {
                             auto* args = reinterpret_cast<type*>(ptr->_buffer);
                             auto* cb = *reinterpret_cast<func*>(callback);
-                            std::apply(
-                                [&](auto&... args)
-                                {
-                                    cb(block, args...);
-                                },
-                                *args
-                            );
+                            std::apply([&](auto&... args) { cb(block, args...); }, *args);
                         }
                         return nullptr;
                     };
@@ -299,7 +287,7 @@ namespace d2
             std::shared_mutex mtx{};
             mt::TaskRing<SignalInstance, _max_concurrent_signals> instances{};
             mt::TaskRing<SignalInstance, 1> combined{};
-            absl::flat_hash_map<event_idx, std::vector<std::weak_ptr<HandleState>>> handles{};
+            absl::flat_hash_map<event_idx, std::vector<std::shared_ptr<HandleState>>> handles{};
             std::size_t packed_size{0};
             args_code argument_code{0};
             std::atomic<bool> is_queued{false};
@@ -322,20 +310,23 @@ namespace d2
         public:
             using State = HandleState::State;
         private:
+            std::shared_ptr<SignalStorage> _storage{};
             std::shared_ptr<HandleState> _state{nullptr};
         public:
             Handle() = default;
-            Handle(const Handle&) = default;
+            Handle(const Handle&) = delete;
             Handle(Handle&&) = default;
-            Handle(std::shared_ptr<HandleState> ptr);
+            Handle(std::shared_ptr<HandleState> ptr, std::shared_ptr<SignalStorage> storage);
             Handle(std::nullptr_t) {}
+            ~Handle();
 
             void mute();
             void unmute();
+            void release();
             void close();
             State state() const;
 
-            Handle& operator=(const Handle&) = default;
+            Handle& operator=(const Handle&) = delete;
             Handle& operator=(Handle&&) = default;
 
             bool operator==(std::nullptr_t) const;
@@ -472,9 +463,7 @@ namespace d2
                     {
                         args.apply(
                             +[](void* ptr, Argv... args)
-                            {
-                                (*reinterpret_cast<Func*>(ptr))(args...);
-                            },
+                            { (*reinterpret_cast<Func*>(ptr))(args...); },
                             callback
                         );
                     };
@@ -498,9 +487,7 @@ namespace d2
                     {
                         args.apply(
                             +[](void* ptr, typename impl::args_normalize<Argv>::type... args)
-                            {
-                                (*reinterpret_cast<Func*>(ptr))(args...);
-                            },
+                            { (*reinterpret_cast<Func*>(ptr))(args...); },
                             callback
                         );
                     };

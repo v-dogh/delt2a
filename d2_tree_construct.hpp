@@ -1,5 +1,6 @@
 #pragma once
 
+#include "d2_exceptions.hpp"
 #include "d2_interpolator.hpp"
 #include "d2_tree_element.hpp"
 #include "d2_tree_element_frwd.hpp"
@@ -60,6 +61,7 @@ namespace d2
 
     class TreeCtxBase
     {
+        D2_TAG_MODULE(tree)
     private:
         struct BranchState
         {
@@ -534,6 +536,31 @@ namespace d2
         branch(std::pair<typename style::ThemeRegistry<decltype(Var)>::type, Branch>... branches)
         {
             branch(var<Var>(), std::move(branches)...);
+        }
+
+        void persist()
+        {
+            if (_ptr->parent() != screen()->root())
+                D2_THRW("Attempt to persist children below the root layer");
+            auto handle = context()->listen(
+                sys::screen::Event::TreeSwap,
+                [ptr = _ptr](IOContext::ptr ctx)
+                {
+                    if (ptr != nullptr)
+                    {
+                        auto root = ctx->screen()->root();
+                        if (root->exists(ptr->name()))
+                            D2_TLOG(
+                                Warning,
+                                "Element already exists at: '",
+                                ptr->name(),
+                                "'; While attempting to persist (overriding)"
+                            );
+                        root->override(ptr->extract());
+                    }
+                }
+            );
+            declare<Signals::Handle>() = std::move(handle);
         }
 
         // Styles

@@ -41,7 +41,15 @@ namespace d2
         return _manager != nullptr;
     }
 
-    Signals::Handle::Handle(std::shared_ptr<HandleState> ptr) : _state(ptr) {}
+    Signals::Handle::Handle(
+        std::shared_ptr<HandleState> ptr, std::shared_ptr<SignalStorage> storage
+    ) : _state(ptr), _storage(storage)
+    {
+    }
+    Signals::Handle::~Handle()
+    {
+        close();
+    }
 
     void Signals::Handle::mute()
     {
@@ -51,9 +59,16 @@ namespace d2
     {
         _state->state = State::Active;
     }
+    void Signals::Handle::release()
+    {
+        _state = nullptr;
+        _storage = nullptr;
+    }
     void Signals::Handle::close()
     {
         _state->state = State::Inactive;
+        _state = nullptr;
+        _storage = nullptr;
     }
     Signals::Handle::State Signals::Handle::state() const
     {
@@ -124,7 +139,7 @@ namespace d2
         auto state = std::make_shared<HandleState>(std::move(callback));
         std::lock_guard l2(f->second->mtx);
         f->second->handles[ev].push_back(state);
-        return state;
+        return Handle(state, f->second);
     }
     void Signals::_sig_apply(SignalStorage& storage, event_idx ev, SignalInstance& args)
     {
@@ -144,20 +159,18 @@ namespace d2
                     [](const std::weak_ptr<HandleState>& weak)
                     {
                         auto ptr = weak.lock();
-                        return ptr == nullptr || ptr->state.load(std::memory_order_acquire) ==
+                        return ptr == nullptr || ptr->state.load(std::memory_order::acquire) ==
                                                      Handle::State::Inactive;
                     }
                 ),
                 list.end()
             );
             callbacks.reserve(list.size());
-            for (auto& weak : list)
+            for (decltype(auto) ptr : list)
             {
-                auto ptr = weak.lock();
                 if (ptr == nullptr)
                     continue;
-
-                const auto state = ptr->state.load(std::memory_order_acquire);
+                const auto state = ptr->state.load(std::memory_order::acquire);
                 if (state == Handle::State::Active)
                     callbacks.push_back(std::move(ptr));
             }
@@ -165,7 +178,7 @@ namespace d2
 
         for (decltype(auto) ptr : callbacks)
         {
-            if (ptr->state.load(std::memory_order_acquire) == Handle::State::Active)
+            if (ptr->state.load(std::memory_order::acquire) == Handle::State::Active)
                 ptr->callback(args);
         }
     }
@@ -196,13 +209,13 @@ namespace d2
             while (_sig_pending(*storage))
                 _sig_apply_all(*storage, ev);
 
-            storage->is_queued.store(false, std::memory_order_release);
+            storage->is_queued.store(false, std::memory_order::release);
             if (!_sig_pending(*storage))
                 break;
 
             bool expected = false;
             if (storage->is_queued.compare_exchange_strong(
-                    expected, true, std::memory_order_acq_rel, std::memory_order_acquire
+                    expected, true, std::memory_order::acq_rel, std::memory_order::acquire
                 ))
             {
                 continue;
@@ -214,7 +227,7 @@ namespace d2
     {
         bool expected = false;
         if (!storage->is_queued.compare_exchange_strong(
-                expected, true, std::memory_order_acq_rel, std::memory_order_acquire
+                expected, true, std::memory_order::acq_rel, std::memory_order::acquire
             ))
         {
             return;
@@ -223,12 +236,8 @@ namespace d2
         auto self = shared_from_this();
         if (storage->flags & SignalFlags::Async)
         {
-            _pool->launch_void(
-                [self = std::move(self), storage = std::move(storage), ev]()
-                {
-                    self->_sig_drain_queued(std::move(storage), ev);
-                }
-            );
+            _pool->launch_void([self = std::move(self), storage = std::move(storage), ev]()
+                               { self->_sig_drain_queued(std::move(storage), ev); });
 
             return;
         }
@@ -237,9 +246,7 @@ namespace d2
             _pool->launch_deferred(
                 std::chrono::milliseconds(0),
                 [self = std::move(self), storage = std::move(storage), ev]()
-                {
-                    self->_sig_drain_queued(std::move(storage), ev);
-                }
+                { self->_sig_drain_queued(std::move(storage), ev); }
             );
 
             return;
