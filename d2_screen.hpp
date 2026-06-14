@@ -160,7 +160,7 @@ namespace d2::sys
             _ts.recursive = true;
             auto load = [this]<typename Tree>()
             {
-                using type = Tree::tree;
+                using type = typename Tree::tree;
                 const std::string name = std::string(Tree::name);
                 auto& t = _trees[name];
                 t = std::make_shared<TreeData>();
@@ -212,6 +212,8 @@ namespace d2::sys
                 return std::static_pointer_cast<Type>(f->second->state);
             }
         }
+
+        std::string name();
 
         void erase_tree(std::string_view name);
         void erase_tree();

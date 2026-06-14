@@ -623,6 +623,11 @@ namespace d2::sys
             interps.erase(f);
     }
 
+    std::string SystemScreen::name()
+    {
+        return _ts.current_name;
+    }
+
     void SystemScreen::erase_tree(std::string_view name)
     {
         auto root = _trees[name];

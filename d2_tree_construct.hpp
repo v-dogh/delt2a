@@ -530,25 +530,38 @@ namespace d2
             branch(var<Var>(), std::move(branches)...);
         }
 
-        void persist()
+        void persist(std::vector<std::string> whitelist = {})
         {
             if (_ptr->parent() != screen()->root())
                 D2_THRW("Attempt to persist children below the root layer");
             auto handle = context()->listen(
                 sys::screen::Event::TreeSwap,
-                [ptr = _ptr](IOContext::ptr ctx)
+                [ptr = _ptr,
+                 tmp = std::shared_ptr<Element>(nullptr),
+                 whitelist = absl::flat_hash_set<std::string>(whitelist.begin(), whitelist.end())](
+                    IOContext::ptr ctx
+                ) mutable
                 {
+                    auto src = ctx->screen();
                     if (ptr != nullptr)
                     {
-                        auto root = ctx->screen()->root();
-                        if (root->exists(ptr->name()))
-                            D2_TLOG(
-                                Warning,
-                                "Element already exists at: '",
-                                ptr->name(),
-                                "'; While attempting to persist (overriding)"
-                            );
-                        root->override(ptr->extract());
+                        if (whitelist.empty() || whitelist.contains(src->name()))
+                        {
+                            auto root = src->root();
+                            if (root->exists(ptr->name()))
+                                D2_TLOG(
+                                    Warning,
+                                    "Element already exists at: '",
+                                    ptr->name(),
+                                    "'; While attempting to persist (overriding)"
+                                );
+                            root->override(tmp ? tmp : ptr->extract());
+                            tmp = nullptr;
+                        }
+                        else if (!whitelist.empty())
+                        {
+                            tmp = ptr->extract();
+                        }
                     }
                 }
             );
