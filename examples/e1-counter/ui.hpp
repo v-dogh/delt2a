@@ -7,7 +7,6 @@
 namespace e1
 {
     using counter = d2::Tree<
-        "counter",
         d2::TreeState,
         d2::dx::FlowBox,
         [](d2::TreeCtx<d2::dx::FlowBox> ctx)

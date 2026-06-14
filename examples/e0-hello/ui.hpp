@@ -5,7 +5,6 @@
 namespace e0
 {
     using hello = d2::Tree<
-        "hello",
         d2::TreeState,
         d2::dx::Box,
         [](d2::TreeCtx<d2::dx::Box> ctx)

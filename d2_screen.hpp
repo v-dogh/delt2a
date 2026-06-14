@@ -212,20 +212,16 @@ namespace d2::sys
             }
         }
 
-        // Returns the current input frame for the tick
-        in::InputFrame* input();
+        void erase_tree(const std::string& name);
+        void erase_tree();
+        void clear_tree();
 
         TreeTags& tags();
-        TreeTags& tags(const std::string& name);
-
-        const TreeTags& tags() const;
-        const TreeTags& tags(const std::string& name) const;
-
         DynamicDependencyManager& deps();
         DynamicDependencyManager& deps(const std::string& name);
 
-        const DynamicDependencyManager& deps() const;
-        const DynamicDependencyManager& deps(const std::string& name) const;
+        // Returns the current input frame for the tick
+        in::InputFrame* input();
 
         // Interpolation
 
@@ -251,10 +247,6 @@ namespace d2::sys
 
         void clear_animations(TreeIter<> ptr);
         void clear_animations(TreeIter<> ptr, style::uai_property prop);
-
-        void erase_tree(const std::string& name);
-        void erase_tree();
-        void clear_tree();
 
         // Theming
 

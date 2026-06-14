@@ -7,14 +7,11 @@
 
 namespace d2
 {
-    template<meta::ConstString Name, typename State, typename Tree, typename Root>
-    struct TreeTemplateInit
+    template<typename State, typename Tree, typename Root> struct TreeTemplateInit
     {
     public:
         using root = Root;
         using state = State;
-
-        static constexpr std::string_view name = Name.view();
 
         template<typename... Argv>
         static auto build_sub(
@@ -43,9 +40,14 @@ namespace d2
         }
     };
 
-    template<meta::ConstString Name, typename Tree, typename Root>
-    struct TreeTemplate : TreeTemplateInit<Name, TreeState, Tree, Root>
+    template<typename Tree, typename Root>
+    struct TreeTemplate : TreeTemplateInit<TreeState, Tree, Root>
     {
     };
-} // namespace d2
 
+    template<meta::ConstString Name, typename Tree> struct NamedTree
+    {
+        static constexpr auto name = Name.view();
+        using tree = Tree;
+    };
+} // namespace d2

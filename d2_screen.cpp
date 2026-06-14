@@ -533,35 +533,15 @@ namespace d2::sys
         return f->second->tags;
     }
 
-    const TreeTags& SystemScreen::tags() const
+    TreeTags& SystemScreen::tags()
     {
         return _ts.current->tags;
     }
-    const TreeTags& SystemScreen::tags(const std::string& name) const
-    {
-        auto f = _trees.find(name);
-        if (f == _trees.end())
-            D2_THRW("Invalid tree name");
-        return f->second->tags;
-    }
-
     DynamicDependencyManager& SystemScreen::deps()
     {
         return _ts.current->deps;
     }
     DynamicDependencyManager& SystemScreen::deps(const std::string& name)
-    {
-        auto f = _trees.find(name);
-        if (f == _trees.end())
-            D2_THRW("Invalid tree name");
-        return f->second->deps;
-    }
-
-    const DynamicDependencyManager& SystemScreen::deps() const
-    {
-        return _ts.current->deps;
-    }
-    const DynamicDependencyManager& SystemScreen::deps(const std::string& name) const
     {
         auto f = _trees.find(name);
         if (f == _trees.end())

@@ -1,9 +1,5 @@
 #pragma once
 
-#include "d2_exceptions.hpp"
-#include "d2_interpolator.hpp"
-#include "d2_tree_element.hpp"
-#include "d2_tree_element_frwd.hpp"
 #include <chrono>
 #include <cstdint>
 #include <d2_io_handler.hpp>
@@ -137,10 +133,6 @@ namespace d2
                 "Invalid type or tag name (use ctag for non-standard tags to "
                 "bypass the checks)"
             );
-        }
-        template<typename Type> void tag(const std::string& name, Type&& value) const
-        {
-            screen()->tags().set(name, std::forward<Type&&>(value));
         }
 
         // Deps

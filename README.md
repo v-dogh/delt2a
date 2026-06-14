@@ -51,7 +51,6 @@ And then define a tree and add some elements:
 #include <elements/d2_std.hpp>
 
 using app = d2::Tree<
-    "main",
     d2::TreeState,
     d2::dx::Box,
     [](d2::TreeCtx<d2::dx::Box> ctx)
