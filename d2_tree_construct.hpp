@@ -532,7 +532,7 @@ namespace d2
 
         void persist(std::vector<std::string> whitelist = {})
         {
-            if (_ptr->parent() != screen()->root())
+            if (_ptr->parent() != screen()->root().shared())
                 D2_THRW("Attempt to persist children below the root layer");
             auto handle = context()->listen(
                 sys::screen::Event::TreeSwap,
