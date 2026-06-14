@@ -67,8 +67,8 @@ namespace d2::sys::net
         };
         struct Request
         {
-            std::string_view method{Method::Get};
-            std::string_view url{""};
+            std::string method{Method::Get};
+            std::string url{""};
             std::function<void(RequestBuilder&)> on_setup{nullptr};
             std::function<void(Response&)> on_response{nullptr};
             std::function<void(std::string, d2::IOContext::ptr)> on_error{nullptr};
