@@ -158,29 +158,30 @@ namespace d2::sys
             if (_ts.recursive)
                 D2_THRW("Attempt to create trees recursively");
             _ts.recursive = true;
-            auto load = [this]<typename Set>()
+            auto load = [this]<typename Tree>()
             {
-                const std::string name = std::string(Set::name);
+                using type = Tree::tree;
+                const std::string name = std::string(Tree::name);
                 auto& t = _trees[name];
                 t = std::make_shared<TreeData>();
-                // Temporary switch for Set::construct
+                // Temporary switch for type::construct
                 {
                     auto backup = std::move(_ts);
                     _ts = TempTreeState();
                     _ts.current_name = name;
                     _ts.current = t;
-                    t->state = Set::build(context());
+                    t->state = type::build(context());
                     _ts = std::move(backup);
                 }
                 t->rebuild = [](TreeIter<ParentElement> root, TreeState::ptr state)
-                { Set::create_at(root, std::static_pointer_cast<typename Set::state>(state)); };
+                { type::create_at(root, std::static_pointer_cast<typename type::state>(state)); };
             };
             load.template operator()<First>();
             (load.template operator()<Rest>(), ...);
             _ts.recursive = false;
-            set(std::string(First::name));
+            set(First::name);
         }
-        void set(const std::string& name);
+        void set(std::string_view name);
 
         template<typename Type = void> auto state() const
         {
@@ -193,7 +194,7 @@ namespace d2::sys
                 return std::static_pointer_cast<Type>(_ts.current->state);
             }
         }
-        template<typename Type = void> auto state(const std::string& name) const
+        template<typename Type = void> auto state(std::string_view name) const
         {
             auto f = _trees.find(name);
             if (f == _trees.end())
@@ -212,13 +213,13 @@ namespace d2::sys
             }
         }
 
-        void erase_tree(const std::string& name);
+        void erase_tree(std::string_view name);
         void erase_tree();
         void clear_tree();
 
         TreeTags& tags();
         DynamicDependencyManager& deps();
-        DynamicDependencyManager& deps(const std::string& name);
+        DynamicDependencyManager& deps(std::string_view name);
 
         // Returns the current input frame for the tick
         in::InputFrame* input();

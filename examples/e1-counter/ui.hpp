@@ -108,7 +108,13 @@ namespace e1
     {
         try
         {
-            d2::IOContext::make<d2::sys::input, d2::sys::output, d2::sys::screen>()->run<counter>();
+            d2::IOContext::make<
+                //
+                d2::sys::input,
+                d2::sys::output,
+                d2::sys::screen
+            >()
+                ->run<d2::NamedTree<"Counter", counter>>();
         }
         catch (const std::exception& ex)
         {

@@ -71,7 +71,7 @@ int main()
         d2::sys::input,
         d2::sys::output,
         d2::sys::screen
-    >()->run<app>();
+    >()->run<d2::NamedTree<"App", app>>();
 }
 ```
 

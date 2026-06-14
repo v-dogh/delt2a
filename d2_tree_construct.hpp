@@ -588,8 +588,8 @@ namespace d2
         }
     };
 
-    template<meta::ConstString Name, typename State, typename Root, auto Build, typename... Argv>
-    struct Tree : d2::TreeTemplateInit<Name, State, void, Root>
+    template<typename State, typename Root, auto Build, typename... Argv>
+    struct Tree : d2::TreeTemplateInit<State, void, Root>
     {
         static_assert(
             std::is_invocable_v<decltype(Build), TreeCtx<Root, State>, Argv...>,
@@ -600,8 +600,8 @@ namespace d2
             Build(TreeCtx<Root, State>(root.as<Root>()), std::move(args)...);
         }
     };
-    template<meta::ConstString Name, typename Base, typename State, typename Root, typename... Argv>
-    struct TreeForward : d2::TreeTemplateInit<Name, State, void, Root>
+    template<typename Base, typename State, typename Root, typename... Argv>
+    struct TreeForward : d2::TreeTemplateInit<State, void, Root>
     {
         static void create_at(TreeIter<> root, TreeState::ptr state, Argv... args)
         {

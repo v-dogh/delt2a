@@ -454,7 +454,7 @@ namespace d2::sys
         return _ts.current->state->root();
     }
 
-    void SystemScreen::set(const std::string& name)
+    void SystemScreen::set(std::string_view name)
     {
         D2_TLOG(Info, "Switching trees to: '", name, "'")
         if (_ts.current != nullptr && name == root()->name())
@@ -525,23 +525,11 @@ namespace d2::sys
     {
         return _ts.current->tags;
     }
-    TreeTags& SystemScreen::tags(const std::string& name)
-    {
-        auto f = _trees.find(name);
-        if (f == _trees.end())
-            D2_THRW("Invalid tree name");
-        return f->second->tags;
-    }
-
-    TreeTags& SystemScreen::tags()
-    {
-        return _ts.current->tags;
-    }
     DynamicDependencyManager& SystemScreen::deps()
     {
         return _ts.current->deps;
     }
-    DynamicDependencyManager& SystemScreen::deps(const std::string& name)
+    DynamicDependencyManager& SystemScreen::deps(std::string_view name)
     {
         auto f = _trees.find(name);
         if (f == _trees.end())
@@ -635,7 +623,7 @@ namespace d2::sys
             interps.erase(f);
     }
 
-    void SystemScreen::erase_tree(const std::string& name)
+    void SystemScreen::erase_tree(std::string_view name)
     {
         auto root = _trees[name];
         if (root == _ts.current)

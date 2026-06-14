@@ -5,9 +5,8 @@
 
 namespace d2::ex
 {
-    struct debug : TreeForward<"debug", debug, TreeState, dx::VirtualBox>
+    struct debug : TreeForward<debug, TreeState, dx::VirtualBox>
     {
         static void construct(TreeCtx<dx::VirtualBox, TreeState> ctx);
     };
 } // namespace d2::ex
-
