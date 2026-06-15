@@ -371,7 +371,11 @@ namespace d2::sys::net
         if (op->on_open)
         {
             if (auto client = op->client.lock())
+            {
+                D2_SAFE_BLOCK_BEGIN
                 op->on_open(client);
+                D2_SAFE_BLOCK_END
+            }
         }
 
         while (!op->outgoing.empty() && op->phase == Phase::Open && !op->pending_send)
@@ -547,7 +551,9 @@ namespace d2::sys::net
                     {
                         std::string message = std::move(op->message_buffer);
                         op->message_buffer.clear();
+                        D2_SAFE_BLOCK_BEGIN
                         op->on_message(std::string_view(message), op->message_type, client);
+                        D2_SAFE_BLOCK_END
                     }
                     else
                     {
@@ -635,7 +641,11 @@ namespace d2::sys::net
         op->phase = Phase::Closed;
         op->public_state = State::Closed;
         if (op->on_close)
+        {
+            D2_SAFE_BLOCK_BEGIN
             op->on_close(code, std::string_view(reason), op->ctx);
+            D2_SAFE_BLOCK_END
+        }
     }
     void SystemWSCurl::_transport_error(std::shared_ptr<Operation> op, std::string error)
     {
@@ -654,11 +664,19 @@ namespace d2::sys::net
         op->phase = Phase::Failed;
         op->public_state = State::Failed;
         if (op->on_error)
+        {
+            D2_SAFE_BLOCK_BEGIN
             op->on_error(error, op->ctx);
+            D2_SAFE_BLOCK_END
+        }
         else
             D2_TLOG(Error, "WebSocket failed: ", error);
         if (op->on_close)
+        {
+            D2_SAFE_BLOCK_BEGIN
             op->on_close(1006, std::string_view(error), op->ctx);
+            D2_SAFE_BLOCK_END
+        }
     }
     void SystemWSCurl::_schedule_reconnect(std::shared_ptr<Operation> op)
     {
@@ -672,12 +690,20 @@ namespace d2::sys::net
 
             const std::string error = "WebSocket reconnect attempts exhausted";
             if (op->on_error)
+            {
+                D2_SAFE_BLOCK_BEGIN
                 op->on_error(error, op->ctx);
+                D2_SAFE_BLOCK_END
+            }
             else
                 D2_TLOG(Error, error);
 
             if (op->on_close)
+            {
+                D2_SAFE_BLOCK_BEGIN
                 op->on_close(1006, error, op->ctx);
+                D2_SAFE_BLOCK_END
+            }
             return;
         }
 
@@ -811,7 +837,11 @@ namespace d2::sys::net
                     if (op->handle)
                         curl_multi_remove_handle(multi, op->handle);
                     if (op->on_close)
+                    {
+                        D2_SAFE_BLOCK_BEGIN
                         op->on_close(1001, "WebSocket module unloaded", op->ctx);
+                        D2_SAFE_BLOCK_END
+                    }
                     op->reset_handle();
                 }
                 for (auto& [_, op] : _open)
@@ -823,7 +853,11 @@ namespace d2::sys::net
                     if (op->handle)
                         curl_multi_remove_handle(multi, op->handle);
                     if (op->on_close)
+                    {
+                        D2_SAFE_BLOCK_BEGIN
                         op->on_close(1001, "WebSocket module unloaded", op->ctx);
+                        D2_SAFE_BLOCK_END
+                    }
                     op->reset_handle();
                 }
 
@@ -878,7 +912,11 @@ namespace d2::sys::net
 
         CurlBuilder builder(*op);
         if (op->on_setup)
+        {
+            D2_SAFE_BLOCK_BEGIN
             op->on_setup(builder);
+            D2_SAFE_BLOCK_END
+        }
 
         auto client = std::make_shared<CurlClient>(op->ctx, op, ptr());
         op->client = client;

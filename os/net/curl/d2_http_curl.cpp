@@ -366,7 +366,9 @@ namespace d2::sys::net
             }
 
             SystemHTTPCurl::CurlChunk fragment(*op, buffer, downloaded, downloaded_total);
+            D2_SAFE_BLOCK_BEGIN
             op->on_chunk(fragment);
+            D2_SAFE_BLOCK_END
         }
         else
         {
@@ -632,7 +634,9 @@ namespace d2::sys::net
         if (!op->on_response)
             return;
         CurlResponse res(*op);
+        D2_SAFE_BLOCK_BEGIN
         op->on_response(res);
+        D2_SAFE_BLOCK_END
     }
 
     void SystemHTTPCurl::_fail(std::shared_ptr<Operation> op, std::string error)
@@ -641,7 +645,9 @@ namespace d2::sys::net
             error = "Unknown HTTP transport error";
         if (op->on_error)
         {
+            D2_SAFE_BLOCK_BEGIN
             op->on_error(std::move(error), op->ctx);
+            D2_SAFE_BLOCK_END
             return;
         }
         D2_TLOG(Error, "HTTP request failed: ", error);
@@ -802,7 +808,11 @@ namespace d2::sys::net
 
         CurlBuilder builder(*op);
         if (request.on_setup)
+        {
+            D2_SAFE_BLOCK_BEGIN
             request.on_setup(builder);
+            D2_SAFE_BLOCK_END
+        }
         if (op->on_chunk || op->body_mode == BodyMode::Streaming)
             op->stream_state = std::make_shared<StreamState>();
 
