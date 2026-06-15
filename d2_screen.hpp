@@ -2,8 +2,8 @@
 
 #include <absl/container/node_hash_map.h>
 #include <chrono>
+#include <d2_animate.hpp>
 #include <d2_input_base.hpp>
-#include <d2_interpolator.hpp>
 #include <d2_io_handler.hpp>
 #include <d2_model.hpp>
 #include <d2_module.hpp>

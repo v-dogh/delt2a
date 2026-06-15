@@ -1,8 +1,8 @@
-#include "d2_interpolator.hpp"
-#include "d2_styles_base.hpp"
+#include "d2_animate.hpp"
 
 #include <chrono>
 #include <d2_exceptions.hpp>
+#include <d2_styles_base.hpp>
 #include <d2_tree_element.hpp>
 
 namespace d2

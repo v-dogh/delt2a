@@ -1,5 +1,4 @@
 #include "d2_screen.hpp"
-#include "d2_interpolator.hpp"
 
 #include <absl/strings/internal/str_format/extension.h>
 #include <chrono>

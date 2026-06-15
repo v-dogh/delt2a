@@ -179,8 +179,8 @@ add_library(DeltaCore STATIC
     # Pixel
     d2_pixel.hpp
     d2_colors.hpp
-    d2_interpolator.cpp
-    d2_interpolator.hpp
+    d2_animate.cpp
+    d2_animate.hpp
     d2_pixel.cpp
     d2_extended_page.hpp
     d2_extended_page.cpp
