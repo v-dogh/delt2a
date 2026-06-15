@@ -14,12 +14,100 @@ namespace d2::sys
                 sys::SystemScreen::Event::KeyInput,
                 [this](IOContext::ptr ctx)
                 {
+                    static auto control_contains =
+                        [](const control_list& list, in::keytype key, std::optional<in::mode> mode)
+                    {
+                        if (list.contains(std::make_pair(key, std::optional<in::mode>{})))
+                            return true;
+                        if (mode.has_value() && list.contains(std::make_pair(key, mode)))
+                            return true;
+                        return false;
+                    };
+                    static auto sequence_contains_key = [](const key_list& seq, in::keytype key)
+                    {
+                        for (const auto& [seq_key, seq_mode] : seq)
+                        {
+                            if (seq_key == key)
+                                return true;
+                        }
+                        return false;
+                    };
+
+                    static auto focus_allowed = [](IOContext::ptr ctx, const Bind& bind)
+                    {
+                        const auto focused = ctx->screen()->focused();
+                        const bool input_focused = focused != nullptr && focused->provides_input();
+
+                        switch (bind.focus_policy)
+                        {
+                        case Bind::FocusPolicy::RespectInput:
+                            return !input_focused;
+                        case Bind::FocusPolicy::IgnoreInput:
+                            return true;
+                        case Bind::FocusPolicy::RequireInput:
+                            return input_focused;
+                        }
+
+                        return false;
+                    };
+
                     const auto in = ctx->screen()->input();
-                    bool any = false;
-                    std::vector<callback_type*> cbs;
+                    const auto now = std::chrono::steady_clock::now();
+                    const auto active_controls = in->active_list();
+
+                    absl::flat_hash_set<in::keytype> active_holds;
+                    absl::flat_hash_set<in::keytype> active_presses;
+                    absl::flat_hash_set<in::keytype> active_releases;
+
+                    for (auto [key, mode] : active_controls)
+                    {
+                        switch (mode)
+                        {
+                        case in::Mode::Hold:
+                            active_holds.emplace(key);
+                            break;
+                        case in::Mode::Press:
+                            active_presses.emplace(key);
+                            break;
+                        case in::Mode::Release:
+                            active_releases.emplace(key);
+                            break;
+                        }
+                    }
+
+                    for (decltype(auto) key : active_presses)
+                    {
+                        _hold_ts[key] = now;
+                        active_holds.emplace(key);
+                    }
+                    for (decltype(auto) key : active_holds)
+                    {
+                        if (!_hold_ts.contains(key))
+                            _hold_ts.emplace(key, now);
+                    }
+                    for (decltype(auto) key : active_releases)
+                    {
+                        _hold_ts.erase(key);
+                        active_holds.erase(key);
+                    }
+                    for (auto hold_it = _hold_ts.begin(); hold_it != _hold_ts.end();)
+                    {
+                        auto cur = hold_it++;
+                        if (!active_holds.contains(cur->first) &&
+                            !in->active(cur->first, in::Mode::Hold))
+                        {
+                            _hold_ts.erase(cur);
+                        }
+                    }
+
+                    bool consume = false;
+
                     std::vector<std::string> active_names;
+                    std::vector<PendingCall> call_names;
 
                     active_names.reserve(_active_set.size());
+                    call_names.reserve(_active_set.size());
+
                     for (decltype(auto) name : _active_set)
                         active_names.push_back(name);
                     for (decltype(auto) name : active_names)
@@ -31,48 +119,143 @@ namespace d2::sys
                         auto& bind = it->second;
                         if (!bind.active || !bind.bind.enabled || bind.bind.sequences.empty())
                             continue;
+
+                        if (!focus_allowed(ctx, bind.bind))
+                        {
+                            bind.sequence_idx = 0;
+                            bind.sequence_ts = {};
+                            continue;
+                        }
+
                         if (bind.sequence_idx >= bind.bind.sequences.size())
                             bind.sequence_idx = 0;
-                        if (std::chrono::steady_clock::now() - bind.sequence_ts >
-                            bind.bind.sequential_delay)
+
+                        if (now - bind.sequence_ts > bind.bind.sequential_delay)
                             bind.sequence_idx = 0;
 
+                        if (bind.bind.enable_blacklist)
+                        {
+                            bool blacklisted = false;
+                            for (auto [key, mode] : active_controls)
+                            {
+                                if (control_contains(bind.bind.blacklist, key, mode))
+                                {
+                                    blacklisted = true;
+                                    break;
+                                }
+                            }
+                            if (blacklisted)
+                            {
+                                bind.sequence_idx = 0;
+                                bind.sequence_ts = {};
+                                continue;
+                            }
+                        }
+
                         auto& aq_seq = bind.bind.sequences[bind.sequence_idx];
+                        if (bind.bind.enable_whitelist)
+                        {
+                            bool whitelisted = true;
+                            for (auto [key, mode] : active_controls)
+                            {
+                                if (sequence_contains_key(aq_seq, key))
+                                    continue;
+
+                                if (control_contains(bind.bind.whitelist, key, mode))
+                                    continue;
+
+                                whitelisted = false;
+                                break;
+                            }
+                            if (!whitelisted)
+                            {
+                                bind.sequence_idx = 0;
+                                bind.sequence_ts = {};
+                                continue;
+                            }
+                        }
+
                         bool good = true;
-                        std::size_t idx = 0;
+                        bool triggered = false;
                         for (auto [key, mode] : aq_seq)
                         {
+                            if (!in->active(key, mode))
+                            {
+                                bind.sequence_idx = 0;
+                                good = false;
+                                break;
+                            }
+
                             if (mode == in::Mode::Hold)
                             {
-                                bind.sequence_idx = 0;
-                                good = false;
-                                break;
+                                if (bind.bind.hold_threshold > std::chrono::milliseconds(0))
+                                {
+                                    auto hold_it = _hold_ts.find(key);
+                                    if (hold_it == _hold_ts.end())
+                                    {
+                                        _hold_ts.emplace(key, now);
+                                        bind.sequence_idx = 0;
+                                        good = false;
+                                        break;
+                                    }
+
+                                    if (now - hold_it->second < bind.bind.hold_threshold)
+                                    {
+                                        bind.sequence_idx = 0;
+                                        good = false;
+                                        break;
+                                    }
+                                }
                             }
-                            else if (!in->active(key, mode))
+                            else
                             {
-                                bind.sequence_idx = 0;
-                                good = false;
-                                break;
+                                triggered = true;
                             }
-                            idx++;
                         }
+
+                        if (good && !triggered)
+                            good = false;
+
                         if (good)
                         {
                             bind.sequence_idx++;
-                            bind.sequence_ts = std::chrono::steady_clock::now();
-                            any = true;
+                            bind.sequence_ts = now;
+
+                            if (bind.bind.consume_policy == Bind::ConsumePolicy::OnMatch)
+                                consume = true;
                         }
                         if (bind.sequence_idx >= bind.bind.sequences.size())
                         {
-                            cbs.push_back(&bind.callback);
+                            call_names.push_back(
+                                PendingCall{
+                                    .name = name,
+                                    .epoch = bind.epoch,
+                                }
+                            );
                             bind.sequence_idx = 0;
                         }
                     }
+
                     // Consume the sequence input
-                    if (any) [[maybe_unused]]
+                    if (consume) [[maybe_unused]]
                         const auto seq = in->sequence();
-                    for (decltype(auto) it : cbs)
-                        (*it)(ctx);
+
+                    for (decltype(auto) call : call_names)
+                    {
+                        auto it = _binds.find(call.name);
+                        if (it == _binds.end() || it->second.epoch != call.epoch)
+                            continue;
+
+                        auto cb = std::move(it->second.callback);
+                        D2_SAFE_BLOCK_BEGIN
+                        if (cb)
+                            cb(ctx);
+                        D2_SAFE_BLOCK_END
+
+                        auto restore_it = _binds.find(call.name);
+                        if (restore_it != _binds.end() && restore_it->second.epoch == call.epoch)
+                            restore_it->second.callback = std::move(cb);
+                    }
                 }
             );
         }
@@ -102,6 +285,18 @@ namespace d2::sys
             case Bind::DepCond::Hovered:
                 return ptr->getstate(Element::State::Hovered);
             }
+            return false;
+        };
+
+        static auto control_contains =
+            [](const control_list& list, in::keytype key, std::optional<in::mode> mode)
+        {
+            if (list.contains(std::make_pair(key, std::optional<in::mode>{})))
+                return true;
+
+            if (mode.has_value() && list.contains(std::make_pair(key, mode)))
+                return true;
+
             return false;
         };
 
@@ -147,6 +342,15 @@ namespace d2::sys
             }
         };
 
+        if (bind.bind.sequences.empty())
+        {
+            auto err = BindError{
+                .type = ConflictType::Failure, .description = "Bind sequences cannot be empty"
+            };
+            D2_TLOG(Warning, err.description)
+            return err;
+        }
+
         for (decltype(auto) seq : bind.bind.sequences)
         {
             if (seq.empty())
@@ -158,17 +362,53 @@ namespace d2::sys
                 return err;
             }
 
+            bool has_trigger = false;
             for (const auto& [key, mode] : seq)
             {
-                if (mode == in::Mode::Hold)
+                if (mode != in::Mode::Hold)
+                    has_trigger = true;
+
+                if (bind.bind.enable_blacklist && control_contains(bind.bind.blacklist, key, mode))
                 {
                     auto err = BindError{
-                        .type = ConflictType::Failure, .description = "Hold mode is not implemented"
+                        .type = ConflictType::Blacklist,
+                        .description =
+                            std::format("Bind {} contains an input from its own blacklist", name)
                     };
                     D2_TLOG(Warning, err.description)
                     return err;
                 }
             }
+
+            if (!has_trigger)
+            {
+                auto err = BindError{
+                    .type = ConflictType::Failure,
+                    .description = std::format(
+                        "Bind {} sequence step must contain at least one Press or Release input",
+                        name
+                    )
+                };
+                D2_TLOG(Warning, err.description)
+                return err;
+            }
+        }
+
+        for (auto other = _binds.begin(); other != _binds.end(); ++other)
+        {
+            if (other == it)
+                continue;
+            if (other->second.bind.sequences != bind.bind.sequences)
+                continue;
+            if (!other->second.bind.enabled || !bind.bind.enabled)
+                continue;
+
+            auto err = BindError{
+                .type = ConflictType::Collision,
+                .description = std::format("Bind {} collides with bind {}", name, other->first)
+            };
+            D2_TLOG(Warning, err.description)
+            return err;
         }
 
         bind.listeners.clear();
@@ -251,6 +491,16 @@ namespace d2::sys
             return err;
         }
 
+        if (!callback)
+        {
+            auto err = BindError{
+                .type = ConflictType::Failure,
+                .description = std::format("Bind {} has an empty callback", name)
+            };
+            D2_TLOG(Warning, err.description)
+            return err;
+        }
+
         auto [it, _] = _binds.emplace(name, BindValue());
         auto& bind = it->second;
         bind.bind = std::move(value);
@@ -276,15 +526,23 @@ namespace d2::sys
             return err;
         }
 
+        auto old = f->second.bind;
+
         _active_set.erase(name);
         f->second.active = false;
         f->second.listeners.clear();
         f->second.sequence_idx = 0;
         f->second.sequence_ts = {};
         f->second.bind = std::move(value);
-        f->second.epoch = _epoch_ctr++;
 
-        return _bind_dcheck(f);
+        auto err = _bind_dcheck(f);
+        if (err.has_value())
+        {
+            f->second.bind = std::move(old);
+            _bind_dcheck(f);
+        }
+
+        return err;
     }
     const SystemBinder::Bind& SystemBinder::check(const std::string& name) const noexcept
     {
@@ -299,8 +557,7 @@ namespace d2::sys
         auto f = _binds.find(name);
         if (f == _binds.end())
             D2_THRW("Invalid bind name");
-
-        for (auto& listener : f->second.listeners)
+        for (decltype(auto) listener : f->second.listeners)
             listener.mute();
 
         if (f->second.active)

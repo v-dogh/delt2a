@@ -412,7 +412,7 @@ namespace d2
             );
             nsrc->swap_in();
             _reg_elem(cptr);
-            return cptr;
+            return d2::TreeIter(cptr);
         }
 
         template<typename Func, typename... Arge, typename... Args>

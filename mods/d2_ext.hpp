@@ -24,26 +24,25 @@ namespace d2::sys
     public:
         enum Targets : unsigned char
         {
-            Internal = 1 << 0,
-            External = 1 << 1,
+            Local = 1 << 0,
+            System = 1 << 1,
         };
-    protected:
-        unsigned char _targets{Targets::Internal};
+        enum class Level : unsigned char
+        {
+            Info,
+            Warning,
+            Error,
+            Prompt,
+            SoftPrompt,
+        };
     public:
         using AbstractModule::AbstractModule;
 
-        void set_targets(unsigned char targets);
-
-        virtual void notify(
-            const std::string& title,
-            const std::string& content,
-            const std::vector<unsigned char> icon = {}
-        ) = 0;
+        virtual void notify(std::string_view title, std::string_view content) = 0;
         virtual void remind(
             std::chrono::system_clock::time_point when,
-            const std::string& title,
-            const std::string& content,
-            const std::vector<unsigned char> icon = {}
+            std::string_view title,
+            std::string_view content
         ) = 0;
     };
 } // namespace d2::sys

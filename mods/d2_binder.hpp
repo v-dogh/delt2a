@@ -41,6 +41,17 @@ namespace d2::sys
                 Focused,
                 Hovered
             };
+            enum class FocusPolicy
+            {
+                RespectInput,
+                IgnoreInput,
+                RequireInput,
+            };
+            enum class ConsumePolicy
+            {
+                OnMatch,
+                Never,
+            };
             std::vector<key_list> sequences{};
             control_list whitelist{};
             control_list blacklist{};
@@ -49,6 +60,8 @@ namespace d2::sys
             std::string description{};
             std::string display_name{};
             bool enabled{true};
+            FocusPolicy focus_policy{FocusPolicy::RespectInput};
+            ConsumePolicy consume_policy{ConsumePolicy::OnMatch};
             // Element | Required
             std::vector<std::tuple<std::weak_ptr<Element>, DepMode, DepCond>> dependencies{};
             std::chrono::milliseconds sequential_delay{std::chrono::milliseconds(100)};
@@ -77,9 +90,16 @@ namespace d2::sys
             std::vector<d2::Element::EventListener> listeners{};
             bool active{false};
         };
+        struct PendingCall
+        {
+            std::string name{};
+            std::size_t epoch{0};
+        };
+
         std::size_t _epoch_ctr{0};
         absl::flat_hash_map<std::string, BindValue> _binds{};
         absl::flat_hash_set<std::string> _active_set{};
+        absl::flat_hash_map<in::keytype, std::chrono::steady_clock::time_point> _hold_ts{};
         Signals::Handle _key_event{nullptr};
 
         std::optional<SystemBinder::BindError>
