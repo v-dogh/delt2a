@@ -3,7 +3,6 @@
 #include <d2_locale.hpp>
 #include <d2_module.hpp>
 #include <mt/pool.hpp>
-
 #include <vector>
 
 namespace d2::sys

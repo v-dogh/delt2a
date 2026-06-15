@@ -40,6 +40,46 @@ namespace d2::in
         return _screen_capacity;
     }
 
+    absl::InlinedVector<std::pair<keytype, mode>, 8> InputFrame::active_list()
+    {
+        const auto c = _cur_poll_idx();
+        const auto p = _prev_poll_idx();
+        absl::InlinedVector<std::pair<keytype, mode>, 8> keys;
+        // Keyboard
+        {
+            const auto& cb = _keys_poll[c];
+            const auto& pb = _keys_poll[p];
+            for (std::size_t i = 0; i < cb.size(); i++)
+            {
+                const auto ck = cb[i];
+                const auto pk = pb[i];
+                if (ck)
+                    keys.push_back({keytype(i), mode::Hold});
+                if (ck && !pk)
+                    keys.push_back({keytype(i), mode::Press});
+                else if (!ck && pk)
+                    keys.push_back({keytype(i), mode::Release});
+            }
+        }
+        // Mouse
+        {
+            const auto& cb = _mouse_poll[c];
+            const auto& pb = _mouse_poll[p];
+            for (std::size_t i = 0; i < cb.size(); i++)
+            {
+                const auto ck = cb[i];
+                const auto pk = pb[i];
+                if (ck)
+                    keys.push_back({keytype(i), mode::Hold});
+                if (ck && !pk)
+                    keys.push_back({keytype(i), mode::Press});
+                else if (!ck && pk)
+                    keys.push_back({keytype(i), mode::Release});
+            }
+        }
+        return keys;
+    }
+
     bool InputFrame::active(Mouse mouse, Mode mode)
     {
         const auto idx = std::size_t(mouse);

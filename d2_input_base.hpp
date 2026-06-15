@@ -1,8 +1,10 @@
 #pragma once
 
+#include <absl/container/inlined_vector.h>
 #include <array>
 #include <bitset>
 #include <memory>
+#include <memory_resource>
 #include <string>
 #include <thread>
 
@@ -118,6 +120,16 @@ namespace d2::in
             Type current{};
             Type previous{};
         };
+
+        struct ActiveList
+        {
+        private:
+            std::array<std::pair<keytype, mode>, 8> _active_keys_cache_buf_storage{};
+            std::pmr::monotonic_buffer_resource _active_keys_cache_buf{
+                _active_keys_cache_buf_storage.data(), _active_keys_cache_buf_storage.size()
+            };
+            std::pmr::vector<std::pair<keytype, mode>> _active_keys_cache{&_active_keys_cache_buf};
+        };
     private:
         struct ConsumeState
         {
@@ -175,6 +187,8 @@ namespace d2::in
         mouse_position mouse_position();
         screen_size screen_capacity();
         screen_size screen_size();
+
+        absl::InlinedVector<std::pair<keytype, mode>, 8> active_list();
 
         bool active(Mouse mouse, Mode mode);
         bool active(Special mod, Mode mode);
@@ -236,4 +250,3 @@ namespace d2::in
         };
     } // namespace internal
 } // namespace d2::in
-
