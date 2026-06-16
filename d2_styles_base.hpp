@@ -71,7 +71,7 @@ namespace d2::style
                 D2_THRW("Type does not implement interface");
 
             if (!temporary)
-                _clear_anims(Property);
+                _clear_anims_impl(Property);
 
             if constexpr (impl::is_var<std::remove_cvref_t<Type>>)
             {
@@ -133,7 +133,7 @@ namespace d2::style
             {
                 if (!temporary)
                 {
-                    if (_get_dynamic_impl(Property))
+                    if (_test_dynamic_impl(Property))
                         _deregister_dep_bind(Property);
                 }
                 auto [ptr, type] = interface->template get<Property>();
@@ -167,7 +167,7 @@ namespace d2::style
         template<
             D2_UAI_INTERFACE_TEMPL Interface,
             Interface<0>::Property Property,
-            bool Temporary,
+            bool Temporary = false,
             typename Type
         >
         auto& set_for(Type&& value)
@@ -180,9 +180,9 @@ namespace d2::style
             else
             {
                 ctx->sync(
-                       [value = std::forward<Type>(value), this]() mutable
-                       { _int_set_for<Interface, Property>(std::forward<Type>(value), Temporary); }
-                ).value();
+                    [value = std::forward<Type>(value), this]() mutable
+                    { _int_set_for<Interface, Property>(std::forward<Type>(value), Temporary); }
+                );
             }
             return *this;
         }
@@ -198,9 +198,8 @@ namespace d2::style
             }
             else
             {
-                result = ctx->sync(
-                                [&result, this]() { result = _int_get_for<Interface, Property>(); }
-                ).value();
+                result =
+                    ctx->sync([&result, this]() { result = _int_get_for<Interface, Property>(); });
             }
             return result;
         }
@@ -224,36 +223,32 @@ namespace d2::style
             }
             else
             {
-                return ctx
-                    ->sync([this, func = std::forward<Func>(func)]
-                           { return func(*getref_for<Interface, Property>()); })
-                    .value();
+                return ctx->sync([this, func = std::forward<Func>(func)]
+                                 { return func(*getref_for<Interface, Property>()); });
             }
         }
         template<D2_UAI_INTERFACE_TEMPL Interface, Interface<0>::Property Property, typename Func>
         auto apply_set_for(Func&& func)
         {
-            return _context_impl()
-                ->sync(
-                    [this, func = std::forward<Func>(func)]
+            return _context_impl()->sync(
+                [this, func = std::forward<Func>(func)]
+                {
+                    _set_dynamic_impl(Property, false);
+                    auto* interface = _interface_for<Interface>();
+                    auto [var, type] = interface->template get<Property>();
+                    if constexpr (std::is_same_v<decltype(func(*var)), void>)
                     {
-                        _set_dynamic_impl(Property, false);
-                        auto* interface = _interface_for<Interface>();
-                        auto [var, type] = interface->template get<Property>();
-                        if constexpr (std::is_same_v<decltype(func(*var)), void>)
-                        {
-                            func(*var);
-                            _signal_base_impl(type, Property);
-                        }
-                        else
-                        {
-                            auto result = func(*var);
-                            _signal_base_impl(type, Property);
-                            return result;
-                        }
+                        func(*var);
+                        _signal_base_impl(type, Property);
                     }
-                )
-                .value();
+                    else
+                    {
+                        auto result = func(*var);
+                        _signal_base_impl(type, Property);
+                        return result;
+                    }
+                }
+            );
         }
 
         void initialize(bool force = false)

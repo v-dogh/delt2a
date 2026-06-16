@@ -180,7 +180,7 @@ namespace d2::sys
         return a;
     }
 
-    std::chrono::milliseconds SystemScreen::_run_interpolators()
+    std::chrono::milliseconds SystemScreen::_run_animations()
     {
         std::chrono::milliseconds deadline{std::chrono::milliseconds::max()};
         auto& interps = _ts.current->animations;
@@ -190,17 +190,23 @@ namespace d2::sys
             const auto beg = interps.begin();
             for (auto it = beg; it != end;)
             {
-                if (!it->second->keep_alive())
+                auto& [anim, callback] = it->second;
+                if (!anim->keep_alive())
                 {
                     const auto saved = it;
                     ++it;
+                    auto cb = std::move(callback);
+                    auto target = d2::TreeIter{anim->target().first.lock()};
                     interps.erase(saved);
+                    D2_SAFE_BLOCK_BEGIN
+                    cb(target);
+                    D2_SAFE_BLOCK_END
                     if (it == interps.end())
                         break;
                 }
                 else
                 {
-                    deadline = std::min(deadline, it->second->update());
+                    deadline = std::min(deadline, anim->update());
                     ++it;
                 }
             }
@@ -604,11 +610,16 @@ namespace d2::sys
         auto& interps = _ts.current->animations;
         for (auto it = interps.begin(); it != interps.end();)
         {
-            if (it->second->target().first == ptr.shared().get())
+            auto& [anim, callback] = it->second;
+            if (anim->target().first.lock() == ptr.shared())
             {
                 const auto saved = it;
                 ++it;
+                auto cb = std::move(callback);
                 interps.erase(saved);
+                D2_SAFE_BLOCK_BEGIN
+                cb(ptr);
+                D2_SAFE_BLOCK_END
             }
             else
                 ++it;
@@ -619,7 +630,13 @@ namespace d2::sys
         auto& interps = _ts.current->animations;
         auto f = interps.find(std::make_pair(ptr.shared().get(), prop));
         if (f != interps.end())
+        {
+            auto cb = std::move(f->second.callback);
             interps.erase(f);
+            D2_SAFE_BLOCK_BEGIN
+            cb(ptr);
+            D2_SAFE_BLOCK_END
+        }
     }
 
     std::string SystemScreen::name()
@@ -813,7 +830,7 @@ namespace d2::sys
 
             _trigger_events();
 
-            const auto interp_ms = _run_interpolators();
+            const auto interp_ms = _run_animations();
             ctx->deadline(interp_ms == Animation::Wake::refresh ? _refresh_rate : interp_ms);
         }
         // Render

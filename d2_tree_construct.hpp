@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chrono>
+#include <concepts>
 #include <cstdint>
 #include <d2_io_handler.hpp>
 #include <d2_meta.hpp>
@@ -296,8 +297,29 @@ namespace d2
         template<
             template<typename, Element::property> typename Interpolator,
             Element::property Prop,
+            typename Func,
             typename... Argv
         >
+            requires(
+                std::constructible_from<Interpolator<Parent, Prop>, Argv...> &&
+                std::invocable<Func, TreeCtx<Parent, State>>
+            )
+        Animation::ptr animate(std::chrono::milliseconds time, Func&& callback, Argv&&... args)
+        {
+            return screen()->template animate<Interpolator<Parent, Prop>>(
+                time,
+                [callback = std::forward<Func>(callback)](d2::TreeIter<> ptr) mutable
+                { callback(TreeCtx<Parent, State>(ptr)); },
+                _ptr.as<Parent>(),
+                std::forward<Argv>(args)...
+            );
+        }
+        template<
+            template<typename, Element::property> typename Interpolator,
+            Element::property Prop,
+            typename... Argv
+        >
+            requires std::constructible_from<Interpolator<Parent, Prop>, Argv...>
         Animation::ptr animate(std::chrono::milliseconds time, Argv&&... args)
         {
             return screen()->template animate<Interpolator<Parent, Prop>>(

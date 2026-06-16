@@ -134,7 +134,7 @@ namespace d2
         );
         virtual ~Animation() = default;
 
-        std::pair<Element*, style::uai_property> target() const;
+        std::pair<std::weak_ptr<Element>, style::uai_property> target() const;
 
         void stop();
         void mute();
@@ -229,4 +229,3 @@ namespace d2
         };
     } // namespace anim
 } // namespace d2
-

@@ -37,10 +37,15 @@ namespace d2::sys
         };
         using ModelType = MatrixModel::ModelType;
     private:
+        struct AnimationState
+        {
+            Animation::ptr ptr{nullptr};
+            std::function<void(d2::TreeIter<>)> callback{nullptr};
+        };
         struct TreeData
         {
             std::function<void(TreeIter<ParentElement>, TreeState::ptr)> rebuild{nullptr};
-            absl::node_hash_map<std::pair<Element*, style::uai_property>, Animation::ptr>
+            absl::node_hash_map<std::pair<Element*, style::uai_property>, AnimationState>
                 animations{};
             TreeState::ptr state{nullptr};
             TreeTags tags{};
@@ -104,7 +109,7 @@ namespace d2::sys
         eptr _update_states(eptr container, const std::pair<int, int>& mouse);
         eptr _update_states_reverse(eptr ptr);
 
-        std::chrono::milliseconds _run_interpolators();
+        std::chrono::milliseconds _run_animations();
 
         void _apply_impl(const TreeIter<>::foreach_callback& func, eptr container) const;
         void _signal(Event ev);
@@ -229,10 +234,17 @@ namespace d2::sys
         // Interpolation
 
         template<typename Type, typename... Argv>
-        Animation::ptr animate(std::chrono::milliseconds time, Argv&&... args)
+            requires std::constructible_from<Type, Argv...>
+        Animation::ptr animate(
+            std::chrono::milliseconds time,
+            std::function<void(d2::TreeIter<>)> finish,
+            d2::TreeIter<> elem,
+            Argv&&... args
+        )
         {
             auto& interps = _ts.current->animations;
-            const auto ptr = std::make_shared<Type>(time, std::forward<Argv>(args)...);
+            const auto ptr =
+                std::make_shared<Type>(time, elem.shared(), std::forward<Argv>(args)...);
             const auto target = ptr->target();
 
             auto f = interps.find(target);
@@ -246,6 +258,13 @@ namespace d2::sys
             context()->deadline(std::chrono::steady_clock::now());
 
             return ptr;
+        }
+        template<typename Type, typename... Argv>
+            requires std::constructible_from<Type, Argv...>
+        Animation::ptr
+        animate(std::chrono::milliseconds time, d2::TreeIter<> target, Argv&&... args)
+        {
+            return animate<Type>(time, [](d2::TreeIter<>) {}, target, std::forward<Argv>(args)...);
         }
 
         void clear_animations(TreeIter<> ptr);

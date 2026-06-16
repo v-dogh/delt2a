@@ -44,6 +44,8 @@ namespace d2::sys
     public:
         using AbstractModule::AbstractModule;
 
+        virtual bool supports(unsigned char mode) = 0;
+
         virtual void notify(
             Level level,
             std::string_view title,
@@ -57,6 +59,8 @@ namespace d2::sys
             Element::ptr view,
             unsigned char targets = Local | Passive
         ) = 0;
+
+        virtual void clear() = 0;
     };
 } // namespace d2::sys
 namespace d2::sys

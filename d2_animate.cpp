@@ -36,9 +36,9 @@ namespace d2
     {
     }
 
-    std::pair<Element*, style::uai_property> Animation::target() const
+    std::pair<std::weak_ptr<Element>, style::uai_property> Animation::target() const
     {
-        return {_ptr.lock().get(), _prop};
+        return {_ptr, _prop};
     }
 
     void Animation::stop()
