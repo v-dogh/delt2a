@@ -16,26 +16,10 @@
 
 namespace d2::sys
 {
-    struct Load
+    enum class Load
     {
-        struct Spec
-        {
-            enum class Type
-            {
-                Immediate,
-                Lazy,
-                Deferred,
-            };
-            Type type{Type::Lazy};
-            // Used for Deferred type
-            std::size_t ms{0};
-        };
-        static constexpr auto Immediate = Spec{.type = Spec::Type::Immediate, .ms = 0};
-        static constexpr auto Lazy = Spec{.type = Spec::Type::Lazy, .ms = 0};
-        static constexpr Spec Deferred(std::size_t ms)
-        {
-            return Spec{.type = Spec::Type::Deferred, .ms = ms};
-        }
+        Immediate,
+        Lazy,
     };
     enum class Access
     {
@@ -43,7 +27,7 @@ namespace d2::sys
         TUnsafe,
     };
 
-    template<typename Base, Load::Spec LoadSpec, typename... Deps> struct ConcreteModule;
+    template<typename Base, Load LoadType, typename... Deps> struct ConcreteModule;
 
     class SystemModule : public std::enable_shared_from_this<SystemModule>
     {
@@ -66,7 +50,7 @@ namespace d2::sys
         struct ModPreset
         {
             Access access{Access::TUnsafe};
-            Load::Spec spec{};
+            Load load{};
             std::vector<std::type_index> deps{};
             std::vector<std::string> dep_names{};
         };
@@ -104,7 +88,7 @@ namespace d2::sys
 
         virtual ModInfo info() const = 0;
         ModPreset preset() const;
-        Load::Spec load_spec() const noexcept;
+        Load load_type() const noexcept;
         Access access() const noexcept;
         std::size_t static_usage() const noexcept;
 
@@ -202,7 +186,7 @@ namespace d2::sys
         static constexpr auto module_access = Ac;
         using module_deps = std::tuple<Deps...>;
     public:
-        template<typename B, Load::Spec L, typename... D> friend struct ConcreteModule;
+        template<typename B, Load L, typename... D> friend struct ConcreteModule;
 
         using SystemModule::SystemModule;
 
@@ -222,14 +206,14 @@ namespace d2::sys
     template<typename Module>
     static constexpr bool is_abstract = !std::is_base_of_v<ConcreteModuleTag, Module>;
 
-    template<typename Base, Load::Spec LoadSpec, typename... Deps>
+    template<typename Base, Load LoadType, typename... Deps>
     struct ConcreteModule : private ConcreteModuleTag
     {
-        template<typename B, Load::Spec L, typename... D> friend struct ConcreteModule;
+        template<typename B, Load L, typename... D> friend struct ConcreteModule;
 
         static inline const SystemModule::ModPreset module_preset{
             .access = Base::module_access,
-            .spec = LoadSpec,
+            .load = LoadType,
             .deps = impl::MergeDeps<typename Base::module_deps, Deps...>::list(),
             .dep_names = impl::MergeDeps<typename Base::module_deps, Deps...>::names()
         };

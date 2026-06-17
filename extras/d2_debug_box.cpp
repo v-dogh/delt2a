@@ -932,16 +932,13 @@ namespace d2::ex
                                 [=](TreeCtx<FlowBox> ctx)
                                 {
                                     std::string load_type = "";
-                                    switch (preset.spec.type)
+                                    switch (preset.load)
                                     {
-                                    case sys::Load::Spec::Type::Immediate:
+                                    case sys::Load::Immediate:
                                         load_type = "Immediate";
                                         break;
-                                    case sys::Load::Spec::Type::Lazy:
+                                    case sys::Load::Lazy:
                                         load_type = "Lazy";
-                                        break;
-                                    case sys::Load::Spec::Type::Deferred:
-                                        load_type = std::format("Deferred ({})", preset.spec.ms);
                                         break;
                                     }
 

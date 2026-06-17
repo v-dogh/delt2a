@@ -3,7 +3,6 @@
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/flat_hash_set.h>
 #include <chrono>
-#include <exception>
 #include <memory>
 #include <shared_mutex>
 #include <stop_token>
@@ -44,6 +43,7 @@ namespace d2
         MainWorker::ptr _worker{nullptr};
         mt::ConcurrentPool::ptr _scheduler{nullptr};
         std::function<void(ptr)> _module_manifest{nullptr};
+        std::function<MainWorker::ptr(ptr)> _early_manifest{nullptr};
         std::thread::id _main_thread{};
         std::chrono::steady_clock::time_point _deadline{
             std::chrono::steady_clock::time_point::max()
@@ -111,12 +111,32 @@ namespace d2
         static void set(ptr) noexcept;
         static ptr get() noexcept;
 
-        template<typename... Components> static ptr make(rs::Config logs_cfg = {})
+        template<typename... Modules> static ptr make(rs::Config logs_cfg = {})
         {
             auto logs = rs::RuntimeLogs::make(logs_cfg);
             auto scheduler = mt::ConcurrentPool::make<mt::SimpleTopology>();
             auto ptr = std::make_shared<IOContext>(scheduler, logs);
-            ptr->_module_manifest = [](IOContext::ptr ptr) { ptr->load<Components...>(); };
+            ptr->_module_manifest = [](IOContext::ptr ptr)
+            {
+                ptr->load<
+                    std::conditional_t<std::is_base_of_v<sys::input, Modules>, void, Modules>...
+                >();
+            };
+            ptr->_early_manifest = [](IOContext::ptr ptr)
+            {
+                MainWorker::ptr worker;
+                (
+                    [&]()
+                    {
+                        if constexpr (std::is_base_of_v<sys::input, Modules>)
+                        {
+                            ptr->load<Modules>();
+                            worker = ptr->sys<sys::input>()->worker();
+                        }
+                    }(),
+                    ...);
+                return worker;
+            };
             return ptr;
         }
 
@@ -294,20 +314,11 @@ namespace d2
             std::vector<std::pair<sys::ModuleStub, std::optional<std::string>>> modules{};
             auto insert = [&]<typename Module>()
             {
-                auto stub = sys::Platform::resolve<Module>();
-                const auto spec = stub.preset().spec;
-                if (spec.type == sys::Load::Spec::Type::Deferred)
+                if constexpr (!std::is_void_v<Module>)
                 {
-                    scheduler()->launch_deferred(
-                        std::chrono::milliseconds{spec.ms},
-                        [this](auto&&...)
-                        {
-                            // Force load it
-                            _get_module_if<Module>();
-                        }
-                    );
+                    auto stub = sys::Platform::resolve<Module>();
+                    modules.push_back({std::move(stub), std::nullopt});
                 }
-                modules.push_back({std::move(stub), std::nullopt});
             };
             (insert.template operator()<Modules>(), ...);
             if (!modules.empty())
@@ -320,14 +331,6 @@ namespace d2
         template<typename Module> void load(const std::string& id)
         {
             auto stub = sys::Platform::resolve<Module>();
-            const auto spec = stub.preset().spec;
-            if (spec.type == sys::Load::Spec::Type::Deferred)
-            {
-                scheduler()->launch_deferred(
-                    std::chrono::milliseconds{spec.ms},
-                    [this](auto&&...) { _get_module_if<Module>(); }
-                );
-            }
             _load_modules({std::pair{std::move(stub), id}});
         }
 
@@ -352,11 +355,11 @@ namespace d2
             _sysenum_mod(Module::module_info().index, std::move(callback));
         }
 
-        template<typename Module> auto sys()
+        template<typename Module> module<Module> sys()
         {
             return _get_module<Module>();
         }
-        template<typename Module> auto sys_if()
+        template<typename Module> module<Module> sys_if()
         {
             auto ptr = _get_module_if<Module>();
             return (ptr != nullptr)
@@ -364,11 +367,11 @@ namespace d2
                        : nullptr;
         }
 
-        template<typename Module> auto sys(const std::string& id)
+        template<typename Module> module<Module> sys(const std::string& id)
         {
             return _get_module<Module>(id);
         }
-        template<typename Module> auto sys_if(const std::string& id)
+        template<typename Module> module<Module> sys_if(const std::string& id)
         {
             auto ptr = _get_module_if<Module>(id);
             return (ptr != nullptr)

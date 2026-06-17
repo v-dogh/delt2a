@@ -87,9 +87,9 @@ namespace d2::sys
     {
         return _preset;
     }
-    Load::Spec SystemModule::load_spec() const noexcept
+    Load SystemModule::load_type() const noexcept
     {
-        return _preset.spec;
+        return _preset.load;
     }
     Access SystemModule::access() const noexcept
     {

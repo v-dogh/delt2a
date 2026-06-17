@@ -193,7 +193,7 @@ namespace d2
                 const auto info = stub.info();
                 const auto preset = stub.preset();
                 _insert_module(stub, id);
-                if (preset.spec.type == sys::Load::Spec::Type::Immediate)
+                if (preset.load == sys::Load::Immediate)
                 {
                     load_list.push_back({info.index, id});
                 }
@@ -438,8 +438,9 @@ namespace d2
     void IOContext::_initialize()
     {
         D2_TLOG(Module, "Initializing IO context")
+        auto tptr = std::static_pointer_cast<IOContext>(shared_from_this());
         _main_thread = std::this_thread::get_id();
-        _worker = sys<sys::input>()->worker();
+        _worker = _early_manifest(tptr);
         _scheduler->start(
             [&](std::size_t, mt::Node::Config& cfg)
             {
@@ -510,7 +511,7 @@ namespace d2
 
         launch_thread();
         if (_module_manifest)
-            _module_manifest(std::static_pointer_cast<IOContext>(shared_from_this()));
+            _module_manifest(tptr);
 
         D2_TLOG(Module, "Success in initialization")
     }
