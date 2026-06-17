@@ -23,7 +23,6 @@ namespace d2::sys::net
         CURL* handle{nullptr};
         curl_slist* request_headers{nullptr};
 
-        d2::IOContext::ptr ctx{nullptr};
         std::weak_ptr<Client> client{};
 
         std::string url{};
@@ -66,8 +65,8 @@ namespace d2::sys::net
         std::function<void(Client::ptr)> on_open{};
         std::function<void(RequestBuilder&)> on_setup{};
         std::function<void(std::string_view, Type, Client::ptr)> on_message{};
-        std::function<void(std::string, d2::IOContext::ptr)> on_error{};
-        std::function<void(std::uint16_t, std::string_view, d2::IOContext::ptr)> on_close{};
+        std::function<void(std::string)> on_error{};
+        std::function<void(std::uint16_t, std::string_view)> on_close{};
 
         bool setup();
         void reset_handle();
@@ -88,11 +87,7 @@ namespace d2::sys::net
         d2::sys::module<SystemWSCurl> owner{};
         std::weak_ptr<Operation> op{};
 
-        CurlClient(
-            d2::IOContext::ptr ctx,
-            std::shared_ptr<Operation> op,
-            d2::sys::module<SystemWSCurl> owner
-        );
+        CurlClient(std::shared_ptr<Operation> op, d2::sys::module<SystemWSCurl> owner);
 
         virtual void send(std::string_view msg, Type type = Type::Text) override;
         virtual void close(std::uint16_t code = 1000, std::string_view reason = "") override;
@@ -149,8 +144,8 @@ namespace d2::sys::net
     }
 
     SystemWSCurl::CurlClient::CurlClient(
-        d2::IOContext::ptr ctx, std::shared_ptr<Operation> op, d2::sys::module<SystemWSCurl> owner
-    ) : Client(std::move(ctx)), owner(std::move(owner)), op(std::move(op))
+        std::shared_ptr<Operation> op, d2::sys::module<SystemWSCurl> owner
+    ) : owner(std::move(owner)), op(std::move(op))
     {
     }
 
@@ -643,7 +638,7 @@ namespace d2::sys::net
         if (op->on_close)
         {
             D2_SAFE_BLOCK_BEGIN
-            op->on_close(code, std::string_view(reason), op->ctx);
+            op->on_close(code, std::string_view(reason));
             D2_SAFE_BLOCK_END
         }
     }
@@ -666,7 +661,7 @@ namespace d2::sys::net
         if (op->on_error)
         {
             D2_SAFE_BLOCK_BEGIN
-            op->on_error(error, op->ctx);
+            op->on_error(error);
             D2_SAFE_BLOCK_END
         }
         else
@@ -674,7 +669,7 @@ namespace d2::sys::net
         if (op->on_close)
         {
             D2_SAFE_BLOCK_BEGIN
-            op->on_close(1006, std::string_view(error), op->ctx);
+            op->on_close(1006, std::string_view(error));
             D2_SAFE_BLOCK_END
         }
     }
@@ -692,7 +687,7 @@ namespace d2::sys::net
             if (op->on_error)
             {
                 D2_SAFE_BLOCK_BEGIN
-                op->on_error(error, op->ctx);
+                op->on_error(error);
                 D2_SAFE_BLOCK_END
             }
             else
@@ -701,7 +696,7 @@ namespace d2::sys::net
             if (op->on_close)
             {
                 D2_SAFE_BLOCK_BEGIN
-                op->on_close(1006, error, op->ctx);
+                op->on_close(1006, error);
                 D2_SAFE_BLOCK_END
             }
             return;
@@ -839,7 +834,7 @@ namespace d2::sys::net
                     if (op->on_close)
                     {
                         D2_SAFE_BLOCK_BEGIN
-                        op->on_close(1001, "WebSocket module unloaded", op->ctx);
+                        op->on_close(1001, "WebSocket module unloaded");
                         D2_SAFE_BLOCK_END
                     }
                     op->reset_handle();
@@ -855,7 +850,7 @@ namespace d2::sys::net
                     if (op->on_close)
                     {
                         D2_SAFE_BLOCK_BEGIN
-                        op->on_close(1001, "WebSocket module unloaded", op->ctx);
+                        op->on_close(1001, "WebSocket module unloaded");
                         D2_SAFE_BLOCK_END
                     }
                     op->reset_handle();
@@ -896,7 +891,6 @@ namespace d2::sys::net
     {
         auto op = std::make_shared<Operation>();
         op->owner = this;
-        op->ctx = context();
         op->url = std::move(connection.url);
         op->ping_interval = connection.ping_interval;
         op->timeout = connection.timeout;
@@ -918,7 +912,7 @@ namespace d2::sys::net
             D2_SAFE_BLOCK_END
         }
 
-        auto client = std::make_shared<CurlClient>(op->ctx, op, ptr());
+        auto client = std::make_shared<CurlClient>(op, ptr());
         op->client = client;
 
         _run([this, op]() { _start(op); });

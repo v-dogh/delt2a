@@ -41,13 +41,9 @@ namespace d2::sys
 
     SystemAudio::Status SystemAudio::_load_impl()
     {
-        _sig_generic = context()->connect<Device, const DeviceName&, Event, module<SystemAudio>>();
-        _sig_in = context()->connect<Event, const DeviceName&, module<SystemAudio>>(
-            Signals::id(Device::Input)
-        );
-        _sig_out = context()->connect<Event, const DeviceName&, module<SystemAudio>>(
-            Signals::id(Device::Output)
-        );
+        _sig_generic = context()->connect<Device, const DeviceName&, Event>();
+        _sig_in = context()->connect<Event, const DeviceName&>(Signals::id(Device::Input));
+        _sig_out = context()->connect<Event, const DeviceName&>(Signals::id(Device::Output));
         return Status::Ok;
     }
     SystemAudio::Status SystemAudio::_unload_impl()
@@ -367,15 +363,13 @@ namespace d2::sys
         _device_data[std::size_t(dev)].filter.transforms.clear();
     }
 
-    Signals::Handle SystemAudio::watch(
-        Device dev, Event ev, std::function<void(const DeviceName&, module<SystemAudio>)> callback
-    )
+    Signals::Handle
+    SystemAudio::watch(Device dev, Event ev, std::function<void(const DeviceName&)> callback)
     {
         return context()->listen(ev, Signals::id(dev), std::move(callback));
     }
-    Signals::Handle SystemAudio::watch(
-        Device dev, std::function<void(const DeviceName&, Event, module<SystemAudio>)> callback
-    )
+    Signals::Handle
+    SystemAudio::watch(Device dev, std::function<void(const DeviceName&, Event)> callback)
     {
         return context()->listen(dev, std::move(callback));
     }

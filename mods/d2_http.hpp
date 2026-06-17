@@ -22,8 +22,6 @@ namespace d2::sys::net
         };
         struct Response
         {
-            d2::IOContext::ptr ctx{nullptr};
-
             virtual int status() = 0;
             virtual std::optional<std::string_view> get(std::string_view header) = 0;
             virtual std::string_view body() = 0;
@@ -45,8 +43,6 @@ namespace d2::sys::net
         };
         struct Chunk
         {
-            d2::IOContext::ptr ctx{nullptr};
-
             virtual std::string_view read() = 0;
             virtual void cancel() = 0;
 
@@ -57,8 +53,6 @@ namespace d2::sys::net
         };
         struct RequestBuilder
         {
-            d2::IOContext::ptr ctx{nullptr};
-
             virtual void set(std::string_view header, std::string_view value) = 0;
             virtual void body(std::string_view value) = 0;
             virtual void stream() = 0;
@@ -71,7 +65,7 @@ namespace d2::sys::net
             std::string url{""};
             std::function<void(RequestBuilder&)> on_setup{nullptr};
             std::function<void(Response&)> on_response{nullptr};
-            std::function<void(std::string, d2::IOContext::ptr)> on_error{nullptr};
+            std::function<void(std::string)> on_error{nullptr};
             std::function<void(Chunk&)> on_chunk{nullptr};
         };
     private:

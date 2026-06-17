@@ -28,10 +28,6 @@ namespace d2::sys::net
         {
             using ptr = std::shared_ptr<Client>;
 
-            const d2::IOContext::ptr ctx{nullptr};
-
-            explicit Client(d2::IOContext::ptr ctx) : ctx(std::move(ctx)) {}
-
             virtual void send(std::string_view msg, Type type = Type::Text) = 0;
             virtual void close(std::uint16_t code = 1000, std::string_view reason = "") = 0;
             virtual State state() = 0;
@@ -57,8 +53,8 @@ namespace d2::sys::net
             std::function<void(RequestBuilder&)> on_setup{};
             std::function<void(Client::ptr)> on_open{};
             std::function<void(std::string_view, Type, Client::ptr)> on_message{};
-            std::function<void(std::string, d2::IOContext::ptr)> on_error{};
-            std::function<void(std::uint16_t, std::string_view, d2::IOContext::ptr)> on_close{};
+            std::function<void(std::string)> on_error{};
+            std::function<void(std::uint16_t, std::string_view)> on_close{};
         };
     protected:
         virtual Client::ptr _connect_impl(Connection connection) = 0;

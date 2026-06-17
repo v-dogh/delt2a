@@ -396,14 +396,9 @@ namespace d2::sys
         virtual void filter_remove(Device dev, const std::string& name) = 0;
         virtual void filter_clear(Device dev) = 0;
 
-        Signals::Handle watch(
-            Device dev,
-            Event ev,
-            std::function<void(const DeviceName&, module<SystemAudio>)> callback
-        );
-        Signals::Handle watch(
-            Device dev, std::function<void(const DeviceName&, Event, module<SystemAudio>)> callback
-        );
+        Signals::Handle
+        watch(Device dev, Event ev, std::function<void(const DeviceName&)> callback);
+        Signals::Handle watch(Device dev, std::function<void(const DeviceName&, Event)> callback);
     };
 
 } // namespace d2::sys

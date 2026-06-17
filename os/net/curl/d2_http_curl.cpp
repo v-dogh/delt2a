@@ -24,8 +24,6 @@ namespace d2::sys::net
         CURL* handle{nullptr};
         curl_slist* request_headers{nullptr};
 
-        d2::IOContext::ptr ctx{nullptr};
-
         std::string method{};
         std::string url{};
 
@@ -50,7 +48,7 @@ namespace d2::sys::net
         std::string error_string{};
 
         std::function<void(Response&)> on_response;
-        std::function<void(std::string, d2::IOContext::ptr)> on_error;
+        std::function<void(std::string)> on_error;
         std::function<void(Chunk&)> on_chunk;
 
         std::shared_ptr<StreamState> stream_state{};
@@ -66,10 +64,7 @@ namespace d2::sys::net
     {
         Operation& op;
 
-        explicit CurlBuilder(Operation& op) : op(op)
-        {
-            ctx = op.ctx;
-        }
+        explicit CurlBuilder(Operation& op) : op(op) {}
 
         virtual void set(std::string_view header, std::string_view value) override;
         virtual void body(std::string_view value) override;
@@ -92,7 +87,6 @@ namespace d2::sys::net
             op(op), data(data), downloaded_snapshot(downloaded),
             downloaded_total_snapshot(downloaded_total)
         {
-            ctx = op.ctx;
         }
 
         virtual std::string_view read() override;
@@ -105,10 +99,7 @@ namespace d2::sys::net
     {
         Operation& op;
 
-        explicit CurlResponse(Operation& op) : op(op)
-        {
-            ctx = op.ctx;
-        }
+        explicit CurlResponse(Operation& op) : op(op) {}
 
         virtual int status() override;
         virtual std::optional<std::string_view> get(std::string_view header) override;
@@ -646,7 +637,7 @@ namespace d2::sys::net
         if (op->on_error)
         {
             D2_SAFE_BLOCK_BEGIN
-            op->on_error(std::move(error), op->ctx);
+            op->on_error(std::move(error));
             D2_SAFE_BLOCK_END
             return;
         }
@@ -799,7 +790,6 @@ namespace d2::sys::net
         auto op = std::make_shared<Operation>();
 
         op->owner = this;
-        op->ctx = context();
         op->method = std::string(request.method);
         op->url = std::string(request.url);
         op->on_response = std::move(request.on_response);
