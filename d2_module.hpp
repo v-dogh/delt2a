@@ -234,6 +234,12 @@ namespace d2::sys
             .dep_names = impl::MergeDeps<typename Base::module_deps, Deps...>::names()
         };
 
+        module<const Base> ptr() const noexcept
+        {
+            return module<const Base>(std::static_pointer_cast<const Base>(
+                static_cast<const Base*>(this)->shared_from_this()
+            ));
+        }
         module<Base> ptr() noexcept
         {
             return module<Base>(
