@@ -83,7 +83,7 @@ namespace d2::style
                 if (state == nullptr)
                     return;
 
-                IOContext::get()->sync(
+                _sync(
                     [state, index, generation]
                     {
                         if (state->owner == nullptr || state->destroying)
@@ -107,7 +107,7 @@ namespace d2::style
                 if (state == nullptr)
                     return State::Inactive;
 
-                return IOContext::get()->sync(
+                return _sync(
                     [state, index, generation]() noexcept
                     {
                         if (state->owner == nullptr || state->destroying)
@@ -146,6 +146,20 @@ namespace d2::style
             }
         };
     protected:
+        template<typename Func> static std::invoke_result_t<Func> _sync(Func&& func)
+        {
+            if (auto ctx = IOContext::get())
+                return ctx->sync(std::forward<Func>(func));
+            return std::forward<Func>(func)();
+        }
+        template<typename Func> static void _sync_async(Func&& func)
+        {
+            if (auto ctx = IOContext::get())
+                ctx->sync_async(std::forward<Func>(func));
+            else
+                std::forward<Func>(func)();
+        }
+
         std::shared_ptr<StateData> _state{};
 
         struct InvokeGuard
@@ -182,7 +196,7 @@ namespace d2::style
         DependencyBase(DependencyBase&&) = delete;
         ~DependencyBase()
         {
-            IOContext::get()->sync(
+            _sync(
                 [this]
                 {
                     if (_state != nullptr)
@@ -513,13 +527,13 @@ namespace d2::style
 
         Dependency() = default;
         Dependency(const Dependency& copy) :
-            DependencyBase(), _value(IOContext::get()->sync([&copy] { return copy._read(); }))
+            DependencyBase(), _value(_sync([&copy] { return copy._read(); }))
         {
         }
         Dependency(Dependency&&) = delete;
         ~Dependency()
         {
-            IOContext::get()->sync(
+            _sync(
                 [this]
                 {
                     _unlink_local();
@@ -574,30 +588,28 @@ namespace d2::style
         }
         Handle subscribe_base(std::weak_ptr<void> handle, void* base, manager_callback func)
         {
-            return IOContext::get()->sync(
-                [this, handle = std::move(handle), base, func]() mutable
-                { return _subscribe_base_local(std::move(handle), base, func); }
-            );
+            return _sync([this, handle = std::move(handle), base, func]() mutable
+                         { return _subscribe_base_local(std::move(handle), base, func); });
         }
         void cleanup()
         {
-            IOContext::get()->sync([this] { _cleanup_local(); });
+            _sync([this] { _cleanup_local(); });
         }
         void apply()
         {
-            IOContext::get()->sync([this] { _apply_local(); });
+            _sync([this] { _apply_local(); });
         }
 
         template<typename Value> void set(Value&& value)
         {
-            IOContext::get()->sync([this, value = std::forward<Value>(value)]() mutable
-                                   { _set_local(std::move(value)); });
+            _sync([this, value = std::forward<Value>(value)]() mutable
+                  { _set_local(std::move(value)); });
         }
         template<typename Value> void set_async(Value&& value)
         {
-            auto state = _ensure_state();
+            auto state = _sync([this] { return _ensure_state(); });
 
-            IOContext::get()->sync_async(
+            _sync_async(
                 [state, value = std::forward<Value>(value)]() mutable
                 {
                     if (state->owner == nullptr || state->destroying)
@@ -607,23 +619,18 @@ namespace d2::style
             );
         }
 
-        const Type& value() const
+        Type value() const
         {
-            return IOContext::get()->sync([this]() -> const Type& { return _value_local(); });
-        }
-
-        Type read() const
-        {
-            return IOContext::get()->sync([this] { return _read(); });
+            return _sync([this] { return _read(); });
         }
 
         void unlink()
         {
-            IOContext::get()->sync([this] { _unlink_local(); });
+            _sync([this] { _unlink_local(); });
         }
         void link(Dependency<Type>& provider)
         {
-            IOContext::get()->sync(
+            _sync(
                 [this, &provider]
                 {
                     _unlink_local();
@@ -646,7 +653,7 @@ namespace d2::style
         template<typename Other>
         void link(Dependency<Other>& provider, Type (*callback)(const Other&))
         {
-            IOContext::get()->sync(
+            _sync(
                 [this, &provider, callback]
                 {
                     _unlink_local();
@@ -682,7 +689,7 @@ namespace d2::style
         operator Value() const
             requires(!std::is_reference_v<Value> || std::is_const_v<Value>)
         {
-            return IOContext::get()->sync(
+            return _sync(
                 [this]() -> Value
                 {
                     if constexpr (std::is_reference_v<Value>)
@@ -700,28 +707,28 @@ namespace d2::style
         constexpr auto operator+()
             requires requires(const Type& v) { +v; }
         {
-            return IOContext::get()->sync([this] { return +_value_local(); });
+            return _sync([this] { return +_value_local(); });
         }
         constexpr auto operator-()
             requires requires(const Type& v) { -v; }
         {
-            return IOContext::get()->sync([this] { return -_value_local(); });
+            return _sync([this] { return -_value_local(); });
         }
         constexpr auto operator~()
             requires requires(const Type& v) { ~v; }
         {
-            return IOContext::get()->sync([this] { return ~_value_local(); });
+            return _sync([this] { return ~_value_local(); });
         }
         constexpr auto operator!()
             requires requires(const Type& v) { !v; }
         {
-            return IOContext::get()->sync([this] { return !_value_local(); });
+            return _sync([this] { return !_value_local(); });
         }
 
         constexpr auto operator++()
             requires requires(Type& v) { ++v; }
         {
-            return IOContext::get()->sync(
+            return _sync(
                 [this]
                 {
                     auto v = ++_value_local();
@@ -733,7 +740,7 @@ namespace d2::style
         constexpr auto operator--()
             requires requires(Type& v) { --v; }
         {
-            return IOContext::get()->sync(
+            return _sync(
                 [this]
                 {
                     auto v = --_value_local();
@@ -745,7 +752,7 @@ namespace d2::style
         constexpr auto operator++(int)
             requires requires(Type& v) { v++; }
         {
-            return IOContext::get()->sync(
+            return _sync(
                 [this]
                 {
                     auto v = _value_local()++;
@@ -757,7 +764,7 @@ namespace d2::style
         constexpr auto operator--(int)
             requires requires(Type& v) { v--; }
         {
-            return IOContext::get()->sync(
+            return _sync(
                 [this]
                 {
                     auto v = _value_local()--;
@@ -772,7 +779,7 @@ namespace d2::style
     constexpr auto operator op(Other&& rhs)                                                        \
         requires requires(Type& v, Other&& o) { v op std::forward<Other>(o); }                     \
     {                                                                                              \
-        return IOContext::get()->sync(                                                             \
+        return _sync(                                                                              \
             [this, rhs = std::forward<Other>(rhs)]() mutable                                       \
             {                                                                                      \
                 auto v = (_value_local() op std::move(rhs));                                       \
@@ -799,16 +806,16 @@ namespace d2::style
         constexpr auto operator[](Index&& index) const
             requires requires(const Type& v, Index&& i) { v[std::forward<Index>(i)]; }
         {
-            return IOContext::get()->sync([this, index = std::forward<Index>(index)]() mutable
-                                          { return _value_local()[std::move(index)]; });
+            return _sync([this, index = std::forward<Index>(index)]() mutable
+                         { return _value_local()[std::move(index)]; });
         }
 
         template<class... Args>
         constexpr auto operator()(Args&&... args) const
             requires requires(const Type& v, Args&&... as) { v(std::forward<Args>(as)...); }
         {
-            return IOContext::get()->sync([this, ... args = std::forward<Args>(args)]() mutable
-                                          { return _value_local()(std::move(args)...); });
+            return _sync([this, ... args = std::forward<Args>(args)]() mutable
+                         { return _value_local()(std::move(args)...); });
         }
 
         //
@@ -817,7 +824,7 @@ namespace d2::style
 
         Dependency& operator=(const Dependency& copy)
         {
-            IOContext::get()->sync([this, &copy] { _set_local(copy._read()); });
+            _sync([this, &copy] { _set_local(copy._read()); });
             return *this;
         }
         Dependency& operator=(Dependency&&) = delete;
