@@ -43,6 +43,7 @@ namespace d2
 
         MainWorker::ptr _worker{nullptr};
         mt::ConcurrentPool::ptr _scheduler{nullptr};
+        std::function<void(ptr)> _module_manifest{nullptr};
         std::thread::id _main_thread{};
         std::chrono::steady_clock::time_point _deadline{
             std::chrono::steady_clock::time_point::max()
@@ -115,8 +116,7 @@ namespace d2
             auto logs = rs::RuntimeLogs::make(logs_cfg);
             auto scheduler = mt::ConcurrentPool::make<mt::SimpleTopology>();
             auto ptr = std::make_shared<IOContext>(scheduler, logs);
-            ptr->launch_thread();
-            ptr->load<Components...>();
+            ptr->_module_manifest = [](IOContext::ptr ptr) { ptr->load<Components...>(); };
             return ptr;
         }
 

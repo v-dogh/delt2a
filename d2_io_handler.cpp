@@ -504,6 +504,14 @@ namespace d2
                                        }};
             }
         );
+
+        D2_TLOG(Info, "Activating extended code page")
+        ExtendedCodePage::activate_thread();
+
+        launch_thread();
+        if (_module_manifest)
+            _module_manifest(std::static_pointer_cast<IOContext>(shared_from_this()));
+
         D2_TLOG(Module, "Success in initialization")
     }
     void IOContext::_deinitialize()
@@ -518,11 +526,6 @@ namespace d2
         if (!_stop)
             D2_THRW("Another instance is already running");
         D2_TLOG(Module, "Starting IOContext")
-        D2_TLOG(Info, "Activating extended code page")
-
-        ExtendedCodePage::activate_thread();
-
-        launch_thread();
 
         const auto in = input();
         const auto src = screen();
