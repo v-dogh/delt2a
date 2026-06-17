@@ -1,6 +1,7 @@
 #pragma once
 
 #include <d2_exceptions.hpp>
+#include <d2_io_handler.hpp>
 #include <d2_meta.hpp>
 #include <d2_pixel.hpp>
 #include <memory>
@@ -79,9 +80,17 @@ namespace d2::style
                 const auto generation = _generation;
 
                 release();
-                if (state == nullptr || state->owner == nullptr || state->destroying)
+                if (state == nullptr)
                     return;
-                state->owner->_close_slot(index, generation);
+
+                IOContext::get()->sync(
+                    [state, index, generation]
+                    {
+                        if (state->owner == nullptr || state->destroying)
+                            return;
+                        state->owner->_close_slot_local(index, generation);
+                    }
+                );
             }
             void release() noexcept
             {
@@ -92,17 +101,28 @@ namespace d2::style
             State state() const noexcept
             {
                 auto state = _state.lock();
-                if (state == nullptr || state->owner == nullptr || state->destroying)
-                    return State::Inactive;
-                if (_index >= state->dependencies.size())
+                const auto index = _index;
+                const auto generation = _generation;
+
+                if (state == nullptr)
                     return State::Inactive;
 
-                const auto& dependency = state->dependencies[_index];
-                if (dependency.func == nullptr)
-                    return State::Inactive;
-                if (dependency.generation != _generation)
-                    return State::Inactive;
-                return State::Active;
+                return IOContext::get()->sync(
+                    [state, index, generation]() noexcept
+                    {
+                        if (state->owner == nullptr || state->destroying)
+                            return State::Inactive;
+                        if (index >= state->dependencies.size())
+                            return State::Inactive;
+
+                        const auto& dependency = state->dependencies[index];
+                        if (dependency.func == nullptr)
+                            return State::Inactive;
+                        if (dependency.generation != generation)
+                            return State::Inactive;
+                        return State::Active;
+                    }
+                );
             }
 
             Handle& operator=(const Handle&) = delete;
@@ -151,7 +171,7 @@ namespace d2::style
                     return;
                 --state->recursion_ctr;
                 if (state->recursion_ctr == 0 && state->owner == &self && !state->destroying)
-                    self._flush_pending();
+                    self._flush_pending_local();
             }
 
             InvokeGuard& operator=(const InvokeGuard&) = delete;
@@ -162,11 +182,16 @@ namespace d2::style
         DependencyBase(DependencyBase&&) = delete;
         ~DependencyBase()
         {
-            if (_state != nullptr)
-            {
-                _state->destroying = true;
-                _state->owner = nullptr;
-            }
+            IOContext::get()->sync(
+                [this]
+                {
+                    if (_state != nullptr)
+                    {
+                        _state->destroying = true;
+                        _state->owner = nullptr;
+                    }
+                }
+            );
         }
 
         std::shared_ptr<StateData> _ensure_state()
@@ -222,7 +247,7 @@ namespace d2::style
                 state->dependencies[index] = std::move(dependency);
             return _make_handle(index);
         }
-        void _close_slot(std::uint32_t index, std::uint32_t generation)
+        void _close_slot_local(std::uint32_t index, std::uint32_t generation)
         {
             if (_state == nullptr)
                 return;
@@ -250,10 +275,10 @@ namespace d2::style
             {
                 _destroy(dependency);
                 state->free_slots.push_back(index);
-                _cleanup();
+                _cleanup_local();
             }
         }
-        void _cleanup()
+        void _cleanup_local()
         {
             if (_state == nullptr)
                 return;
@@ -263,7 +288,7 @@ namespace d2::style
             while (!state->dependencies.empty() && state->dependencies.back().func == nullptr)
                 state->dependencies.pop_back();
         }
-        void _flush_pending()
+        void _flush_pending_local()
         {
             if (_state == nullptr)
                 return;
@@ -290,9 +315,9 @@ namespace d2::style
                         state->free_slots.push_back(index);
                 }
             }
-            _cleanup();
+            _cleanup_local();
         }
-        void _destroy_state()
+        void _destroy_state_local()
         {
             auto state = std::move(_state);
             if (state == nullptr)
@@ -373,6 +398,21 @@ namespace d2::style
             return callback(icb, ptr, const_cast<Dependency<Type>*>(&src), false);
         }
 
+        Type& _value_local()
+        {
+            auto& src = _source();
+            if (!std::holds_alternative<Type>(src._value))
+                D2_THRW("Dependency value is dynamic and cannot be referenced");
+            return std::get<Type>(src._value);
+        }
+        const Type& _value_local() const
+        {
+            const auto& src = _source();
+            if (!std::holds_alternative<Type>(src._value))
+                D2_THRW("Dependency value is dynamic and cannot be referenced");
+            return std::get<Type>(src._value);
+        }
+
         template<typename Func> decltype(auto) _with_value(Func&& func) const
         {
             const auto& src = _source();
@@ -406,16 +446,86 @@ namespace d2::style
             _link.release();
             _value = Type{};
         }
+
+        Handle _subscribe_base_local(std::weak_ptr<void> handle, void* base, manager_callback func)
+        {
+            Deps dependency{handle, base, reinterpret_cast<void (*)()>(func)};
+            bool keep = false;
+
+            auto state = _ensure_state();
+            {
+                InvokeGuard guard(*this, state);
+                keep = _invoke_raw(dependency, Query::Invoke);
+            }
+
+            if (!keep)
+            {
+                _destroy(dependency);
+                return {};
+            }
+
+            return _insert_slot(std::move(dependency));
+        }
+        void _apply_local()
+        {
+            if (_state == nullptr)
+                return;
+
+            auto state = _state;
+            InvokeGuard guard(*this, state);
+            const auto end = state->dependencies.size();
+
+            _with_value(
+                [&](const Type& v)
+                {
+                    for (std::size_t i = 0; i < end && i < state->dependencies.size(); ++i)
+                    {
+                        auto& it = state->dependencies[i];
+                        if (it.func == nullptr)
+                            continue;
+
+                        const auto obj = it.obj;
+                        auto* const base = it.base;
+                        const auto func = reinterpret_cast<manager_callback>(it.func);
+                        const auto generation = it.generation;
+
+                        if (!func(obj.lock(), base, v, Query::Invoke))
+                            _close_slot_local(static_cast<std::uint32_t>(i), generation);
+                    }
+                }
+            );
+        }
+        template<typename Value> void _set_local(Value&& value)
+        {
+            _unlink_local();
+            _value = std::forward<Value>(value);
+            _apply_local();
+        }
+        void _unlink_local()
+        {
+            if (std::holds_alternative<Type>(_value))
+                return;
+            _link.close();
+            _value = Type{};
+        }
     public:
         template<typename Other> friend class Dependency;
 
         Dependency() = default;
-        Dependency(const Dependency& copy) : DependencyBase(), _value(copy._read()) {}
+        Dependency(const Dependency& copy) :
+            DependencyBase(), _value(IOContext::get()->sync([&copy] { return copy._read(); }))
+        {
+        }
         Dependency(Dependency&&) = delete;
         ~Dependency()
         {
-            unlink();
-            _destroy_state();
+            IOContext::get()->sync(
+                [this]
+                {
+                    _unlink_local();
+                    _destroy_state_local();
+                }
+            );
         }
 
         template<typename Data, typename Elem, typename Func>
@@ -464,129 +574,106 @@ namespace d2::style
         }
         Handle subscribe_base(std::weak_ptr<void> handle, void* base, manager_callback func)
         {
-            Deps dependency{handle, base, reinterpret_cast<void (*)()>(func)};
-            bool keep = false;
-
-            auto state = _ensure_state();
-            {
-                InvokeGuard guard(*this, state);
-                keep = _invoke_raw(dependency, Query::Invoke);
-            }
-
-            if (!keep)
-            {
-                _destroy(dependency);
-                return {};
-            }
-
-            return _insert_slot(std::move(dependency));
+            return IOContext::get()->sync(
+                [this, handle = std::move(handle), base, func]() mutable
+                { return _subscribe_base_local(std::move(handle), base, func); }
+            );
         }
         void cleanup()
         {
-            _cleanup();
+            IOContext::get()->sync([this] { _cleanup_local(); });
         }
         void apply()
         {
-            if (_state == nullptr)
-                return;
-
-            auto state = _state;
-            InvokeGuard guard(*this, state);
-            const auto end = state->dependencies.size();
-
-            _with_value(
-                [&](const Type& v)
-                {
-                    for (std::size_t i = 0; i < end && i < state->dependencies.size(); ++i)
-                    {
-                        auto& it = state->dependencies[i];
-                        if (it.func == nullptr)
-                            continue;
-
-                        const auto obj = it.obj;
-                        auto* const base = it.base;
-                        const auto func = reinterpret_cast<manager_callback>(it.func);
-                        const auto generation = it.generation;
-
-                        if (!func(obj.lock(), base, v, Query::Invoke))
-                            _close_slot(static_cast<std::uint32_t>(i), generation);
-                    }
-                }
-            );
+            IOContext::get()->sync([this] { _apply_local(); });
         }
 
         template<typename Value> void set(Value&& value)
         {
-            unlink();
-            _value = std::forward<Value>(value);
-            apply();
+            IOContext::get()->sync([this, value = std::forward<Value>(value)]() mutable
+                                   { _set_local(std::move(value)); });
+        }
+        template<typename Value> void set_async(Value&& value)
+        {
+            auto state = _ensure_state();
+
+            IOContext::get()->sync_async(
+                [state, value = std::forward<Value>(value)]() mutable
+                {
+                    if (state->owner == nullptr || state->destroying)
+                        return;
+                    static_cast<Dependency<Type>*>(state->owner)->_set_local(std::move(value));
+                }
+            );
         }
 
-        Type& value()
-        {
-            auto& src = _source();
-            if (!std::holds_alternative<Type>(src._value))
-                D2_THRW("Dependency value is dynamic and cannot be referenced");
-            return std::get<Type>(src._value);
-        }
         const Type& value() const
         {
-            const auto& src = _source();
-            if (!std::holds_alternative<Type>(src._value))
-                D2_THRW("Dependency value is dynamic and cannot be referenced");
-            return std::get<Type>(src._value);
+            return IOContext::get()->sync([this]() -> const Type& { return _value_local(); });
+        }
+
+        Type read() const
+        {
+            return IOContext::get()->sync([this] { return _read(); });
         }
 
         void unlink()
         {
-            if (std::holds_alternative<Type>(_value))
-                return;
-            _link.close();
-            _value = Type{};
+            IOContext::get()->sync([this] { _unlink_local(); });
         }
         void link(Dependency<Type>& provider)
         {
-            unlink();
-            _value = &provider;
-            _link = provider.subscribe_base(
-                std::weak_ptr<void>{},
-                this,
-                [](std::shared_ptr<void>, void* ptr, const Type&, Query query) -> bool
+            IOContext::get()->sync(
+                [this, &provider]
                 {
-                    if (query == Query::Destroy)
-                        static_cast<Dependency<Type>*>(ptr)->_provider_destroyed();
-                    else
-                        static_cast<Dependency<Type>*>(ptr)->apply();
-                    return true;
+                    _unlink_local();
+                    _value = &provider;
+                    _link = provider._subscribe_base_local(
+                        std::weak_ptr<void>{},
+                        this,
+                        [](std::shared_ptr<void>, void* ptr, const Type&, Query query) -> bool
+                        {
+                            if (query == Query::Destroy)
+                                static_cast<Dependency<Type>*>(ptr)->_provider_destroyed();
+                            else
+                                static_cast<Dependency<Type>*>(ptr)->_apply_local();
+                            return true;
+                        }
+                    );
                 }
             );
         }
         template<typename Other>
         void link(Dependency<Other>& provider, Type (*callback)(const Other&))
         {
-            unlink();
-            _value = dynalink{
-                +[](void (*icb)(), void* ptr, void*, bool destroy)
+            IOContext::get()->sync(
+                [this, &provider, callback]
                 {
-                    const auto callback = reinterpret_cast<Type (*)(const Other&)>(icb);
-                    const auto provider = static_cast<Dependency<Other>*>(ptr);
-                    if (destroy)
-                        return Type{};
-                    return callback(provider->_read());
-                },
-                reinterpret_cast<void (*)()>(callback),
-                static_cast<void*>(&provider)
-            };
-            _link = provider.subscribe_base(
-                std::weak_ptr<void>{},
-                this,
-                [](std::shared_ptr<void>, void* ptr, const Other&, Query query) -> bool
-                {
-                    if (query == Query::Destroy)
-                        static_cast<Dependency<Type>*>(ptr)->_provider_destroyed();
-                    else
-                        static_cast<Dependency<Type>*>(ptr)->apply();
-                    return true;
+                    _unlink_local();
+                    _value = dynalink{
+                        +[](void (*icb)(), void* ptr, void*, bool destroy)
+                        {
+                            const auto callback = reinterpret_cast<Type (*)(const Other&)>(icb);
+                            const auto provider = static_cast<Dependency<Other>*>(ptr);
+                            if (destroy)
+                                return Type{};
+                            return callback(provider->_read());
+                        },
+                        reinterpret_cast<void (*)()>(callback),
+                        static_cast<void*>(&provider)
+                    };
+                    _link = provider._subscribe_base_local(
+                        std::weak_ptr<void>{},
+                        this,
+                        [](std::shared_ptr<void>, void* ptr, const Other&, Query query) -> bool
+                        {
+                            if (query == Query::Destroy)
+                                static_cast<Dependency<Type>*>(ptr)->_provider_destroyed();
+                            else
+                                static_cast<Dependency<Type>*>(ptr)->_apply_local();
+                            return true;
+                        }
+                    );
                 }
             );
         }
@@ -595,10 +682,15 @@ namespace d2::style
         operator Value() const
             requires(!std::is_reference_v<Value> || std::is_const_v<Value>)
         {
-            if constexpr (std::is_reference_v<Value>)
-                return static_cast<Value>(value());
-            else
-                return static_cast<Value>(_read());
+            return IOContext::get()->sync(
+                [this]() -> Value
+                {
+                    if constexpr (std::is_reference_v<Value>)
+                        return static_cast<Value>(_value_local());
+                    else
+                        return static_cast<Value>(_read());
+                }
+            );
         }
 
         //
@@ -606,53 +698,73 @@ namespace d2::style
         //
 
         constexpr auto operator+()
-            requires requires(Type& v) { +v; }
+            requires requires(const Type& v) { +v; }
         {
-            return +value();
+            return IOContext::get()->sync([this] { return +_value_local(); });
         }
         constexpr auto operator-()
-            requires requires(Type& v) { -v; }
+            requires requires(const Type& v) { -v; }
         {
-            return -value();
+            return IOContext::get()->sync([this] { return -_value_local(); });
         }
         constexpr auto operator~()
-            requires requires(Type& v) { ~v; }
+            requires requires(const Type& v) { ~v; }
         {
-            return ~value();
+            return IOContext::get()->sync([this] { return ~_value_local(); });
         }
         constexpr auto operator!()
-            requires requires(Type& v) { !v; }
+            requires requires(const Type& v) { !v; }
         {
-            return !value();
+            return IOContext::get()->sync([this] { return !_value_local(); });
         }
 
         constexpr auto operator++()
             requires requires(Type& v) { ++v; }
         {
-            auto v = ++value();
-            apply();
-            return v;
+            return IOContext::get()->sync(
+                [this]
+                {
+                    auto v = ++_value_local();
+                    _apply_local();
+                    return v;
+                }
+            );
         }
         constexpr auto operator--()
             requires requires(Type& v) { --v; }
         {
-            auto v = --value();
-            apply();
-            return v;
+            return IOContext::get()->sync(
+                [this]
+                {
+                    auto v = --_value_local();
+                    _apply_local();
+                    return v;
+                }
+            );
         }
         constexpr auto operator++(int)
             requires requires(Type& v) { v++; }
         {
-            auto v = value()++;
-            apply();
-            return v;
+            return IOContext::get()->sync(
+                [this]
+                {
+                    auto v = _value_local()++;
+                    _apply_local();
+                    return v;
+                }
+            );
         }
         constexpr auto operator--(int)
             requires requires(Type& v) { v--; }
         {
-            auto v = value()--;
-            apply();
-            return v;
+            return IOContext::get()->sync(
+                [this]
+                {
+                    auto v = _value_local()--;
+                    _apply_local();
+                    return v;
+                }
+            );
         }
 
 #define FORWARD_ASSIGN_OP(op)                                                                      \
@@ -660,9 +772,14 @@ namespace d2::style
     constexpr auto operator op(Other&& rhs)                                                        \
         requires requires(Type& v, Other&& o) { v op std::forward<Other>(o); }                     \
     {                                                                                              \
-        auto v = (value() op std::forward<Other>(rhs));                                            \
-        apply();                                                                                   \
-        return v;                                                                                  \
+        return IOContext::get()->sync(                                                             \
+            [this, rhs = std::forward<Other>(rhs)]() mutable                                       \
+            {                                                                                      \
+                auto v = (_value_local() op std::move(rhs));                                       \
+                _apply_local();                                                                    \
+                return v;                                                                          \
+            }                                                                                      \
+        );                                                                                         \
     }
 
         FORWARD_ASSIGN_OP(+=)
@@ -679,17 +796,19 @@ namespace d2::style
 #undef FORWARD_ASSIGN_OP
 
         template<class Index>
-        constexpr auto operator[](Index&& index)
-            requires requires(Type& v, Index&& i) { v[std::forward<Index>(i)]; }
+        constexpr auto operator[](Index&& index) const
+            requires requires(const Type& v, Index&& i) { v[std::forward<Index>(i)]; }
         {
-            return value()[std::forward<Index>(index)];
+            return IOContext::get()->sync([this, index = std::forward<Index>(index)]() mutable
+                                          { return _value_local()[std::move(index)]; });
         }
 
         template<class... Args>
-        constexpr auto operator()(Args&&... args)
-            requires requires(Type& v, Args&&... as) { v(std::forward<Args>(as)...); }
+        constexpr auto operator()(Args&&... args) const
+            requires requires(const Type& v, Args&&... as) { v(std::forward<Args>(as)...); }
         {
-            return value()(std::forward<Args>(args)...);
+            return IOContext::get()->sync([this, ... args = std::forward<Args>(args)]() mutable
+                                          { return _value_local()(std::move(args)...); });
         }
 
         //
@@ -698,7 +817,7 @@ namespace d2::style
 
         Dependency& operator=(const Dependency& copy)
         {
-            set(copy._read());
+            IOContext::get()->sync([this, &copy] { _set_local(copy._read()); });
             return *this;
         }
         Dependency& operator=(Dependency&&) = delete;

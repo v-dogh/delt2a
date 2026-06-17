@@ -11,7 +11,7 @@ namespace d2::sys
 {
     SystemScreen::Status SystemScreen::_load_impl()
     {
-        _sig = context()->connect<Event, IOContext::ptr>();
+        _sig = context()->connect<Event, module<screen>>();
         return Status::Ok;
     }
     SystemScreen::Status SystemScreen::_unload_impl()
@@ -390,7 +390,7 @@ namespace d2::sys
     }
     void SystemScreen::_signal(Event ev)
     {
-        context()->signal(ev, context());
+        context()->signal(ev, ptr());
     }
 
     MatrixModel::ptr SystemScreen::fetch_model(const std::string& name, const std::string& path)

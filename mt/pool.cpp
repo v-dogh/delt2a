@@ -43,20 +43,16 @@ namespace mt
 
     context::Guard::Guard()
     {
-        ptr = context::ptr();
+        ptr = context::get();
     }
     context::Guard::~Guard()
     {
         context::set(ptr);
     }
 
-    context::pool context::ptr() noexcept
+    context::pool context::get() noexcept
     {
         return _pool_ptr;
-    }
-    ConcurrentPool& context::get() noexcept
-    {
-        return *_pool_ptr;
     }
     void context::set(pool ptr) noexcept
     {
@@ -182,10 +178,7 @@ namespace mt
                 std::remove_if(
                     _periodic_tasks.begin(),
                     _periodic_tasks.end(),
-                    [](const auto& v)
-                    {
-                        return v == nullptr;
-                    }
+                    [](const auto& v) { return v == nullptr; }
                 ),
                 _periodic_tasks.end()
             );
@@ -309,7 +302,7 @@ namespace mt
             return;
         }
         std::lock_guard lock(_startup_mtx);
-        const auto pool = context::ptr();
+        const auto pool = context::get();
         _handle = std::jthread(
             [=, this, ptr = shared_from_this()]()
             {
@@ -754,11 +747,7 @@ namespace mt
 
     void ConcurrentPool::start()
     {
-        start(
-            [](std::size_t, Node::Config&)
-            {
-            }
-        );
+        start([](std::size_t, Node::Config&) {});
     }
     void ConcurrentPool::start(std::function<void(std::size_t, Node::Config&)> callback)
     {
@@ -778,12 +767,7 @@ namespace mt
         for (std::size_t i = 0; i < nodes->size(); i++)
         {
             auto node = nodes->at(i);
-            node->reconfigure(
-                [&](Node::Config& cfg)
-                {
-                    callback(i, cfg);
-                }
-            );
+            node->reconfigure([&](Node::Config& cfg) { callback(i, cfg); });
             node->start();
         }
 
@@ -831,10 +815,7 @@ namespace mt
                 workers.begin(),
                 workers.end(),
                 cpy.begin(),
-                [](const auto& v)
-                {
-                    return v->clone();
-                }
+                [](const auto& v) { return v->clone(); }
             );
             grow(std::move(cpy), it - nodes->begin());
         }

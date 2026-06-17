@@ -170,7 +170,7 @@ namespace d2
                 }
                 else
                 {
-                    ret out;
+                    std::optional<ret> res;
                     _worker->accept({[&](mt::Task::Query query, std::any& out)
                                      {
                                          if (query == mt::Task::Query::Type)
@@ -179,13 +179,13 @@ namespace d2
                                          }
                                          else if (query == mt::Task::Query::Run)
                                          {
-                                             out = callback(std::forward<Argv>(args)...);
+                                             res = callback(std::forward<Argv>(args)...);
                                              out = mt::Task::Token::Discard;
                                              lock.release();
                                          }
                                      }});
                     lock.wait();
-                    return out;
+                    return std::move(res.value());
                 }
             }
         }

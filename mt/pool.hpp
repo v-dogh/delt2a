@@ -152,8 +152,7 @@ namespace mt
     private:
         static inline thread_local pool _pool_ptr{nullptr};
     public:
-        static pool ptr() noexcept;
-        static ConcurrentPool& get() noexcept;
+        static pool get() noexcept;
         static void set(pool ptr) noexcept;
     };
 

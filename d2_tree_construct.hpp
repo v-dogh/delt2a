@@ -561,10 +561,9 @@ namespace d2
                 [ptr = _ptr,
                  tmp = std::shared_ptr<Element>(nullptr),
                  whitelist = absl::flat_hash_set<std::string>(whitelist.begin(), whitelist.end())](
-                    IOContext::ptr ctx
+                    sys::module<sys::screen> src
                 ) mutable
                 {
-                    auto src = ctx->screen();
                     if (ptr != nullptr)
                     {
                         if (whitelist.empty() || whitelist.contains(src->name()))
