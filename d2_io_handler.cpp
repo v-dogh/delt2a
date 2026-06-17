@@ -522,6 +522,8 @@ namespace d2
 
         ExtendedCodePage::activate_thread();
 
+        launch_thread();
+
         const auto in = input();
         const auto src = screen();
 
