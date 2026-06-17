@@ -115,6 +115,7 @@ namespace d2
             auto logs = rs::RuntimeLogs::make(logs_cfg);
             auto scheduler = mt::ConcurrentPool::make<mt::SimpleTopology>();
             auto ptr = std::make_shared<IOContext>(scheduler, logs);
+            ptr->launch_thread();
             ptr->load<Components...>();
             return ptr;
         }
