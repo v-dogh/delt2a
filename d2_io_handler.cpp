@@ -428,6 +428,13 @@ namespace d2
         }
     }
 
+    void IOContext::launch_thread()
+    {
+        rs::context::set(_logs);
+        mt::context::set(_scheduler);
+        set(std::static_pointer_cast<IOContext>(shared_from_this()));
+    }
+
     void IOContext::_initialize()
     {
         D2_TLOG(Module, "Initializing IO context")
@@ -473,8 +480,15 @@ namespace d2
             }
         );
         _scheduler->reconfigure(
-            [](mt::Node::Config& cfg)
+            [this](mt::Node::Config& cfg)
             {
+                cfg.on_worker_start.push_back(
+                    [this, ptr = weak_from_this()](mt::Worker& worker, mt::Node::Snapshot snapshot)
+                    {
+                        if (auto lock = std::static_pointer_cast<IOContext>(ptr.lock()))
+                            lock->launch_thread();
+                    }
+                );
                 cfg.on_exception = {[](std::exception_ptr ex)
                                     {
                                         D2_SAFE_BLOCK_BEGIN

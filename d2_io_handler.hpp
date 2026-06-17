@@ -254,11 +254,7 @@ namespace d2
                     )
                     {
                         if (const auto lock = ctx.lock(); lock != nullptr)
-                        {
-                            rs::context::set(lock->_logs);
-                            mt::context::set(lock->_scheduler);
-                            set(lock);
-                        }
+                            lock->launch_thread();
                         callback(stop, std::forward<Argv>(args)...);
                     }
                 );
@@ -271,16 +267,14 @@ namespace d2
                      ctx = std::weak_ptr(std::static_pointer_cast<IOContext>(shared_from_this()))]()
                     {
                         if (const auto lock = ctx.lock(); lock != nullptr)
-                        {
-                            rs::context::set(lock->_logs);
-                            mt::context::set(lock->_scheduler);
-                            set(lock);
-                        }
+                            lock->launch_thread();
                         callback(std::forward<Argv>(args)...);
                     }
                 );
             }
         }
+        // Initializes the thread state (on the current thread)
+        void launch_thread();
 
         // Modules
 
