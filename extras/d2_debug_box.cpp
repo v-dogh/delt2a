@@ -1156,13 +1156,13 @@ namespace d2::ex
                             }
                         };
                         ctx->disable_history();
-                        auto sink = rs::context::get().sink<Sink>(ctx);
-                        rs::context::get().page([&](rs::LogEntry entry) { sink->accept(entry); });
+                        auto sink = rs::context::get()->sink<Sink>(ctx);
+                        rs::context::get()->page([&](rs::LogEntry entry) { sink->accept(entry); });
                         ctx.onv(
                             Element::State::Created,
                             false,
                             [](Element::EventListener, TreeIter<MultiInput>)
-                            { rs::context::get().unsink<Sink>(); }
+                            { rs::context::get()->unsink<Sink>(); }
                         );
                     }
                 );

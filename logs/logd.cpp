@@ -548,13 +548,9 @@ namespace rs
     {
         _logs = ptr;
     }
-    RuntimeLogs::ptr context::ptr()
+    RuntimeLogs::ptr context::get()
     {
         return _logs;
-    }
-    RuntimeLogs& context::get()
-    {
-        return *_logs;
     }
     RuntimeLogs::InputStream& context::in()
     {

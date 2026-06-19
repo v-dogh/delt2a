@@ -26,8 +26,8 @@ namespace d2
 #       define D2_ASSERT(...) (void());
 #   endif
 #   ifdef D2_SECURITY_LOG
-#       define D2_LOG(_severity_, _mod_, ...) ::rs::context::get().log(::rs::Severity::_severity_, #_mod_ __VA_OPT__(,) __VA_ARGS__);
-#       define D2_TLOG(_severity_, ...) ::rs::context::get().log(::rs::Severity::_severity_, __module__ __VA_OPT__(,) __VA_ARGS__);
+#       define D2_LOG(_severity_, _mod_, ...) ::rs::context::get()->log(::rs::Severity::_severity_, #_mod_ __VA_OPT__(,) __VA_ARGS__);
+#       define D2_TLOG(_severity_, ...) ::rs::context::get()->log(::rs::Severity::_severity_, __module__ __VA_OPT__(,) __VA_ARGS__);
 #   else
 #       define D2_LOG(...) (void());
 #       define D2_TLOG(...) (void());

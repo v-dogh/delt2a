@@ -370,8 +370,7 @@ namespace rs
         static inline thread_local RuntimeLogs::ptr _logs{nullptr};
     public:
         static void set(RuntimeLogs::ptr ptr);
-        static RuntimeLogs::ptr ptr();
-        static RuntimeLogs& get();
+        static RuntimeLogs::ptr get();
         static RuntimeLogs::InputStream& in();
     };
 
@@ -465,7 +464,7 @@ namespace rs
             }
             catch (const BaseException& ex)
             {
-                context::get().log(
+                context::get()->log(
                     Severity::Critical,
                     ex.module.empty() ? module : ex.module,
                     "Critical Error Occured; Reason: '",
@@ -490,7 +489,7 @@ namespace rs
             }
             catch (const std::exception& ex)
             {
-                context::get().log(
+                context::get()->log(
                     Severity::Critical,
                     module,
                     "Critical Error Occured; Reason: '",
@@ -506,7 +505,7 @@ namespace rs
             }
             catch (...)
             {
-                context::get().log(
+                context::get()->log(
                     Severity::Critical,
                     module,
                     "Unknown Error Occured",
