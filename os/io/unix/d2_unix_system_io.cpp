@@ -172,8 +172,11 @@ namespace d2::sys
         termios io;
         tcgetattr(STDIN_FILENO, &_restore_termios);
         io = _restore_termios;
-        io.c_lflag &= ~(ICANON | ECHO);
-        io.c_cc[VMIN] = 1;
+        io.c_lflag &= ~(ICANON | ECHO | ISIG | IEXTEN);
+        io.c_iflag &= ~(IXON | ICRNL | BRKINT | INPCK | ISTRIP);
+        io.c_oflag &= ~(OPOST);
+        io.c_cflag |= CS8;
+        io.c_cc[VMIN] = 0;
         io.c_cc[VTIME] = 0;
         tcsetattr(STDIN_FILENO, TCSANOW, &io);
         fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
@@ -224,178 +227,467 @@ namespace d2::sys
         {
             string text;
 
-            fd_set fds;
-            struct timeval timeout;
-            timeout.tv_sec = 0;
-            timeout.tv_usec = 0;
+            static std::string pending;
+            static bool esc_waiting = false;
+            static std::chrono::steady_clock::time_point esc_started{};
 
-            FD_ZERO(&fds);
-            FD_SET(STDIN_FILENO, &fds);
-
-            auto is_input = ::select(STDIN_FILENO + 1, &fds, nullptr, nullptr, &timeout) > 0;
-            while (is_input)
+            constexpr auto esc_delay = std::chrono::milliseconds{25};
+            const auto now = std::chrono::steady_clock::now();
+            const auto is_ready = []
             {
-                char ch;
-                ::read(STDIN_FILENO, &ch, 1);
+                fd_set fds;
+                FD_ZERO(&fds);
+                FD_SET(STDIN_FILENO, &fds);
 
-                // Special keys :) (for now only some of them since im sigma skividi rn fr fr)
-                if (ch == '\n')
+                timeval timeout{};
+                timeout.tv_sec = 0;
+                timeout.tv_usec = 0;
+
+                const auto res = ::select(STDIN_FILENO + 1, &fds, nullptr, nullptr, &timeout);
+                return res > 0 && FD_ISSET(STDIN_FILENO, &fds);
+            };
+            const auto read_av = [&]
+            {
+                while (is_ready())
+                {
+                    char buf[128];
+                    const auto n = ::read(STDIN_FILENO, buf, sizeof(buf));
+
+                    if (n > 0)
+                    {
+                        pending.append(buf, static_cast<std::size_t>(n));
+                    }
+                    else if (n < 0 && errno == EINTR)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            };
+
+            const auto is_csi_final = [](unsigned char ch) { return ch >= 0x40 && ch <= 0x7e; };
+            const auto parse_int = [](std::string_view sv, int& out)
+            {
+                if (sv.empty())
+                    return false;
+
+                const auto* first = sv.data();
+                const auto* last = sv.data() + sv.size();
+
+                const auto res = std::from_chars(first, last, out);
+                return res.ec == std::errc{} && res.ptr == last;
+            };
+            const auto parse_params = [&](std::string_view sv)
+            {
+                std::vector<int> res;
+
+                while (true)
+                {
+                    const auto off = sv.find(';');
+                    const auto part = sv.substr(0, off);
+
+                    int value = 0;
+                    if (!part.empty())
+                        parse_int(part, value);
+
+                    res.push_back(value);
+
+                    if (off == std::string_view::npos)
+                        break;
+
+                    sv.remove_prefix(off + 1);
+                }
+
+                if (res.size() == 1 && res[0] == 0 && sv.empty())
+                    res.clear();
+
+                return res;
+            };
+            const auto set_key = [&](char ch)
+            {
+                if (ch >= in::keymin() && ch <= in::keymax())
+                {
+                    if (ch >= 'A' && ch <= 'Z')
+                        frame.set(in::special::Shift);
+
+                    frame.set(in::key(ch));
+                }
+            };
+            const auto set_control = [&](char ch)
+            {
+                frame.set(in::special::LeftControl);
+                set_key(ch);
+            };
+            const auto apply_csi_modifier = [&](int mod)
+            {
+                if (mod <= 1)
+                    return;
+
+                const auto bits = mod - 1;
+                if ((bits & 1) != 0)
+                    frame.set(in::special::Shift);
+                if ((bits & 2) != 0)
+                    frame.set(in::special::LeftAlt);
+                if ((bits & 4) != 0)
+                    frame.set(in::special::LeftControl);
+            };
+            const auto set_fn_key = [&](int n) { frame.set(in::fn(n) + 1); };
+            const auto parse_sgr_mouse = [&](std::string_view body, char final)
+            {
+                if (body.empty() || body[0] != '<')
+                    return;
+
+                body.remove_prefix(1);
+
+                const auto off1 = body.find(';');
+                if (off1 == std::string_view::npos)
+                    return;
+
+                const auto off2 = body.find(';', off1 + 1);
+                if (off2 == std::string_view::npos)
+                    return;
+
+                int button = 0;
+                int x = 0;
+                int y = 0;
+
+                if (!parse_int(body.substr(0, off1), button))
+                    return;
+                if (!parse_int(body.substr(off1 + 1, off2 - off1 - 1), x))
+                    return;
+                if (!parse_int(body.substr(off2 + 1), y))
+                    return;
+
+                in::mouse_position mpos{x - 1, y - 1};
+
+                const auto is_release = final == 'm';
+                const auto is_wheel = (button & 64) != 0;
+
+                if ((button & 4) != 0)
+                    frame.set(in::special::Shift);
+                if ((button & 8) != 0)
+                    frame.set(in::special::LeftAlt);
+                if ((button & 16) != 0)
+                    frame.set(in::special::LeftControl);
+
+                if (is_wheel)
+                {
+                    in::mouse_position scroll_delta{0, 0};
+
+                    if ((button & 1) == 0)
+                        scroll_delta.second = 1;
+                    else
+                        scroll_delta.second = -1;
+
+                    frame.set_scroll_delta(scroll_delta);
+                }
+                else
+                {
+                    switch (button & 3)
+                    {
+                    case 0:
+                        is_release ? frame.set(in::mouse::Left, false) : frame.set(in::mouse::Left);
+                        break;
+
+                    case 1:
+                        is_release ? frame.set(in::mouse::Middle, false)
+                                   : frame.set(in::mouse::Middle);
+                        break;
+
+                    case 2:
+                        is_release ? frame.set(in::mouse::Right, false)
+                                   : frame.set(in::mouse::Right);
+                        break;
+                    }
+                }
+
+                frame.set_mouse_position(mpos);
+            };
+            const auto parse_csi = [&](std::string_view seq)
+            {
+                if (seq.size() < 3)
+                    return;
+
+                const auto final = seq.back();
+                const auto body = seq.substr(2, seq.size() - 3);
+
+                if ((final == 'M' || final == 'm') && !body.empty() && body[0] == '<')
+                {
+                    parse_sgr_mouse(body, final);
+                    return;
+                }
+                if (final == 'Z')
+                {
+                    frame.set(in::special::Shift);
+                    frame.set(in::special::Tab);
+                    return;
+                }
+
+                const auto params = parse_params(body);
+                if (params.size() >= 2)
+                    apply_csi_modifier(params[1]);
+
+                switch (final)
+                {
+                case 'A':
+                    frame.set(in::special::ArrowUp);
+                    break;
+                case 'B':
+                    frame.set(in::special::ArrowDown);
+                    break;
+                case 'C':
+                    frame.set(in::special::ArrowRight);
+                    break;
+                case 'D':
+                    frame.set(in::special::ArrowLeft);
+                    break;
+                case 'H':
+                    frame.set(in::special::Home);
+                    break;
+                case 'F':
+                    frame.set(in::special::End);
+                    break;
+                case 'P':
+                    set_fn_key(0);
+                    break;
+                case 'Q':
+                    set_fn_key(1);
+                    break;
+                case 'R':
+                    set_fn_key(2);
+                    break;
+                case 'S':
+                    set_fn_key(3);
+                    break;
+
+                case '~':
+                {
+                    if (params.empty())
+                        break;
+                    switch (params[0])
+                    {
+                    case 1:
+                    case 7:
+                        frame.set(in::special::Home);
+                        break;
+                    case 4:
+                    case 8:
+                        frame.set(in::special::End);
+                        break;
+                    case 3:
+                        frame.set(in::special::Delete);
+                        break;
+                    case 15:
+                        set_fn_key(4);
+                        break;
+                    case 17:
+                        set_fn_key(5);
+                        break;
+                    case 18:
+                        set_fn_key(6);
+                        break;
+                    case 19:
+                        set_fn_key(7);
+                        break;
+                    case 20:
+                        set_fn_key(8);
+                        break;
+                    case 21:
+                        set_fn_key(9);
+                        break;
+                    case 23:
+                        set_fn_key(10);
+                        break;
+                    case 24:
+                        set_fn_key(11);
+                        break;
+                    }
+                    break;
+                }
+                }
+            };
+            const auto parse_ss3 = [&](std::string_view seq)
+            {
+                if (seq.size() < 3)
+                    return;
+
+                const auto final = seq.back();
+                const auto body = seq.substr(2, seq.size() - 3);
+                const auto params = parse_params(body);
+
+                if (params.size() >= 2)
+                    apply_csi_modifier(params[1]);
+                switch (final)
+                {
+                case 'A':
+                    frame.set(in::special::ArrowUp);
+                    break;
+                case 'B':
+                    frame.set(in::special::ArrowDown);
+                    break;
+                case 'C':
+                    frame.set(in::special::ArrowRight);
+                    break;
+                case 'D':
+                    frame.set(in::special::ArrowLeft);
+                    break;
+                case 'H':
+                    frame.set(in::special::Home);
+                    break;
+                case 'F':
+                    frame.set(in::special::End);
+                    break;
+                case 'P':
+                    set_fn_key(0);
+                    break;
+                case 'Q':
+                    set_fn_key(1);
+                    break;
+                case 'R':
+                    set_fn_key(2);
+                    break;
+                case 'S':
+                    set_fn_key(3);
+                    break;
+                }
+            };
+            const auto should_wait_for_escape = [&]
+            {
+                if (!esc_waiting)
+                {
+                    esc_waiting = true;
+                    esc_started = now;
+                    return true;
+                }
+                return now - esc_started < esc_delay;
+            };
+
+            read_av();
+
+            std::size_t pos = 0;
+            while (pos < pending.size())
+            {
+                const auto ch = static_cast<unsigned char>(pending[pos]);
+
+                // Enter
+                if (ch == '\n' || ch == '\r')
                 {
                     frame.set(in::special::Enter);
+                    pos++;
                 }
                 // Tabulator exterminans
                 else if (ch == '\t')
                 {
                     frame.set(in::special::Tab);
+                    pos++;
                 }
                 // Backspace
-                else if (ch == 127)
+                else if (ch == 127 || ch == '\b')
                 {
                     frame.set(in::special::Backspace);
+                    pos++;
+                }
+                // Escape / sequences
+                else if (ch == '\x1b')
+                {
+                    if (pos + 1 >= pending.size())
+                    {
+                        if (should_wait_for_escape())
+                            break;
+
+                        frame.set(in::special::Escape);
+                        esc_waiting = false;
+                        pos++;
+                        continue;
+                    }
+                    esc_waiting = false;
+
+                    const auto next = pending[pos + 1];
+                    if (next == '[')
+                    {
+                        std::size_t end = pos + 2;
+                        while (end < pending.size() &&
+                               !is_csi_final(static_cast<unsigned char>(pending[end])))
+                        {
+                            end++;
+                        }
+                        if (end >= pending.size())
+                        {
+                            if (should_wait_for_escape())
+                                break;
+
+                            frame.set(in::special::Escape);
+                            esc_waiting = false;
+                            pos++;
+                            continue;
+                        }
+                        parse_csi(std::string_view{pending.data() + pos, end - pos + 1});
+                        pos = end + 1;
+                    }
+                    else if (next == 'O')
+                    {
+                        std::size_t end = pos + 2;
+                        while (end < pending.size() &&
+                               !is_csi_final(static_cast<unsigned char>(pending[end])))
+                        {
+                            end++;
+                        }
+                        if (end >= pending.size())
+                        {
+                            if (should_wait_for_escape())
+                                break;
+
+                            frame.set(in::special::Escape);
+                            esc_waiting = false;
+                            pos++;
+                            continue;
+                        }
+                        parse_ss3(std::string_view{pending.data() + pos, end - pos + 1});
+                        pos = end + 1;
+                    }
+                    else
+                    {
+                        frame.set(in::special::LeftAlt);
+                        set_key(next);
+                        pos += 2;
+                    }
                 }
                 // Control
                 else if (ch >= 1 && ch <= 26)
                 {
-                    const auto res = 'A' + (ch - 1);
-                    frame.set(in::special::LeftControl);
-                    frame.set(res - in::keymin());
+                    const auto res = static_cast<char>('A' + (ch - 1));
+                    set_control(res);
+                    pos++;
                 }
-                // Escape
-                else if (ch == '\e')
+                else if (ch == 0)
                 {
-                    std::array<char, 18> seq{ch};
-                    std::size_t i = 1;
-                    while (i < seq.size() && ::read(STDIN_FILENO, &seq[i], 1) > 0 &&
-                           std::tolower(seq[i]) != 'm')
-                        i++;
-
-                    if (i > 1)
-                    {
-                        // Other
-                        if (seq[1] == 'O')
-                        {
-                            if (seq[2] >= 'P' && seq[2] <= 'P' + 12)
-                            {
-                                char n = seq[2] - 'P';
-                                frame.set(in::fn(n) + 1);
-                            }
-                        }
-                        else if (seq[1] == '[')
-                        {
-                            // Mouse input
-                            if (seq[2] == '<')
-                            {
-                                int button = 0;
-                                in::mouse_position mpos{0, 0};
-                                const auto off1 = std::find(seq.begin() + 2, seq.end(), ';');
-                                const auto off2 = std::find(off1 + 1, seq.end(), ';');
-                                const auto off3 = std::find(off2 + 1, seq.end(), ';');
-                                std::from_chars<int>(seq.data() + 3, off1, button);
-                                std::from_chars<int>(off1 + 1, off2, mpos.first);
-                                std::from_chars<int>(off2 + 1, off3, mpos.second);
-                                mpos.first--;
-                                mpos.second--;
-
-                                const auto is_release = (seq[i] == 'm');
-                                const auto is_motion = (button & 32) != 0;
-                                const auto is_wheel = (button & 64) != 0;
-
-                                if (is_wheel)
-                                {
-                                    in::mouse_position scroll_delta{0, 0};
-                                    if ((button & 1) == 0)
-                                        scroll_delta.second = 1;
-                                    else
-                                        scroll_delta.second = -1;
-                                    frame.set_scroll_delta(scroll_delta);
-                                }
-                                else
-                                {
-                                    switch (button & 3)
-                                    {
-                                    case 0:
-                                        is_release ? frame.set(in::mouse::Left, false)
-                                                   : frame.set(in::mouse::Left);
-                                        break;
-                                    case 1:
-                                        is_release ? frame.set(in::mouse::Middle, false)
-                                                   : frame.set(in::mouse::Middle);
-                                        break;
-                                    case 2:
-                                        is_release ? frame.set(in::mouse::Right, false)
-                                                   : frame.set(in::mouse::Right);
-                                        break;
-                                    }
-                                }
-
-                                frame.set_mouse_position(mpos);
-                            }
-                            else if (seq[2] == 'Z')
-                            {
-                                frame.set(in::special::Shift);
-                                frame.set(in::special::Tab);
-                            }
-                            else
-                            {
-                                std::size_t basis = 0;
-                                if (seq[2] == '1' && seq[3] == ';' && seq[4] == '2')
-                                {
-                                    frame.set(in::special::LeftControl);
-                                    frame.set(in::special::Shift);
-                                    basis = 3;
-                                }
-
-                                switch (seq[2 + basis])
-                                {
-                                case 'A':
-                                    frame.set(in::special::ArrowUp);
-                                    break;
-                                case 'B':
-                                    frame.set(in::special::ArrowDown);
-                                    break;
-                                case 'C':
-                                    frame.set(in::special::ArrowRight);
-                                    break;
-                                case 'D':
-                                    frame.set(in::special::ArrowLeft);
-                                    break;
-                                case 'H':
-                                    frame.set(in::special::Home);
-                                    break;
-                                case 'F':
-                                    frame.set(in::special::End);
-                                    break;
-                                case '3':
-                                    frame.set(in::special::Delete);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    // Literally escape
-                    else
-                    {
-                        frame.set(in::special::Escape);
-                    }
+                    // Ctrl+@ / Ctrl+Space
+                    frame.set(in::special::LeftControl);
+                    set_key(' ');
+                    pos++;
+                }
+                else if (ch >= 28 && ch <= 31)
+                {
+                    // Ctrl+\, Ctrl+], Ctrl+^, Ctrl+_
+                    static constexpr char ctrl_map[] = {'\\', ']', '^', '_'};
+                    set_control(ctrl_map[ch - 28]);
+                    pos++;
                 }
                 // Normal keys :(
                 else
                 {
+                    const auto c = static_cast<char>(ch);
                     // Sequence
-                    text.push_back(ch);
-
+                    text.push_back(c);
                     // Key
-                    if (ch >= in::keymin() && ch <= in::keymax())
-                    {
-                        if (ch >= 'A' && ch <= 'Z')
-                            frame.set(in::special::Shift);
-                        frame.set(in::key(ch));
-                    }
+                    set_key(c);
+                    pos++;
                 }
-                is_input = ::select(STDIN_FILENO + 1, &fds, nullptr, nullptr, &timeout) > 0;
             }
-
-            frame.set_text(std::move(text));
+            pending.erase(0, pos);
         }
     }
     void UnixTerminalInput::_endcycle_impl() {}
