@@ -178,8 +178,16 @@ namespace d2::sys
         };
     } // namespace impl
 
+    template<typename Base> struct ModuleLocalGet
+    {
+        static module<Base> get();
+        static module<Base> get(const std::string& name);
+
+        static module<Base> get_if();
+        static module<Base> get_if(const std::string& name);
+    };
     template<typename Base, meta::ConstString Name, Access Ac, typename... Deps>
-    struct AbstractModule : public SystemModule
+    struct AbstractModule : public SystemModule, public ModuleLocalGet<Base>
     {
         D2_TAG_MODULE_VALUE(Name.view());
     private:

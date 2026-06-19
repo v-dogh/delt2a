@@ -384,3 +384,25 @@ namespace d2
         module<sys::screen> screen();
     };
 } // namespace d2
+
+// Aliases for IOContext::get()->sys<module>() etc.
+namespace d2::sys
+{
+    template<typename Base> module<Base> ModuleLocalGet<Base>::get()
+    {
+        return IOContext::get()->sys<Base>();
+    }
+    template<typename Base> module<Base> ModuleLocalGet<Base>::get_if()
+    {
+        return IOContext::get()->sys_if<Base>();
+    }
+
+    template<typename Base> module<Base> ModuleLocalGet<Base>::get(const std::string& id)
+    {
+        return IOContext::get()->sys<Base>(id);
+    }
+    template<typename Base> module<Base> ModuleLocalGet<Base>::get_if(const std::string& id)
+    {
+        return IOContext::get()->sys_if<Base>(id);
+    }
+} // namespace d2::sys
