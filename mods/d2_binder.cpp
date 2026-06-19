@@ -12,7 +12,7 @@ namespace d2::sys
             const auto ctx = context();
             _key_event = ctx->listen(
                 sys::SystemScreen::Event::KeyInput,
-                [this](IOContext::ptr ctx)
+                [this](module<screen> src)
                 {
                     static auto control_contains =
                         [](const control_list& list, in::keytype key, std::optional<in::mode> mode)
@@ -51,7 +51,7 @@ namespace d2::sys
                         return false;
                     };
 
-                    const auto in = ctx->screen()->input();
+                    const auto in = src->input();
                     const auto now = std::chrono::steady_clock::now();
                     const auto active_controls = in->active_list();
 
@@ -120,7 +120,7 @@ namespace d2::sys
                         if (!bind.active || !bind.bind.enabled || bind.bind.sequences.empty())
                             continue;
 
-                        if (!focus_allowed(ctx, bind.bind))
+                        if (!focus_allowed(src->context(), bind.bind))
                         {
                             bind.sequence_idx = 0;
                             bind.sequence_ts = {};
@@ -249,7 +249,7 @@ namespace d2::sys
                         auto cb = std::move(it->second.callback);
                         D2_SAFE_BLOCK_BEGIN
                         if (cb)
-                            cb(ctx);
+                            cb();
                         D2_SAFE_BLOCK_END
 
                         auto restore_it = _binds.find(call.name);

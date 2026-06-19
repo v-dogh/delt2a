@@ -26,7 +26,7 @@ namespace d2::sys
     public:
         using key_list = std::vector<std::pair<in::keytype, in::mode>>;
         using control_list = absl::flat_hash_set<std::pair<in::keytype, std::optional<in::mode>>>;
-        using callback_type = std::function<void(std::shared_ptr<IOContext>)>;
+        using callback_type = std::function<void()>;
         struct Bind
         {
             enum class DepMode
