@@ -1114,7 +1114,7 @@ namespace d2::ex
                                     std::chrono::milliseconds{500},
                                     [this, ctx](auto)
                                     {
-                                        if (!logs_size)
+                                        if (ctx == nullptr || !logs_size)
                                             return;
                                         std::string out;
                                         {
