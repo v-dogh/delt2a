@@ -185,9 +185,9 @@ namespace d2::sys
         io.c_cc[VTIME] = 0;
         tcsetattr(STDIN_FILENO, TCSANOW, &io);
         fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
+
         std::cout << "\033[?25l"
-                  << "\033[?1000h" // press/release
-                  << "\033[?1002h" // button-motion tracking
+                  << "\033[?1003h" // any-motion tracking
                   << "\033[?1006h" // SGR extended coordinates
                   << std::flush;
     }
@@ -195,8 +195,7 @@ namespace d2::sys
     {
         tcsetattr(STDIN_FILENO, TCSANOW, &_restore_termios);
         std::cout << "\033[?1006l"
-                  << "\033[?1002l"
-                  << "\033[?1000l"
+                  << "\033[?1003l"
                   << "\033[?25h" << std::flush;
     }
 
