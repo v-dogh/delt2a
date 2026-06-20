@@ -17,6 +17,7 @@ namespace d2::sys
     class UnixWorker : public MainWorker
     {
     protected:
+        virtual bool _is_current_thread_impl() const noexcept override;
         virtual bool _try_accept_impl(mt::Task& task) noexcept override;
         virtual void _accept_impl(mt::Task task) noexcept override;
         virtual void _ping_impl() override;
@@ -24,6 +25,7 @@ namespace d2::sys
         virtual void _stop_impl() noexcept override;
         virtual Worker::ptr _clone_impl() const override;
     private:
+        std::atomic<std::thread::id> _main_thread{};
         mt::TaskRing<mt::Task, 16> _tasks{};
         int _wake_read{-1};
         int _wake_write{-1};
@@ -64,9 +66,6 @@ namespace d2::sys
         virtual MainWorker::ptr _worker_impl() override;
     public:
         using SystemInput::SystemInput;
-
-        void mask_interrupts();
-        void unmask_interrupts();
     };
     class UnixTerminalOutput : public SystemOutput,
                                public ConcreteModule<UnixTerminalOutput, Load::Immediate>

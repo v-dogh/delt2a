@@ -9,6 +9,24 @@
 
 namespace d2::sys
 {
+    template<std::size_t First, std::size_t Len, std::size_t Count>
+    void flip(std::bitset<Count>& bs)
+    {
+        if constexpr (First < Count && Len != 0)
+        {
+            constexpr std::size_t clamped = Len > Count - First ? Count - First : Len;
+            static const auto mask = []()
+            {
+                std::bitset<Count> m;
+                for (std::size_t i = 0; i < clamped; i++)
+                    m.set(First + i);
+                return m;
+            }();
+
+            bs ^= mask;
+        }
+    }
+
     SystemScreen::Status SystemScreen::_load_impl()
     {
         _sig = context()->connect<Event, module<screen>>();
@@ -143,10 +161,14 @@ namespace d2::sys
                 return;
         }
 
-        auto parent = _ts.keynav_iterator->parent();
+        const auto parent = _ts.keynav_iterator->parent();
+        const auto start = _ts.keynav_iterator->traverse();
         do
+        {
             _keynav_cycle();
-        while (_ts.keynav_iterator->parent() == parent);
+            if (_ts.keynav_iterator->traverse() == start)
+                break;
+        } while (_ts.keynav_iterator->parent() == parent);
     }
     void SystemScreen::_keynav_cycle_macro_reverse()
     {
@@ -158,10 +180,102 @@ namespace d2::sys
                 return;
         }
 
-        auto parent = _ts.keynav_iterator->parent();
+        const auto parent = _ts.keynav_iterator->parent();
+        const auto start = _ts.keynav_iterator->traverse();
         do
+        {
             _keynav_cycle_reverse();
-        while (_ts.keynav_iterator->parent() == parent);
+            if (_ts.keynav_iterator->traverse() == start)
+                break;
+        } while (_ts.keynav_iterator->parent() == parent);
+    }
+
+    bool SystemScreen::_keynav_has_input() const
+    {
+        if (_ts.current == nullptr || root() == nullptr)
+            return false;
+
+        bool found = false;
+        _apply_impl(
+            [&](eptr it)
+            {
+                if (it->provides_input())
+                    found = true;
+                return true;
+            },
+            root()
+        );
+        return found;
+    }
+
+    bool SystemScreen::_keynav_prepare()
+    {
+        if (!_keynav_has_input())
+            return false;
+
+        if (_ts.keynav_iterator != nullptr)
+        {
+            _ts.keynav_iterator->setstate(Element::State::Keynavi, false);
+            return true;
+        }
+
+        if (focused() != nullptr && focused()->parent() != nullptr)
+        {
+            _ts.keynav_iterator = focused()->parent()->traverse().asp()->begin();
+            while (!_ts.keynav_iterator.is_end() && _ts.keynav_iterator->traverse() != focused())
+                _ts.keynav_iterator.increment();
+
+            if (!_ts.keynav_iterator.is_end())
+                return true;
+
+            _ts.keynav_iterator = nullptr;
+        }
+
+        return true;
+    }
+
+    void SystemScreen::_keynav_apply()
+    {
+        if (_ts.keynav_iterator == nullptr)
+            return;
+
+        _ts.keynav_iterator->setstate(Element::State::Keynavi, true);
+        focus(_ts.keynav_iterator->traverse());
+    }
+
+    void SystemScreen::focus_next_minor(bool reverse)
+    {
+        if (!_keynav_prepare())
+            return;
+
+        if (reverse)
+            _keynav_cycle_reverse();
+        else
+            _keynav_cycle();
+
+        _keynav_apply();
+    }
+
+    void SystemScreen::focus_next_major(bool reverse)
+    {
+        if (!_keynav_prepare())
+            return;
+
+        if (reverse)
+            _keynav_cycle_macro_reverse();
+        else
+            _keynav_cycle_macro();
+
+        _keynav_apply();
+    }
+
+    void SystemScreen::clear_keynav()
+    {
+        if (_ts.keynav_iterator != nullptr)
+            _ts.keynav_iterator->setstate(Element::State::Keynavi, false);
+
+        _ts.keynav_iterator = nullptr;
+        focus(nullptr);
     }
 
     SystemScreen::eptr SystemScreen::_lca(eptr a, eptr b)
@@ -216,18 +330,21 @@ namespace d2::sys
     void SystemScreen::_trigger_events()
     {
         auto input = context()->input().ptr();
-        const auto is_mouse_input = input->had_event(in::Event::KeyMouseInput);
-        const auto is_keyboard_input = input->had_event(in::Event::KeyInput);
-        const auto is_key_seq_input = input->had_event(in::Event::KeySequenceInput);
-        const auto is_resize = input->had_event(in::Event::ScreenResize);
-        const auto is_mouse_moved = input->had_event(in::Event::MouseMovement);
-
-        // I think this should be explicit (for top level events, whether the event consumes or not)
         auto frame = input->frame();
-        in::internal::InputFrameView::from(frame.get())
-            .set_consume(true, std::this_thread::get_id());
+
+        const auto is_mouse_input = frame->had_event(in::Event::KeyMouseInput);
+        const auto is_keyboard_input = frame->had_event(in::Event::KeyInput);
+        const auto is_key_seq_input = frame->had_event(in::Event::KeySequenceInput);
+        const auto is_resize = frame->had_event(in::Event::ScreenResize);
+        const auto is_mouse_moved = frame->had_event(in::Event::MouseMovement);
+
+        auto view = in::internal::InputFrameView::from(frame.get());
+
         _frame = frame.get();
+
         _signal(Event::Update);
+        view.set_consume(true, std::this_thread::get_id());
+
         if (is_mouse_input)
             _signal(Event::MouseInput);
         if (is_mouse_moved)
@@ -238,13 +355,13 @@ namespace d2::sys
             _signal(Event::KeyInput);
         if (is_key_seq_input)
             _signal(Event::KeySequenceInput);
-        in::internal::InputFrameView::from(frame.get()).apply_consume();
+
+        view.apply_consume();
         {
             _trigger_focused_events(*frame);
             _trigger_hovered_events(*frame);
         }
-        in::internal::InputFrameView::from(frame.get())
-            .set_consume(false, std::this_thread::get_id());
+        view.set_consume(false, std::this_thread::get_id());
         _frame = nullptr;
     }
     void SystemScreen::_trigger_focused_events(in::InputFrame& frame, eptr ptr)
@@ -261,11 +378,15 @@ namespace d2::sys
             frame.had_event(in::Event::KeyInput) || frame.had_event(in::Event::KeySequenceInput);
         if (is_keyboard_input)
         {
-            in::InputFrame::keyboard_keymap mask;
-            mask.flip();
-            mask = in::internal::InputFrameView::from(&frame).mask_mouse_consume(mask);
+            static constexpr auto mouse_first = std::size_t(in::Mouse::Left);
+            static constexpr auto mouse_last = std::size_t(in::Mouse::MouseKeyMax);
+
+            in::InputFrame::keymap mask;
+            flip<mouse_first, mouse_last - mouse_first>(mask);
+
+            mask = in::internal::InputFrameView::from(&frame).mask_key_consume(mask);
             _trigger_focused_events(frame, _ts.focused);
-            in::internal::InputFrameView::from(&frame).mask_mouse_consume(mask);
+            in::internal::InputFrameView::from(&frame).mask_key_consume(mask);
         }
     }
     void SystemScreen::_trigger_hovered_events(in::InputFrame& frame, eptr ptr)
@@ -278,16 +399,19 @@ namespace d2::sys
     }
     void SystemScreen::_trigger_hovered_events(in::InputFrame& frame)
     {
-        auto input = context()->input().ptr();
-        const auto is_mouse_input = input->had_event(in::Event::KeyMouseInput) ||
-                                    input->had_event(in::Event::ScrollWheelMovement);
+        const auto is_mouse_input = frame.had_event(in::Event::MouseMovement) ||
+                                    frame.had_event(in::Event::KeyMouseInput) ||
+                                    frame.had_event(in::Event::ScrollWheelMovement);
         if (is_mouse_input)
         {
-            in::InputFrame::keyboard_keymap mask;
-            mask.flip();
-            mask = in::internal::InputFrameView::from(&frame).mask_keyboard_consume(mask);
+            static constexpr auto mouse_first = std::size_t(in::Mouse::Left);
+
+            in::InputFrame::keymap mask;
+            flip<0, mouse_first>(mask);
+
+            mask = in::internal::InputFrameView::from(&frame).mask_key_consume(mask);
             _trigger_hovered_events(frame, _ts.targetted);
-            in::internal::InputFrameView::from(&frame).mask_keyboard_consume(mask);
+            in::internal::InputFrameView::from(&frame).mask_key_consume(mask);
         }
     }
     void SystemScreen::_trigger_rc_hover_events(eptr n, eptr o)
@@ -755,76 +879,6 @@ namespace d2::sys
                     focus(uptarget);
                 }
             }
-            if (input->had_event(in::Event::KeyInput))
-            {
-                // Micro forwards
-                if (input->active(in::special::LeftControl, in::mode::Hold) &&
-                    input->active(in::key('W'), in::mode::Press))
-                {
-                    if (_ts.keynav_iterator != nullptr)
-                    {
-                        _ts.keynav_iterator->setstate(Element::State::Keynavi, false);
-                    }
-                    else if (focused() != nullptr)
-                    {
-                        _ts.keynav_iterator = focused()->parent()->traverse().asp()->begin();
-                        while (_ts.keynav_iterator->traverse() != focused())
-                            _ts.keynav_iterator.increment();
-                    }
-                    _keynav_cycle();
-                    _ts.keynav_iterator->setstate(Element::State::Keynavi, true);
-                    focus(_ts.keynav_iterator->traverse());
-                }
-                // Micro reverse
-                else if (
-                    input->active(in::special::LeftControl, in::mode::Hold) &&
-                    input->active(in::key('E'), in::mode::Press)
-                )
-                {
-                    if (_ts.keynav_iterator != nullptr)
-                    {
-                        _ts.keynav_iterator->setstate(Element::State::Keynavi, false);
-                    }
-                    else if (focused() != nullptr)
-                    {
-                        _ts.keynav_iterator = focused()->parent()->traverse().asp()->begin();
-                        while (_ts.keynav_iterator->traverse() != focused())
-                            _ts.keynav_iterator.increment();
-                    }
-                    _keynav_cycle_reverse();
-                    _ts.keynav_iterator->setstate(Element::State::Keynavi, true);
-                    focus(_ts.keynav_iterator->traverse());
-                }
-                // Macro movement
-                else if (
-                    input->active(in::special::Shift, in::mode::Hold) &&
-                    input->active(in::special::Tab, in::mode::Press)
-                )
-                {
-                    if (_ts.keynav_iterator != nullptr)
-                    {
-                        _ts.keynav_iterator->setstate(Element::State::Keynavi, false);
-                    }
-                    else if (focused() != nullptr)
-                    {
-                        _ts.keynav_iterator = focused()->parent()->traverse().asp()->begin();
-                        while (_ts.keynav_iterator->traverse() != focused())
-                            _ts.keynav_iterator.increment();
-                    }
-                    _keynav_cycle_macro();
-                    _ts.keynav_iterator->setstate(Element::State::Keynavi, true);
-                    focus(_ts.keynav_iterator->traverse());
-                }
-                else if (input->active(in::special::Escape, in::mode::Press))
-                {
-                    if (_ts.keynav_iterator != nullptr)
-                    {
-                        _ts.keynav_iterator->setstate(Element::State::Keynavi, false);
-                        focus(nullptr);
-                    }
-                    _ts.keynav_iterator = nullptr;
-                }
-            }
 
             _ts.current->state->update();
 
@@ -832,6 +886,9 @@ namespace d2::sys
 
             const auto interp_ms = _run_animations();
             ctx->deadline(interp_ms == Animation::Wake::refresh ? _refresh_rate : interp_ms);
+
+            if (input->had_pulse())
+                ctx->deadline(std::chrono::milliseconds{0});
         }
         // Render
         if (!ctx->is_suspended() && root()->needs_update())

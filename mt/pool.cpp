@@ -1,8 +1,10 @@
 #include "pool.hpp"
 
+#include <algorithm>
 #include <bit>
 #include <chrono>
 #include <random>
+#include <utility>
 
 namespace mt
 {
@@ -118,35 +120,75 @@ namespace mt
 
     bool Worker::_process(PeriodicTask& task)
     {
+        if (task == nullptr)
+            return false;
+
         const auto node = _node.lock();
-        const auto type = task.query<Task::Query::Type>();
-        const auto token = task.query<Task::Query::Run>(Node::ExceptionHandler(node));
+        Task::Token token = Task::Token::Discard;
+        try
+        {
+            token = task.query<Task::Query::Run>(Node::ExceptionHandler(node));
+        }
+        catch (...)
+        {
+            if (node != nullptr)
+                Node::ExceptionHandler(node).handle(std::current_exception());
+            token = Task::Token::Discard;
+        }
+
         _last_task = tp_to_itg(std::chrono::steady_clock::now());
         return token == Task::Token::Continue;
     }
     bool Worker::_process(Task& task)
     {
+        struct CountGuard
+        {
+            Worker& worker;
+            ~CountGuard() noexcept
+            {
+                worker._task_cnt_dec();
+            }
+        } guard{*this};
+
+        const auto now = [] { return std::chrono::steady_clock::now(); };
         const auto node = _node.lock();
-        const auto type = task.query<Task::Query::Type>();
+
+        if (task == nullptr)
+        {
+            const auto t = tp_to_itg(now());
+            _last_task = t;
+            _last_task_np = t;
+            return false;
+        }
+
         Task::Token token = Task::Token::Discard;
-        if ((type & (Task::Periodic | Task::Delayed)) && task != nullptr)
+        try
         {
-            const auto timing = task.query<Task::Query::Timing>();
-            _periodic_deadline = tp_to_itg(
-                std::min(
-                    itg_to_tp(_periodic_deadline.load()), std::chrono::steady_clock::now() + timing
-                )
-            );
-            _periodic_tasks.emplace_back(std::move(task.value()));
-        }
-        else
-        {
-            if (task != nullptr)
+            const auto type = task.query<Task::Query::Type>();
+            if (type & (Task::Periodic | Task::Delayed))
+            {
+                const auto timing = task.query<Task::Query::Timing>();
+                const auto deadline = now() + timing;
+                _periodic_deadline =
+                    tp_to_itg(std::min(itg_to_tp(_periodic_deadline.load()), deadline));
+                _periodic_tasks.emplace_back(std::move(task.value()));
+                _ptask_cnt++;
+            }
+            else
+            {
                 token = task.query<Task::Query::Run>(Node::ExceptionHandler(node));
-            _last_task = tp_to_itg(std::chrono::steady_clock::now());
+                _last_task = tp_to_itg(now());
+            }
         }
-        _last_task_np = tp_to_itg(std::chrono::steady_clock::now());
-        _task_cnt_dec();
+        catch (...)
+        {
+            if (node != nullptr)
+                Node::ExceptionHandler(node).handle(std::current_exception());
+            token = Task::Token::Discard;
+            _last_task = tp_to_itg(now());
+        }
+
+        _last_task_np = tp_to_itg(now());
         return token == Task::Token::Continue;
     }
     void Worker::_tick()
@@ -197,50 +239,117 @@ namespace mt
 
     bool Worker::try_accept(Task& task) noexcept
     {
+        if (_stop.load(std::memory_order_acquire))
+            return false;
+
+        if (_is_current_thread_impl())
+        {
+            _task_cnt_inc();
+            _process(task);
+            return true;
+        }
+
         _task_cnt_inc();
         const auto result = _try_accept_impl(task);
         if (!result)
             _task_cnt_dec();
+
         return result;
     }
     void Worker::accept(Task task)
     {
+        if (_stop.load(std::memory_order_acquire))
+            return;
+
+        if (_is_current_thread_impl())
+        {
+            _task_cnt_inc();
+            _process(task);
+            return;
+        }
+
         _task_cnt_inc();
-        _accept_impl(std::move(task));
+        try
+        {
+            _accept_impl(std::move(task));
+        }
+        catch (...)
+        {
+            _task_cnt_dec();
+            throw;
+        }
     }
     void Worker::ping()
     {
+        if (_is_current_thread_impl())
+            return;
         _ping_impl();
     }
-
     void Worker::start()
     {
-        _start_impl();
-        _stop = false;
+        bool expected = true;
+        if (!_stop.compare_exchange_strong(expected, false))
+            return;
+
+        try
+        {
+            _start_impl();
+        }
+        catch (...)
+        {
+            _stop.store(true, std::memory_order_release);
+            throw;
+        }
     }
     std::vector<PeriodicTask> Worker::stop() noexcept
     {
-        if (_stop)
+        bool expected = false;
+        if (!_stop.compare_exchange_strong(expected, true))
             return {};
-        Barrier lock;
+
         std::vector<PeriodicTask> tasks;
-        accept({[&](Task::Query query, std::any& out)
-                {
-                    if (query == Task::Query::Type)
+        auto steal_periodic_tasks = [&]() noexcept
+        {
+            tasks = std::move(_periodic_tasks);
+            _periodic_tasks.clear();
+            _ptask_cnt = 0;
+            _periodic_deadline = _tmax;
+        };
+
+        if (_is_current_thread_impl())
+        {
+            steal_periodic_tasks();
+            _stop_impl();
+            return tasks;
+        }
+
+        Barrier lock;
+        try
+        {
+            accept({[&](Task::Query query, std::any& out)
                     {
-                        out =
-                            static_cast<unsigned char>(Task::Type::Immediate | Task::Type::System);
-                    }
-                    else if (query == Task::Query::Run)
-                    {
-                        tasks = std::move(_periodic_tasks);
-                        lock.release();
-                        out = Task::Token::Discard;
-                    }
-                }});
-        lock.wait();
+                        if (query == Task::Query::Type)
+                        {
+                            out = static_cast<unsigned char>(
+                                Task::Type::Immediate | Task::Type::System
+                            );
+                        }
+                        else if (query == Task::Query::Run)
+                        {
+                            steal_periodic_tasks();
+                            lock.release();
+                            out = Task::Token::Discard;
+                        }
+                    }});
+
+            lock.wait();
+        }
+        catch (...)
+        {
+            steal_periodic_tasks();
+        }
+
         _stop_impl();
-        _stop = true;
         return tasks;
     }
 
@@ -295,27 +404,29 @@ namespace mt
     }
     void RingWorker::_start_impl()
     {
-        if (is_running())
-        {
-            // Wait until it is started
-            std::lock_guard lock(_startup_mtx);
-            return;
-        }
         std::lock_guard lock(_startup_mtx);
+
+        if (_handle.joinable())
+        {
+            if (_handle.get_id() == std::this_thread::get_id())
+                throw std::logic_error("Cannot restart a RingWorker from its own worker thread");
+            _handle.join();
+        }
+
         const auto pool = context::get();
+        _stop_handle = false;
         _handle = std::jthread(
             [=, this, ptr = shared_from_this()]()
             {
                 context::set(pool);
-                while (!_stop_handle)
+                while (!_stop_handle.load())
                 {
                     std::array<Task, 6> tasks;
-                    const auto max = std::min(
-                        _max_idle_time,
-                        std::chrono::duration_cast<std::chrono::milliseconds>(
-                            deadline() - std::chrono::steady_clock::now()
-                        )
+                    auto wait_time = std::chrono::duration_cast<std::chrono::milliseconds>(
+                        deadline() - std::chrono::steady_clock::now()
                     );
+                    wait_time = std::max(wait_time, std::chrono::milliseconds(0));
+                    const auto max = std::min(_max_idle_time, wait_time);
                     if (max == std::chrono::milliseconds::max() ? _tasks.dequeue(tasks[0])
                         : max == std::chrono::milliseconds(0)   ? _tasks.try_dequeue(tasks[0])
                                                                 : _tasks.dequeue(tasks[0], max))
@@ -335,29 +446,43 @@ namespace mt
                         }
                     }
                     else
+                    {
                         _tick();
+                    }
+
                     const auto s = std::chrono::duration_cast<std::chrono::milliseconds>(
                         std::chrono::steady_clock::now() - last_immediate_task()
                     );
-                    if (s >= _max_idle_time)
-                        pool->shrink(shared_from_this());
+                    if (pool != nullptr && s >= _max_idle_time)
+                    {
+                        try
+                        {
+                            pool->shrink(shared_from_this());
+                        }
+                        catch (...)
+                        {
+                        }
+                    }
                 }
             }
         );
-        _stop_handle = false;
     }
     void RingWorker::_stop_impl() noexcept
     {
-        if (!is_running())
-        {
-            // Wait until stopped
-            std::lock_guard lock(_startup_mtx);
-            return;
-        }
         std::lock_guard lock(_startup_mtx);
         _stop_handle = true;
+
+        if (!_handle.joinable())
+            return;
+        if (_handle.get_id() == std::this_thread::get_id())
+            return;
+
         _ping_impl();
         _handle.join();
+    }
+    bool RingWorker::_is_current_thread_impl() const noexcept
+    {
+        return _handle.get_id() == std::this_thread::get_id();
     }
     Worker::ptr RingWorker::_clone_impl() const
     {
@@ -450,10 +575,13 @@ namespace mt
         _stop = true;
         const auto cfg = _cfg.load();
         const auto workers = _workers.load();
-        for (decltype(auto) it : workers->workers)
+        if (workers != nullptr)
         {
-            it->stop();
-            _event(cfg->on_worker_stop, *cfg, *it, Snapshot());
+            for (decltype(auto) it : workers->workers)
+            {
+                it->stop();
+                _event(cfg->on_worker_stop, *cfg, *it, Snapshot());
+            }
         }
         _workers = nullptr;
         _event(cfg->on_stop, *cfg);
@@ -504,6 +632,8 @@ namespace mt
                          const auto lock = ptr->_workers.load();
                          const auto tmp = std::make_shared<WorkerList>();
                          tmp->main = lock->main;
+                         for (decltype(auto) worker : workers)
+                             worker->start();
                          tmp->workers = std::move(workers);
                          tmp->workers.reserve(lock->workers.size());
                          tmp->workers.insert(
@@ -546,12 +676,33 @@ namespace mt
         if (_stop)
             return;
         const auto workers = _workers.load();
+        if (workers == nullptr || workers->main == nullptr || worker == nullptr)
+            return;
+
         Barrier lock;
         workers->main->accept(
             {[=, this, ptr = shared_from_this(), &lock](Task::Query query, std::any& out)
              {
+                 if (query == Task::Query::Type)
+                 {
+                     out = static_cast<unsigned char>(Task::System | Task::Immediate);
+                     return;
+                 }
+                 if (query != Task::Query::Run)
+                     return;
+
                  const auto workers = _workers.load();
+                 if (workers == nullptr)
+                 {
+                     if (sync)
+                         lock.release();
+                     out = Task::Token::Discard;
+                     return;
+                 }
                  if (workers->main == worker)
+                 {
+                     if (sync)
+                         lock.release();
                      _throw(
                          PoolException{
                              ErrorCode::ShrinkFailure,
@@ -560,14 +711,19 @@ namespace mt
                              "Node is running"
                          }
                      );
+                 }
                  auto cpy = std::make_shared<WorkerList>(*workers);
                  const auto f = std::find(cpy->workers.begin(), cpy->workers.end(), worker);
                  if (f == cpy->workers.end())
+                 {
+                     if (sync)
+                         lock.release();
                      _throw(
                          PoolException{
                              ErrorCode::ShrinkFailure, "Failed to find the worker for removal"
                          }
                      );
+                 }
                  cpy->workers.erase(f);
                  auto& c1 = cpy->categories[0];
                  auto& c2 = cpy->categories[1];
@@ -587,6 +743,7 @@ namespace mt
                      schedule(std::move(it));
                  if (sync)
                      lock.release();
+                 out = Task::Token::Discard;
              }}
         );
         if (sync)
@@ -596,7 +753,14 @@ namespace mt
     float Node::load() const noexcept
     {
         const auto lock = _workers.load();
+        if (lock == nullptr || lock->workers.empty())
+            return 0.f;
         return float(_task_cnt.load() + 1) / lock->workers.size();
+    }
+    std::size_t Node::workers() const noexcept
+    {
+        const auto lock = _workers.load();
+        return lock == nullptr ? 0 : lock->workers.size();
     }
     Node::Snapshot Node::snapshot() const noexcept
     {
@@ -635,15 +799,22 @@ namespace mt
         const auto dist = distv.has_value() ? distv.value() : cfg->default_distribution;
         const auto lock = _workers.load();
         const auto type = task.query<Task::Query::Type>();
-        const auto workers = lock->categories[std::countr_zero(type)];
+        const auto schedule_type = static_cast<unsigned char>(type & Task::All);
         ErrorCode code = ErrorCode::Full;
         bool accepted = false;
         std::size_t idx = 0;
+        std::span<const Worker::ptr> workers;
+        if (lock != nullptr && schedule_type != Task::Empty)
+        {
+            const auto category = std::countr_zero(schedule_type);
+            if (category < lock->categories.size())
+                workers = lock->categories[category];
+        }
         if (l >= cfg->pressure_trigger_ratio)
         {
             code = ErrorCode::Pressure;
         }
-        else
+        else if (!workers.empty())
         {
             switch (dist)
             {
@@ -666,7 +837,7 @@ namespace mt
         {
             const auto snap = snapshot();
             const auto token = _safe(cfg->reject_callback, *cfg, task, code, snap);
-            _event(cfg->on_reject, *cfg, ErrorCode::Full, snap);
+            _event(cfg->on_reject, *cfg, code, snap);
             if (token.has_value())
             {
                 if (token->action == RejectionToken::Action::Reschedule)
@@ -680,7 +851,9 @@ namespace mt
                         {
                             if (query == Task::Query::Type)
                             {
-                                out = static_cast<unsigned char>(Task::Type::System);
+                                out = static_cast<unsigned char>(
+                                    Task::Type::System | Task::Type::Delayed
+                                );
                             }
                             else if (query == Task::Query::Timing)
                             {
@@ -790,10 +963,13 @@ namespace mt
         }
 
         const auto nodes = _nodes.load();
-        for (decltype(auto) it : *nodes)
-            it->stop();
-        nodes->clear();
-        nodes->shrink_to_fit();
+        if (nodes != nullptr)
+        {
+            for (decltype(auto) it : *nodes)
+                it->stop();
+            nodes->clear();
+            nodes->shrink_to_fit();
+        }
 
         _stop = true;
         _stop.notify_all();

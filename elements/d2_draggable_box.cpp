@@ -63,45 +63,60 @@ namespace d2::dx
     void VirtualBox::_event_impl(in::InputFrame& frame)
     {
         Box::_event_impl(frame);
-        if (frame.had_event(in::Event::MouseMovement) || frame.had_event(in::Event::KeyMouseInput))
+
+        const auto mouse_event =
+            frame.had_event(in::Event::MouseMovement) || frame.had_event(in::Event::KeyMouseInput);
+
+        if (mouse_event)
         {
-            const auto rlc = frame.active(in::mouse::Left, in::mode::Release);
-            const auto rc = frame.active(in::mouse::Right, in::mode::Press);
-            const auto lc = frame.active(in::mouse::Left, in::mode::Hold);
-            if (getstate(Hovered) && !_is_being_resized())
+            const auto left_press = frame.active(in::mouse::Left, in::mode::Press);
+            const auto left_hold = frame.active(in::mouse::Left, in::mode::Hold);
+            const auto left_release = frame.active(in::mouse::Left, in::mode::Release);
+            const auto right_press = frame.active(in::mouse::Right, in::mode::Press);
+
+            const auto draggable = bool(data::vbox_options & VBoxOptions::Draggable);
+            const auto minimizable = bool(data::vbox_options & VBoxOptions::Minimizable);
+            const auto resizing = _is_being_resized();
+
+            if (getstate(Clicked) && left_hold && !resizing && draggable)
             {
-                if (getstate(Clicked) && lc && (data::vbox_options & VBoxOptions::Draggable))
+                const auto [mx, my] = context()->input()->mouse_position();
+
+                const auto nx = std::max(mx - offset_.first, 0);
+                const auto ny = std::max(my - offset_.second, 0);
+
+                if (nx != resolve_units(Box::x) || ny != resolve_units(Box::y))
                 {
-                    const auto [x, y] = context()->input()->mouse_position();
-                    const auto nx = std::max(x - offset_.first, 0);
-                    const auto ny = std::max(y - offset_.second, 0);
-                    if (nx != resolve_units(Box::x) || ny != resolve_units(Box::y))
-                    {
-                        Box::x = nx;
-                        Box::y = ny;
-                        _signal_write(WriteType::Offset);
-                    }
-                }
-                if (rc && (data::vbox_options & VBoxOptions::Minimizable))
-                {
-                    minimized_ = !minimized_;
-                    _signal_write(WriteType::Dimensions);
+                    Box::x = nx;
+                    Box::y = ny;
+                    _signal_write(WriteType::Offset);
                 }
             }
-            else if (rlc && _is_being_resized())
+            if (left_release && resizing)
             {
                 const auto [x, y] = mouse_object_space();
+
                 const auto yoff = resolve_units(Box::height) - y;
                 const auto bh = resolve_units(data::bar_height);
+
                 if (x > 0 && (yoff - bh) > 0 && x != resolve_units(Box::width) &&
                     yoff != resolve_units(Box::height))
                 {
                     Box::width = x;
                     Box::height = yoff;
                     Box::y = y + resolve_units(Box::y);
+
                     _signal_write(WriteType::Offset | WriteType::Dimensions);
                 }
                 offset_ = {0, 0};
+            }
+            if (getstate(Hovered) && !getstate(Clicked) && !resizing)
+            {
+                if (right_press && minimizable)
+                {
+                    minimized_ = !minimized_;
+                    _signal_write(WriteType::Dimensions);
+                }
             }
         }
         if (frame.had_event(in::Event::KeyInput))
@@ -111,13 +126,17 @@ namespace d2::dx
             const auto down = frame.active(in::key('j'), in::mode::Hold);
             const auto up = frame.active(in::key('k'), in::mode::Hold);
 
-            if ((data::vbox_options & data::Resizable) &&
-                frame.active(in::special::Shift, in::mode::Hold))
+            const auto resizable = bool(data::vbox_options & data::Resizable);
+            const auto draggable = bool(data::vbox_options & data::Draggable);
+            const auto shift = frame.active(in::special::Shift, in::mode::Hold);
+
+            if (resizable && shift)
             {
                 if (left || right)
                 {
                     const auto width = resolve_units(Box::width);
-                    if (width > 1)
+
+                    if (width > 1 || right)
                     {
                         Box::width = width + (left ? -1 : 1);
                         _signal_write(WriteType::LayoutWidth);
@@ -126,19 +145,21 @@ namespace d2::dx
                 if (down || up)
                 {
                     const auto height = resolve_units(Box::height);
-                    if (height > 1)
+
+                    if (height > 1 || down)
                     {
                         Box::height = height + (up ? -1 : 1);
                         _signal_write(WriteType::LayoutHeight);
                     }
                 }
             }
-            else if (data::vbox_options & data::Draggable)
+            else if (draggable)
             {
                 if (left || right)
                 {
                     const auto x = resolve_units(Box::x);
-                    if (x > 1)
+
+                    if (x > 0 || right)
                     {
                         Box::x = x + (left ? -1 : 1);
                         _signal_write(WriteType::LayoutXPos);
@@ -147,7 +168,8 @@ namespace d2::dx
                 if (down || up)
                 {
                     const auto y = resolve_units(Box::y);
-                    if (y > 1)
+
+                    if (y > 0 || down)
                     {
                         Box::y = y + (up ? -1 : 1);
                         _signal_write(WriteType::LayoutYPos);

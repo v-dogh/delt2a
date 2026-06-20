@@ -68,6 +68,7 @@ namespace d2::sys
         void disable();
 
         bool had_event(in::Event ev);
+        bool had_pulse();
 
         in::mouse_position mouse_position();
         in::screen_size screen_capacity();

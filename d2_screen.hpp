@@ -1,5 +1,6 @@
 #pragma once
 
+#include <absl/container/flat_hash_map.h>
 #include <absl/container/node_hash_map.h>
 #include <chrono>
 #include <d2_animate.hpp>
@@ -13,6 +14,7 @@
 #include <d2_tree_element_frwd.hpp>
 #include <d2_tree_state.hpp>
 #include <mods/d2_core.hpp>
+#include <utility>
 
 namespace d2::sys
 {
@@ -96,6 +98,10 @@ namespace d2::sys
         void _keynav_cycle_macro();
         void _keynav_cycle_macro_reverse();
 
+        bool _keynav_has_input() const;
+        bool _keynav_prepare();
+        void _keynav_apply();
+
         void _trigger_events();
         void _trigger_focused_events(in::InputFrame& frame, eptr ptr);
         void _trigger_focused_events(in::InputFrame& frame);
@@ -143,6 +149,10 @@ namespace d2::sys
         eptr focused() const;
         eptr clicked() const;
         eptr hovered() const;
+
+        void focus_next_minor(bool reverse = false);
+        void focus_next_major(bool reverse = false);
+        void clear_keynav();
 
         std::size_t fps() const;
         std::size_t animations() const;

@@ -3,13 +3,20 @@
 #include "future.hpp"
 #include "task_ring.hpp"
 #include <any>
+#include <array>
+#include <atomic>
 #include <chrono>
 #include <exception>
 #include <functional>
+#include <limits>
 #include <memory>
 #include <mutex>
+#include <optional>
+#include <span>
 #include <stdexcept>
+#include <string>
 #include <thread>
+#include <type_traits>
 #include <vector>
 
 namespace mt
@@ -193,6 +200,7 @@ namespace mt
         virtual void _ping_impl() = 0;
         virtual void _start_impl() = 0;
         virtual void _stop_impl() noexcept = 0;
+        virtual bool _is_current_thread_impl() const noexcept = 0;
         virtual ptr _clone_impl() const = 0;
     public:
         friend class Node;
@@ -485,6 +493,7 @@ namespace mt
         virtual void _ping_impl() override;
         virtual void _start_impl() override;
         virtual void _stop_impl() noexcept override;
+        virtual bool _is_current_thread_impl() const noexcept override;
         virtual ptr _clone_impl() const override;
     public:
         using Worker::Worker;
@@ -636,7 +645,6 @@ namespace mt
             );
             return task;
         }
-
         template<typename Func, typename... Argv>
         void launchd_void(Func&& callback, std::optional<Node::Distribution> dist, Argv&&... args)
         {
@@ -667,7 +675,6 @@ namespace mt
                 dist
             );
         }
-
         template<typename Future, typename Func, typename... Argv>
         auto launchd_cyclic(
             std::chrono::milliseconds time, Func&& callback, TaskConfig<Future> cfg, Argv&&... args
@@ -730,7 +737,6 @@ namespace mt
             );
             return task;
         }
-
         template<typename Future, typename Func, typename... Argv>
         auto launchd_deferred(
             std::chrono::milliseconds time, Func&& callback, TaskConfig<Future> cfg, Argv&&... args
@@ -802,7 +808,6 @@ namespace mt
 
             return task;
         }
-
         template<typename Func, typename... Argv>
         auto co_launchd(Func&& callback, std::optional<Node::Distribution> dist, Argv&&... args)
         {
@@ -871,12 +876,10 @@ namespace mt
                 std::forward<Func>(callback), TaskConfig<future<ret>>(), std::forward<Argv>(args)...
             );
         }
-
         template<typename Func, typename... Argv> void launch_void(Func&& callback, Argv&&... args)
         {
             launchd_void(std::forward<Func>(callback), std::nullopt, std::forward<Argv>(args)...);
         }
-
         template<typename Func, typename... Argv>
         auto launch_cyclic(std::chrono::milliseconds time, Func&& callback, Argv&&... args)
         {
@@ -888,7 +891,6 @@ namespace mt
                 std::forward<Argv>(args)...
             );
         }
-
         template<typename Func, typename... Argv>
         auto launch_deferred(std::chrono::milliseconds time, Func&& callback, Argv&&... args)
         {
@@ -900,7 +902,6 @@ namespace mt
                 std::forward<Argv>(args)...
             );
         }
-
         template<typename Func, typename... Argv> auto co_launch(Func&& callback, Argv&&... args)
         {
             return co_launchd(

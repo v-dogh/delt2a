@@ -20,15 +20,6 @@ namespace d2::in
         Release,
         Hold
     };
-    enum class Mouse : keytype
-    {
-        Left,
-        Right,
-        Middle,
-        SideTop,
-        SideBottom,
-        MouseKeyMax
-    };
     enum class Special : keytype
     {
         Reserved = (('`' - ' ') + ('~' - '{')) + 1,
@@ -57,9 +48,17 @@ namespace d2::in
         // For reference, the max value a character can take (when resolved)
         SpecialKeyMax = (Fn + 24),
     };
+    enum class Mouse : keytype
+    {
+        Left = keytype(Special::SpecialKeyMax) + 1,
+        Right,
+        Middle,
+        SideTop,
+        SideBottom,
+        MouseKeyMax
+    };
     enum class Event : unsigned char
     {
-        Reserved = 1 << 0,
         ScreenResize = 1 << 1,
         ScreenCapacityChange = 1 << 2,
         MouseMovement = 1 << 3,
@@ -111,8 +110,7 @@ namespace d2::in
     class InputFrame
     {
     public:
-        using keyboard_keymap = std::bitset<std::size_t(Special::SpecialKeyMax) + 1>;
-        using mouse_keymap = std::bitset<std::size_t(Special::SpecialKeyMax) + 1>;
+        using keymap = std::bitset<std::size_t(Mouse::MouseKeyMax)>;
         using ptr = std::shared_ptr<InputFrame>;
 
         template<typename Type> struct ExportKeymap
@@ -133,19 +131,19 @@ namespace d2::in
     private:
         struct ConsumeState
         {
-            keyboard_keymap keys_consumed{};
-            mouse_keymap mouse_consumed{};
+            keymap keys_consumed{};
             bool consumed_scroll{false};
             bool consumed_sequence{false};
         };
     private:
         // Consumed
-        // mouse press (not hold)
-        // key press (not hold)
+        // input press/release/hold
         // scroll delta
+        // sequence
 
         std::thread::id _consume_ctx{};
         bool _consume{false};
+        bool _poll_index{false};
 
         ConsumeState _active_consume{};
         ConsumeState _consume_swap{};
@@ -159,11 +157,11 @@ namespace d2::in
 
         // c - current, p - previous
         // c for hold
-        // c and !p for press
-        // !c and p for release
+        // explicit press/release maps for transitions
+        // auto release is used for pulse inputs
 
-        std::array<keyboard_keymap, 2> _keys_poll{};
-        std::array<mouse_keymap, 2> _mouse_poll{};
+        std::array<keymap, 2> _keys_poll{};
+        keymap _pulse{};
 
         std::string _sequence{""};
 
@@ -181,21 +179,21 @@ namespace d2::in
         InputFrame(const InputFrame&) = default;
         InputFrame(InputFrame&&) = default;
 
-        bool had_event(Event ev);
+        bool had_event(Event ev) const;
+        bool had_pulse() const;
 
         mouse_position scroll_delta();
         mouse_position mouse_position();
         screen_size screen_capacity();
         screen_size screen_size();
 
-        absl::InlinedVector<std::pair<keytype, mode>, 8> active_list();
+        absl::InlinedVector<std::pair<keytype, mode>, 8> active_list() const;
 
         bool active(Mouse mouse, Mode mode);
         bool active(Special mod, Mode mode);
         bool active(keytype key, Mode mode);
 
-        ExportKeymap<keyboard_keymap> keyboard_map() const noexcept;
-        ExportKeymap<mouse_keymap> mouse_map() const noexcept;
+        ExportKeymap<keymap> map() const noexcept;
 
         std::string_view sequence();
 
@@ -223,11 +221,14 @@ namespace d2::in
             InputFrameView(InputFrameView&&) = default;
 
             void swap();
-            void swap(const InputFrame* ptr);
 
             void set(Mouse mouse, bool value = true);
             void set(Special mod, bool value = true);
             void set(keytype key, bool value = true);
+
+            void pulse(Mouse mouse);
+            void pulse(Special mod);
+            void pulse(keytype key);
 
             void set_scroll_delta(mouse_position pos);
             void set_mouse_position(mouse_position pos);
@@ -242,8 +243,7 @@ namespace d2::in
             void apply_consume();
             void reset_consume();
 
-            InputFrame::keyboard_keymap mask_keyboard_consume(InputFrame::keyboard_keymap mask);
-            InputFrame::mouse_keymap mask_mouse_consume(InputFrame::mouse_keymap mask);
+            InputFrame::keymap mask_key_consume(InputFrame::keymap mask);
 
             InputFrameView& operator=(const InputFrameView&) = default;
             InputFrameView& operator=(InputFrameView&&) = default;

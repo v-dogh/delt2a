@@ -98,6 +98,13 @@ namespace d2::sys
             return false;
         return _frame_impl()->had_event(ev);
     }
+    bool SystemInput::had_pulse()
+    {
+        FrameLock lock(this, true);
+        if (!_enabled)
+            return false;
+        return _frame_impl()->had_pulse();
+    }
 
     in::mouse_position SystemInput::mouse_position()
     {

@@ -167,6 +167,7 @@ namespace d2
             };
         private:
             void* (*_manager)(SignalInstance*, SignalInstance*, void*, void*, Action){nullptr};
+
             union
             {
                 std::array<unsigned char, _static_storage_length> _static_storage;
@@ -196,6 +197,7 @@ namespace d2
                         auto aligned = static_cast<void*>(ptr->_static_storage.data());
                         auto aligned_size = ptr->_static_storage.size();
                         const auto data = std::align(alignment, total, aligned, aligned_size);
+
                         if (action == Action::Destroy)
                         {
                             std::destroy_at(reinterpret_cast<type*>(data));
@@ -220,6 +222,7 @@ namespace d2
                             auto* cb = *reinterpret_cast<func*>(callback);
                             std::apply([&](auto&... args) { cb(block, args...); }, *args);
                         }
+
                         return nullptr;
                     };
                 }
@@ -229,6 +232,7 @@ namespace d2
                         ::operator new(total, std::align_val_t{alignment})
                     );
                     new (_buffer) type{std::forward<Argv>(pack)...};
+
                     _manager = +[](SignalInstance* ptr,
                                    SignalInstance* dest,
                                    void* callback,
@@ -256,11 +260,13 @@ namespace d2
                             auto* cb = *reinterpret_cast<func*>(callback);
                             std::apply([&](auto&... args) { cb(block, args...); }, *args);
                         }
+
                         return nullptr;
                     };
                 }
             }
-            SignalInstance(SignalInstance&& copy);
+
+            SignalInstance(SignalInstance&& copy) noexcept;
             SignalInstance(const SignalInstance&) = delete;
             ~SignalInstance();
 
@@ -276,7 +282,7 @@ namespace d2
                 );
             }
 
-            SignalInstance& operator=(SignalInstance&& copy);
+            SignalInstance& operator=(SignalInstance&& copy) noexcept;
             SignalInstance& operator=(const SignalInstance&) = delete;
 
             bool operator==(std::nullptr_t) const;
@@ -315,7 +321,7 @@ namespace d2
         public:
             Handle() = default;
             Handle(const Handle&) = delete;
-            Handle(Handle&&) = default;
+            Handle(Handle&& other) noexcept;
             Handle(std::shared_ptr<HandleState> ptr, std::shared_ptr<SignalStorage> storage);
             Handle(std::nullptr_t) {}
             ~Handle();
@@ -327,7 +333,7 @@ namespace d2
             State state() const;
 
             Handle& operator=(const Handle&) = delete;
-            Handle& operator=(Handle&&) = default;
+            Handle& operator=(Handle&& other) noexcept;
 
             bool operator==(std::nullptr_t) const;
             bool operator!=(std::nullptr_t) const;
@@ -344,12 +350,14 @@ namespace d2
                 std::weak_ptr<Signals> ptr, std::shared_ptr<SignalStorage> storage, signal_id id
             );
             Signal(std::nullptr_t) {}
+            Signal(const Signal&) = delete;
+            Signal(Signal&& other) noexcept;
             ~Signal();
 
             void disconnect();
 
-            Signal& operator=(const Signal&) = default;
-            Signal& operator=(Signal&&) = default;
+            Signal& operator=(const Signal&) = delete;
+            Signal& operator=(Signal&& other) noexcept;
 
             bool operator==(std::nullptr_t) const;
             bool operator!=(std::nullptr_t) const;

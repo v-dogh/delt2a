@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/uio.h>
+#include <thread>
 #include <unistd.h>
 
 namespace d2::sys
@@ -22,6 +23,10 @@ namespace d2::sys
     // Worker
     //
 
+    bool UnixWorker::_is_current_thread_impl() const noexcept
+    {
+        return std::this_thread::get_id() == _main_thread;
+    }
     bool UnixWorker::_try_accept_impl(mt::Task& task) noexcept
     {
         if (!_tasks.try_enqueue(task))
@@ -45,6 +50,7 @@ namespace d2::sys
             throw std::system_error(errno, std::generic_category(), "pipe2");
         _wake_read = fds[0];
         _wake_write = fds[1];
+        _main_thread = std::this_thread::get_id();
     }
     void UnixWorker::_stop_impl() noexcept
     {
@@ -174,19 +180,24 @@ namespace d2::sys
         io = _restore_termios;
         io.c_lflag &= ~(ICANON | ECHO | ISIG | IEXTEN);
         io.c_iflag &= ~(IXON | ICRNL | BRKINT | INPCK | ISTRIP);
-        io.c_oflag &= ~(OPOST);
         io.c_cflag |= CS8;
         io.c_cc[VMIN] = 0;
         io.c_cc[VTIME] = 0;
         tcsetattr(STDIN_FILENO, TCSANOW, &io);
         fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK);
-        // Disable cursor | enable mouse tracking | extended mode
-        std::cout << "\033[?25l" << "\033[?1003h" << "\x1b[?1006h" << std::flush;
+        std::cout << "\033[?25l"
+                  << "\033[?1000h" // press/release
+                  << "\033[?1002h" // button-motion tracking
+                  << "\033[?1006h" // SGR extended coordinates
+                  << std::flush;
     }
     void UnixTerminalInput::_disable_raw_mode()
     {
         tcsetattr(STDIN_FILENO, TCSANOW, &_restore_termios);
-        std::cout << "\033[?25h" << "\033[?1003l" << "\x1b[?1006l" << std::flush;
+        std::cout << "\033[?1006l"
+                  << "\033[?1002l"
+                  << "\033[?1000l"
+                  << "\033[?25h" << std::flush;
     }
 
     void UnixTerminalInput::_lock_frame_impl()
@@ -306,20 +317,25 @@ namespace d2::sys
 
                 return res;
             };
-            const auto set_key = [&](char ch)
+            const auto pulse_key = [&](char ch)
             {
                 if (ch >= in::keymin() && ch <= in::keymax())
                 {
                     if (ch >= 'A' && ch <= 'Z')
-                        frame.set(in::special::Shift);
+                        frame.pulse(in::special::Shift);
 
-                    frame.set(in::key(ch));
+                    frame.pulse(in::key(ch));
                 }
             };
-            const auto set_control = [&](char ch)
+            const auto pulse_key_raw = [&](char ch)
             {
-                frame.set(in::special::LeftControl);
-                set_key(ch);
+                if (ch >= in::keymin() && ch <= in::keymax())
+                    frame.pulse(in::key(ch));
+            };
+            const auto pulse_control = [&](char ch)
+            {
+                frame.pulse(in::special::LeftControl);
+                pulse_key_raw(ch);
             };
             const auto apply_csi_modifier = [&](int mod)
             {
@@ -328,13 +344,13 @@ namespace d2::sys
 
                 const auto bits = mod - 1;
                 if ((bits & 1) != 0)
-                    frame.set(in::special::Shift);
+                    frame.pulse(in::special::Shift);
                 if ((bits & 2) != 0)
-                    frame.set(in::special::LeftAlt);
+                    frame.pulse(in::special::LeftAlt);
                 if ((bits & 4) != 0)
-                    frame.set(in::special::LeftControl);
+                    frame.pulse(in::special::LeftControl);
             };
-            const auto set_fn_key = [&](int n) { frame.set(in::fn(n) + 1); };
+            const auto pulse_fn_key = [&](int n) { frame.pulse(in::fn(n) + 1); };
             const auto parse_sgr_mouse = [&](std::string_view body, char final)
             {
                 if (body.empty() || body[0] != '<')
@@ -367,11 +383,11 @@ namespace d2::sys
                 const auto is_wheel = (button & 64) != 0;
 
                 if ((button & 4) != 0)
-                    frame.set(in::special::Shift);
+                    frame.pulse(in::special::Shift);
                 if ((button & 8) != 0)
-                    frame.set(in::special::LeftAlt);
+                    frame.pulse(in::special::LeftAlt);
                 if ((button & 16) != 0)
-                    frame.set(in::special::LeftControl);
+                    frame.pulse(in::special::LeftControl);
 
                 if (is_wheel)
                 {
@@ -391,12 +407,10 @@ namespace d2::sys
                     case 0:
                         is_release ? frame.set(in::mouse::Left, false) : frame.set(in::mouse::Left);
                         break;
-
                     case 1:
                         is_release ? frame.set(in::mouse::Middle, false)
                                    : frame.set(in::mouse::Middle);
                         break;
-
                     case 2:
                         is_release ? frame.set(in::mouse::Right, false)
                                    : frame.set(in::mouse::Right);
@@ -421,8 +435,8 @@ namespace d2::sys
                 }
                 if (final == 'Z')
                 {
-                    frame.set(in::special::Shift);
-                    frame.set(in::special::Tab);
+                    frame.pulse(in::special::Shift);
+                    frame.pulse(in::special::Tab);
                     return;
                 }
 
@@ -433,34 +447,34 @@ namespace d2::sys
                 switch (final)
                 {
                 case 'A':
-                    frame.set(in::special::ArrowUp);
+                    frame.pulse(in::special::ArrowUp);
                     break;
                 case 'B':
-                    frame.set(in::special::ArrowDown);
+                    frame.pulse(in::special::ArrowDown);
                     break;
                 case 'C':
-                    frame.set(in::special::ArrowRight);
+                    frame.pulse(in::special::ArrowRight);
                     break;
                 case 'D':
-                    frame.set(in::special::ArrowLeft);
+                    frame.pulse(in::special::ArrowLeft);
                     break;
                 case 'H':
-                    frame.set(in::special::Home);
+                    frame.pulse(in::special::Home);
                     break;
                 case 'F':
-                    frame.set(in::special::End);
+                    frame.pulse(in::special::End);
                     break;
                 case 'P':
-                    set_fn_key(0);
+                    pulse_fn_key(0);
                     break;
                 case 'Q':
-                    set_fn_key(1);
+                    pulse_fn_key(1);
                     break;
                 case 'R':
-                    set_fn_key(2);
+                    pulse_fn_key(2);
                     break;
                 case 'S':
-                    set_fn_key(3);
+                    pulse_fn_key(3);
                     break;
 
                 case '~':
@@ -471,38 +485,38 @@ namespace d2::sys
                     {
                     case 1:
                     case 7:
-                        frame.set(in::special::Home);
+                        frame.pulse(in::special::Home);
                         break;
                     case 4:
                     case 8:
-                        frame.set(in::special::End);
+                        frame.pulse(in::special::End);
                         break;
                     case 3:
-                        frame.set(in::special::Delete);
+                        frame.pulse(in::special::Delete);
                         break;
                     case 15:
-                        set_fn_key(4);
+                        pulse_fn_key(4);
                         break;
                     case 17:
-                        set_fn_key(5);
+                        pulse_fn_key(5);
                         break;
                     case 18:
-                        set_fn_key(6);
+                        pulse_fn_key(6);
                         break;
                     case 19:
-                        set_fn_key(7);
+                        pulse_fn_key(7);
                         break;
                     case 20:
-                        set_fn_key(8);
+                        pulse_fn_key(8);
                         break;
                     case 21:
-                        set_fn_key(9);
+                        pulse_fn_key(9);
                         break;
                     case 23:
-                        set_fn_key(10);
+                        pulse_fn_key(10);
                         break;
                     case 24:
-                        set_fn_key(11);
+                        pulse_fn_key(11);
                         break;
                     }
                     break;
@@ -523,34 +537,34 @@ namespace d2::sys
                 switch (final)
                 {
                 case 'A':
-                    frame.set(in::special::ArrowUp);
+                    frame.pulse(in::special::ArrowUp);
                     break;
                 case 'B':
-                    frame.set(in::special::ArrowDown);
+                    frame.pulse(in::special::ArrowDown);
                     break;
                 case 'C':
-                    frame.set(in::special::ArrowRight);
+                    frame.pulse(in::special::ArrowRight);
                     break;
                 case 'D':
-                    frame.set(in::special::ArrowLeft);
+                    frame.pulse(in::special::ArrowLeft);
                     break;
                 case 'H':
-                    frame.set(in::special::Home);
+                    frame.pulse(in::special::Home);
                     break;
                 case 'F':
-                    frame.set(in::special::End);
+                    frame.pulse(in::special::End);
                     break;
                 case 'P':
-                    set_fn_key(0);
+                    pulse_fn_key(0);
                     break;
                 case 'Q':
-                    set_fn_key(1);
+                    pulse_fn_key(1);
                     break;
                 case 'R':
-                    set_fn_key(2);
+                    pulse_fn_key(2);
                     break;
                 case 'S':
-                    set_fn_key(3);
+                    pulse_fn_key(3);
                     break;
                 }
             };
@@ -575,19 +589,19 @@ namespace d2::sys
                 // Enter
                 if (ch == '\n' || ch == '\r')
                 {
-                    frame.set(in::special::Enter);
+                    frame.pulse(in::special::Enter);
                     pos++;
                 }
                 // Tabulator exterminans
                 else if (ch == '\t')
                 {
-                    frame.set(in::special::Tab);
+                    frame.pulse(in::special::Tab);
                     pos++;
                 }
                 // Backspace
                 else if (ch == 127 || ch == '\b')
                 {
-                    frame.set(in::special::Backspace);
+                    frame.pulse(in::special::Backspace);
                     pos++;
                 }
                 // Escape / sequences
@@ -598,7 +612,7 @@ namespace d2::sys
                         if (should_wait_for_escape())
                             break;
 
-                        frame.set(in::special::Escape);
+                        frame.pulse(in::special::Escape);
                         esc_waiting = false;
                         pos++;
                         continue;
@@ -619,7 +633,7 @@ namespace d2::sys
                             if (should_wait_for_escape())
                                 break;
 
-                            frame.set(in::special::Escape);
+                            frame.pulse(in::special::Escape);
                             esc_waiting = false;
                             pos++;
                             continue;
@@ -640,7 +654,7 @@ namespace d2::sys
                             if (should_wait_for_escape())
                                 break;
 
-                            frame.set(in::special::Escape);
+                            frame.pulse(in::special::Escape);
                             esc_waiting = false;
                             pos++;
                             continue;
@@ -650,8 +664,8 @@ namespace d2::sys
                     }
                     else
                     {
-                        frame.set(in::special::LeftAlt);
-                        set_key(next);
+                        frame.pulse(in::special::LeftAlt);
+                        pulse_key(next);
                         pos += 2;
                     }
                 }
@@ -659,21 +673,21 @@ namespace d2::sys
                 else if (ch >= 1 && ch <= 26)
                 {
                     const auto res = static_cast<char>('A' + (ch - 1));
-                    set_control(res);
+                    pulse_control(res);
                     pos++;
                 }
                 else if (ch == 0)
                 {
                     // Ctrl+@ / Ctrl+Space
-                    frame.set(in::special::LeftControl);
-                    set_key(' ');
+                    frame.pulse(in::special::LeftControl);
+                    pulse_key_raw(' ');
                     pos++;
                 }
                 else if (ch >= 28 && ch <= 31)
                 {
                     // Ctrl+\, Ctrl+], Ctrl+^, Ctrl+_
                     static constexpr char ctrl_map[] = {'\\', ']', '^', '_'};
-                    set_control(ctrl_map[ch - 28]);
+                    pulse_control(ctrl_map[ch - 28]);
                     pos++;
                 }
                 // Normal keys :(
@@ -683,11 +697,13 @@ namespace d2::sys
                     // Sequence
                     text.push_back(c);
                     // Key
-                    set_key(c);
+                    pulse_key(c);
                     pos++;
                 }
             }
             pending.erase(0, pos);
+
+            frame.set_text(std::move(text));
         }
     }
     void UnixTerminalInput::_endcycle_impl() {}
@@ -706,25 +722,6 @@ namespace d2::sys
     MainWorker::ptr UnixTerminalInput::_worker_impl()
     {
         return mt::Worker::make<UnixWorker>();
-    }
-
-    void UnixTerminalInput::mask_interrupts()
-    {
-        std::unique_lock lock(_mtx);
-
-        struct termios io;
-        tcgetattr(STDIN_FILENO, &io);
-        io.c_lflag &= ~ISIG;
-        tcsetattr(STDIN_FILENO, TCSANOW, &io);
-    }
-    void UnixTerminalInput::unmask_interrupts()
-    {
-        std::unique_lock lock(_mtx);
-
-        struct termios io;
-        tcgetattr(STDIN_FILENO, &io);
-        io.c_lflag |= ISIG;
-        tcsetattr(STDIN_FILENO, TCSANOW, &io);
     }
 
     //

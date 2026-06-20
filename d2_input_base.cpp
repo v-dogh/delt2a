@@ -1,20 +1,26 @@
 #include "d2_input_base.hpp"
+
 #include <utility>
 
 namespace d2::in
 {
     std::size_t InputFrame::_cur_poll_idx() const
     {
-        return std::size_t(_event_state & static_cast<unsigned char>(Event::Reserved));
+        return std::size_t(_poll_index);
     }
     std::size_t InputFrame::_prev_poll_idx() const
     {
-        return std::size_t(!(_event_state & static_cast<unsigned char>(Event::Reserved)));
+        return std::size_t(!_poll_index);
     }
 
-    bool InputFrame::had_event(Event ev)
+    bool InputFrame::had_event(Event ev) const
     {
         return _event_state & static_cast<unsigned char>(ev);
+    }
+    bool InputFrame::had_pulse() const
+    {
+        const auto& cur = _keys_poll[_cur_poll_idx()];
+        return (_pulse & cur).any();
     }
 
     mouse_position InputFrame::mouse_position()
@@ -40,32 +46,16 @@ namespace d2::in
         return _screen_capacity;
     }
 
-    absl::InlinedVector<std::pair<keytype, mode>, 8> InputFrame::active_list()
+    absl::InlinedVector<std::pair<keytype, mode>, 8> InputFrame::active_list() const
     {
         const auto c = _cur_poll_idx();
         const auto p = _prev_poll_idx();
         absl::InlinedVector<std::pair<keytype, mode>, 8> keys;
-        // Keyboard
+        const auto& cb = _keys_poll[c];
+        const auto& pb = _keys_poll[p];
+        for (std::size_t i = 0; i < cb.size(); i++)
         {
-            const auto& cb = _keys_poll[c];
-            const auto& pb = _keys_poll[p];
-            for (std::size_t i = 0; i < cb.size(); i++)
-            {
-                const auto ck = cb[i];
-                const auto pk = pb[i];
-                if (ck)
-                    keys.push_back({keytype(i), mode::Hold});
-                if (ck && !pk)
-                    keys.push_back({keytype(i), mode::Press});
-                else if (!ck && pk)
-                    keys.push_back({keytype(i), mode::Release});
-            }
-        }
-        // Mouse
-        {
-            const auto& cb = _mouse_poll[c];
-            const auto& pb = _mouse_poll[p];
-            for (std::size_t i = 0; i < cb.size(); i++)
+            if (!(_consume && _active_consume.keys_consumed.test(i)))
             {
                 const auto ck = cb[i];
                 const auto pk = pb[i];
@@ -82,34 +72,7 @@ namespace d2::in
 
     bool InputFrame::active(Mouse mouse, Mode mode)
     {
-        const auto idx = std::size_t(mouse);
-        const auto c = _cur_poll_idx();
-        const auto p = _prev_poll_idx();
-        bool result = false;
-        switch (mode)
-        {
-        case Mode::Press:
-        {
-            result = _mouse_poll[c].test(idx) && !_mouse_poll[p].test(idx) &&
-                     !(_consume && _active_consume.mouse_consumed.test(idx));
-            break;
-        }
-        case Mode::Release:
-        {
-            result = !_mouse_poll[c].test(idx) && _mouse_poll[p].test(idx) &&
-                     !(_consume && _active_consume.mouse_consumed.test(idx));
-            break;
-        }
-        case Mode::Hold:
-        {
-            result =
-                _mouse_poll[c].test(idx) && !(_consume && _active_consume.mouse_consumed.test(idx));
-            break;
-        }
-        }
-        if (result && _consume && std::this_thread::get_id() == _consume_ctx)
-            _consume_swap.mouse_consumed.set(idx);
-        return result;
+        return active(keytype(mouse), mode);
     }
     bool InputFrame::active(Special mod, Mode mode)
     {
@@ -131,7 +94,7 @@ namespace d2::in
         }
         case Mode::Release:
         {
-            result = !_keys_poll[c].test(idx) && _keys_poll[p].test(idx) &&
+            result = (!_keys_poll[c].test(idx) && _keys_poll[p].test(idx)) &&
                      !(_consume && _active_consume.keys_consumed.test(idx));
             break;
         }
@@ -147,13 +110,9 @@ namespace d2::in
         return result;
     }
 
-    InputFrame::ExportKeymap<InputFrame::keyboard_keymap> InputFrame::keyboard_map() const noexcept
+    InputFrame::ExportKeymap<InputFrame::keymap> InputFrame::map() const noexcept
     {
         return {.current = _keys_poll[_cur_poll_idx()], .previous = _keys_poll[_prev_poll_idx()]};
-    }
-    InputFrame::ExportKeymap<InputFrame::mouse_keymap> InputFrame::mouse_map() const noexcept
-    {
-        return {.current = _mouse_poll[_cur_poll_idx()], .previous = _mouse_poll[_prev_poll_idx()]};
     }
 
     std::string_view InputFrame::sequence()
@@ -172,52 +131,79 @@ namespace d2::in
         _active_consume.consumed_scroll = true;
         _active_consume.consumed_sequence = true;
         _active_consume.keys_consumed.set();
-        _active_consume.mouse_consumed.set();
     }
 
     namespace internal
     {
         void InputFrameView::swap()
         {
-            const auto ref = _ptr->_event_state & static_cast<unsigned char>(Event::Reserved);
+            _ptr->_poll_index = !_ptr->_poll_index;
+
+            const auto old_idx = _ptr->_prev_poll_idx();
+            const auto new_idx = _ptr->_cur_poll_idx();
+            const auto& old_map = _ptr->_keys_poll[old_idx];
+            auto& new_map = _ptr->_keys_poll[new_idx];
+            const auto released = (old_map & ~new_map).any();
+
+            new_map = old_map;
+            new_map &= ~_ptr->_pulse;
+
             _ptr->_event_state = 0x00;
-            if (!ref)
-                _ptr->_event_state |= static_cast<unsigned char>(Event::Reserved);
+            if (released)
+                _ptr->_event_state |= static_cast<unsigned char>(Event::KeyInput);
             _ptr->_scroll_delta = {0, 0};
             _ptr->_sequence.clear();
-            reset_consume();
-            // Reset key state
-            {
-                auto& mpoll = _ptr->_mouse_poll[_ptr->_cur_poll_idx()];
-                _ptr->_keys_poll[_ptr->_cur_poll_idx()].reset();
-                mpoll = _ptr->_mouse_poll[_ptr->_prev_poll_idx()];
-            }
-        }
-        void InputFrameView::swap(const InputFrame* ptr)
-        {
-            *_ptr = *ptr;
-            swap();
+            _ptr->_pulse.reset();
         }
 
         void InputFrameView::set(Mouse mouse, bool value)
         {
-            _ptr->_event_state |= static_cast<unsigned char>(Event::KeyMouseInput);
-            _ptr->_mouse_poll[_ptr->_cur_poll_idx()].set(std::size_t(mouse), value);
+            const auto idx = std::size_t(mouse);
+            auto& cur = _ptr->_keys_poll[_ptr->_cur_poll_idx()];
+            const auto old = cur.test(idx);
+            if (old != value)
+            {
+                cur.set(idx, value);
+                _ptr->_event_state |= static_cast<unsigned char>(Event::KeyMouseInput);
+            }
         }
         void InputFrameView::set(Special mod, bool value)
         {
-            _ptr->_event_state |= static_cast<unsigned char>(Event::KeyInput);
-            _ptr->_keys_poll[_ptr->_cur_poll_idx()].set(std::size_t(mod), value);
+            set(keytype(mod), value);
         }
         void InputFrameView::set(keytype key, bool value)
         {
-            _ptr->_event_state |= static_cast<unsigned char>(Event::KeyInput);
-            _ptr->_keys_poll[_ptr->_cur_poll_idx()].set(key, value);
+            const auto idx = std::size_t(key);
+            auto& cur_keys = _ptr->_keys_poll[_ptr->_cur_poll_idx()];
+            const auto old = cur_keys.test(idx);
+            _ptr->_pulse.reset(idx);
+            if (old != value)
+            {
+                cur_keys.set(idx, value);
+                _ptr->_event_state |= static_cast<unsigned char>(Event::KeyInput);
+            }
+        }
+
+        void InputFrameView::pulse(Mouse mouse)
+        {
+            const auto idx = std::size_t(mouse);
+            set(mouse);
+            _ptr->_pulse.set(idx);
+        }
+        void InputFrameView::pulse(Special mod)
+        {
+            pulse(keytype(mod));
+        }
+        void InputFrameView::pulse(keytype key)
+        {
+            const auto idx = std::size_t(key);
+            set(key);
+            _ptr->_pulse.set(idx);
         }
 
         void InputFrameView::set_scroll_delta(mouse_position pos)
         {
-            if (_ptr->scroll_delta() != pos)
+            if (_ptr->_scroll_delta != pos)
             {
                 _ptr->_event_state |= static_cast<unsigned char>(Event::ScrollWheelMovement);
                 _ptr->_scroll_delta = pos;
@@ -249,8 +235,10 @@ namespace d2::in
         }
         void InputFrameView::set_text(std::string in)
         {
-            _ptr->_event_state |= static_cast<unsigned char>(Event::KeySequenceInput);
             _ptr->_sequence = std::move(in);
+
+            if (!_ptr->_sequence.empty())
+                _ptr->_event_state |= static_cast<unsigned char>(Event::KeySequenceInput);
         }
 
         std::pair<bool, std::thread::id> InputFrameView::get_consume()
@@ -270,7 +258,6 @@ namespace d2::in
         void InputFrameView::reset_consume()
         {
             _ptr->_active_consume.keys_consumed.reset();
-            _ptr->_active_consume.mouse_consumed.reset();
             _ptr->_active_consume.consumed_scroll = false;
             _ptr->_active_consume.consumed_sequence = false;
             _ptr->_consume_swap = _ptr->_active_consume;
@@ -280,14 +267,9 @@ namespace d2::in
             _ptr->_active_consume = _ptr->_consume_swap;
         }
 
-        InputFrame::keyboard_keymap
-        InputFrameView::mask_keyboard_consume(InputFrame::keyboard_keymap mask)
+        InputFrame::keymap InputFrameView::mask_key_consume(InputFrame::keymap mask)
         {
             return std::exchange(_ptr->_active_consume.keys_consumed, mask);
-        }
-        InputFrame::mouse_keymap InputFrameView::mask_mouse_consume(InputFrame::mouse_keymap mask)
-        {
-            return std::exchange(_ptr->_active_consume.mouse_consumed, mask);
         }
     } // namespace internal
 } // namespace d2::in

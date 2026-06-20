@@ -483,6 +483,7 @@ namespace d2
         _scheduler->reconfigure(
             [this](mt::Node::Config& cfg)
             {
+                cfg.min_workers = 0;
                 cfg.on_worker_start.push_back(
                     [this, ptr = weak_from_this()](mt::Worker& worker, mt::Node::Snapshot snapshot)
                     {
@@ -518,7 +519,6 @@ namespace d2
     void IOContext::_deinitialize()
     {
         D2_TLOG(Module, "Deinitializing IO context")
-        _worker->stop();
         _scheduler->stop();
         D2_TLOG(Module, "Success in deinitialization")
     }
@@ -540,11 +540,14 @@ namespace d2
             src->tick();
             in->endcycle();
             D2_SAFE_BLOCK_END
-            if (_deadline == std::chrono::steady_clock::time_point::max())
-                _worker->wait();
-            else
-                _worker->wait(_deadline);
-            _deadline = std::chrono::steady_clock::time_point::max();
+            if (!_stop)
+            {
+                if (_deadline == std::chrono::steady_clock::time_point::max())
+                    _worker->wait();
+                else
+                    _worker->wait(_deadline);
+                _deadline = std::chrono::steady_clock::time_point::max();
+            }
         }
         D2_TLOG(Info, "Ending main loop")
 

@@ -11,7 +11,7 @@ namespace d2::sys
         {
             const auto ctx = context();
             _key_event = ctx->listen(
-                sys::SystemScreen::Event::KeyInput,
+                sys::screen::Event::KeyInput,
                 [this](module<screen> src)
                 {
                     static auto control_contains =
@@ -259,9 +259,8 @@ namespace d2::sys
                 }
             );
         }
-        else if (_active_set.empty() && _key_event != nullptr)
+        else if (_active_set.empty())
         {
-            _key_event.close();
             _key_event = nullptr;
         }
     }
