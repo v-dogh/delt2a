@@ -552,13 +552,15 @@ namespace d2
             branch(var<Var>(), std::move(branches)...);
         }
 
-        void persist(std::vector<std::string> whitelist = {})
+        void persist(bool preserve_position = true, std::vector<std::string> whitelist = {})
         {
             if (_ptr->parent() != screen()->root().shared())
                 D2_THRW("Attempt to persist children below the root layer");
             auto handle = context()->listen(
                 sys::screen::Event::TreeSwap,
-                [ptr = _ptr,
+                [=,
+                 ptr = _ptr,
+                 index = std::size_t(0),
                  tmp = std::shared_ptr<Element>(nullptr),
                  whitelist = absl::flat_hash_set<std::string>(whitelist.begin(), whitelist.end())](
                     sys::module<sys::screen> src
@@ -566,6 +568,8 @@ namespace d2
                 {
                     if (ptr != nullptr)
                     {
+                        if (preserve_position)
+                            index = ptr->parent()->index_of(ptr);
                         if (whitelist.empty() || whitelist.contains(src->name()))
                         {
                             auto root = src->root();
@@ -576,11 +580,16 @@ namespace d2
                                     ptr->name(),
                                     "'; While attempting to persist (overriding)"
                                 );
-                            root->override(tmp ? tmp : ptr->extract());
+                            if (preserve_position)
+                                root->create_after(index - 1, tmp ? tmp : ptr->extract());
+                            else
+                                root->create(tmp ? tmp : ptr->extract());
                             tmp = nullptr;
                         }
                         else if (!whitelist.empty())
                         {
+                            if (preserve_position)
+                                index = ptr->parent()->index_of(ptr);
                             tmp = ptr->extract();
                         }
                     }
