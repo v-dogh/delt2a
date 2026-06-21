@@ -30,7 +30,7 @@ namespace d2::style
     private:
         struct StateData
         {
-            DependencyBase* owner{nullptr};
+            const DependencyBase* owner{nullptr};
             std::size_t recursion_ctr{0};
             std::uint32_t next_generation{1};
             bool destroying{false};
@@ -68,82 +68,16 @@ namespace d2::style
                 _generation(std::exchange(other._generation, 0))
             {
             }
-            ~Handle()
-            {
-                close();
-            }
+            ~Handle();
 
-            void close()
-            {
-                const auto state = _state.lock();
-                const auto index = _index;
-                const auto generation = _generation;
-
-                release();
-                if (state == nullptr)
-                    return;
-
-                _sync(
-                    [state, index, generation]
-                    {
-                        if (state->owner == nullptr || state->destroying)
-                            return;
-                        state->owner->_close_slot_local(index, generation);
-                    }
-                );
-            }
-            void release() noexcept
-            {
-                _state = std::weak_ptr<StateData>();
-                _index = 0;
-                _generation = 0;
-            }
-            State state() const noexcept
-            {
-                auto state = _state.lock();
-                const auto index = _index;
-                const auto generation = _generation;
-
-                if (state == nullptr)
-                    return State::Inactive;
-
-                return _sync(
-                    [state, index, generation]() noexcept
-                    {
-                        if (state->owner == nullptr || state->destroying)
-                            return State::Inactive;
-                        if (index >= state->dependencies.size())
-                            return State::Inactive;
-
-                        const auto& dependency = state->dependencies[index];
-                        if (dependency.func == nullptr)
-                            return State::Inactive;
-                        if (dependency.generation != generation)
-                            return State::Inactive;
-                        return State::Active;
-                    }
-                );
-            }
+            void close();
+            void release() noexcept;
+            State state() const noexcept;
 
             Handle& operator=(const Handle&) = delete;
-            Handle& operator=(Handle&& other) noexcept
-            {
-                if (this == &other)
-                    return *this;
+            Handle& operator=(Handle&& other) noexcept;
 
-                close();
-
-                _state = std::move(other._state);
-                _index = std::exchange(other._index, 0);
-                _generation = std::exchange(other._generation, 0);
-
-                return *this;
-            }
-
-            operator bool() const noexcept
-            {
-                return state() == State::Active;
-            }
+            operator bool() const noexcept;
         };
     protected:
         template<typename Func> static std::invoke_result_t<Func> _sync(Func&& func)
@@ -160,33 +94,17 @@ namespace d2::style
                 std::forward<Func>(func)();
         }
 
-        std::shared_ptr<StateData> _state{};
+        mutable std::shared_ptr<StateData> _state{};
 
         struct InvokeGuard
         {
-            DependencyBase& self;
+            const DependencyBase& self;
             std::shared_ptr<StateData> state;
 
-            InvokeGuard(DependencyBase& self) : self(self), state(self._state)
-            {
-                if (state != nullptr)
-                    ++state->recursion_ctr;
-            }
+            InvokeGuard(const DependencyBase& self);
             InvokeGuard(const InvokeGuard&) = delete;
-            InvokeGuard(DependencyBase& self, std::shared_ptr<StateData> state) :
-                self(self), state(std::move(state))
-            {
-                if (this->state != nullptr)
-                    ++this->state->recursion_ctr;
-            }
-            ~InvokeGuard()
-            {
-                if (state == nullptr)
-                    return;
-                --state->recursion_ctr;
-                if (state->recursion_ctr == 0 && state->owner == &self && !state->destroying)
-                    self._flush_pending_local();
-            }
+            InvokeGuard(const DependencyBase& self, std::shared_ptr<StateData> state);
+            ~InvokeGuard();
 
             InvokeGuard& operator=(const InvokeGuard&) = delete;
         };
@@ -194,167 +112,20 @@ namespace d2::style
         DependencyBase() = default;
         DependencyBase(const DependencyBase&) {}
         DependencyBase(DependencyBase&&) = delete;
-        ~DependencyBase()
-        {
-            _sync(
-                [this]
-                {
-                    if (_state != nullptr)
-                    {
-                        _state->destroying = true;
-                        _state->owner = nullptr;
-                    }
-                }
-            );
-        }
+        ~DependencyBase();
 
-        std::shared_ptr<StateData> _ensure_state()
-        {
-            if (_state == nullptr)
-            {
-                _state = std::make_shared<StateData>();
-                _state->owner = this;
-            }
-            return _state;
-        }
-        std::uint32_t _next_generation()
-        {
-            auto generation = _state->next_generation++;
-            if (_state->next_generation == 0)
-                _state->next_generation = 1;
-            return generation;
-        }
-        Handle _make_handle(std::uint32_t index)
-        {
-            return Handle{_state, index, _state->dependencies[index].generation};
-        }
-        Handle _insert_slot(Deps dependency)
-        {
-            auto state = _ensure_state();
-            std::uint32_t index = 0;
-            bool found = false;
-            if (state->recursion_ctr == 0)
-            {
-                while (!state->free_slots.empty())
-                {
-                    index = state->free_slots.back();
-                    state->free_slots.pop_back();
+        std::shared_ptr<StateData> _ensure_state() const;
+        std::uint32_t _next_generation() const;
 
-                    if (index < state->dependencies.size() &&
-                        state->dependencies[index].func == nullptr)
-                    {
-                        found = true;
-                        break;
-                    }
-                }
-            }
-            dependency.generation = _next_generation();
-            if (!found)
-            {
-                if (state->dependencies.size() >= std::numeric_limits<std::uint32_t>::max())
-                    D2_THRW("Dependency subscription storage overflow");
+        Handle _make_handle(std::uint32_t index) const;
+        Handle _insert_slot(Deps dependency) const;
 
-                index = static_cast<std::uint32_t>(state->dependencies.size());
-                state->dependencies.push_back(std::move(dependency));
-            }
-            else
-                state->dependencies[index] = std::move(dependency);
-            return _make_handle(index);
-        }
-        void _close_slot_local(std::uint32_t index, std::uint32_t generation)
-        {
-            if (_state == nullptr)
-                return;
+        void _close_slot_local(std::uint32_t index, std::uint32_t generation) const;
+        void _cleanup_local() const;
+        void _flush_pending_local() const;
+        void _destroy_state_local() const;
 
-            auto state = _state;
-            if (state->destroying)
-                return;
-            if (index >= state->dependencies.size())
-                return;
-            auto& slot = state->dependencies[index];
-            if (slot.func == nullptr)
-                return;
-            if (slot.generation != generation)
-                return;
-
-            auto dependency = slot;
-            slot = Deps{};
-            slot.generation = _next_generation();
-            if (state->recursion_ctr != 0)
-            {
-                state->pending_destroy.push_back(dependency);
-                state->pending_free.push_back(index);
-            }
-            else
-            {
-                _destroy(dependency);
-                state->free_slots.push_back(index);
-                _cleanup_local();
-            }
-        }
-        void _cleanup_local()
-        {
-            if (_state == nullptr)
-                return;
-            auto state = _state;
-            if (state->recursion_ctr != 0 || state->destroying)
-                return;
-            while (!state->dependencies.empty() && state->dependencies.back().func == nullptr)
-                state->dependencies.pop_back();
-        }
-        void _flush_pending_local()
-        {
-            if (_state == nullptr)
-                return;
-            auto state = _state;
-            if (state->recursion_ctr != 0 || state->destroying)
-                return;
-
-            if (!state->pending_destroy.empty())
-            {
-                auto pending = std::move(state->pending_destroy);
-                state->pending_destroy.clear();
-
-                for (auto& it : pending)
-                    _destroy(it);
-            }
-            if (!state->pending_free.empty())
-            {
-                auto pending = std::move(state->pending_free);
-                state->pending_free.clear();
-                for (decltype(auto) index : pending)
-                {
-                    if (index < state->dependencies.size() &&
-                        state->dependencies[index].func == nullptr)
-                        state->free_slots.push_back(index);
-                }
-            }
-            _cleanup_local();
-        }
-        void _destroy_state_local()
-        {
-            auto state = std::move(_state);
-            if (state == nullptr)
-                return;
-
-            state->destroying = true;
-            state->owner = nullptr;
-
-            auto dependencies = std::move(state->dependencies);
-            auto pending_destroy = std::move(state->pending_destroy);
-
-            state->dependencies.clear();
-            state->free_slots.clear();
-            state->pending_free.clear();
-            state->pending_destroy.clear();
-
-            for (auto& it : dependencies)
-                _destroy(it);
-            for (auto& it : pending_destroy)
-                _destroy(it);
-        }
-
-        virtual void _destroy(Deps dependency) = 0;
+        virtual void _destroy(Deps dependency) const = 0;
     };
     using DependencyHandle = DependencyBase::Handle;
 
@@ -446,7 +217,7 @@ namespace d2::style
             return _with_value([&](const Type& v) { return func(obj.lock(), base, v, query); });
         }
 
-        void _destroy(Deps dependency) override
+        void _destroy(Deps dependency) const override
         {
             const auto obj = dependency.obj;
             auto* const base = dependency.base;
@@ -461,7 +232,8 @@ namespace d2::style
             _value = Type{};
         }
 
-        Handle _subscribe_base_local(std::weak_ptr<void> handle, void* base, manager_callback func)
+        Handle
+        _subscribe_base_local(std::weak_ptr<void> handle, void* base, manager_callback func) const
         {
             Deps dependency{handle, base, reinterpret_cast<void (*)()>(func)};
             bool keep = false;
@@ -480,7 +252,7 @@ namespace d2::style
 
             return _insert_slot(std::move(dependency));
         }
-        void _apply_local()
+        void _apply_local() const
         {
             if (_state == nullptr)
                 return;
@@ -543,7 +315,7 @@ namespace d2::style
         }
 
         template<typename Data, typename Elem, typename Func>
-        Handle subscribe(std::weak_ptr<Elem> handle, Data&& def, Func&& callback)
+        Handle subscribe(std::weak_ptr<Elem> handle, Data&& def, Func&& callback) const
         {
             using DataT = std::remove_cvref_t<Data>;
             using FuncT = std::remove_cvref_t<Func>;
@@ -582,20 +354,20 @@ namespace d2::style
             );
         }
         template<typename Elem, typename Func>
-        Handle subscribe(std::weak_ptr<Elem> handle, Func&& callback)
+        Handle subscribe(std::weak_ptr<Elem> handle, Func&& callback) const
         {
             return subscribe<Dummy>(handle, Dummy{}, std::forward<Func>(callback));
         }
-        Handle subscribe_base(std::weak_ptr<void> handle, void* base, manager_callback func)
+        Handle subscribe_base(std::weak_ptr<void> handle, void* base, manager_callback func) const
         {
             return _sync([this, handle = std::move(handle), base, func]() mutable
                          { return _subscribe_base_local(std::move(handle), base, func); });
         }
-        void cleanup()
+        void cleanup() const
         {
             _sync([this] { _cleanup_local(); });
         }
-        void apply()
+        void apply() const
         {
             _sync([this] { _apply_local(); });
         }
@@ -704,22 +476,22 @@ namespace d2::style
         // Operators
         //
 
-        constexpr auto operator+()
+        constexpr auto operator+() const
             requires requires(const Type& v) { +v; }
         {
             return _sync([this] { return +_value_local(); });
         }
-        constexpr auto operator-()
+        constexpr auto operator-() const
             requires requires(const Type& v) { -v; }
         {
             return _sync([this] { return -_value_local(); });
         }
-        constexpr auto operator~()
+        constexpr auto operator~() const
             requires requires(const Type& v) { ~v; }
         {
             return _sync([this] { return ~_value_local(); });
         }
-        constexpr auto operator!()
+        constexpr auto operator!() const
             requires requires(const Type& v) { !v; }
         {
             return _sync([this] { return !_value_local(); });
