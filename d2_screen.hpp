@@ -1,5 +1,6 @@
 #pragma once
 
+#include "d2_signal_handler.hpp"
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/node_hash_map.h>
 #include <chrono>
@@ -42,6 +43,12 @@ namespace d2::sys
             Update,
             TreeSwap,
         };
+        using EventManifest = SignalManifest<
+            EvDefault<Event, module<SystemScreen>>,
+            // Old|New
+            EvCase<Event::TreeSwap, std::string, std::string, module<SystemScreen>>
+        >;
+
         using ModelType = MatrixModel::ModelType;
     private:
         struct AnimationState
@@ -123,7 +130,11 @@ namespace d2::sys
         std::chrono::milliseconds _run_animations();
 
         void _apply_impl(const TreeIter<>::foreach_callback& func, eptr container) const;
-        void _signal(Event ev);
+
+        template<Event Ev, typename... Argv> void _signal(Argv&&... args)
+        {
+            context()->signal<Ev>(std::forward<Argv>(args)..., ptr());
+        }
     public:
         static constexpr std::chrono::milliseconds fps(std::size_t c)
         {
@@ -372,6 +383,10 @@ namespace d2::sys
 
 namespace d2
 {
+    template<> struct SignalRegistry<sys::screen::Event> : sys::screen::EventManifest
+    {
+    };
+
     template<typename Tree, typename... Trees> void IOContext::run(auto&&... themes)
     {
         _initialize();

@@ -29,7 +29,7 @@ namespace d2::sys
 
     SystemScreen::Status SystemScreen::_load_impl()
     {
-        _sig = context()->connect<Event, module<screen>>();
+        _sig = context()->connect<EventManifest>();
         return Status::Ok;
     }
     SystemScreen::Status SystemScreen::_unload_impl()
@@ -342,19 +342,19 @@ namespace d2::sys
 
         _frame = frame.get();
 
-        _signal(Event::Update);
+        _signal<Event::Update>();
         view.set_consume(true, std::this_thread::get_id());
 
         if (is_mouse_input)
-            _signal(Event::MouseInput);
+            _signal<Event::MouseInput>();
         if (is_mouse_moved)
-            _signal(Event::MouseMoved);
+            _signal<Event::MouseMoved>();
         if (is_resize)
-            _signal(Event::Resize);
+            _signal<Event::Resize>();
         if (is_keyboard_input)
-            _signal(Event::KeyInput);
+            _signal<Event::KeyInput>();
         if (is_key_seq_input)
-            _signal(Event::KeySequenceInput);
+            _signal<Event::KeySequenceInput>();
 
         view.apply_consume();
         {
@@ -512,10 +512,6 @@ namespace d2::sys
             }
         );
     }
-    void SystemScreen::_signal(Event ev)
-    {
-        context()->signal(ev, ptr());
-    }
 
     MatrixModel::ptr SystemScreen::fetch_model(const std::string& name, const std::string& path)
     {
@@ -589,6 +585,7 @@ namespace d2::sys
         if (_ts.current != nullptr && name == root()->name())
             return;
 
+        const auto prev = _ts.current_name;
         auto root = _trees[name];
         if (_ts.current != nullptr)
         {
@@ -647,7 +644,7 @@ namespace d2::sys
         D2_TLOG(Verbose, "Initializing tree")
         root->state->root()->initialize(true);
 
-        _signal(Event::TreeSwap);
+        _signal<Event::TreeSwap>(std::string(prev), std::string(name));
     }
 
     TreeTags& SystemScreen::tags()
@@ -893,7 +890,7 @@ namespace d2::sys
         // Render
         if (!ctx->is_suspended() && root()->needs_update())
         {
-            _signal(Event::PreRedraw);
+            _signal<Event::PreRedraw>();
 
             auto& root = *this->root().as();
             auto frame = root.frame();
@@ -902,7 +899,7 @@ namespace d2::sys
             auto output = ctx->output().ptr();
             output->write(frame.data(), bwidth, bheight);
 
-            _signal(Event::PostRedraw);
+            _signal<Event::PostRedraw>();
         }
         {
             _fps_ctr++;

@@ -808,7 +808,7 @@ namespace d2::sys::net
 
         Stream::ptr stream{nullptr};
         if (op->body_mode == BodyMode::Streaming)
-            stream = std::make_unique<CurlStream>(op, ptr());
+            stream = std::make_unique<CurlStream>(op, ptr<http_curl>());
 
         _run(
             [this, op]() mutable

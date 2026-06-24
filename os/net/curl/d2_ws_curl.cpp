@@ -912,7 +912,7 @@ namespace d2::sys::net
             D2_SAFE_BLOCK_END
         }
 
-        auto client = std::make_shared<CurlClient>(op, ptr());
+        auto client = std::make_shared<CurlClient>(op, ptr<ws_curl>());
         op->client = client;
 
         _run([this, op]() { _start(op); });

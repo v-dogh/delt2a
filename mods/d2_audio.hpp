@@ -39,20 +39,6 @@ namespace d2::sys
         using FormatInfo = impl::FormatInfo;
         using DeviceConfig = impl::DeviceConfig;
 
-        enum class Event
-        {
-            Activate,
-            Deactivate,
-            Create,
-            Destroy,
-            DefaultChange,
-        };
-        enum class Device
-        {
-            Input,
-            Output,
-        };
-
         struct DeviceName
         {
             std::string id{""};
@@ -308,10 +294,24 @@ namespace d2::sys
                 }
             };
         };
+
+        enum class Event
+        {
+            Activate,
+            Deactivate,
+            Create,
+            Destroy,
+            DefaultChange,
+        };
+        enum class Device
+        {
+            Input,
+            Output,
+        };
+
+        using EventManifest = SignalManifest<EvDefault<Event, Device, const DeviceName&>>;
     private:
         Signals::Signal _sig_generic{nullptr};
-        Signals::Signal _sig_in{nullptr};
-        Signals::Signal _sig_out{nullptr};
     protected:
         struct DeviceData
         {
@@ -400,9 +400,12 @@ namespace d2::sys
         watch(Device dev, Event ev, std::function<void(const DeviceName&)> callback);
         Signals::Handle watch(Device dev, std::function<void(const DeviceName&, Event)> callback);
     };
-
-} // namespace d2::sys
-namespace d2::sys
-{
     using audio = SystemAudio;
-}
+} // namespace d2::sys
+
+namespace d2
+{
+    template<> struct SignalRegistry<sys::audio::Event> : sys::audio::EventManifest
+    {
+    };
+} // namespace d2

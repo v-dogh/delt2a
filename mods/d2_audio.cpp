@@ -41,16 +41,12 @@ namespace d2::sys
 
     SystemAudio::Status SystemAudio::_load_impl()
     {
-        _sig_generic = context()->connect<Device, const DeviceName&, Event>();
-        _sig_in = context()->connect<Event, const DeviceName&>(Signals::id(Device::Input));
-        _sig_out = context()->connect<Event, const DeviceName&>(Signals::id(Device::Output));
+        _sig_generic = context()->connect<EventManifest>(sigspec(ptr().id()));
         return Status::Ok;
     }
     SystemAudio::Status SystemAudio::_unload_impl()
     {
         _sig_generic.disconnect();
-        _sig_in.disconnect();
-        _sig_out.disconnect();
         return Status::Ok;
     }
 
@@ -297,9 +293,7 @@ namespace d2::sys
     }
     void SystemAudio::_trigger_device_event(Device dev, Event ev, const DeviceName& name)
     {
-        const auto ptr = std::static_pointer_cast<SystemAudio>(shared_from_this());
-        context()->signal(dev, name, ev, module(ptr));
-        context()->signal(ev, Signals::id(dev), name, module(ptr));
+        context()->signal(dev, sigspec(ptr().id()), name, ev, ptr());
     }
 
     void SystemAudio::_filter(Device dev, FilterPipeline filter)
@@ -366,12 +360,20 @@ namespace d2::sys
     Signals::Handle
     SystemAudio::watch(Device dev, Event ev, std::function<void(const DeviceName&)> callback)
     {
-        return context()->listen(ev, Signals::id(dev), std::move(callback));
+        return context()->listen(
+            dev,
+            sigspec(ptr().id()),
+            [=, callback = std::move(callback)](const DeviceName& name, Event event) mutable
+            {
+                if (ev == event)
+                    callback(name);
+            }
+        );
     }
     Signals::Handle
     SystemAudio::watch(Device dev, std::function<void(const DeviceName&, Event)> callback)
     {
-        return context()->listen(dev, std::move(callback));
+        return context()->listen(dev, sigspec(ptr().id()), std::move(callback));
     }
 
 } // namespace d2::sys

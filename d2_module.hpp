@@ -29,6 +29,25 @@ namespace d2::sys
 
     template<typename Base, Load LoadType, typename... Deps> struct ModuleImpl;
 
+    // Modules are there to solve two problems:
+    // 1. isolating state for specific features
+    // 2. isolating platform behavior
+    // A module is supposed to be responsible for a specific task and provide an easy way to
+    // describe requirements, dependencies or behavior. This includes:
+    // 1. lifecycle - i.e. Status
+    // 2. compatibility (from best to worse) -
+    // a) Native
+    // b) Generic
+    // c) Unknown
+    // d) Failed
+    // 3. Access - whether it is thread safe or not (so only main thread). You can also add any
+    // "safe threads" manually at runtime
+    // 4. Load - Lazy (on query) or Immediate (at IOContext startup/module load)
+    // 5. Dependencies (on other modules)
+    // ------------------------------------------------------
+    // ModuleDecl is used to just declare (an abstract) module (so interface)
+    // ModuleImpl is for the actual implementation of the module
+    // For platform independent module 'Module' simply combines both
     class SystemModule : public std::enable_shared_from_this<SystemModule>
     {
     public:
@@ -132,6 +151,10 @@ namespace d2::sys
                 )};
             return _ptr;
         }
+        std::uintptr_t id() const
+        {
+            return std::uintptr_t(ptr().get());
+        }
 
         std::shared_ptr<Module> operator->() const
         {
@@ -206,6 +229,19 @@ namespace d2::sys
         {
             return module_info();
         }
+
+        template<typename Type = Base> module<const Type> ptr() const noexcept
+        {
+            return module<const Type>(std::static_pointer_cast<const Type>(
+                static_cast<const Type*>(this)->shared_from_this()
+            ));
+        }
+        template<typename Type = Base> module<Type> ptr() noexcept
+        {
+            return module<Type>(
+                std::static_pointer_cast<Type>(static_cast<Type*>(this)->shared_from_this())
+            );
+        }
     };
     struct ModuleImplTag
     {
@@ -225,19 +261,6 @@ namespace d2::sys
             .deps = impl::MergeDeps<typename Base::module_deps, Deps...>::list(),
             .dep_names = impl::MergeDeps<typename Base::module_deps, Deps...>::names()
         };
-
-        module<const Base> ptr() const noexcept
-        {
-            return module<const Base>(std::static_pointer_cast<const Base>(
-                static_cast<const Base*>(this)->shared_from_this()
-            ));
-        }
-        module<Base> ptr() noexcept
-        {
-            return module<Base>(
-                std::static_pointer_cast<Base>(static_cast<Base*>(this)->shared_from_this())
-            );
-        }
     };
 
     template<typename Base, meta::ConstString Name, Access Ac, Load LoadType, typename... Deps>
