@@ -8,7 +8,7 @@
 namespace d2::sys::net
 {
     class SystemSession
-        : public d2::sys::AbstractModule<SystemSession, "Session", d2::sys::Access::TSafe>
+        : public d2::sys::Module<SystemSession, "Session", Access::TSafe, Load::Lazy>
     {
     public:
         struct Scope
@@ -33,7 +33,7 @@ namespace d2::sys::net
         mutable std::shared_mutex _mtx{};
         absl::flat_hash_map<std::string, ScopeLookup> _scopes{};
     public:
-        using AbstractModule::AbstractModule;
+        using Module::Module;
 
         void set_scope(
             std::string_view name,

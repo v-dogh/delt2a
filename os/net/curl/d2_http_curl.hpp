@@ -13,7 +13,7 @@
 namespace d2::sys::net
 {
     class SystemHTTPCurl : public SystemHTTP,
-                           public d2::sys::ConcreteModule<SystemHTTPCurl, d2::sys::Load::Lazy>
+                           public d2::sys::ModuleImpl<SystemHTTPCurl, d2::sys::Load::Lazy>
     {
     private:
         enum class BodyMode

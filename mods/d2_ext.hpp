@@ -7,17 +7,17 @@
 
 namespace d2::sys
 {
-    class SystemClipboard : public AbstractModule<SystemClipboard, "Clipboard", Access::TUnsafe>
+    class SystemClipboard : public ModuleDecl<SystemClipboard, "Clipboard", Access::TUnsafe>
     {
     public:
-        using AbstractModule::AbstractModule;
+        using ModuleDecl::ModuleDecl;
 
         virtual void clear() = 0;
         virtual void copy(const d2::string& value) = 0;
         virtual d2::string paste() = 0;
         virtual bool empty() = 0;
     };
-    class SystemNotify : public AbstractModule<SystemNotify, "Notifications", Access::TSafe>
+    class SystemNotify : public ModuleDecl<SystemNotify, "Notifications", Access::TSafe>
     {
     public:
         enum Mode : unsigned char
@@ -42,7 +42,7 @@ namespace d2::sys
             Error,
         };
     public:
-        using AbstractModule::AbstractModule;
+        using ModuleDecl::ModuleDecl;
 
         virtual bool supports(unsigned char mode) = 0;
 
@@ -62,9 +62,7 @@ namespace d2::sys
 
         virtual void clear() = 0;
     };
-} // namespace d2::sys
-namespace d2::sys
-{
+
     using clipboard = SystemClipboard;
     using notify = SystemNotify;
 } // namespace d2::sys

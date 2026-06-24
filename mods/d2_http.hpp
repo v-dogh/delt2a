@@ -5,7 +5,7 @@
 
 namespace d2::sys::net
 {
-    class SystemHTTP : public d2::sys::AbstractModule<SystemHTTP, "HTTP", d2::sys::Access::TSafe>
+    class SystemHTTP : public d2::sys::ModuleDecl<SystemHTTP, "HTTP", d2::sys::Access::TSafe>
     {
     public:
         struct Method
@@ -73,7 +73,7 @@ namespace d2::sys::net
     public:
         Stream::ptr request(Request request);
 
-        using AbstractModule::AbstractModule;
+        using ModuleDecl::ModuleDecl;
     };
     using http = SystemHTTP;
 } // namespace d2::sys::net

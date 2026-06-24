@@ -20,7 +20,7 @@ namespace d2
             Left,
             Right
         };
-        using id = std::variant<ptr, std::size_t, std::string>;
+        using id = std::variant<ptr, int, std::string>;
     protected:
         virtual void _layout_for_impl(enum Layout, cptr) const;
 
@@ -32,7 +32,7 @@ namespace d2
         _signal_context_change_impl(write_flag type, unsigned int prop, ptr element) override;
         virtual void _state_change_impl(State state, bool value) override;
 
-        virtual std::size_t _index_of_impl(id) const = 0;
+        virtual int _index_of_impl(id) const = 0;
 
         virtual bool _empty_impl() const = 0;
         virtual bool _exists_impl(const std::string&) const = 0;
@@ -61,7 +61,7 @@ namespace d2
         bool exists(const std::string& name) const;
         bool exists(ptr ptr) const;
 
-        std::size_t index_of(id id);
+        int index_of(id id);
 
         template<typename Type> TreeIter<Type> at(id id)
         {
@@ -134,7 +134,7 @@ namespace d2
     protected:
         std::vector<ptr> _elements{};
 
-        virtual std::size_t _index_of_impl(id id) const override;
+        virtual int _index_of_impl(id id) const override;
 
         virtual bool _empty_impl() const override;
         virtual bool _exists_impl(const std::string& name) const override;
@@ -162,7 +162,7 @@ namespace d2
     class MetaParentElement : public ParentElement
     {
     protected:
-        virtual std::size_t _index_of_impl(id) const override
+        virtual int _index_of_impl(id) const override
         {
             throw std::logic_error{"Not implemented"};
         }

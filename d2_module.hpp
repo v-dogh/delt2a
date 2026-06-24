@@ -27,7 +27,7 @@ namespace d2::sys
         TUnsafe,
     };
 
-    template<typename Base, Load LoadType, typename... Deps> struct ConcreteModule;
+    template<typename Base, Load LoadType, typename... Deps> struct ModuleImpl;
 
     class SystemModule : public std::enable_shared_from_this<SystemModule>
     {
@@ -187,14 +187,14 @@ namespace d2::sys
         static module<Base> get_if(const std::string& name);
     };
     template<typename Base, meta::ConstString Name, Access Ac, typename... Deps>
-    struct AbstractModule : public SystemModule, public ModuleLocalGet<Base>
+    struct ModuleDecl : public SystemModule, public ModuleLocalGet<Base>
     {
         D2_TAG_MODULE_VALUE(Name.view());
     private:
         static constexpr auto module_access = Ac;
         using module_deps = std::tuple<Deps...>;
     public:
-        template<typename B, Load L, typename... D> friend struct ConcreteModule;
+        template<typename B, Load L, typename... D> friend struct ModuleImpl;
 
         using SystemModule::SystemModule;
 
@@ -207,17 +207,17 @@ namespace d2::sys
             return module_info();
         }
     };
-    struct ConcreteModuleTag
+    struct ModuleImplTag
     {
     };
 
     template<typename Module>
-    static constexpr bool is_abstract = !std::is_base_of_v<ConcreteModuleTag, Module>;
+    static constexpr bool is_abstract = !std::is_base_of_v<ModuleImplTag, Module>;
 
     template<typename Base, Load LoadType, typename... Deps>
-    struct ConcreteModule : private ConcreteModuleTag
+    struct ModuleImpl : private ModuleImplTag
     {
-        template<typename B, Load L, typename... D> friend struct ConcreteModule;
+        template<typename B, Load L, typename... D> friend struct ModuleImpl;
 
         static inline const SystemModule::ModPreset module_preset{
             .access = Base::module_access,
@@ -238,6 +238,12 @@ namespace d2::sys
                 std::static_pointer_cast<Base>(static_cast<Base*>(this)->shared_from_this())
             );
         }
+    };
+
+    template<typename Base, meta::ConstString Name, Access Ac, Load LoadType, typename... Deps>
+    struct Module : public ModuleDecl<Base, Name, Ac, Deps...>, public ModuleImpl<Base, LoadType>
+    {
+        using ModuleDecl<Base, Name, Ac, Deps...>::ModuleDecl;
     };
 
     struct ModuleStub

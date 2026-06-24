@@ -9,7 +9,7 @@
 namespace d2::sys
 {
     // Generic base for system input
-    class SystemInput : public AbstractModule<SystemInput, "Input", Access::TSafe>
+    class SystemInput : public ModuleDecl<SystemInput, "Input", Access::TSafe>
     {
     private:
         struct FrameLock
@@ -56,7 +56,7 @@ namespace d2::sys
         virtual void _endcycle_impl() = 0;
         virtual MainWorker::ptr _worker_impl() = 0;
     public:
-        using AbstractModule::AbstractModule;
+        using ModuleDecl::ModuleDecl;
 
         FramePtr frame();
         MainWorker::ptr worker();
@@ -83,7 +83,7 @@ namespace d2::sys
 
     // Generic base for system output
     // Provides interfaces used for rendering to the console and other OS agnostic interfaces
-    class SystemOutput : public AbstractModule<SystemOutput, "Output", Access::TUnsafe>
+    class SystemOutput : public ModuleDecl<SystemOutput, "Output", Access::TUnsafe>
     {
     public:
         static constexpr auto image_constant =
@@ -132,7 +132,7 @@ namespace d2::sys
             PNG,
         };
     public:
-        using AbstractModule::AbstractModule;
+        using ModuleDecl::ModuleDecl;
 
         virtual void load_image(const std::string& path, ImageInstance img) = 0;
         virtual void release_image(const std::string& path) = 0;

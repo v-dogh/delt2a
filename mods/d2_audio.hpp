@@ -32,7 +32,7 @@ namespace d2::sys
         };
     } // namespace impl
 
-    class SystemAudio : public AbstractModule<SystemAudio, "Audio", Access::TSafe>
+    class SystemAudio : public ModuleDecl<SystemAudio, "Audio", Access::TSafe>
     {
     public:
         using Format = impl::Format;
@@ -368,7 +368,7 @@ namespace d2::sys
             }
         }
 
-        using AbstractModule::AbstractModule;
+        using ModuleDecl::ModuleDecl;
 
         virtual void flush(Device dev) = 0;
         virtual void record(std::function<void(std::span<const unsigned char>)> stream) = 0;

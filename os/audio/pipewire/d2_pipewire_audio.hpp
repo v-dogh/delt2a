@@ -18,7 +18,7 @@
 namespace d2::sys
 {
     class PipewireSystemAudio : public SystemAudio,
-                                public ConcreteModule<PipewireSystemAudio, Load::Lazy>
+                                public ModuleImpl<PipewireSystemAudio, Load::Lazy>
     {
     private:
         struct Voice

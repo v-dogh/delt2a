@@ -42,14 +42,14 @@ namespace d2
         return &named_it->second;
     }
 
-    void IOContext::_remove_module(std::type_index idx, std::optional<std::string> id)
+    void IOContext::_remove_module(std::type_index target_idx, std::optional<std::string> id)
     {
         if (id.has_value())
         {
             if (id.value().empty())
                 D2_THRW("Cannot remove dynamic module with empty ID");
             D2_TLOG(Info, "Removing module at ", id.value());
-            const auto f = _modules.find(idx);
+            const auto f = _modules.find(target_idx);
             if (f == _modules.end())
                 D2_THRW("Failed to remove module ", id.value(), "; Not present");
             auto ff = f->second.named.find(id.value());
@@ -60,14 +60,14 @@ namespace d2
         else
         {
             D2_TLOG(Info, "Removing module");
-            const auto f = _modules.find(idx);
+            const auto f = _modules.find(target_idx);
             if (f == _modules.end() || f->second.unnamed == nullptr)
                 D2_THRW("Failed to remove module; Not present");
 
             // Check for dependencies
             for (const auto& [idx, ptr] : _modules)
             {
-                if (idx != idx)
+                if (idx != target_idx)
                 {
                     const auto deps = ptr.unnamed.preset().deps;
                     if (std::find(deps.begin(), deps.end(), idx) != deps.end())
@@ -310,7 +310,7 @@ namespace d2
         const auto f = _modules.find(idx);
         if (f == _modules.end() || f->second.unnamed == nullptr)
             return false;
-        auto ptr = f->second;
+        auto& ptr = f->second;
         if (ptr.unnamed.status() != sys::SystemModule::Status::Offline)
             return true;
         visit_map.insert(idx);

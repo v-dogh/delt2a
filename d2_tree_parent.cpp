@@ -298,10 +298,10 @@ namespace d2
         return _exists_impl(ptr);
     }
 
-    std::size_t ParentElement::index_of(id id)
+    int ParentElement::index_of(id id)
     {
-        if (std::holds_alternative<std::size_t>(id))
-            return std::get<std::size_t>(id);
+        if (std::holds_alternative<int>(id))
+            return std::get<int>(id);
         return _index_of_impl(id);
     }
 
@@ -425,7 +425,7 @@ namespace d2
         return _find(ptr) != ~0ull;
     }
 
-    std::size_t VecParentElement::_index_of_impl(id id) const
+    int VecParentElement::_index_of_impl(id id) const
     {
         if (std::holds_alternative<ptr>(id))
             return _find(std::get<ptr>(id));
@@ -434,13 +434,11 @@ namespace d2
 
     TreeIter<> VecParentElement::_at_impl(id id) const
     {
-        if (std::holds_alternative<std::size_t>(id))
+        if (std::holds_alternative<int>(id))
         {
-            const auto& idx = std::get<std::size_t>(id);
+            const auto& idx = std::get<int>(id);
             if (idx >= _elements.size())
-                throw std::runtime_error{
-                    std::format("Attempt to reference invalid object at index: {}", idx)
-                };
+                D2_THRW(std::format("Attempt to reference invalid object at index: ", idx));
             return _elements[idx];
         }
         else if (std::holds_alternative<std::string>(id))
@@ -448,9 +446,7 @@ namespace d2
             const auto& name = std::get<std::string>(id);
             const auto idx = _find(name);
             if (idx == ~0ull)
-                throw std::runtime_error{
-                    std::format("Attempt to reference invalid object: {}", name)
-                };
+                D2_THRW(std::format("Attempt to reference invalid object: ", name));
             return {_elements[idx]};
         }
         return nullptr;
@@ -483,24 +479,20 @@ namespace d2
     TreeIter<> VecParentElement::_create_after_impl(ptr p, id after)
     {
         std::size_t idx = 0;
-        if (std::holds_alternative<std::size_t>(after))
+        if (std::holds_alternative<int>(after))
         {
-            idx = std::get<std::size_t>(after) + 1;
+            idx = std::get<int>(after) + 1;
             if (idx >= _elements.size())
-                throw std::runtime_error{
-                    std::format("Attempt to reference invalid object at index: {}", idx)
-                };
+                D2_THRW("Attempt to reference invalid object at index: ", idx);
         }
         else if (std::holds_alternative<std::string>(after))
         {
             const auto& name = std::get<std::string>(after);
             if (_find(p->name()) != ~0ull)
-                throw std::runtime_error{"Attempt to create an object with a duplicate name"};
+                D2_THRW("Attempt to create an object with a duplicate name");
             idx = _find(name);
             if (idx == ~0ull)
-                throw std::runtime_error{
-                    "Attempt to create an object after a non-existent element"
-                };
+                D2_THRW("Attempt to create an object after a non-existent element");
             idx++;
         }
         else if (std::holds_alternative<ptr>(after))
@@ -509,12 +501,10 @@ namespace d2
             if (val != nullptr)
             {
                 if (_find(p->name()) != ~0ull)
-                    throw std::runtime_error{"Attempt to create an object with a duplicate name"};
+                    D2_THRW("Attempt to create an object with a duplicate name");
                 idx = _find(val);
                 if (idx == ~0ull)
-                    throw std::runtime_error{
-                        "Attempt to create an object after a non-existent element"
-                    };
+                    D2_THRW("Attempt to create an object after a non-existent element");
                 idx++;
             }
         }
@@ -525,24 +515,20 @@ namespace d2
     TreeIter<> VecParentElement::_override_after_impl(ptr p, id after)
     {
         std::size_t idx = 0;
-        if (std::holds_alternative<std::size_t>(after))
+        if (std::holds_alternative<int>(after))
         {
-            const auto& idx = std::get<std::size_t>(after) + 1;
+            const auto& idx = std::get<int>(after) + 1;
             if (idx >= _elements.size())
-                throw std::runtime_error{
-                    std::format("Attempt to reference invalid object at index: {}", idx)
-                };
+                D2_THRW("Attempt to reference invalid object at index:", idx);
         }
         else if (std::holds_alternative<std::string>(after))
         {
             const auto& name = std::get<std::string>(after);
             if (_find(p->name()) != ~0ull)
-                throw std::runtime_error{"Attempt to create an object with a duplicate name"};
+                D2_THRW("Attempt to create an object with a duplicate name");
             idx = _find(name);
             if (idx == ~0ull)
-                throw std::runtime_error{
-                    "Attempt to create an object after a non-existent element"
-                };
+                D2_THRW("Attempt to create an object after a non-existent element");
             idx++;
         }
         else if (std::holds_alternative<ptr>(after))
@@ -551,12 +537,10 @@ namespace d2
             if (val != nullptr)
             {
                 if (_find(p->name()) != ~0ull)
-                    throw std::runtime_error{"Attempt to create an object with a duplicate name"};
+                    D2_THRW("Attempt to create an object with a duplicate name");
                 idx = _find(val);
                 if (idx == ~0ull)
-                    throw std::runtime_error{
-                        "Attempt to create an object after a non-existent element"
-                    };
+                    D2_THRW("Attempt to create an object after a non-existent element");
                 idx++;
             }
         }
@@ -572,9 +556,9 @@ namespace d2
     bool VecParentElement::_remove_impl(id id)
     {
         std::size_t idx = 0;
-        if (std::holds_alternative<std::size_t>(id))
+        if (std::holds_alternative<int>(id))
         {
-            idx = std::get<std::size_t>(id);
+            idx = std::get<int>(id);
             if (idx >= _elements.size())
                 return false;
         }
@@ -602,9 +586,9 @@ namespace d2
     VecParentElement::ptr VecParentElement::_extract_impl(id id)
     {
         std::size_t idx = 0;
-        if (std::holds_alternative<std::size_t>(id))
+        if (std::holds_alternative<int>(id))
         {
-            idx = std::get<std::size_t>(id);
+            idx = std::get<int>(id);
             if (idx >= _elements.size())
                 return nullptr;
         }

@@ -560,7 +560,7 @@ namespace d2
                 sys::screen::Event::TreeSwap,
                 [=,
                  ptr = _ptr,
-                 index = std::size_t(0),
+                 index = int(0),
                  tmp = std::shared_ptr<Element>(nullptr),
                  whitelist = absl::flat_hash_set<std::string>(whitelist.begin(), whitelist.end())](
                     sys::module<sys::screen> src

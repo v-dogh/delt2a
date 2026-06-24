@@ -41,7 +41,7 @@ namespace d2::sys
     };
 
     class UnixTerminalInput : public SystemInput,
-                              public ConcreteModule<UnixTerminalInput, Load::Immediate>
+                              public ModuleImpl<UnixTerminalInput, Load::Immediate>
     {
     private:
         std::shared_mutex _mtx{};
@@ -68,7 +68,7 @@ namespace d2::sys
         using SystemInput::SystemInput;
     };
     class UnixTerminalOutput : public SystemOutput,
-                               public ConcreteModule<UnixTerminalOutput, Load::Immediate>
+                               public ModuleImpl<UnixTerminalOutput, Load::Immediate>
     {
     private:
         static constexpr auto _max_color_len =

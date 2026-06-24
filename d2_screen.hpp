@@ -18,9 +18,14 @@
 
 namespace d2::sys
 {
-    class SystemScreen
-        : public AbstractModule<SystemScreen, "Screen", Access::TUnsafe>,
-          public ConcreteModule<SystemScreen, Load::Immediate, SystemInput, SystemOutput>
+    class SystemScreen : public Module<
+                             SystemScreen,
+                             "Screen",
+                             Access::TUnsafe,
+                             Load::Immediate,
+                             SystemInput,
+                             SystemOutput
+                         >
     {
         D2_TAG_MODULE(src)
     public:
@@ -127,7 +132,7 @@ namespace d2::sys
             return std::chrono::milliseconds(1000 / c);
         }
 
-        using AbstractModule::AbstractModule;
+        using Module::Module;
 
         TreeIter<ParentElement> root() const;
 

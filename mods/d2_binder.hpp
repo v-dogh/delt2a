@@ -19,8 +19,8 @@
 
 namespace d2::sys
 {
-    class SystemBinder : public AbstractModule<SystemBinder, "Binder", Access::TUnsafe>,
-                         public ConcreteModule<SystemBinder, Load::Lazy, sys::SystemScreen>
+    class SystemBinder
+        : public Module<SystemBinder, "Binder", Access::TUnsafe, Load::Lazy, sys::SystemScreen>
     {
         D2_TAG_MODULE(bdr)
     public:
@@ -106,7 +106,7 @@ namespace d2::sys
         _bind_dcheck(absl::flat_hash_map<std::string, BindValue>::iterator it);
         void _check_event();
     public:
-        using AbstractModule::AbstractModule;
+        using Module::Module;
 
         std::optional<BindError> bind(const std::string& name, Bind value, callback_type callback);
         std::optional<BindError> rebind(const std::string& name, Bind value);

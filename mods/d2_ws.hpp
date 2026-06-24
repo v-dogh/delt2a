@@ -5,7 +5,7 @@
 
 namespace d2::sys::net
 {
-    class SystemWS : public d2::sys::AbstractModule<SystemWS, "WebSockets", d2::sys::Access::TSafe>
+    class SystemWS : public d2::sys::ModuleDecl<SystemWS, "WebSockets", d2::sys::Access::TSafe>
     {
     public:
         enum class State
@@ -61,7 +61,7 @@ namespace d2::sys::net
     public:
         Client::ptr connect(Connection connection);
 
-        using AbstractModule::AbstractModule;
+        using ModuleDecl::ModuleDecl;
     };
     using ws = SystemWS;
 } // namespace d2::sys::net

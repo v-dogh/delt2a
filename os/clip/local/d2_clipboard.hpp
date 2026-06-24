@@ -6,7 +6,7 @@
 namespace d2::sys
 {
     class LocalSystemClipboard : public SystemClipboard,
-                                 public ConcreteModule<LocalSystemClipboard, Load::Lazy>
+                                 public ModuleImpl<LocalSystemClipboard, Load::Lazy>
     {
     private:
         string _value{};

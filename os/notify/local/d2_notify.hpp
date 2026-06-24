@@ -8,7 +8,7 @@
 namespace d2::sys
 {
     class LocalSystemNotify : public SystemNotify,
-                              public ConcreteModule<LocalSystemNotify, Load::Lazy, SystemScreen>
+                              public ModuleImpl<LocalSystemNotify, Load::Lazy, SystemScreen>
     {
     private:
         d2::TreeIter<ParentElement> _display{};
