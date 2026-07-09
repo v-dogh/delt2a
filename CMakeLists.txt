@@ -10,14 +10,22 @@ include(cmake/system.cmake)
 # OPTIONS #
 ###########
 
-option(D2_EXCLUDE_LIBRARY_EXTRAS    "Disable extras module"        OFF)
-option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"      OFF)
-option(D2_SECURITY_WATCH            "Enable runtime debug checks"  ON)
-option(D2_SECURITY_LOG              "Enable runtime logging"       ON)
-option(D2_SECURITY_ASSERT           "Enable debug assertions"      ON)
-option(D2_UNICODE_MODE              "Enable unicode mode"          ON)
-option(D2_ENABLE_INSTALL            "Enable install for cmake"     OFF)
-option(D2_TEST                      "Enable building of examples"  OFF)
+# General
+
+option(D2_EXCLUDE_LIBRARY_EXTRAS    "Disable extras module"                     OFF)
+option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"                   OFF)
+option(D2_SECURITY_WATCH            "Enable runtime debug checks"               ON)
+option(D2_SECURITY_LOG              "Enable runtime logging"                    ON)
+option(D2_SECURITY_ASSERT           "Enable debug assertions"                   ON)
+option(D2_UNICODE_MODE              "Enable unicode mode"                       ON)
+option(D2_ENABLE_INSTALL            "Enable install for cmake"                  OFF)
+option(D2_TEST                      "Enable building of examples"               OFF)
+
+# Sanitizing
+
+option(D2_SANITIZER_RECOVER         "Enable sanitizer recovery where supported" ON)
+option(D2_MSAN_TRACK_ORIGINS        "Enable MSAN origin tracking"               ON)
+option(D2_ASAN_USE_AFTER_SCOPE      "Enable ASAN use-after-scope checks"        ON)
 
 set(D2_SANITIZER "none" CACHE STRING "Sanitizer: none, address, memory, thread, undefined")
 set_property(CACHE D2_SANITIZER PROPERTY STRINGS
@@ -27,10 +35,6 @@ set_property(CACHE D2_SANITIZER PROPERTY STRINGS
     thread
     undefined
 )
-
-option(D2_SANITIZER_RECOVER         "Enable sanitizer recovery where supported"      ON)
-option(D2_MSAN_TRACK_ORIGINS        "Enable MSAN origin tracking"                    ON)
-option(D2_ASAN_USE_AFTER_SCOPE      "Enable ASAN use-after-scope checks"             ON)
 
 ######################
 # SANITIZER SETTINGS #
@@ -144,12 +148,12 @@ add_subdirectory(logs)
 
 # LSX library
 add_library(DeltaLSX STATIC
-    lsx/d2_solver.hpp
-    lsx/d2_solver.cpp
-    lsx/d2_solver_types.hpp
-    lsx/d2_solver_types.cpp
-    lsx/d2_solver_ops.hpp
-    lsx/d2_solver_ops.cpp
+    core/lsx/d2_solver.hpp
+    core/lsx/d2_solver.cpp
+    core/lsx/d2_solver_types.hpp
+    core/lsx/d2_solver_types.cpp
+    core/lsx/d2_solver_ops.hpp
+    core/lsx/d2_solver_ops.cpp
 )
 target_link_libraries(DeltaLSX PUBLIC
     absl::base
@@ -159,73 +163,78 @@ delta_setup_target(DeltaLSX)
 
 # Core library
 add_library(DeltaCore STATIC
-    # Core
     d2_std.hpp
-    d2_exceptions.hpp
-    d2_styles.hpp
-    d2_styles_base.hpp
-    d2_theme.hpp
-    d2_theme.cpp
-    d2_model.hpp
-    d2_model.cpp
-    d2_meta.hpp
+    # Utils
+    core/utils/d2_exceptions.hpp
+    core/utils/d2_meta.hpp
+    core/utils/d2_model.hpp
+    core/utils/d2_model.cpp
+    # Types
+    core/types/d2_vtypes.hpp
+    core/types/d2_vtypes.cpp
+    core/types/d2_pixel.hpp
+    core/types/d2_pixel.cpp
+    core/types/d2_element_units.hpp
     # Platform
-    d2_locale.hpp
-    d2_chardef.hpp
-    d2_platform_string.hpp
-    d2_platform_string.cpp
-    d2_fragmented_buffer.hpp
-    d2_fragmented_buffer.cpp
-    # Pixel
-    d2_pixel.hpp
-    d2_colors.hpp
-    d2_animate.cpp
-    d2_animate.hpp
-    d2_pixel.cpp
-    d2_extended_page.hpp
-    d2_extended_page.cpp
+    core/platform/d2_locale.hpp
+    core/platform/d2_platform_string.hpp
+    core/platform/d2_platform_string.cpp
+    core/platform/d2_extended_page.hpp
+    core/platform/d2_extended_page.cpp
+    core/platform/d2_fragmented_buffer.hpp
+    core/platform/d2_fragmented_buffer.cpp
+    core/platform/d2_chardef.hpp
+    core/platform/d2_colors.hpp
     # Tree
-    d2_element_units.hpp
-    d2_tree_state.hpp
-    d2_tree_state.cpp
-    d2_tree_element_frwd.hpp
-    d2_tree_element.hpp
-    d2_tree_parent.hpp
-    d2_tree.hpp
-    d2_tree_element.cpp
-    d2_tree_parent.cpp
-    d2_tree_construct.hpp
-    # Context
-    d2_main_worker.hpp
-    d2_main_worker.cpp
-    d2_io_handler_frwd.hpp
-    d2_io_handler.hpp
-    d2_io_handler.cpp
-    d2_signal_handler.hpp
-    d2_signal_handler.cpp
-    d2_screen_comps.cpp
-    d2_screen_comps.hpp
-    d2_screen.hpp
-    d2_screen.cpp
-    d2_input_base.hpp
-    d2_input_base.cpp
+    core/tree/d2_tree_element_frwd.hpp
+    core/tree/d2_tree_element.hpp
+    core/tree/d2_tree_element.cpp
+    core/tree/d2_tree_parent.hpp
+    core/tree/d2_tree_parent.cpp
+    core/tree/d2_tree_state.hpp
+    core/tree/d2_tree_state.cpp
+    core/tree/d2_tree.hpp
+    core/tree/d2_tree_construct.hpp
+    core/tree/d2_theme.hpp
+    core/tree/d2_theme.cpp
+    core/tree/d2_styles.hpp
+    core/tree/d2_styles_base.hpp
+    core/tree/d2_text_select.hpp
+    core/tree/d2_text_select.cpp
+    # IO
+    core/io/d2_context_frwd.hpp
+    core/io/d2_context.hpp
+    core/io/d2_context.cpp
+    core/io/d2_main_worker.hpp
+    core/io/d2_main_worker.cpp
+    core/io/d2_signal_handler.hpp
+    core/io/d2_signal_handler.cpp
+    core/io/d2_input_base.hpp
+    core/io/d2_input_base.cpp
+    # Screen
+    core/screen/d2_screen.hpp
+    core/screen/d2_screen.cpp
+    core/screen/d2_screen_comps.cpp
+    core/screen/d2_screen_comps.hpp
+    core/screen/d2_animate.cpp
+    core/screen/d2_animate.hpp
     # Mods
-    d2_module.hpp
-    d2_module.cpp
-    mods/d2_core.hpp
-    mods/d2_core.cpp
-    mods/d2_ext.hpp
-    mods/d2_ext.cpp
-    mods/d2_audio.hpp
-    mods/d2_audio.cpp
-    mods/d2_binder.hpp
-    mods/d2_binder.cpp
-    mods/d2_http.hpp
-    mods/d2_http.cpp
-    mods/d2_ws.hpp
-    mods/d2_ws.cpp
-    mods/d2_session.hpp
-    mods/d2_session.cpp
+    core/io/d2_module.hpp
+    core/io/d2_module.cpp
+    core/mods/d2_core.hpp
+    core/mods/d2_core.cpp
+    core/mods/d2_ext.hpp
+    core/mods/d2_ext.cpp
+    core/mods/d2_audio.hpp
+    core/mods/d2_audio.cpp
+    core/mods/d2_binder.hpp
+    core/mods/d2_binder.cpp
+    core/mods/d2_http.hpp
+    core/mods/d2_http.cpp
+    core/mods/d2_ws.hpp
+    core/mods/d2_ws.cpp
+    core/mods/d2_session.hpp
+    core/mods/d2_session.cpp
 )
 target_link_libraries(DeltaCore PUBLIC
     TPMP
@@ -293,19 +302,8 @@ if (NOT D2_EXCLUDE_LIBRARY_EXTRAS)
         extras/d2_default_theme.hpp
         extras/d2_default_theme.cpp
         extras/d2_default_styles.hpp
-        # Widgets
-        # extras/d2_loading_indicators.hpp
-        # extras/d2_file_explorer.hpp
-        # extras/d2_file_explorer.cpp
-        # extras/d2_exit_prompt.hpp
-        # extras/d2_exit_prompt.cpp
-        # extras/d2_color_picker.hpp
-        # extras/d2_color_picker.cpp
-        # extras/d2_theme_selector.hpp
-        # extras/d2_theme_selector.cpp
-        # extras/d2_audio_device_selector.hpp
-        # extras/d2_audio_device_selector.cpp
         # Other stuff 
+        extras/d2_loading_indicators.hpp
         extras/d2_debug_box.hpp
         extras/d2_debug_box.cpp
     )

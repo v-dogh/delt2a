@@ -10,29 +10,27 @@ namespace d2::dx
     {
         switch (type)
         {
-            case Element::Layout::X: return data::x;
-            case Element::Layout::Y: return data::y;
-            case Element::Layout::Width:
-                if (data::width.getunits() == Unit::Auto)
-                    return
-                        HDUnit(_text_dimensions.width) +
-                        (data::container_options & EnableBorder) * 2;
-                return data::width;
-            case Element::Layout::Height:
-                if (data::height.getunits() == Unit::Auto)
-                    return
-                        VDUnit(_text_dimensions.height) +
-                        (data::container_options & EnableBorder) * 2;
-                return data::height;
+        case Element::Layout::X:
+            return data::x;
+        case Element::Layout::Y:
+            return data::y;
+        case Element::Layout::Width:
+            if (data::width.getunits() == Unit::Auto)
+                return HDUnit(_text_dimensions.width) +
+                       (data::container_options & EnableBorder) * 2;
+            return data::width;
+        case Element::Layout::Height:
+            if (data::height.getunits() == Unit::Auto)
+                return VDUnit(_text_dimensions.height) +
+                       (data::container_options & EnableBorder) * 2;
+            return data::height;
         }
     }
 
     void Button::_signal_write_impl(write_flag type, unsigned int prop, ptr element)
     {
-        if (element.get() == this &&
-            (prop == Value || prop == initial_property) &&
-                (data::width.getunits() == Unit::Auto ||
-                 data::height.getunits() == Unit::Auto))
+        if (element.get() == this && (prop == Value || prop == initial_property) &&
+            (data::width.getunits() == Unit::Auto || data::height.getunits() == Unit::Auto))
         {
             _text_dimensions = TextHelper::_paragraph_bounding_box(data::text);
         }
@@ -51,8 +49,7 @@ namespace d2::dx
     }
     void Button::_event_impl(in::InputFrame& frame)
     {
-        if (getstate(State::Keynavi) &&
-            frame.had_event(in::Event::KeyInput) &&
+        if (getstate(State::Keynavi) && frame.had_event(in::Event::KeyInput) &&
             frame.active(in::special::Enter, in::mode::Press))
         {
             if (data::on_submit != nullptr)
@@ -72,8 +69,8 @@ namespace d2::dx
         if (data::container_options & data::EnableBorder)
             ContainerHelper::_render_border(buffer);
 
-        BoundingBox bbox = box();
-        Position pos{ 0, 0 };
+        Box bbox = box();
+        Position pos{0, 0};
         if (data::container_options & EnableBorder)
         {
             const auto bw = resolve_units(data::border_width);
@@ -83,11 +80,7 @@ namespace d2::dx
             pos.y = bw;
         }
         TextHelper::_render_paragraph(
-            data::text,
-            data::foreground_color,
-            style::IZText::Alignment::Center,
-            pos, bbox,
-            buffer
+            data::text, data::foreground_color, style::IZText::Alignment::Center, pos, bbox, buffer
         );
     }
-}
+} // namespace d2::dx

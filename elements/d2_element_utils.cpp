@@ -5,9 +5,9 @@ namespace d2::dx::impl
 {
     namespace tx
     {
-        Element::BoundingBox _text_bounding_box(const string& value)
+        Element::Box _text_bounding_box(const string& value)
         {
-            Element::BoundingBox box{ 0, 0 };
+            Element::Box box{0, 0};
             if (value.empty())
                 return box;
             int x = 0;
@@ -25,9 +25,9 @@ namespace d2::dx::impl
             box.height++;
             return box;
         }
-        Element::BoundingBox _paragraph_bounding_box(const string& value, int width, int height)
+        Element::Box _paragraph_bounding_box(const string& value, int width, int height)
         {
-            Element::BoundingBox box{ 0, 0 };
+            Element::Box box{0, 0};
             for (auto it = StringIterator(value); !it.is_end();)
             {
                 for (; !it.is_end() && it.is_endline(); it.increment())
@@ -66,7 +66,8 @@ namespace d2::dx::impl
                 it = lit;
                 if (it.is_endline())
                     it.increment();
-                for (; !it.is_end() && it.is_space() && !it.is_endline(); it.increment());
+                for (; !it.is_end() && it.is_space() && !it.is_endline(); it.increment())
+                    ;
             }
             return box;
         }
@@ -76,43 +77,31 @@ namespace d2::dx::impl
             Pixel color,
             style::IZText::Alignment alignment,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
-            )
+        )
         {
-            return _render_paragraph(
-                value,
-                color,
-                alignment,
-                pos, box,
-                buffer
-            );
+            return _render_paragraph(value, color, alignment, pos, box, buffer);
         }
         void _render_text(
             const string& value,
             Pixel color,
             style::IZText::Alignment alignment,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
-            )
+        )
         {
-            return _render_paragraph(
-                value,
-                color,
-                alignment,
-                pos, box,
-                buffer
-            );
+            return _render_paragraph(value, color, alignment, pos, box, buffer);
         }
         void _render_paragraph(
             const string& value,
             Pixel color,
             style::IZText::Alignment alignment,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
-            )
+        )
         {
             int y = 0;
             for (auto it = StringIterator(value); !it.is_end();)
@@ -130,7 +119,8 @@ namespace d2::dx::impl
                 int last_space_width = 0;
                 int line_width = 0;
 
-                for (; !lit.is_end() && line_width < box.width && !lit.is_endline(); lit.increment())
+                for (; !lit.is_end() && line_width < box.width && !lit.is_endline();
+                     lit.increment())
                 {
                     line_width++;
                     if (lit.is_space())
@@ -171,8 +161,9 @@ namespace d2::dx::impl
                 it = lit;
                 if (it.is_endline())
                     it.increment();
-                for (; !it.is_end() && it.is_space() && !it.is_endline(); it.increment());
+                for (; !it.is_end() && it.is_space() && !it.is_endline(); it.increment())
+                    ;
             }
         }
-    }
-}
+    } // namespace tx
+} // namespace d2::dx::impl

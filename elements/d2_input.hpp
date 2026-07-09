@@ -25,21 +25,18 @@ namespace d2
             D2_UAI_FIELDS(
                 string pre{};
                 string hint{};
-                PixelBackground marked_mask{ .r = 170, .g = 170, .b = 170 };
                 PixelForeground ptr_color{ .a = 255, .v = '_' };
                 unsigned char input_options{ Auto };
             ),
             D2_UAI_PROPS(
                 Pre,
                 Hint,
-                MarkedMask,
                 PtrColor,
                 InputOptions
             ),
             D2_UAI_LINK(
                 D2_UAI_PROP(Pre, pre, Masked)
                 D2_UAI_PROP(Hint, hint, Masked)
-                D2_UAI_PROP(MarkedMask, marked_mask, Masked)
                 D2_UAI_PROP(PtrColor, ptr_color, Masked)
                 D2_UAI_PROP(InputOptions, input_options, Masked)
             )
@@ -101,4 +98,3 @@ namespace d2
         };
     } // namespace dx
 } // namespace d2
-

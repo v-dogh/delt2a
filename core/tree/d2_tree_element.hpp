@@ -1,6 +1,5 @@
 #pragma once
 
-#include "d2_theme.hpp"
 #include <absl/container/inlined_vector.h>
 #include <d2_element_units.hpp>
 #include <d2_input_base.hpp>
@@ -8,8 +7,10 @@
 #include <d2_pixel.hpp>
 #include <d2_screen.hpp>
 #include <d2_styles_base.hpp>
+#include <d2_theme.hpp>
 #include <d2_tree_element_frwd.hpp>
 #include <d2_tree_state.hpp>
+#include <d2_vtypes.hpp>
 #include <functional>
 #include <memory>
 #include <string>
@@ -59,17 +60,6 @@ namespace d2
             }
         };
         class EventListener;
-
-        struct BoundingBox
-        {
-            int width{0};
-            int height{0};
-        };
-        struct Position
-        {
-            int x{0};
-            int y{0};
-        };
 
         using unit_meta_flag = unsigned short;
         using internal_flag = unsigned short;
@@ -443,7 +433,7 @@ namespace d2
 
         // Layout
 
-        virtual BoundingBox _reserve_buffer_impl() const
+        virtual Box _reserve_buffer_impl() const
         {
             return box();
         }
@@ -512,9 +502,9 @@ namespace d2
 
         Frame frame();
 
-        BoundingBox box() const;
+        Box box() const;
         Position position() const;
-        BoundingBox internal_box() const;
+        Box internal_box() const;
         Position internal_position() const;
 
         Position position_screen_space() const;

@@ -1,39 +1,36 @@
 #pragma once
 
-#include <d2_tree_element.hpp>
 #include <d2_styles.hpp>
+#include <d2_tree_element.hpp>
 #include <elements/d2_element_utils.hpp>
 
 namespace d2::dx
 {
-    class Button :
-        public style::UAI<
-            Button,
-            style::ILayout,
-            style::IContainer,
-            style::IColors,
-            style::IResponsive<Button>::type,
-            style::IText,
-            style::IKeyboardNav
-        >,
-        public impl::TextHelper<Button>,
-        public impl::ContainerHelper<Button>
+    class Button : public style::
+                       UAI<Button,
+                           style::ILayout,
+                           style::IContainer,
+                           style::IColors,
+                           style::IResponsive<Button>::type,
+                           style::IText,
+                           style::IKeyboardNav>,
+                   public impl::TextHelper<Button>,
+                   public impl::ContainerHelper<Button>
     {
     public:
         friend class ContainerHelper<Button>;
         friend class TextHelper<Button>;
-        using data = style::UAI<
-            Button,
-            style::ILayout,
-            style::IContainer,
-            style::IColors,
-            style::IResponsive<Button>::type,
-            style::IText,
-            style::IKeyboardNav
-        >;
+        using data = style::
+            UAI<Button,
+                style::ILayout,
+                style::IContainer,
+                style::IColors,
+                style::IResponsive<Button>::type,
+                style::IText,
+                style::IKeyboardNav>;
         using data::data;
     protected:
-        BoundingBox _text_dimensions{};
+        Box _text_dimensions{};
 
         virtual bool _provides_input_impl() const override;
         virtual Unit _layout_impl(enum Element::Layout type) const override;
@@ -44,5 +41,4 @@ namespace d2::dx
 
         virtual void _frame_impl(PixelBuffer::View buffer) override;
     };
-} // d2::elem
-
+} // namespace d2::dx

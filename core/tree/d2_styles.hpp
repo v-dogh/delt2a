@@ -8,6 +8,7 @@
 #include <d2_pixel.hpp>
 #include <d2_screen.hpp>
 #include <d2_styles_base.hpp>
+#include <d2_text_select.hpp>
 #include <d2_tree_element.hpp>
 #include <d2_tree_parent.hpp>
 #include <type_traits>
@@ -716,7 +717,7 @@ namespace d2::style
     // DSL
     namespace
     {
-#define D2_UAI_INTERFACE(_name_, _opts_, _fields_, _props_, _links_)                               \
+#define D2_UAI_INTERFACE(_name_, _opts_, _fields_, _props_, _links_, ...)                          \
     namespace uai                                                                                  \
     {                                                                                              \
         template<std::size_t PropBase> struct Props_##_name_                                       \
@@ -724,7 +725,7 @@ namespace d2::style
             static constexpr std::size_t base = 0;                                                 \
         _props_ public : static constexpr auto _prop_count = _prot_prop_count;                     \
         };                                                                                         \
-        struct Data_##_name_                                                                       \
+        struct Data_##_name_ __VA_OPT__( :) __VA_ARGS__                                            \
         {                                                                                          \
         private:                                                                                   \
             static constexpr std::size_t base = 0;                                                 \
@@ -738,6 +739,7 @@ namespace d2::style
     }                                                                                              \
     template<std::size_t PropBase>                                                                 \
     struct I##_name_ : uai::Data_##_name_, ::d2::style::impl::XAllocInterface<I##_name_>           \
+                                                                                                   \
     {                                                                                              \
     private:                                                                                       \
         static constexpr std::size_t count = uai::Props_##_name_<PropBase>::_prop_count;           \
@@ -814,6 +816,20 @@ public:                                                                         
     );
 #define D2_UAI_PROP_VAR(...) __VA_ARGS__
     } // namespace
+
+    // Text selection
+
+    D2_UAI_INTERFACE(
+        Selectable,
+        D2_UAI_OPTS(),
+        D2_UAI_FIELDS(PixelBackground highlight_mask{.r = 170, .g = 170, .b = 170}),
+        D2_UAI_PROPS(EnableSelection, HighlightMask),
+        D2_UAI_LINK(D2_UAI_PROP(EnableSelection, enable_selection, Style)
+                        D2_UAI_PROP(HighlightMask, highlight_mask, Style)),
+        IVSelectable
+    )
+
+    // Rest of the standard/common interfaces
 
     D2_UAI_INTERFACE(
         Layout,

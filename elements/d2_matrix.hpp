@@ -1,17 +1,17 @@
 #pragma once
 
-#include <d2_tree_element.hpp>
-#include <d2_styles.hpp>
 #include <d2_model.hpp>
+#include <d2_styles.hpp>
+#include <d2_tree_element.hpp>
 
 namespace d2
 {
     namespace style
     {
-        D2_UAI_INTERFACE(Model,
+        D2_UAI_INTERFACE(
+            Model,
             D2_UAI_OPTS(
-                enum MaskMode
-                {
+                enum MaskMode{
                     ApplyFg = 1 << 0,
                     ApplyBg = 1 << 1,
                     InterpFg = 1 << 2,
@@ -19,23 +19,15 @@ namespace d2
                 };
             ),
             D2_UAI_FIELDS(
-                MatrixModel::ptr model{ nullptr };
-                PixelBackground background_mask{};
+                MatrixModel::ptr model{nullptr}; PixelBackground background_mask{};
                 PixelForeground foreground_mask{};
-                unsigned char mask_options{ 0x00 };
+                unsigned char mask_options{0x00};
             ),
-            D2_UAI_PROPS(
-                Model,
-                BackgroundMask,
-                ForegroundMask,
-                MaskOptions
-            ),
-            D2_UAI_LINK(
-                D2_UAI_PROP(Model, model, Masked)
-                D2_UAI_PROP(BackgroundMask, background_mask, Masked)
-                D2_UAI_PROP(ForegroundMask, foreground_mask, Masked)
-                D2_UAI_PROP(MaskOptions, mask_options, Masked)
-            )
+            D2_UAI_PROPS(Model, BackgroundMask, ForegroundMask, MaskOptions),
+            D2_UAI_LINK(D2_UAI_PROP(Model, model, Masked)
+                            D2_UAI_PROP(BackgroundMask, background_mask, Masked)
+                                D2_UAI_PROP(ForegroundMask, foreground_mask, Masked)
+                                    D2_UAI_PROP(MaskOptions, mask_options, Masked))
         )
     }
     namespace dx
@@ -48,12 +40,11 @@ namespace d2
             using data::data;
         protected:
             virtual Unit _layout_impl(enum Element::Layout type) const override;
-            virtual BoundingBox _reserve_buffer_impl() const override;
+            virtual Box _reserve_buffer_impl() const override;
             virtual PixelBuffer::View _fetch_pixel_buffer_impl() const override;
             virtual bool _provides_buffer_impl() const override;
 
             virtual void _frame_impl(PixelBuffer::View buffer) override;
         };
-    }
-}
-
+    } // namespace dx
+} // namespace d2

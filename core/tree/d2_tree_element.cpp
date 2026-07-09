@@ -652,7 +652,7 @@ namespace d2
 
         return Frame(shared_from_this());
     }
-    Element::BoundingBox Element::box() const
+    Element::Box Element::box() const
     {
         [[unlikely]] if (parent() == nullptr)
             return {_layout.get(Layout::Width), _layout.get(Layout::Height)};
@@ -660,7 +660,7 @@ namespace d2
             parent()->layout_for(Layout::Width, shared_from_this());
         if (!(_internal_state & DimensionsHeightUpdated))
             parent()->layout_for(Layout::Height, shared_from_this());
-        return Element::BoundingBox{_layout.get(Layout::Width), _layout.get(Layout::Height)};
+        return Element::Box{_layout.get(Layout::Width), _layout.get(Layout::Height)};
     }
     Element::Position Element::position() const
     {
@@ -672,7 +672,7 @@ namespace d2
             parent()->layout_for(Layout::Y, shared_from_this());
         return Element::Position{_layout.get(Layout::X), _layout.get(Layout::Y)};
     }
-    Element::BoundingBox Element::internal_box() const
+    Element::Box Element::internal_box() const
     {
         return {
             resolve_units(internal_layout(Layout::Width)),

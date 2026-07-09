@@ -6,49 +6,40 @@ namespace d2::dx
     {
         switch (type)
         {
-            case Element::Layout::X: return data::x;
-            case Element::Layout::Y: return data::y;
-            case Element::Layout::Width:
-                if (!data::model)
-                    return HDUnit(0);
-                return data::model->width();
-            case Element::Layout::Height:
-                if (!data::model)
-                    return VDUnit(0);
-                return data::model->height();
+        case Element::Layout::X:
+            return data::x;
+        case Element::Layout::Y:
+            return data::y;
+        case Element::Layout::Width:
+            if (!data::model)
+                return HDUnit(0);
+            return data::model->width();
+        case Element::Layout::Height:
+            if (!data::model)
+                return VDUnit(0);
+            return data::model->height();
         }
     }
-    Matrix::BoundingBox Matrix::_reserve_buffer_impl() const
+    Matrix::Box Matrix::_reserve_buffer_impl() const
     {
-        if (
-            data::model &&
-            (data::mask_options & MaskMode::ApplyBg ||
-             data::mask_options & MaskMode::ApplyFg)
-        )
+        if (data::model &&
+            (data::mask_options & MaskMode::ApplyBg || data::mask_options & MaskMode::ApplyFg))
         {
-            return
-            {
-                static_cast<int>(data::model->width()),
-                static_cast<int>(data::model->height())
+            return {
+                static_cast<int>(data::model->width()), static_cast<int>(data::model->height())
             };
         }
         else
-            return { 0, 0 };
+            return {0, 0};
     }
     PixelBuffer::View Matrix::_fetch_pixel_buffer_impl() const
     {
-        if (
-            !data::model ||
-            (data::mask_options & MaskMode::ApplyBg) ||
-            (data::mask_options & MaskMode::ApplyFg)
-        )
+        if (!data::model || (data::mask_options & MaskMode::ApplyBg) ||
+            (data::mask_options & MaskMode::ApplyFg))
             return Element::_fetch_pixel_buffer_impl();
         return PixelBuffer::View(
-                   data::model.get(),
-                   0, 0,
-                   data::model->width(),
-                   data::model->height()
-               );
+            data::model.get(), 0, 0, data::model->width(), data::model->height()
+        );
     }
     bool Matrix::_provides_buffer_impl() const
     {
@@ -57,11 +48,8 @@ namespace d2::dx
 
     void Matrix::_frame_impl(PixelBuffer::View buffer)
     {
-        if (
-            data::model &&
-            ((data::mask_options & MaskMode::ApplyBg) ||
-             (data::mask_options & MaskMode::ApplyFg))
-        )
+        if (data::model &&
+            ((data::mask_options & MaskMode::ApplyBg) || (data::mask_options & MaskMode::ApplyFg)))
         {
             const auto vol = data::model->width() * data::model->height();
             std::size_t idx = 0;
@@ -102,4 +90,4 @@ namespace d2::dx
             }
         }
     }
-}
+} // namespace d2::dx

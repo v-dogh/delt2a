@@ -1,54 +1,56 @@
 #pragma once
 
-#include <d2_tree_element.hpp>
 #include <d2_styles.hpp>
+#include <d2_tree_element.hpp>
 
 namespace d2::dx::impl
 {
     namespace tx
     {
-        Element::BoundingBox _text_bounding_box(const string& value);
-        Element::BoundingBox _paragraph_bounding_box(const string& value, int width = INT_MAX, int height = INT_MAX);
+        Element::Box _text_bounding_box(const string& value);
+        Element::Box
+        _paragraph_bounding_box(const string& value, int width = INT_MAX, int height = INT_MAX);
 
         void _render_text_simple(
             const string& value,
             Pixel color,
             style::IZText::Alignment alignment,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
-            );
+        );
         void _render_text(
             const string& value,
             Pixel color,
             style::IZText::Alignment alignment,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
-            );
+        );
         void _render_paragraph(
             const string& value,
             Pixel color,
             style::IZText::Alignment alignment,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
-            );
-    }
+        );
+    } // namespace tx
     namespace cnt
     {
 
     }
 
-    template<typename Base>
-    class TextHelper
+    template<typename Base> class TextHelper
     {
     protected:
-        Element::BoundingBox _text_bounding_box(const string& value) const
+        Element::Box _text_bounding_box(const string& value) const
         {
             return impl::tx::_text_bounding_box(value);
         }
-        Element::BoundingBox _paragraph_bounding_box(const string& value, int width = INT_MAX, int height = INT_MAX) const
+        Element::Box _paragraph_bounding_box(
+            const string& value, int width = INT_MAX, int height = INT_MAX
+        ) const
         {
             return impl::tx::_paragraph_bounding_box(value, width, height);
         }
@@ -58,32 +60,22 @@ namespace d2::dx::impl
             Pixel color,
             style::IZText::Alignment alignment,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
         ) const
         {
-            impl::tx::_render_text_simple(
-                value,
-                color,
-                alignment,
-                pos, box,
-                buffer
-            );
+            impl::tx::_render_text_simple(value, color, alignment, pos, box, buffer);
         }
         void _render_text_simple(
             const string& value,
             Pixel color,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
         ) const
         {
             impl::tx::_render_text_simple(
-                value,
-                color,
-                style::IZText::Alignment::Left,
-                pos, box,
-                buffer
+                value, color, style::IZText::Alignment::Left, pos, box, buffer
             );
         }
         void _render_text(
@@ -91,71 +83,48 @@ namespace d2::dx::impl
             Pixel color,
             style::IZText::Alignment alignment,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
         ) const
         {
-            impl::tx::_render_text(
-                value,
-                color,
-                alignment,
-                pos, box,
-                buffer
-            );
+            impl::tx::_render_text(value, color, alignment, pos, box, buffer);
         }
         void _render_text(
             const string& value,
             Pixel color,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
         ) const
         {
-            impl::tx::_render_text(
-                value,
-                color,
-                style::IZText::Alignment::Left,
-                pos, box,
-                buffer
-            );
+            impl::tx::_render_text(value, color, style::IZText::Alignment::Left, pos, box, buffer);
         }
         void _render_paragraph(
             const string& value,
             Pixel color,
             style::IZText::Alignment alignment,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
         ) const
         {
-            impl::tx::_render_paragraph(
-                value,
-                color,
-                alignment,
-                pos, box,
-                buffer
-            );
+            impl::tx::_render_paragraph(value, color, alignment, pos, box, buffer);
         }
         void _render_paragraph(
             const string& value,
             Pixel color,
             Element::Position pos,
-            Element::BoundingBox box,
+            Element::Box box,
             PixelBuffer::View buffer
         )
         {
             impl::tx::_render_paragraph(
-                value,
-                color,
-                style::IZText::Alignment::Left,
-                pos, box,
-                buffer
+                value, color, style::IZText::Alignment::Left, pos, box, buffer
             );
         }
     };
 
-    template<typename Base>
-    class ContainerHelper
+    template<typename Base> class ContainerHelper
     {
     protected:
         Element::Position _border_base() const
@@ -168,16 +137,9 @@ namespace d2::dx::impl
                 const auto et = !(p.container_options & Base::ContainerOptions::DisableBorderTop);
                 const auto el = !(p.container_options & Base::ContainerOptions::DisableBorderLeft);
 
-                return
-                {
-                    el * bw,
-                    et * bw
-                };
+                return {el * bw, et * bw};
             }
-            return
-            {
-                0, 0
-            };
+            return {0, 0};
         }
         Element::Position _border_base_inv() const
         {
@@ -186,19 +148,13 @@ namespace d2::dx::impl
             if (is_border)
             {
                 const auto bw = p.resolve_units(p.border_width);
-                const auto eb = !(p.container_options & Base::ContainerOptions::DisableBorderBottom);
+                const auto eb =
+                    !(p.container_options & Base::ContainerOptions::DisableBorderBottom);
                 const auto er = !(p.container_options & Base::ContainerOptions::DisableBorderRight);
 
-                return
-                {
-                    er * bw,
-                    eb * bw
-                };
+                return {er * bw, eb * bw};
             }
-            return
-            {
-                0, 0
-            };
+            return {0, 0};
         }
         void _render_border(PixelBuffer::View buffer) const
         {
@@ -216,7 +172,8 @@ namespace d2::dx::impl
                 const auto bw = p.resolve_units(p.border_width);
 
                 const bool et = !(p.container_options & Base::ContainerOptions::DisableBorderTop);
-                const bool eb = !(p.container_options & Base::ContainerOptions::DisableBorderBottom);
+                const bool eb =
+                    !(p.container_options & Base::ContainerOptions::DisableBorderBottom);
                 const bool el = !(p.container_options & Base::ContainerOptions::DisableBorderLeft);
                 const bool er = !(p.container_options & Base::ContainerOptions::DisableBorderRight);
 
@@ -260,13 +217,16 @@ namespace d2::dx::impl
                     auto& tr = buffer.at(bbox.width - 1);
                     auto& bl = buffer.at(0, bbox.height - 1);
                     auto& br = buffer.at(bbox.width - 1, bbox.height - 1);
-                    if (et && el) tl.blend(bch.extend(p.corners.top_left));
-                    if (et && er) tr.blend(bch.extend(p.corners.top_right));
-                    if (eb && el) bl.blend(bch.extend(p.corners.bottom_left));
-                    if (eb && er) br.blend(bch.extend(p.corners.bottom_right));
+                    if (et && el)
+                        tl.blend(bch.extend(p.corners.top_left));
+                    if (et && er)
+                        tr.blend(bch.extend(p.corners.top_right));
+                    if (eb && el)
+                        bl.blend(bch.extend(p.corners.bottom_left));
+                    if (eb && er)
+                        br.blend(bch.extend(p.corners.bottom_right));
                 }
             }
         }
     };
-}
-
+} // namespace d2::dx::impl
