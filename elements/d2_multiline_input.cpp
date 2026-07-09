@@ -1,8 +1,8 @@
 #include "elements/d2_multiline_input.hpp"
 
+#include <core/mods/d2_ext.hpp>
 #include <core/screen/d2_screen.hpp>
 #include <core/tree/d2_tree_element.hpp>
-#include <core/mods/d2_ext.hpp>
 
 #include <algorithm>
 #include <cctype>
@@ -33,7 +33,7 @@ namespace d2::dx
         return std::max<std::size_t>(1, width);
     }
 
-    void MultiInput::_write_ptr(Pixel& px)
+    void MultiInput::_write_ptr(pixel& px)
     {
         if ((data::input_options & InputOptions::Blink) && !_ptr_blink)
         {
@@ -41,7 +41,7 @@ namespace d2::dx
         }
         else
         {
-            px = Pixel::combine(
+            px = pixel::combine(
                 (data::input_options & InputOptions::AutoPtrColor)
                     ? data::foreground_color.extend(data::ptr_color.v)
                     : data::ptr_color,
@@ -1067,7 +1067,7 @@ namespace d2::dx
 
     void MultiInput::_frame_impl(PixelBuffer::View buffer)
     {
-        const auto color = Pixel::combine(data::foreground_color, data::background_color);
+        const auto color = pixel::combine(data::foreground_color, data::background_color);
         const auto& doc = _doc_model();
 
         buffer.fill(data::background_color);
@@ -1129,7 +1129,7 @@ namespace d2::dx
                 const auto abs = line_start + src_col;
 
                 if (abs >= hlower && abs < hupper)
-                    px.blend(color.mask(data::marked_mask));
+                    px.blend(color.mask(data::highlight_mask));
                 else
                     px.blend(color);
 
@@ -1142,9 +1142,7 @@ namespace d2::dx
             const auto hcolor = data::foreground_color.alpha(0.5f);
             for (std::size_t i = 0; i < std::min<std::size_t>(vp.width, data::hint.size()); i++)
             {
-                buffer.at(i, 0).blend(
-                    hcolor.stylize(d2::px::foreground::Style::Bold).extend(data::hint[i])
-                );
+                buffer.at(i, 0).blend(hcolor.stylize(px::style::Bold).extend(data::hint[i]));
             }
         }
 

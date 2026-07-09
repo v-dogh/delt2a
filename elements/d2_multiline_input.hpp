@@ -44,6 +44,7 @@ namespace d2
                                style::IColors,
                                style::IMultiInput,
                                style::IInput,
+                               style::ISelectable,
                                style::IResponsive<Input, string>::type
                            >
         {
@@ -55,6 +56,7 @@ namespace d2
                 style::IColors,
                 style::IMultiInput,
                 style::IInput,
+                style::ISelectable,
                 style::IResponsive<Input, string>::type
             >;
             using data::data;
@@ -96,7 +98,7 @@ namespace d2
             bool _ptr_blink{false};
             mutable bool _dirty_dm{true};
         protected:
-            void _write_ptr(Pixel& px);
+            void _write_ptr(pixel& px);
 
             void _doc_dirty() const;
             const DocModel& _doc_model() const;
@@ -191,4 +193,3 @@ namespace d2
         };
     } // namespace dx
 } // namespace d2
-

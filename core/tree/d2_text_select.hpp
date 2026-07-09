@@ -9,7 +9,7 @@ namespace d2::style
     protected:
         bool enable_selection{true};
     public:
-        virtual void select(std::size_t begin, std::size_t end) = 0;
-        virtual string selected() const = 0;
+        // virtual void select(std::size_t begin, std::size_t end) = 0;
+        // virtual string selected() const = 0;
     };
 } // namespace d2::style

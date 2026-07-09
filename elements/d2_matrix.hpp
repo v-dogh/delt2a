@@ -1,8 +1,9 @@
 #pragma once
 
-#include <core/utils/d2_model.hpp>
+#include "core/types/d2_vtypes.hpp"
 #include <core/tree/d2_styles.hpp>
 #include <core/tree/d2_tree_element.hpp>
+#include <core/utils/d2_model.hpp>
 
 namespace d2
 {
@@ -19,8 +20,8 @@ namespace d2
                 };
             ),
             D2_UAI_FIELDS(
-                MatrixModel::ptr model{nullptr}; PixelBackground background_mask{};
-                PixelForeground foreground_mask{};
+                MatrixModel::ptr model{nullptr}; px::background background_mask{};
+                px::foreground foreground_mask{};
                 unsigned char mask_options{0x00};
             ),
             D2_UAI_PROPS(Model, BackgroundMask, ForegroundMask, MaskOptions),
@@ -40,7 +41,7 @@ namespace d2
             using data::data;
         protected:
             virtual Unit _layout_impl(enum Element::Layout type) const override;
-            virtual Box _reserve_buffer_impl() const override;
+            virtual BoundingBox _reserve_buffer_impl() const override;
             virtual PixelBuffer::View _fetch_pixel_buffer_impl() const override;
             virtual bool _provides_buffer_impl() const override;
 

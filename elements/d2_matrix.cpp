@@ -20,7 +20,7 @@ namespace d2::dx
             return data::model->height();
         }
     }
-    Matrix::Box Matrix::_reserve_buffer_impl() const
+    BoundingBox Matrix::_reserve_buffer_impl() const
     {
         if (data::model &&
             (data::mask_options & MaskMode::ApplyBg || data::mask_options & MaskMode::ApplyFg))

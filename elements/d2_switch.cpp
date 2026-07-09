@@ -97,7 +97,7 @@ namespace d2::dx
     }
     void Switch::_frame_impl(PixelBuffer::View buffer)
     {
-        buffer.fill(Pixel::combine(data::foreground_color, data::background_color));
+        buffer.fill(pixel::combine(data::foreground_color, data::background_color));
 
         if (!data::options.empty())
         {
@@ -108,8 +108,8 @@ namespace d2::dx
                 (width - (data::options.size() - 1) - (basisx + ibasisx)) / data::options.size();
 
             const auto disabled_color =
-                Pixel::combine(data::disabled_foreground_color, data::disabled_background_color);
-            const auto enabled_color = Pixel::combine(
+                pixel::combine(data::disabled_foreground_color, data::disabled_background_color);
+            const auto enabled_color = pixel::combine(
                 data::enabled_foreground_color,
                 (getstate(Keynavi) ? data::focused_color : data::enabled_background_color)
             );
@@ -382,7 +382,7 @@ namespace d2::dx
     }
     void VerticalSwitch::_frame_impl(PixelBuffer::View buffer)
     {
-        buffer.fill(Pixel::combine(data::foreground_color, data::background_color));
+        buffer.fill(pixel::combine(data::foreground_color, data::background_color));
         ContainerHelper::_render_border(buffer);
 
         if (data::options.empty())
@@ -415,17 +415,17 @@ namespace d2::dx
         const int content_w = std::max(0, inner_w - scrollbar_w);
 
         const auto disabled_color =
-            Pixel::combine(data::disabled_foreground_color, data::disabled_background_color);
+            pixel::combine(data::disabled_foreground_color, data::disabled_background_color);
 
         const auto enabled_bg =
             getstate(Keynavi) ? data::enabled_background_color.mask(data::focused_color, 0.35f)
                                     .alpha(data::enabled_background_color.a)
                               : data::enabled_background_color;
 
-        const auto enabled_color = Pixel::combine(data::enabled_foreground_color, enabled_bg);
+        const auto enabled_color = pixel::combine(data::enabled_foreground_color, enabled_bg);
 
         const auto target_color =
-            Pixel::combine(data::enabled_foreground_color, data::focused_color);
+            pixel::combine(data::enabled_foreground_color, data::focused_color);
 
         for (std::size_t i = 0; i < visible_count; ++i)
         {
@@ -476,7 +476,7 @@ namespace d2::dx
                     for (int j = 0; j < half; ++j)
                     {
                         const float t = static_cast<float>(j) / static_cast<float>(half);
-                        const auto c = Pixel::interpolate(bbg, color, t);
+                        const auto c = pixel::interpolate(bbg, color, t);
                         buffer.at(content_x0 + j, yoff) = c;
                         buffer.at(content_x1 - j, yoff) = c;
                     }
@@ -499,7 +499,7 @@ namespace d2::dx
                 {
                     TextHelper::_render_text_simple(
                         data::select_pre,
-                        d2::Pixel::combine(data::pre_color, colors::w::transparent),
+                        d2::pixel::combine(data::pre_color, colors::w::transparent),
                         Alignment::Left,
                         {inner_x0, yoff},
                         {left_pad, 1},
@@ -511,7 +511,7 @@ namespace d2::dx
                 {
                     TextHelper::_render_text_simple(
                         data::select_post,
-                        d2::Pixel::combine(data::post_color, colors::w::transparent),
+                        d2::pixel::combine(data::post_color, colors::w::transparent),
                         Alignment::Left,
                         {inner_x0 + content_w - right_pad, yoff},
                         {right_pad, 1},

@@ -30,7 +30,7 @@ namespace d2::dx
                 style::IKeyboardNav>;
         using data::data;
     protected:
-        Box _text_dimensions{};
+        BoundingBox _text_dimensions{};
 
         virtual bool _provides_input_impl() const override;
         virtual Unit _layout_impl(enum Element::Layout type) const override;

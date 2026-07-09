@@ -5,9 +5,9 @@ namespace d2::dx::impl
 {
     namespace tx
     {
-        Element::Box _text_bounding_box(const string& value)
+        BoundingBox _text_bounding_box(const string& value)
         {
-            Element::Box box{0, 0};
+            BoundingBox box{0, 0};
             if (value.empty())
                 return box;
             int x = 0;
@@ -25,9 +25,9 @@ namespace d2::dx::impl
             box.height++;
             return box;
         }
-        Element::Box _paragraph_bounding_box(const string& value, int width, int height)
+        BoundingBox _paragraph_bounding_box(const string& value, int width, int height)
         {
-            Element::Box box{0, 0};
+            BoundingBox box{0, 0};
             for (auto it = StringIterator(value); !it.is_end();)
             {
                 for (; !it.is_end() && it.is_endline(); it.increment())
@@ -74,10 +74,10 @@ namespace d2::dx::impl
 
         void _render_text_simple(
             const string& value,
-            Pixel color,
+            pixel color,
             style::IZText::Alignment alignment,
-            Element::Position pos,
-            Element::Box box,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         )
         {
@@ -85,10 +85,10 @@ namespace d2::dx::impl
         }
         void _render_text(
             const string& value,
-            Pixel color,
+            pixel color,
             style::IZText::Alignment alignment,
-            Element::Position pos,
-            Element::Box box,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         )
         {
@@ -96,10 +96,10 @@ namespace d2::dx::impl
         }
         void _render_paragraph(
             const string& value,
-            Pixel color,
+            pixel color,
             style::IZText::Alignment alignment,
-            Element::Position pos,
-            Element::Box box,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         )
         {

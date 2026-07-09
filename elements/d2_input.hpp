@@ -25,7 +25,7 @@ namespace d2
             D2_UAI_FIELDS(
                 string pre{};
                 string hint{};
-                PixelForeground ptr_color{ .a = 255, .v = '_' };
+                px::foreground ptr_color{ .a = 255, .v = '_' };
                 unsigned char input_options{ Auto };
             ),
             D2_UAI_PROPS(
@@ -50,6 +50,7 @@ namespace d2
                               style::IColors,
                               style::IText,
                               style::IInput,
+                              style::ISelectable,
                               style::IResponsive<Input, string>::type>
         {
         public:
@@ -59,6 +60,7 @@ namespace d2
                     style::IColors,
                     style::IText,
                     style::IInput,
+                    style::ISelectable,
                     style::IResponsive<Input, string>::type>;
             using data::data;
         protected:
@@ -69,7 +71,7 @@ namespace d2
             int highlight_end_{0};
             bool ptr_blink_{false};
 
-            void _write_ptr(Pixel& px);
+            void _write_ptr(pixel& px);
             bool _is_highlighted();
             void _remove_highlighted();
             void _begin_highlight_if();

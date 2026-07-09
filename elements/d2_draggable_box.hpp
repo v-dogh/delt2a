@@ -21,8 +21,8 @@ namespace d2
             ),
             D2_UAI_FIELDS(
                 string title{};
-                PixelForeground bar_color{ .v = charset::box_top_bar };
-                Pixel::value_type resize_point_value{ charset::box_top_drag_spot };
+                px::foreground bar_color{ .v = charset::box_top_bar };
+                px::value_type resize_point_value{ charset::box_top_drag_spot };
                 VDUnit bar_height{ 2.0_px };
                 unsigned char vbox_options{ Auto };
             ),
@@ -44,14 +44,15 @@ namespace d2
     }
     namespace dx
     {
-        class VirtualBox : public style::UAIC<Box, VirtualBox, style::IDraggableBox, style::IKeyboardNav>
+        class VirtualBox
+            : public style::UAIC<Box, VirtualBox, style::IDraggableBox, style::IKeyboardNav>
         {
         public:
             using data = style::UAIC<Box, VirtualBox, style::IDraggableBox, style::IKeyboardNav>;
             D2_UAI_CHAIN(Box)
         protected:
-            std::pair<int, int> offset_{ 0, 0 };
-            bool minimized_{ false };
+            std::pair<int, int> offset_{0, 0};
+            bool minimized_{false};
 
             bool _is_being_resized() const;
 
@@ -64,6 +65,5 @@ namespace d2
         public:
             void close();
         };
-    }
-}
-
+    } // namespace dx
+} // namespace d2

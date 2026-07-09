@@ -1,12 +1,12 @@
 #include "elements/d2_input.hpp"
+#include <core/mods/d2_ext.hpp>
 #include <core/screen/d2_screen.hpp>
 #include <elements/d2_element_utils.hpp>
 #include <limits>
-#include <core/mods/d2_ext.hpp>
 
 namespace d2::dx
 {
-    void Input::_write_ptr(Pixel& px)
+    void Input::_write_ptr(pixel& px)
     {
         if ((data::input_options & InputOptions::Blink) && !ptr_blink_)
         {
@@ -14,7 +14,7 @@ namespace d2::dx
         }
         else
         {
-            px = Pixel::combine(
+            px = pixel::combine(
                 (data::input_options & data::AutoPtrColor)
                     ? data::foreground_color.extend(data::ptr_color.v)
                     : data::ptr_color,
@@ -396,7 +396,7 @@ namespace d2::dx
     void Input::_frame_impl(PixelBuffer::View buffer)
     {
         const auto [width, height] = box();
-        const auto color = Pixel::combine(data::foreground_color, data::background_color);
+        const auto color = pixel::combine(data::foreground_color, data::background_color);
 
         // Draw the pre-value
         {
@@ -440,7 +440,7 @@ namespace d2::dx
                         auto& px = buffer.at(pi);
                         if (i - d >= hlower && i - d < hupper)
                         {
-                            px.blend(color.mask(data::marked_mask));
+                            px.blend(color.mask(data::highlight_mask));
                         }
                         else
                             px.blend(color);
@@ -463,8 +463,9 @@ namespace d2::dx
                      i < std::min<std::size_t>(pre.size() + hint.size(), width);
                      i++)
                 {
-                    buffer.at(i).blend(hcolor.stylize(d2::px::foreground::Style::Bold)
-                                           .extend(data::hint[i - pre.size()]));
+                    buffer.at(i).blend(
+                        hcolor.stylize(px::style::Bold).extend(data::hint[i - pre.size()])
+                    );
                 }
             }
 

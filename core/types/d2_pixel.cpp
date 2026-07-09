@@ -5,7 +5,7 @@ namespace d2
 {
     // View
 
-    std::span<const Pixel> PixelBuffer::View::data() const
+    std::span<const pixel> PixelBuffer::View::data() const
     {
         return buffer_->data();
     }
@@ -15,21 +15,21 @@ namespace d2
         D2_ASSERT(buffer_ != nullptr)
         buffer_->clear();
     }
-    void PixelBuffer::View::fill(Pixel px)
+    void PixelBuffer::View::fill(pixel px)
     {
         D2_ASSERT(buffer_ != nullptr)
         buffer_->fill(px, xoff_, yoff_, width_, height_);
     }
-    void PixelBuffer::View::fill(Pixel px, int x, int y, int width, int height)
+    void PixelBuffer::View::fill(pixel px, int x, int y, int width, int height)
     {
         D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
         buffer_->fill(px, x + xoff_, y + yoff_, width, height);
     }
-    void PixelBuffer::View::fill_blend(Pixel px)
+    void PixelBuffer::View::fill_blend(pixel px)
     {
         buffer_->fill_blend(px, xoff_, yoff_, width_, height_);
     }
-    void PixelBuffer::View::fill_blend(Pixel px, int x, int y, int width, int height)
+    void PixelBuffer::View::fill_blend(pixel px, int x, int y, int width, int height)
     {
         D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
         buffer_->fill_blend(px, x + xoff_, y + yoff_, width, height);
@@ -64,26 +64,26 @@ namespace d2
         return yoff_;
     }
 
-    const Pixel& PixelBuffer::View::at(int x, int y) const
+    const pixel& PixelBuffer::View::at(int x, int y) const
     {
         D2_ASSERT(x < width_ && y < height_ && x >= 0 && y >= 0)
         return buffer_->buffer_[((y + yoff_) * buffer_->width_) + (x + xoff_)];
     }
-    Pixel& PixelBuffer::View::at(int x, int y)
+    pixel& PixelBuffer::View::at(int x, int y)
     {
-        return const_cast<Pixel&>(const_cast<const View*>(this)->at(x, y));
+        return const_cast<pixel&>(const_cast<const View*>(this)->at(x, y));
     }
 
-    const Pixel& PixelBuffer::View::at(int c) const
+    const pixel& PixelBuffer::View::at(int c) const
     {
         D2_ASSERT(c < width_ * height_ && c >= 0)
         const auto idxx = c % width_;
         const auto idxy = c / width_;
         return at(idxx, idxy);
     }
-    Pixel& PixelBuffer::View::at(int c)
+    pixel& PixelBuffer::View::at(int c)
     {
-        return const_cast<Pixel&>(const_cast<const View*>(this)->at(c));
+        return const_cast<pixel&>(const_cast<const View*>(this)->at(c));
     }
 
     void PixelBuffer::View::inscribe(int x, int y, const View& sub)
@@ -93,17 +93,17 @@ namespace d2
 
     // RLE
 
-    PixelBuffer::RleIterator::RleIterator(std::span<const PixelBase> buffer) :
+    PixelBuffer::RleIterator::RleIterator(std::span<const px::combined> buffer) :
         _buffer(buffer), _current(buffer.begin())
     {
-        if (!buffer.empty() && (_rem = PixelBase::is_cform(_buffer[0])) > 0)
+        if (!buffer.empty() && (_rem = (_buffer[0]).is_cform()) > 0)
         {
             ++_current;
             --_rem;
         }
     }
 
-    const PixelBase& PixelBuffer::RleIterator::value() const
+    const px::combined& PixelBuffer::RleIterator::value() const
     {
         return *_current;
     }
@@ -113,7 +113,7 @@ namespace d2
         if (!_rem)
         {
             ++_current;
-            if (!is_end() && (_rem = PixelBase::is_cform(*_current)) > 0)
+            if (!is_end() && (_rem = (*_current).is_cform()) > 0)
             {
                 ++_current;
                 --_rem;
@@ -136,17 +136,17 @@ namespace d2
 
     // Implementation
 
-    std::vector<Pixel> PixelBuffer::rle_pack(std::span<const Pixel> buffer)
+    std::vector<pixel> PixelBuffer::rle_pack(std::span<const pixel> buffer)
     {
         if (buffer.empty())
             return {};
 
-        std::vector<Pixel> result;
+        std::vector<pixel> result;
         result.reserve(buffer.size());
 
         for (std::size_t i = 0;;)
         {
-            Pixel current = buffer[i];
+            pixel current = buffer[i];
             i++;
 
             std::size_t len = 1;
@@ -167,7 +167,7 @@ namespace d2
             }
             else
             {
-                result.push_back(PixelBase::cform(len));
+                result.push_back(px::combined::cform(len));
                 result.push_back(current);
             }
 
@@ -178,14 +178,14 @@ namespace d2
         result.shrink_to_fit();
         return result;
     }
-    std::vector<Pixel> PixelBuffer::rle_unpack(std::span<const Pixel> buffer)
+    std::vector<pixel> PixelBuffer::rle_unpack(std::span<const pixel> buffer)
     {
-        std::vector<Pixel> result;
+        std::vector<pixel> result;
         result.reserve(buffer.size() * 3);
 
         for (auto it = buffer.begin(); it != buffer.end(); ++it)
         {
-            if (const auto len = PixelBase::is_cform(*it))
+            if (const auto len = (*it).is_cform())
             {
                 const auto& px = *(++it);
                 for (std::size_t i = 0; i < len; i++)
@@ -203,11 +203,11 @@ namespace d2
         return result;
     }
     void
-    PixelBuffer::rle_walk(std::span<const Pixel> buffer, std::function<bool(const Pixel&)> func)
+    PixelBuffer::rle_walk(std::span<const pixel> buffer, std::function<bool(const pixel&)> func)
     {
         for (auto it = buffer.begin(); it != buffer.end(); ++it)
         {
-            if (const auto len = PixelBase::is_cform(*it))
+            if (const auto len = (*it).is_cform())
             {
                 auto& px = *(++it);
                 for (std::size_t i = 0; i < len; i++)
@@ -226,10 +226,10 @@ namespace d2
         }
     }
     void PixelBuffer::rle_mdwalk(
-        std::span<const Pixel> buffer,
+        std::span<const pixel> buffer,
         int width,
         int height,
-        std::function<RleBreak(int, int, const Pixel&)> func
+        std::function<RleBreak(int, int, const pixel&)> func
     )
     {
         int x = 0;
@@ -237,7 +237,7 @@ namespace d2
         int skip = 0;
         for (auto it = buffer.begin(); it != buffer.end(); ++it)
         {
-            if (const auto len = PixelBase::is_cform(*it))
+            if (const auto len = (*it).is_cform())
             {
                 auto& px = *(++it);
                 for (std::size_t i = 0; i < len; i++)
@@ -307,16 +307,16 @@ namespace d2
                 break;
         }
     }
-    PixelBuffer::RleIterator PixelBuffer::rle_iterator(std::span<const Pixel> buffer)
+    PixelBuffer::RleIterator PixelBuffer::rle_iterator(std::span<const pixel> buffer)
     {
         return RleIterator(buffer);
     }
 
-    std::span<const Pixel> PixelBuffer::data() const
+    std::span<const pixel> PixelBuffer::data() const
     {
         return {buffer_.begin(), buffer_.end()};
     }
-    std::span<const Pixel> PixelBuffer::data()
+    std::span<const pixel> PixelBuffer::data()
     {
         return {buffer_.begin(), buffer_.end()};
     }
@@ -329,11 +329,11 @@ namespace d2
         height_ = 0;
         compressed_ = false;
     }
-    void PixelBuffer::fill(Pixel px)
+    void PixelBuffer::fill(pixel px)
     {
         std::fill(buffer_.begin(), buffer_.end(), px);
     }
-    void PixelBuffer::fill(Pixel px, int x, int y, int width, int height)
+    void PixelBuffer::fill(pixel px, int x, int y, int width, int height)
     {
         D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
         for (std::size_t i = y; i < height + y; i++)
@@ -342,12 +342,12 @@ namespace d2
                 buffer_[(i * width_) + j] = px;
             }
     }
-    void PixelBuffer::fill_blend(Pixel px)
+    void PixelBuffer::fill_blend(pixel px)
     {
         for (decltype(auto) it : buffer_)
             it.blend(px);
     }
-    void PixelBuffer::fill_blend(Pixel px, int x, int y, int width, int height)
+    void PixelBuffer::fill_blend(pixel px, int x, int y, int width, int height)
     {
         D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
         for (std::size_t i = y; i < height + y; i++)
@@ -381,7 +381,7 @@ namespace d2
             clear();
         }
     }
-    void PixelBuffer::reset(std::vector<Pixel> data, int w, int h)
+    void PixelBuffer::reset(std::vector<pixel> data, int w, int h)
     {
         compressed_ = false;
         width_ = w;
@@ -410,23 +410,23 @@ namespace d2
         return height_;
     }
 
-    const Pixel& PixelBuffer::at(int x, int y) const
+    const pixel& PixelBuffer::at(int x, int y) const
     {
         D2_ASSERT(x < width_ && y < height_ && x >= 0 && y >= 0)
         return buffer_[(y * width_) + x];
     }
-    Pixel& PixelBuffer::at(int x, int y)
+    pixel& PixelBuffer::at(int x, int y)
     {
         D2_ASSERT(x < width_ && y < height_ && x >= 0 && y >= 0)
         return buffer_[(y * width_) + x];
     }
 
-    const Pixel& PixelBuffer::at(int c) const
+    const pixel& PixelBuffer::at(int c) const
     {
         D2_ASSERT(c < width_ * height_ && c >= 0)
         return buffer_[c];
     }
-    Pixel& PixelBuffer::at(int c)
+    pixel& PixelBuffer::at(int c)
     {
         D2_ASSERT(c < width_ * height_ && c >= 0)
         return buffer_[c];
@@ -445,7 +445,7 @@ namespace d2
                 view.data(),
                 view.width(),
                 view.height(),
-                [&xdiff, &ydiff, &xf, &yf, this](int xs, int ys, const Pixel& px) -> RleBreak
+                [&xdiff, &ydiff, &xf, &yf, this](int xs, int ys, const pixel& px) -> RleBreak
                 {
                     const auto xoff = xs + xf;
                     const auto yoff = ys + yf;

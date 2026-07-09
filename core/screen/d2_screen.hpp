@@ -4,17 +4,17 @@
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/node_hash_map.h>
 #include <chrono>
-#include <core/screen/d2_animate.hpp>
-#include <core/io/d2_input_base.hpp>
 #include <core/io/d2_context.hpp>
-#include <core/utils/d2_model.hpp>
+#include <core/io/d2_input_base.hpp>
 #include <core/io/d2_module.hpp>
+#include <core/mods/d2_core.hpp>
+#include <core/screen/d2_animate.hpp>
 #include <core/screen/d2_screen_comps.hpp>
 #include <core/tree/d2_styles_base.hpp>
 #include <core/tree/d2_theme.hpp>
 #include <core/tree/d2_tree_element_frwd.hpp>
 #include <core/tree/d2_tree_state.hpp>
-#include <core/mods/d2_core.hpp>
+#include <core/utils/d2_model.hpp>
 #include <utility>
 
 namespace d2::sys
@@ -153,9 +153,9 @@ namespace d2::sys
         MatrixModel::ptr
         fetch_model(const std::string& name, const std::string& path, ModelType type);
         MatrixModel::ptr
-        fetch_model(const std::string& name, int width, int height, std::vector<Pixel> data);
+        fetch_model(const std::string& name, int width, int height, std::vector<pixel> data);
         MatrixModel::ptr
-        fetch_model(const std::string& name, int width, int height, std::span<const Pixel> data);
+        fetch_model(const std::string& name, int width, int height, std::span<const pixel> data);
         MatrixModel::ptr fetch_model(const std::string& name);
         void remove_model(const std::string& name);
 

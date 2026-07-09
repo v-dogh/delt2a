@@ -60,7 +60,7 @@ namespace d2::dx
     void Button::_frame_impl(PixelBuffer::View buffer)
     {
         buffer.fill(
-            Pixel::combine(
+            pixel::combine(
                 data::foreground_color,
                 getstate(State::Keynavi) ? data::focused_color : data::background_color
             )
@@ -69,7 +69,7 @@ namespace d2::dx
         if (data::container_options & data::EnableBorder)
             ContainerHelper::_render_border(buffer);
 
-        Box bbox = box();
+        BoundingBox bbox = box();
         Position pos{0, 0};
         if (data::container_options & EnableBorder)
         {

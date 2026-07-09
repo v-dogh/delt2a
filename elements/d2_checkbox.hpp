@@ -14,10 +14,10 @@ namespace d2
             D2_UAI_OPTS(),
             D2_UAI_FIELDS(
                 string value_on{charset::checkbox_true}; string value_off{charset::checkbox_false};
-                PixelForeground color_on_foreground{};
-                PixelBackground color_on_background{d2::colors::w::transparent};
-                PixelForeground color_off_foreground{};
-                PixelBackground color_off_background{d2::colors::w::transparent};
+                px::foreground color_on_foreground{};
+                px::background color_on_background{d2::colors::w::transparent};
+                px::foreground color_off_foreground{};
+                px::background color_off_background{d2::colors::w::transparent};
                 bool checkbox_value{false};
             ),
             D2_UAI_PROPS(
@@ -60,7 +60,7 @@ namespace d2
                     style::IResponsive<Checkbox, bool>::type>;
             using data::data;
         protected:
-            Box _text_dimensions{};
+            BoundingBox _text_dimensions{};
 
             void _submit();
 

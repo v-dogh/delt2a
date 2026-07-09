@@ -819,7 +819,7 @@ namespace d2::sys
 
         return std::make_pair(result, int(ptr2 - result.begin() + 1));
     }
-    UnixTerminalOutput::color_type UnixTerminalOutput::_generate_color(const Pixel& px, bool force)
+    UnixTerminalOutput::color_type UnixTerminalOutput::_generate_color(const pixel& px, bool force)
     {
         using buffer = std::array<char, _max_color_len>;
 
@@ -848,11 +848,11 @@ namespace d2::sys
         {
             for (std::size_t i = 0; i < 7; i++)
             {
-                const auto ns = px.style & (1 << i);
-                const auto ps = _track_style & (1 << i);
+                const auto ns = px::style(std::uint8_t(px.style) & (1 << i));
+                const auto ps = px::style(std::uint8_t(_track_style) & (1 << i));
                 if (ns != ps)
                 {
-                    if (ns)
+                    if (bool(ns))
                     {
                         *(ptr++) = style_on[i][0];
                     }
@@ -915,7 +915,7 @@ namespace d2::sys
         return std::make_pair(code, int(ptrfe - code.begin() + 1));
     }
 
-    void UnixTerminalOutput::_push(const Pixel& px)
+    void UnixTerminalOutput::_push(const pixel& px)
     {
         if (px.v == '\t')
         {
@@ -1010,15 +1010,15 @@ namespace d2::sys
     }
 
     void
-    UnixTerminalOutput::write(std::span<const Pixel> buffer, std::size_t width, std::size_t height)
+    UnixTerminalOutput::write(std::span<const pixel> buffer, std::size_t width, std::size_t height)
     {
         std::unique_lock lock(mtx_);
 
         const auto beg = std::chrono::high_resolution_clock::now();
 
-        _track_style = 0x00;
-        _track_foreground = PixelForeground(255, 255, 255);
-        _track_background = PixelBackground(0, 0, 0);
+        _track_style = px::style::None;
+        _track_foreground = px::foreground(255, 255, 255);
+        _track_background = px::background(0, 0, 0);
 
         _out.reserve((buffer.size()) * sizeof(value_type) + (height + 1) + _max_color_len * 2);
 

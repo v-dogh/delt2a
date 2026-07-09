@@ -69,7 +69,7 @@ namespace d2::dx
             {
                 TextHelper::_render_paragraph(
                     data::text,
-                    Pixel::combine(data::foreground_color, data::background_color),
+                    pixel::combine(data::foreground_color, data::background_color),
                     data::alignment,
                     {},
                     box(),
@@ -80,7 +80,7 @@ namespace d2::dx
             {
                 TextHelper::_render_text(
                     data::text,
-                    Pixel::combine(data::foreground_color, data::background_color),
+                    pixel::combine(data::foreground_color, data::background_color),
                     data::alignment,
                     {},
                     box(),
@@ -92,7 +92,7 @@ namespace d2::dx
         {
             TextHelper::_render_text_simple(
                 data::text,
-                Pixel::combine(data::foreground_color, data::background_color),
+                pixel::combine(data::foreground_color, data::background_color),
                 {},
                 box(),
                 buffer

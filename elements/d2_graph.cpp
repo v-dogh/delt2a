@@ -4,15 +4,15 @@ namespace d2::dx::graph
 {
     void CyclicVerticalBar::_frame_impl(PixelBuffer::View buffer)
     {
-        buffer.fill(Pixel::combine(data::foreground_color, data::background_color));
+        buffer.fill(pixel::combine(data::foreground_color, data::background_color));
         ContainerHelper::_render_border(buffer);
 
         if (_data.empty())
             return;
-        const auto [ width, height ] = box();
-        const auto [ basex, basey ] = ContainerHelper::_border_base();
-        const auto [ ibasex, ibasey ] = ContainerHelper::_border_base_inv();
-        const auto [ xres, yres ] = _resolution();
+        const auto [width, height] = box();
+        const auto [basex, basey] = ContainerHelper::_border_base();
+        const auto [ibasex, ibasey] = ContainerHelper::_border_base_inv();
+        const auto [xres, yres] = _resolution();
         if (xres == 0 || yres == 0)
             return;
 
@@ -52,7 +52,9 @@ namespace d2::dx::graph
                     continue;
 
                 const auto total_quarters = std::min<std::size_t>(
-                    static_cast<std::size_t>(std::floor(static_cast<float>(quarters_cap) * data_point + 1e-6f)),
+                    static_cast<std::size_t>(
+                        std::floor(static_cast<float>(quarters_cap) * data_point + 1e-6f)
+                    ),
                     quarters_cap
                 );
 
@@ -73,19 +75,13 @@ namespace d2::dx::graph
                     {
                         if (i % 2 == 0)
                         {
-                            flags |=
-                                charset::TopLeft |
-                                charset::MidTopLeft |
-                                charset::MidBotLeft |
-                                charset::BotLeft;
+                            flags |= charset::TopLeft | charset::MidTopLeft | charset::MidBotLeft |
+                                     charset::BotLeft;
                         }
                         else
                         {
-                            flags |=
-                                charset::TopRight |
-                                charset::MidTopRight |
-                                charset::MidBotRight |
-                                charset::BotRight;
+                            flags |= charset::TopRight | charset::MidTopRight |
+                                     charset::MidBotRight | charset::BotRight;
                         }
                     }
                     else if (j == full && rem != 0)
@@ -95,20 +91,36 @@ namespace d2::dx::graph
                         {
                             switch (dot)
                             {
-                            case 3: flags |= charset::TopLeft; [[fallthrough]];
-                            case 2: flags |= charset::MidTopLeft; [[fallthrough]];
-                            case 1: flags |= charset::MidBotLeft; [[fallthrough]];
-                            case 0: flags |= charset::BotLeft; break;
+                            case 3:
+                                flags |= charset::TopLeft;
+                                [[fallthrough]];
+                            case 2:
+                                flags |= charset::MidTopLeft;
+                                [[fallthrough]];
+                            case 1:
+                                flags |= charset::MidBotLeft;
+                                [[fallthrough]];
+                            case 0:
+                                flags |= charset::BotLeft;
+                                break;
                             }
                         }
                         else
                         {
                             switch (dot)
                             {
-                            case 3: flags |= charset::TopRight; [[fallthrough]];
-                            case 2: flags |= charset::MidTopRight; [[fallthrough]];
-                            case 1: flags |= charset::MidBotRight; [[fallthrough]];
-                            case 0: flags |= charset::BotRight; break;
+                            case 3:
+                                flags |= charset::TopRight;
+                                [[fallthrough]];
+                            case 2:
+                                flags |= charset::MidTopRight;
+                                [[fallthrough]];
+                            case 1:
+                                flags |= charset::MidBotRight;
+                                [[fallthrough]];
+                            case 0:
+                                flags |= charset::BotRight;
+                                break;
                             }
                         }
                     }
@@ -118,10 +130,8 @@ namespace d2::dx::graph
                     }
 
                     const auto y = data::invert ? j : (inner_h - j - 1);
-                    cells[
-                        static_cast<std::size_t>(y) * inner_w +
-                        static_cast<std::size_t>(x)
-                    ] |= flags;
+                    cells[static_cast<std::size_t>(y) * inner_w + static_cast<std::size_t>(x)] |=
+                        flags;
                 }
             }
 
@@ -135,19 +145,14 @@ namespace d2::dx::graph
 
                     const auto j = data::invert ? y : (inner_h - y - 1);
                     const auto h = col_h[x];
-                    const auto t = (h <= 1) ? 1.f : static_cast<float>(std::min<std::size_t>(j, h - 1)) / static_cast<float>(h - 1);
+                    const auto t = (h <= 1) ? 1.f
+                                            : static_cast<float>(std::min<std::size_t>(j, h - 1)) /
+                                                  static_cast<float>(h - 1);
 
-                    auto px = Pixel::interpolate(
-                        data::min_color,
-                        data::max_color,
-                        t
-                    );
+                    auto px = pixel::interpolate(data::min_color, data::max_color, t);
 
                     px.v = charset::cell(flags);
-                    buffer.at(
-                        x + basex,
-                        y + basey
-                    ).blend(px);
+                    buffer.at(x + basex, y + basey).blend(px);
                 }
             }
 
@@ -182,12 +187,9 @@ namespace d2::dx::graph
             yoff = std::min<std::size_t>(yoff, inner_h);
             for (std::size_t j = 0; j < yoff; j++)
             {
-                const auto t = (yoff <= 1) ? 1.f : static_cast<float>(j) / static_cast<float>(yoff - 1);
-                auto px = Pixel::interpolate(
-                    data::min_color,
-                    data::max_color,
-                    t
-                );
+                const auto t =
+                    (yoff <= 1) ? 1.f : static_cast<float>(j) / static_cast<float>(yoff - 1);
+                auto px = pixel::interpolate(data::min_color, data::max_color, t);
 
                 px.v = data::min_color.v;
 
@@ -195,26 +197,20 @@ namespace d2::dx::graph
                 if (y < basey || y >= height - ibasey)
                     continue;
 
-                buffer.at(
-                    x + basex,
-                    y
-                ).blend(px);
+                buffer.at(x + basex, y).blend(px);
             }
         }
     }
     std::pair<int, int> CyclicVerticalBar::_resolution() const
     {
-        const auto [ width, height ] = box();
-        const auto [ basex, basey ] = ContainerHelper::_border_base();
-        const auto [ ibasex, ibasey ] = ContainerHelper::_border_base_inv();
+        const auto [width, height] = box();
+        const auto [basex, basey] = ContainerHelper::_border_base();
+        const auto [ibasex, ibasey] = ContainerHelper::_border_base_inv();
         const auto yres = height - (basey + ibasey);
         const auto xres = width - (basex + ibasex);
         if (data::automatic_resolution)
-            return {
-                xres * (data::high_resolution ? 2 : 1),
-                yres * (data::high_resolution ? 4 : 1)
-            };
-        return { data::resolution, yres };
+            return {xres * (data::high_resolution ? 2 : 1), yres * (data::high_resolution ? 4 : 1)};
+        return {data::resolution, yres};
     }
     void CyclicVerticalBar::clear()
     {
@@ -224,7 +220,7 @@ namespace d2::dx::graph
     }
     void CyclicVerticalBar::push(float data_point)
     {
-        const auto [ xres, yres ] = _resolution();
+        const auto [xres, yres] = _resolution();
         if (_data.size() != xres)
         {
             if (_start_offset >= xres)
@@ -238,17 +234,22 @@ namespace d2::dx::graph
     }
     void CyclicVerticalBar::rescale(float scale)
     {
-        if (scale == 1.f) return;
-        std::transform(_data.begin(), _data.end(), _data.begin(), [&](float point) {
-            return scale * point;
-        });
+        if (scale == 1.f)
+            return;
+        std::transform(
+            _data.begin(), _data.end(), _data.begin(), [&](float point) { return scale * point; }
+        );
     }
     void CyclicVerticalBar::rescale(float scale, float trans)
     {
-        if (scale == 1.f && trans == 0.f) return;
-        std::transform(_data.begin(), _data.end(), _data.begin(), [&](float point) {
-            return scale * point + trans;
-        });
+        if (scale == 1.f && trans == 0.f)
+            return;
+        std::transform(
+            _data.begin(),
+            _data.end(),
+            _data.begin(),
+            [&](float point) { return scale * point + trans; }
+        );
     }
 
     float NodeWaveGraph::_lerp(float t, float a, float b)
@@ -296,7 +297,8 @@ namespace d2::dx::graph
         const auto color_i = d2::px::combined::combine(data::node_color_i, data::background_color);
         const auto color_a = d2::px::combined::combine(data::node_color_a, data::background_color);
         const auto color_b = d2::px::combined::combine(data::node_color_b, data::background_color);
-        const auto color_focused = d2::px::combined::combine(data::node_color_focused, data::background_color);
+        const auto color_focused =
+            d2::px::combined::combine(data::node_color_focused, data::background_color);
         const auto height = 4 * buffer.height();
         const auto width = 2 * buffer.width() * (frequency / resolution);
         const auto start = _offset;
@@ -306,12 +308,14 @@ namespace d2::dx::graph
         std::size_t x = 0;
         float prev_end = 0.f;
 
-        auto inc = [&]() {
+        auto inc = [&]()
+        {
             auto rel = (x + abs_start) / width;
             x++;
             rel = (x + abs_start) / width;
         };
-        auto write = [&, pmask = std::size_t(0), prev_cell = int(-1)] (float y) mutable {
+        auto write = [&, pmask = std::size_t(0), prev_cell = int(-1)](float y) mutable
+        {
             auto t = (y + 1.f) * 0.5f;
             if (t <= 0.f)
                 t = 0.f;
@@ -320,11 +324,11 @@ namespace d2::dx::graph
 
             const auto off = static_cast<std::size_t>(t * static_cast<float>(height));
             const auto cell_u = off / 4;
-            const auto dot    = off % 4;
+            const auto dot = off % 4;
 
             const auto cell = static_cast<int>(cell_u);
             const auto h = static_cast<int>(buffer.height());
-            const auto row  = h - cell - 1;
+            const auto row = h - cell - 1;
             if (row < 0 || row >= h)
             {
                 inc();
@@ -338,10 +342,18 @@ namespace d2::dx::graph
             {
                 switch (dot)
                 {
-                case 0: left = d2::charset::BotLeft; break;
-                case 1: left = d2::charset::MidBotLeft; break;
-                case 2: left = d2::charset::MidTopLeft; break;
-                case 3: left = d2::charset::TopLeft; break;
+                case 0:
+                    left = d2::charset::BotLeft;
+                    break;
+                case 1:
+                    left = d2::charset::MidBotLeft;
+                    break;
+                case 2:
+                    left = d2::charset::MidTopLeft;
+                    break;
+                case 3:
+                    left = d2::charset::TopLeft;
+                    break;
                 }
 
                 pmask = left;
@@ -353,10 +365,18 @@ namespace d2::dx::graph
             {
                 switch (dot)
                 {
-                case 0: right = d2::charset::BotRight; break;
-                case 1: right = d2::charset::MidBotRight; break;
-                case 2: right = d2::charset::MidTopRight; break;
-                case 3: right = d2::charset::TopRight; break;
+                case 0:
+                    right = d2::charset::BotRight;
+                    break;
+                case 1:
+                    right = d2::charset::MidBotRight;
+                    break;
+                case 2:
+                    right = d2::charset::MidTopRight;
+                    break;
+                case 3:
+                    right = d2::charset::TopRight;
+                    break;
                 }
 
                 if (prev_cell == cell)
@@ -406,10 +426,12 @@ namespace d2::dx::graph
             if (x / 2 >= buffer.width())
                 return;
 
-            color = _focused_node && _focused_node->id == it->id ?
-                        color_focused : (color_ctr ? color_a : color_b);
+            color = _focused_node && _focused_node->id == it->id ? color_focused
+                                                                 : (color_ctr ? color_a : color_b);
             while (x / 2 < buffer.width() && rel < it->end)
-                write(it->interpolator(it->phase, it->frequency, (float(x) / width) - start, it->parameters));
+                write(it->interpolator(
+                    it->phase, it->frequency, (float(x) / width) - start, it->parameters
+                ));
             if (x / 2 >= buffer.width())
                 return;
             color_ctr = !color_ctr;
@@ -429,10 +451,7 @@ namespace d2::dx::graph
         const auto width = box().width;
         if (_start_point != ~0ull)
         {
-            return push(
-                _start_point / width,
-                _end_point / width
-                );
+            return push(_start_point / width, _end_point / width);
         }
         return ~0ull;
     }
@@ -440,13 +459,12 @@ namespace d2::dx::graph
     {
         if (_nodes.empty())
         {
-            _nodes.push_front({ _id++, start, end });
+            _nodes.push_front({_id++, start, end});
         }
         auto closest = _nodes.begin();
         for (auto it = _nodes.begin(); it != _nodes.end(); ++it)
         {
-            if (start > it->start &&
-                it->start < closest->start)
+            if (start > it->start && it->start < closest->start)
             {
                 closest = it;
             }
@@ -456,13 +474,12 @@ namespace d2::dx::graph
         {
             auto cpy = closest;
             cpy->end = start;
-            _nodes.insert(++closest, { _id++, start, end });
-            _nodes.insert(++closest, *cpy)
-                ->start = end;
+            _nodes.insert(++closest, {_id++, start, end});
+            _nodes.insert(++closest, *cpy)->start = end;
         }
         else
         {
-            _nodes.insert(closest, { _id++, start, end });
+            _nodes.insert(closest, {_id++, start, end});
         }
         _signal_write(Style);
         return _id - 1;
@@ -473,13 +490,13 @@ namespace d2::dx::graph
     }
     void NodeWaveGraph::set_parameters(std::size_t id, const NodePair& node)
     {
-        auto it = std::find_if(_nodes.begin(), _nodes.end(), [&](const auto& node) {
-            return node.id == id;
-        });
+        auto it = std::find_if(
+            _nodes.begin(), _nodes.end(), [&](const auto& node) { return node.id == id; }
+        );
         it->phase = node.phase;
         it->frequency = node.frequency;
         it->parameters = node.parameters;
         it->interpolator = node.interpolator;
         _signal_write(Style);
     }
-}
+} // namespace d2::dx::graph

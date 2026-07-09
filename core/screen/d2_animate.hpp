@@ -2,9 +2,9 @@
 
 #include "core/utils/d2_exceptions.hpp"
 #include <chrono>
-#include <core/types/d2_pixel.hpp>
 #include <core/tree/d2_styles_base.hpp>
 #include <core/tree/d2_tree_element_frwd.hpp>
+#include <core/types/d2_pixel.hpp>
 #include <limits>
 
 namespace d2
@@ -32,46 +32,46 @@ namespace d2
                 return _source + progress * (_dest - _source);
             }
         };
-        template<> class LinearInterpolationWriter<PixelBackground>
+        template<> class LinearInterpolationWriter<px::background>
         {
         private:
-            PixelBackground _source{};
-            PixelBackground _dest{};
+            px::background _source{};
+            px::background _dest{};
         public:
-            LinearInterpolationWriter(PixelBackground source, PixelBackground dest) :
+            LinearInterpolationWriter(px::background source, px::background dest) :
                 _source(source), _dest(dest)
             {
             }
 
-            void reset(const PixelBackground& source, const PixelBackground& dest)
+            void reset(const px::background& source, const px::background& dest)
             {
                 _source = source;
                 _dest = dest;
             }
-            PixelBackground write(float progress)
+            px::background write(float progress)
             {
-                return Pixel::interpolate(_source, _dest, progress);
+                return pixel::interpolate(_source, _dest, progress);
             }
         };
-        template<> class LinearInterpolationWriter<PixelForeground>
+        template<> class LinearInterpolationWriter<px::foreground>
         {
         private:
-            PixelForeground _source{};
-            PixelForeground _dest{};
+            px::foreground _source{};
+            px::foreground _dest{};
         public:
-            LinearInterpolationWriter(PixelForeground source, PixelForeground dest) :
+            LinearInterpolationWriter(px::foreground source, px::foreground dest) :
                 _source(source), _dest(dest)
             {
             }
 
-            void reset(const PixelForeground& source, const PixelForeground& dest)
+            void reset(const px::foreground& source, const px::foreground& dest)
             {
                 _source = source;
                 _dest = dest;
             }
-            PixelForeground write(float progress)
+            px::foreground write(float progress)
             {
-                PixelForeground value{};
+                px::foreground value{};
                 value.r = _source.r + progress * (_dest.r - _source.r);
                 value.g = _source.g + progress * (_dest.g - _source.g);
                 value.b = _source.b + progress * (_dest.b - _source.b);
@@ -79,22 +79,22 @@ namespace d2
                 return value;
             }
         };
-        template<> class LinearInterpolationWriter<Pixel>
+        template<> class LinearInterpolationWriter<pixel>
         {
         private:
-            Pixel _source{};
-            Pixel _dest{};
+            pixel _source{};
+            pixel _dest{};
         public:
-            LinearInterpolationWriter(Pixel source, Pixel dest) : _source(source), _dest(dest) {}
+            LinearInterpolationWriter(pixel source, pixel dest) : _source(source), _dest(dest) {}
 
-            void reset(const Pixel& source, const Pixel& dest)
+            void reset(const pixel& source, const pixel& dest)
             {
                 _source = source;
                 _dest = dest;
             }
-            Pixel write(float progress)
+            pixel write(float progress)
             {
-                return Pixel::interpolate(_source, _dest, progress);
+                return pixel::interpolate(_source, _dest, progress);
             }
         };
     } // namespace impl

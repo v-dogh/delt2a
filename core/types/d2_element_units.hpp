@@ -1,8 +1,10 @@
 #pragma once
 
+#include <cstdint>
+
 namespace d2
 {
-// More boolerplate xd
+    // More boolerplate xd
     class Unit
     {
     public:
@@ -49,19 +51,21 @@ namespace d2
     private:
         struct UnitType
         {
-            unsigned char mods{ 0x00 };
-            Type type{ Px };
+            unsigned char mods{0x00};
+            Type type{Px};
 
             constexpr UnitType() = default;
-            constexpr UnitType(Type type, unsigned char mods = 0x00) : mods(mods), type(type) { }
+            constexpr UnitType(Type type, unsigned char mods = 0x00) : mods(mods), type(type) {}
         };
     protected:
-        float value_{ 0.f };
+        float value_{0.f};
         UnitType units_{};
     public:
         constexpr Unit() = default;
-        constexpr Unit(float value, Type units = Px, unsigned char mods = 0x00)
-            : value_(value), units_(units, mods) {}
+        constexpr Unit(float value, Type units = Px, unsigned char mods = 0x00) :
+            value_(value), units_(units, mods)
+        {
+        }
         constexpr Unit(Type units, unsigned char mods = 0x00) : units_(units, mods) {}
         constexpr Unit(Mods mods) : units_(Type::Px, mods) {}
         constexpr Unit(const Unit&) = default;
@@ -75,9 +79,7 @@ namespace d2
         constexpr bool contextual() const
         {
             // Auto does not count as relative
-            return
-                units_.type == Type::Pc ||
-                (units_.mods & (Mods::Inverted | Mods::Center));
+            return units_.type == Type::Pc || (units_.mods & (Mods::Inverted | Mods::Center));
         }
         constexpr bool inverted() const
         {
@@ -216,7 +218,7 @@ namespace d2
         }
     };
 
-    enum UnitContext : unsigned char
+    enum class UnitContext : unsigned char
     {
         Horizontal = Unit::Mods::Horizontal,
         Vertical = Unit::Mods::Vertical,
@@ -224,33 +226,33 @@ namespace d2
         Dimensions = Unit::Mods::_Dimensions,
     };
 
-    template<unsigned char Ctx>
-    class AlignedUnit : public Unit
+    template<unsigned char Ctx> class AlignedUnit : public Unit
     {
     private:
         void _setctx()
         {
             const auto mods = getmods();
             setmods(
-                (Ctx & UnitContext::Horizontal) * !(mods & UnitContext::Vertical) |
-                (Ctx & UnitContext::Vertical) * !(mods & UnitContext::Horizontal) |
-                (Ctx & (UnitContext::Dimensions | UnitContext::Position))
+                (Ctx & std::uint8_t(UnitContext::Horizontal)) *
+                    !(mods & std::uint8_t(UnitContext::Vertical)) |
+                (Ctx & std::uint8_t(UnitContext::Vertical)) *
+                    !(mods & std::uint8_t(UnitContext::Horizontal)) |
+                (Ctx &
+                 (std::uint8_t(UnitContext::Dimensions) | std::uint8_t(UnitContext::Position)))
             );
         }
     public:
         constexpr AlignedUnit() = default;
-        constexpr AlignedUnit(const Unit& value)
-            : Unit(value)
+        constexpr AlignedUnit(const Unit& value) : Unit(value)
         {
             _setctx();
         }
-        constexpr AlignedUnit(float value, Type units = Px, unsigned char mods = 0x00)
-            : Unit(value, units, mods)
+        constexpr AlignedUnit(float value, Type units = Px, unsigned char mods = 0x00) :
+            Unit(value, units, mods)
         {
             _setctx();
         }
-        constexpr AlignedUnit(Type units, unsigned char mods = 0x00)
-            : Unit(units, mods)
+        constexpr AlignedUnit(Type units, unsigned char mods = 0x00) : Unit(units, mods)
         {
             _setctx();
         }
@@ -263,11 +265,11 @@ namespace d2
 
         consteval bool getcontext(UnitContext value) const
         {
-            return Ctx & value;
+            return Ctx & std::uint8_t(value);
         }
         consteval bool getcontext(UnitContext value)
         {
-            return Ctx & value;
+            return Ctx & std::uint8_t(value);
         }
 
         constexpr AlignedUnit& operator=(const AlignedUnit&) = default;
@@ -283,12 +285,15 @@ namespace d2
     };
 
     // Aliases for conventionalism
-
-    using HDUnit = AlignedUnit<UnitContext::Horizontal | UnitContext::Dimensions>;
-    using VDUnit = AlignedUnit<UnitContext::Vertical | UnitContext::Dimensions>;
-    using HPUnit = AlignedUnit<UnitContext::Horizontal | UnitContext::Position>;
-    using VPUnit = AlignedUnit<UnitContext::Vertical | UnitContext::Position>;
-}
+    using HDUnit =
+        AlignedUnit<std::uint8_t(UnitContext::Horizontal) | std::uint8_t(UnitContext::Dimensions)>;
+    using VDUnit =
+        AlignedUnit<std::uint8_t(UnitContext::Vertical) | std::uint8_t(UnitContext::Dimensions)>;
+    using HPUnit =
+        AlignedUnit<std::uint8_t(UnitContext::Horizontal) | std::uint8_t(UnitContext::Position)>;
+    using VPUnit =
+        AlignedUnit<std::uint8_t(UnitContext::Vertical) | std::uint8_t(UnitContext::Position)>;
+} // namespace d2
 
 constexpr d2::Unit operator""_px(long double value)
 {
@@ -356,4 +361,3 @@ constexpr d2::Unit operator""_relative(long double value)
 {
     return d2::Unit(value, d2::Unit::Px, d2::Unit::Mods::Relative);
 }
-

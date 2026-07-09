@@ -151,8 +151,8 @@ namespace d2::dx
     void Dropdown::_frame_impl(PixelBuffer::View buffer)
     {
         const auto bbox = box();
-        const auto color = Pixel::combine(data::foreground_color, data::background_color);
-        const auto color_focused = Pixel::combine(data::foreground_color, data::focused_color);
+        const auto color = pixel::combine(data::foreground_color, data::background_color);
+        const auto color_focused = pixel::combine(data::foreground_color, data::focused_color);
 
         buffer.fill(color);
 

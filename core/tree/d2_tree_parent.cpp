@@ -129,8 +129,8 @@ namespace d2
     int ParentElement::resolve_units(Unit value, cptr elem) const
     {
         const bool adjust = value.getmods() & Unit::Mods::Adjusted;
-        const bool dims = value.getmods() & UnitContext::Dimensions;
-        const bool horiz = value.getmods() & UnitContext::Horizontal;
+        const bool dims = value.getmods() & std::uint8_t(UnitContext::Dimensions);
+        const bool horiz = value.getmods() & std::uint8_t(UnitContext::Horizontal);
         const bool inv = value.getmods() & Unit::Mods::Inverted;
         const bool rel = value.getmods() & Unit::Relative;
         const float val = value.raw();

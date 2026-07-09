@@ -14,7 +14,7 @@ namespace d2::dx
         friend class TextHelper;
         using data = style::UAI<Text, style::ILayout, style::IText, style::IColors>;
     protected:
-        Box _text_dimensions{};
+        BoundingBox _text_dimensions{};
 
         virtual Unit _layout_impl(Element::Layout type) const override;
         virtual void _frame_impl(PixelBuffer::View buffer) override;

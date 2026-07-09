@@ -7,32 +7,32 @@ namespace d2::dx::impl
 {
     namespace tx
     {
-        Element::Box _text_bounding_box(const string& value);
-        Element::Box
+        BoundingBox _text_bounding_box(const string& value);
+        BoundingBox
         _paragraph_bounding_box(const string& value, int width = INT_MAX, int height = INT_MAX);
 
         void _render_text_simple(
             const string& value,
-            Pixel color,
+            pixel color,
             style::IZText::Alignment alignment,
-            Element::Position pos,
-            Element::Box box,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         );
         void _render_text(
             const string& value,
-            Pixel color,
+            pixel color,
             style::IZText::Alignment alignment,
-            Element::Position pos,
-            Element::Box box,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         );
         void _render_paragraph(
             const string& value,
-            Pixel color,
+            pixel color,
             style::IZText::Alignment alignment,
-            Element::Position pos,
-            Element::Box box,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         );
     } // namespace tx
@@ -44,11 +44,11 @@ namespace d2::dx::impl
     template<typename Base> class TextHelper
     {
     protected:
-        Element::Box _text_bounding_box(const string& value) const
+        BoundingBox _text_bounding_box(const string& value) const
         {
             return impl::tx::_text_bounding_box(value);
         }
-        Element::Box _paragraph_bounding_box(
+        BoundingBox _paragraph_bounding_box(
             const string& value, int width = INT_MAX, int height = INT_MAX
         ) const
         {
@@ -57,10 +57,10 @@ namespace d2::dx::impl
 
         void _render_text_simple(
             const string& value,
-            Pixel color,
+            pixel color,
             style::IZText::Alignment alignment,
-            Element::Position pos,
-            Element::Box box,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         ) const
         {
@@ -68,9 +68,9 @@ namespace d2::dx::impl
         }
         void _render_text_simple(
             const string& value,
-            Pixel color,
-            Element::Position pos,
-            Element::Box box,
+            pixel color,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         ) const
         {
@@ -80,10 +80,10 @@ namespace d2::dx::impl
         }
         void _render_text(
             const string& value,
-            Pixel color,
+            pixel color,
             style::IZText::Alignment alignment,
-            Element::Position pos,
-            Element::Box box,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         ) const
         {
@@ -91,9 +91,9 @@ namespace d2::dx::impl
         }
         void _render_text(
             const string& value,
-            Pixel color,
-            Element::Position pos,
-            Element::Box box,
+            pixel color,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         ) const
         {
@@ -101,10 +101,10 @@ namespace d2::dx::impl
         }
         void _render_paragraph(
             const string& value,
-            Pixel color,
+            pixel color,
             style::IZText::Alignment alignment,
-            Element::Position pos,
-            Element::Box box,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         ) const
         {
@@ -112,9 +112,9 @@ namespace d2::dx::impl
         }
         void _render_paragraph(
             const string& value,
-            Pixel color,
-            Element::Position pos,
-            Element::Box box,
+            pixel color,
+            Position pos,
+            BoundingBox box,
             PixelBuffer::View buffer
         )
         {
@@ -127,7 +127,7 @@ namespace d2::dx::impl
     template<typename Base> class ContainerHelper
     {
     protected:
-        Element::Position _border_base() const
+        Position _border_base() const
         {
             auto& p = static_cast<const Base&>(*this);
             const auto is_border = p.container_options & Base::ContainerOptions::EnableBorder;
@@ -141,7 +141,7 @@ namespace d2::dx::impl
             }
             return {0, 0};
         }
-        Element::Position _border_base_inv() const
+        Position _border_base_inv() const
         {
             auto& p = static_cast<const Base&>(*this);
             const auto is_border = p.container_options & Base::ContainerOptions::EnableBorder;

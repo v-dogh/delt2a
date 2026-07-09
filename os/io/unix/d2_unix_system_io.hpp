@@ -3,9 +3,9 @@
 #include <any>
 #include <shared_mutex>
 
-#include <core/platform/d2_locale.hpp>
 #include <core/io/d2_module.hpp>
 #include <core/mods/d2_core.hpp>
+#include <core/platform/d2_locale.hpp>
 
 #include <fcntl.h>
 #include <poll.h>
@@ -90,12 +90,12 @@ namespace d2::sys
     private:
         std::chrono::microseconds _frame_time{0};
         std::vector<unsigned char> _out{};
-        std::vector<Pixel> _swapframe{};
+        std::vector<pixel> _swapframe{};
         std::size_t _pbuffer_size{0};
         std::size_t _buffer_size{0};
-        std::uint8_t _track_style{};
-        PixelForeground _track_foreground{};
-        PixelBackground _track_background{};
+        px::style _track_style{};
+        px::foreground _track_foreground{};
+        px::background _track_background{};
 
         std::mutex mtx_{};
         std::unordered_map<std::string, std::any> images_{};
@@ -104,9 +104,9 @@ namespace d2::sys
         void _kitty_write(const std::string& cmd);
 
         position_type _generate_position(int x, int y, bool skip = false);
-        color_type _generate_color(const Pixel& px, bool force = false);
+        color_type _generate_color(const pixel& px, bool force = false);
 
-        void _push(const Pixel& px);
+        void _push(const pixel& px);
         int _write(std::span<const unsigned char> buffer);
         int _write(std::span<const char> buffer);
 
@@ -133,7 +133,7 @@ namespace d2::sys
         virtual image image_id(const std::string& path) override;
 
         virtual void
-        write(std::span<const Pixel> buffer, std::size_t width, std::size_t height) override;
+        write(std::span<const pixel> buffer, std::size_t width, std::size_t height) override;
 
         virtual std::size_t delta_size() override;
         virtual std::size_t swapframe_size() override;

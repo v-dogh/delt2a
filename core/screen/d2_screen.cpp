@@ -2,9 +2,9 @@
 
 #include <absl/strings/internal/str_format/extension.h>
 #include <chrono>
-#include <core/utils/d2_exceptions.hpp>
 #include <core/io/d2_input_base.hpp>
 #include <core/tree/d2_tree_parent.hpp>
+#include <core/utils/d2_exceptions.hpp>
 #include <filesystem>
 
 namespace d2::sys
@@ -538,7 +538,7 @@ namespace d2::sys
         return ptr;
     }
     MatrixModel::ptr SystemScreen::fetch_model(
-        const std::string& name, int width, int height, std::vector<Pixel> data
+        const std::string& name, int width, int height, std::vector<pixel> data
     )
     {
         auto f = _models.find(name);
@@ -551,7 +551,7 @@ namespace d2::sys
         return ptr;
     }
     MatrixModel::ptr SystemScreen::fetch_model(
-        const std::string& name, int width, int height, std::span<const Pixel> data
+        const std::string& name, int width, int height, std::span<const pixel> data
     )
     {
         auto f = _models.find(name);

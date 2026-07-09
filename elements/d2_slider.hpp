@@ -1,60 +1,48 @@
 #pragma once
 
-#include <core/tree/d2_tree_element.hpp>
 #include <core/tree/d2_styles.hpp>
+#include <core/tree/d2_tree_element.hpp>
 
 namespace d2
 {
     namespace style
     {
-        D2_UAI_INTERFACE(Slider,
+        D2_UAI_INTERFACE(
+            Slider,
             D2_UAI_OPTS(),
             D2_UAI_FIELDS(
-                float min{ 0.f };
-                float max{ 100.f };
-                float step{ 1.f };
-                Pixel slider_color{ .r = 255, .g = 255, .b = 255, .v = ' ' };
-                HDUnit slider_width{ 1 };
+                float min{0.f}; float max{100.f}; float step{1.f};
+                pixel slider_color{.r = 255, .g = 255, .b = 255, .v = ' '};
+                HDUnit slider_width{1};
             ),
-            D2_UAI_PROPS(
-                Max,
-                Min,
-                Step,
-                SliderColor,
-                SliderWidth
-            ),
-            D2_UAI_LINK(
-                D2_UAI_PROP(Max, max, Style)
-                D2_UAI_PROP(Min, min, Style)
-                D2_UAI_PROP(Step, step, None)
-                D2_UAI_PROP(SliderColor, slider_color, Style)
-                D2_UAI_PROP(SliderWidth, slider_width, Style)
-            )
+            D2_UAI_PROPS(Max, Min, Step, SliderColor, SliderWidth),
+            D2_UAI_LINK(D2_UAI_PROP(Max, max, Style) D2_UAI_PROP(Min, min, Style)
+                            D2_UAI_PROP(Step, step, None)
+                                D2_UAI_PROP(SliderColor, slider_color, Style)
+                                    D2_UAI_PROP(SliderWidth, slider_width, Style))
         )
     }
     namespace dx
     {
-        class Slider : public style::UAI<
-            Slider,
-            style::ILayout,
-            style::ISlider,
-            style::IColors,
-            style::IKeyboardNav,
-            style::IResponsive<Slider, float, float>::type
-        >
+        class Slider : public style::
+                           UAI<Slider,
+                               style::ILayout,
+                               style::ISlider,
+                               style::IColors,
+                               style::IKeyboardNav,
+                               style::IResponsive<Slider, float, float>::type>
         {
         public:
-            using data = style::UAI<
-                Slider,
-                style::ILayout,
-                style::ISlider,
-                style::IColors,
-                style::IKeyboardNav,
-                style::IResponsive<Slider, float, float>::type
-            >;
+            using data = style::
+                UAI<Slider,
+                    style::ILayout,
+                    style::ISlider,
+                    style::IColors,
+                    style::IKeyboardNav,
+                    style::IResponsive<Slider, float, float>::type>;
         protected:
-            int _slider_spos{ 0 };
-            float _slider_pos{ 0 };
+            int _slider_spos{0};
+            float _slider_pos{0};
 
             void _submit();
 
@@ -70,10 +58,7 @@ namespace d2
             int _relative_to_absolute(float rel);
             float _absolute_to_relative(int abs);
         public:
-            Slider(
-                const std::string& name,
-                TreeState::ptr state
-            );
+            Slider(const std::string& name, TreeState::ptr state);
 
             void reset_absolute(float value = 0);
             void reset_relative(float value = 0);
@@ -88,11 +73,7 @@ namespace d2
             virtual int _aligned_width() override;
             virtual void _frame_impl(PixelBuffer::View buffer) override;
         public:
-            VerticalSlider(
-                const std::string& name,
-                TreeState::ptr state
-            );
+            VerticalSlider(const std::string& name, TreeState::ptr state);
         };
-    }
-}
-
+    } // namespace dx
+} // namespace d2

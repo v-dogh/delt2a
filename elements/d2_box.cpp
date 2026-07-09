@@ -99,7 +99,7 @@ namespace d2::dx
     {
         // Fill in the gaps
 
-        buffer.fill(Pixel::combine(data::foreground_color, data::background_color));
+        buffer.fill(pixel::combine(data::foreground_color, data::background_color));
 
         // Fleshbox
 

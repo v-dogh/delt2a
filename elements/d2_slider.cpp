@@ -106,7 +106,7 @@ namespace d2::dx
 
     void Slider::_frame_impl(PixelBuffer::View buffer)
     {
-        buffer.fill(Pixel::combine(data::foreground_color, data::background_color));
+        buffer.fill(pixel::combine(data::foreground_color, data::background_color));
 
         const auto sw = resolve_units(data::slider_width);
         auto sc = getstate(State::Keynavi) ? px::combined(data::focused_color) : data::slider_color;
@@ -181,7 +181,7 @@ namespace d2::dx
     }
     void VerticalSlider::_frame_impl(PixelBuffer::View buffer)
     {
-        buffer.fill(Pixel::combine(data::foreground_color, data::background_color));
+        buffer.fill(pixel::combine(data::foreground_color, data::background_color));
 
         const auto sw = resolve_units(data::slider_width);
         auto sc = getstate(State::Keynavi) ? px::combined(data::focused_color) : data::slider_color;

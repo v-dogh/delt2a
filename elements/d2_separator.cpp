@@ -4,12 +4,14 @@ namespace d2::dx
 {
     void Separator::_frame_impl(PixelBuffer::View buffer)
     {
-        auto color = Pixel::combine(data::foreground_color, data::background_color);
-        if (!data::hide_body) buffer.fill(color);
-        else buffer.fill(data::background_color);
+        auto color = pixel::combine(data::foreground_color, data::background_color);
+        if (!data::hide_body)
+            buffer.fill(color);
+        else
+            buffer.fill(data::background_color);
         if (data::override_corners)
         {
-            const auto [ width, height ] = box();
+            const auto [width, height] = box();
             if (_orientation == Align::Vertical)
             {
                 color.v = data::corner_left;
@@ -31,24 +33,19 @@ namespace d2::dx
         }
     }
 
-    Separator::Separator(
-        const std::string& name,
-        TreeState::ptr state
-        ) : data(name, state)
+    Separator::Separator(const std::string& name, TreeState::ptr state) : data(name, state)
     {
         _orientation = Align::Horizontal;
-        data::foreground_color = d2::px::foreground{ .v = d2::charset::switch_separator_horizontal };
-        data::background_color = d2::px::background{ .a = 0 };
+        data::foreground_color = d2::px::foreground{.v = d2::charset::switch_separator_horizontal};
+        data::background_color = d2::px::background{.a = 0};
         data::height = 1.0_px;
     }
-    VerticalSeparator::VerticalSeparator(
-        const std::string& name,
-        TreeState::ptr state
-        ) : Separator(name, state)
+    VerticalSeparator::VerticalSeparator(const std::string& name, TreeState::ptr state) :
+        Separator(name, state)
     {
         _orientation = Align::Vertical;
-        data::foreground_color = d2::px::foreground{ .v = d2::charset::switch_separator_vertical };
-        data::background_color = d2::px::background{ .a = 0 };
+        data::foreground_color = d2::px::foreground{.v = d2::charset::switch_separator_vertical};
+        data::background_color = d2::px::background{.a = 0};
         data::width = 1.0_px;
     }
-}
+} // namespace d2::dx

@@ -22,16 +22,16 @@ namespace d2
                 std::function<void(TreeIter<dx::Switch>, string, string)> on_change_values{nullptr};
                 std::vector<string> options{};
 
-                PixelBackground disabled_background_color{d2::colors::w::transparent};
-                PixelForeground disabled_foreground_color{};
-                PixelBackground enabled_background_color{.r = 255, .g = 255, .b = 255};
-                PixelForeground enabled_foreground_color{.r = 0, .g = 0, .b = 0};
-                Pixel separator_color{.a = 0, .v = '|'};
+                px::background disabled_background_color{d2::colors::w::transparent};
+                px::foreground disabled_foreground_color{};
+                px::background enabled_background_color{.r = 255, .g = 255, .b = 255};
+                px::foreground enabled_foreground_color{.r = 0, .g = 0, .b = 0};
+                pixel separator_color{.a = 0, .v = '|'};
                 bool disable_separator{false};
                 bool expand_background{true};
 
-                PixelForeground pre_color{};
-                PixelForeground post_color{};
+                px::foreground pre_color{};
+                px::foreground post_color{};
                 string select_pre{""};
                 string select_post{""};
 
@@ -77,8 +77,8 @@ namespace d2
             VerticalSwitch,
             D2_UAI_OPTS(),
             D2_UAI_FIELDS(
-                PixelForeground slider_background_color{.v = charset::slider_vertical};
-                Pixel slider_color{.r = 255, .g = 255, .b = 255, .v = ' '};
+                px::foreground slider_background_color{.v = charset::slider_vertical};
+                pixel slider_color{.r = 255, .g = 255, .b = 255, .v = ' '};
                 value_type left_connector{charset::box_border_connector_left};
                 value_type right_connector{charset::box_border_connector_right};
             ),
@@ -116,7 +116,7 @@ namespace d2
                     style::IKeyboardNav>;
             using data::data;
         protected:
-            Box _perfect_dimensions{};
+            BoundingBox _perfect_dimensions{};
             int _idx{invalid};
             int _old{invalid};
 

@@ -1,15 +1,15 @@
 #pragma once
 
 #include <absl/container/inlined_vector.h>
-#include <core/types/d2_element_units.hpp>
-#include <core/io/d2_input_base.hpp>
 #include <core/io/d2_context.hpp>
-#include <core/types/d2_pixel.hpp>
+#include <core/io/d2_input_base.hpp>
 #include <core/screen/d2_screen.hpp>
 #include <core/tree/d2_styles_base.hpp>
 #include <core/tree/d2_theme.hpp>
 #include <core/tree/d2_tree_element_frwd.hpp>
 #include <core/tree/d2_tree_state.hpp>
+#include <core/types/d2_element_units.hpp>
+#include <core/types/d2_pixel.hpp>
 #include <core/types/d2_vtypes.hpp>
 #include <functional>
 #include <memory>
@@ -433,7 +433,7 @@ namespace d2
 
         // Layout
 
-        virtual Box _reserve_buffer_impl() const
+        virtual BoundingBox _reserve_buffer_impl() const
         {
             return box();
         }
@@ -502,9 +502,9 @@ namespace d2
 
         Frame frame();
 
-        Box box() const;
+        BoundingBox box() const;
         Position position() const;
-        Box internal_box() const;
+        BoundingBox internal_box() const;
         Position internal_position() const;
 
         Position position_screen_space() const;

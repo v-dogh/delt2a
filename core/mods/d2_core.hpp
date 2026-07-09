@@ -143,7 +143,7 @@ namespace d2::sys
         virtual std::size_t swapframe_size() = 0;
 
         virtual void
-        write(std::span<const Pixel> buffer, std::size_t width, std::size_t height) = 0;
+        write(std::span<const pixel> buffer, std::size_t width, std::size_t height) = 0;
     };
 
     // Generic base class for the main screen

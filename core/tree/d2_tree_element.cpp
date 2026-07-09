@@ -1,7 +1,7 @@
 #include "core/tree/d2_tree_element.hpp"
-#include <core/utils/d2_exceptions.hpp>
 #include <core/io/d2_input_base.hpp>
 #include <core/tree/d2_tree_parent.hpp>
+#include <core/utils/d2_exceptions.hpp>
 #include <vector>
 
 namespace d2
@@ -652,7 +652,7 @@ namespace d2
 
         return Frame(shared_from_this());
     }
-    Element::Box Element::box() const
+    BoundingBox Element::box() const
     {
         [[unlikely]] if (parent() == nullptr)
             return {_layout.get(Layout::Width), _layout.get(Layout::Height)};
@@ -660,9 +660,9 @@ namespace d2
             parent()->layout_for(Layout::Width, shared_from_this());
         if (!(_internal_state & DimensionsHeightUpdated))
             parent()->layout_for(Layout::Height, shared_from_this());
-        return Element::Box{_layout.get(Layout::Width), _layout.get(Layout::Height)};
+        return BoundingBox{_layout.get(Layout::Width), _layout.get(Layout::Height)};
     }
-    Element::Position Element::position() const
+    Position Element::position() const
     {
         [[unlikely]] if (parent() == nullptr)
             return {_layout.get(Layout::X), _layout.get(Layout::Y)};
@@ -670,22 +670,22 @@ namespace d2
             parent()->layout_for(Layout::X, shared_from_this());
         if (!(_internal_state & PositionYUpdated))
             parent()->layout_for(Layout::Y, shared_from_this());
-        return Element::Position{_layout.get(Layout::X), _layout.get(Layout::Y)};
+        return Position{_layout.get(Layout::X), _layout.get(Layout::Y)};
     }
-    Element::Box Element::internal_box() const
+    BoundingBox Element::internal_box() const
     {
         return {
             resolve_units(internal_layout(Layout::Width)),
             resolve_units(internal_layout(Layout::Height))
         };
     }
-    Element::Position Element::internal_position() const
+    Position Element::internal_position() const
     {
         return {
             resolve_units(internal_layout(Layout::X)), resolve_units(internal_layout(Layout::Y))
         };
     }
-    Element::Position Element::position_screen_space() const
+    Position Element::position_screen_space() const
     {
         if (parent())
         {
@@ -698,7 +698,7 @@ namespace d2
         }
         return position();
     }
-    Element::Position Element::mouse_object_space() const
+    Position Element::mouse_object_space() const
     {
         if (parent())
         {

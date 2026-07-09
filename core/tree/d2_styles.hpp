@@ -1,16 +1,16 @@
 #pragma once
 
-#include "core/utils/d2_exceptions.hpp"
 #include "core/tree/d2_theme.hpp"
+#include "core/utils/d2_exceptions.hpp"
 #include <bitset>
 #include <core/platform/d2_chardef.hpp>
-#include <core/types/d2_element_units.hpp>
-#include <core/types/d2_pixel.hpp>
 #include <core/screen/d2_screen.hpp>
 #include <core/tree/d2_styles_base.hpp>
 #include <core/tree/d2_text_select.hpp>
 #include <core/tree/d2_tree_element.hpp>
 #include <core/tree/d2_tree_parent.hpp>
+#include <core/types/d2_element_units.hpp>
+#include <core/types/d2_pixel.hpp>
 #include <type_traits>
 #include <utility>
 
@@ -822,7 +822,7 @@ public:                                                                         
     D2_UAI_INTERFACE(
         Selectable,
         D2_UAI_OPTS(),
-        D2_UAI_FIELDS(PixelBackground highlight_mask{.r = 170, .g = 170, .b = 170}),
+        D2_UAI_FIELDS(px::background highlight_mask{.r = 170, .g = 170, .b = 170}),
         D2_UAI_PROPS(EnableSelection, HighlightMask),
         D2_UAI_LINK(D2_UAI_PROP(EnableSelection, enable_selection, Style)
                         D2_UAI_PROP(HighlightMask, highlight_mask, Style)),
@@ -863,15 +863,15 @@ public:                                                                         
         ),
         D2_UAI_FIELDS(
             HDUnit border_width{ 1 };
-            Pixel border_horizontal_color{ .a = 0, .v = charset::box_border_horizontal };
-            Pixel border_vertical_color{ .a = 0, .v = charset::box_border_vertical };
+            pixel border_horizontal_color{ .a = 0, .v = charset::box_border_horizontal };
+            pixel border_vertical_color{ .a = 0, .v = charset::box_border_vertical };
 
             struct
             {
-                Pixel::value_type top_left{ charset::box_tl_corner };
-                Pixel::value_type top_right{ charset::box_tr_corner };
-                Pixel::value_type bottom_left{ charset::box_bl_corner };
-                Pixel::value_type bottom_right{ charset::box_br_corner };
+                px::value_type top_left{ charset::box_tl_corner };
+                px::value_type top_right{ charset::box_tr_corner };
+                px::value_type bottom_left{ charset::box_bl_corner };
+                px::value_type bottom_right{ charset::box_br_corner };
             } corners;
 
             unsigned char container_options {
@@ -923,7 +923,7 @@ public:                                                                         
         Colors,
         D2_UAI_OPTS(),
         D2_UAI_FIELDS(
-            PixelBackground background_color{.a = 0}; PixelForeground foreground_color{.a = 0};
+            px::background background_color{.a = 0}; px::foreground foreground_color{.a = 0};
         ),
         D2_UAI_PROPS(BackgroundColor, ForegroundColor),
         D2_UAI_LINK(D2_UAI_PROP(BackgroundColor, background_color, Style)
@@ -933,7 +933,7 @@ public:                                                                         
     D2_UAI_INTERFACE(
         KeyboardNav,
         D2_UAI_OPTS(),
-        D2_UAI_FIELDS(PixelBackground focused_color{.r = 150, .g = 150, .b = 150};),
+        D2_UAI_FIELDS(px::background focused_color{.r = 150, .g = 150, .b = 150};),
         D2_UAI_PROPS(FocusedColor),
         D2_UAI_LINK(D2_UAI_PROP(FocusedColor, focused_color, Style))
     )

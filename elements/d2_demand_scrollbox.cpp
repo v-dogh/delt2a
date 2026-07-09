@@ -24,7 +24,8 @@ namespace d2::dx
 
     int DemandScrollBox::_get_border_impl(BorderType type, cptr elem) const
     {
-        const auto bw = data::container_options & EnableBorder ? resolve_units(data::border_width) : 0;
+        const auto bw =
+            data::container_options & EnableBorder ? resolve_units(data::border_width) : 0;
         if (elem != _scrollbar && type == BorderType::Right && _scrollbar->getstate(Display))
         {
             const auto sw = _scrollbar->box().width;
@@ -36,10 +37,14 @@ namespace d2::dx
     {
         switch (type)
         {
-        case Element::Layout::X: return data::x;
-        case Element::Layout::Y: return data::y;
-        case Element::Layout::Width: return data::width;
-        case Element::Layout::Height: return data::height;
+        case Element::Layout::X:
+            return data::x;
+        case Element::Layout::Y:
+            return data::y;
+        case Element::Layout::Width:
+            return data::width;
+        case Element::Layout::Height:
+            return data::height;
         }
     }
     void DemandScrollBox::_layout_for_impl(enum Element::Layout type, cptr ptr) const
@@ -52,10 +57,15 @@ namespace d2::dx
         {
             switch (type)
             {
-            case Element::Layout::Y: ptr->override_layout(type, 0); return;
-            case Element::Layout::X: [[ fallthrough ]];
-            case Element::Layout::Width: [[ fallthrough ]];
-            case Element::Layout::Height: ParentElement::_layout_for_impl(type, ptr);
+            case Element::Layout::Y:
+                ptr->override_layout(type, 0);
+                return;
+            case Element::Layout::X:
+                [[fallthrough]];
+            case Element::Layout::Width:
+                [[fallthrough]];
+            case Element::Layout::Height:
+                ParentElement::_layout_for_impl(type, ptr);
             }
         }
     }
@@ -69,21 +79,19 @@ namespace d2::dx
     {
         if (state == State::Created && value && _scrollbar == nullptr)
         {
-            _scrollbar = d2::Element::make<VerticalSlider>(
-                "",
-                this->state()
-            );
+            _scrollbar = d2::Element::make<VerticalSlider>("", this->state());
             _insert_setstate(_scrollbar);
             _scrollbar->set<Slider::X>(0.0_pxi);
             _scrollbar->set<Slider::Y>(0.0_px);
             _scrollbar->set<Slider::Height>(1.0_pc);
-            _scrollbar->set<Slider::OnSubmit>([this](auto ptr, auto, auto abs)
-            {
-                _offset = abs;
-                _signal_write(WriteType::Style);
-            });
-            internal::ElementView::from(_scrollbar)
-                .signal_write(WriteType::Masked);
+            _scrollbar->set<Slider::OnSubmit>(
+                [this](auto ptr, auto, auto abs)
+                {
+                    _offset = abs;
+                    _signal_write(WriteType::Style);
+                }
+            );
+            internal::ElementView::from(_scrollbar).signal_write(WriteType::Masked);
             MetaParentElement::_state_change_impl(state, value);
         }
         else if (state == State::Swapped && data::swap_out)
@@ -94,7 +102,6 @@ namespace d2::dx
         }
         else
             MetaParentElement::_state_change_impl(state, value);
-
     }
     bool DemandScrollBox::_provides_input_impl() const
     {
@@ -119,8 +126,10 @@ namespace d2::dx
                 if (_offset <= ch)
                     scroll_to(_offset + 1);
             }
-            else if (frame.active(in::special::ArrowRight, in::mode::Hold) ||
-                     frame.active(in::special::ArrowUp, in::mode::Hold))
+            else if (
+                frame.active(in::special::ArrowRight, in::mode::Hold) ||
+                frame.active(in::special::ArrowUp, in::mode::Hold)
+            )
             {
                 if (_offset > 0)
                     scroll_to(_offset - 1);
@@ -136,12 +145,9 @@ namespace d2::dx
     {
         _scrollbar->reset_absolute(offset);
     }
-    void DemandScrollBox::reset()
-    {
+    void DemandScrollBox::reset() {}
 
-    }
-
-    void DemandScrollBox::foreach(foreach_callback callback) const noexcept
+    void DemandScrollBox::foreach (foreach_callback callback) const noexcept
     {
         for (decltype(auto) it : _view)
             callback(it);
@@ -155,7 +161,8 @@ namespace d2::dx
 
     void DemandScrollBox::_update_view()
     {
-        const auto bw = (data::container_options & EnableBorder) ? resolve_units(data::border_width) : 0;
+        const auto bw =
+            (data::container_options & EnableBorder) ? resolve_units(data::border_width) : 0;
         const int height = int(layout(d2::Element::Layout::Height)) - int(bw) * 2;
         const int ypad = int(resolve_units(data::padding_vertical));
 
@@ -190,9 +197,8 @@ namespace d2::dx
             {
                 const auto h = int(elem->layout(d2::Element::Layout::Height));
                 _height_cache[i] = h;
-                _avg_height =
-                    (_avg_height * double(_avg_height_cnt) + double(h)) /
-                    double(_avg_height_cnt + 1);
+                _avg_height = (_avg_height * double(_avg_height_cnt) + double(h)) /
+                              double(_avg_height_cnt + 1);
                 ++_avg_height_cnt;
             }
             return elem;
@@ -208,10 +214,7 @@ namespace d2::dx
                 return int(_avg_height);
             return 1;
         };
-        auto span = [&](std::size_t i) -> int
-        {
-            return estimated_height(i) + ypad;
-        };
+        auto span = [&](std::size_t i) -> int { return estimated_height(i) + ypad; };
 
         const auto new_off_px = int(_offset);
         const auto dy = new_off_px - _prev_offset;
@@ -262,8 +265,10 @@ namespace d2::dx
             }
 
             const auto sp = span(_top_index);
-            if (_top_inset < 0) _top_inset = 0;
-            if (_top_inset >= sp) _top_inset = sp - 1;
+            if (_top_inset < 0)
+                _top_inset = 0;
+            if (_top_inset >= sp)
+                _top_inset = sp - 1;
         }
 
         std::size_t vis_first = _top_index;
@@ -307,8 +312,7 @@ namespace d2::dx
                 continue;
             }
 
-            if (auto reused = old_at(idx);
-                reused != nullptr)
+            if (auto reused = old_at(idx); reused != nullptr)
             {
                 new_view[i] = reused;
             }
@@ -332,10 +336,7 @@ namespace d2::dx
         int above = 0;
         for (std::size_t i = 0; i < data::preload; ++i)
         {
-            const auto idx =
-                int(vis_first) -
-                int(data::preload) +
-                int(i);
+            const auto idx = int(vis_first) - int(data::preload) + int(i);
             if (idx < 0)
                 continue;
             above += span(idx);
@@ -348,15 +349,11 @@ namespace d2::dx
     {
         _update_view();
 
-        buffer.fill(
-            Pixel::combine(
-                data::foreground_color,
-                data::background_color
-            )
-        );
+        buffer.fill(pixel::combine(data::foreground_color, data::background_color));
 
         // Render elements
-        const auto bw = (data::container_options & EnableBorder) ? resolve_units(data::border_width) : 0;
+        const auto bw =
+            (data::container_options & EnableBorder) ? resolve_units(data::border_width) : 0;
         const auto height = layout(d2::Element::Layout::Height) - bw * 2;
         const auto xpad = resolve_units(data::padding_horizontal);
         const auto ypad = resolve_units(data::padding_vertical);
@@ -368,13 +365,10 @@ namespace d2::dx
                 logical_height += ypad;
                 auto& it = _view[i];
                 const auto frame = it->frame();
-                const auto [ x, y ] = it->position();
-                const auto [ width, height ] = it->box();
+                const auto [x, y] = it->position();
+                const auto [width, height] = it->box();
                 it->override_position(x + xpad, logical_height);
-                buffer.inscribe(
-                    x + xpad, logical_height,
-                    frame.buffer()
-                );
+                buffer.inscribe(x + xpad, logical_height, frame.buffer());
                 logical_height += height;
             }
         }
@@ -386,10 +380,8 @@ namespace d2::dx
             const auto sw = _scrollbar->get<Slider::SliderWidth>();
             const auto sm = _scrollbar->get<Slider::Max>();
             const auto est_height = ((float(logical_height) / logical_count) * data::length);
-            const auto rsw = std::max(1, std::min<int>(
-                slider_height,
-                slider_height * height / est_height
-            ));
+            const auto rsw =
+                std::max(1, std::min<int>(slider_height, slider_height * height / est_height));
             // Update slider and render scrollbar
             if (est_height > height || !data::hide_slider)
             {
@@ -399,7 +391,7 @@ namespace d2::dx
                 if (sm != est_height - height)
                     _scrollbar->set<Slider::Max>(est_height - height);
                 const auto frame = _scrollbar->frame();
-                const auto [ x, y ] = _scrollbar->position();
+                const auto [x, y] = _scrollbar->position();
                 buffer.inscribe(x, y, frame.buffer());
             }
             else
@@ -407,4 +399,4 @@ namespace d2::dx
         }
         ContainerHelper::_render_border(buffer);
     }
-}
+} // namespace d2::dx

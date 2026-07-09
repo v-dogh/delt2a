@@ -25,39 +25,36 @@ namespace d2::ex::df
     using contrast_text = Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
                                      { dstylev(ForegroundColor, DefaultTheme::TextContrast); }>;
 
-    using bold_text = Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
-                                 {
-                                     dstyledv(
-                                         ForegroundColor,
-                                         DefaultTheme::Text,
-                                         value.stylize(d2::px::foreground::Bold)
-                                     );
-                                 }>;
+    using bold_text =
+        Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
+                   {
+                       dstyledv(
+                           ForegroundColor, DefaultTheme::Text, value.stylize(px::style::Bold)
+                       );
+                   }>;
 
-    using bold_muted_text = Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
-                                       {
-                                           dstyledv(
-                                               ForegroundColor,
-                                               DefaultTheme::TextMuted,
-                                               value.stylize(d2::px::foreground::Bold)
-                                           );
-                                       }>;
+    using bold_muted_text =
+        Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
+                   {
+                       dstyledv(
+                           ForegroundColor, DefaultTheme::TextMuted, value.stylize(px::style::Bold)
+                       );
+                   }>;
 
-    using bold_accent_text = Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
-                                        {
-                                            dstyledv(
-                                                ForegroundColor,
-                                                DefaultTheme::TextAccent,
-                                                value.stylize(d2::px::foreground::Bold)
-                                            );
-                                        }>;
+    using bold_accent_text =
+        Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
+                   {
+                       dstyledv(
+                           ForegroundColor, DefaultTheme::TextAccent, value.stylize(px::style::Bold)
+                       );
+                   }>;
 
     using bold_contrast_text = Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
                                           {
                                               dstyledv(
                                                   ForegroundColor,
                                                   DefaultTheme::TextContrast,
-                                                  value.stylize(d2::px::foreground::Bold)
+                                                  value.stylize(px::style::Bold)
                                               );
                                           }>;
 
@@ -295,54 +292,52 @@ namespace d2::ex::df
                                            dstylev(FocusedColor, DefaultTheme::AccentMuted);
                                        }>;
 
-    using icon = Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
-                            {
-                                dstyledv(
-                                    ForegroundColor,
-                                    DefaultTheme::Text,
-                                    value.stylize(d2::px::foreground::Bold)
-                                );
+    using icon =
+        Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
+                   {
+                       dstyledv(
+                           ForegroundColor, DefaultTheme::Text, value.stylize(px::style::Bold)
+                       );
 
-                                dstylev(FocusedColor, DefaultTheme::AccentMuted);
+                       dstylev(FocusedColor, DefaultTheme::AccentMuted);
 
-                                // interp_twoway_auto(
-                                //     Hovered,
-                                //     500,
-                                //     Linear,
-                                //     ForegroundColor,
-                                //     DefaultTheme::AccentHover
-                                // );
-                                //
-                                // interp_twoway_auto(
-                                //     Clicked,
-                                //     100,
-                                //     Linear,
-                                //     ForegroundColor,
-                                //     DefaultTheme::AccentActive
-                                // );
-                            }>;
+                       // interp_twoway_auto(
+                       //     Hovered,
+                       //     500,
+                       //     Linear,
+                       //     ForegroundColor,
+                       //     DefaultTheme::AccentHover
+                       // );
+                       //
+                       // interp_twoway_auto(
+                       //     Clicked,
+                       //     100,
+                       //     Linear,
+                       //     ForegroundColor,
+                       //     DefaultTheme::AccentActive
+                       // );
+                   }>;
 
-    using accent_icon = Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
-                                   {
-                                       dstyledv(
-                                           ForegroundColor,
-                                           DefaultTheme::TextAccent,
-                                           value.stylize(d2::px::foreground::Bold)
-                                       );
+    using accent_icon =
+        Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
+                   {
+                       dstyledv(
+                           ForegroundColor, DefaultTheme::TextAccent, value.stylize(px::style::Bold)
+                       );
 
-                                       dstylev(FocusedColor, DefaultTheme::AccentMuted);
+                       dstylev(FocusedColor, DefaultTheme::AccentMuted);
 
-                                       // interp_twoway_auto(Hovered, 500, Linear, ForegroundColor,
-                                       // DefaultTheme::AccentHover); interp_twoway_auto(Clicked,
-                                       // 100, Linear, ForegroundColor, DefaultTheme::AccentActive);
-                                   }>;
+                       // interp_twoway_auto(Hovered, 500, Linear, ForegroundColor,
+                       // DefaultTheme::AccentHover); interp_twoway_auto(Clicked,
+                       // 100, Linear, ForegroundColor, DefaultTheme::AccentActive);
+                   }>;
 
     using contrast_icon = Stylesheet<[]<typename Type>(TreeCtx<Type> ctx)
                                      {
                                          dstyledv(
                                              ForegroundColor,
                                              DefaultTheme::TextContrast,
-                                             value.stylize(d2::px::foreground::Bold)
+                                             value.stylize(px::style::Bold)
                                          );
 
                                          dstylev(FocusedColor, DefaultTheme::AccentMuted);
@@ -706,4 +701,3 @@ namespace d2::ex::df
                                               }
                                           }>;
 } // namespace d2::ex::df
-

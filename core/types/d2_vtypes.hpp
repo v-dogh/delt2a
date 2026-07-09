@@ -73,7 +73,7 @@ namespace d2
         auto operator<=>(const Position&) const = default;
     };
 
-    struct Box
+    struct BoundingBox
     {
         int width{0};
         int height{0};
@@ -91,13 +91,13 @@ namespace d2
             return p.x >= 0 && p.y >= 0 && p.x < width && p.y < height;
         }
 
-        constexpr auto& operator+=(Box rhs) noexcept
+        constexpr auto& operator+=(BoundingBox rhs) noexcept
         {
             width += rhs.width;
             height += rhs.height;
             return *this;
         }
-        constexpr auto& operator-=(Box rhs) noexcept
+        constexpr auto& operator-=(BoundingBox rhs) noexcept
         {
             width -= rhs.width;
             height -= rhs.height;
@@ -116,33 +116,35 @@ namespace d2
             return *this;
         }
 
-        [[nodiscard]] friend constexpr Box operator+(Box lhs, Box rhs) noexcept
+        [[nodiscard]] friend constexpr BoundingBox
+        operator+(BoundingBox lhs, BoundingBox rhs) noexcept
         {
             lhs += rhs;
             return lhs;
         }
-        [[nodiscard]] friend constexpr Box operator-(Box lhs, Box rhs) noexcept
+        [[nodiscard]] friend constexpr BoundingBox
+        operator-(BoundingBox lhs, BoundingBox rhs) noexcept
         {
             lhs -= rhs;
             return lhs;
         }
-        [[nodiscard]] friend constexpr Box operator*(Box lhs, int scalar) noexcept
+        [[nodiscard]] friend constexpr BoundingBox operator*(BoundingBox lhs, int scalar) noexcept
         {
             lhs *= scalar;
             return lhs;
         }
-        [[nodiscard]] friend constexpr Box operator*(int scalar, Box rhs) noexcept
+        [[nodiscard]] friend constexpr BoundingBox operator*(int scalar, BoundingBox rhs) noexcept
         {
             rhs *= scalar;
             return rhs;
         }
-        [[nodiscard]] friend constexpr Box operator/(Box lhs, int scalar) noexcept
+        [[nodiscard]] friend constexpr BoundingBox operator/(BoundingBox lhs, int scalar) noexcept
         {
             lhs /= scalar;
             return lhs;
         }
 
-        auto operator<=>(const Box&) const = default;
+        auto operator<=>(const BoundingBox&) const = default;
     };
 
     namespace px
@@ -365,7 +367,7 @@ namespace d2
             component b{255};
             component a{255};
             value_type v{' '};
-            px::style style{style::None};
+            style style{style::None};
 
             [[nodiscard]] constexpr background as_background() const noexcept
             {
@@ -825,11 +827,11 @@ namespace d2
                 px.v = ' ';
                 return px;
             }
-            [[nodiscard]] constexpr bool is_cform_marker() noexcept
+            [[nodiscard]] constexpr bool is_cform_marker() const noexcept
             {
                 return style == px::style::Reserved;
             }
-            [[nodiscard]] constexpr std::uint64_t cform_length() noexcept
+            [[nodiscard]] constexpr std::uint64_t cform_length() const noexcept
             {
                 if (!is_cform_marker())
                     return 0;
@@ -845,7 +847,7 @@ namespace d2
                 len |= static_cast<std::uint64_t>(af) << 56;
                 return len;
             }
-            [[nodiscard]] constexpr std::size_t is_cform() noexcept
+            [[nodiscard]] constexpr std::size_t is_cform() const noexcept
             {
                 return static_cast<std::size_t>(cform_length());
             }

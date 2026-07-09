@@ -14,11 +14,11 @@ namespace d2
             D2_UAI_FIELDS(
                 string default_value{};
 
-                PixelForeground selected_foreground_color{};
-                PixelBackground selected_background_color{};
+                px::foreground selected_foreground_color{};
+                px::background selected_background_color{};
 
-                PixelForeground option_foreground_color{};
-                PixelBackground option_background_color{};
+                px::foreground option_foreground_color{};
+                px::background option_background_color{};
 
                 bool show_choice{true};
 
@@ -69,7 +69,7 @@ namespace d2
             using data::data;
             using opts = std::vector<string>;
         protected:
-            Box _perfect_dimensions{};
+            BoundingBox _perfect_dimensions{};
             mutable int _cell_height{0};
             int _soft_selected{-1};
             int _selected{-1};
