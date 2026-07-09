@@ -1,6 +1,6 @@
 #pragma once
 
-#include <d2_exceptions.hpp>
+#include <core/utils/d2_exceptions.hpp>
 #include <absl/container/flat_hash_map.h>
 #include <string>
 #include <array>

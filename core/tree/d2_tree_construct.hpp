@@ -3,13 +3,13 @@
 #include <chrono>
 #include <concepts>
 #include <cstdint>
-#include <d2_io_handler.hpp>
-#include <d2_meta.hpp>
-#include <d2_screen.hpp>
-#include <d2_theme.hpp>
-#include <d2_tree.hpp>
-#include <d2_tree_state.hpp>
-#include <mods/d2_core.hpp>
+#include <core/io/d2_context.hpp>
+#include <core/utils/d2_meta.hpp>
+#include <core/screen/d2_screen.hpp>
+#include <core/tree/d2_theme.hpp>
+#include <core/tree/d2_tree.hpp>
+#include <core/tree/d2_tree_state.hpp>
+#include <core/mods/d2_core.hpp>
 #include <type_traits>
 #include <utility>
 

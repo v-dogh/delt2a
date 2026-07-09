@@ -1,6 +1,6 @@
-#include "d2_ws_curl.hpp"
+#include "os/net/curl/d2_ws_curl.hpp"
 
-#include "d2_curl_global.hpp"
+#include "os/net/curl/d2_curl_global.hpp"
 #include <algorithm>
 #include <cstdint>
 #include <cstring>

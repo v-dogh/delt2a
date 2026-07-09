@@ -1,11 +1,11 @@
 #pragma once
 
 #include <absl/container/flat_hash_map.h>
-#include <d2_exceptions.hpp>
-#include <d2_io_handler_frwd.hpp>
-#include <d2_tree_element_frwd.hpp>
+#include <core/utils/d2_exceptions.hpp>
+#include <core/io/d2_context_frwd.hpp>
+#include <core/tree/d2_tree_element_frwd.hpp>
 #include <memory>
-#include <mods/d2_core.hpp>
+#include <core/mods/d2_core.hpp>
 
 namespace d2
 {

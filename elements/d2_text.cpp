@@ -1,4 +1,4 @@
-#include "d2_text.hpp"
+#include "elements/d2_text.hpp"
 
 namespace d2::dx
 {

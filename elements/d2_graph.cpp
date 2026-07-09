@@ -1,4 +1,4 @@
-#include "d2_graph.hpp"
+#include "elements/d2_graph.hpp"
 
 namespace d2::dx::graph
 {

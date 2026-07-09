@@ -1,10 +1,10 @@
 #pragma once
 
-#include "d2_exceptions.hpp"
+#include "core/utils/d2_exceptions.hpp"
 #include <chrono>
-#include <d2_pixel.hpp>
-#include <d2_styles_base.hpp>
-#include <d2_tree_element_frwd.hpp>
+#include <core/types/d2_pixel.hpp>
+#include <core/tree/d2_styles_base.hpp>
+#include <core/tree/d2_tree_element_frwd.hpp>
 #include <limits>
 
 namespace d2

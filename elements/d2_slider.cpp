@@ -1,4 +1,4 @@
-#include "d2_slider.hpp"
+#include "elements/d2_slider.hpp"
 
 namespace d2::dx
 {

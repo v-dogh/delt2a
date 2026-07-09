@@ -1,4 +1,4 @@
-#include "d2_matrix.hpp"
+#include "elements/d2_matrix.hpp"
 
 namespace d2::dx
 {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <d2_pixel.hpp>
-#include <d2_theme.hpp>
+#include <core/types/d2_pixel.hpp>
+#include <core/tree/d2_theme.hpp>
 
 namespace d2::ex
 {

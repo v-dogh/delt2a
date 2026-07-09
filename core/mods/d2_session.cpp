@@ -1,4 +1,4 @@
-#include "d2_session.hpp"
+#include "core/mods/d2_session.hpp"
 
 #include <absl/strings/str_format.h>
 #include <ada.h>

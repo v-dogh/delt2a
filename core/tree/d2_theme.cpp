@@ -1,4 +1,4 @@
-#include "d2_theme.hpp"
+#include "core/tree/d2_theme.hpp"
 
 namespace d2::style
 {

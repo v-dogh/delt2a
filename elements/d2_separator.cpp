@@ -1,4 +1,4 @@
-#include "d2_separator.hpp"
+#include "elements/d2_separator.hpp"
 
 namespace d2::dx
 {

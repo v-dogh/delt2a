@@ -6,7 +6,7 @@
 #include <curl/curl.h>
 #include <functional>
 #include <memory>
-#include <mods/d2_ws.hpp>
+#include <core/mods/d2_ws.hpp>
 #include <mt/task_ring.hpp>
 #include <string>
 #include <string_view>

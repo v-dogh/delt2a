@@ -1,5 +1,5 @@
-#include "d2_pixel.hpp"
-#include <d2_exceptions.hpp>
+#include "core/types/d2_pixel.hpp"
+#include <core/utils/d2_exceptions.hpp>
 
 namespace d2
 {

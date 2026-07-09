@@ -1,8 +1,8 @@
-#include "d2_default_theme.hpp"
-#include <d2_chardef.hpp>
-#include <d2_colors.hpp>
-#include <d2_locale.hpp>
-#include <d2_pixel.hpp>
+#include "extras/d2_default_theme.hpp"
+#include <core/platform/d2_chardef.hpp>
+#include <core/platform/d2_colors.hpp>
+#include <core/platform/d2_locale.hpp>
+#include <core/types/d2_pixel.hpp>
 
 #include <algorithm>
 #include <cmath>

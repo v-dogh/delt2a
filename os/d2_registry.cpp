@@ -1,4 +1,4 @@
-#include "d2_registry.hpp"
+#include "os/d2_registry.hpp"
 
 // cmake generated
 #include <d2_platform.hpp>

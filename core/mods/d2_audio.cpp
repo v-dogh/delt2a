@@ -1,4 +1,4 @@
-#include "d2_audio.hpp"
+#include "core/mods/d2_audio.hpp"
 
 namespace d2::sys
 {

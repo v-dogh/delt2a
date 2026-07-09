@@ -1,6 +1,6 @@
-#include "d2_switch.hpp"
-#include <d2_colors.hpp>
-#include <d2_styles.hpp>
+#include "elements/d2_switch.hpp"
+#include <core/platform/d2_colors.hpp>
+#include <core/tree/d2_styles.hpp>
 
 namespace d2::dx
 {

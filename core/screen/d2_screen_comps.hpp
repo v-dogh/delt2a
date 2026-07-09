@@ -1,9 +1,9 @@
 #pragma once
 
-#include <d2_input_base.hpp>
-#include <d2_io_handler_frwd.hpp>
-#include <d2_styles_base.hpp>
-#include <d2_tree_element_frwd.hpp>
+#include <core/io/d2_input_base.hpp>
+#include <core/io/d2_context_frwd.hpp>
+#include <core/tree/d2_styles_base.hpp>
+#include <core/tree/d2_tree_element_frwd.hpp>
 
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/flat_hash_set.h>

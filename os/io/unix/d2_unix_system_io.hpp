@@ -3,9 +3,9 @@
 #include <any>
 #include <shared_mutex>
 
-#include <d2_locale.hpp>
-#include <d2_module.hpp>
-#include <mods/d2_core.hpp>
+#include <core/platform/d2_locale.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/mods/d2_core.hpp>
 
 #include <fcntl.h>
 #include <poll.h>

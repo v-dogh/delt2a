@@ -1,9 +1,9 @@
 #pragma once
 
-#include <d2_io_handler.hpp>
-#include <d2_module.hpp>
-#include <d2_screen.hpp>
-#include <d2_tree_element.hpp>
+#include <core/io/d2_context.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/screen/d2_screen.hpp>
+#include <core/tree/d2_tree_element.hpp>
 
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/flat_hash_set.h>

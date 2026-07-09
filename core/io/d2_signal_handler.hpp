@@ -5,7 +5,7 @@
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
-#include <d2_exceptions.hpp>
+#include <core/utils/d2_exceptions.hpp>
 #include <functional>
 #include <memory>
 #include <mt/pool.hpp>

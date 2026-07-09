@@ -1,7 +1,7 @@
-#include "d2_module.hpp"
+#include "core/io/d2_module.hpp"
 
-#include <d2_exceptions.hpp>
-#include <d2_io_handler.hpp>
+#include <core/utils/d2_exceptions.hpp>
+#include <core/io/d2_context.hpp>
 #include <memory>
 #include <typeindex>
 #include <variant>

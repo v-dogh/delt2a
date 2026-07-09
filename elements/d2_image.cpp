@@ -1,4 +1,4 @@
-#include "d2_image.hpp"
+#include "elements/d2_image.hpp"
 
 namespace d2::dx
 {

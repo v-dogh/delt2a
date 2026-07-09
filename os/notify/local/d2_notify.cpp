@@ -1,4 +1,4 @@
-#include "d2_notify.hpp"
+#include "os/notify/local/d2_notify.hpp"
 
 #include <elements/d2_std.hpp>
 #include <extras/d2_default_styles.hpp>

@@ -1,5 +1,5 @@
-#include "d2_element_utils.hpp"
-#include <d2_platform_string.hpp>
+#include "elements/d2_element_utils.hpp"
+#include <core/platform/d2_platform_string.hpp>
 
 namespace d2::dx::impl
 {

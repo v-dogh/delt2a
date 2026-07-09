@@ -1,8 +1,8 @@
 #pragma once
 
-#include <d2_model.hpp>
-#include <d2_styles.hpp>
-#include <d2_tree_element.hpp>
+#include <core/utils/d2_model.hpp>
+#include <core/tree/d2_styles.hpp>
+#include <core/tree/d2_tree_element.hpp>
 
 namespace d2
 {

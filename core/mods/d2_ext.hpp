@@ -1,8 +1,8 @@
 #pragma once
 
-#include <d2_locale.hpp>
-#include <d2_module.hpp>
-#include <d2_tree_element.hpp>
+#include <core/platform/d2_locale.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/tree/d2_tree_element.hpp>
 #include <mt/pool.hpp>
 
 namespace d2::sys

@@ -1,4 +1,4 @@
-#include "d2_solver.hpp"
+#include "core/lsx/d2_solver.hpp"
 
 #include <sstream>
 

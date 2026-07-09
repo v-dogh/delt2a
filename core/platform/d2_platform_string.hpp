@@ -5,7 +5,7 @@
 #include <uni_algo/ranges.h>
 #include <uni_algo/prop.h>
 #endif
-#include <d2_locale.hpp>
+#include <core/platform/d2_locale.hpp>
 
 namespace d2
 {

@@ -1,4 +1,4 @@
-#include "d2_core.hpp"
+#include "core/mods/d2_core.hpp"
 
 namespace d2::sys
 {

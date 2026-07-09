@@ -1,10 +1,10 @@
-#include "d2_screen.hpp"
+#include "core/screen/d2_screen.hpp"
 
 #include <absl/strings/internal/str_format/extension.h>
 #include <chrono>
-#include <d2_exceptions.hpp>
-#include <d2_input_base.hpp>
-#include <d2_tree_parent.hpp>
+#include <core/utils/d2_exceptions.hpp>
+#include <core/io/d2_input_base.hpp>
+#include <core/tree/d2_tree_parent.hpp>
 #include <filesystem>
 
 namespace d2::sys

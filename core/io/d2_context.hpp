@@ -7,12 +7,12 @@
 #include <shared_mutex>
 #include <stop_token>
 
-#include <d2_exceptions.hpp>
-#include <d2_io_handler_frwd.hpp>
-#include <d2_main_worker.hpp>
-#include <d2_module.hpp>
-#include <d2_signal_handler.hpp>
-#include <mods/d2_core.hpp>
+#include <core/utils/d2_exceptions.hpp>
+#include <core/io/d2_context_frwd.hpp>
+#include <core/io/d2_main_worker.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/io/d2_signal_handler.hpp>
+#include <core/mods/d2_core.hpp>
 #include <mt/pool.hpp>
 #include <os/d2_registry.hpp>
 

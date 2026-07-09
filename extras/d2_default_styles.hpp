@@ -1,7 +1,7 @@
 #pragma once
 
-#include <d2_colors.hpp>
-#include <d2_tree_construct.hpp>
+#include <core/platform/d2_colors.hpp>
+#include <core/tree/d2_tree_construct.hpp>
 #include <elements/d2_slider.hpp>
 #include <extras/d2_default_theme.hpp>
 

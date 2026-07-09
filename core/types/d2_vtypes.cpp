@@ -1,4 +1,4 @@
-#include "d2_vtypes.hpp"
+#include "core/types/d2_vtypes.hpp"
 
 namespace d2
 {

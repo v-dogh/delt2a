@@ -1,7 +1,7 @@
-#include "d2_tree_element.hpp"
-#include <d2_exceptions.hpp>
-#include <d2_input_base.hpp>
-#include <d2_tree_parent.hpp>
+#include "core/tree/d2_tree_element.hpp"
+#include <core/utils/d2_exceptions.hpp>
+#include <core/io/d2_input_base.hpp>
+#include <core/tree/d2_tree_parent.hpp>
 #include <vector>
 
 namespace d2

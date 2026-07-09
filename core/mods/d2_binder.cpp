@@ -1,4 +1,4 @@
-#include "d2_binder.hpp"
+#include "core/mods/d2_binder.hpp"
 
 #include <chrono>
 #include <format>

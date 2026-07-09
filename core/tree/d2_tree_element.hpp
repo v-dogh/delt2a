@@ -1,16 +1,16 @@
 #pragma once
 
 #include <absl/container/inlined_vector.h>
-#include <d2_element_units.hpp>
-#include <d2_input_base.hpp>
-#include <d2_io_handler.hpp>
-#include <d2_pixel.hpp>
-#include <d2_screen.hpp>
-#include <d2_styles_base.hpp>
-#include <d2_theme.hpp>
-#include <d2_tree_element_frwd.hpp>
-#include <d2_tree_state.hpp>
-#include <d2_vtypes.hpp>
+#include <core/types/d2_element_units.hpp>
+#include <core/io/d2_input_base.hpp>
+#include <core/io/d2_context.hpp>
+#include <core/types/d2_pixel.hpp>
+#include <core/screen/d2_screen.hpp>
+#include <core/tree/d2_styles_base.hpp>
+#include <core/tree/d2_theme.hpp>
+#include <core/tree/d2_tree_element_frwd.hpp>
+#include <core/tree/d2_tree_state.hpp>
+#include <core/types/d2_vtypes.hpp>
 #include <functional>
 #include <memory>
 #include <string>

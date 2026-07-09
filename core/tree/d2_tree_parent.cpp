@@ -1,5 +1,5 @@
-#include "d2_tree_parent.hpp"
-#include "d2_tree_element.hpp"
+#include "core/tree/d2_tree_parent.hpp"
+#include "core/tree/d2_tree_element.hpp"
 #include <cmath>
 
 namespace d2

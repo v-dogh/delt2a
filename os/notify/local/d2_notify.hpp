@@ -1,9 +1,9 @@
 #pragma once
 
-#include <d2_module.hpp>
-#include <d2_screen.hpp>
-#include <d2_tree_construct.hpp>
-#include <mods/d2_ext.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/screen/d2_screen.hpp>
+#include <core/tree/d2_tree_construct.hpp>
+#include <core/mods/d2_ext.hpp>
 
 namespace d2::sys
 {

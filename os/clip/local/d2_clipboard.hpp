@@ -1,7 +1,7 @@
 #pragma once
 
-#include <d2_module.hpp>
-#include <mods/d2_ext.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/mods/d2_ext.hpp>
 
 namespace d2::sys
 {

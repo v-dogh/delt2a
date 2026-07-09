@@ -1,10 +1,10 @@
 #pragma once
 
-#include <d2_fragmented_buffer.hpp>
-#include <d2_styles.hpp>
-#include <d2_tree_element.hpp>
-#include <d2_tree_element_frwd.hpp>
-#include <d2_tree_parent.hpp>
+#include <core/platform/d2_fragmented_buffer.hpp>
+#include <core/tree/d2_styles.hpp>
+#include <core/tree/d2_tree_element.hpp>
+#include <core/tree/d2_tree_element_frwd.hpp>
+#include <core/tree/d2_tree_parent.hpp>
 #include <elements/d2_input.hpp>
 #include <elements/d2_slider.hpp>
 

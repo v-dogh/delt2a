@@ -2,7 +2,7 @@
 
 #include <functional>
 #include <memory>
-#include <d2_exceptions.hpp>
+#include <core/utils/d2_exceptions.hpp>
 
 namespace d2
 {

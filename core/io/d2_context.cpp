@@ -1,12 +1,12 @@
-#include "d2_io_handler.hpp"
+#include "core/io/d2_context.hpp"
 
 #include <algorithm>
 #include <chrono>
-#include <d2_module.hpp>
-#include <d2_screen.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/screen/d2_screen.hpp>
 #include <features.h>
 #include <memory>
-#include <mods/d2_core.hpp>
+#include <core/mods/d2_core.hpp>
 #include <mt/pool.hpp>
 
 namespace d2

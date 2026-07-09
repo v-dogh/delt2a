@@ -3,8 +3,8 @@
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/flat_hash_set.h>
 #include <limits>
-#include <lsx/d2_solver_ops.hpp>
-#include <lsx/d2_solver_types.hpp>
+#include <core/lsx/d2_solver_ops.hpp>
+#include <core/lsx/d2_solver_types.hpp>
 #include <optional>
 
 namespace d2::lsx

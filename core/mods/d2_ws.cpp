@@ -1,6 +1,6 @@
-#include "d2_ws.hpp"
+#include "core/mods/d2_ws.hpp"
 
-#include <mods/d2_session.hpp>
+#include <core/mods/d2_session.hpp>
 
 namespace d2::sys::net
 {

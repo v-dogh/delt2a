@@ -1,16 +1,16 @@
 #pragma once
 
-#include "d2_exceptions.hpp"
-#include "d2_theme.hpp"
+#include "core/utils/d2_exceptions.hpp"
+#include "core/tree/d2_theme.hpp"
 #include <bitset>
-#include <d2_chardef.hpp>
-#include <d2_element_units.hpp>
-#include <d2_pixel.hpp>
-#include <d2_screen.hpp>
-#include <d2_styles_base.hpp>
-#include <d2_text_select.hpp>
-#include <d2_tree_element.hpp>
-#include <d2_tree_parent.hpp>
+#include <core/platform/d2_chardef.hpp>
+#include <core/types/d2_element_units.hpp>
+#include <core/types/d2_pixel.hpp>
+#include <core/screen/d2_screen.hpp>
+#include <core/tree/d2_styles_base.hpp>
+#include <core/tree/d2_text_select.hpp>
+#include <core/tree/d2_tree_element.hpp>
+#include <core/tree/d2_tree_parent.hpp>
 #include <type_traits>
 #include <utility>
 

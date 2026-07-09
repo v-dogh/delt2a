@@ -1,7 +1,7 @@
 #pragma once
 
-#include <d2_exceptions.hpp>
-#include <d2_module.hpp>
+#include <core/utils/d2_exceptions.hpp>
+#include <core/io/d2_module.hpp>
 
 namespace d2::sys
 {

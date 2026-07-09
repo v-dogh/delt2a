@@ -1,7 +1,7 @@
 #pragma once
 
-#include <d2_tree_element.hpp>
-#include <d2_styles.hpp>
+#include <core/tree/d2_tree_element.hpp>
+#include <core/tree/d2_styles.hpp>
 
 namespace d2
 {

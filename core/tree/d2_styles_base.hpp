@@ -1,10 +1,10 @@
 #pragma once
 
-#include "d2_exceptions.hpp"
+#include "core/utils/d2_exceptions.hpp"
 #include <algorithm>
-#include <d2_io_handler.hpp>
-#include <d2_theme.hpp>
-#include <d2_tree_element_frwd.hpp>
+#include <core/io/d2_context.hpp>
+#include <core/tree/d2_theme.hpp>
+#include <core/tree/d2_tree_element_frwd.hpp>
 #include <functional>
 #include <memory>
 #include <type_traits>

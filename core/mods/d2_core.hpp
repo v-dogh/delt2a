@@ -1,9 +1,9 @@
 #pragma once
 
-#include <d2_input_base.hpp>
-#include <d2_main_worker.hpp>
-#include <d2_module.hpp>
-#include <d2_pixel.hpp>
+#include <core/io/d2_input_base.hpp>
+#include <core/io/d2_main_worker.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/types/d2_pixel.hpp>
 #include <mt/pool.hpp>
 
 namespace d2::sys

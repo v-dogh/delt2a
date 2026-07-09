@@ -1,8 +1,8 @@
 #pragma once
 
-#include <d2_io_handler.hpp>
-#include <d2_module.hpp>
-#include <mods/d2_audio.hpp>
+#include <core/io/d2_context.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/mods/d2_audio.hpp>
 
 #include <pipewire/extensions/metadata.h>
 #include <pipewire/pipewire.h>

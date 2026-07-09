@@ -5,7 +5,7 @@
 #include <curl/curl.h>
 #include <functional>
 #include <memory>
-#include <mods/d2_http.hpp>
+#include <core/mods/d2_http.hpp>
 #include <mt/task_ring.hpp>
 #include <string>
 #include <thread>

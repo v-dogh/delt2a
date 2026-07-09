@@ -1,20 +1,20 @@
 #pragma once
 
-#include "d2_signal_handler.hpp"
+#include "core/io/d2_signal_handler.hpp"
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/node_hash_map.h>
 #include <chrono>
-#include <d2_animate.hpp>
-#include <d2_input_base.hpp>
-#include <d2_io_handler.hpp>
-#include <d2_model.hpp>
-#include <d2_module.hpp>
-#include <d2_screen_comps.hpp>
-#include <d2_styles_base.hpp>
-#include <d2_theme.hpp>
-#include <d2_tree_element_frwd.hpp>
-#include <d2_tree_state.hpp>
-#include <mods/d2_core.hpp>
+#include <core/screen/d2_animate.hpp>
+#include <core/io/d2_input_base.hpp>
+#include <core/io/d2_context.hpp>
+#include <core/utils/d2_model.hpp>
+#include <core/io/d2_module.hpp>
+#include <core/screen/d2_screen_comps.hpp>
+#include <core/tree/d2_styles_base.hpp>
+#include <core/tree/d2_theme.hpp>
+#include <core/tree/d2_tree_element_frwd.hpp>
+#include <core/tree/d2_tree_state.hpp>
+#include <core/mods/d2_core.hpp>
 #include <utility>
 
 namespace d2::sys

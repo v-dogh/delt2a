@@ -1,9 +1,9 @@
 #pragma once
 
-#include <d2_meta.hpp>
-#include <d2_screen.hpp>
-#include <d2_tree_element.hpp>
-#include <d2_tree_parent.hpp>
+#include <core/utils/d2_meta.hpp>
+#include <core/screen/d2_screen.hpp>
+#include <core/tree/d2_tree_element.hpp>
+#include <core/tree/d2_tree_parent.hpp>
 
 namespace d2
 {

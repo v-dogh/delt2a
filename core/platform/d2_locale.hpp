@@ -1,6 +1,6 @@
 #pragma once
 
-#include <d2_extended_page.hpp>
+#include <core/platform/d2_extended_page.hpp>
 
 #include <limits>
 #include <string>

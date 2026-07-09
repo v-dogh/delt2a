@@ -1,8 +1,8 @@
-#include "d2_input.hpp"
-#include <d2_screen.hpp>
+#include "elements/d2_input.hpp"
+#include <core/screen/d2_screen.hpp>
 #include <elements/d2_element_utils.hpp>
 #include <limits>
-#include <mods/d2_ext.hpp>
+#include <core/mods/d2_ext.hpp>
 
 namespace d2::dx
 {

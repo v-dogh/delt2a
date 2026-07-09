@@ -1,7 +1,7 @@
 #pragma once
 
-#include <d2_locale.hpp>
-#include <d2_vtypes.hpp>
+#include <core/platform/d2_locale.hpp>
+#include <core/types/d2_vtypes.hpp>
 #include <functional>
 #include <span>
 #include <vector>

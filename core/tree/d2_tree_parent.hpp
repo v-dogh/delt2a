@@ -1,6 +1,6 @@
 #pragma once
 
-#include <d2_tree_element.hpp>
+#include <core/tree/d2_tree_element.hpp>
 #include <variant>
 
 namespace d2

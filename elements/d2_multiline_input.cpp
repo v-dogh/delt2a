@@ -1,8 +1,8 @@
-#include "d2_multiline_input.hpp"
+#include "elements/d2_multiline_input.hpp"
 
-#include <d2_screen.hpp>
-#include <d2_tree_element.hpp>
-#include <mods/d2_ext.hpp>
+#include <core/screen/d2_screen.hpp>
+#include <core/tree/d2_tree_element.hpp>
+#include <core/mods/d2_ext.hpp>
 
 #include <algorithm>
 #include <cctype>
