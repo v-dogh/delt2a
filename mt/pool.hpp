@@ -1,7 +1,7 @@
 #pragma once
 
-#include "mt/future.hpp"
-#include "mt/task_ring.hpp"
+#include "future.hpp"
+#include "task_ring.hpp"
 #include <any>
 #include <array>
 #include <atomic>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mt/control.hpp"
+#include "control.hpp"
 #include <coroutine>
 #include <memory>
 #include <optional>
@@ -250,4 +250,3 @@ namespace mt
         void unhandled_exception() noexcept {}
     };
 } // namespace mt
-

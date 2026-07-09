@@ -171,7 +171,6 @@ add_library(DeltaCore STATIC
     core/utils/d2_model.cpp
     # Types
     core/types/d2_vtypes.hpp
-    core/types/d2_vtypes.cpp
     core/types/d2_pixel.hpp
     core/types/d2_pixel.cpp
     core/types/d2_element_units.hpp

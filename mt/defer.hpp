@@ -1,6 +1,6 @@
 #pragma once
 
-#include "mt/pool.hpp"
+#include "pool.hpp"
 
 namespace mt
 {
@@ -68,4 +68,3 @@ namespace mt
     using tdefer = DeferDecision<PoolDefer>;
     using cdefer = DeferDecision<ContextDefer>;
 } // namespace mt
-
