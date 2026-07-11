@@ -10,9 +10,8 @@ namespace d2::sys
         if (!_active_set.empty() && _key_event == nullptr)
         {
             const auto ctx = context();
-            _key_event = ctx->listen(
-                sys::screen::Event::KeyInput,
-                [this](module<screen> src)
+            _key_event = ctx->listen<sys::screen::Event::KeyInput>(
+                [this](in::InputFrame& in)
                 {
                     static auto control_contains =
                         [](const control_list& list, in::keytype key, std::optional<in::mode> mode)
@@ -51,9 +50,8 @@ namespace d2::sys
                         return false;
                     };
 
-                    const auto in = src->input();
                     const auto now = std::chrono::steady_clock::now();
-                    const auto active_controls = in->active_list();
+                    const auto active_controls = in.active_list();
 
                     absl::flat_hash_set<in::keytype> active_holds;
                     absl::flat_hash_set<in::keytype> active_presses;
@@ -94,7 +92,7 @@ namespace d2::sys
                     {
                         auto cur = hold_it++;
                         if (!active_holds.contains(cur->first) &&
-                            !in->active(cur->first, in::Mode::Hold))
+                            !in.active(cur->first, in::Mode::Hold))
                         {
                             _hold_ts.erase(cur);
                         }
@@ -120,7 +118,7 @@ namespace d2::sys
                         if (!bind.active || !bind.bind.enabled || bind.bind.sequences.empty())
                             continue;
 
-                        if (!focus_allowed(src->context(), bind.bind))
+                        if (!focus_allowed(IOContext::get(), bind.bind))
                         {
                             bind.sequence_idx = 0;
                             bind.sequence_ts = {};
@@ -179,7 +177,7 @@ namespace d2::sys
                         bool triggered = false;
                         for (auto [key, mode] : aq_seq)
                         {
-                            if (!in->active(key, mode))
+                            if (!in.active(key, mode))
                             {
                                 bind.sequence_idx = 0;
                                 good = false;
@@ -238,7 +236,7 @@ namespace d2::sys
 
                     // Consume the sequence input
                     if (consume) [[maybe_unused]]
-                        const auto seq = in->sequence();
+                        const auto seq = in.sequence();
 
                     for (decltype(auto) call : call_names)
                     {

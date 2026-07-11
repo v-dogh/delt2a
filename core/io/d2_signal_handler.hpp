@@ -3,9 +3,9 @@
 #include <absl/container/flat_hash_map.h>
 #include <array>
 #include <atomic>
+#include <core/utils/d2_exceptions.hpp>
 #include <cstddef>
 #include <cstdint>
-#include <core/utils/d2_exceptions.hpp>
 #include <functional>
 #include <memory>
 #include <mt/pool.hpp>
