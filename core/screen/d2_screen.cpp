@@ -2,9 +2,6 @@
 
 #include <absl/strings/internal/str_format/extension.h>
 #include <chrono>
-#include <core/io/d2_input_base.hpp>
-#include <core/tree/d2_tree_parent.hpp>
-#include <core/utils/d2_exceptions.hpp>
 #include <filesystem>
 
 namespace d2::sys
@@ -25,6 +22,38 @@ namespace d2::sys
 
             bs ^= mask;
         }
+    }
+
+    template<SystemScreen::Event Ev, typename... Argv> void SystemScreen::_signal(Argv&&... args)
+    {
+        auto ctx = context();
+        if constexpr (Ev == Event::KeyInput)
+        {
+            ctx->signal<Ev>(ref(*input()));
+        }
+        else if constexpr (Ev == Event::KeySequenceInput)
+        {
+            ctx->signal<Ev>(input()->sequence());
+        }
+        else if constexpr (Ev == Event::KeyMouseInput)
+        {
+            ctx->signal<Ev>(ref(*input()));
+        }
+        else if constexpr (Ev == Event::MouseMoved)
+        {
+            ctx->signal<Ev>(input()->mouse_position());
+        }
+        else if constexpr (Ev == Event::MouseInput)
+        {
+            ctx->signal<Ev>(ref(*input()));
+        }
+        else if constexpr (Ev == Event::Resize)
+        {
+            auto root = _ts.current->state->root();
+            ctx->signal<Ev>(root->box());
+        }
+        else
+            ctx->signal<Ev>(std::forward<Argv>(args)...);
     }
 
     SystemScreen::Status SystemScreen::_load_impl()
@@ -458,8 +487,7 @@ namespace d2::sys
             );
         }
     }
-    SystemScreen::eptr
-    SystemScreen::_update_states(eptr container, const std::pair<int, int>& mouse)
+    SystemScreen::eptr SystemScreen::_update_states(eptr container, Position mouse)
     {
         if (!container.is_type<ParentElement>())
             return nullptr;
@@ -475,12 +503,11 @@ namespace d2::sys
                     const auto [x, y] = it->position();
                     if (mouse_target == nullptr || it->getzindex() > mouse_target->getzindex())
                     {
-                        if (mouse.first >= x && mouse.second >= y && mouse.first < (x + width) &&
-                            mouse.second < (y + height))
+                        if (mouse.x >= x && mouse.y >= y && mouse.x < (x + width) &&
+                            mouse.y < (y + height))
                         {
                             mouse_target = it;
-                            auto res =
-                                _update_states(it, std::pair(mouse.first - x, mouse.second - y));
+                            auto res = _update_states(it, {mouse.x - x, mouse.y - y});
                             if (res != nullptr && res->getzindex() > d2::ParentElement::underlap)
                                 mouse_target = std::move(res);
                         }

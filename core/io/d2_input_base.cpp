@@ -23,11 +23,11 @@ namespace d2::in
         return (_pulse & cur).any();
     }
 
-    mouse_position InputFrame::mouse_position()
+    Position InputFrame::mouse_position()
     {
         return _mouse_pos;
     }
-    mouse_position InputFrame::scroll_delta()
+    Position InputFrame::scroll_delta()
     {
         if (_consume)
         {
@@ -37,11 +37,11 @@ namespace d2::in
         }
         return _scroll_delta;
     }
-    screen_size InputFrame::screen_size()
+    BoundingBox InputFrame::screen_size()
     {
-        return _screen_size;
+        return _BoundingBox;
     }
-    screen_size InputFrame::screen_capacity()
+    BoundingBox InputFrame::screen_capacity()
     {
         return _screen_capacity;
     }
@@ -201,7 +201,7 @@ namespace d2::in
             _ptr->_pulse.set(idx);
         }
 
-        void InputFrameView::set_scroll_delta(mouse_position pos)
+        void InputFrameView::set_scroll_delta(Position pos)
         {
             if (_ptr->_scroll_delta != pos)
             {
@@ -209,7 +209,7 @@ namespace d2::in
                 _ptr->_scroll_delta = pos;
             }
         }
-        void InputFrameView::set_mouse_position(mouse_position pos)
+        void InputFrameView::set_mouse_position(Position pos)
         {
             if (_ptr->mouse_position() != pos)
             {
@@ -217,15 +217,15 @@ namespace d2::in
                 _ptr->_mouse_pos = pos;
             }
         }
-        void InputFrameView::set_screen_size(screen_size size)
+        void InputFrameView::set_screen_size(BoundingBox size)
         {
             if (_ptr->screen_size() != size)
             {
                 _ptr->_event_state |= static_cast<unsigned char>(Event::ScreenResize);
-                _ptr->_screen_size = size;
+                _ptr->_BoundingBox = size;
             }
         }
-        void InputFrameView::set_screen_capacity(screen_size size)
+        void InputFrameView::set_screen_capacity(BoundingBox size)
         {
             if (_ptr->screen_capacity() != size)
             {

@@ -62,7 +62,7 @@ namespace d2::dx
         }
         if (frame.had_event(in::Event::ScrollWheelMovement) && getstate(Hovered))
         {
-            const auto scroll = frame.scroll_delta().second;
+            const auto scroll = frame.scroll_delta().y;
             if (scroll)
             {
                 npos = std::clamp(_slider_pos + data::step * scroll, data::min, data::max);

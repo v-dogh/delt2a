@@ -365,7 +365,7 @@ namespace d2::dx
         }
         if (frame.had_event(in::Event::ScrollWheelMovement))
         {
-            auto scroll = frame.scroll_delta().second;
+            auto scroll = frame.scroll_delta().y;
             if (scroll > 0)
                 while (scroll--)
                     scroll_up();

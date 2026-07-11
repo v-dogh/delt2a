@@ -1,9 +1,10 @@
 #pragma once
 
-#include "core/io/d2_signal_handler.hpp"
 #include <absl/container/flat_hash_map.h>
 #include <absl/container/node_hash_map.h>
 #include <chrono>
+#include <utility>
+
 #include <core/io/d2_context.hpp>
 #include <core/io/d2_input_base.hpp>
 #include <core/io/d2_module.hpp>
@@ -12,10 +13,10 @@
 #include <core/screen/d2_screen_comps.hpp>
 #include <core/tree/d2_styles_base.hpp>
 #include <core/tree/d2_theme.hpp>
-#include <core/tree/d2_tree_element_frwd.hpp>
+#include <core/tree/d2_tree_parent.hpp>
 #include <core/tree/d2_tree_state.hpp>
+#include <core/utils/d2_exceptions.hpp>
 #include <core/utils/d2_model.hpp>
-#include <utility>
 
 namespace d2::sys
 {
@@ -44,11 +45,17 @@ namespace d2::sys
             TreeSwap,
         };
         using EventManifest = SignalManifest<
-            EvDefault<Event, module<SystemScreen>>,
+            EvDefault<Event>,
+            // Input stuff
+            EvCase<Event::Resize, BoundingBox>,
+            EvCase<Event::KeyInput, in::InputFrame&>,
+            EvCase<Event::KeySequenceInput, d2::string_view>,
+            EvCase<Event::KeyMouseInput, in::InputFrame&>,
+            EvCase<Event::MouseMoved, Position>,
+            EvCase<Event::MouseInput, in::InputFrame&>,
             // Old|New
-            EvCase<Event::TreeSwap, std::string, std::string, module<SystemScreen>>
+            EvCase<Event::TreeSwap, std::string, std::string>
         >;
-
         using ModelType = MatrixModel::ModelType;
     private:
         struct AnimationState
@@ -124,17 +131,14 @@ namespace d2::sys
         void _trigger_rc_focus_events(eptr n, eptr o);
 
         void _update_viewport();
-        eptr _update_states(eptr container, const std::pair<int, int>& mouse);
+        eptr _update_states(eptr container, Position mouse);
         eptr _update_states_reverse(eptr ptr);
 
         std::chrono::milliseconds _run_animations();
 
         void _apply_impl(const TreeIter<>::foreach_callback& func, eptr container) const;
 
-        template<Event Ev, typename... Argv> void _signal(Argv&&... args)
-        {
-            context()->signal<Ev>(std::forward<Argv>(args)..., ptr());
-        }
+        template<Event Ev, typename... Argv> void _signal(Argv&&... args);
     public:
         static constexpr std::chrono::milliseconds fps(std::size_t c)
         {

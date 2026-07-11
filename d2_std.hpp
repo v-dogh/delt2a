@@ -6,5 +6,6 @@
 #include <core/platform/d2_chardef.hpp>
 #include <core/platform/d2_colors.hpp>
 
+#include <core/mods/d2_binder.hpp>
 #include <core/mods/d2_core.hpp>
 #include <core/mods/d2_ext.hpp>

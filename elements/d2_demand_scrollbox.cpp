@@ -114,7 +114,7 @@ namespace d2::dx
         {
             if (getstate(RcHover))
             {
-                const auto scroll = frame.scroll_delta().second;
+                const auto scroll = frame.scroll_delta().y;
                 scroll_to(_offset + scroll);
             }
         }

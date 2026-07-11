@@ -376,7 +376,7 @@ namespace d2::sys
                 if (!parse_int(body.substr(off2 + 1), y))
                     return;
 
-                in::mouse_position mpos{x - 1, y - 1};
+                Position mpos{x - 1, y - 1};
 
                 const auto is_release = final == 'm';
                 const auto is_wheel = (button & 64) != 0;
@@ -390,12 +390,12 @@ namespace d2::sys
 
                 if (is_wheel)
                 {
-                    in::mouse_position scroll_delta{0, 0};
+                    Position scroll_delta{0, 0};
 
                     if ((button & 1) == 0)
-                        scroll_delta.second = 1;
+                        scroll_delta.y = 1;
                     else
-                        scroll_delta.second = -1;
+                        scroll_delta.y = -1;
 
                     frame.set_scroll_delta(scroll_delta);
                 }

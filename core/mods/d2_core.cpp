@@ -106,17 +106,17 @@ namespace d2::sys
         return _frame_impl()->had_pulse();
     }
 
-    in::mouse_position SystemInput::mouse_position()
+    Position SystemInput::mouse_position()
     {
         FrameLock lock(this, true);
-        return _enabled ? _frame_impl()->mouse_position() : in::mouse_position{-1, -1};
+        return _enabled ? _frame_impl()->mouse_position() : Position{-1, -1};
     }
-    in::screen_size SystemInput::screen_capacity()
+    BoundingBox SystemInput::screen_capacity()
     {
         FrameLock lock(this, true);
         return _frame_impl()->screen_capacity();
     }
-    in::screen_size SystemInput::screen_size()
+    BoundingBox SystemInput::screen_size()
     {
         FrameLock lock(this, true);
         return _frame_impl()->screen_size();

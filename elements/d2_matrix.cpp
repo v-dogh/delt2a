@@ -55,16 +55,16 @@ namespace d2::dx
             std::size_t idx = 0;
             for (std::size_t i = 0; i < vol; i++)
             {
+                auto& px = buffer.at(idx);
                 if (data::mask_options & MaskMode::ApplyBg)
                 {
-                    buffer.at(idx) = data::model->at(idx);
+                    px = data::model->at(idx);
                     if (data::mask_options & MaskMode::InterpBg)
                     {
-                        buffer.at(idx).mask_background(data::background_mask);
+                        px = px.mask_background(data::background_mask);
                     }
                     else
                     {
-                        auto& px = buffer.at(idx);
                         px.r = data::background_mask.r;
                         px.g = data::background_mask.g;
                         px.b = data::background_mask.b;
@@ -73,14 +73,13 @@ namespace d2::dx
                 }
                 if (data::mask_options & MaskMode::ApplyFg)
                 {
-                    buffer.at(idx) = data::model->at(idx);
+                    px = data::model->at(idx);
                     if (data::mask_options & MaskMode::InterpFg)
                     {
-                        buffer.at(idx).mask_foreground(data::foreground_mask);
+                        px = px.mask_foreground(data::foreground_mask);
                     }
                     else
                     {
-                        auto& px = buffer.at(idx);
                         px.rf = data::foreground_mask.r;
                         px.gf = data::foreground_mask.g;
                         px.bf = data::foreground_mask.b;

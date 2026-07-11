@@ -3,6 +3,7 @@
 #include <absl/container/inlined_vector.h>
 #include <array>
 #include <bitset>
+#include <core/types/d2_vtypes.hpp>
 #include <memory>
 #include <memory_resource>
 #include <string>
@@ -10,8 +11,6 @@
 
 namespace d2::in
 {
-    using mouse_position = std::pair<int, int>;
-    using screen_size = std::pair<std::size_t, std::size_t>;
     using keytype = short;
 
     enum class Mode
@@ -150,10 +149,10 @@ namespace d2::in
 
         unsigned char _event_state{0x00};
 
-        screen_size _screen_capacity{-1, -1};
-        screen_size _screen_size{-1, -1};
-        mouse_position _mouse_pos{0, 0};
-        mouse_position _scroll_delta{0, 0};
+        BoundingBox _screen_capacity{-1, -1};
+        BoundingBox _BoundingBox{-1, -1};
+        Position _mouse_pos{0, 0};
+        Position _scroll_delta{0, 0};
 
         // c - current, p - previous
         // c for hold
@@ -182,10 +181,10 @@ namespace d2::in
         bool had_event(Event ev) const;
         bool had_pulse() const;
 
-        mouse_position scroll_delta();
-        mouse_position mouse_position();
-        screen_size screen_capacity();
-        screen_size screen_size();
+        Position scroll_delta();
+        Position mouse_position();
+        BoundingBox screen_capacity();
+        BoundingBox screen_size();
 
         absl::InlinedVector<std::pair<keytype, mode>, 8> active_list() const;
 
@@ -230,10 +229,10 @@ namespace d2::in
             void pulse(Special mod);
             void pulse(keytype key);
 
-            void set_scroll_delta(mouse_position pos);
-            void set_mouse_position(mouse_position pos);
-            void set_screen_size(screen_size size);
-            void set_screen_capacity(screen_size size);
+            void set_scroll_delta(Position pos);
+            void set_mouse_position(Position pos);
+            void set_screen_size(BoundingBox size);
+            void set_screen_capacity(BoundingBox size);
             void set_text(std::string in);
 
             std::pair<bool, std::thread::id> get_consume();

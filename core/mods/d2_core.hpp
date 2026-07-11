@@ -70,9 +70,9 @@ namespace d2::sys
         bool had_event(in::Event ev);
         bool had_pulse();
 
-        in::mouse_position mouse_position();
-        in::screen_size screen_capacity();
-        in::screen_size screen_size();
+        Position mouse_position();
+        BoundingBox screen_capacity();
+        BoundingBox screen_size();
 
         bool active(in::Mouse mouse, in::Mode mode);
         bool active(in::Special mod, in::Mode mode);
