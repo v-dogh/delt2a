@@ -7,6 +7,8 @@ namespace d2::sys::net
 {
     bool SystemSession::Scope::parse(const rule& rule, std::string_view input)
     {
+        if (std::holds_alternative<std::monostate>(rule))
+            return true;
         if (std::holds_alternative<std::regex>(rule))
         {
             const auto& reg = std::get<std::regex>(rule);
@@ -27,7 +29,12 @@ namespace d2::sys::net
             D2_THRW("Failed to set scope: '", name, "'", "; Already present");
         _scopes[name].scope = std::move(scope);
         for (const auto& [key, value] : headers)
-            set_header(name, key, value);
+        {
+            auto f = _scopes.find(name);
+            if (f == _scopes.end())
+                D2_THRW("Invalid scope: '", name, "'");
+            f->second.headers[key] = std::move(value);
+        }
     }
     void
     SystemSession::set_header(std::string_view name, std::string_view header, std::string value)

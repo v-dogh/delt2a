@@ -308,7 +308,7 @@ namespace d2::sys::net
     bool SystemHTTPCurl::CurlStream::is_open()
     {
         if (auto locked = op.lock())
-            return locked->cancelled;
+            return !locked->cancelled;
         return false;
     }
 
