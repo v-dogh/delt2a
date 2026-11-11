@@ -165,7 +165,13 @@ namespace rs
     void RuntimeLogs::LogHeader::bin(unsigned char* buffer)
     {
         std::size_t off = 0;
-        _write(buffer, timestamp, off);
+        if (severity == Severity::Reserved)
+        {
+            static_assert(sizeof(timestamp) == sizeof(data_offset));
+            _write(buffer, data_offset, off);
+        }
+        else
+            _write(buffer, timestamp, off);
         _write(buffer, code, off);
         _write(buffer, length, off);
         _write(buffer, md_length, off);
@@ -190,6 +196,8 @@ namespace rs
         read(buffer, header.length, off);
         read(buffer, header.md_length, off);
         read(buffer, header.severity, off);
+        if (header.severity == Severity::Reserved)
+            std::memcpy(&header.data_offset, buffer, sizeof(header.data_offset));
         header.mod =
             std::string_view(reinterpret_cast<const char*>(buffer + off), header.md_length);
         off += header.md_length;

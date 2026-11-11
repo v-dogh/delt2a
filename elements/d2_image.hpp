@@ -9,23 +9,18 @@ namespace d2
     namespace style
     {
         D2_UAI_INTERFACE(Image,
-            D2_UAI_OPTS(
-                enum ImageOptions : unsigned char
-                {
-
-                };
-            ),
+            D2_UAI_OPTS(),
             D2_UAI_FIELDS(
-                std::string path;
-                unsigned char image_options{ 0x00 };
+                image::Raster::ptr source{};
+                image::Rect source_rect{};
             ),
             D2_UAI_PROPS(
-                Path,
-                ImageOptions
+                Source,
+                SourceRect
             ),
             D2_UAI_LINK(
-                D2_UAI_PROP(Path, path, Style)
-                D2_UAI_PROP(ImageOptions, image_options, Style)
+                D2_UAI_PROP(Source, source, Style)
+                D2_UAI_PROP(SourceRect, source_rect, Style)
             )
         )
     }

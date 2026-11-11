@@ -14,12 +14,12 @@ namespace d2
     {
         void DynamicIterator::increment(int cnt)
         {
-            if (!_ptr.expired())
+            if (!_ptr.expired() && _adaptor)
                 _adaptor->increment(cnt, _ptr.lock());
         }
         void DynamicIterator::decrement(int cnt)
         {
-            if (!_ptr.expired())
+            if (!_ptr.expired() && _adaptor)
                 _adaptor->decrement(cnt, _ptr.lock());
         }
 
@@ -41,10 +41,10 @@ namespace d2
         }
         bool DynamicIterator::is_equal(DynamicIterator it) const
         {
-            if ((it._ptr.expired() && it._ptr.expired()) ||
+            if ((it._ptr.expired() && _ptr.expired()) ||
                 (it._adaptor == nullptr && _adaptor == nullptr))
                 return true;
-            if (!it._ptr.expired() && !_ptr.expired() && it._ptr.lock() == _ptr.lock())
+            if (_adaptor && it._adaptor && !it._ptr.expired() && !_ptr.expired() && it._ptr.lock() == _ptr.lock())
             {
                 return _adaptor->is_equal(it._adaptor.get(), _ptr.lock());
             }
@@ -82,7 +82,7 @@ namespace d2
         DynamicIterator& DynamicIterator::operator=(const DynamicIterator& copy)
         {
             _ptr = copy._ptr;
-            _adaptor = copy._adaptor->clone();
+            _adaptor = copy._adaptor ? copy._adaptor->clone() : nullptr;
             return *this;
         }
     } // namespace internal
@@ -365,7 +365,7 @@ namespace d2
         LinearIteratorAdaptor() = default;
         LinearIteratorAdaptor(const LinearIteratorAdaptor&) = default;
         LinearIteratorAdaptor(LinearIteratorAdaptor&&) = default;
-        LinearIteratorAdaptor(std::vector<ptr>::iterator it) : current(it) {}
+        LinearIteratorAdaptor(std::vector<ParentElement::ptr>::iterator it) : current(it) {}
 
         std::vector<ParentElement::ptr>::iterator current{};
 

@@ -6,8 +6,9 @@
 #include <curl/curl.h>
 #include <functional>
 #include <memory>
+#include <mutex>
 #include <core/mods/d2_ws.hpp>
-#include <mt/task_ring.hpp>
+#include <mt/task_queue.hpp>
 #include <string>
 #include <string_view>
 #include <thread>
@@ -37,7 +38,9 @@ namespace d2::sys::net
         struct CurlClient;
     private:
         std::jthread _worker{};
-        mt::TaskRing<std::function<void()>, 8> _tasks{};
+        std::mutex _handle_mtx{};
+        bool _curl_acquired{false};
+        mt::TaskQueue<std::function<void()>, true> _tasks{};
 
         std::atomic<CURLM*> _handle{nullptr};
         std::atomic<bool> _stop{true};
@@ -77,6 +80,7 @@ namespace d2::sys::net
         virtual Client::ptr _connect_impl(Connection connection) override;
     public:
         using SystemWS::SystemWS;
+        ~SystemWSCurl() override { unload(); }
     };
 
     using ws_curl = SystemWSCurl;

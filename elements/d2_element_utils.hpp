@@ -133,7 +133,7 @@ namespace d2::dx::impl
             const auto is_border = p.container_options & Base::ContainerOptions::EnableBorder;
             if (is_border)
             {
-                const auto bw = p.resolve_units(p.border_width);
+                const auto bw = std::max(0, p.resolve_units(p.border_width));
                 const auto et = !(p.container_options & Base::ContainerOptions::DisableBorderTop);
                 const auto el = !(p.container_options & Base::ContainerOptions::DisableBorderLeft);
 
@@ -147,7 +147,7 @@ namespace d2::dx::impl
             const auto is_border = p.container_options & Base::ContainerOptions::EnableBorder;
             if (is_border)
             {
-                const auto bw = p.resolve_units(p.border_width);
+                const auto bw = std::max(0, p.resolve_units(p.border_width));
                 const auto eb =
                     !(p.container_options & Base::ContainerOptions::DisableBorderBottom);
                 const auto er = !(p.container_options & Base::ContainerOptions::DisableBorderRight);
@@ -159,7 +159,8 @@ namespace d2::dx::impl
         void _render_border(PixelBuffer::View buffer) const
         {
             auto& p = static_cast<const Base&>(*this);
-            const auto bbox = p.box();
+            const BoundingBox bbox{std::min(p.box().width, buffer.width()), std::min(p.box().height, buffer.height())};
+            if (bbox.empty()) return;
 
             const bool is_border = p.container_options & Base::ContainerOptions::EnableBorder;
             const bool is_topfix = p.container_options & Base::ContainerOptions::TopFix;
@@ -169,7 +170,7 @@ namespace d2::dx::impl
             {
                 const auto& bcv = p.border_vertical_color;
                 const auto& bch = p.border_horizontal_color;
-                const auto bw = p.resolve_units(p.border_width);
+                const auto bw = std::max(0, p.resolve_units(p.border_width));
 
                 const bool et = !(p.container_options & Base::ContainerOptions::DisableBorderTop);
                 const bool eb =
@@ -179,7 +180,7 @@ namespace d2::dx::impl
 
                 // Top
                 if (et)
-                    for (std::size_t i = 0; i < bw; i++)
+                    for (int i = 0; i < std::min(bw, bbox.height); i++)
                         for (std::size_t x = 0; x < bbox.width; x++)
                         {
                             buffer.at(x, i).blend(bch);
@@ -187,7 +188,7 @@ namespace d2::dx::impl
 
                 // Bottom
                 if (eb)
-                    for (std::size_t i = 0; i < bw; i++)
+                    for (int i = 0; i < std::min(bw, bbox.height); i++)
                         for (std::size_t x = 0; x < bbox.width; x++)
                         {
                             buffer.at(x, bbox.height - 1 - i).blend(bch);
@@ -195,7 +196,7 @@ namespace d2::dx::impl
 
                 // Left
                 if (el)
-                    for (std::size_t i = 0; i < bw; i++)
+                    for (int i = 0; i < std::min(bw, bbox.width); i++)
                         for (std::size_t y = is_topfix; y < bbox.height; y++)
                         {
                             buffer.at(i, y).blend(bcv);
@@ -203,7 +204,7 @@ namespace d2::dx::impl
 
                 // Right
                 if (er)
-                    for (std::size_t i = 0; i < bw; i++)
+                    for (int i = 0; i < std::min(bw, bbox.width); i++)
                         for (std::size_t y = is_topfix; y < bbox.height; y++)
                         {
                             buffer.at(bbox.width - 1 - i, y).blend(bcv);

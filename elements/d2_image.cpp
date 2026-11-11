@@ -4,19 +4,17 @@ namespace d2::dx
 {
     void Image::_frame_impl(PixelBuffer::View buffer)
     {
-        if (!data::path.empty())
+        buffer.fill(pixel::combine(data::foreground_color, data::background_color));
+        if (data::source)
         {
-            buffer.fill(px::combined{.a = 0, .v = ' '});
-            ContainerHelper::_render_border(buffer);
-            const auto id = state()->context()->output()->image_id(data::path);
-            const auto base = data::container_options & EnableBorder ? 1 : 0;
-            buffer.at(base, base) = sys::output::image_constant;
-            buffer.at(base + 1, base).v = static_cast<unsigned char>(id);
-            buffer.at(base + 2, base).v = static_cast<unsigned char>((0xF0 & id) >> 1);
-            buffer.at(base + 3, base).v = static_cast<unsigned char>((0xF00 & id) >> 2);
-            buffer.at(base + 4, base).v = static_cast<unsigned char>((0xF000 & id) >> 3);
+            const auto begin = _border_base(), end = _border_base_inv();
+            const auto left = std::clamp(begin.x, 0, buffer.width());
+            const auto top = std::clamp(begin.y, 0, buffer.height());
+            const auto width = std::max(0, buffer.width() - left - std::clamp(end.x, 0, buffer.width()));
+            const auto height = std::max(0, buffer.height() - top - std::clamp(end.y, 0, buffer.height()));
+            if (width && height)
+                buffer.image(data::source, {left, top, width, height}, data::source_rect);
         }
-        else
-            buffer.fill(pixel::combine(data::foreground_color, data::background_color));
+        ContainerHelper::_render_border(buffer);
     }
-} // namespace d2::dx
+}

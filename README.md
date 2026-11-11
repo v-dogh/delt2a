@@ -37,7 +37,7 @@ Fetch and link the framework:
 FetchContent_Declare(
     delt2a
     GIT_REPOSITORY https://git.pvdogh.dev/MagnariusCosmo/delt2a
-    GIT_TAG master
+    GIT_TAG impl
 )
 FetchContent_MakeAvailable(delt2a)
 ...
@@ -76,3 +76,22 @@ int main()
 ```
 
 More examples are in the project's 'examples' directory
+
+
+## Core cleanup checkpoint
+
+See [building and tests](docs/building.md) for dependency setup, source and installed consumers, sanitizers and API documentation. See [core contracts](docs/core-contracts.md) for queue ordering, future/coroutine behavior, Unicode palette limits and lifetime rules.
+
+The [checkpoint notes](docs/checkpoint-1.md) describe the changes, migration points and validation limits. These changes are supplied in the accompanying source bundle; the remote `impl` branch has not been updated.
+
+The framework now uses a growing moodycamel queue; `TaskRing` is legacy. The second checkpoint adds [shared text layout and generic selection](docs/text-and-selection.md), including a runnable `d2_selection` example. The third checkpoint migrates editing widgets to grapheme positions and cell geometry. The fourth checkpoint adds [image composition and optional Kitty/Sixel output](docs/images.md). The fifth adds [provider-neutral inference and conversation APIs](docs/inference.md), including model switching, custom tools and context management. The concrete OpenAI-compatible provider remains the next addition.
+
+See [checkpoint 2](docs/checkpoint-2.md) for the delivered scope, test matrix and remaining limits.
+
+See [checkpoint 3](docs/checkpoint-3.md) for editing/history changes and validation.
+
+See [checkpoint 4](docs/checkpoint-4.md) for image rendering, module lifecycle changes and validation.
+
+See [checkpoint 5](docs/checkpoint-5.md) for inference contracts and validation.
+
+See [checkpoint 6](docs/checkpoint-6.md) for the consistent `core/mods/inference/` layout and [HTTP request controls](docs/http.md) needed by the upcoming native provider.

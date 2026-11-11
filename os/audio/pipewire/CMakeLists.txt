@@ -12,9 +12,7 @@ add_library(PipewireSystemAudio STATIC
     d2_pipewire_audio.cpp
 )
 
-target_include_directories(PipewireSystemAudio PUBLIC ${PIPEWIRE_INCLUDE_DIRS})
-target_compile_options    (PipewireSystemAudio PUBLIC ${PIPEWIRE_CFLAGS_OTHER})
-target_link_libraries     (PipewireSystemAudio PUBLIC ${PIPEWIRE_LIBRARIES})
+target_link_libraries(PipewireSystemAudio PUBLIC PkgConfig::PIPEWIRE)
 
 delta_register_module(
     TYPE      "d2::sys::PipewireSystemAudio"

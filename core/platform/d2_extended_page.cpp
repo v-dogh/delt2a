@@ -1,36 +1,42 @@
 #include "core/platform/d2_extended_page.hpp"
+#include <stdexcept>
 
 namespace d2
 {
-#   if D2_LOCALE_MODE == UNICODE
         AutoValueType::AutoValueType(const std::string& ext) :
             _value(global_extended_code_page.write(ext)) {}
         AutoValueType::AutoValueType(const char* ext) :
             AutoValueType(std::string(ext)) {}
-#   endif
 
     std::size_t ExtendedCodePage::_value_to_index(standard_value_type value) const
     {
-        if (value >= 0)
-            return static_cast<std::size_t>(value);
-        return static_cast<std::size_t>(value + 160);
+        const auto byte = static_cast<unsigned char>(value);
+        if (byte < 9)
+            return byte;
+        if (byte < 32 && byte != 9)
+            return byte - 1;
+        if (byte >= 128)
+            return byte - 97;
+        return extended_code_range;
     }
     standard_value_type ExtendedCodePage::_index_to_value(std::size_t idx) const
     {
-        if (idx < 32)
+        if (idx < 9)
             return static_cast<standard_value_type>(idx);
-        return static_cast<standard_value_type>(idx - 160);
+        if (idx < 31)
+            return static_cast<standard_value_type>(idx + 1);
+        return static_cast<standard_value_type>(idx + 97);
     }
 
     void ExtendedCodePage::activate_thread()
     {
-#       if D2_LOCALE_MODE == UTF8
+#       if D2_LOCALE_MODE == UNICODE
             global_extended_code_page.activate();
 #       endif
     }
     void ExtendedCodePage::deactivate_thread()
     {
-#       if D2_LOCALE_MODE == UTF8
+#       if D2_LOCALE_MODE == UNICODE
             global_extended_code_page.deactivate();
 #       endif
     }
@@ -41,47 +47,44 @@ namespace d2
     }
     bool ExtendedCodePage::is_extended(standard_value_type value) const
     {
-        return value < 32 || value > 126;
+        return _value_to_index(value) < extended_code_range;
+    }
+    std::optional<standard_value_type> ExtendedCodePage::try_write(std::string_view value)
+    {
+        if (value.empty())
+            return ' ';
+        if (value.size() == 1 && (value[0] == '\t' || (value[0] >= 32 && value[0] <= 126)))
+            return value[0];
+#if D2_LOCALE_MODE == ASCII
+        return '?';
+#else
+        auto str = std::string(value);
+        if (const auto f = _map.find(str); f != _map.end())
+            return _index_to_value(f->second);
+        if (_ctr == extended_code_range)
+            return std::nullopt;
+        _page[_ctr] = str;
+        _map.emplace(std::move(str), _ctr);
+        return _index_to_value(_ctr++);
+#endif
     }
     standard_value_type ExtendedCodePage::write(std::string_view value)
     {
-        [[ unlikely ]] if (value.empty())
-            return ' ';
-        if (value.size() == 1)
-            return value[0];
-        auto str = std::string(value);
-        if (auto f = _map.find(str);
-            f != _map.end())
-        {
-            return _index_to_value(f->second);
-        }
-        else if (_ctr >= extended_code_range - 1) [[ unlikely ]]
-        {
-            D2_TLOG(Warning, "Extended code page overflow triggered invalid character emission")
-            return '?';
-        }
-        else [[ likely ]]
-            ++_ctr;
-        _append_page += value.size();
-        std::memcpy(_page.data() + _append_page, value.data(), value.size());
-        const auto idx = _append_link++;
-        _link[idx] = { _append_page, static_cast<std::uint8_t>(value.size()) };
-        _map.emplace(std::move(str), idx);
-        return _index_to_value(idx);
+        if (auto token = try_write(value))
+            return *token;
+        throw std::overflow_error("Extended code page is full");
     }
     std::string_view ExtendedCodePage::read(standard_value_type value) const
     {
         const auto idx = _value_to_index(value);
-        return std::string_view(
-            _page.data() + _link[idx].first,
-            _link[idx].second
-        );
+        return idx < _ctr ? std::string_view(_page[idx]) : std::string_view("?");
     }
     void ExtendedCodePage::clear()
     {
         _map.clear();
-        _append_page = 0;
-        _append_link = 0;
+        for (std::size_t i = 0; i < _ctr; ++i)
+            _page[i].clear();
+        _ctr = 0;
     }
     void ExtendedCodePage::activate()
     {

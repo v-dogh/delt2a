@@ -141,18 +141,11 @@ namespace rs
         };
         struct LogHeader
         {
-            union
-            {
-                struct
-                {
-                    std::chrono::steady_clock::time_point
-                        timestamp{};           // timestamp relative to baseline
-                    std::uint32_t code{0x00};  // optional code
-                    std::uint16_t length{0};   // message length
-                    std::uint8_t md_length{0}; // module length
-                };
-                std::uint64_t data_offset;
-            };
+            std::chrono::steady_clock::time_point timestamp{};
+            std::uint32_t code{0x00};
+            std::uint16_t length{0};
+            std::uint8_t md_length{0};
+            std::uint64_t data_offset{0};
             Severity severity{}; // severity of the log
 
             std::string_view msg{""};
@@ -209,7 +202,7 @@ namespace rs
                 std::ostream out{&stream};
                 std::string_view data{};
                 std::string_view module{};
-                code code{std::numeric_limits<std::uint32_t>::max()};
+                RuntimeLogs::code code{std::numeric_limits<std::uint32_t>::max()};
                 Severity severity{Severity::Debug};
                 bool filter{false};
 
@@ -464,7 +457,7 @@ namespace rs
             }
             catch (const BaseException& ex)
             {
-                context::get()->log(
+                if (auto logs = context::get()) logs->log(
                     Severity::Critical,
                     ex.module.empty() ? module : ex.module,
                     "Critical Error Occured; Reason: '",
@@ -489,7 +482,7 @@ namespace rs
             }
             catch (const std::exception& ex)
             {
-                context::get()->log(
+                if (auto logs = context::get()) logs->log(
                     Severity::Critical,
                     module,
                     "Critical Error Occured; Reason: '",
@@ -505,7 +498,7 @@ namespace rs
             }
             catch (...)
             {
-                context::get()->log(
+                if (auto logs = context::get()) logs->log(
                     Severity::Critical,
                     module,
                     "Unknown Error Occured",

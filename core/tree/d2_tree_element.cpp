@@ -105,6 +105,8 @@ namespace d2
     }
     void Element::_unmute_listener(EventListenerState::ptr listener)
     {
+        if (listener->state() != EventListenerState::Mode::Muted)
+            return;
         D2_ASSERT(listener->index() < _subscribers.size());
         if (listener->event() == State::Clicked || listener->event() == State::Focused)
             _cursor_sink_listener_cnt++;
@@ -114,6 +116,8 @@ namespace d2
     }
     void Element::_mute_listener(EventListenerState::ptr listener)
     {
+        if (listener->state() != EventListenerState::Mode::Active)
+            return;
         D2_ASSERT(listener->index() < _subscribers.size());
         if (listener->event() == State::Clicked || listener->event() == State::Focused)
             _cursor_sink_listener_cnt--;
@@ -123,34 +127,19 @@ namespace d2
     }
     void Element::_destroy_listener(EventListenerState::ptr listener)
     {
-        D2_ASSERT(listener->index() < _subscribers.size());
-        if (listener->event() == State::Clicked || listener->event() == State::Focused)
-            _cursor_sink_listener_cnt--;
-        if (listener->event() == State::Event || listener->event() == State::RcEvent)
-            _dynamic_input_listener_cnt--;
+        if (listener->state() == EventListenerState::Mode::Destroyed)
+            return;
+        _mute_listener(listener);
+        listener->setstate(EventListenerState::Mode::Destroyed);
         _subscribers[listener->index()] = nullptr;
-        for (auto it = _subscribers.begin(); it != _subscribers.end();)
-        {
-            const auto beg = it;
-            for (; it != _subscribers.end(); ++it)
-            {
-                if (*it != nullptr)
-                    break;
-            }
-            if (it == _subscribers.end())
-            {
-                _subscribers.erase(beg, _subscribers.end());
-                return;
-            }
-            else
-                ++it;
-        }
+        while (!_subscribers.empty() && !_subscribers.back())
+            _subscribers.pop_back();
     }
     void Element::_trigger(State event, bool value)
     {
-        for (std::size_t i = 0; i < _subscribers.size(); i++)
+        const auto subscribers = _subscribers;
+        for (const auto& l : subscribers)
         {
-            auto& l = _subscribers[i];
             if (l != nullptr && l->event() == event &&
                 (l->value() == EventListenerState::Dep::Any ||
                  (value ? l->value() == EventListenerState::Dep::On
@@ -360,7 +349,9 @@ namespace d2
     }
     void Element::setcache(CachePolicy flag) const
     {
-        _internal_state |= InternalState(flag);
+        constexpr auto mask = CachePolicyStatic | CachePolicyDynamic | CachePolicyVolatile | CachePolicyBypass;
+        auto state = _internal_state.load();
+        while (!_internal_state.compare_exchange_weak(state, (state & ~mask) | InternalState(flag))) {}
     }
     bool Element::getstate(State state) const
     {
@@ -551,6 +542,7 @@ namespace d2
         case Layout::Height:
             return rep & ContextualHeight;
         }
+        return false;
     }
     bool Element::relative_layout(Layout type) const
     {
@@ -566,6 +558,7 @@ namespace d2
         case Layout::Height:
             return rep & RelativeHeight;
         }
+        return false;
     }
 
     Element::Frame Element::frame()
@@ -577,7 +570,7 @@ namespace d2
         }
         if (_internal_state & CachePolicyBypass)
         {
-            if (needs_update())
+            if (needs_update() || _buffer.empty())
             {
                 if (const auto [width, height] = box(); width > 0 && height > 0)
                 {
@@ -603,16 +596,24 @@ namespace d2
                 _update_layout_impl();
                 _signal_update(WasWrittenLayout);
             }
-            if (needs_update())
+            if (needs_update() || _buffer.empty())
             {
                 if (const auto [width, height] = box(); width > 0 && height > 0)
                 {
                     const auto ab = !_provides_buffer_impl() || parent() == nullptr;
                     _frames_reused = 0;
                     _update_style_impl();
-                    if (((_internal_state & CachePolicyStatic) ||
-                         ((_internal_state & CachePolicyDynamic) && _frames_redrawn == 1)) &&
-                        ab)
+                    bool isolated = parent() == nullptr;
+                    if (auto owner = parent())
+                    {
+                        const auto target = owner->_fetch_pixel_buffer_impl();
+                        const auto pos = position();
+                        isolated = target.has_images() || pos.x < 0 || pos.y < 0 ||
+                            static_cast<long long>(pos.x) + width > target.width() ||
+                            static_cast<long long>(pos.y) + height > target.height();
+                    }
+                    if (isolated || (((_internal_state & CachePolicyStatic) ||
+                         ((_internal_state & CachePolicyDynamic) && _frames_redrawn == 1)) && ab))
                     {
                         const auto [bwidth, bheight] = _reserve_buffer_impl();
                         _buffer.set_size(bwidth, bheight);

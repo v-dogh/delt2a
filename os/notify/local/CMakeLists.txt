@@ -1,7 +1,13 @@
+if (NOT TARGET DeltaElements)
+    return()
+endif()
+
 add_library(LocalSystemNotify STATIC
     d2_notify.hpp
     d2_notify.cpp
 )
+
+target_link_libraries(LocalSystemNotify PUBLIC DeltaElements)
 
 delta_register_module(
     TYPE   "d2::sys::LocalSystemNotify"

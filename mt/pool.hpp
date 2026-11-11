@@ -1,7 +1,7 @@
 #pragma once
 
 #include "future.hpp"
-#include "task_ring.hpp"
+#include "task_queue.hpp"
 #include <any>
 #include <array>
 #include <atomic>
@@ -90,6 +90,7 @@ namespace mt
             Type,
             // void -> Token
             Run,
+            Discard,
             // Public + N is free for the library user
             Public
         };
@@ -122,6 +123,14 @@ namespace mt
             }
         }
 
+        void discard() const
+        {
+            if (_cb)
+            {
+                std::any out;
+                _cb(Query::Discard, out);
+            }
+        }
         const callback& value() const noexcept;
         callback& value() noexcept;
 
@@ -181,6 +190,7 @@ namespace mt
         std::vector<PeriodicTask> _periodic_tasks{};
 
         std::atomic<bool> _stop{true};
+        std::atomic<std::size_t> _submitters{0};
         std::atomic<std::size_t> _task_cnt{0};
         std::atomic<std::size_t> _ptask_cnt{0};
 
@@ -188,6 +198,8 @@ namespace mt
         std::atomic<std::chrono::steady_clock::time_point::rep> _last_task_np{_tmax};
         std::atomic<std::chrono::steady_clock::time_point::rep> _periodic_deadline{_tmax};
     private:
+        bool _begin_submission() noexcept;
+        void _end_submission() noexcept;
         void _task_cnt_inc();
         void _task_cnt_dec();
     protected:
@@ -196,7 +208,7 @@ namespace mt
         void _tick();
 
         virtual bool _try_accept_impl(Task& task) noexcept = 0;
-        virtual void _accept_impl(Task task) noexcept = 0;
+        virtual void _accept_impl(Task task) = 0;
         virtual void _ping_impl() = 0;
         virtual void _start_impl() = 0;
         virtual void _stop_impl() noexcept = 0;
@@ -294,7 +306,7 @@ namespace mt
             // Ratios Task/Worker
 
             float growth_trigger_ratio{5.f};
-            float pressure_trigger_ratio{15.f};
+            float pressure_trigger_ratio{std::numeric_limits<float>::infinity()};
 
             // If the worker count is 0, the first worker in the returned vector will be selected
             // as the system worker for the current Node
@@ -478,18 +490,19 @@ namespace mt
 
     // Default worker
     // Represents a single thread
-    // Accepts tasks to a static ring buffer
+    // Accepts tasks to a growing concurrent queue
     class RingWorker : public Worker
     {
     protected:
-        TaskRing<Task, 16> _tasks{};
+        TaskQueue<Task> _tasks{};
         std::jthread _handle{};
+        std::atomic<std::thread::id> _thread_id{};
         std::mutex _startup_mtx{};
         std::atomic<bool> _stop_handle{true};
         std::chrono::milliseconds _max_idle_time{std::chrono::milliseconds::max()};
 
         virtual bool _try_accept_impl(Task& task) noexcept override;
-        virtual void _accept_impl(Task task) noexcept override;
+        virtual void _accept_impl(Task task) override;
         virtual void _ping_impl() override;
         virtual void _start_impl() override;
         virtual void _stop_impl() noexcept override;
@@ -497,6 +510,7 @@ namespace mt
         virtual ptr _clone_impl() const override;
     public:
         using Worker::Worker;
+        ~RingWorker() override { stop(); }
 
         RingWorker(unsigned char cap, std::chrono::milliseconds max_idle_time) :
             Worker(cap), _max_idle_time(max_idle_time)
@@ -527,7 +541,7 @@ namespace mt
         using ptr = std::shared_ptr<ConcurrentPool>;
         using wptr = std::weak_ptr<ConcurrentPool>;
     private:
-        std::unique_ptr<Topology> _topology{nullptr};
+        std::unique_ptr<Topology> _topology{std::make_unique<SimpleTopology>()};
         std::atomic<bool> _changing{false};
         std::atomic<bool> _stop{true};
         std::atomic<std::shared_ptr<std::vector<Node::ptr>>> _nodes{};
@@ -544,7 +558,7 @@ namespace mt
             );
         }
     public:
-        template<typename Topology> static ptr make()
+        template<typename Topology = SimpleTopology> static ptr make()
         {
             auto ptr = std::make_shared<ConcurrentPool>();
             ptr->_topology = std::make_unique<Topology>();
@@ -610,9 +624,19 @@ namespace mt
                      {
                          out = static_cast<unsigned char>(Task::Type::Immediate);
                      }
+                     else if (query == Task::Query::Discard)
+                     {
+                         if (const auto ptr = block.lock())
+                             ptr->discard();
+                     }
                      else if (query == Task::Query::Run)
                      {
                          const auto ptr = block.lock();
+                         if (ptr && ptr->is_discarded())
+                         {
+                             out = Task::Token::Discard;
+                             return;
+                         }
                          if (!(ptr && ptr->is_discarded()))
                          {
                              try
@@ -698,6 +722,10 @@ namespace mt
                      {
                          out = time;
                      }
+                     else if (query == Task::Query::Discard)
+                     {
+                         block->discard();
+                     }
                      else if (query == Task::Query::Run)
                      {
                          const auto fut = future<ret>(block);
@@ -760,9 +788,19 @@ namespace mt
                      {
                          out = time;
                      }
+                     else if (query == Task::Query::Discard)
+                     {
+                         if (const auto ptr = block.lock())
+                             ptr->discard();
+                     }
                      else if (query == Task::Query::Run)
                      {
                          const auto ptr = block.lock();
+                         if (ptr && ptr->is_discarded())
+                         {
+                             out = Task::Token::Discard;
+                             return;
+                         }
                          if (!(ptr && ptr->is_discarded()))
                          {
                              try
@@ -823,9 +861,19 @@ namespace mt
                      {
                          out = static_cast<unsigned char>(Task::Type::Immediate);
                      }
+                     else if (query == Task::Query::Discard)
+                     {
+                         if (const auto ptr = block.lock())
+                             ptr->discard();
+                     }
                      else if (query == Task::Query::Run)
                      {
                          const auto ptr = block.lock();
+                         if (ptr && ptr->is_discarded())
+                         {
+                             out = Task::Token::Discard;
+                             return;
+                         }
                          if (!(ptr && ptr->is_discarded()))
                          {
                              try

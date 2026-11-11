@@ -1,82 +1,104 @@
 #include "elements/d2_input.hpp"
 #include <core/mods/d2_ext.hpp>
 #include <core/screen/d2_screen.hpp>
-#include <elements/d2_element_utils.hpp>
 #include <limits>
 
 namespace d2::dx
 {
+    const text::Layout& Input::_layout() const
+    {
+        _text.reset(data::text, data::input_options & Censor, false);
+        return _text.display();
+    }
+    int Input::_prefix_width() const
+    {
+        return text::Layout(data::pre, {.newlines = false}).bounds().width;
+    }
+    void Input::_ensure_ptr_visible()
+    {
+        const auto& layout = _layout();
+        ptr_ = std::min(ptr_, layout.size());
+        highlight_start_ = std::min(highlight_start_, layout.size());
+        highlight_end_ = std::min(highlight_end_, layout.size());
+        const auto width = std::max(1, box().width - _prefix_width());
+        const auto column = layout.caret(ptr_).x;
+        bound_lower_ = std::clamp(bound_lower_, 0, std::max(0, layout.bounds().width + 1 - width));
+        if (column < bound_lower_)
+            bound_lower_ = column;
+        else if (column >= bound_lower_ + width)
+            bound_lower_ = column - width + 1;
+    }
+    std::size_t Input::_hit(Position position) const
+    {
+        _layout();
+        position.x += bound_lower_ - _prefix_width();
+        position.y = 0;
+        const auto gap = getstate(Focused) && (data::input_options & DrawPtr) &&
+                         !(data::input_options & PtrOverlap);
+        return _text.hit(position, gap ? std::optional(ptr_) : std::nullopt);
+    }
     void Input::_write_ptr(pixel& px)
     {
-        if ((data::input_options & InputOptions::Blink) && !ptr_blink_)
-        {
+        const auto hidden = (data::input_options & Blink) && !ptr_blink_;
+        px = pixel::combine(
+            (data::input_options & AutoPtrColor) ? data::foreground_color.extend(data::ptr_color.v)
+                                               : data::ptr_color,
+            data::background_color);
+        px.style &= ~px::style::Reserved;
+        if (hidden)
             px.v = ' ';
-        }
-        else
-        {
-            px = pixel::combine(
-                (data::input_options & data::AutoPtrColor)
-                    ? data::foreground_color.extend(data::ptr_color.v)
-                    : data::ptr_color,
-                data::background_color
-            );
-        }
     }
-
-    bool Input::_is_highlighted()
+    bool Input::_is_highlighted() { return highlight_start_ != highlight_end_; }
+    void Input::_erase(std::size_t begin, std::size_t end)
     {
-        return highlight_start_ != highlight_end_;
+        _layout();
+        begin = std::min(begin, _text.source.size());
+        end = std::clamp(end, begin, _text.source.size());
+        const auto byte = _text.source.byte_offset(begin);
+        data::text.erase(byte, _text.source.byte_offset(end) - byte);
+        _layout();
+        ptr_ = _text.source.grapheme_at(byte, text::Affinity::Downstream);
+        _reset_highlight();
+        _ensure_ptr_visible();
+        _signal_write(WriteType::Masked);
     }
     void Input::_remove_highlighted()
     {
         if (_is_highlighted())
-        {
-            const auto lower = std::min(highlight_start_, highlight_end_);
-            const auto upper = std::max(highlight_start_, highlight_end_);
-            const auto diff = upper - lower;
-            data::text.erase(lower, diff);
-            if (ptr_ >= upper)
-                _move_left(diff);
-            _reset_highlight();
-        }
+            _erase(std::min(highlight_start_, highlight_end_), std::max(highlight_start_, highlight_end_));
     }
     void Input::_begin_highlight_if()
     {
-        if (highlight_start_ == highlight_end_)
-        {
-            highlight_start_ = ptr_;
-            highlight_end_ = ptr_;
-            _signal_write(WriteType::Style);
-        }
+        if (!_is_highlighted())
+            highlight_start_ = highlight_end_ = ptr_;
     }
-    void Input::_reset_highlight()
-    {
-        if (_is_highlighted())
-        {
-            highlight_start_ = 0;
-            highlight_end_ = 0;
-            _signal_write(WriteType::Style);
-        }
-    }
+    void Input::_reset_highlight() { highlight_start_ = highlight_end_ = ptr_; }
     void Input::_reset_ptrs()
     {
-        ptr_ = 0;
-        bound_lower_ = 0;
-        highlight_start_ = 0;
-        highlight_end_ = 0;
+        ptr_ = bound_lower_ = 0;
         _reset_highlight();
     }
     string Input::_highlighted_value()
     {
-        if (_is_highlighted())
-        {
-            const auto lower = std::min(highlight_start_, highlight_end_);
-            const auto upper = std::max(highlight_start_, highlight_end_);
-            return data::text.substr(lower, upper - lower);
-        }
-        return "";
+        _ensure_ptr_visible();
+        return std::string(_text.source.extract({highlight_start_, highlight_end_}));
     }
-
+    void Input::_insert(std::string_view value)
+    {
+        if (value.empty())
+            return;
+        _ensure_ptr_visible();
+        const auto begin = _is_highlighted() ? std::min(highlight_start_, highlight_end_) : ptr_;
+        const auto end = _is_highlighted() ? std::max(highlight_start_, highlight_end_) : ptr_;
+        const auto byte = _text.source.byte_offset(begin);
+        const auto count = value.size();
+        data::text.replace(byte, _text.source.byte_offset(end) - byte, value);
+        _layout();
+        ptr_ = _text.source.grapheme_at(byte + count, text::Affinity::Downstream);
+        _reset_highlight();
+        _ensure_ptr_visible();
+        _signal_write(WriteType::Masked);
+    }
     void Input::_start_blink()
     {
         if ((data::input_options & InputOptions::Blink) && getstate(State::Focused) &&
@@ -84,10 +106,16 @@ namespace d2::dx
         {
             btask_ = context()->scheduler()->launch_cyclic(
                 std::chrono::milliseconds(500),
-                [this](auto)
+                [weak = weak_from_this()](mt::future<void> task)
                 {
-                    ptr_blink_ = !ptr_blink_;
-                    _signal_write(WriteType::Style);
+                    if (auto element = weak.lock())
+                    {
+                        auto& self = static_cast<Input&>(*element);
+                        self.ptr_blink_ = !self.ptr_blink_;
+                        self._signal_write(WriteType::Style);
+                    }
+                    else
+                        task.discard();
                 }
             );
         }
@@ -113,388 +141,184 @@ namespace d2::dx
     }
     void Input::_unfreeze_blink()
     {
-        if (ptr_blink_ && btask_ == nullptr)
+        if (getstate(State::Focused) && btask_ == nullptr)
             _start_blink();
     }
 
+
+    void Input::_move_to(std::size_t pos, bool select)
+    {
+        _ensure_ptr_visible();
+        if (select)
+            _begin_highlight_if();
+        ptr_ = std::min(pos, _layout().size());
+        if (select)
+            highlight_end_ = ptr_;
+        else
+            _reset_highlight();
+        _ensure_ptr_visible();
+        _signal_write(WriteType::Style);
+    }
     void Input::_move_right(std::size_t cnt)
     {
-        _reset_highlight();
-
-        ptr_ += cnt;
-        if (ptr_ > data::text.size())
-        {
-            ptr_ = data::text.size();
-        }
-
-        const auto upper = bound_lower_ + box().width;
-        if (ptr_ >= upper && bound_lower_ < data::text.size())
-        {
-            const auto diff = ptr_ - upper;
-            bound_lower_ += diff;
-        }
-
-        _signal_write(WriteType::Style);
+        _ensure_ptr_visible();
+        _move_to(ptr_ + std::min(cnt, _layout().size() - ptr_));
     }
-    void Input::_move_left(std::size_t cnt)
-    {
-        _reset_highlight();
-
-        if (ptr_ >= cnt)
-        {
-            ptr_ -= cnt;
-        }
-        else
-        {
-            ptr_ = 0;
-        }
-
-        if (ptr_ < bound_lower_ && bound_lower_ > 0)
-        {
-            const auto diff = bound_lower_ - ptr_;
-            bound_lower_ -= diff;
-        }
-
-        _signal_write(WriteType::Style);
-    }
-
-    bool Input::_provides_input_impl() const
-    {
-        return true;
-    }
-
+    void Input::_move_left(std::size_t cnt) { _move_to(ptr_ - std::min(ptr_, cnt)); }
+    bool Input::_provides_input_impl() const { return true; }
     Unit Input::_layout_impl(Element::Layout type) const
     {
         switch (type)
         {
-        case Element::Layout::X:
-            return data::x;
-        case Element::Layout::Y:
-            return data::y;
+        case Element::Layout::X: return data::x;
+        case Element::Layout::Y: return data::y;
         case Element::Layout::Width:
             if (data::width.getunits() == Unit::Auto)
-                return Unit(
-                    int(data::pre.size() + std::max(data::hint.size(), data::text.size())) +
-                    data::width.raw()
-                );
+                return Unit(_prefix_width() + std::max(_layout().bounds().width +
+                    int(getstate(Focused) && (data::input_options & DrawPtr)),
+                    text::Layout(data::hint, {.newlines = false}).bounds().width) + data::width.raw());
             return data::width;
         case Element::Layout::Height:
             if (data::height.getunits() == Unit::Auto)
                 return Unit(1 + data::height.raw());
             return data::height;
         }
+        return data::width;
     }
-
     void Input::_state_change_impl(State state, bool value)
     {
         if (state == State::Focused)
         {
             if (value)
-            {
                 _start_blink();
-            }
             else
             {
                 _stop_blink();
                 _reset_highlight();
             }
+            _signal_write(WriteType::Dimensions);
         }
         else if (state == State::Clicked && value)
         {
-            const auto [x, y] = mouse_object_space();
-            if (x >= data::pre.size())
-                ptr_ = bound_lower_ + (x - data::pre.size());
-            _reset_highlight();
+            _ensure_ptr_visible();
+            _move_to(_hit(mouse_object_space()));
             _begin_highlight_if();
         }
         else if (state == State::Swapped)
         {
             if (value)
-            {
                 _freeze_blink();
-            }
             else
-            {
                 _unfreeze_blink();
-            }
         }
     }
     void Input::_event_impl(in::InputFrame& frame)
     {
-        write_flag flag = WriteType::Style;
-        bool write = false;
-
-        if (frame.had_event(in::Event::MouseMovement) || frame.had_event(in::Event::KeyMouseInput))
-        {
-            if (frame.active(in::mouse::Left, in::mode::Hold))
-            {
-                const auto [x, y] = mouse_object_space();
-                if (x >= data::pre.size())
-                {
-                    highlight_end_ = bound_lower_ + (x - data::pre.size());
-                    write = true;
-                }
-            }
-        }
+        _ensure_ptr_visible();
+        const auto keys = frame.map().current;
+        const auto shift = keys.test(std::size_t(in::special::Shift));
+        const auto ctrl = keys.test(std::size_t(in::special::LeftControl));
+        const auto readonly = bool(data::input_options & ReadOnly);
+        if ((frame.had_event(in::Event::MouseMovement) || frame.had_event(in::Event::KeyMouseInput)) &&
+            frame.active(in::mouse::Left, in::mode::Hold))
+            _move_to(_hit(mouse_object_space()), true);
         if (frame.had_event(in::Event::KeyInput))
         {
-            if (frame.active(in::special::Enter, in::mode::Hold) &&
-                !(data::input_options & ReadOnly))
+            if (frame.active(in::special::Enter, in::mode::Hold) && !readonly)
             {
                 if (!data::text.empty())
                 {
-                    string cpy = std::move(data::text);
-                    data::text = std::string();
-                    if (data::on_submit != nullptr)
-                        data::on_submit(
-                            std::static_pointer_cast<Input>(shared_from_this()), std::move(cpy)
-                        );
+                    auto submitted = std::move(data::text);
+                    data::text.clear();
                     _reset_ptrs();
-                    flag |= WriteType::Offset;
-                    write = true;
+                    _signal_write(WriteType::Masked);
+                    if (data::on_submit)
+                        data::on_submit(std::static_pointer_cast<Input>(shared_from_this()), std::move(submitted));
                 }
             }
-            else if (
-                frame.active(in::special::Backspace, in::mode::Hold) &&
-                !(data::input_options & ReadOnly)
-            )
+            else if (frame.active(in::special::Backspace, in::mode::Hold) && !readonly)
             {
-                if (_is_highlighted())
-                {
-                    _remove_highlighted();
-                }
-                else if (!data::text.empty() && ptr_)
-                {
-                    data::text.erase(ptr_ - 1, 1);
-                    if (ptr_ == bound_lower_)
-                        bound_lower_--;
-                    ptr_--;
-                    write = true;
-                }
-                flag |= WriteType::Offset;
+                if (_is_highlighted()) _remove_highlighted();
+                else if (ptr_) _erase(ptr_ - 1, ptr_);
             }
-            else if (
-                frame.active(in::special::Delete, in::mode::Hold) &&
-                !(data::input_options & ReadOnly)
-            )
+            else if (frame.active(in::special::Delete, in::mode::Hold) && !readonly)
             {
-                if (_is_highlighted())
-                {
-                    _remove_highlighted();
-                }
-                else if (ptr_ < data::text.size())
-                {
-                    data::text.erase(ptr_, 1);
-                    write = true;
-                }
-                flag |= WriteType::Offset;
+                if (_is_highlighted()) _remove_highlighted();
+                else if (ptr_ < _layout().size()) _erase(ptr_, ptr_ + 1);
             }
             else if (frame.active(in::special::ArrowLeft, in::mode::Hold))
-            {
-                if (frame.active(in::special::Shift, in::mode::Hold))
-                {
-                    _begin_highlight_if();
-                    if (highlight_end_ > 0)
-                    {
-                        highlight_end_--;
-                        write = true;
-                    }
-                }
-                else
-                    _move_left();
-            }
+                _move_to(ptr_ ? ptr_ - 1 : 0, shift);
             else if (frame.active(in::special::ArrowRight, in::mode::Hold))
-            {
-                if (frame.active(in::special::Shift, in::mode::Hold))
-                {
-                    _begin_highlight_if();
-                    if (highlight_end_ < data::text.size())
-                    {
-                        highlight_end_++;
-                        if (highlight_end_ > bound_lower_ + box().width)
-                            bound_lower_++;
-                        write = true;
-                    }
-                }
-                else
-                    _move_right();
-            }
+                _move_to(ptr_ + (ptr_ < _layout().size()), shift);
+            else if (frame.active(in::special::Home, in::mode::Hold))
+                _move_to(0, shift);
+            else if (frame.active(in::special::End, in::mode::Hold))
+                _move_to(_layout().size(), shift);
             else if (frame.active(in::special::Escape, in::mode::Hold))
-            {
                 screen()->focus(nullptr);
-            }
-            else if (frame.active(in::special::LeftControl, in::mode::Hold))
+            else if (ctrl)
             {
-                auto clipboard = context()->sys_if<sys::SystemClipboard>();
-                if (clipboard)
+                if (frame.active(in::key('a'), in::mode::Press))
                 {
-                    if (frame.active(in::key('a'), in::mode::Press))
+                    _move_to(0);
+                    _move_to(_layout().size(), true);
+                }
+                else if (auto ctx = state() ? context() : nullptr; ctx)
+                {
+                    if (auto clipboard = ctx->sys_if<sys::SystemClipboard>(); clipboard)
                     {
-                        highlight_start_ = 0;
-                        highlight_end_ = data::text.size();
-                        write = true;
-                    }
-                    else if (
-                        frame.active(in::key('v'), in::mode::Press) &&
-                        !(data::input_options & ReadOnly)
-                    )
-                    {
-                        if (!clipboard->empty())
+                        if (frame.active(in::key('v'), in::mode::Press) && !readonly)
+                            _insert(clipboard->paste());
+                        else if (frame.active(in::key('x'), in::mode::Press) && !readonly && _is_highlighted())
                         {
+                            clipboard->copy(_highlighted_value());
                             _remove_highlighted();
-                            const auto v = clipboard->paste();
-                            data::text.insert(ptr_, v);
-                            _move_right(v.size());
-                            flag |= WriteType::Offset;
-                            write = true;
                         }
-                    }
-                    else if (
-                        frame.active(in::key('x'), in::mode::Press) &&
-                        highlight_start_ != highlight_end_ && !(data::input_options & ReadOnly)
-                    )
-                    {
-                        clipboard->copy(_highlighted_value());
-                        _remove_highlighted();
-                    }
-                    else if (frame.active(in::key('c'), in::mode::Press) && _is_highlighted())
-                    {
-                        clipboard->copy(_highlighted_value());
+                        else if (frame.active(in::key('c'), in::mode::Press) && _is_highlighted())
+                            clipboard->copy(_highlighted_value());
                     }
                 }
             }
         }
-        if (frame.had_event(in::Event::KeySequenceInput) && !(data::input_options & ReadOnly))
-        {
-            if (_is_highlighted())
-                _remove_highlighted();
-            if (ptr_ > data::text.size())
-                ptr_ = data::text.size();
-
-            auto seq = std::string(frame.sequence());
-            if (frame.active(in::special::Shift, in::mode::Hold))
-            {
-                std::transform(
-                    seq.cbegin(),
-                    seq.cend(),
-                    seq.begin(),
-                    [](char ch) -> char { return std::toupper(ch); }
-                );
-            }
-
-            data::text.insert(data::text.begin() + ptr_, seq.begin(), seq.end());
-            _move_right(seq.size());
-            flag |= WriteType::Offset;
-            write = true;
-        }
-
-        if (write)
-        {
-            _signal_write(flag);
-        }
+        if (frame.had_event(in::Event::KeySequenceInput) && !readonly && !ctrl)
+            _insert(frame.sequence());
     }
     void Input::_frame_impl(PixelBuffer::View buffer)
     {
-        const auto [width, height] = box();
+        buffer.fill(data::background_color);
+        if (buffer.empty())
+            return;
+        _ensure_ptr_visible();
         const auto color = pixel::combine(data::foreground_color, data::background_color);
-
-        // Draw the pre-value
+        const auto prefix = _prefix_width();
+        text::Layout(data::pre, {.newlines = false}).draw(buffer, color);
+        const auto width = std::max(0, buffer.width() - prefix);
+        if (!width)
+            return;
+        auto content = PixelBuffer::View(buffer, prefix, 0, width, 1);
+        const auto draw_ptr = (data::input_options & DrawPtr) && getstate(Focused);
+        const auto gap = draw_ptr && !(data::input_options & PtrOverlap);
+        _layout().draw(content, color, {-bound_lower_, 0}, text::Range{highlight_start_, highlight_end_},
+                       data::highlight_mask, gap ? std::optional(ptr_) : std::nullopt);
+        if (data::text.empty() && !draw_ptr)
+            text::Layout(data::hint, {.newlines = false}).draw(content,
+                pixel::combine(data::foreground_color.alpha(0.5f).stylize(px::style::Bold), data::background_color));
+        const auto column = _layout().caret(ptr_).x - bound_lower_;
+        if (draw_ptr && column >= 0 && column < width)
         {
-            buffer.fill(data::background_color);
-            for (std::size_t i = 0; i < std::min(width, int(data::pre.size())); i++)
-            {
-                auto& p = buffer.at(i);
-                p = color;
-                p.v = data::pre[i];
-            }
-        }
-
-        // Correct bounds
-        {
-            if (ptr_ > data::text.size())
-                ptr_ = data::text.size();
-            if (bound_lower_ > data::text.size())
-                bound_lower_ = data::text.size();
-        }
-
-        // Draw the input
-        {
-            const auto draw_ptr =
-                bool(data::input_options & InputOptions::DrawPtr) && getstate(Focused);
-            if (!data::text.empty())
-            {
-                const auto hlower = std::min(highlight_start_, highlight_end_);
-                const auto hupper = std::max(highlight_start_, highlight_end_);
-                const auto m = std::min(bound_lower_ + width, int(data::text.size())) + draw_ptr;
-
-                for (std::size_t pi = data::pre.size(), i = bound_lower_, d = 0;
-                     i < m && pi < buffer.width();
-                     i++, pi++)
-                {
-                    if (draw_ptr && i == ptr_)
-                    {
-                        d = 1;
-                    }
-                    else
-                    {
-                        auto& px = buffer.at(pi);
-                        if (i - d >= hlower && i - d < hupper)
-                        {
-                            px.blend(color.mask(data::highlight_mask));
-                        }
-                        else
-                            px.blend(color);
-
-                        if (data::input_options & InputOptions::Censor)
-                        {
-                            px.v = '*';
-                        }
-                        else
-                        {
-                            px.v = data::text[i - d];
-                        }
-                    }
-                }
-            }
-            else if (!data::hint.empty() && !draw_ptr)
-            {
-                const auto hcolor = data::foreground_color.alpha(0.5f);
-                for (std::size_t i = pre.size();
-                     i < std::min<std::size_t>(pre.size() + hint.size(), width);
-                     i++)
-                {
-                    buffer.at(i).blend(
-                        hcolor.stylize(px::style::Bold).extend(data::hint[i - pre.size()])
-                    );
-                }
-            }
-
-            if (const auto off = ptr_ + pre.size() - bound_lower_; draw_ptr && off < buffer.width())
-            {
-                _write_ptr(buffer.at(off));
-            }
+            if (!gap && ptr_ < _layout().size())
+                for (int i = 0; i < _layout().glyphs()[ptr_].columns && column + i < width; ++i)
+                    content.at(column + i, 0) = pixel::combine(data::foreground_color.extend(' '), data::background_color);
+            _write_ptr(content.at(column, 0));
         }
     }
-
     Input::~Input()
     {
-        if (data::input_options & data::Censor)
+        btask_.discard();
+        if (data::input_options & Censor)
             std::fill(data::text.begin(), data::text.end(), 0);
     }
-
-    void Input::sync()
-    {
-        _move_right(std::numeric_limits<std::size_t>::max());
-    }
-    void Input::jump(std::size_t pos)
-    {
-        if (pos < ptr_)
-        {
-            _move_left(ptr_ - pos);
-        }
-        else if (pos > ptr_)
-        {
-            _move_right(pos - ptr_);
-        }
-    }
+    void Input::sync() { _move_to(_layout().size()); }
+    void Input::jump(std::size_t pos) { _move_to(pos); }
+    std::size_t Input::cursor() const { return std::min(ptr_, _layout().size()); }
 } // namespace d2::dx

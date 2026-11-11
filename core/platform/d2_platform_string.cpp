@@ -1,11 +1,17 @@
 #include "core/platform/d2_platform_string.hpp"
+#include <stdexcept>
+#include <cctype>
 
 namespace d2
 {
 #   if D2_LOCALE_MODE == ASCII
     std::size_t StringIterator::distance(const StringIterator& first, const StringIterator& second)
     {
-        return std::distance(first._it, second._it);
+        if (first._str.data() != second._str.data() || first._str.size() != second._str.size())
+            throw std::invalid_argument("String iterators have different ranges");
+        if (first._it == second._it)
+            return 0;
+        return first._it < second._it ? second._it - first._it : first._it - second._it;
     }
 
     StringIterator StringIterator::begin() const
@@ -19,11 +25,13 @@ namespace d2
 
     bool StringIterator::increment()
     {
-        return ++_it != _str.end();
+        if (!is_end())
+            ++_it;
+        return !is_end();
     }
     string_view StringIterator::current() const
     {
-        return { &*_it, &*_it + 1 };
+        return is_end() ? string_view{} : string_view(&*_it, 1);
     }
 
     bool StringIterator::is_end() const
@@ -32,50 +40,53 @@ namespace d2
     }
     bool StringIterator::is_space() const
     {
-        return std::isspace(*_it);
+        return !is_end() && std::isspace(static_cast<unsigned char>(*_it));
     }
     bool StringIterator::is_endline() const
     {
-        return *_it == '\n';
+        return !is_end() && *_it == '\n';
     }
 
     bool StringIterator::operator==(const StringIterator& copy) const
     {
         return _it == copy._it;
     }
-    string_view operator*() const
+    string_view StringIterator::operator*() const
     {
         return current();
     }
     StringIterator& StringIterator::operator++()
     {
-        ++_it;
+        increment();
         return *this;
     }
     StringIterator StringIterator::operator++(int)
     {
         auto cpy = _it;
-        ++_it;
-        return StringIterator(cpy);
+        increment();
+        return StringIterator(_str, cpy);
     }
 #   elif D2_LOCALE_MODE == UNICODE
     std::size_t StringIterator::distance(const StringIterator& first, const StringIterator& second)
     {
+        if (first._view.begin() != second._view.begin() || first._view.end() != second._view.end())
+            throw std::invalid_argument("String iterators have different ranges");
         std::size_t i = 0;
-        iterator fit;
-        iterator sit;
-        if ((*first._it).data() < (*second._it).data())
+        auto fit = first._it;
+        while (fit != first._view.end() && fit != second._it)
         {
-            fit = first._it;
-            sit = second._it;
+            ++fit;
+            ++i;
         }
-        else
+        if (fit == second._it)
+            return i;
+        i = 0;
+        fit = second._it;
+        while (fit != first._it)
         {
-            fit = second._it;
-            sit = first._it;
+            ++fit;
+            ++i;
         }
-        while (fit != first._view.end() && fit != sit)
-            i++;
         return i;
     }
 
@@ -90,11 +101,13 @@ namespace d2
 
     bool StringIterator::increment()
     {
-        return ++_it != _view.end();
+        if (!is_end())
+            ++_it;
+        return !is_end();
     }
     string_view StringIterator::current() const
     {
-        return *_it;
+        return is_end() ? string_view{} : *_it;
     }
 
     bool StringIterator::is_end() const
@@ -103,7 +116,9 @@ namespace d2
     }
     bool StringIterator::is_space() const
     {
-        for (auto ch : *_it)
+        if (is_end())
+            return false;
+        for (auto ch : current() | una::views::utf8)
         {
             if (!una::codepoint::is_whitespace(ch))
                 return false;
@@ -132,13 +147,13 @@ namespace d2
     }
     StringIterator& StringIterator::operator++()
     {
-        ++_it;
+        increment();
         return *this;
     }
     StringIterator StringIterator::operator++(int)
     {
         auto cpy = _it;
-        ++_it;
+        increment();
         return StringIterator(_view, cpy);
     }
 #   endif

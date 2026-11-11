@@ -6,7 +6,9 @@ namespace d2::sys::net
 {
     SystemHTTP::Stream::ptr SystemHTTP::request(Request request)
     {
-        if (auto s = context()->sys_if<session>())
+        auto ctx = context();
+        if (!ctx) throw std::logic_error("HTTP context is unavailable");
+        if (auto s = ctx->sys_if<session>())
         {
             request.on_setup = [=, callback = std::move(request.on_setup)](RequestBuilder& builder)
             {

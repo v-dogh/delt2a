@@ -117,7 +117,6 @@ namespace d2::style
         D2_TAG_MODULE(tree)
     public:
         using property = uai_property;
-        template<property Property> using type_of = decltype(get<Property>());
     private:
         template<std::size_t Prop>
         using last_interface = impl::LastImpl<Interface, Interfaces...>::template type<Prop>;
@@ -525,6 +524,9 @@ namespace d2::style
                 return _int_get_synced<Property>();
             }
         }
+        template<property Property, typename Self = UniversalAccessInterface>
+        using type_of = decltype(std::declval<Self&>().template get<Property>());
+
         template<property Property> auto* getref()
         {
             if constexpr (chain_)

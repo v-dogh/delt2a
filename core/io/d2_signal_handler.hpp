@@ -9,7 +9,7 @@
 #include <functional>
 #include <memory>
 #include <mt/pool.hpp>
-#include <mt/task_ring.hpp>
+#include <mt/task_queue.hpp>
 #include <new>
 #include <shared_mutex>
 #include <tuple>
@@ -759,8 +759,9 @@ namespace d2
             };
 
             std::shared_mutex mtx{};
-            mt::TaskRing<SignalEnvelope, _max_concurrent_signals> instances{};
-            mt::TaskRing<SignalEnvelope, 1> combined{};
+            mt::TaskQueue<SignalEnvelope> instances{};
+            mutable std::mutex combined_mtx{};
+            std::optional<SignalEnvelope> combined{};
             absl::flat_hash_map<event_idx, EventBucket> handles{};
             signature_verifier verify{nullptr};
             std::atomic<bool> is_queued{false};

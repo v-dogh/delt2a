@@ -9,3 +9,5 @@
 #include <core/mods/d2_binder.hpp>
 #include <core/mods/d2_core.hpp>
 #include <core/mods/d2_ext.hpp>
+
+#include <core/mods/d2_images.hpp>

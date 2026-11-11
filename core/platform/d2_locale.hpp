@@ -26,7 +26,7 @@ namespace d2
 #if D2_LOCALE_MODE == ASCII
     constexpr auto encoding = Encoding::Ascii;
     using string = std::string;
-    using string_view = std::string;
+    using string_view = std::string_view;
     using value_type = char;
 #elif D2_LOCALE_MODE == UNICODE
     constexpr auto encoding = Encoding::Unicode;

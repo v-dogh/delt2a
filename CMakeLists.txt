@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.21)
 project(DeltaAscii LANGUAGES CXX VERSION 0.1.0)
 
 include(GNUInstallDirs)
@@ -12,6 +12,7 @@ include(cmake/system.cmake)
 
 # General
 
+option(D2_EXCLUDE_LIBRARY_INFERENCE "Disable inference abstractions"             OFF)
 option(D2_EXCLUDE_LIBRARY_EXTRAS    "Disable extras module"                     OFF)
 option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"                   OFF)
 option(D2_SECURITY_WATCH            "Enable runtime debug checks"               ON)
@@ -20,6 +21,8 @@ option(D2_SECURITY_ASSERT           "Enable debug assertions"                   
 option(D2_UNICODE_MODE              "Enable unicode mode"                       ON)
 option(D2_ENABLE_INSTALL            "Enable install for cmake"                  OFF)
 option(D2_TEST                      "Enable building of examples"               OFF)
+option(D2_BUILD_TESTS               "Build regression tests"                    OFF)
+option(D2_BUILD_DOCS                "Build Doxygen API reference"                OFF)
 
 # Sanitizing
 
@@ -115,7 +118,7 @@ if (NOT TARGET absl::base)
         FetchContent_Declare(
             absl
             GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
-            GIT_TAG        master
+            GIT_TAG        d9e4955c65cd4367dd6bf46f4ccb8cd3d100540b
         )
         set(ABSL_PROPAGATE_CXX_STD ON  CACHE BOOL "" FORCE)
         set(ABSL_ENABLE_INSTALL    OFF CACHE BOOL "" FORCE)
@@ -125,20 +128,20 @@ if (NOT TARGET absl::base)
         find_package(absl REQUIRED)
     endif()
 endif()
-if (D2_UNICODE_MODE)
+if (D2_UNICODE_MODE AND NOT TARGET uni-algo::uni-algo)
     find_package(uni-algo REQUIRED)
 endif()
-find_package(ada REQUIRED)
+if (NOT TARGET ada::ada)
+    find_package(ada REQUIRED)
+endif()
 
 #############
 # LIBRARIES #
 #############
 
 # Export stuff
-if (NOT D2_SANITIZER STREQUAL "none" OR NOT D2_ENABLE_INSTALL)
-    set(TPMP_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
-    set(LOGS_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
-endif()
+set(TPMP_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
+set(LOGD_ENABLE_INSTALL OFF CACHE BOOL "" FORCE)
 
 # Scheduler
 add_subdirectory(mt)
@@ -173,11 +176,15 @@ add_library(DeltaCore STATIC
     core/types/d2_vtypes.hpp
     core/types/d2_pixel.hpp
     core/types/d2_pixel.cpp
+    core/types/d2_image.hpp
+    core/types/d2_image.cpp
     core/types/d2_element_units.hpp
     # Platform
     core/platform/d2_locale.hpp
     core/platform/d2_platform_string.hpp
     core/platform/d2_platform_string.cpp
+    core/platform/d2_text_layout.hpp
+    core/platform/d2_text_layout.cpp
     core/platform/d2_extended_page.hpp
     core/platform/d2_extended_page.cpp
     core/platform/d2_fragmented_buffer.hpp
@@ -295,7 +302,7 @@ if (NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
 endif()
 
 # Some funtime extras
-if (NOT D2_EXCLUDE_LIBRARY_EXTRAS)
+if (NOT D2_EXCLUDE_LIBRARY_EXTRAS AND NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
     add_library(DeltaExtras STATIC
         # Presets
         extras/d2_default_theme.hpp
@@ -313,6 +320,10 @@ if (NOT D2_EXCLUDE_LIBRARY_EXTRAS)
     delta_setup_target(DeltaExtras)
 endif()
 
+if (NOT D2_EXCLUDE_LIBRARY_INFERENCE)
+    add_subdirectory(core/mods/inference)
+endif()
+
 # Platform library
 add_library(DeltaCoreOS STATIC
     os/d2_registry.cpp
@@ -323,10 +334,7 @@ delta_setup_target(DeltaCoreOS)
 
 delta_discover_modules(
     TARGET DeltaCoreOS
-    DEPS 
-        DeltaCore
-        $<$<TARGET_EXISTS:DeltaElements>:DeltaElements>
-        $<$<TARGET_EXISTS:DeltaExtras>:DeltaExtras>
+    DEPS DeltaCore
     ROOTS
         "${CMAKE_CURRENT_SOURCE_DIR}/os"
     EXCLUDE_BASES ${D2_MODULE_EXCLUDE_BASES}
@@ -335,10 +343,7 @@ delta_discover_modules(
 )
 delta_discover_module_root_groups(
     TARGET DeltaCoreOS
-    DEPS
-        DeltaCore
-        $<$<TARGET_EXISTS:DeltaElements>:DeltaElements>
-        $<$<TARGET_EXISTS:DeltaExtras>:DeltaExtras>
+    DEPS DeltaCore
 )
 delta_generate_module_registry(
     TARGET DeltaCoreOS
@@ -353,37 +358,105 @@ delta_generate_module_registry(
 add_library(DeltaAscii       INTERFACE)
 add_library(DeltaAscii::Core ALIAS DeltaAscii)
 
-target_link_libraries(DeltaAscii INTERFACE
-    DeltaCore
-    $<$<TARGET_EXISTS:DeltaElements>:DeltaElements>
-    $<$<TARGET_EXISTS:DeltaExtras>:DeltaExtras>
-    $<$<TARGET_EXISTS:DeltaCoreOS>:DeltaCoreOS>
-)
+set_target_properties(DeltaAscii PROPERTIES EXPORT_NAME Core)
+set(_delta_targets DeltaCore DeltaLSX DeltaCoreOS TPMP TPMPQueue logd)
+set(_delta_interface DeltaCore DeltaCoreOS)
+foreach(component IN ITEMS DeltaElements DeltaExtras DeltaInference)
+    if (TARGET ${component})
+        list(APPEND _delta_targets ${component})
+        list(APPEND _delta_interface ${component})
+    endif()
+endforeach()
+target_link_libraries(DeltaAscii INTERFACE ${_delta_interface})
 
 if (NOT D2_SANITIZER STREQUAL "none")
     target_link_libraries(DeltaAscii INTERFACE DeltaSan)
+    if (D2_ENABLE_INSTALL)
+        message(FATAL_ERROR "Install a non-sanitized build")
+    endif()
 elseif(D2_ENABLE_INSTALL)
-    set(_install_targets DeltaCore DeltaLSX DeltaCoreOS)
-    if(TARGET DeltaElements)
-        list(APPEND _install_targets DeltaElements)
-    endif()
-    if(TARGET DeltaExtras)
-        list(APPEND _install_targets DeltaExtras)
-    endif()
-    install(TARGETS ${_install_targets} DeltaAscii
-        EXPORT  DeltaAsciiTargets
+    include(CMakePackageConfigHelpers)
+    get_property(_delta_modules GLOBAL PROPERTY DELTA_REGISTERED_MODULE_TARGETS)
+    list(APPEND _delta_targets ${_delta_modules})
+    list(REMOVE_DUPLICATES _delta_targets)
+    install(TARGETS ${_delta_targets} DeltaAscii
+        EXPORT DeltaAsciiTargets
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
     )
-    install(
-        DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/delt2a
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    install(DIRECTORY core elements extras mt logs os
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/delt2a
+        FILES_MATCHING PATTERN "*.hpp"
     )
-    install(
-        EXPORT      DeltaAsciiTargets
-        FILE        DeltaAsciiTargets.cmake
-        NAMESPACE   DeltaAscii::
+    install(FILES
+        "${TPMP_CONCURRENTQUEUE_SOURCE_DIR}/concurrentqueue.h"
+        "${TPMP_CONCURRENTQUEUE_SOURCE_DIR}/blockingconcurrentqueue.h"
+        "${TPMP_CONCURRENTQUEUE_SOURCE_DIR}/lightweightsemaphore.h"
+        "${TPMP_CONCURRENTQUEUE_SOURCE_DIR}/LICENSE.md"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/delt2a/mt/detail/moodycamel
+    )
+    install(FILES d2_std.hpp "${CMAKE_CURRENT_BINARY_DIR}/generated/d2_platform.hpp"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/delt2a
+    )
+    install(FILES core/platform/generated/UNICODE-LICENSE.txt
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/delt2a/core/platform/generated
+    )
+    set(D2_CONFIG_INFERENCE FALSE)
+    if (TARGET DeltaInference)
+        set(D2_CONFIG_INFERENCE TRUE)
+    endif()
+    set(D2_CONFIG_PNG FALSE)
+    get_property(D2_CONFIG_PNG GLOBAL PROPERTY DELTA_IMAGE_PNG)
+    if (NOT D2_CONFIG_PNG)
+        set(D2_CONFIG_PNG FALSE)
+    endif()
+    set(D2_CONFIG_CURL FALSE)
+    set(D2_CONFIG_PIPEWIRE FALSE)
+    if (TARGET CurlSystemNetwork)
+        set(D2_CONFIG_CURL TRUE)
+    endif()
+    if (TARGET PipewireSystemAudio)
+        set(D2_CONFIG_PIPEWIRE TRUE)
+    endif()
+    configure_package_config_file(cmake/DeltaAsciiConfig.cmake.in
+        "${CMAKE_CURRENT_BINARY_DIR}/DeltaAsciiConfig.cmake"
+        INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/DeltaAscii
+    )
+    write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/DeltaAsciiConfigVersion.cmake"
+        VERSION ${PROJECT_VERSION} COMPATIBILITY SameMajorVersion
+    )
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/DeltaAsciiConfig.cmake"
+                  "${CMAKE_CURRENT_BINARY_DIR}/DeltaAsciiConfigVersion.cmake"
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/DeltaAscii
     )
+    install(EXPORT DeltaAsciiTargets FILE DeltaAsciiTargets.cmake
+        NAMESPACE DeltaAscii:: DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/DeltaAscii
+    )
+endif()
+
+if (D2_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
+endif()
+
+if (D2_TEST AND TARGET DeltaExtras)
+    add_executable(d2_hello examples/hello.cpp)
+    target_link_libraries(d2_hello PRIVATE DeltaAscii::Core)
+    add_executable(d2_selection examples/selection.cpp)
+    target_link_libraries(d2_selection PRIVATE DeltaAscii::Core)
+    if (TARGET TerminalImages)
+        add_executable(d2_images examples/images.cpp)
+        target_link_libraries(d2_images PRIVATE DeltaAscii::Core)
+    endif()
+    add_executable(d2_editing examples/editing.cpp)
+    target_link_libraries(d2_editing PRIVATE DeltaAscii::Core)
+endif()
+
+if (D2_BUILD_DOCS)
+    find_package(Doxygen REQUIRED)
+    set(DOXYGEN_EXTRACT_ALL YES)
+    set(DOXYGEN_WARN_IF_UNDOCUMENTED NO)
+    set(DOXYGEN_GENERATE_LATEX NO)
+    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "${CMAKE_CURRENT_SOURCE_DIR}/docs/core-contracts.md")
+    doxygen_add_docs(d2_docs core elements extras mt logs docs)
 endif()

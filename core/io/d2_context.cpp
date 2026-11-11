@@ -42,7 +42,7 @@ namespace d2
         return &named_it->second;
     }
 
-    void IOContext::_remove_module(std::type_index target_idx, std::optional<std::string> id)
+    std::shared_ptr<sys::SystemModule> IOContext::_remove_module(std::type_index target_idx, std::optional<std::string> id)
     {
         if (id.has_value())
         {
@@ -55,7 +55,9 @@ namespace d2
             auto ff = f->second.named.find(id.value());
             if (ff == f->second.named.end())
                 D2_THRW("Failed to remove module ", id.value(), "; Not present");
+            auto module = ff->second.ptr();
             f->second.named.erase(ff);
+            return module;
         }
         else
         {
@@ -64,25 +66,25 @@ namespace d2
             if (f == _modules.end() || f->second.unnamed == nullptr)
                 D2_THRW("Failed to remove module; Not present");
 
-            // Check for dependencies
-            for (const auto& [idx, ptr] : _modules)
+            for (const auto& [idx, entry] : _modules)
             {
-                if (idx != target_idx)
+                auto check = [&](const sys::ModuleStub& stub)
                 {
-                    const auto deps = ptr.unnamed.preset().deps;
-                    if (std::find(deps.begin(), deps.end(), idx) != deps.end())
-                        D2_THRW(
-                            "Failed to remove module ",
-                            f->second.unnamed.info().name,
-                            "; Dependency ",
-                            ptr.unnamed.info().name
-                        );
-                }
+                    if (stub == nullptr) return;
+                    const auto deps = stub.preset().deps;
+                    if (std::find(deps.begin(), deps.end(), target_idx) != deps.end())
+                        D2_THRW("Cannot remove module ", f->second.unnamed.info().name,
+                                "; Required by ", stub.info().name);
+                };
+                if (idx != target_idx) check(entry.unnamed);
+                for (const auto& [name, stub] : entry.named) check(stub);
             }
+            auto module = f->second.unnamed.ptr();
             if (f->second.named.empty())
                 _modules.erase(f);
             else
                 f->second.unnamed = sys::ModuleStub{};
+            return module;
         }
     }
     void IOContext::_insert_module(sys::ModuleStub ptr, std::optional<std::string> id)
@@ -410,22 +412,41 @@ namespace d2
     }
     IOContext::~IOContext()
     {
-        std::lock_guard lock(_module_mtx);
-        for (decltype(auto) it : _modules)
+        _unload_modules();
+    }
+
+    void IOContext::_unload_modules()
+    {
+        std::vector<std::pair<std::type_index, std::shared_ptr<sys::SystemModule>>> modules;
         {
-            if (it.second.unnamed != nullptr)
+            std::shared_lock lock(_module_mtx);
+            for (const auto& [index, entry] : _modules)
             {
-                const auto ptr = it.second.unnamed.ptr();
-                if (ptr)
-                    ptr->unload();
-            }
-            for (decltype(auto) it : it.second.named)
-            {
-                const auto ptr = it.second.ptr();
-                if (ptr)
-                    ptr->unload();
+                if (entry.unnamed != nullptr)
+                    if (auto ptr = entry.unnamed.ptr())
+                        modules.emplace_back(index, std::move(ptr));
+                for (const auto& [name, stub] : entry.named)
+                    if (auto ptr = stub.ptr())
+                        modules.emplace_back(index, std::move(ptr));
             }
         }
+        std::vector<bool> visited(modules.size());
+        std::vector<std::shared_ptr<sys::SystemModule>> ordered;
+        auto visit = [&](auto&& self, std::size_t index) -> void
+        {
+            if (visited[index])
+                return;
+            visited[index] = true;
+            for (const auto& dep : modules[index].second->dependencies())
+                for (std::size_t i = 0; i < modules.size(); ++i)
+                    if (modules[i].first == dep)
+                        self(self, i);
+            ordered.push_back(modules[index].second);
+        };
+        for (std::size_t i = 0; i < modules.size(); ++i)
+            visit(visit, i);
+        for (auto it = ordered.rbegin(); it != ordered.rend(); ++it)
+            (*it)->unload();
     }
 
     void IOContext::launch_thread()
@@ -519,7 +540,10 @@ namespace d2
     void IOContext::_deinitialize()
     {
         D2_TLOG(Module, "Deinitializing IO context")
+        _unload_modules();
         _scheduler->stop();
+        if (_ptr.get() == this)
+            _ptr.reset();
         D2_TLOG(Module, "Success in deinitialization")
     }
     void IOContext::_run()

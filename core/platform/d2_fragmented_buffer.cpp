@@ -334,6 +334,11 @@ namespace d2::fb
 
     // History
 
+    FragmentedBuffer::FragmentedBuffer() : _locale(std::make_unique<loc::Byte>())
+    {
+        _setup_buffer("");
+    }
+
     void FragmentedBuffer::_push_action(Action action)
     {
         if (_history_offset)
@@ -449,6 +454,71 @@ namespace d2::fb
         }
 
         _jump_char(pos + data.size());
+    }
+
+    void FragmentedBuffer::_action_replace(std::size_t pos, std::size_t len, std::string_view data,
+                                           std::optional<std::size_t> cursor_after)
+    {
+        struct State
+        {
+            std::size_t pos, before, after;
+            std::string removed, inserted;
+        };
+        std::size_t size = 0;
+        for (const auto& shard : _shards)
+            size += shard.value().size();
+        pos = std::min(pos, size);
+        len = std::min(len, size - pos);
+        if (!len && data.empty())
+            return;
+        State state{pos, _ptr.abs, std::min(cursor_after.value_or(pos + data.size()), size - len + data.size()),
+                    {}, std::string(data)};
+        std::size_t offset = 0;
+        for (const auto& shard : _shards)
+        {
+            const auto part = shard.value();
+            const auto begin = std::max(pos, offset);
+            const auto end = std::min(pos + len, offset + part.size());
+            if (begin < end)
+                state.removed += part.substr(begin - offset, end - begin);
+            offset += part.size();
+        }
+        Action action{[](FragmentedBuffer* buf, void* data, void*, Action::Type type)
+        {
+            auto [state, raw] = Action::get_state<State>(data);
+            if (type == Action::Type::Delete)
+            {
+                Action::delete_state<State>(data);
+                return true;
+            }
+            if (type == Action::Type::Merge)
+                return false;
+            const auto revert = type == Action::Type::Revert;
+            const auto& insert = revert ? state->removed : state->inserted;
+            const auto erase = revert ? state->inserted.size() : state->removed.size();
+            const auto enabled = buf->_enabled_history;
+            buf->_enabled_history = false;
+            try
+            {
+                buf->_jump_char(state->pos);
+                if (erase)
+                    buf->_action_erase(erase);
+                if (!insert.empty())
+                    buf->_insert_data(insert);
+                buf->_jump_char(revert ? state->before : state->after);
+            }
+            catch (...)
+            {
+                buf->_enabled_history = enabled;
+                throw;
+            }
+            buf->_enabled_history = enabled;
+            return true;
+        }, Action::alloc_state(std::move(state))};
+        if (_enabled_history)
+            _push_action(std::move(action));
+        else
+            action.apply(this);
     }
 
     void FragmentedBuffer::_action_insert(std::string_view data)

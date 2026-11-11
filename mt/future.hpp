@@ -7,12 +7,12 @@
 
 namespace mt
 {
-    template<typename Type> class Promise;
+    template<typename Type, template<typename> typename Block> class Promise;
 
     template<typename Type, template<typename> typename Block> class Future
     {
     public:
-        using promise_type = Promise<Type>;
+        using promise_type = Promise<Type, Block>;
         using block_ptr = std::shared_ptr<Block<Type>>;
         using ret = Type;
     private:
@@ -40,7 +40,8 @@ namespace mt
             _check_block();
             return _block->value();
         }
-        std::optional<Type> value_or(auto&& callback) const
+        template<typename Value = Type>
+        std::optional<Value> value_or(auto&& callback) const requires (!std::is_void_v<Value>)
         {
             _check_block();
             _block->sync_value();
@@ -108,6 +109,7 @@ namespace mt
 
         std::exception_ptr exception() const
         {
+            _check_block();
             return _block->exception();
         }
 
@@ -118,14 +120,12 @@ namespace mt
 
         bool await_ready() const noexcept
         {
-            return has_value();
+            return !_block || _block->is_ready();
         }
         bool await_suspend(std::coroutine_handle<> handle)
         {
-            // Try deferring the handle
-            // We could have experienced the write in the meantime
-            // If that is the case (and the write did not take the handle) we need to run it
-            return !(!_block->try_set_handle(handle) || (has_value() && _block->has_handle()));
+            _check_block();
+            return _block->try_set_handle(handle);
         }
         Type await_resume()
         {
@@ -146,7 +146,7 @@ namespace mt
 
     template<typename Base, typename Type> struct PromiseBase
     {
-        template<typename... Argv> void return_value(Argv&&... args) noexcept
+        template<typename... Argv> void return_value(Argv&&... args)
         {
             if (!static_cast<Base*>(this)->_block)
                 return;
@@ -163,19 +163,20 @@ namespace mt
         }
     };
 
-    template<typename Type> class Promise : public PromiseBase<Promise<Type>, Type>
+    template<typename Type, template<typename> typename Block>
+    class Promise : public PromiseBase<Promise<Type, Block>, Type>
     {
     public:
-        using future_type = co_future<Type>;
-        using block_ptr = std::shared_ptr<CoroutineControlBlock<Type>>;
+        using future_type = Future<Type, Block>;
+        using block_ptr = std::shared_ptr<Block<Type>>;
     private:
         block_ptr _block{nullptr};
     public:
-        friend class PromiseBase<Promise<Type>, Type>;
+        friend class PromiseBase<Promise<Type, Block>, Type>;
 
         Promise()
         {
-            _block = std::make_shared<CoroutineControlBlock<Type>>();
+            _block = std::make_shared<Block<Type>>();
         }
         Promise(std::nullptr_t) {}
         Promise(const Promise&) = default;
@@ -190,29 +191,9 @@ namespace mt
         {
             return {};
         }
-        auto final_suspend() noexcept
+        std::suspend_never final_suspend() noexcept
         {
-            struct awaitable
-            {
-                block_ptr block;
-
-                bool await_ready() const noexcept
-                {
-                    return block->has_value();
-                }
-                bool await_suspend(std::coroutine_handle<> handle) noexcept
-                {
-                    return !(
-                        !block->try_set_handle(handle) ||
-                        (block->has_value() && block->has_handle())
-                    );
-                }
-                Type await_resume() noexcept
-                {
-                    return block->value();
-                }
-            };
-            return awaitable{_block};
+            return {};
         }
 
         void unhandled_exception() noexcept
@@ -242,7 +223,7 @@ namespace mt
         {
             return {};
         }
-        std::suspend_always final_suspend() noexcept
+        std::suspend_never final_suspend() noexcept
         {
             return {};
         }

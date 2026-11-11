@@ -26,10 +26,10 @@ namespace d2
         static constexpr auto box_bl_corner_rough = '+';
         static constexpr auto box_border_vertical = '|';
         static constexpr auto box_border_horizontal = '_';
-        static constexpr auto box_border_connector_left = "|";
-        static constexpr auto box_border_connector_right = "|";
-        static constexpr auto box_border_connector_bottom = "_";
-        static constexpr auto box_border_connector_top = "_";
+        static constexpr auto box_border_connector_left = '|';
+        static constexpr auto box_border_connector_right = '|';
+        static constexpr auto box_border_connector_bottom = '_';
+        static constexpr auto box_border_connector_top = '_';
 
         static constexpr auto checkbox_true = 'x';
         static constexpr auto checkbox_false = 'o';
@@ -49,6 +49,76 @@ namespace d2
 
         static constexpr auto shade_transparent = ' ';
         static constexpr auto shade_opaque = ' ';
+
+        struct icon
+        {
+            static constexpr auto multiply = "x";
+            static constexpr auto filled_bottom_left_triangle = "/";
+            static constexpr auto filled_bottom_right_triangle = "\\";
+            static constexpr auto filled_top_left_triangle = "\\";
+            static constexpr auto filled_top_right_triangle = "/";
+            static constexpr auto middle_square = "#";
+            static constexpr auto triangle_left = "<";
+            static constexpr auto triangle_right = ">";
+            static constexpr auto triangle_up = "^";
+            static constexpr auto triangle_down = "v";
+            static constexpr auto arrow_left = "<";
+            static constexpr auto arrow_right = ">";
+            static constexpr auto arrow_up = "^";
+            static constexpr auto arrow_down = "v";
+            static constexpr auto play = ">";
+            static constexpr auto pause = "||";
+            static constexpr auto stop = "[]";
+            static constexpr auto record = "o";
+            static constexpr auto next = ">|";
+            static constexpr auto previous = "|<";
+            static constexpr auto checkbox_unchecked = "[ ]";
+            static constexpr auto checkbox_checked = "[x]";
+            static constexpr auto checkbox_crossed = "[X]";
+            static constexpr auto volume_muted = "x";
+            static constexpr auto volume_low = "-";
+            static constexpr auto volume_medium = "=";
+            static constexpr auto volume_high = "+";
+            static constexpr auto info = "i";
+            static constexpr auto help = "?";
+            static constexpr auto warning = "!";
+            static constexpr auto error = "X";
+            static constexpr auto check = "v";
+            static constexpr auto cross = "x";
+            static constexpr auto exclamation = "!";
+            static constexpr auto question = "?";
+            static constexpr auto keyboard = "[=]";
+            static constexpr auto home = "^";
+            static constexpr auto gear = "*";
+            static constexpr auto wrench = "/";
+            static constexpr auto hammer = "T";
+            static constexpr auto document = "[]";
+            static constexpr auto folder = "[+]";
+            static constexpr auto trash = "[x]";
+            static constexpr auto scissors = "x";
+            static constexpr auto star_filled = "*";
+            static constexpr auto star_empty = "+";
+            static constexpr auto heart = "<3";
+            static constexpr auto heart_empty = "<3";
+            static constexpr auto envelope = "[@]";
+            static constexpr auto phone = "()";
+        };
+
+        enum Cell
+        {
+            TopLeft = 1 << 0,
+            TopRight = 1 << 3,
+            MidTopLeft = 1 << 1,
+            MidTopRight = 1 << 4,
+            MidBotLeft = 1 << 2,
+            MidBotRight = 1 << 5,
+            BotLeft = 1 << 6,
+            BotRight = 1 << 7,
+        };
+        static char cell(uint8_t mask)
+        {
+            return mask ? '#' : ' ';
+        }
     };
 
     template<> struct Charset<Encoding::Unicode>

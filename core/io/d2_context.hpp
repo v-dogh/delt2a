@@ -59,6 +59,7 @@ namespace d2
 
         void _initialize();
         void _deinitialize();
+        void _unload_modules();
         void _run();
 
         template<typename Type> module<Type> _get_module()
@@ -87,7 +88,7 @@ namespace d2
 
         d2::sys::ModuleStub* _find_module(std::type_index index, std::optional<std::string> id);
 
-        void _remove_module(std::type_index idx, std::optional<std::string> id = std::nullopt);
+        std::shared_ptr<sys::SystemModule> _remove_module(std::type_index idx, std::optional<std::string> id = std::nullopt);
         void _insert_module(sys::ModuleStub stub, std::optional<std::string> id = std::nullopt);
 
         std::shared_ptr<sys::SystemModule>
@@ -164,96 +165,53 @@ namespace d2
         template<typename Func, typename... Argv>
         auto sync(Func&& callback, Argv&&... args) -> std::invoke_result_t<Func&, Argv...>
         {
-            if (is_synced())
+            return sync_async([&]() -> std::invoke_result_t<Func&, Argv...>
             {
-                return callback();
-            }
-            else
-            {
-                using ret = std::invoke_result_t<Func, Argv...>;
-                mt::Barrier lock;
-                if constexpr (std::is_same_v<void, ret>)
-                {
-                    _worker->accept({[&](mt::Task::Query query, std::any& out)
-                                     {
-                                         if (query == mt::Task::Query::Type)
-                                         {
-                                             out = static_cast<unsigned char>(mt::Task::Immediate);
-                                         }
-                                         else if (query == mt::Task::Query::Run)
-                                         {
-                                             callback(std::forward<Argv>(args)...);
-                                             out = mt::Task::Token::Discard;
-                                             lock.release();
-                                         }
-                                     }});
-                    lock.wait();
-                }
-                else
-                {
-                    std::optional<ret> res;
-                    _worker->accept({[&](mt::Task::Query query, std::any& out)
-                                     {
-                                         if (query == mt::Task::Query::Type)
-                                         {
-                                             out = static_cast<unsigned char>(mt::Task::Immediate);
-                                         }
-                                         else if (query == mt::Task::Query::Run)
-                                         {
-                                             res = callback(std::forward<Argv>(args)...);
-                                             out = mt::Task::Token::Discard;
-                                             lock.release();
-                                         }
-                                     }});
-                    lock.wait();
-                    return std::move(res.value());
-                }
-            }
+                return callback(std::forward<Argv>(args)...);
+            }).value();
         }
         template<typename Func, typename... Argv>
         auto sync_async(Func&& callback, Argv&&... args)
             -> mt::future<std::invoke_result_t<Func&, Argv...>>
         {
-            using ret = std::invoke_result_t<Func, Argv...>;
-            mt::future<ret> task = mt::future<ret>::make();
-            if (is_synced())
+            using ret = std::invoke_result_t<Func&, Argv...>;
+            auto task = mt::future<ret>::make();
+            auto run = [callback = std::forward<Func>(callback),
+                        ... args = std::forward<Argv>(args), task]() mutable
             {
-                if constexpr (std::is_same_v<ret, void>)
+                if (task.is_discarded())
+                    return;
+                try
                 {
-                    callback(std::forward<Argv>(args)...);
-                    task.block()->set_value();
+                    if constexpr (std::is_void_v<ret>)
+                    {
+                        callback(std::forward<Argv>(args)...);
+                        task.block()->set_value();
+                    }
+                    else
+                        task.block()->set_value(callback(std::forward<Argv>(args)...));
                 }
-                else
+                catch (...)
                 {
-                    task.block()->set_value(callback(std::forward<Argv>(args)...));
+                    task.block()->set_exception(std::current_exception());
                 }
-            }
+            };
+            if (is_synced())
+                run();
             else
             {
-                _worker->accept(
-                    {[callback = std::forward<Func>(callback),
-                      ... args = std::forward<Argv>(args),
-                      task](mt::Task::Query query, std::any& out) mutable
-                     {
-                         if (query == mt::Task::Query::Type)
-                         {
-                             out = static_cast<unsigned char>(mt::Task::Immediate);
-                         }
-                         else if (query == mt::Task::Query::Run)
-                         {
-                             if constexpr (std::is_same_v<ret, void>)
-                             {
-                                 callback(std::forward<Argv>(args)...);
-                                 task.block()->set_value();
-                             }
-                             else
-                             {
-                                 task.block()->set_value(callback(std::forward<Argv>(args)...));
-                             }
-                             out = mt::Task::Token::Discard;
-                         }
-                     }}
-                );
+                if (!_worker)
+                    throw std::logic_error("IO context has no main worker");
+                _worker->accept({[run = std::move(run)](mt::Task::Query query, std::any& out) mutable
+                {
+                    if (query == mt::Task::Query::Type)
+                        out = static_cast<unsigned char>(mt::Task::Immediate);
+                    else if (query == mt::Task::Query::Run)
+                    {
+                        run();
+                        out = mt::Task::Token::Discard;
+                    }
+                }});
             }
             return task;
         }
@@ -301,13 +259,17 @@ namespace d2
 
         template<typename Module> void unload()
         {
-            std::lock_guard lock(_module_mtx);
-            _remove_module(Module::module_info().index);
+            std::unique_lock lock(_module_mtx);
+            auto module = _remove_module(Module::module_info().index);
+            lock.unlock();
+            if (module) module->unload();
         }
         template<typename Module> void unload(const std::string& id)
         {
-            std::lock_guard lock(_module_mtx);
-            _remove_module(Module::module_info().index, id);
+            std::unique_lock lock(_module_mtx);
+            auto module = _remove_module(Module::module_info().index, id);
+            lock.unlock();
+            if (module) module->unload();
         }
         template<typename... Modules> void load()
         {

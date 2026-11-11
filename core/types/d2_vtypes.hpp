@@ -367,7 +367,7 @@ namespace d2
             component b{255};
             component a{255};
             value_type v{' '};
-            style style{style::None};
+            px::style style{style::None};
 
             [[nodiscard]] constexpr background as_background() const noexcept
             {
@@ -829,7 +829,7 @@ namespace d2
             }
             [[nodiscard]] constexpr bool is_cform_marker() const noexcept
             {
-                return style == px::style::Reserved;
+                return style == px::style::Reserved && v == ' ';
             }
             [[nodiscard]] constexpr std::uint64_t cform_length() const noexcept
             {
