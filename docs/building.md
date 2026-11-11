@@ -46,6 +46,8 @@ The consumer uses `find_package(DeltaAscii CONFIG REQUIRED)` and the same `Delta
 
 When curl and POSIX sockets are available, `d2_http` also exercises request control, deadlines, headers, callback errors and shutdown against loopback HTTP servers. These tests use no external services. See [HTTP contracts](http.md).
 
+`d2_styles` checks inherited property IDs, types and field routing, including three levels of style inheritance. It also instantiates the setters used by DebugBox. C++23 consumers can test their configuration with `-DCMAKE_CXX_STANDARD=23 -DCMAKE_CXX_EXTENSIONS=OFF -DCMAKE_BUILD_TYPE=Debug`; the framework still requires only C++20.
+
 ```sh
 cmake -S . -B build-asan -DCMAKE_BUILD_TYPE=RelWithDebInfo \
   -DD2_BUILD_TESTS=ON -DD2_SANITIZER=address -DD2_SANITIZER_RECOVER=OFF

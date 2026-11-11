@@ -3,7 +3,7 @@ if (TARGET DeltaInference)
     list(APPEND _d2_tests inference)
 endif()
 if (TARGET DeltaElements)
-    list(APPEND _d2_tests events selection input)
+    list(APPEND _d2_tests events selection input styles)
 endif()
 
 if (TARGET UnixSystemIO)

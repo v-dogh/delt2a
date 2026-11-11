@@ -19,7 +19,7 @@ namespace d2::style
     namespace impl
     {
         template<typename Type>
-        concept chained = requires { (Type::last_offset_); };
+        concept chained = requires { typename Type::uai_chain; };
 
         template<typename Chain> struct ResolveChain
         {
@@ -27,7 +27,7 @@ namespace d2::style
         };
         template<chained Chain> struct ResolveChain<Chain>
         {
-            static constexpr auto offset = Chain::last_offset_;
+            static constexpr auto offset = Chain::uai_chain::last_offset_;
         };
 
         template<D2_UAI_INTERFACE_TEMPL First, D2_UAI_INTERFACE_TEMPL... Rest> struct LastImpl
@@ -117,6 +117,7 @@ namespace d2::style
         D2_TAG_MODULE(tree)
     public:
         using property = uai_property;
+        using uai_chain = UniversalAccessInterface;
     private:
         template<std::size_t Prop>
         using last_interface = impl::LastImpl<Interface, Interfaces...>::template type<Prop>;
