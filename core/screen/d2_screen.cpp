@@ -33,7 +33,12 @@ namespace d2::sys
         }
         else if constexpr (Ev == Event::KeySequenceInput)
         {
-            ctx->signal<Ev>(input()->sequence());
+            auto view = in::internal::InputFrameView::from(input());
+            const auto consume = view.get_consume();
+            view.set_consume(false, std::this_thread::get_id());
+            const auto sequence = input()->sequence();
+            view.restore_consume(consume);
+            ctx->signal<Ev>(sequence);
         }
         else if constexpr (Ev == Event::KeyMouseInput)
         {
@@ -924,7 +929,7 @@ namespace d2::sys
 
             const auto [bwidth, bheight] = root.box();
             auto output = ctx->output().ptr();
-            output->write(frame.data(), bwidth, bheight);
+            output->write_frame(frame.buffer());
 
             _signal<Event::PostRedraw>();
         }

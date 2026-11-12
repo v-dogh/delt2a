@@ -1,5 +1,9 @@
 #include "core/types/d2_pixel.hpp"
 #include <core/utils/d2_exceptions.hpp>
+#include <stdexcept>
+#include <limits>
+#include <utility>
+#include <climits>
 
 namespace d2
 {
@@ -7,13 +11,26 @@ namespace d2
 
     std::span<const pixel> PixelBuffer::View::data() const
     {
-        return buffer_->data();
+        if (!buffer_)
+            return {};
+        if (buffer_->compressed())
+        {
+            if (xoff_ || yoff_ || width_ != buffer_->width() || height_ != buffer_->height())
+                throw std::logic_error("Compressed subview has no contiguous data");
+            return buffer_->data();
+        }
+        if (height_ > 1 && width_ != buffer_->width())
+            throw std::logic_error("Strided view has no contiguous data");
+        if (empty())
+            return {};
+        return buffer_->data().subspan(std::size_t(yoff_) * buffer_->width() + xoff_,
+                                      std::size_t(width_) * height_);
     }
 
     void PixelBuffer::View::clear()
     {
         D2_ASSERT(buffer_ != nullptr)
-        buffer_->clear();
+        fill(pixel{});
     }
     void PixelBuffer::View::fill(pixel px)
     {
@@ -22,7 +39,9 @@ namespace d2
     }
     void PixelBuffer::View::fill(pixel px, int x, int y, int width, int height)
     {
-        D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
+        if (compressed() || x < 0 || y < 0 || width < 0 || height < 0 ||
+            x > width_ || y > height_ || width > width_ - x || height > height_ - y)
+            throw std::out_of_range("Pixel fill bounds");
         buffer_->fill(px, x + xoff_, y + yoff_, width, height);
     }
     void PixelBuffer::View::fill_blend(pixel px)
@@ -31,7 +50,9 @@ namespace d2
     }
     void PixelBuffer::View::fill_blend(pixel px, int x, int y, int width, int height)
     {
-        D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
+        if (compressed() || x < 0 || y < 0 || width < 0 || height < 0 ||
+            x > width_ || y > height_ || width > width_ - x || height > height_ - y)
+            throw std::out_of_range("Pixel fill bounds");
         buffer_->fill_blend(px, x + xoff_, y + yoff_, width, height);
     }
 
@@ -42,7 +63,7 @@ namespace d2
     }
     bool PixelBuffer::View::empty() const
     {
-        return buffer_ == nullptr || buffer_->empty();
+        return buffer_ == nullptr || width_ <= 0 || height_ <= 0 || buffer_->empty();
     }
 
     int PixelBuffer::View::width() const
@@ -66,29 +87,118 @@ namespace d2
 
     const pixel& PixelBuffer::View::at(int x, int y) const
     {
-        D2_ASSERT(x < width_ && y < height_ && x >= 0 && y >= 0)
-        return buffer_->buffer_[((y + yoff_) * buffer_->width_) + (x + xoff_)];
+        if (!buffer_ || x < 0 || y < 0 || x >= width_ || y >= height_)
+            throw std::out_of_range("Pixel view coordinates");
+        return std::as_const(*buffer_).at(x + xoff_, y + yoff_);
     }
     pixel& PixelBuffer::View::at(int x, int y)
     {
-        return const_cast<pixel&>(const_cast<const View*>(this)->at(x, y));
+        const auto& cell = std::as_const(*this).at(x, y);
+        buffer_->images_.erase({x + xoff_, y + yoff_, 1, 1});
+        return const_cast<pixel&>(cell);
     }
 
     const pixel& PixelBuffer::View::at(int c) const
     {
-        D2_ASSERT(c < width_ * height_ && c >= 0)
+        if (c < 0 || width_ <= 0 || height_ <= 0 ||
+            std::size_t(c) >= std::size_t(width_) * height_)
+            throw std::out_of_range("Pixel view index");
         const auto idxx = c % width_;
         const auto idxy = c / width_;
         return at(idxx, idxy);
     }
     pixel& PixelBuffer::View::at(int c)
     {
-        return const_cast<pixel&>(const_cast<const View*>(this)->at(c));
+        std::as_const(*this).at(c);
+        return at(c % width_, c / width_);
     }
 
     void PixelBuffer::View::inscribe(int x, int y, const View& sub)
     {
-        return buffer_->inscribe(x, y, sub);
+        if (empty() || sub.empty())
+            return;
+        if (buffer_->compressed())
+            throw std::logic_error("Cannot write to a compressed pixel buffer");
+        if (buffer_ == sub.buffer_)
+        {
+            if (static_cast<long long>(xoff_) + x == sub.xoff_ &&
+                static_cast<long long>(yoff_) + y == sub.yoff_)
+                return;
+            PixelBuffer snapshot = *sub.buffer_;
+            inscribe(x, y, View(&snapshot, sub.xoff_, sub.yoff_, sub.width_, sub.height_));
+            return;
+        }
+        auto blend = [&](int sx, int sy, const pixel& px)
+        {
+            const auto dx = static_cast<long long>(x) + sx;
+            const auto dy = static_cast<long long>(y) + sy;
+            if (dx >= 0 && dy >= 0 && dx < width_ && dy < height_)
+            {
+                const auto tx = int(dx) + xoff_, ty = int(dy) + yoff_;
+                if (px.a || (px.af && (px.v != ' ' || px.style != px::style{})))
+                    buffer_->images_.erase({tx, ty, 1, 1});
+                buffer_->buffer_[std::size_t(ty) * buffer_->width_ + tx].blend(px);
+            }
+        };
+        if (sub.compressed())
+        {
+            PixelBuffer::rle_mdwalk(sub.buffer_->data(), sub.buffer_->width(), sub.buffer_->height(),
+                [&](int sx, int sy, const pixel& px)
+                {
+                    sx -= sub.xoff_;
+                    sy -= sub.yoff_;
+                    if (sy >= sub.height_)
+                        return RleBreak::SkipRest;
+                    if (sx >= 0 && sy >= 0 && sx < sub.width_)
+                        blend(sx, sy, px);
+                    return RleBreak::Continue;
+                });
+        }
+        else
+        {
+            for (int sy = 0; sy < sub.height_; ++sy)
+                for (int sx = 0; sx < sub.width_; ++sx)
+                    blend(sx, sy, sub.at(sx, sy));
+        }
+        const auto dx = static_cast<long long>(xoff_) + x;
+        const auto dy = static_cast<long long>(yoff_) + y;
+        if (dx >= INT_MIN && dx <= INT_MAX && dy >= INT_MIN && dy <= INT_MAX)
+            buffer_->images_.append(sub.buffer_->images_, {sub.xoff_, sub.yoff_, sub.width_, sub.height_},
+                                     {int(dx), int(dy)}, {xoff_, yoff_, width_, height_});
+    }
+
+    void PixelBuffer::View::image(image::Raster::ptr source, image::Rect destination, image::Rect crop)
+    {
+        if (!buffer_ || compressed())
+            throw std::logic_error("Cannot place an image in this pixel view");
+        const auto x = static_cast<long long>(destination.x) + xoff_;
+        const auto y = static_cast<long long>(destination.y) + yoff_;
+        if (x < INT_MIN || x > INT_MAX || y < INT_MIN || y > INT_MAX)
+            throw std::out_of_range("Image placement position");
+        destination.x = int(x); destination.y = int(y);
+        buffer_->images_.place(std::move(source), destination, {xoff_, yoff_, width_, height_}, crop);
+    }
+    image::Scene PixelBuffer::View::image_scene() const
+    {
+        image::Scene scene;
+        if (buffer_)
+            scene.append(buffer_->images_, {xoff_, yoff_, width_, height_}, {0, 0}, {0, 0, width_, height_});
+        return scene;
+    }
+
+    std::vector<pixel> PixelBuffer::View::unpack() const
+    {
+        if (empty()) return {};
+        const auto unpacked = compressed() ? PixelBuffer::rle_unpack(buffer_->data()) : std::vector<pixel>{};
+        const auto cells = compressed() ? std::span<const pixel>(unpacked) : std::as_const(*buffer_).data();
+        std::vector<pixel> out;
+        out.reserve(std::size_t(width_) * height_);
+        for (int y = 0; y < height_; ++y)
+        {
+            const auto begin = cells.begin() + std::size_t(y + yoff_) * buffer_->width_ + xoff_;
+            out.insert(out.end(), begin, begin + width_);
+        }
+        return out;
     }
 
     // RLE
@@ -99,23 +209,30 @@ namespace d2
         if (!buffer.empty() && (_rem = (_buffer[0]).is_cform()) > 0)
         {
             ++_current;
+            if (_current == _buffer.end())
+                throw std::invalid_argument("Truncated RLE run");
             --_rem;
         }
     }
 
     const px::combined& PixelBuffer::RleIterator::value() const
     {
+        if (is_end())
+            throw std::out_of_range("RLE iterator is at end");
         return *_current;
     }
     void PixelBuffer::RleIterator::increment()
     {
-        D2_ASSERT(!is_end())
+        if (is_end())
+            return;
         if (!_rem)
         {
             ++_current;
             if (!is_end() && (_rem = (*_current).is_cform()) > 0)
             {
                 ++_current;
+                if (_current == _buffer.end())
+                    throw std::invalid_argument("Truncated RLE run");
                 --_rem;
             }
         }
@@ -187,7 +304,9 @@ namespace d2
         {
             if (const auto len = (*it).is_cform())
             {
-                const auto& px = *(++it);
+                if (++it == buffer.end())
+                    throw std::invalid_argument("Truncated RLE run");
+                const auto& px = *it;
                 for (std::size_t i = 0; i < len; i++)
                     result.push_back(px);
                 if (it == buffer.end())
@@ -209,7 +328,9 @@ namespace d2
         {
             if (const auto len = (*it).is_cform())
             {
-                auto& px = *(++it);
+                if (++it == buffer.end())
+                    throw std::invalid_argument("Truncated RLE run");
+                const auto& px = *it;
                 for (std::size_t i = 0; i < len; i++)
                 {
                     if (!func(px))
@@ -232,81 +353,24 @@ namespace d2
         std::function<RleBreak(int, int, const pixel&)> func
     )
     {
-        int x = 0;
-        int y = 0;
-        int skip = 0;
-        for (auto it = buffer.begin(); it != buffer.end(); ++it)
+        if (width <= 0 || height <= 0)
+            return;
+        auto it = rle_iterator(buffer);
+        for (int y = 0; y < height && !it.is_end(); ++y)
         {
-            if (const auto len = (*it).is_cform())
+            bool skip = false;
+            for (int x = 0; x < width && !it.is_end(); ++x, it.increment())
             {
-                auto& px = *(++it);
-                for (std::size_t i = 0; i < len; i++)
-                {
-                    if (!skip)
-                    {
-                        const auto res = func(x, y, px);
-                        if (res == RleBreak::SkipLine)
-                        {
-                            skip = width - x - 1;
-                            // For now naive approach
-                            // For this one we need to consider the X/Y offsets after the
-                            // transformation but its kinda late rn fr fr const auto req = width - x
-                            // - 1; if (req > len - i)
-                            // {
-                            // 	skip = req - (len - i);
-                            // 	break;
-                            // }
-                            // else
-                            // {
-                            // 	i += req;
-                            // 	if (i >= len)
-                            // 		break;
-                            // }
-                        }
-                        else if (res == RleBreak::SkipRest)
-                        {
-                            return;
-                        }
-                    }
-                    else
-                        skip--;
-
-                    if (++x == width)
-                    {
-                        x = 0;
-                        y++;
-                    }
-                }
-                if (it == buffer.end())
-                    break;
+                if (skip)
+                    continue;
+                const auto result = func(x, y, it.value());
+                if (result == RleBreak::SkipRest)
+                    return;
+                skip = result == RleBreak::SkipLine;
             }
-            else
-            {
-                if (!skip)
-                {
-                    const auto res = func(x, y, *it);
-                    if (res == RleBreak::SkipLine)
-                    {
-                        skip = width - x - 1;
-                    }
-                    else if (res == RleBreak::SkipRest)
-                    {
-                        return;
-                    }
-                }
-                else
-                    skip--;
-
-                if (++x == width)
-                {
-                    x = 0;
-                    y++;
-                }
-            }
-            if (y >= height)
-                break;
         }
     }
+
     PixelBuffer::RleIterator PixelBuffer::rle_iterator(std::span<const pixel> buffer)
     {
         return RleIterator(buffer);
@@ -323,6 +387,7 @@ namespace d2
 
     void PixelBuffer::clear()
     {
+        images_.clear();
         buffer_.clear();
         buffer_.shrink_to_fit();
         width_ = 0;
@@ -331,11 +396,17 @@ namespace d2
     }
     void PixelBuffer::fill(pixel px)
     {
+        if (compressed_)
+            throw std::logic_error("Cannot write to a compressed pixel buffer");
+        images_.clear();
         std::fill(buffer_.begin(), buffer_.end(), px);
     }
     void PixelBuffer::fill(pixel px, int x, int y, int width, int height)
     {
-        D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
+        if (compressed_ || x < 0 || y < 0 || width < 0 || height < 0 ||
+            x > width_ || y > height_ || width > width_ - x || height > height_ - y)
+            throw std::out_of_range("Pixel fill bounds");
+        images_.erase({x, y, width, height});
         for (std::size_t i = y; i < height + y; i++)
             for (std::size_t j = x; j < width + x; j++)
             {
@@ -344,12 +415,20 @@ namespace d2
     }
     void PixelBuffer::fill_blend(pixel px)
     {
+        if (compressed_)
+            throw std::logic_error("Cannot write to a compressed pixel buffer");
+        if (px.a || (px.af && (px.v != ' ' || px.style != px::style{})))
+            images_.clear();
         for (decltype(auto) it : buffer_)
             it.blend(px);
     }
     void PixelBuffer::fill_blend(pixel px, int x, int y, int width, int height)
     {
-        D2_ASSERT(x + width <= width_ && y + height <= height_ && x >= 0 && y >= 0)
+        if (compressed_ || x < 0 || y < 0 || width < 0 || height < 0 ||
+            x > width_ || y > height_ || width > width_ - x || height > height_ - y)
+            throw std::out_of_range("Pixel fill bounds");
+        if (px.a || (px.af && (px.v != ' ' || px.style != px::style{})))
+            images_.erase({x, y, width, height});
         for (std::size_t i = y; i < height + y; i++)
             for (std::size_t j = x; j < width + x; j++)
             {
@@ -368,29 +447,30 @@ namespace d2
 
     void PixelBuffer::set_size(int w, int h)
     {
-        if (w > 0 && h > 0)
-        {
-            compressed_ = false;
-            width_ = w;
-            height_ = h;
-            buffer_.clear();
-            buffer_.resize(w * h);
-        }
-        else
-        {
-            clear();
-        }
+        if (w < 0 || h < 0)
+            throw std::invalid_argument("Negative pixel buffer dimensions");
+        std::vector<pixel> data;
+        if (h && std::size_t(w) > data.max_size() / std::size_t(h))
+            throw std::length_error("Pixel buffer dimensions overflow");
+        data.resize(std::size_t(w) * std::size_t(h));
+        images_.clear();
+        buffer_ = std::move(data);
+        width_ = w;
+        height_ = h;
+        compressed_ = false;
     }
     void PixelBuffer::reset(std::vector<pixel> data, int w, int h)
     {
-        compressed_ = false;
+        if (w < 0 || h < 0)
+            throw std::invalid_argument("Negative pixel buffer dimensions");
+        if (h && std::size_t(w) > data.max_size() / std::size_t(h))
+            throw std::length_error("Pixel buffer dimensions overflow");
+        data.resize(std::size_t(w) * std::size_t(h));
+        images_.clear();
+        buffer_ = std::move(data);
         width_ = w;
         height_ = h;
-        buffer_ = std::move(data);
-        if (w * h > buffer_.size())
-        {
-            buffer_.resize(width_ * height_);
-        }
+        compressed_ = false;
     }
     void PixelBuffer::compress()
     {
@@ -412,70 +492,31 @@ namespace d2
 
     const pixel& PixelBuffer::at(int x, int y) const
     {
-        D2_ASSERT(x < width_ && y < height_ && x >= 0 && y >= 0)
-        return buffer_[(y * width_) + x];
+        if (compressed_)
+            throw std::logic_error("Compressed pixel buffer has no random access");
+        if (x < 0 || y < 0 || x >= width_ || y >= height_)
+            throw std::out_of_range("Pixel buffer coordinates");
+        return buffer_[std::size_t(y) * width_ + x];
     }
     pixel& PixelBuffer::at(int x, int y)
     {
-        D2_ASSERT(x < width_ && y < height_ && x >= 0 && y >= 0)
-        return buffer_[(y * width_) + x];
+        const auto& cell = std::as_const(*this).at(x, y);
+        images_.erase({x, y, 1, 1});
+        return const_cast<pixel&>(cell);
     }
-
     const pixel& PixelBuffer::at(int c) const
     {
-        D2_ASSERT(c < width_ * height_ && c >= 0)
-        return buffer_[c];
+        if (compressed_)
+            throw std::logic_error("Compressed pixel buffer has no random access");
+        return buffer_.at(c);
     }
     pixel& PixelBuffer::at(int c)
     {
-        D2_ASSERT(c < width_ * height_ && c >= 0)
-        return buffer_[c];
+        std::as_const(*this).at(c);
+        return at(c % width_, c / width_);
     }
-
     void PixelBuffer::inscribe(int xf, int yf, View view)
     {
-        if (view.empty())
-            return;
-
-        const int xdiff = (xf < 0) * -xf;
-        const int ydiff = (yf < 0) * -yf;
-        if (view.compressed())
-        {
-            rle_mdwalk(
-                view.data(),
-                view.width(),
-                view.height(),
-                [&xdiff, &ydiff, &xf, &yf, this](int xs, int ys, const pixel& px) -> RleBreak
-                {
-                    const auto xoff = xs + xf;
-                    const auto yoff = ys + yf;
-                    if (xoff < 0 || yoff < 0)
-                        return RleBreak::Continue;
-                    else if (yoff >= height_)
-                        return RleBreak::SkipRest;
-                    else if (xoff >= width_)
-                        return RleBreak::SkipLine;
-                    auto& dest = at(xoff, yoff);
-                    dest.blend(px);
-                    return RleBreak::Continue;
-                }
-            );
-        }
-        else
-        {
-            for (std::size_t ys = ydiff; ys < view.height(); ys++)
-            {
-                if (ys + yf >= height_)
-                    break;
-                for (std::size_t xs = xdiff; xs < view.width(); xs++)
-                {
-                    if (xs + xf >= width_)
-                        break;
-                    const auto src = view.at(xs, ys);
-                    auto& dest = at(xs + xf, ys + yf);
-                    dest.blend(src);
-                }
-            }
-        }
+        View(this, 0, 0, width_, height_).inscribe(xf, yf, view);
     }
 } // namespace d2

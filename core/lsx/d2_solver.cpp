@@ -326,6 +326,7 @@ namespace d2::lsx
         case Status::Ok:
             return "Ok";
         }
+        return "Unknown";
     }
 
     ConstraintArray::Status ConstraintArray::status(result_type value) const

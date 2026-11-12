@@ -159,7 +159,7 @@ namespace d2
             DynamicIterator() = default;
             DynamicIterator(std::nullptr_t) {}
             DynamicIterator(const DynamicIterator& copy) :
-                _ptr(copy._ptr), _adaptor(copy._adaptor->clone()) {}
+                _ptr(copy._ptr), _adaptor(copy._adaptor ? copy._adaptor->clone() : nullptr) {}
             DynamicIterator(DynamicIterator&&) = default;
             DynamicIterator(std::weak_ptr<ParentElement> ptr, std::unique_ptr<DynamicIteratorAdaptor> adaptor) :
                 _ptr(ptr), _adaptor(std::move(adaptor)) {}

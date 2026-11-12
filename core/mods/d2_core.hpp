@@ -86,58 +86,14 @@ namespace d2::sys
     class SystemOutput : public ModuleDecl<SystemOutput, "Output", Access::TUnsafe>
     {
     public:
-        static constexpr auto image_constant =
-            px::combined{.v = std::numeric_limits<standard_value_type>::max()};
-        class ImageInstance
-        {
-        public:
-            using data = std::vector<unsigned char>;
-        private:
-            unsigned char format_{0x00};
-            std::size_t width_{0};
-            std::size_t height_{0};
-            data data_{};
-        public:
-            ImageInstance(
-                data data, std::size_t width, std::size_t height, unsigned char format = 0x00
-            ) : data_(data), width_(width), height_(height), format_(format)
-            {
-            }
-            ~ImageInstance() = default;
-
-            std::span<const unsigned char> read() const
-            {
-                return {data_.begin(), data_.end()};
-            }
-
-            std::size_t width() const
-            {
-                return width_;
-            }
-            std::size_t height() const
-            {
-                return height_;
-            }
-
-            unsigned int format() const
-            {
-                return format_;
-            }
-        };
-        using image = std::uint32_t;
-        enum Format : unsigned int
-        {
-            RGB8,
-            RGBA8,
-            PNG,
-        };
-    public:
         using ModuleDecl::ModuleDecl;
-
-        virtual void load_image(const std::string& path, ImageInstance img) = 0;
-        virtual void release_image(const std::string& path) = 0;
-        virtual ImageInstance image_info(const std::string& path) = 0;
-        virtual image image_id(const std::string& path) = 0;
+        virtual void clear_images() {}
+        void write_frame(PixelBuffer::View frame);
+        virtual void write(std::span<const pixel> buffer, std::size_t width, std::size_t height,
+                           const image::Scene& images)
+        {
+            write(buffer, width, height);
+        }
 
         virtual std::size_t delta_size() = 0;
         virtual std::size_t swapframe_size() = 0;

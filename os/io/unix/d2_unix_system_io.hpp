@@ -1,4 +1,5 @@
 #pragma once
+#include <core/mods/d2_images.hpp>
 
 #include <any>
 #include <shared_mutex>
@@ -19,14 +20,14 @@ namespace d2::sys
     protected:
         virtual bool _is_current_thread_impl() const noexcept override;
         virtual bool _try_accept_impl(mt::Task& task) noexcept override;
-        virtual void _accept_impl(mt::Task task) noexcept override;
+        virtual void _accept_impl(mt::Task task) override;
         virtual void _ping_impl() override;
         virtual void _start_impl() override;
         virtual void _stop_impl() noexcept override;
         virtual Worker::ptr _clone_impl() const override;
     private:
         std::atomic<std::thread::id> _main_thread{};
-        mt::TaskRing<mt::Task, 16> _tasks{};
+        mt::TaskQueue<mt::Task> _tasks{};
         int _wake_read{-1};
         int _wake_write{-1};
     private:
@@ -37,6 +38,7 @@ namespace d2::sys
         void _drain() noexcept;
         void _process_tasks();
     public:
+        ~UnixWorker() override { stop(); }
         virtual void wait(std::chrono::steady_clock::time_point deadline) noexcept override;
     };
 
@@ -62,7 +64,6 @@ namespace d2::sys
 
         virtual Status _load_impl() override;
         virtual Status _unload_impl() override;
-
         virtual MainWorker::ptr _worker_impl() override;
     public:
         using SystemInput::SystemInput;
@@ -71,18 +72,10 @@ namespace d2::sys
                                public ModuleImpl<UnixTerminalOutput, Load::Immediate>
     {
     private:
-        static constexpr auto _max_color_len =
-            std::string_view("\033[RX;RX;RX;RX;RX;RX;RX;m").size() +
-            (std::string_view("38;2;255;255;255").size() * 2);
-        static constexpr auto _max_pos_len = std::string_view("\x1b[XXXX;XXXXH").size();
+        static constexpr std::size_t _max_color_len = 96;
+        static constexpr auto _max_pos_len = std::string_view("\x1b[XXXXXXXXXX;XXXXXXXXXXH").size();
         static constexpr auto _cls_code = std::string_view("\033[H");
     private:
-        struct KittyImageState
-        {
-            std::uint32_t id{0};
-            std::size_t width{0};
-            std::size_t height{0};
-        };
         using position_type =
             std::pair<std::array<char, UnixTerminalOutput::_max_pos_len>, std::size_t>;
         using color_type =
@@ -91,6 +84,8 @@ namespace d2::sys
         std::chrono::microseconds _frame_time{0};
         std::vector<unsigned char> _out{};
         std::vector<pixel> _swapframe{};
+        std::vector<pixel> _displayframe{};
+        std::size_t _pbuffer_width{0}, _pbuffer_height{0};
         std::size_t _pbuffer_size{0};
         std::size_t _buffer_size{0};
         px::style _track_style{};
@@ -98,10 +93,12 @@ namespace d2::sys
         px::background _track_background{};
 
         std::mutex mtx_{};
-        std::unordered_map<std::string, std::any> images_{};
-
-        void _kitty_write_id(std::uint32_t id);
-        void _kitty_write(const std::string& cmd);
+        std::shared_ptr<SystemImages> _active_images{};
+        std::string _image_cleanup{};
+        std::vector<pixel> _sourceframe{};
+        std::size_t _source_width{0}, _source_height{0};
+        void _render(std::span<const pixel> buffer, std::size_t width, std::size_t height,
+                     const image::Scene& images, bool suppress_images);
 
         position_type _generate_position(int x, int y, bool skip = false);
         color_type _generate_color(const pixel& px, bool force = false);
@@ -110,7 +107,6 @@ namespace d2::sys
         int _write(std::span<const unsigned char> buffer);
         int _write(std::span<const char> buffer);
 
-        void _release_image(std::any data);
     protected:
         virtual Status _load_impl() override
         {
@@ -118,8 +114,7 @@ namespace d2::sys
         }
         virtual Status _unload_impl() override
         {
-            for (decltype(auto) it : images_)
-                _release_image(it.second);
+            clear_images();
             return Status::Ok;
         }
     public:
@@ -127,13 +122,10 @@ namespace d2::sys
 
         std::chrono::microseconds frame_time() const;
 
-        virtual void load_image(const std::string& path, ImageInstance img) override;
-        virtual void release_image(const std::string& path) override;
-        virtual ImageInstance image_info(const std::string& path) override;
-        virtual image image_id(const std::string& path) override;
-
-        virtual void
-        write(std::span<const pixel> buffer, std::size_t width, std::size_t height) override;
+        void clear_images() override;
+        void write(std::span<const pixel> buffer, std::size_t width, std::size_t height) override;
+        void write(std::span<const pixel> buffer, std::size_t width, std::size_t height,
+                   const image::Scene& images) override;
 
         virtual std::size_t delta_size() override;
         virtual std::size_t swapframe_size() override;

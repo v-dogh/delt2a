@@ -384,7 +384,7 @@ namespace d2::dx::graph
                     const std::size_t mask = pmask | right;
                     buffer.at(x / 2, row) = color;
                     buffer.at(x / 2, row).v =
-                        d2::global_extended_code_page.write(d2::charset::cell(mask));
+                        d2::AutoValueType(d2::charset::cell(mask));
                 }
                 else
                 {
@@ -392,11 +392,11 @@ namespace d2::dx::graph
                     {
                         buffer.at(x / 2, h - prev_cell - 1) = color;
                         buffer.at(x / 2, h - prev_cell - 1).v =
-                            d2::global_extended_code_page.write(d2::charset::cell(pmask));
+                            d2::AutoValueType(d2::charset::cell(pmask));
                     }
                     buffer.at(x / 2, row) = color;
                     buffer.at(x / 2, row).v =
-                        d2::global_extended_code_page.write(d2::charset::cell(right));
+                        d2::AutoValueType(d2::charset::cell(right));
                 }
                 pmask = 0;
                 prev_cell = -1;

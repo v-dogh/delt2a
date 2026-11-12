@@ -3,6 +3,7 @@
 #include <core/io/d2_module.hpp>
 #include <core/platform/d2_locale.hpp>
 #include <core/tree/d2_tree_element.hpp>
+#include <core/tree/d2_text_select.hpp>
 #include <mt/pool.hpp>
 
 namespace d2::sys
@@ -73,7 +74,6 @@ namespace d2::sys
                                "Selector",
                                Access::TUnsafe,
                                Load::Immediate,
-                               SystemClipboard,
                                SystemScreen
                            >
     {
@@ -84,16 +84,27 @@ namespace d2::sys
         };
         using EventManifest = SignalManifest<
             // Content|StartPos|EndPos
-            EvDefault<Event, d2::string_view, Position, Position>
+            EvDefault<Event, d2::string, Position, Position>
         >;
     private:
         Signals::Signal _sig{};
-        Signals::Handle _mouse_ev{};
+        std::array<Signals::Handle, 5> _events{};
+        TextSelection _selection{};
+        Position _start{}, _end{};
+
+        void _mouse(in::InputFrame& frame);
+        void _key(in::InputFrame& frame);
 
         virtual Status _load_impl() override;
         virtual Status _unload_impl() override;
     public:
         using Module::Module;
+
+        TextSelection& selection() noexcept { return _selection; }
+        std::string value() { return _selection.value(); }
+        
+        void clear() { _selection.clear(); }
+        bool copy();
     };
 
     using clipboard = SystemClipboard;

@@ -63,8 +63,7 @@ namespace d2
         protected:
             struct DocModel
             {
-                std::vector<std::size_t> starts{0};
-                std::vector<std::size_t> line_lengths{0};
+                detail::InputLayout text{};
                 std::size_t length{0};
                 std::size_t max_width{0};
             };
@@ -109,9 +108,8 @@ namespace d2
             std::size_t
             _abs_from_line_col(const DocModel& doc, std::size_t line, std::size_t col) const;
             string _range_value(std::size_t pos, std::size_t len) const;
-            string _line_segment(
-                const DocModel& doc, std::size_t line, std::size_t col, std::size_t len
-            ) const;
+            void _replace(std::size_t begin, std::size_t end, std::string_view value,
+                          std::optional<std::size_t> cursor_after = {});
 
             bool _ptr_overlapped() const;
             bool _draw_ptr() const;
@@ -147,8 +145,8 @@ namespace d2
             void _move_to(std::size_t pos, bool keep_highlight = false);
             void _move_right(std::size_t cnt = 1);
             void _move_left(std::size_t cnt = 1);
-            void _move_up(std::size_t cnt = 1);
-            void _move_down(std::size_t cnt = 1);
+            void _move_up(std::size_t cnt = 1, bool select = false);
+            void _move_down(std::size_t cnt = 1, bool select = false);
 
             void _insert(std::string_view value);
             void _erase_before(std::size_t len = 1);
@@ -164,6 +162,7 @@ namespace d2
             virtual void _update_layout_impl() override;
             virtual void foreach_internal(foreach_internal_callback callback) const override;
         public:
+            ~MultiInput() override;
             string value() const;
             void value(std::string text);
 
@@ -172,7 +171,7 @@ namespace d2
             void undo();
             void redo();
 
-            bool is_synced() const noexcept;
+            bool is_synced() const;
             void sync();
 
             void jump(std::size_t pos);
@@ -186,6 +185,7 @@ namespace d2
 
             std::size_t cursor() const;
 
+            d2::TreeIter<VerticalSlider> vertical_scrollbar() const noexcept;
             d2::TreeIter<VerticalSlider> vertical_scollbar() const noexcept;
             d2::TreeIter<Slider> horizontal_scrollbar() const noexcept;
 

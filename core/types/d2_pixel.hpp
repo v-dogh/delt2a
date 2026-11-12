@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdexcept>
+#include <core/types/d2_image.hpp>
+
 #include <core/platform/d2_locale.hpp>
 #include <core/types/d2_vtypes.hpp>
 #include <functional>
@@ -34,11 +37,20 @@ namespace d2
             explicit View(PixelBuffer* ptr, int x, int y, int width, int height) :
                 buffer_(ptr), xoff_(x), yoff_(y), width_(width), height_(height)
             {
+                if (!ptr || x < 0 || y < 0 || width < 0 || height < 0 ||
+                    x > ptr->width() || y > ptr->height() ||
+                    width > ptr->width() - x || height > ptr->height() - y)
+                    throw std::out_of_range("Pixel view bounds");
             }
             explicit View(const View& ptr, int x, int y, int width, int height) :
-                buffer_(ptr.buffer_), xoff_(x + ptr.xoff_), yoff_(y + ptr.yoff_), width_(width),
-                height_(height)
+                buffer_(ptr.buffer_), width_(width), height_(height)
             {
+                if (!buffer_ || x < 0 || y < 0 || width < 0 || height < 0 ||
+                    x > ptr.width_ || y > ptr.height_ ||
+                    width > ptr.width_ - x || height > ptr.height_ - y)
+                    throw std::out_of_range("Pixel subview bounds");
+                xoff_ = ptr.xoff_ + x;
+                yoff_ = ptr.yoff_ + y;
             }
 
             std::span<const pixel> data() const;
@@ -64,6 +76,10 @@ namespace d2
             pixel& at(int c);
 
             void inscribe(int x, int y, const View& sub);
+            void image(image::Raster::ptr source, image::Rect destination, image::Rect crop = {});
+            image::Scene image_scene() const;
+            bool has_images() const { return buffer_ && !buffer_->images_.empty(); }
+            std::vector<pixel> unpack() const;
 
             View& operator=(const View&) = default;
             View& operator=(View&&) = default;
@@ -94,6 +110,7 @@ namespace d2
         int width_{0};
         int height_{0};
         bool compressed_{false};
+        image::Scene images_{};
     public:
         static std::vector<pixel> rle_pack(std::span<const pixel> buffer);
         static std::vector<pixel> rle_unpack(std::span<const pixel> buffer);
@@ -107,7 +124,7 @@ namespace d2
         static RleIterator rle_iterator(std::span<const pixel> buffer);
 
         PixelBuffer() = default;
-        PixelBuffer(int w, int h) : width_(w), height_(h) {}
+        PixelBuffer(int w, int h) { set_size(w, h); }
         PixelBuffer(const PixelBuffer&) = default;
         PixelBuffer(PixelBuffer&&) = default;
 
@@ -137,6 +154,7 @@ namespace d2
         pixel& at(int c);
 
         void inscribe(int xf, int yf, View view);
+        const image::Scene& image_scene() const { return images_; }
 
         PixelBuffer& operator=(const PixelBuffer&) = default;
         PixelBuffer& operator=(PixelBuffer&&) = default;

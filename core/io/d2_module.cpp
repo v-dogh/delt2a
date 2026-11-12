@@ -17,13 +17,13 @@ namespace d2::sys
         }
         _safe_threads.insert(id);
     }
-    void SystemModule::_ensure_loaded(std::function<Status()> callback)
+    void SystemModule::_transition(bool loading, std::function<Status()> callback)
     {
         D2_TAG_MODULE_RUNTIME(info().name)
         Status s = _status.load(std::memory_order::acquire);
         while (true)
         {
-            if (s == Status::Ok)
+            if (loading ? (s == Status::Ok || s == Status::Degraded) : s == Status::Offline)
                 return;
             if (s == Status::Loading)
             {
@@ -44,9 +44,7 @@ namespace d2::sys
         Status out = Status::Offline;
         const auto result = D2_SAFE_BLOCK_BEGIN out = callback();
         D2_SAFE_BLOCK_END
-        if (!result)
-            _status.store(Status::Failure, std::memory_order::release);
-        _status.store(out, std::memory_order::release);
+        _status.store(result ? out : Status::Failure, std::memory_order::release);
         _status.notify_all();
     }
     void SystemModule::_stat(Status status)
@@ -118,18 +116,15 @@ namespace d2::sys
     }
     void SystemModule::load()
     {
-        _ensure_loaded(
+        _transition(true,
             [this]()
             {
                 D2_TAG_MODULE_RUNTIME(info().name)
                 auto stat = _pre_load_impl();
-                if (_status == Status::Offline)
-                {
-                    D2_TLOG(Warning, "Module degraded at pre load")
-                    return Status::Degraded;
-                }
+                if (stat != Status::Ok)
+                    return stat;
                 stat = _load_impl();
-                if (_status == Status::Offline)
+                if (stat == Status::Offline)
                 {
                     D2_TLOG(Warning, "Module degraded")
                     return Status::Degraded;
@@ -142,29 +137,30 @@ namespace d2::sys
     }
     void SystemModule::unload()
     {
-        _ensure_loaded(
+        _transition(false,
             [this]()
             {
-                D2_TAG_MODULE_RUNTIME(info().name)
-                auto stat = _unload_impl();
-                if (_status != Status::Ok)
-                {
-                    D2_TLOG(Warning, "Failed to unload module");
-                    stat = _post_unload_impl();
-                    if (_status != Status::Ok)
-                        D2_TLOG(Warning, "Failed to post unload as well");
-                }
-                stat = _post_unload_impl();
-                if (stat == Status::Ok)
-                    return Status::Offline;
-                return stat;
+                Status stat = Status::Failure;
+                std::exception_ptr failure;
+                try { stat = _unload_impl(); }
+                catch (...) { failure = std::current_exception(); }
+                const auto post = _post_unload_impl();
+                if (failure)
+                    std::rethrow_exception(failure);
+                if (stat != Status::Ok)
+                    return stat;
+                return post == Status::Ok ? Status::Offline : post;
             }
         );
     }
+
     bool SystemModule::accessible() const
     {
         if (_preset.access == Access::TUnsafe && _safe_threads.empty())
-            return _ctx.lock()->is_synced();
+        {
+            const auto ctx = _ctx.lock();
+            return ctx && ctx->is_synced();
+        }
         return _preset.access == Access::TSafe ||
                _safe_threads.contains(std::this_thread::get_id());
     }

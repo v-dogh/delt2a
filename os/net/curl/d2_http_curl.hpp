@@ -5,8 +5,9 @@
 #include <curl/curl.h>
 #include <functional>
 #include <memory>
+#include <mutex>
 #include <core/mods/d2_http.hpp>
-#include <mt/task_ring.hpp>
+#include <mt/task_queue.hpp>
 #include <string>
 #include <thread>
 
@@ -32,7 +33,11 @@ namespace d2::sys::net
         struct CurlStream;
     private:
         std::jthread _worker{};
-        mt::TaskRing<std::function<void()>, 8> _tasks{};
+        std::mutex _handle_mtx{};
+        std::mutex _submit_mtx{};
+        bool _accepting{false};
+        bool _curl_acquired{false};
+        mt::TaskQueue<std::function<void()>, true> _tasks{};
 
         std::atomic<CURLM*> _handle{nullptr};
         std::atomic<bool> _stop{true};
@@ -49,8 +54,10 @@ namespace d2::sys::net
 
         void _wake();
         void _complete(std::shared_ptr<Operation> op);
-        void _fail(std::shared_ptr<Operation> op, std::string error);
-        void _run(std::function<void()> task);
+        void _fail(std::shared_ptr<Operation> op, Error error);
+        void _report_error(const std::shared_ptr<Operation>& op, const Error& error) noexcept;
+        bool _run(std::function<void()> task);
+        void _sweep();
 
         virtual Status _load_impl() override;
         virtual Status _unload_impl() override;
@@ -58,6 +65,7 @@ namespace d2::sys::net
         virtual Stream::ptr _request_impl(Request request) override;
     public:
         using SystemHTTP::SystemHTTP;
+        ~SystemHTTPCurl() override { unload(); }
     };
     using http_curl = SystemHTTPCurl;
 } // namespace d2::sys::net

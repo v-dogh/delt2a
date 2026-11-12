@@ -107,6 +107,7 @@ namespace d2::sys
         void _check_event();
     public:
         using Module::Module;
+        ~SystemBinder() override;
 
         std::optional<BindError> bind(const std::string& name, Bind value, callback_type callback);
         std::optional<BindError> rebind(const std::string& name, Bind value);

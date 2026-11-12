@@ -271,7 +271,10 @@ namespace d2
     public:
         using TreeCtxBase::TreeCtxBase;
 
-        TreeCtx(d2::TreeIter<Parent> ptr) : TreeCtxBase(ptr) {}
+        template<typename Other>
+        TreeCtx(d2::TreeIter<Other> ptr) : TreeCtxBase(d2::TreeIter<>{ptr}) {}
+        template<typename Other>
+        TreeCtx(std::shared_ptr<Other> ptr) : TreeCtxBase(d2::TreeIter<>{ptr}) {}
 
         TreeIter<Parent> ptr() const noexcept
         {
@@ -333,9 +336,9 @@ namespace d2
             Element::property Prop,
             typename... Argv
         >
-        Animation::ptr animate_twoway(std::chrono::milliseconds time, Argv&&... args)
+        Element::EventListener animate_twoway(std::chrono::milliseconds time, Argv&&... args)
         {
-            return animate_twoway<Interpolator, Interpolator>(
+            return animate_twoway<Interpolator, Interpolator, Prop>(
                 time, time, std::forward<Argv>(args)...
             );
         }
@@ -345,11 +348,11 @@ namespace d2
             Element::property Prop,
             typename... Argv
         >
-        Animation::ptr animate_twoway(
+        Element::EventListener animate_twoway(
             std::chrono::milliseconds time_to, std::chrono::milliseconds time_from, Argv&&... args
         )
         {
-            onv(Element::State::Clicked,
+            return onv(Element::State::Clicked,
                 [=,
                  ... args =
                      std::forward<Argv>(args)](Element::EventListener listener, TreeIter<> ptr)
@@ -357,11 +360,11 @@ namespace d2
                     auto ctx = TreeCtx<Parent, State>(ptr);
                     if (ptr->getstate(Element::State::Clicked))
                     {
-                        ctx.template animate<InterpolatorTo>(time_to, args...);
+                        ctx.template animate<InterpolatorTo, Prop>(time_to, args...);
                     }
                     else
                     {
-                        ctx.template animate<InterpolatorFrom>(time_from, args...);
+                        ctx.template animate<InterpolatorFrom, Prop>(time_from, args...);
                     }
                 });
         }
@@ -371,9 +374,9 @@ namespace d2
             Element::property Prop,
             typename... Argv
         >
-        Animation::ptr animate_toggle(std::chrono::milliseconds time, Argv&&... args)
+        Element::EventListener animate_toggle(std::chrono::milliseconds time, Argv&&... args)
         {
-            return animate_toggle<Interpolator, anim::Linear>(
+            return animate_toggle<Interpolator, anim::Linear, Prop>(
                 time, std::chrono::milliseconds{0}, std::forward<Argv>(args)...
             );
         }
@@ -383,11 +386,11 @@ namespace d2
             Element::property Prop,
             typename... Argv
         >
-        Animation::ptr animate_toggle(
+        Element::EventListener animate_toggle(
             std::chrono::milliseconds time_to, std::chrono::milliseconds time_from, Argv&&... args
         )
         {
-            onv(Element::State::Clicked,
+            return onv(Element::State::Clicked,
                 true,
                 [=,
                  saved = Parent::template type_of<Prop>(),
@@ -397,14 +400,14 @@ namespace d2
                 ) mutable
                 {
                     auto ctx = TreeCtx<Parent, State>(ptr);
-                    if (state)
+                    if (!state)
                     {
-                        saved = ctx->template get<Prop>();
-                        ctx.template animate<InterpolatorTo>(time_to, args...);
+                        saved = ctx.ptr()->template get<Prop>();
+                        ctx.template animate<InterpolatorTo, Prop>(time_to, args...);
                     }
                     else
                     {
-                        ctx.template animate<InterpolatorFrom>(time_from, saved);
+                        ctx.template animate<InterpolatorFrom, Prop>(time_from, saved);
                     }
                     state = !state;
                 });
@@ -513,19 +516,16 @@ namespace d2
                     for (decltype(auto) it : ptrs)
                         ptr.asp()->remove(it);
                     ptrs.clear();
-                    (
-                        [&]()
-                        {
-                            if (branches.first == value)
-                            {
-                                BranchGuard guard;
-                                branches.second(TreeCtx<Parent, State>(ptr));
-                                ptrs = TreeCtxBase::_get_branch();
-                                return true;
-                            }
+                    auto apply = [&](auto& branch)
+                    {
+                        if (branch.first != value)
                             return false;
-                        }() ||
-                        ...);
+                        BranchGuard guard;
+                        branch.second(TreeCtx<Parent, State>(ptr));
+                        ptrs = TreeCtxBase::_get_branch();
+                        return true;
+                    };
+                    (apply(branches) || ...);
                 }
             );
             declare<style::DependencyHandle>() = std::move(handle);
@@ -616,6 +616,9 @@ namespace d2
             return TreeCtx<OtherRoot, OtherState>(_ptr);
         }
     };
+
+    template<typename Parent> TreeCtx(d2::TreeIter<Parent>) -> TreeCtx<Parent>;
+    template<typename Parent> TreeCtx(std::shared_ptr<Parent>) -> TreeCtx<Parent>;
 
     // Callback takes TreeCtx<Type> where Type is the stylesheet target's type
     template<auto Callback, typename... Argv> struct Stylesheet

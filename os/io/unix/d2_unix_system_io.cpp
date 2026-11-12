@@ -1,4 +1,6 @@
 #include "os/io/unix/d2_unix_system_io.hpp"
+#include <core/platform/d2_text_layout.hpp>
+#include <core/io/d2_context.hpp>
 
 #include <absl/strings/escaping.h>
 #include <any>
@@ -9,6 +11,7 @@
 #include <mutex>
 #include <optional>
 #include <span>
+#include <system_error>
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
@@ -34,7 +37,7 @@ namespace d2::sys
         _wake();
         return true;
     }
-    void UnixWorker::_accept_impl(mt::Task task) noexcept
+    void UnixWorker::_accept_impl(mt::Task task)
     {
         _tasks.enqueue(std::move(task));
         _wake();
@@ -54,6 +57,7 @@ namespace d2::sys
     }
     void UnixWorker::_stop_impl() noexcept
     {
+        _process_tasks();
         _wake();
         _closefd(_wake_read);
         _closefd(_wake_write);
@@ -727,80 +731,6 @@ namespace d2::sys
     // Output
     //
 
-    std::uint32_t _kitty_id()
-    {
-        static std::uint32_t id = 1;
-        return id++;
-    }
-    void UnixTerminalOutput::_kitty_write(const std::string& payload)
-    {
-        std::string seq;
-        seq.reserve(7 + payload.size());
-        seq += "\x1b_G";
-        seq += payload;
-        seq += "\x1b\\";
-        ::write(STDOUT_FILENO, seq.data(), seq.size());
-    }
-    void UnixTerminalOutput::_kitty_write_id(std::uint32_t id)
-    {
-        auto sp = [](std::string_view str) -> std::span<const unsigned char>
-        { return std::span(reinterpret_cast<const unsigned char*>(str.data()), str.size()); };
-
-        const auto c1 = sp("\x1b_Ga=p,i=");
-        const auto c3 = sp(",q=2\x1b\\");
-
-        std::array<char, 10> id_out;
-        const auto [end, _] = std::to_chars(id_out.data(), id_out.data() + id_out.size(), id);
-        const auto c2 = sp(std::string_view(id_out.data(), end));
-
-        _out.insert(_out.end(), c1.begin(), c1.end());
-        _out.insert(_out.end(), c2.begin(), c2.end());
-        _out.insert(_out.end(), c3.begin(), c3.end());
-    }
-    std::optional<std::string> _make_shm(const void* data, std::size_t len)
-    {
-        static std::atomic<std::uint64_t> counter = 0;
-        for (std::size_t attempt = 0; attempt < 64; attempt++)
-        {
-            const auto name = std::format("/tty-graphics-protocol-{}-{}", ::getpid(), ++counter);
-            const auto fd = ::shm_open(
-                name.c_str(),
-                O_CREAT | O_EXCL | O_RDWR
-#ifdef O_CLOEXEC
-                    | O_CLOEXEC
-#endif
-                ,
-                0600
-            );
-            if (fd < 0)
-            {
-                if (errno == EEXIST)
-                    continue;
-                return std::nullopt;
-            }
-            if (::ftruncate(fd, static_cast<off_t>(len)) != 0)
-            {
-                ::close(fd);
-                ::shm_unlink(name.c_str());
-                return std::nullopt;
-            }
-
-            void* p = ::mmap(nullptr, len, PROT_WRITE, MAP_SHARED, fd, 0);
-            if (p == MAP_FAILED)
-            {
-                ::close(fd);
-                ::shm_unlink(name.c_str());
-                return std::nullopt;
-            }
-            std::memcpy(p, data, len);
-            ::msync(p, len, MS_SYNC);
-            ::munmap(p, len);
-            ::close(fd);
-            return name;
-        }
-        return std::nullopt;
-    }
-
     UnixTerminalOutput::position_type
     UnixTerminalOutput::_generate_position(int x, int y, bool skip)
     {
@@ -819,100 +749,53 @@ namespace d2::sys
 
         return std::make_pair(result, int(ptr2 - result.begin() + 1));
     }
-    UnixTerminalOutput::color_type UnixTerminalOutput::_generate_color(const pixel& px, bool force)
+    UnixTerminalOutput::color_type UnixTerminalOutput::_generate_color(const pixel& cell, bool force)
     {
-        using buffer = std::array<char, _max_color_len>;
-
-        constexpr std::array<const char*, 7> style_on = {"1", "4", "3", "9", "5", "7", "8"};
-        constexpr std::array<const char*, 7> style_off = {"22", "24", "23", "29", "25", "27", "28"};
-        constexpr auto style_code = std::string_view("\033[");
-        constexpr auto bg_code = std::string_view("48;2;");
-        constexpr auto fg_code = std::string_view("38;2;");
-
-        // Preds
-
-        const auto do_background = force || px.r != _track_background.r ||
-                                   px.g != _track_background.g || px.b != _track_background.b;
-        const auto do_foreground = force || px.rf != _track_foreground.r ||
-                                   px.gf != _track_foreground.g || px.bf != _track_foreground.b;
-
-        if (px.style == _track_style && !do_background && !do_foreground)
-            return std::make_pair(buffer(), 0);
-
-        buffer code{"\033["};
-
-        // Styles
-
-        buffer::iterator ptr = code.begin() + style_code.size();
-        if (force || px.style != _track_style)
+        std::array<char, _max_color_len> code{};
+        auto ptr = code.begin();
+        auto append = [&](std::string_view value) { ptr = std::copy(value.begin(), value.end(), ptr); };
+        const auto style = cell.style & ~px::style::Reserved;
+        const auto background = force || cell.r != _track_background.r ||
+                                cell.g != _track_background.g || cell.b != _track_background.b;
+        const auto foreground = force || cell.rf != _track_foreground.r ||
+                                cell.gf != _track_foreground.g || cell.bf != _track_foreground.b;
+        if (!force && style == _track_style && !background && !foreground)
+            return {code, 0};
+        append("\033[");
+        constexpr std::array<std::string_view, 7> on{"1", "4", "3", "9", "5", "7", "8"};
+        constexpr std::array<std::string_view, 7> off{"22", "24", "23", "29", "25", "27", "28"};
+        for (std::size_t i = 0; i < on.size(); ++i)
         {
-            for (std::size_t i = 0; i < 7; i++)
+            const auto bit = px::style(1 << i);
+            if (force || (style & bit) != (_track_style & bit))
             {
-                const auto ns = px::style(std::uint8_t(px.style) & (1 << i));
-                const auto ps = px::style(std::uint8_t(_track_style) & (1 << i));
-                if (ns != ps)
-                {
-                    if (bool(ns))
-                    {
-                        *(ptr++) = style_on[i][0];
-                    }
-                    else
-                    {
-                        *(ptr++) = style_off[i][0];
-                        *(ptr++) = style_off[i][1];
-                    }
-                    *(ptr++) = ';';
-                }
+                append(bool(style & bit) ? on[i] : off[i]);
+                append(";");
             }
-            _track_style = px.style;
         }
-
-        if (!(do_foreground || do_background))
-            *ptr = 'm';
-
-        // Background
-        buffer::iterator ptrbe = ptr;
-        if (do_background)
+        auto rgb = [&](unsigned char r, unsigned char g, unsigned char b)
         {
-            const auto ptrb = std::copy(bg_code.begin(), bg_code.end(), ptrbe);
-
-            const auto [ptr1b, _1b] = std::to_chars(ptrb, code.end(), px.r);
-            const auto [ptr2b, _2b] = std::to_chars(ptr1b + 1, code.end(), px.g);
-            const auto [ptr3b, _3b] = std::to_chars(ptr2b + 1, code.end(), px.b);
-
-            *ptr1b = ';';
-            *ptr2b = ';';
-            *ptr3b = do_foreground ? ';' : 'm';
-
-            ptrbe = ptr3b + 1;
-
-            _track_background.r = px.r;
-            _track_background.g = px.g;
-            _track_background.b = px.b;
-        }
-
-        // Foreground
-        buffer::iterator ptrfe = ptrbe;
-        if (do_foreground)
+            for (auto value : {r, g, b})
+            {
+                ptr = std::to_chars(ptr, code.end(), value).ptr;
+                *ptr++ = ';';
+            }
+        };
+        if (background)
         {
-            const auto ptrf = std::copy(fg_code.begin(), fg_code.end(), ptrfe);
-
-            const auto [ptr1f, _1f] = std::to_chars(ptrf, code.end(), px.rf);
-            const auto [ptr2f, _2f] = std::to_chars(ptr1f + 1, code.end(), px.gf);
-            const auto [ptr3f, _3f] = std::to_chars(ptr2f + 1, code.end(), px.bf);
-
-            *ptr1f = ';';
-            *ptr2f = ';';
-            *ptr3f = 'm';
-
-            ptrfe = ptr3f;
-
-            _track_foreground.r = px.rf;
-            _track_foreground.g = px.gf;
-            _track_foreground.b = px.bf;
+            append("48;2;");
+            rgb(cell.r, cell.g, cell.b);
         }
-
-        return std::make_pair(code, int(ptrfe - code.begin() + 1));
+        if (foreground)
+        {
+            append("38;2;");
+            rgb(cell.rf, cell.gf, cell.bf);
+        }
+        *(ptr - 1) = 'm';
+        _track_style = style;
+        _track_background = cell.as_background();
+        _track_foreground = cell.as_foreground();
+        return {code, static_cast<std::size_t>(ptr - code.begin())};
     }
 
     void UnixTerminalOutput::_push(const pixel& px)
@@ -934,7 +817,7 @@ namespace d2::sys
             _out.push_back(px.v);
         }
 #else
-        out_.push_back(px.v);
+        _out.push_back(px.v);
 #endif
     }
     int UnixTerminalOutput::_write(std::span<const unsigned char> buffer)
@@ -951,232 +834,117 @@ namespace d2::sys
         return _frame_time;
     }
 
-    void UnixTerminalOutput::_release_image(std::any data)
+    void UnixTerminalOutput::clear_images()
     {
-        _kitty_write(std::format("a=d,d=I,i={};", std::any_cast<KittyImageState&>(data).id));
-    }
-
-    void UnixTerminalOutput::load_image(const std::string& path, ImageInstance img)
-    {
-        if (images_.contains(path))
-            release_image(path);
-
-        const auto fmt = static_cast<Format>(img.format());
-        const auto bytes = img.read();
-        if (bytes.empty())
-            return;
-
-        const auto* fkey = fmt == Format::PNG ? "f=100" : (fmt == Format::RGBA8 ? "f=32" : "f=24");
-        std::optional<std::pair<int, int>> dims;
-        if (fmt != Format::PNG)
+        std::vector<pixel> cells;
+        std::size_t width, height;
         {
-            dims = {img.width(), img.height()};
+            std::unique_lock lock(mtx_);
+            if (!_active_images && _image_cleanup.empty()) return;
+            cells = _sourceframe;
+            width = _source_width; height = _source_height;
         }
-
-        const auto shm_name = _make_shm(bytes.data(), bytes.size());
-        if (!shm_name)
-            return;
-
-        const auto kid = _kitty_id();
-        std::ostringstream out;
-        out << std::format("a=t,q=2,i={},t=s,{}", kid, fkey);
-        if (dims)
-            out << std::format(",s={},v={}", dims->first, dims->second);
-        out << std::format(",S={};", bytes.size());
-        out << absl::Base64Escape(*shm_name);
-        _kitty_write(out.str());
-
-        images_.emplace(
-            path, KittyImageState{.id = kid, .width = img.width(), .height = img.height()}
-        );
+        _render(cells, width, height, {}, true);
     }
-    void UnixTerminalOutput::release_image(const std::string& path)
+    void UnixTerminalOutput::write(std::span<const pixel> buffer, std::size_t width, std::size_t height)
     {
-        auto it = images_.find(path);
-        if (it != images_.end())
-        {
-            _release_image(it->second);
-            images_.erase(it);
-        }
+        _render(buffer, width, height, {}, false);
     }
-    UnixTerminalOutput::ImageInstance UnixTerminalOutput::image_info(const std::string& path)
+    void UnixTerminalOutput::write(std::span<const pixel> buffer, std::size_t width, std::size_t height,
+                                    const image::Scene& images)
     {
-        const auto& state = std::any_cast<KittyImageState&>(images_.at(path));
-        return ImageInstance({}, state.width, state.height);
+        _render(buffer, width, height, images, false);
     }
-    SystemOutput::image UnixTerminalOutput::image_id(const std::string& path)
-    {
-        return std::any_cast<KittyImageState&>(images_.at(path)).id;
-    }
-
-    void
-    UnixTerminalOutput::write(std::span<const pixel> buffer, std::size_t width, std::size_t height)
+    void UnixTerminalOutput::_render(std::span<const pixel> buffer, std::size_t width, std::size_t height,
+                                      const image::Scene& images, bool suppress_images)
     {
         std::unique_lock lock(mtx_);
-
+        if ((height && width > std::numeric_limits<std::size_t>::max() / height) ||
+            buffer.size() != width * height || width > INT_MAX || height > INT_MAX)
+            throw std::invalid_argument("Terminal frame dimensions");
         const auto beg = std::chrono::high_resolution_clock::now();
-
-        _track_style = px::style::None;
-        _track_foreground = px::foreground(255, 255, 255);
-        _track_background = px::background(0, 0, 0);
-
-        _out.reserve((buffer.size()) * sizeof(value_type) + (height + 1) + _max_color_len * 2);
-
+        auto full = width != _pbuffer_width || height != _pbuffer_height ||
+                    buffer.size() != _pbuffer_size;
+        _sourceframe.assign(buffer.begin(), buffer.end());
+        _source_width = width; _source_height = height;
+        _displayframe.assign(buffer.begin(), buffer.end());
+        std::shared_ptr<SystemImages> renderer;
+        if (!suppress_images)
+            if (auto ctx = context())
+                if (auto module = ctx->sys_if<SystemImages>(); module)
+                    renderer = module.ptr();
+        SystemImages::Plan plan;
+        if (renderer != _active_images)
+        {
+            if (_active_images)
+            {
+                plan = _active_images->reset();
+                _image_cleanup += plan.before;
+                plan.before.clear();
+            }
+            _active_images = renderer;
+            full = true;
+        }
+        if (renderer)
+        {
+            winsize size{};
+            BoundingBox metrics{};
+            if (::ioctl(STDOUT_FILENO, TIOCGWINSZ, &size) == 0 && size.ws_col && size.ws_row)
+                metrics = {size.ws_xpixel / size.ws_col, size.ws_ypixel / size.ws_row};
+            try
+            {
+                auto next = renderer->prepare(_displayframe, {int(width), int(height)}, images, metrics);
+                plan.before += next.before;
+                plan.after = std::move(next.after);
+                plan.repaint |= next.repaint;
+            }
+            catch (...)
+            {
+                renderer->invalidate();
+                _pbuffer_size = _pbuffer_width = _pbuffer_height = 0;
+                throw;
+            }
+        }
+        full |= plan.repaint;
+        _image_cleanup += plan.before;
+        _out.insert(_out.end(), _image_cleanup.begin(), _image_cleanup.end());
+        for (std::size_t i = 0; i < _displayframe.size(); ++i)
+        {
+            _displayframe[i] = text::display_cell(_displayframe, i, width);
+            if (_displayframe[i].v == char(127)) _displayframe[i].v = ' ';
+        }
+        buffer = _displayframe;
         const auto compressed = PixelBuffer::rle_pack(buffer);
-
-        // Move to zero
+        std::vector<bool> dirty(buffer.size(), full);
+        if (!full)
         {
-            const auto [pos, plen] = _generate_position(0, 0, false);
-            _write(std::span<const char>(pos.data(), plen));
+            PixelBuffer::RleIterator previous(_swapframe);
+            for (std::size_t i = 0; i < buffer.size(); ++i, previous.increment())
+                dirty[i] = buffer[i] != previous.value();
         }
-
-        // Clean redraw
-        if (buffer.size() != _pbuffer_size)
+        bool first = true;
+        std::size_t next = buffer.size();
+        auto changed = [&](std::size_t i)
         {
-            std::size_t x = 0;
-            std::size_t y = 0;
-            _out.insert(_out.end(), _cls_code.begin(), _cls_code.end());
-            for (auto it = buffer.begin(); it != buffer.end();)
+            return dirty[i] || (i % width && dirty[i - 1]) ||
+                   (i % width + 1 < width && dirty[i + 1]);
+        };
+        for (std::size_t i = 0; i < buffer.size(); ++i)
+        {
+            const auto& cell = buffer[i];
+            if (changed(i) && !text::continuation(cell))
             {
-                const auto& px = *it;
-                const auto [code, len] = _generate_color(px);
-
-                auto sit = it;
-                while (sit != buffer.end() && px.compare_colors(*sit))
-                    ++sit;
-
-                const auto abs_start = it - buffer.begin();
-                const auto abs_end = sit - buffer.begin();
-                const auto edls = (abs_end - abs_start) / width;
-
-                _out.reserve(_out.size() + len + ((sit - it) * sizeof(value_type)) + edls);
-                _out.insert(_out.end(), code.begin(), code.begin() + len);
-
-                while (it != sit)
-                {
-                    const auto abs = it - buffer.begin();
-                    if (abs && !(abs % width) && abs != abs_start)
-                    {
-                        _out.push_back('\n');
-                        y++;
-                        x = 0;
-                    }
-                    else
-                        x++;
-
-                    // Image support
-                    [[unlikely]] if (it->v == image_constant.v)
-                    {
-                        // Explicitly move cursor
-                        const auto [pos, plen] = _generate_position(x + 1, y + 1, false);
-                        _out.insert(_out.end(), pos.begin(), pos.begin() + plen);
-                        ++it;
-                        // Get ID
-                        std::uint32_t id = 0;
-                        id |= static_cast<std::uint32_t>(it->v);
-                        ++it;
-                        id |= (static_cast<std::uint32_t>(it->v) << 1) & 0xF0;
-                        ++it;
-                        id |= (static_cast<std::uint32_t>(it->v) << 2) & 0xF00;
-                        ++it;
-                        id |= (static_cast<std::uint32_t>(it->v) << 3) & 0xF000;
-                        ++it;
-                        _kitty_write_id(id);
-                        for (std::size_t i = 0; i < 5; i++)
-                            _push({});
-                    }
-                    else
-                    {
-                        _push(*it);
-                        ++it;
-                    }
-                }
-
-                if (sit == buffer.end())
-                    break;
+                const auto [pos, plen] = _generate_position(i % width, i / width, next == i && i % width);
+                _out.insert(_out.end(), pos.begin(), pos.begin() + plen);
+                const auto [color, clen] = _generate_color(cell, first);
+                _out.insert(_out.end(), color.begin(), color.begin() + clen);
+                first = false;
+                _push(cell);
+                next = i + 1;
+                if (i % width + 1 < width && text::continuation(buffer[i + 1])) ++next;
             }
         }
-        else
-        {
-            bool sequential = false;
-            bool linear = false;
-            PixelBuffer::RleIterator pv_it(_swapframe);
-            for (auto it = buffer.begin(); it != buffer.end();)
-            {
-                if (const auto& px = *it; px != pv_it.value())
-                {
-                    const auto idx = it - buffer.begin();
-                    const auto x = idx % width;
-                    const auto y = idx / width;
-                    const auto [pos, plen] = _generate_position(x, y, linear && sequential);
-                    const auto [code, len] = _generate_color(px, !sequential);
-
-                    auto sit = it;
-                    while (sit != buffer.end() && *sit != pv_it.value() && px.compare_colors(*sit))
-                    {
-                        pv_it.increment();
-                        ++sit;
-                    }
-
-                    const auto end = sit - buffer.begin();
-                    const auto edls = (end - idx) / width;
-
-                    _out.reserve(
-                        _out.size() + len + plen + ((sit - it) * sizeof(value_type)) + edls
-                    );
-                    _out.insert(_out.end(), pos.begin(), pos.begin() + plen);
-                    _out.insert(_out.end(), code.begin(), code.begin() + len);
-
-                    linear = true;
-                    sequential = true;
-                    while (it != sit)
-                    {
-                        const auto abs = it - buffer.begin();
-                        if (abs && !(abs % width) && abs != idx)
-                        {
-                            linear = false;
-                            _out.push_back('\n');
-                        }
-                        // Image support
-                        [[unlikely]] if (it->v == image_constant.v)
-                        {
-                            // Explicitly move cursor
-                            const auto [pos, plen] = _generate_position(x + 1, y + 1, false);
-                            _out.insert(_out.end(), pos.begin(), pos.begin() + plen);
-                            ++it;
-                            // Get ID
-                            std::uint32_t id = 0;
-                            id |= static_cast<std::uint32_t>(it->v);
-                            ++it;
-                            id |= (static_cast<std::uint32_t>(it->v) << 1) & 0xF0;
-                            ++it;
-                            id |= (static_cast<std::uint32_t>(it->v) << 2) & 0xF00;
-                            ++it;
-                            id |= (static_cast<std::uint32_t>(it->v) << 3) & 0xF000;
-                            ++it;
-                            _kitty_write_id(id);
-                            for (std::size_t i = 0; i < 5; i++)
-                                _push({});
-                        }
-                        else
-                        {
-                            _push(*it);
-                            ++it;
-                        }
-                    }
-                    if (sit == buffer.end())
-                        break;
-                }
-                else
-                {
-                    const auto abs = it - buffer.begin();
-                    linear = !(abs && !(abs % width));
-                    sequential = false;
-                    pv_it.increment();
-                    ++it;
-                }
-            }
-        }
+        _out.insert(_out.end(), plan.after.begin(), plan.after.end());
 
         if (!_out.empty())
         {
@@ -1199,18 +967,31 @@ namespace d2::sys
                         continue;
 
                     if (written == -1 && (errno == EAGAIN || errno == EWOULDBLOCK))
-                        continue;
-
-                    break;
+                    {
+                        pollfd descriptor{STDOUT_FILENO, POLLOUT, 0};
+                        int ready;
+                        do { ready = ::poll(&descriptor, 1, -1); } while (ready < 0 && errno == EINTR);
+                        if (ready > 0 && (descriptor.revents & POLLOUT)) continue;
+                        if (ready >= 0) errno = EIO;
+                    }
+                    const auto error = written < 0 ? errno : EIO;
+                    if (_active_images) _active_images->invalidate();
+                    _image_cleanup.insert(0, "\x1b\\");
+                    _out.clear();
+                    _swapframe.clear();
+                    _pbuffer_size = _pbuffer_width = _pbuffer_height = 0;
+                    throw std::system_error(error, std::generic_category(), "Terminal write failed");
                 }
                 idx += size;
             }
 
-            _pbuffer_size = width * height;
-            _swapframe.clear();
-            _swapframe.insert(_swapframe.end(), compressed.begin(), compressed.end());
         }
+        _pbuffer_size = width * height;
+        _pbuffer_width = width;
+        _pbuffer_height = height;
+        _swapframe.assign(compressed.begin(), compressed.end());
         _buffer_size = _out.size();
+        _image_cleanup.clear();
         _out.clear();
 
         _frame_time = std::chrono::duration_cast<std::chrono::microseconds>(

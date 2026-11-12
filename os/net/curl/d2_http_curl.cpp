@@ -1,12 +1,16 @@
 #include "os/net/curl/d2_http_curl.hpp"
 
 #include "os/net/curl/d2_curl_global.hpp"
+#include <charconv>
+#include <climits>
+#include <limits>
 
 namespace d2::sys::net
 {
     struct SystemHTTPCurl::StreamState
     {
         std::atomic_bool cancelled = false;
+        std::atomic_bool completed = false;
 
         std::atomic<std::uint64_t> downloaded = 0;
         std::atomic<std::uint64_t> uploaded = 0;
@@ -31,7 +35,7 @@ namespace d2::sys::net
         std::string request_body{};
         std::string builder_error{};
 
-        mt::TaskRing<std::string, 4> upload_queue{};
+        mt::TaskQueue<std::string, true> upload_queue{};
         std::string upload_current{};
         std::size_t upload_offset{0};
 
@@ -46,16 +50,27 @@ namespace d2::sys::net
         CURLcode curl_code = CURLE_OK;
         std::array<char, CURL_ERROR_SIZE> error_buffer{};
         std::string error_string{};
+        std::optional<Error> failure;
+        std::optional<std::chrono::steady_clock::time_point> deadline;
+        std::optional<std::chrono::milliseconds> connect_timeout;
+        std::size_t max_response_bytes{0}, max_header_bytes{0}, header_bytes{0};
+        bool follow_redirects{true}, headers_open{false};
+        long max_redirects{10};
 
         std::function<void(Response&)> on_response;
-        std::function<void(std::string)> on_error;
+        std::function<void(const Error&)> on_error;
         std::function<void(Chunk&)> on_chunk;
+        std::function<void(Response&)> on_headers;
 
-        std::shared_ptr<StreamState> stream_state{};
+        std::shared_ptr<StreamState> stream_state = std::make_shared<StreamState>();
 
         std::atomic<bool> cancelled{false};
 
         bool setup();
+        void callback_failed() noexcept
+        {
+            failure = Error{Error::Code::Callback, {}, std::current_exception()};
+        }
 
         ~Operation();
     };
@@ -107,11 +122,12 @@ namespace d2::sys::net
     };
     struct SystemHTTPCurl::CurlStream : Stream
     {
-        d2::sys::module<SystemHTTPCurl> ptr;
+        std::weak_ptr<SystemHTTPCurl> ptr;
         std::weak_ptr<Operation> op;
+        std::shared_ptr<StreamState> state;
 
-        explicit CurlStream(std::shared_ptr<Operation> op, d2::sys::module<SystemHTTPCurl> ptr) :
-            ptr(ptr), op(op)
+        explicit CurlStream(std::shared_ptr<Operation> op, std::weak_ptr<SystemHTTPCurl> ptr) :
+            ptr(ptr), op(op), state(op->stream_state)
         {
         }
         virtual ~CurlStream() override;
@@ -245,17 +261,17 @@ namespace d2::sys::net
             return;
         if (locked->body_mode != BodyMode::Streaming)
             return;
-        if (locked->cancelled)
+        if (locked->cancelled || state->completed)
             return;
 
         std::string chunk(data);
         locked->upload_queue.enqueue(std::move(chunk));
-        if (ptr)
+        if (auto owner = ptr.lock())
         {
-            ptr->_run(
+            owner->_run(
                 [op = locked]()
                 {
-                    if (!op->handle)
+                    if (!op->handle || op->stream_state->completed)
                         return;
 
                     if (op->upload_paused)
@@ -276,13 +292,13 @@ namespace d2::sys::net
         if (locked->body_mode != BodyMode::Streaming)
             return;
 
-        if (ptr)
+        if (auto owner = ptr.lock())
         {
-            ptr->_run(
+            owner->_run(
                 [op = locked]()
                 {
                     op->upload_finished = true;
-                    if (!op->handle)
+                    if (!op->handle || op->stream_state->completed)
                         return;
                     if (op->upload_paused)
                     {
@@ -302,34 +318,17 @@ namespace d2::sys::net
             if (locked->stream_state)
                 locked->stream_state->cancelled = true;
         }
-        if (ptr)
-            ptr->_wake();
+        if (auto owner = ptr.lock())
+            owner->_wake();
     }
     bool SystemHTTPCurl::CurlStream::is_open()
-    {
-        if (auto locked = op.lock())
-            return locked->cancelled;
-        return false;
-    }
+    { return !state->completed && !state->cancelled; }
 
     std::size_t SystemHTTPCurl::CurlStream::up_current()
-    {
-        auto locked = op.lock();
-        if (!locked || !locked->stream_state)
-            return 0;
-        return static_cast<std::size_t>(locked->stream_state->uploaded.load());
-    }
+    { return static_cast<std::size_t>(state->uploaded.load()); }
 
     std::size_t SystemHTTPCurl::CurlStream::up_total()
-    {
-        auto locked = op.lock();
-        if (!locked || !locked->stream_state)
-            return 0;
-        auto& st = *locked->stream_state;
-        if (!st.has_upload_total)
-            return 0;
-        return static_cast<std::size_t>(st.upload_total.load());
-    }
+    { return state->has_upload_total ? static_cast<std::size_t>(state->upload_total.load()) : 0; }
 
     // Callbacks
 
@@ -337,124 +336,149 @@ namespace d2::sys::net
     SystemHTTPCurl::_write_cb(char* ptr, std::size_t size, std::size_t nmemb, void* data)
     {
         auto* op = static_cast<Operation*>(data);
-        const auto bytes = size * nmemb;
-        if (op->cancelled)
-            return CURL_WRITEFUNC_ERROR;
-        if (op->on_chunk)
+        try
         {
-            std::string_view buffer(ptr, bytes);
-            std::size_t downloaded = bytes;
-            std::size_t downloaded_total = 0;
-
-            if (op->stream_state)
+            if (size && nmemb > std::numeric_limits<std::size_t>::max() / size) return 0;
+            const auto bytes = size * nmemb;
+            if (op->cancelled) return 0;
+            auto& state = *op->stream_state;
+            const auto previous = state.downloaded.load();
+            if (op->max_response_bytes && (previous > op->max_response_bytes ||
+                bytes > op->max_response_bytes - previous))
             {
-                auto& st = *op->stream_state;
-
-                downloaded = static_cast<std::size_t>(st.downloaded.fetch_add(bytes) + bytes);
-
-                if (st.has_download_total)
-                    downloaded_total = static_cast<std::size_t>(st.download_total.load());
+                op->failure = Error{Error::Code::Limit, "HTTP response exceeded byte limit"};
+                return 0;
             }
-
-            SystemHTTPCurl::CurlChunk fragment(*op, buffer, downloaded, downloaded_total);
-            D2_SAFE_BLOCK_BEGIN
-            op->on_chunk(fragment);
-            D2_SAFE_BLOCK_END
+            state.downloaded += bytes;
+            if (op->on_chunk)
+            {
+                CurlChunk fragment(*op, {ptr, bytes}, state.downloaded,
+                    state.has_download_total ? state.download_total.load() : 0);
+                op->on_chunk(fragment);
+            }
+            else op->response_body.append(ptr, bytes);
+            return op->cancelled ? 0 : bytes;
         }
-        else
-        {
-            op->response_body.append(ptr, bytes);
-        }
-
-        return bytes;
+        catch (...) { op->callback_failed(); return 0; }
     }
 
     std::size_t SystemHTTPCurl::_read_cb(char* ptr, std::size_t size, std::size_t nmemb, void* data)
     {
         auto* op = static_cast<Operation*>(data);
-        const auto capacity = size * nmemb;
-        if (op->cancelled)
-            return CURL_READFUNC_ABORT;
-        if (capacity == 0)
-            return 0;
-
-        std::size_t written = 0;
-        while (written < capacity)
+        try
         {
-            if (op->upload_offset >= op->upload_current.size())
+            if (size && nmemb > std::numeric_limits<std::size_t>::max() / size) return CURL_READFUNC_ABORT;
+            const auto capacity = size * nmemb;
+            if (op->cancelled)
+                return CURL_READFUNC_ABORT;
+            if (capacity == 0)
+                return 0;
+
+            std::size_t written = 0;
+            while (written < capacity)
             {
-                op->upload_current.clear();
-                op->upload_offset = 0;
-                std::string next;
-                while (op->upload_queue.try_dequeue(next))
+                if (op->upload_offset >= op->upload_current.size())
                 {
-                    if (!next.empty())
+                    op->upload_current.clear();
+                    op->upload_offset = 0;
+                    std::string next;
+                    while (op->upload_queue.try_dequeue(next))
                     {
-                        op->upload_current = std::move(next);
-                        break;
+                        if (!next.empty())
+                        {
+                            op->upload_current = std::move(next);
+                            break;
+                        }
                     }
+                    if (op->upload_current.empty())
+                        break;
                 }
-                if (op->upload_current.empty())
-                    break;
+
+                const auto remaining_chunk = op->upload_current.size() - op->upload_offset;
+                const auto remaining_buffer = capacity - written;
+                const auto amount = std::min(remaining_chunk, remaining_buffer);
+
+                std::memcpy(ptr + written, op->upload_current.data() + op->upload_offset, amount);
+
+                op->upload_offset += amount;
+                written += amount;
             }
 
-            const auto remaining_chunk = op->upload_current.size() - op->upload_offset;
-            const auto remaining_buffer = capacity - written;
-            const auto amount = std::min(remaining_chunk, remaining_buffer);
+            if (written > 0)
+                return written;
 
-            std::memcpy(ptr + written, op->upload_current.data() + op->upload_offset, amount);
+            if (op->upload_finished)
+                return 0;
 
-            op->upload_offset += amount;
-            written += amount;
+            op->upload_paused = true;
+            return CURL_READFUNC_PAUSE;
         }
-
-        if (written > 0)
-            return written;
-
-        if (op->upload_finished)
-            return 0;
-
-        op->upload_paused = true;
-        return CURL_READFUNC_PAUSE;
+        catch (...) { op->callback_failed(); return CURL_READFUNC_ABORT; }
     }
 
     std::size_t
     SystemHTTPCurl::_header_cb(char* buffer, std::size_t size, std::size_t n, void* data)
     {
         auto* op = static_cast<Operation*>(data);
-
-        const auto bytes = size * n;
-        std::string_view line(buffer, bytes);
-        while (!line.empty() && (line.back() == '\r' || line.back() == '\n'))
-            line.remove_suffix(1);
-
-        const auto colon = line.find(':');
-        if (colon == std::string_view::npos)
-            return bytes;
-
-        auto name = line.substr(0, colon);
-        auto value = line.substr(colon + 1);
-        while (!value.empty() && std::isspace(static_cast<unsigned char>(value.front())))
-            value.remove_prefix(1);
-        while (!value.empty() && std::isspace(static_cast<unsigned char>(value.back())))
-            value.remove_suffix(1);
-
-        const auto header = to_lower(name);
-        op->response_headers[header] = std::string(value);
-        if (header == "content-length" && op->stream_state)
+        try
         {
-            try
+            if (size && n > std::numeric_limits<std::size_t>::max() / size) return 0;
+            const auto bytes = size * n;
+            if (op->cancelled) return 0;
+            if (op->max_header_bytes && (op->header_bytes > op->max_header_bytes ||
+                bytes > op->max_header_bytes - op->header_bytes))
             {
-                const auto total = static_cast<std::uint64_t>(std::stoull(std::string(value)));
-
-                op->stream_state->has_download_total = true;
-                op->stream_state->download_total = total;
+                op->failure = Error{Error::Code::Limit, "HTTP headers exceeded byte limit"};
+                return 0;
             }
-            catch (...)
+            op->header_bytes += bytes;
+            std::string_view line(buffer, bytes);
+            while (!line.empty() && (line.back() == '\r' || line.back() == '\n')) line.remove_suffix(1);
+            if (line.starts_with("HTTP/"))
             {
+                const auto space = line.find(' ');
+                int status = 0;
+                if (space == line.npos || std::from_chars(line.data() + space + 1,
+                    line.data() + line.size(), status).ec != std::errc{} || status < 100 || status > 999)
+                    return 0;
+                op->status = status;
+                op->response_headers.clear(); op->response_body.clear();
+                op->stream_state->has_download_total = false;
+                op->headers_open = true;
             }
+            else if (line.empty())
+            {
+                if (op->headers_open)
+                {
+                    op->headers_open = false;
+                    if (op->on_headers)
+                    {
+                        CurlResponse response(*op);
+                        op->on_headers(response);
+                    }
+                }
+            }
+            else if (const auto colon = line.find(':'); colon != line.npos)
+            {
+                auto value = line.substr(colon + 1);
+                while (!value.empty() && (value.front() == ' ' || value.front() == '\t')) value.remove_prefix(1);
+                while (!value.empty() && (value.back() == ' ' || value.back() == '\t')) value.remove_suffix(1);
+                const auto header = to_lower(line.substr(0, colon));
+                op->response_headers[header] = std::string(value);
+                if (header == "content-length")
+                {
+                    std::uint64_t total = 0;
+                    const auto parsed = std::from_chars(value.data(), value.data() + value.size(), total);
+                    if (parsed.ec == std::errc{} && parsed.ptr == value.data() + value.size())
+                    {
+                        op->stream_state->download_total = total;
+                        op->stream_state->has_download_total = true;
+                    }
+                }
+            }
+            return op->cancelled ? 0 : bytes;
         }
-        return bytes;
+        catch (...) { op->callback_failed(); return 0; }
     }
 
     int SystemHTTPCurl::_progress_cb(
@@ -535,7 +559,15 @@ namespace d2::sys::net
         curl_easy_setopt(handle, CURLOPT_HEADERFUNCTION, _header_cb);
         curl_easy_setopt(handle, CURLOPT_HEADERDATA, this);
 
-        curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L);
+        curl_easy_setopt(handle, CURLOPT_NOSIGNAL, 1L);
+        curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, follow_redirects ? 1L : 0L);
+        curl_easy_setopt(handle, CURLOPT_MAXREDIRS, max_redirects);
+        if (connect_timeout) curl_easy_setopt(handle, CURLOPT_CONNECTTIMEOUT_MS, long(connect_timeout->count()));
+        if (deadline)
+        {
+            const auto remaining = std::chrono::ceil<std::chrono::milliseconds>(*deadline - std::chrono::steady_clock::now());
+            curl_easy_setopt(handle, CURLOPT_TIMEOUT_MS, long(std::clamp<std::int64_t>(remaining.count(), 1, LONG_MAX)));
+        }
 
         if (body_mode == BodyMode::Fixed)
         {
@@ -611,47 +643,72 @@ namespace d2::sys::net
 
     void SystemHTTPCurl::_wake()
     {
+        std::lock_guard lock(_handle_mtx);
         if (auto* handle = _handle.load())
             curl_multi_wakeup(handle);
     }
 
     void SystemHTTPCurl::_complete(std::shared_ptr<Operation> op)
     {
+        if (op->failure) { _fail(op, std::move(*op->failure)); return; }
+        if (op->cancelled) { _fail(op, {Error::Code::Cancelled, "HTTP request cancelled"}); return; }
+        if ((op->deadline && std::chrono::steady_clock::now() >= *op->deadline) || op->curl_code == CURLE_OPERATION_TIMEDOUT)
+        { _fail(op, {Error::Code::Timeout, "HTTP request timed out", {}, int(op->curl_code)}); return; }
         if (op->curl_code != CURLE_OK)
+        { _fail(op, {Error::Code::Transport, op->error_string, {}, int(op->curl_code)}); return; }
+        if (op->stream_state->completed.exchange(true)) return;
+        try
         {
-            _fail(op, op->error_string);
-            return;
+            if (op->on_response)
+            {
+                CurlResponse response(*op);
+                op->on_response(response);
+            }
         }
-        if (!op->on_response)
-            return;
-        CurlResponse res(*op);
-        D2_SAFE_BLOCK_BEGIN
-        op->on_response(res);
-        D2_SAFE_BLOCK_END
+        catch (...) { _report_error(op, {Error::Code::Callback, "HTTP response callback failed", std::current_exception()}); }
     }
-
-    void SystemHTTPCurl::_fail(std::shared_ptr<Operation> op, std::string error)
+    void SystemHTTPCurl::_report_error(const std::shared_ptr<Operation>& op, const Error& error) noexcept
     {
-        if (error.empty())
-            error = "Unknown HTTP transport error";
-        if (op->on_error)
+        try
         {
-            D2_SAFE_BLOCK_BEGIN
-            op->on_error(std::move(error));
-            D2_SAFE_BLOCK_END
-            return;
+            if (op->on_error) op->on_error(error);
+            else D2_TLOG(Error, "HTTP request failed: ", error.message);
         }
-        D2_TLOG(Error, "HTTP request failed: ", error);
+        catch (...) { /* A failing error handler must not unwind through the transport worker. */ }
     }
-
-    void SystemHTTPCurl::_run(std::function<void()> task)
+    void SystemHTTPCurl::_fail(std::shared_ptr<Operation> op, Error error)
     {
-        _tasks.enqueue(std::move(task));
+        if (op->stream_state->completed.exchange(true)) return;
+        if (error.message.empty()) error.message = error.code == Error::Code::Callback ?
+            "HTTP callback failed" : "HTTP transport failed";
+        _report_error(op, error);
+    }
+    bool SystemHTTPCurl::_run(std::function<void()> task)
+    {
+        {
+            std::lock_guard lock(_submit_mtx);
+            if (!_accepting) return false;
+            _tasks.enqueue(std::move(task));
+        }
         _wake();
+        return true;
+    }
+    void SystemHTTPCurl::_sweep()
+    {
+        const auto now = std::chrono::steady_clock::now();
+        for (auto it = _ops.begin(); it != _ops.end();)
+        {
+            auto op = it->second;
+            if (!op->cancelled && (!op->deadline || now < *op->deadline)) { ++it; continue; }
+            curl_multi_remove_handle(_handle.load(), op->handle);
+            _ops.erase(it++);
+            _complete(std::move(op));
+        }
     }
 
     SystemHTTPCurl::Status SystemHTTPCurl::_load_impl()
     {
+        auto initialized = mt::future<bool>::make();
         const auto code = CurlGlobal::acquire();
         if (code != CURLE_OK)
         {
@@ -659,184 +716,221 @@ namespace d2::sys::net
             return Status::Failure;
         }
 
-        _worker = context()->launch_thread(
-            [this]()
-            {
-                auto* handle = curl_multi_init();
-                if (!handle)
+        _curl_acquired = true;
+        try
+        {
+            _worker = context()->launch_thread(
+                [this, initialized]()
                 {
-                    D2_TLOG(Critical, "Failed to initialize curl multi handle");
-                    _handle = nullptr;
-                    _stop = false;
-                    _stop.notify_all();
-                    return;
-                }
+                    auto* handle = curl_multi_init();
+                    if (!handle)
+                    {
+                        D2_TLOG(Critical, "Failed to initialize curl multi handle");
+                        _handle = nullptr;
+                        initialized.block()->set_value(false);
+                        return;
+                    }
 
-                _handle = handle;
-                _stop = false;
-                _stop.notify_all();
+                    _handle = handle;
+                    { std::lock_guard lock(_submit_mtx); _stop = false; _accepting = true; }
+                    initialized.block()->set_value(true);
 
-                int running = 0;
-                while (!_stop)
-                {
+                    int running = 0;
+                    while (!_stop)
+                    {
+                        {
+                            std::function<void()> task;
+                            while (_tasks.try_dequeue(task))
+                                task();
+                        }
+                        _sweep();
+                        {
+                            const auto code = curl_multi_perform(handle, &running);
+                            if (code != CURLM_OK)
+                            {
+                                D2_TLOG(
+                                    Critical,
+                                    "Unexpected curl multi perform error: ",
+                                    curl_multi_strerror(code)
+                                );
+                                for (auto& [_, op] : _ops)
+                                    op->failure = Error{Error::Code::Transport, curl_multi_strerror(code)};
+                                break;
+                            }
+                        }
+                        {
+                            int queued = 0;
+                            while (auto* msg = curl_multi_info_read(handle, &queued))
+                            {
+                                if (msg->msg != CURLMSG_DONE)
+                                    continue;
+
+                                auto* easy = msg->easy_handle;
+                                auto it = _ops.find(easy);
+                                if (it == _ops.end())
+                                    continue;
+
+                                auto op = it->second;
+                                long status = 0;
+                                curl_easy_getinfo(easy, CURLINFO_RESPONSE_CODE, &status);
+                                op->status = int(status);
+                                op->curl_code = msg->data.result;
+                                if (op->cancelled)
+                                {
+                                    op->curl_code = CURLE_ABORTED_BY_CALLBACK;
+                                    op->error_string = "Request cancelled";
+                                }
+                                else if (op->curl_code == CURLE_OK)
+                                {
+                                    op->error_string.clear();
+                                }
+                                else if (op->error_buffer[0] != '\0')
+                                {
+                                    op->error_string = std::string(op->error_buffer.data());
+                                }
+                                else
+                                {
+                                    op->error_string = curl_easy_strerror(op->curl_code);
+                                }
+
+                                curl_multi_remove_handle(handle, easy);
+                                _ops.erase(it);
+
+                                _complete(std::move(op));
+                            }
+                        }
+                        {
+                            _sweep();
+                            int timeout = 1000;
+                            const auto now = std::chrono::steady_clock::now();
+                            for (const auto& [_, op] : _ops)
+                                if (op->deadline)
+                                    timeout = int(std::min<std::int64_t>(timeout, std::max<std::int64_t>(0,
+                                        std::chrono::ceil<std::chrono::milliseconds>(*op->deadline - now).count())));
+                            int cnt = 0;
+                            const auto code = curl_multi_poll(handle, nullptr, 0, timeout, &cnt);
+                            if (code != CURLM_OK)
+                            {
+                                D2_TLOG(
+                                    Critical,
+                                    "Unexpected curl multi poll error: ",
+                                    curl_multi_strerror(code)
+                                );
+                                for (auto& [_, op] : _ops)
+                                    op->failure = Error{Error::Code::Transport, curl_multi_strerror(code)};
+                                break;
+                            }
+                        }
+                    }
+
+                    {
+                        std::lock_guard lock(_submit_mtx);
+                        _accepting = false; _stop = true;
+                    }
                     {
                         std::function<void()> task;
-                        while (_tasks.try_dequeue(task))
-                            task();
+                        while (_tasks.try_dequeue(task)) task();
                     }
+                    for (auto& [_, op] : _ops)
                     {
-                        const auto code = curl_multi_perform(handle, &running);
-                        if (code != CURLM_OK)
-                        {
-                            D2_TLOG(
-                                Critical,
-                                "Unexpected curl multi perform error: ",
-                                curl_multi_strerror(code)
-                            );
-                        }
+                        curl_multi_remove_handle(handle, op->handle);
+                        op->cancelled = true;
+                        op->curl_code = CURLE_ABORTED_BY_CALLBACK;
+                        op->error_string = "HTTP module unloaded before request completed";
+                        _complete(op);
                     }
+
+                    _ops.clear();
+
                     {
-                        int queued = 0;
-                        while (auto* msg = curl_multi_info_read(handle, &queued))
-                        {
-                            if (msg->msg != CURLMSG_DONE)
-                                continue;
-
-                            auto* easy = msg->easy_handle;
-                            auto it = _ops.find(easy);
-                            if (it == _ops.end())
-                                continue;
-
-                            auto op = it->second;
-                            curl_easy_getinfo(easy, CURLINFO_RESPONSE_CODE, &op->status);
-                            op->curl_code = msg->data.result;
-                            if (op->cancelled)
-                            {
-                                op->curl_code = CURLE_ABORTED_BY_CALLBACK;
-                                op->error_string = "Request cancelled";
-                            }
-                            else if (op->curl_code == CURLE_OK)
-                            {
-                                op->error_string.clear();
-                            }
-                            else if (op->error_buffer[0] != '\0')
-                            {
-                                op->error_string = std::string(op->error_buffer.data());
-                            }
-                            else
-                            {
-                                op->error_string = curl_easy_strerror(op->curl_code);
-                            }
-
-                            curl_multi_remove_handle(handle, easy);
-                            _ops.erase(it);
-
-                            _complete(std::move(op));
-                        }
-                    }
-                    {
-                        int cnt = 0;
-                        const auto code = curl_multi_poll(handle, nullptr, 0, 1000, &cnt);
-                        if (code != CURLM_OK)
-                        {
-                            D2_TLOG(
-                                Critical,
-                                "Unexpected curl multi poll error: ",
-                                curl_multi_strerror(code)
-                            );
-                        }
+                        std::lock_guard lock(_handle_mtx);
+                        _handle = nullptr;
+                        curl_multi_cleanup(handle);
                     }
                 }
-
-                for (auto& [_, op] : _ops)
-                {
-                    curl_multi_remove_handle(handle, op->handle);
-                    op->cancelled = true;
-                    op->curl_code = CURLE_ABORTED_BY_CALLBACK;
-                    op->error_string = "HTTP module unloaded before request completed";
-                    _complete(op);
-                }
-
-                _ops.clear();
-
-                curl_multi_cleanup(handle);
-                _handle = nullptr;
-            }
-        );
-
-        while (_stop)
-            _stop.wait(true);
-        if (!_handle.load())
+            );
+        }
+        catch (...)
+        {
+            if (std::exchange(_curl_acquired, false)) CurlGlobal::release();
+            throw;
+        }
+        if (!initialized.value())
         {
             if (_worker.joinable())
                 _worker.join();
-            CurlGlobal::release();
+            if (std::exchange(_curl_acquired, false))
+                CurlGlobal::release();
             return Status::Failure;
         }
         return Status::Ok;
     }
     SystemHTTPCurl::Status SystemHTTPCurl::_unload_impl()
     {
-        _stop = true;
+        if (_worker.joinable() && _worker.get_id() == std::this_thread::get_id())
+            throw std::logic_error("Cannot unload curl from its callback thread");
+        { std::lock_guard lock(_submit_mtx); _accepting = false; _stop = true; }
         _wake();
         if (_worker.joinable())
             _worker.join();
-        CurlGlobal::release();
+        if (std::exchange(_curl_acquired, false))
+            CurlGlobal::release();
         return Status::Ok;
     }
 
     SystemHTTPCurl::Stream::ptr SystemHTTPCurl::_request_impl(Request request)
     {
+        const auto started = std::chrono::steady_clock::now();
         auto op = std::make_shared<Operation>();
-
         op->owner = this;
-        op->method = std::string(request.method);
-        op->url = std::string(request.url);
-        op->on_response = std::move(request.on_response);
-        op->on_error = std::move(request.on_error);
-        op->on_chunk = std::move(request.on_chunk);
-
-        CurlBuilder builder(*op);
-        if (request.on_setup)
+        op->method = std::string(request.method); op->url = std::move(request.url);
+        op->on_response = std::move(request.on_response); op->on_error = std::move(request.on_error);
+        op->on_chunk = std::move(request.on_chunk); op->on_headers = std::move(request.on_headers);
+        op->deadline = request.deadline; op->connect_timeout = request.connect_timeout;
+        op->max_response_bytes = request.max_response_bytes; op->max_header_bytes = request.max_header_bytes;
+        op->follow_redirects = request.follow_redirects; op->max_redirects = request.max_redirects;
+        auto self = std::static_pointer_cast<SystemHTTPCurl>(shared_from_this());
+        auto stream = std::make_unique<CurlStream>(op, self);
+        if ((request.timeout && (request.timeout->count() <= 0 || *request.timeout >
+                std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::time_point::max() - started))) ||
+            (request.connect_timeout && (request.connect_timeout->count() <= 0 || request.connect_timeout->count() > LONG_MAX)) ||
+            request.max_redirects < 0)
         {
-            D2_SAFE_BLOCK_BEGIN
-            request.on_setup(builder);
-            D2_SAFE_BLOCK_END
+            _fail(op, {Error::Code::InvalidRequest, "Invalid HTTP timeout or redirect limit"});
+            return stream;
         }
-        if (op->on_chunk || op->body_mode == BodyMode::Streaming)
-            op->stream_state = std::make_shared<StreamState>();
-
-        Stream::ptr stream{nullptr};
-        if (op->body_mode == BodyMode::Streaming)
-            stream = std::make_unique<CurlStream>(op, ptr<http_curl>());
-
-        _run(
-            [this, op]() mutable
+        if (request.timeout)
+        {
+            const auto deadline = started + *request.timeout;
+            op->deadline = op->deadline ? std::min(*op->deadline, deadline) : deadline;
+        }
+        CurlBuilder builder(*op);
+        try { if (request.on_setup) request.on_setup(builder); }
+        catch (...)
+        {
+            _fail(op, {Error::Code::Callback, "HTTP setup callback failed", std::current_exception()});
+            return stream;
+        }
+        if (!_run([this, op]()
+        {
+            try
             {
+                if (_stop) { _fail(op, {Error::Code::Cancelled, "HTTP module unloaded"}); return; }
+                if (op->cancelled || (op->deadline && std::chrono::steady_clock::now() >= *op->deadline))
+                { _complete(op); return; }
                 if (!op->setup())
-                {
-                    if (op->curl_code == CURLE_OK)
-                        op->curl_code = CURLE_FAILED_INIT;
-                    if (op->error_string.empty())
-                        op->error_string = "Failed to initialize curl request handle";
-
-                    _fail(op, op->error_string);
-                    return;
-                }
-
+                { _fail(op, {Error::Code::InvalidRequest, op->error_string, {}, int(op->curl_code)}); return; }
+                // Reserve the registry entry before handing the easy handle to curl.
+                _ops.emplace(op->handle, op);
                 const auto code = curl_multi_add_handle(_handle.load(), op->handle);
                 if (code != CURLM_OK)
                 {
-                    op->curl_code = CURLE_FAILED_INIT;
-                    op->error_string = curl_multi_strerror(code);
-                    D2_TLOG(Error, "Failed to add curl request handle: ", op->error_string);
-                    _fail(op, op->error_string);
-                    return;
+                    _ops.erase(op->handle);
+                    _fail(op, {Error::Code::Transport, curl_multi_strerror(code)});
                 }
-                _ops.emplace(op->handle, op);
             }
-        );
-
+            catch (...) { _fail(op, {Error::Code::Transport, "HTTP submission failed", std::current_exception()}); }
+        })) _fail(op, {Error::Code::Unavailable, "HTTP module is not accepting requests"});
         return stream;
     }
 } // namespace d2::sys::net

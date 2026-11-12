@@ -240,12 +240,13 @@ namespace d2::fb
         void _split_shard();
         void _insert_data(std::string_view data);
 
+        void _action_replace(std::size_t pos, std::size_t len, std::string_view data, std::optional<std::size_t> cursor_after);
         void _action_insert(std::string_view data);
         void _action_erase(std::size_t len);
     public:
-        FragmentedBuffer() = default;
+        FragmentedBuffer();
         FragmentedBuffer(const FragmentedBuffer&) = delete;
-        FragmentedBuffer(FragmentedBuffer&&) = default;
+        FragmentedBuffer(FragmentedBuffer&&) = delete;
 
         // Fun class-level namespacing???
 
@@ -321,7 +322,7 @@ namespace d2::fb
                 const auto ptr = _buf->_ptr;
                 _buf->_jump_char(pos);
                 _buf->_action_insert(data);
-                _buf->_ptr = ptr;
+                _buf->_jump_char(ptr.abs);
             }
             void erase(std::size_t len)
             {
@@ -332,7 +333,12 @@ namespace d2::fb
                 const auto ptr = _buf->_ptr;
                 _buf->_jump_char(pos);
                 _buf->_action_erase(len);
-                _buf->_ptr = ptr;
+                _buf->_jump_char(ptr.abs);
+            }
+            void replace(std::size_t pos, std::size_t len, std::string_view data,
+                         std::optional<std::size_t> cursor_after = {})
+            {
+                _buf->_action_replace(pos, len, data, cursor_after);
             }
         } act{this};
         struct : Namespace
@@ -344,6 +350,8 @@ namespace d2::fb
             void disable()
             {
                 _buf->_enabled_history = false;
+                _buf->_history.clear();
+                _buf->_history_offset = 0;
             }
             void reapply()
             {
@@ -356,7 +364,7 @@ namespace d2::fb
         } history{this};
 
         FragmentedBuffer& operator=(const FragmentedBuffer&) = delete;
-        FragmentedBuffer& operator=(FragmentedBuffer&&) = default;
+        FragmentedBuffer& operator=(FragmentedBuffer&&) = delete;
     };
 } // namespace d2::fb
 

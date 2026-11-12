@@ -310,6 +310,7 @@ namespace d2::sys::net
 
     void SystemWSCurl::_wake()
     {
+        std::lock_guard lock(_handle_mtx);
         if (auto* handle = _handle.load())
             curl_multi_wakeup(handle);
     }
@@ -732,6 +733,7 @@ namespace d2::sys::net
             return Status::Failure;
         }
 
+        _curl_acquired = true;
         _worker = context()->launch_thread(
             [this]()
             {
@@ -860,8 +862,11 @@ namespace d2::sys::net
                 _open.clear();
                 _reconnecting.clear();
 
-                curl_multi_cleanup(multi);
-                _handle = nullptr;
+                {
+                    std::lock_guard lock(_handle_mtx);
+                    _handle = nullptr;
+                    curl_multi_cleanup(multi);
+                }
             }
         );
 
@@ -871,7 +876,8 @@ namespace d2::sys::net
         {
             if (_worker.joinable())
                 _worker.join();
-            CurlGlobal::release();
+            if (std::exchange(_curl_acquired, false))
+                CurlGlobal::release();
             return Status::Failure;
         }
 
@@ -879,11 +885,14 @@ namespace d2::sys::net
     }
     SystemWSCurl::Status SystemWSCurl::_unload_impl()
     {
+        if (_worker.joinable() && _worker.get_id() == std::this_thread::get_id())
+            throw std::logic_error("Cannot unload curl from its callback thread");
         _stop = true;
         _wake();
         if (_worker.joinable())
             _worker.join();
-        CurlGlobal::release();
+        if (std::exchange(_curl_acquired, false))
+            CurlGlobal::release();
         return Status::Ok;
     }
 

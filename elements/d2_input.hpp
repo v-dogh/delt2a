@@ -1,5 +1,6 @@
 #pragma once
 
+#include <elements/d2_input_layout.hpp>
 #include <core/tree/d2_styles.hpp>
 #include <core/tree/d2_tree_element.hpp>
 
@@ -65,12 +66,20 @@ namespace d2
             using data::data;
         protected:
             IOContext::future<void> btask_{};
-            int ptr_{0};
+            std::size_t ptr_{0};
             int bound_lower_{0};
-            int highlight_start_{0};
-            int highlight_end_{0};
+            std::size_t highlight_start_{0};
+            std::size_t highlight_end_{0};
             bool ptr_blink_{false};
 
+            mutable detail::InputLayout _text{};
+            const text::Layout& _layout() const;
+            int _prefix_width() const;
+            void _ensure_ptr_visible();
+            std::size_t _hit(Position position) const;
+            void _move_to(std::size_t pos, bool select = false);
+            void _insert(std::string_view value);
+            void _erase(std::size_t begin, std::size_t end);
             void _write_ptr(pixel& px);
             bool _is_highlighted();
             void _remove_highlighted();
@@ -97,6 +106,7 @@ namespace d2
 
             void jump(std::size_t pos);
             void sync();
+            std::size_t cursor() const;
         };
     } // namespace dx
 } // namespace d2

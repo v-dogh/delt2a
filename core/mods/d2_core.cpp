@@ -146,3 +146,24 @@ namespace d2::sys
         return "";
     }
 } // namespace d2::sys
+
+namespace d2::sys
+{
+    void SystemOutput::write_frame(PixelBuffer::View frame)
+    {
+        const auto scene = frame.image_scene();
+        std::span<const pixel> cells;
+        if (!frame.compressed())
+        {
+            try { cells = frame.data(); }
+            catch (const std::logic_error&) {}
+        }
+        if (cells.size() == std::size_t(frame.width()) * frame.height())
+            write(cells, frame.width(), frame.height(), scene);
+        else
+        {
+            const auto copy = frame.unpack();
+            write(copy, frame.width(), frame.height(), scene);
+        }
+    }
+}

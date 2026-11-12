@@ -2,6 +2,8 @@
 
 #include <core/io/d2_context.hpp>
 #include <core/io/d2_module.hpp>
+#include <chrono>
+#include <exception>
 
 namespace d2::sys::net
 {
@@ -59,14 +61,28 @@ namespace d2::sys::net
 
             virtual ~RequestBuilder() = default;
         };
+        struct Error
+        {
+            enum class Code { InvalidRequest, Unavailable, Cancelled, Timeout, Transport, Callback, Limit };
+            Code code{Code::Transport};
+            std::string message;
+            std::exception_ptr cause;
+            std::optional<int> native_code;
+        };
         struct Request
         {
             std::string_view method{Method::Get};
             std::string url{""};
             std::function<void(RequestBuilder&)> on_setup{nullptr};
             std::function<void(Response&)> on_response{nullptr};
-            std::function<void(std::string)> on_error{nullptr};
+            std::function<void(const Error&)> on_error{nullptr};
             std::function<void(Chunk&)> on_chunk{nullptr};
+            std::function<void(Response&)> on_headers{nullptr};
+            std::optional<std::chrono::steady_clock::time_point> deadline;
+            std::optional<std::chrono::milliseconds> timeout, connect_timeout;
+            std::size_t max_response_bytes{0}, max_header_bytes{0};
+            bool follow_redirects{true};
+            long max_redirects{10};
         };
     private:
         virtual Stream::ptr _request_impl(Request request) = 0;

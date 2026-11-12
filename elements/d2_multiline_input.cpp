@@ -23,11 +23,11 @@ namespace d2::dx
     {
         auto width = doc.max_width;
 
-        if (_draw_ptr() && !_ptr_overlapped())
+        if (_draw_ptr())
         {
             const auto [ptr_line, ptr_col] = _line_col_from_abs(doc, _ptr_abs);
             if (ptr_line < _line_count(doc))
-                width = std::max(width, _line_length(doc, ptr_line) + 1);
+                width = std::max({width, _line_length(doc, ptr_line) + !_ptr_overlapped(), ptr_col + 1});
         }
 
         return std::max<std::size_t>(1, width);
@@ -37,7 +37,7 @@ namespace d2::dx
     {
         if ((data::input_options & InputOptions::Blink) && !_ptr_blink)
         {
-            px.v = ' ';
+            px = pixel::combine(data::foreground_color.extend(' '), data::background_color);
         }
         else
         {
@@ -56,126 +56,40 @@ namespace d2::dx
     }
     const MultiInput::DocModel& MultiInput::_doc_model() const
     {
-        if (_dirty_dm)
+        if (_dirty_dm || _dm_cache.text.censor != bool(data::input_options & Censor))
         {
-            DocModel doc{};
-
-            _buffer.buf.iterate(
-                [&](fb::Locale::Value v)
-                {
-                    const auto sv = v.value();
-
-                    if (sv == "\n")
-                    {
-                        doc.length += sv.size();
-                        doc.max_width = std::max(doc.max_width, doc.line_lengths.back());
-                        doc.starts.push_back(doc.length);
-                        doc.line_lengths.push_back(0);
-                        return fb::FragmentedBuffer::It::Continue;
-                    }
-
-                    doc.line_lengths.back() += sv.size();
-                    doc.length += sv.size();
-                    doc.max_width = std::max(doc.max_width, doc.line_lengths.back());
-                    return fb::FragmentedBuffer::It::Continue;
-                }
-            );
-
-            doc.max_width = std::max<std::size_t>(1, doc.max_width);
-
-            _dm_cache = std::move(doc);
+            _dm_cache.text.reset(value(), data::input_options & Censor, true);
+            _dm_cache.length = _dm_cache.text.source.size();
+            _dm_cache.max_width = std::max(1, _dm_cache.text.display().bounds().width);
             _dirty_dm = false;
         }
-
         return _dm_cache;
     }
-
     std::size_t MultiInput::_line_count(const DocModel& doc) const
     {
-        return doc.starts.size();
+        return doc.text.display().lines().size();
     }
-
     std::size_t MultiInput::_line_length(const DocModel& doc, std::size_t line) const
     {
-        if (line >= doc.line_lengths.size())
-            return 0;
-
-        return doc.line_lengths[line];
+        return line < _line_count(doc) ? doc.text.display().lines()[line].columns : 0;
     }
-
     std::pair<std::size_t, std::size_t>
     MultiInput::_line_col_from_abs(const DocModel& doc, std::size_t abs) const
     {
-        if (doc.starts.empty())
-            return {0, 0};
-
-        abs = std::min(abs, doc.length);
-
-        auto it = std::upper_bound(doc.starts.begin(), doc.starts.end(), abs);
-        if (it == doc.starts.begin())
-            return {0, 0};
-
-        const auto line = std::size_t(std::distance(doc.starts.begin(), it) - 1);
-        const auto col = std::min<std::size_t>(abs - doc.starts[line], _line_length(doc, line));
-        return {line, col};
+        const auto position = doc.text.display().caret(std::min(abs, doc.length));
+        return {std::size_t(position.y), std::size_t(position.x)};
     }
-
     std::size_t
     MultiInput::_abs_from_line_col(const DocModel& doc, std::size_t line, std::size_t col) const
     {
-        if (doc.starts.empty())
-            return 0;
-
         line = std::min(line, _line_count(doc) - 1);
-        return doc.starts[line] + std::min<std::size_t>(col, _line_length(doc, line));
+        return doc.text.display().hit_test({int(std::min(col, _line_length(doc, line))), int(line)});
     }
-
     string MultiInput::_range_value(std::size_t pos, std::size_t len) const
     {
-        string out{};
-
-        if (!len)
-            return out;
-
-        out.reserve(len);
-
-        std::size_t cursor = pos;
-        _buffer.buf.iterate(
-            [&](fb::Locale::Value v)
-            {
-                if (out.size() >= len)
-                    return fb::FragmentedBuffer::It::Break;
-
-                const auto sv = v.value();
-                const auto left = len - out.size();
-                const auto take = std::min(left, sv.size());
-
-                out += string(sv.begin(), sv.begin() + take);
-                cursor += take;
-
-                return out.size() >= len ? fb::FragmentedBuffer::It::Break
-                                         : fb::FragmentedBuffer::It::Continue;
-            },
-            pos
-        );
-
-        return out;
-    }
-
-    string MultiInput::_line_segment(
-        const DocModel& doc, std::size_t line, std::size_t col, std::size_t len
-    ) const
-    {
-        if (line >= _line_count(doc) || !len)
-            return "";
-
-        const auto line_len = _line_length(doc, line);
-
-        if (col >= line_len)
-            return "";
-
-        len = std::min(len, line_len - col);
-        return _range_value(doc.starts[line] + col, len);
+        const auto& doc = _doc_model();
+        pos = std::min(pos, doc.length);
+        return std::string(doc.text.source.extract({pos, pos + std::min(len, doc.length - pos)}));
     }
 
     bool MultiInput::_fixed_width() const
@@ -354,7 +268,7 @@ namespace d2::dx
     void MultiInput::_sync_ptr()
     {
         _clamp_ptr();
-        _buffer.ptr.jump(_ptr_abs);
+        _buffer.ptr.jump(_doc_model().text.source.byte_offset(_ptr_abs));
     }
 
     void MultiInput::_ensure_ptr_visible()
@@ -390,25 +304,27 @@ namespace d2::dx
         return _highlight_start != _highlight_end;
     }
 
+    void MultiInput::_replace(std::size_t begin, std::size_t end, std::string_view value,
+                              std::optional<std::size_t> cursor_after)
+    {
+        const auto& doc = _doc_model();
+        begin = std::min(begin, doc.length);
+        end = std::clamp(end, begin, doc.length);
+        const auto byte = doc.text.source.byte_offset(begin);
+        _sync_ptr();
+        _buffer.act.replace(byte, doc.text.source.byte_offset(end) - byte, value, cursor_after);
+        _doc_dirty();
+        _ptr_abs = _doc_model().text.source.grapheme_at(_buffer.ptr.absolute_offset(), text::Affinity::Downstream);
+        _sync_ptr();
+        _preferred_x = _line_col_from_abs(_doc_model(), _ptr_abs).second;
+        _reset_highlight();
+        _ensure_ptr_visible();
+        _signal_write(WriteType::Masked);
+    }
     void MultiInput::_remove_highlighted()
     {
         if (_is_highlighted())
-        {
-            const auto lower = std::min(_highlight_start, _highlight_end);
-            const auto upper = std::max(_highlight_start, _highlight_end);
-            const auto diff = upper - lower;
-
-            _buffer.act.erase(lower, diff);
-            _doc_dirty();
-
-            _ptr_abs = lower;
-            _preferred_x = _line_col_from_abs(_doc_model(), _ptr_abs).second;
-
-            _sync_ptr();
-            _reset_highlight();
-            _ensure_ptr_visible();
-            _signal_write(WriteType::Offset | WriteType::Style);
-        }
+            _replace(std::min(_highlight_start, _highlight_end), std::max(_highlight_start, _highlight_end), "");
     }
 
     void MultiInput::_begin_highlight_if()
@@ -449,13 +365,24 @@ namespace d2::dx
         {
             _btask = context()->scheduler()->launch_cyclic(
                 std::chrono::milliseconds(500),
-                [this](auto)
+                [weak = weak_from_this()](mt::future<void> task)
                 {
-                    _ptr_blink = !_ptr_blink;
-                    _signal_write(WriteType::Style);
+                    if (auto element = weak.lock())
+                    {
+                        auto& self = static_cast<MultiInput&>(*element);
+                        self._ptr_blink = !self._ptr_blink;
+                        self._signal_write(WriteType::Style);
+                    }
+                    else
+                        task.discard();
                 }
             );
         }
+    }
+
+    MultiInput::~MultiInput()
+    {
+        _btask.discard();
     }
 
     void MultiInput::_stop_blink()
@@ -531,7 +458,8 @@ namespace d2::dx
     void MultiInput::_move_right(std::size_t cnt)
     {
         const auto& doc = _doc_model();
-        _move_to(std::min(_ptr_abs + cnt, doc.length));
+        _clamp_ptr();
+        _move_to(_ptr_abs + std::min(cnt, doc.length - _ptr_abs));
     }
 
     void MultiInput::_move_left(std::size_t cnt)
@@ -539,92 +467,50 @@ namespace d2::dx
         _move_to(_ptr_abs >= cnt ? _ptr_abs - cnt : 0);
     }
 
-    void MultiInput::_move_up(std::size_t cnt)
+    void MultiInput::_move_up(std::size_t cnt, bool select)
     {
         const auto& doc = _doc_model();
-        auto [line, col] = _line_col_from_abs(doc, _ptr_abs);
-
-        if (line == 0)
-            return;
-
-        line = (cnt > line) ? 0 : line - cnt;
-        _move_to(_abs_from_line_col(doc, line, _preferred_x));
+        const auto line = _line_col_from_abs(doc, _ptr_abs).first;
+        const auto preferred = _preferred_x;
+        if (select)
+            _begin_highlight_if();
+        _move_to(_abs_from_line_col(doc, line - std::min(cnt, line), preferred), select);
+        if (select)
+            _highlight_end = _ptr_abs;
+        _preferred_x = preferred;
     }
-
-    void MultiInput::_move_down(std::size_t cnt)
+    void MultiInput::_move_down(std::size_t cnt, bool select)
     {
         const auto& doc = _doc_model();
-        auto [line, col] = _line_col_from_abs(doc, _ptr_abs);
-
-        if (!_line_count(doc))
-            return;
-
-        line = std::min<std::size_t>(line + cnt, _line_count(doc) - 1);
-        _move_to(_abs_from_line_col(doc, line, _preferred_x));
+        const auto line = _line_col_from_abs(doc, _ptr_abs).first;
+        const auto preferred = _preferred_x;
+        if (select)
+            _begin_highlight_if();
+        _move_to(_abs_from_line_col(doc, line + std::min(cnt, _line_count(doc) - 1 - line), preferred), select);
+        if (select)
+            _highlight_end = _ptr_abs;
+        _preferred_x = preferred;
     }
-
     void MultiInput::_insert(std::string_view value)
     {
-        if (_is_highlighted())
-            _remove_highlighted();
-
-        _buffer.act.insert(_ptr_abs, value);
-        _doc_dirty();
-
-        _ptr_abs += value.size();
-
-        _sync_ptr();
-        _preferred_x = _line_col_from_abs(_doc_model(), _ptr_abs).second;
-        _ensure_ptr_visible();
-
-        _signal_write(WriteType::Masked);
+        if (value.empty())
+            return;
+        _replace(_is_highlighted() ? std::min(_highlight_start, _highlight_end) : _ptr_abs,
+                 _is_highlighted() ? std::max(_highlight_start, _highlight_end) : _ptr_abs, value);
     }
-
     void MultiInput::_erase_before(std::size_t len)
     {
         if (_is_highlighted())
-        {
             _remove_highlighted();
-            return;
-        }
-
-        if (!len || !_ptr_abs)
-            return;
-
-        len = std::min(len, _ptr_abs);
-        _buffer.act.erase(_ptr_abs - len, len);
-        _doc_dirty();
-
-        _ptr_abs -= len;
-
-        _sync_ptr();
-        _preferred_x = _line_col_from_abs(_doc_model(), _ptr_abs).second;
-        _ensure_ptr_visible();
-
-        _signal_write(WriteType::Masked);
+        else if (len && _ptr_abs)
+            _replace(_ptr_abs - std::min(len, _ptr_abs), _ptr_abs, "");
     }
-
     void MultiInput::_erase_after(std::size_t len)
     {
         if (_is_highlighted())
-        {
             _remove_highlighted();
-            return;
-        }
-
-        const auto& doc = _doc_model();
-        if (!len || _ptr_abs >= doc.length)
-            return;
-
-        len = std::min(len, doc.length - _ptr_abs);
-        _buffer.act.erase(_ptr_abs, len);
-        _doc_dirty();
-
-        _sync_ptr();
-        _preferred_x = _line_col_from_abs(_doc_model(), _ptr_abs).second;
-        _ensure_ptr_visible();
-
-        _signal_write(WriteType::Masked);
+        else if (len && _ptr_abs < _doc_model().length)
+            _replace(_ptr_abs, _ptr_abs + std::min(len, _doc_model().length - _ptr_abs), "");
     }
 
     void MultiInput::_signal_write_impl(write_flag type, unsigned int prop, ptr element)
@@ -682,6 +568,7 @@ namespace d2::dx
                 _stop_blink();
                 _reset_highlight();
             }
+            _signal_write(WriteType::Dimensions);
         }
         else if (state == State::Clicked && value)
         {
@@ -697,9 +584,6 @@ namespace d2::dx
         }
         else if (state == State::Created && value)
         {
-            _buffer.buf.locale<fb::loc::Byte>();
-            _buffer.buf.setup_buffer("");
-            _doc_dirty();
 
             if (_vscrollbar == nullptr)
             {
@@ -754,12 +638,16 @@ namespace d2::dx
 
     void MultiInput::_event_impl(in::InputFrame& frame)
     {
+        _clamp_ptr();
+        const auto keys = frame.map().current;
+        const auto shift = keys.test(std::size_t(in::special::Shift));
+        const auto ctrl = keys.test(std::size_t(in::special::LeftControl));
         write_flag flag = WriteType::Style;
         bool write = false;
 
         if ((frame.had_event(in::Event::MouseMovement) ||
              frame.had_event(in::Event::KeyMouseInput)) &&
-            !(_vscrollbar->getstate(Clicked) || _hscrollbar->getstate(Clicked)))
+            !((_vscrollbar && _vscrollbar->getstate(Clicked)) || (_hscrollbar && _hscrollbar->getstate(Clicked))))
         {
             if (frame.active(in::mouse::Left, in::mode::Hold))
             {
@@ -777,7 +665,7 @@ namespace d2::dx
             }
         }
         if (frame.had_event(in::Event::ScrollWheelMovement) && getstate(RcHover) &&
-            !_vscrollbar->getstate(Hovered) && !_hscrollbar->getstate(Hovered))
+            !(_vscrollbar && _vscrollbar->getstate(Hovered)) && !(_hscrollbar && _hscrollbar->getstate(Hovered)))
         {
             const auto& doc = _doc_model();
             const auto vp = _viewport(doc);
@@ -824,7 +712,7 @@ namespace d2::dx
             if (frame.active(in::special::Enter, in::mode::Hold) &&
                 !(data::input_options & ReadOnly))
             {
-                if (frame.active(in::special::LeftControl, in::mode::Hold))
+                if (ctrl)
                 {
                     if (data::on_submit != nullptr)
                         data::on_submit(
@@ -855,8 +743,6 @@ namespace d2::dx
             if (frame.active(in::special::Home, in::mode::Hold))
             {
                 const auto& doc = _doc_model();
-                const auto ctrl = frame.active(in::special::LeftControl, in::mode::Hold);
-                const auto shift = frame.active(in::special::Shift, in::mode::Hold);
 
                 if (shift)
                     _begin_highlight_if();
@@ -884,8 +770,6 @@ namespace d2::dx
             if (frame.active(in::special::End, in::mode::Hold))
             {
                 const auto& doc = _doc_model();
-                const auto ctrl = frame.active(in::special::LeftControl, in::mode::Hold);
-                const auto shift = frame.active(in::special::Shift, in::mode::Hold);
 
                 if (shift)
                     _begin_highlight_if();
@@ -912,7 +796,7 @@ namespace d2::dx
             }
             if (frame.active(in::special::ArrowLeft, in::mode::Hold))
             {
-                if (frame.active(in::special::Shift, in::mode::Hold))
+                if (shift)
                 {
                     _begin_highlight_if();
                     if (_ptr_abs > 0)
@@ -931,7 +815,7 @@ namespace d2::dx
             if (frame.active(in::special::ArrowRight, in::mode::Hold))
             {
                 const auto& doc = _doc_model();
-                if (frame.active(in::special::Shift, in::mode::Hold))
+                if (shift)
                 {
                     _begin_highlight_if();
                     if (_ptr_abs < doc.length)
@@ -948,115 +832,43 @@ namespace d2::dx
                     _move_right();
             }
             if (frame.active(in::special::ArrowUp, in::mode::Hold))
-            {
-                if (frame.active(in::special::Shift, in::mode::Hold))
-                {
-                    _begin_highlight_if();
-                    const auto before = _ptr_abs;
-                    _move_up();
-                    _highlight_end = _ptr_abs;
-                    write = (before != _ptr_abs);
-                }
-                else
-                    _move_up();
-            }
+                _move_up(1, shift);
             if (frame.active(in::special::ArrowDown, in::mode::Hold))
+                _move_down(1, shift);
+            if (ctrl)
             {
-                if (frame.active(in::special::Shift, in::mode::Hold))
+                if (frame.active(in::key('a'), in::mode::Press))
                 {
-                    _begin_highlight_if();
-                    const auto before = _ptr_abs;
-                    _move_down();
-                    _highlight_end = _ptr_abs;
-                    write = (before != _ptr_abs);
+                    _highlight_start = 0;
+                    _highlight_end = _ptr_abs = _doc_model().length;
+                    _sync_ptr();
+                    _ensure_ptr_visible();
+                    write = true;
                 }
-                else
-                    _move_down();
-            }
-            if (frame.active(in::special::LeftControl, in::mode::Hold))
-            {
-                auto clipboard = context()->sys_if<sys::SystemClipboard>();
-                if (clipboard)
+                else if (frame.active(in::key('z'), in::mode::Press) && !(data::input_options & ReadOnly))
+                    undo();
+                else if (frame.active(in::key('y'), in::mode::Press) && !(data::input_options & ReadOnly))
+                    redo();
+                else if (auto ctx = state() ? context() : nullptr; ctx)
                 {
-                    if (frame.active(in::key('a'), in::mode::Press))
+                    if (auto clipboard = ctx->sys_if<sys::SystemClipboard>(); clipboard)
                     {
-                        const auto& doc = _doc_model();
-                        _highlight_start = 0;
-                        _highlight_end = doc.length;
-                        _ptr_abs = doc.length;
-                        _sync_ptr();
-                        _ensure_ptr_visible();
-                        write = true;
-                    }
-                    else if (frame.active(in::key('c'), in::mode::Press) && _is_highlighted())
-                    {
-                        clipboard->copy(_highlighted_value());
-                    }
-                    else if (
-                        frame.active(in::key('x'), in::mode::Press) && _is_highlighted() &&
-                        !(data::input_options & ReadOnly)
-                    )
-                    {
-                        clipboard->copy(_highlighted_value());
-                        _remove_highlighted();
-                        flag |= WriteType::Offset;
-                        write = true;
-                    }
-                    else if (
-                        frame.active(in::key('v'), in::mode::Press) &&
-                        !(data::input_options & ReadOnly)
-                    )
-                    {
-                        if (!clipboard->empty())
+                        if (frame.active(in::key('c'), in::mode::Press) && _is_highlighted())
+                            clipboard->copy(_highlighted_value());
+                        else if (frame.active(in::key('x'), in::mode::Press) && _is_highlighted() &&
+                                 !(data::input_options & ReadOnly))
                         {
-                            _insert(clipboard->paste());
-                            flag |= WriteType::Offset;
-                            write = true;
+                            clipboard->copy(_highlighted_value());
+                            _remove_highlighted();
                         }
-                    }
-                    else if (
-                        frame.active(in::key('z'), in::mode::Press) &&
-                        !(data::input_options & ReadOnly)
-                    )
-                    {
-                        undo();
-                        flag |= WriteType::Offset;
-                        write = true;
-                    }
-                    else if (
-                        frame.active(in::key('y'), in::mode::Press) &&
-                        !(data::input_options & ReadOnly)
-                    )
-                    {
-                        redo();
-                        flag |= WriteType::Offset;
-                        write = true;
+                        else if (frame.active(in::key('v'), in::mode::Press) && !(data::input_options & ReadOnly))
+                            _insert(clipboard->paste());
                     }
                 }
             }
         }
-
-        if (frame.had_event(in::Event::KeySequenceInput) && !(data::input_options & ReadOnly))
-        {
-            auto seq = std::string(frame.sequence());
-
-            if (!seq.empty())
-            {
-                if (frame.active(in::special::Shift, in::mode::Hold))
-                {
-                    std::transform(
-                        seq.cbegin(),
-                        seq.cend(),
-                        seq.begin(),
-                        [](char ch) -> char { return std::toupper(static_cast<unsigned char>(ch)); }
-                    );
-                }
-
-                _insert(seq);
-                flag |= WriteType::Offset;
-                write = true;
-            }
-        }
+        if (frame.had_event(in::Event::KeySequenceInput) && !(data::input_options & ReadOnly) && !ctrl)
+            _insert(frame.sequence());
 
         if (write)
         {
@@ -1067,90 +879,30 @@ namespace d2::dx
 
     void MultiInput::_frame_impl(PixelBuffer::View buffer)
     {
+        buffer.fill(data::background_color);
+        if (buffer.empty())
+            return;
+        _clamp_ptr();
         const auto color = pixel::combine(data::foreground_color, data::background_color);
         const auto& doc = _doc_model();
-
-        buffer.fill(data::background_color);
-
-        _clamp_ptr();
-
         const auto vp = _viewport(doc);
-        const auto [ptr_line, ptr_col] = _line_col_from_abs(doc, _ptr_abs);
-        const auto hlower = std::min(_highlight_start, _highlight_end);
-        const auto hupper = std::max(_highlight_start, _highlight_end);
-        const auto draw_ptr = _draw_ptr();
-        const auto ptr_overlapped = _ptr_overlapped();
-
-        bool has_visible_text = false;
-
-        for (std::size_t vy = 0; vy < vp.height; vy++)
+        auto content = PixelBuffer::View(buffer, 0, 0, int(vp.width), int(vp.height));
+        const auto& layout = doc.text.display();
+        const auto gap = _draw_ptr() && !_ptr_overlapped();
+        layout.draw(content, color, {-int(_view_x), -int(_view_y)},
+                    text::Range{_highlight_start, _highlight_end}, data::highlight_mask,
+                    gap ? std::optional(_ptr_abs) : std::nullopt);
+        if (!doc.length && !_draw_ptr())
+            text::Layout(data::hint).draw(content,
+                pixel::combine(data::foreground_color.alpha(0.5f).stylize(px::style::Bold), data::background_color));
+        const auto position = layout.caret(_ptr_abs) - Position{int(_view_x), int(_view_y)};
+        if (_draw_ptr() && position.x >= 0 && position.x < int(vp.width) &&
+            position.y >= 0 && position.y < int(vp.height))
         {
-            const auto line_index = _view_y + vy;
-            if (line_index >= _line_count(doc))
-                break;
-
-            const auto line_start = doc.starts[line_index];
-            const auto line_len = _line_length(doc, line_index);
-            const auto line_has_ptr = draw_ptr && (line_index == ptr_line);
-
-            auto seg_col = _view_x;
-            if (line_has_ptr && !ptr_overlapped && seg_col > ptr_col)
-                seg_col--;
-
-            const auto segment = _line_segment(doc, line_index, seg_col, vp.width + 1);
-
-            for (std::size_t vx = 0; vx < vp.width; vx++)
-            {
-                const auto screen_col = _view_x + vx;
-
-                if (line_has_ptr && !ptr_overlapped && screen_col == ptr_col)
-                {
-                    auto& px = buffer.at(vx, vy);
-                    _write_ptr(px);
-                    has_visible_text = true;
-                    continue;
-                }
-
-                auto src_col = screen_col;
-
-                if (line_has_ptr && !ptr_overlapped && screen_col > ptr_col)
-                    src_col--;
-
-                if (src_col >= line_len)
-                    continue;
-
-                const auto seg_index = src_col - seg_col;
-                if (seg_index >= segment.size())
-                    continue;
-
-                has_visible_text = true;
-
-                auto& px = buffer.at(vx, vy);
-                const auto abs = line_start + src_col;
-
-                if (abs >= hlower && abs < hupper)
-                    px.blend(color.mask(data::highlight_mask));
-                else
-                    px.blend(color);
-
-                px.v = (data::input_options & InputOptions::Censor) ? '*' : segment[seg_index];
-            }
-        }
-
-        if (!has_visible_text && !data::hint.empty() && !draw_ptr && vp.width > 0 && vp.height > 0)
-        {
-            const auto hcolor = data::foreground_color.alpha(0.5f);
-            for (std::size_t i = 0; i < std::min<std::size_t>(vp.width, data::hint.size()); i++)
-            {
-                buffer.at(i, 0).blend(hcolor.stylize(px::style::Bold).extend(data::hint[i]));
-            }
-        }
-
-        if (draw_ptr && ptr_overlapped && ptr_line >= _view_y && ptr_line < _view_y + vp.height &&
-            ptr_col >= _view_x && ptr_col < _view_x + vp.width)
-        {
-            auto& px = buffer.at(ptr_col - _view_x, ptr_line - _view_y);
-            _write_ptr(px);
+            if (!gap && _ptr_abs < layout.size())
+                for (int i = 0; i < layout.glyphs()[_ptr_abs].columns && position.x + i < int(vp.width); ++i)
+                    content.at(position.x + i, position.y) = pixel::combine(data::foreground_color.extend(' '), data::background_color);
+            _write_ptr(content.at(position.x, position.y));
         }
 
         if (vp.show_vscroll && _vscrollbar != nullptr)
@@ -1202,16 +954,7 @@ namespace d2::dx
     string MultiInput::value() const
     {
         string out{};
-
-        _buffer.buf.iterate(
-            [&](fb::Locale::Value v)
-            {
-                const auto sv = v.value();
-                out += string(sv.begin(), sv.end());
-                return fb::FragmentedBuffer::It::Continue;
-            }
-        );
-
+        _buffer.buf.iterate_raw([&](std::string_view part) { out += part; return true; });
         return out;
     }
 
@@ -1229,7 +972,7 @@ namespace d2::dx
         _sync_ptr();
         _update_layout_impl();
         _sync_scrollbars();
-        _signal_write(WriteType::Offset | WriteType::Style);
+        _signal_write(WriteType::Masked);
     }
 
     void MultiInput::clear()
@@ -1242,13 +985,14 @@ namespace d2::dx
         _buffer.history.revert();
         _doc_dirty();
 
-        _clamp_ptr();
+        const auto& layout = _doc_model().text.source;
+        _ptr_abs = layout.grapheme_at(std::min(_buffer.ptr.absolute_offset(), layout.source().size()), text::Affinity::Downstream);
         _sync_ptr();
         _preferred_x = _line_col_from_abs(_doc_model(), _ptr_abs).second;
         _ensure_ptr_visible();
         _reset_highlight();
         _sync_scrollbars();
-        _signal_write(WriteType::Offset | WriteType::Style);
+        _signal_write(WriteType::Masked);
     }
 
     void MultiInput::redo()
@@ -1256,13 +1000,14 @@ namespace d2::dx
         _buffer.history.reapply();
         _doc_dirty();
 
-        _clamp_ptr();
+        const auto& layout = _doc_model().text.source;
+        _ptr_abs = layout.grapheme_at(std::min(_buffer.ptr.absolute_offset(), layout.source().size()), text::Affinity::Downstream);
         _sync_ptr();
         _preferred_x = _line_col_from_abs(_doc_model(), _ptr_abs).second;
         _ensure_ptr_visible();
         _reset_highlight();
         _sync_scrollbars();
-        _signal_write(WriteType::Offset | WriteType::Style);
+        _signal_write(WriteType::Masked);
     }
 
     void MultiInput::jump(std::size_t pos)
@@ -1270,7 +1015,7 @@ namespace d2::dx
         _move_to(pos);
     }
 
-    bool MultiInput::is_synced() const noexcept
+    bool MultiInput::is_synced() const
     {
         const auto& doc = _doc_model();
         return _ptr_abs == doc.length;
@@ -1296,7 +1041,8 @@ namespace d2::dx
         const auto old_hstart = _highlight_start;
         const auto old_hend = _highlight_end;
 
-        _buffer.act.insert(old_length, text);
+        _buffer.act.replace(old_doc.text.source.byte_offset(old_length), 0, text,
+                            old_doc.text.source.byte_offset(old_ptr));
         _doc_dirty();
 
         _ptr_abs = std::min(old_ptr, old_length);
@@ -1308,7 +1054,7 @@ namespace d2::dx
 
         _sync_ptr();
         _sync_scrollbars();
-        _signal_write(WriteType::Offset | WriteType::Style);
+        _signal_write(WriteType::Masked);
     }
 
     void MultiInput::insert(std::string_view text)
@@ -1323,18 +1069,16 @@ namespace d2::dx
 
     void MultiInput::erase_at(std::size_t pos, std::size_t len)
     {
-        _buffer.act.erase(pos, len);
-        _doc_dirty();
-
         const auto& doc = _doc_model();
-        _ptr_abs = std::min(_ptr_abs, doc.length);
-
-        _sync_ptr();
-        _preferred_x = _line_col_from_abs(doc, _ptr_abs).second;
-        _ensure_ptr_visible();
-        _sync_scrollbars();
-
-        _signal_write(WriteType::Offset | WriteType::Style);
+        pos = std::min(pos, doc.length);
+        len = std::min(len, doc.length - pos);
+        if (!len)
+            return;
+        const auto old_byte = doc.text.source.byte_offset(_ptr_abs);
+        const auto begin = doc.text.source.byte_offset(pos);
+        const auto end = doc.text.source.byte_offset(pos + len);
+        const auto next = old_byte <= begin ? old_byte : (old_byte < end ? begin : old_byte - (end - begin));
+        _replace(pos, pos + len, "", next);
     }
 
     void MultiInput::disable_history()
@@ -1352,9 +1096,13 @@ namespace d2::dx
         return _ptr_abs;
     }
 
-    d2::TreeIter<VerticalSlider> MultiInput::vertical_scollbar() const noexcept
+    d2::TreeIter<VerticalSlider> MultiInput::vertical_scrollbar() const noexcept
     {
         return _vscrollbar;
+    }
+    d2::TreeIter<VerticalSlider> MultiInput::vertical_scollbar() const noexcept
+    {
+        return vertical_scrollbar();
     }
     d2::TreeIter<Slider> MultiInput::horizontal_scrollbar() const noexcept
     {

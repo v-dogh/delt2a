@@ -505,9 +505,13 @@ namespace d2
     {
         if (storage.flags & SignalFlags::Combine)
         {
-            SignalEnvelope sig;
-            if (storage.combined.try_dequeue(sig))
-                _sig_apply(storage, sig.event, sig.dispatch, sig.instance);
+            std::optional<SignalEnvelope> sig;
+            {
+                std::lock_guard lock(storage.combined_mtx);
+                sig.swap(storage.combined);
+            }
+            if (sig)
+                _sig_apply(storage, sig->event, sig->dispatch, sig->instance);
 
             return;
         }
@@ -520,17 +524,31 @@ namespace d2
     bool Signals::_sig_pending(const SignalStorage& storage) const
     {
         if (storage.flags & SignalFlags::Combine)
-            return !storage.combined.empty();
+        {
+            std::lock_guard lock(storage.combined_mtx);
+            return storage.combined.has_value();
+        }
 
         return !storage.instances.empty();
     }
 
     void Signals::_sig_drain_queued(std::shared_ptr<SignalStorage> storage)
     {
+        std::exception_ptr failure;
         while (true)
         {
             while (_sig_pending(*storage))
-                _sig_apply_all(*storage);
+            {
+                try
+                {
+                    _sig_apply_all(*storage);
+                }
+                catch (...)
+                {
+                    if (!failure)
+                        failure = std::current_exception();
+                }
+            }
 
             storage->is_queued.store(false, std::memory_order::release);
 
@@ -547,6 +565,8 @@ namespace d2
 
             break;
         }
+        if (failure)
+            std::rethrow_exception(failure);
     }
 
     void Signals::_sig_schedule_drain(std::shared_ptr<SignalStorage> storage)
@@ -560,27 +580,35 @@ namespace d2
         }
 
         auto self = shared_from_this();
-
-        if (storage->flags & SignalFlags::Async)
+        auto pending = storage;
+        try
         {
-            _pool->launch_void([self = std::move(self), storage = std::move(storage)]()
-                               { self->_sig_drain_queued(std::move(storage)); });
+            if (storage->flags & SignalFlags::Async)
+            {
+                _pool->launch_void([self = std::move(self), storage = std::move(storage)]()
+                                   { self->_sig_drain_queued(std::move(storage)); });
 
-            return;
+                return;
+            }
+
+            if (storage->flags & SignalFlags::Deferred)
+            {
+                _pool->launch_deferred(
+                    std::chrono::milliseconds(0),
+                    [self = std::move(self), storage = std::move(storage)]()
+                    { self->_sig_drain_queued(std::move(storage)); }
+                );
+
+                return;
+            }
+
+            storage->is_queued.store(false, std::memory_order::release);
         }
-
-        if (storage->flags & SignalFlags::Deferred)
+        catch (...)
         {
-            _pool->launch_deferred(
-                std::chrono::milliseconds(0),
-                [self = std::move(self), storage = std::move(storage)]()
-                { self->_sig_drain_queued(std::move(storage)); }
-            );
-
-            return;
+            pending->is_queued.store(false, std::memory_order::release);
+            throw;
         }
-
-        storage->is_queued.store(false, std::memory_order::release);
     }
 
     void Signals::_sig_trigger(
@@ -620,20 +648,16 @@ namespace d2
 
         if (storage->flags & SignalFlags::Combine)
         {
-            SignalEnvelope tmp;
-            while (!storage->combined.try_enqueue_ref(envelope))
-                storage->combined.try_dequeue(tmp);
+            std::optional<SignalEnvelope> old;
+            {
+                std::lock_guard lock(storage->combined_mtx);
+                old.swap(storage->combined);
+                storage->combined.emplace(std::move(envelope));
+            }
         }
         else
         {
-            while (envelope.instance != nullptr && !storage->instances.try_enqueue_ref(envelope))
-            {
-                if (storage->flags & SignalFlags::DropIfFull)
-                    return;
-
-                SignalEnvelope old;
-                storage->instances.try_dequeue(old);
-            }
+            storage->instances.enqueue(std::move(envelope));
         }
         _sig_schedule_drain(std::move(storage));
     }
@@ -670,20 +694,16 @@ namespace d2
 
         if (storage->flags & SignalFlags::Combine)
         {
-            SignalEnvelope tmp;
-            while (!storage->combined.try_enqueue_ref(envelope))
-                storage->combined.try_dequeue(tmp);
+            std::optional<SignalEnvelope> old;
+            {
+                std::lock_guard lock(storage->combined_mtx);
+                old.swap(storage->combined);
+                storage->combined.emplace(std::move(envelope));
+            }
         }
         else
         {
-            while (envelope.instance != nullptr && !storage->instances.try_enqueue_ref(envelope))
-            {
-                if (storage->flags & SignalFlags::DropIfFull)
-                    return;
-
-                SignalEnvelope old;
-                storage->instances.try_dequeue(old);
-            }
+            storage->instances.enqueue(std::move(envelope));
         }
         _sig_schedule_drain(std::move(storage));
     }

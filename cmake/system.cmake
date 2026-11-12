@@ -398,7 +398,8 @@ function(delta_generate_module_registry)
 
     if(DELTA_REGISTRY_TARGET)
         target_include_directories("${DELTA_REGISTRY_TARGET}" PUBLIC
-            "${DELTA_REGISTRY_INCLUDE_ROOT}"
+            "$<BUILD_INTERFACE:${DELTA_REGISTRY_INCLUDE_ROOT}>"
+            "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/delt2a>"
         )
     endif()
 endfunction()

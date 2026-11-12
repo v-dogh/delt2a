@@ -408,6 +408,8 @@ namespace d2::sys
             return err;
         }
 
+        for (auto& listener : bind.listeners)
+            listener.destroy();
         bind.listeners.clear();
         bind.active = false;
         bind.sequence_idx = 0;
@@ -527,6 +529,8 @@ namespace d2::sys
 
         _active_set.erase(name);
         f->second.active = false;
+        for (auto& listener : f->second.listeners)
+            listener.destroy();
         f->second.listeners.clear();
         f->second.sequence_idx = 0;
         f->second.sequence_ts = {};
@@ -576,12 +580,21 @@ namespace d2::sys
         f->second.bind.enabled = true;
         _bind_dcheck(f);
     }
+    SystemBinder::~SystemBinder()
+    {
+        for (auto& [name, bind] : _binds)
+            for (auto& listener : bind.listeners)
+                listener.destroy();
+    }
+
     void SystemBinder::unbind(const std::string& name)
     {
         auto f = _binds.find(name);
         if (f == _binds.end())
             return;
         _active_set.erase(name);
+        for (auto& listener : f->second.listeners)
+            listener.destroy();
         _binds.erase(f);
         _check_event();
     }

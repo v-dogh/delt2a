@@ -3,29 +3,25 @@
 #include <core/tree/d2_tree_element.hpp>
 #include <core/tree/d2_styles.hpp>
 #include <elements/d2_element_utils.hpp>
+#include <core/mods/d2_image_loader.hpp>
 
 namespace d2
 {
     namespace style
     {
         D2_UAI_INTERFACE(Image,
-            D2_UAI_OPTS(
-                enum ImageOptions : unsigned char
-                {
-
-                };
-            ),
+            D2_UAI_OPTS(),
             D2_UAI_FIELDS(
-                std::string path;
-                unsigned char image_options{ 0x00 };
+                image::Raster::ptr source{};
+                image::Rect source_rect{};
             ),
             D2_UAI_PROPS(
-                Path,
-                ImageOptions
+                Source,
+                SourceRect
             ),
             D2_UAI_LINK(
-                D2_UAI_PROP(Path, path, Style)
-                D2_UAI_PROP(ImageOptions, image_options, Style)
+                D2_UAI_PROP(Source, source, Style)
+                D2_UAI_PROP(SourceRect, source_rect, Style)
             )
         )
     }
@@ -42,7 +38,11 @@ namespace d2
             public impl::ContainerHelper<Image>
         {
         private:
+            std::shared_ptr<const char> _load_ticket;
+            static mt::co_future<bool> _finish_load(std::weak_ptr<Image> target, IOContext::wptr context,
+                std::shared_ptr<const char> ticket, mt::future<image::Raster::ptr> pending);
             virtual void _frame_impl(PixelBuffer::View buffer) override;
+            void _signal_base_impl(write_flag type, style::uai_property prop) override;
         public:
             friend class ContainerHelper<Image>;
             using data = style::UAI<
@@ -53,6 +53,9 @@ namespace d2
                 style::IImage
             >;
             using data::data;
+            mt::co_future<bool> load(std::filesystem::path path, image::LoadOptions options = {},
+                                     const std::string& loader = {});
+            void cancel_load();
         };
     }
 }

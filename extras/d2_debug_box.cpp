@@ -1,4 +1,5 @@
 #include "extras/d2_debug_box.hpp"
+#include "core/platform/d2_colors.hpp"
 
 #include <absl/container/flat_hash_map.h>
 #include <core/utils/d2_exceptions.hpp>
@@ -388,6 +389,7 @@ namespace d2::ex
         dstyle(Width, 82.0_px);
         dstyle(Height, 26.0_px);
         dstyle(ContainerBorder, true);
+        dstyle(ForegroundColor, d2::colors::w::white);
 
         ctx.onv(
             Element::State::Created,
@@ -437,6 +439,7 @@ namespace d2::ex
                         dstyle(ZIndex, 1);
                         dstyle(Value, " ");
                         dstyle(X, 5.0_pxi);
+                        dstyle(ForegroundColor, d2::colors::w::white);
 
                         // D2_INTERP_TWOWAY_AUTO(
                         //     Hovered,
@@ -466,6 +469,7 @@ namespace d2::ex
                         dstyle(ZIndex, 1);
                         dstyle(Value, "<X>");
                         dstyle(X, 1.0_pxi);
+                        dstyle(ForegroundColor, d2::colors::w::white);
 
                         ctx.onv(
                             Element::State::Clicked,
@@ -836,6 +840,7 @@ namespace d2::ex
                                 dstyle(ZIndex, Box::overlap);
                                 dstyle(Value, "<info>");
                                 dstyle(X, 0.0_center);
+                                dstyle(ForegroundColor, d2::colors::w::white);
                             }
                         );
                         ctx.elem(
@@ -845,6 +850,7 @@ namespace d2::ex
 
                                 dstyle(Value, "Value:");
                                 dstyle(X, 1.0_relative);
+                                dstyle(ForegroundColor, d2::colors::w::white);
                             }
                         );
                         ctx.elem(
@@ -855,6 +861,7 @@ namespace d2::ex
                                 dstyle(Value, "Min/Max:");
                                 dstyle(X, 1.0_relative);
                                 dstyle(Y, 0.0_relative);
+                                dstyle(ForegroundColor, d2::colors::w::white);
                             }
                         );
                         ctx.elem(
@@ -953,6 +960,7 @@ namespace d2::ex
                                             dstyle(ZIndex, Box::overlap);
                                             dstyle(Value, std::format("<{}>", info.name));
                                             dstyle(X, 0.0_center);
+                                            dstyle(ForegroundColor, d2::colors::w::white);
                                         }
                                     );
                                     ctx.elem(
@@ -971,6 +979,7 @@ namespace d2::ex
                                                 )
                                             );
                                             dstyle(Y, 0.0_relative);
+                                            dstyle(ForegroundColor, d2::colors::w::white);
                                         }
                                     );
                                     ctx.elem(
@@ -979,6 +988,7 @@ namespace d2::ex
                                         {
                                             dstyle(Value, std::format("Load: {}", load_type));
                                             dstyle(Y, 0.0_relative);
+                                            dstyle(ForegroundColor, d2::colors::w::white);
                                         }
                                     );
                                     ctx.elem(
@@ -995,6 +1005,7 @@ namespace d2::ex
                                                 )
                                             );
                                             dstyle(Y, 0.0_relative);
+                                            dstyle(ForegroundColor, d2::colors::w::white);
                                         }
                                     );
                                     ctx.elem(
@@ -1002,6 +1013,7 @@ namespace d2::ex
                                         {
                                             dstyle(Value, "Dependencies:");
                                             dstyle(Y, 0.0_relative);
+                                            dstyle(ForegroundColor, d2::colors::w::white);
                                         }
                                     );
 
@@ -1014,6 +1026,7 @@ namespace d2::ex
                                                 dstyle(Value, dep);
                                                 dstyle(X, 2.0_px);
                                                 dstyle(Y, 0.0_relative);
+                                                dstyle(ForegroundColor, d2::colors::w::white);
                                             }
                                         );
                                     }
@@ -1099,6 +1112,7 @@ namespace d2::ex
                         dstyle(Y, 1.0_px);
                         dstyle(EnableScrollVert, true);
                         dstyle(EnableScrollHoriz, true);
+                        dstyle(ForegroundColor, d2::colors::w::white);
 
                         class Sink : public rs::RuntimeLogSink
                         {

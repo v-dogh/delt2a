@@ -1,46 +1,25 @@
 #include "elements/d2_text.hpp"
+#include "core/platform/d2_colors.hpp"
 
 namespace d2::dx
 {
+    text::Options Text::_options(int width) const
+    {
+        return {.width = std::max(0, width),
+                .wrap = (data::text_options & PreserveWordBoundaries) ? text::Wrap::Word : text::Wrap::None,
+                .alignment = static_cast<text::Alignment>(data::alignment),
+                .newlines = bool(data::text_options & HandleNewlines)};
+    }
     void Text::_signal_write_impl(write_flag type, unsigned int prop, ptr element)
     {
-        if (element.get() == this &&
-            (data::width.getunits() == Unit::Auto || data::height.getunits() == Unit::Auto) &&
-            (prop == Value || prop == TextOptions || prop == TextAlignment ||
-             prop == TextPreserveWordBoundaries || prop == TextHandleNewlines ||
-             prop == initial_property))
-        {
-            if (data::text_options & HandleNewlines)
-            {
-                if (data::text_options & PreserveWordBoundaries)
-                {
-                    _text_dimensions = TextHelper::_paragraph_bounding_box(
-                        data::text,
-                        (data::width.getunits() == Unit::Auto ? INT_MAX
-                                                              : resolve_units(data::width)),
-                        (data::height.getunits() == Unit::Auto ? INT_MAX
-                                                               : resolve_units(data::height))
-                    );
-                }
-                else
-                {
-                    _text_dimensions = TextHelper::_text_bounding_box(data::text);
-                }
-            }
-            else
-            {
-                _text_dimensions = {
-                    static_cast<int>(
-                        (data::width.getunits() == Unit::Auto) ? data::text.size()
-                                                               : resolve_units(data::width)
-                    ),
-                    static_cast<int>(
-                        (data::height.getunits() == Unit::Auto) ? 1 : resolve_units(data::height)
-                    )
-                };
-            }
+        if (element.get() != this)
+            return;
+        if (prop == Value || prop == TextOptions || prop == TextAlignment ||
+            prop == TextPreserveWordBoundaries || prop == TextHandleNewlines ||
+            prop == initial_property)
             _signal_write(WriteType::Dimensions);
-        }
+        else if ((type & DimensionsWidthUpdated) && data::height.getunits() == Unit::Auto)
+            _signal_write(WriteType::LayoutHeight);
     }
     Unit Text::_layout_impl(Element::Layout type) const
     {
@@ -51,57 +30,48 @@ namespace d2::dx
         case Element::Layout::Y:
             return data::y;
         case Element::Layout::Width:
-            if (data::width.getunits() == Unit::Auto)
-                return Unit(_text_dimensions.width + data::width.raw());
-            return data::width;
+            if (data::width.getunits() != Unit::Auto)
+                return data::width;
+            _measurement.reset(data::text, _options(INT_MAX));
+            return Unit(_measurement.bounds().width + data::width.raw());
         case Element::Layout::Height:
-            if (data::height.getunits() == Unit::Auto)
-                return Unit(_text_dimensions.height + data::height.raw());
-            return data::height;
+            if (data::height.getunits() != Unit::Auto)
+                return data::height;
+            _measurement.reset(data::text, _options(layout(Element::Layout::Width)));
+            return Unit(_measurement.bounds().height + data::height.raw());
         }
+        return {};
+    }
+    const text::Layout* Text::text_layout() const
+    {
+        const auto previous = _text_layout.revision();
+        _text_layout.reset(data::text, _options(box().width));
+        if (previous != _text_layout.revision())
+            const_cast<Text*>(this)->_text_selection.reset();
+        return &_text_layout;
+    }
+    void Text::select_text(std::optional<text::Range> range)
+    {
+        if (range)
+        {
+            const auto count = text_layout()->size();
+            range->begin = std::min(range->begin, count);
+            range->end = std::min(range->end, count);
+        }
+        if (_text_selection == range)
+            return;
+        _text_selection = range;
+        _signal_write(WriteType::Style);
     }
     void Text::_frame_impl(PixelBuffer::View buffer)
     {
         buffer.fill(data::background_color);
-        if (data::text_options & HandleNewlines)
-        {
-            if (data::text_options & PreserveWordBoundaries)
-            {
-                TextHelper::_render_paragraph(
-                    data::text,
-                    pixel::combine(data::foreground_color, data::background_color),
-                    data::alignment,
-                    {},
-                    box(),
-                    buffer
-                );
-            }
-            else
-            {
-                TextHelper::_render_text(
-                    data::text,
-                    pixel::combine(data::foreground_color, data::background_color),
-                    data::alignment,
-                    {},
-                    box(),
-                    buffer
-                );
-            }
-        }
-        else
-        {
-            TextHelper::_render_text_simple(
-                data::text,
-                pixel::combine(data::foreground_color, data::background_color),
-                {},
-                box(),
-                buffer
-            );
-        }
+        text_layout()->draw(buffer, pixel::combine(data::foreground_color, data::background_color),
+                            {}, selectable() ? _text_selection : std::nullopt, data::highlight_mask);
     }
-
     Text::Text(const std::string& name, TreeState::ptr state) : data(name, state)
     {
         data::background_color.a = 0;
+        data::foreground_color = d2::colors::w::white;
     }
 } // namespace d2::dx

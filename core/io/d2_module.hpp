@@ -86,7 +86,7 @@ namespace d2::sys
         std::atomic<Status> _status{Status::Offline};
     protected:
         void _mark_safe(std::thread::id id = std::this_thread::get_id());
-        void _ensure_loaded(std::function<Status()> callback);
+        void _transition(bool loading, std::function<Status()> callback);
         void _stat(Status status);
 
         virtual Status _pre_load_impl();

@@ -3,6 +3,7 @@
 #if D2_LOCALE_MODE == UNICODE
 #include <uni_algo/ranges_grapheme.h>
 #include <uni_algo/ranges.h>
+#include <uni_algo/ranges_conv.h>
 #include <uni_algo/prop.h>
 #endif
 #include <core/platform/d2_locale.hpp>
@@ -20,13 +21,13 @@ namespace d2
 
         StringIterator(StringIterator&) = default;
         StringIterator(const StringIterator&) = default;
-        StringIterator(string_view str) : _str(str) {}
+        StringIterator(string_view str) : _str(str), _it(_str.begin()) {}
         StringIterator(string_view str, string_view::iterator it) : _str(str), _it(it) {}
 
         StringIterator begin() const;
         StringIterator end() const;
 
-        void increment();
+        bool increment();
         string_view current() const;
 
         bool is_end() const;
