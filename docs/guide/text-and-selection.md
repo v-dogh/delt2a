@@ -1,5 +1,7 @@
 # Text layout and selection
 
+[Documentation index](../index.md)
+
 `d2::text::Layout` is the shared model for text measurement, painting, hit testing and selection. `dx::Text`, `Input`, `MultiInput` and the common text-rendering helpers use it. The model owns its source; returned source/extraction views remain valid until the next modifying `reset` or destruction.
 
 ## Coordinates
@@ -44,14 +46,14 @@ Inputs: [EastAsianWidth.txt](https://www.unicode.org/Public/16.0.0/ucd/EastAsian
 
 ## Generic selection
 
-Load `sys::selector` with the screen module. Load `sys::clipboard` when copying to a system clipboard is wanted; selection itself works without it.
+Load `sys::selector` with the screen module. Load `sys::clipboard` when copying through a clipboard service is wanted (the bundled backend is process-local); selection itself works without it.
 
 ```cpp
 d2::IOContext::make<d2::sys::input, d2::sys::output, d2::sys::screen,
                    d2::sys::selector, d2::sys::clipboard>();
 ```
 
-`dx::Text` now includes `style::ISelectable`: `EnableSelection` controls participation and `HighlightMask` controls the highlight background. Left-drag selects across participating elements. Ctrl+C copies an existing selection when an editable input is not focused; Escape clears it. The module emits `SystemSelector::Event::Selected` on release with an owned string and the screen positions of the drag endpoints. It does not copy automatically on release or replace widget click/focus handling. Disable selection on labels inside controls where dragging should only operate the control.
+`dx::Text` includes `style::ISelectable`: `EnableSelection` controls participation and `HighlightMask` controls the highlight background. Left-drag selects across participating elements. Ctrl+C copies an existing selection when an editable input is not focused; Escape clears it. The module emits `SystemSelector::Event::Selected` on release with an owned string and the screen positions of the drag endpoints. It does not copy automatically on release or replace widget click/focus handling. Disable selection on labels inside controls where dragging should only operate the control.
 
 The independent `TextSelection` controller can be used without a module: `begin(root, position)`, `extend(position)`, `finish()`, `value()`, `clear()` and `select_all(root)`. Call `refresh()` after document changes; the module does this on screen updates. All these operations run on the UI thread.
 
@@ -81,9 +83,9 @@ Single-line input displays hard newlines as spaces and preserves their source by
 
 MultiInput replacement of a selection is one undo operation. Undo/redo restore the edit's byte cursor, then snap to a valid grapheme boundary. This matters when inserting combining marks or a ZWJ merges adjacent clusters. An insertion lands after the resulting cluster. `value()` replacement clears history and selection; `append()` preserves the current cursor and viewport; `erase_at()` adjusts the cursor around the removed range. Disabling history clears past/redo entries so unrecorded edits cannot leave stale actions addressing unrelated text. History records individual edit operations; it does not coalesce successive keystrokes.
 
-`FragmentedBuffer::act.replace(pos, len, text, cursor_after)` is the byte-level atomic history operation used by the widget. The optional final byte position overrides the default cursor after inserted text. Default construction now creates an empty, usable byte buffer. Existing positional insert/erase overloads retain their cursor-preserving behavior. The correctly spelled `vertical_scrollbar()` accessor is available; `vertical_scollbar()` remains an alias.
+`FragmentedBuffer::act.replace(pos, len, text, cursor_after)` is the byte-level atomic history operation used by the widget. The optional final byte position overrides the default cursor after inserted text. Default construction creates an empty, usable byte buffer. Existing positional insert/erase overloads retain their cursor-preserving behavior. The correctly spelled `vertical_scrollbar()` accessor is available; `vertical_scollbar()` remains an alias.
 
-The layout cache rebuilds the document after edits. This is a correctness migration, not an incremental large-file editor. No bidi/shaping, IME preedit, soft-wrapped editing or cross-widget editable selection is provided.
+The layout cache rebuilds the document after edits. It is not an incremental large-file editor. No bidi/shaping, IME preedit, soft-wrapped editing or cross-widget editable selection is provided.
 
 Build with `D2_TEST=ON` and run `d2_selection` or `d2_editing` in a terminal. Ctrl+Q exits. Headless tests cover layout, extraction, selection lifecycle, editor events, editing/history and terminal bytes.
 

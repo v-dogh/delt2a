@@ -201,7 +201,7 @@ int main()
     CHECK(conversation->snapshot().records.back().error == ErrorCode::Protocol);
     StepOptions expired; expired.deadline = std::chrono::steady_clock::now();
     const auto before_expiry = first->requests.size();
-    expect(ErrorCode::Cancelled,[&] { conversation->step(expired).result.value(); });
+    expect(ErrorCode::Timeout,[&] { conversation->step(expired).result.value(); });
     CHECK(first->requests.size() == before_expiry);
     first->answer = reply("done");
 

@@ -1,8 +1,8 @@
 # Inference and conversations
 
-Checkpoint 5 supplies provider-neutral types, an abstract provider module and a concrete conversation module. There is no network provider yet. The scripted provider in `tests/inference.cpp` exercises the contract without credentials or HTTP requests.
+[Documentation index](../index.md)
 
-Checkpoint 6 moves these files into `core/mods/inference/` and prepares the existing [HTTP transport](http.md) for a native provider. The optional build target and namespaces stay the same.
+The provider-neutral layer supplies types, an abstract provider module and a concrete conversation module. The [OpenAI-compatible provider](openai.md) uses the existing HTTP module.
 
 Include `<core/mods/inference/d2_std.hpp>` and link `DeltaAscii::Inference` (also included by the aggregate `DeltaAscii::Core`). The public namespace is `d2::ai`; runtime modules are in `d2::sys`. Inference can be disabled with `D2_EXCLUDE_LIBRARY_INFERENCE=ON`. It does not require elements, a screen or a terminal backend.
 
@@ -16,7 +16,7 @@ Include `<core/mods/inference/d2_std.hpp>` and link `DeltaAscii::Inference` (als
 | `ai::ToolSet` | Immutable tool definitions, optional argument validators and execution callbacks |
 | `ai::ContextPolicy` | Application token estimation and asynchronous context replacement |
 
-A provider binding identifies one configured provider instance, for example `local` or `hosted`. It is separate from the model name and from the backend implementation type. Bindings cannot be overwritten: use another name for another endpoint/account. Endpoint URLs, credentials, HTTP headers and transport configuration belong to the eventual provider implementation, not to conversation messages.
+A provider binding identifies one configured provider instance, for example `local` or `hosted`. It is separate from the model name and from the backend implementation type. Bindings cannot be overwritten: use another name for another endpoint/account. Endpoint URLs, credentials, HTTP headers and transport configuration belong to the provider implementation, not to conversation messages.
 
 Load the conversation module through `IOContext`, which supplies shared ownership. When constructing it manually with `SystemModule::make`, promote the returned `unique_ptr` to `shared_ptr` before creating sessions. A standalone `Conversation` likewise requires shared ownership before `step()`.
 
@@ -24,7 +24,7 @@ Load the conversation module through `IOContext`, which supplies shared ownershi
 
 ## Creating and switching a conversation
 
-After implementing and constructing a provider as described below:
+After loading a provider (see [OpenAI setup](openai.md)):
 
 ```cpp
 ctx->load<d2::sys::SystemConversations>();
@@ -140,4 +140,4 @@ An implementation must:
 - Serialize events for each request, propagate handler failures, and stop emitting before settling the result.
 - Honor cancellation/deadlines, provide final usage when available and retain required provider continuation data in scoped content.
 
-The next step is to select the OpenAI-compatible transport/serialization implementation behind this contract. No Anthropic adapter, MCP client or external inference SDK is a dependency of this checkpoint. JSON data uses nlohmann/json; asynchronous results and module lifetime use the existing DeltaAscii facilities.
+The native OpenAI-compatible implementation uses SystemHTTP and lives under `os/inference/openai/` with a dedicated CMake target. No Anthropic adapter, MCP client or external inference SDK is required. JSON data uses nlohmann/json; asynchronous results and module lifetime use the existing DeltaAscii facilities. Expired deadlines report `ErrorCode::Timeout`, separately from explicit cancellation.

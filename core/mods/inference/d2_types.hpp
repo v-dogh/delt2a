@@ -154,7 +154,7 @@ namespace d2::ai
     enum class ErrorCode
     {
         InvalidRequest, Unsupported, IncompatibleState, Busy, Closed, Cancelled,
-        ContextLimit, Protocol, Transport, Authentication, RateLimit, Provider
+        ContextLimit, Protocol, Transport, Authentication, RateLimit, Provider, Timeout
     };
     class Error : public std::runtime_error
     {
@@ -162,6 +162,8 @@ namespace d2::ai
         ErrorCode code;
         std::optional<int> http_status;
         std::optional<std::chrono::milliseconds> retry_after;
+        std::string request_id;
+        Json native = Json::object();
         Error(ErrorCode code, std::string message) : std::runtime_error(std::move(message)), code(code) {}
     };
     struct Generation

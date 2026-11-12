@@ -2,6 +2,7 @@
 // Copyright 2024 Unicode, Inc. Unicode and the Unicode Logo are registered trademarks of Unicode, Inc.
 // See UNICODE-LICENSE.txt. Regenerate with tools/generate_text_width.py.
 #pragma once
+
 #include <array>
 #include <utility>
 

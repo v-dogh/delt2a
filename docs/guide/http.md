@@ -1,5 +1,7 @@
 # HTTP requests and streaming
 
+[Documentation index](../index.md)
+
 `sys::net::SystemHTTP` is the transport interface in `core/mods/d2_http.hpp`. The curl backend uses its existing multi-handle worker for concurrent requests. Inference does not introduce another HTTP runtime.
 
 Load the backend through `IOContext` and obtain `ctx->sys<sys::net::SystemHTTP>()`. Request-capable module instances need shared ownership and a live context. Named session rules, when loaded, still add headers before the request's own setup callback.
@@ -64,7 +66,7 @@ Timeout/cancellation cannot preempt a blocking application callback, and resolve
 
 ## Errors and shutdown
 
-`on_error` now accepts `const HTTP::Error&`, replacing the string callback. Codes distinguish invalid request configuration, an unavailable module, cancellation, timeout, transport errors, callback failures and size limits. `native_code` carries a curl error when available. `cause` preserves an original C++ exception where applicable; callback failures can be inspected with `std::rethrow_exception`.
+`on_error` accepts `const HTTP::Error&`. Codes distinguish invalid request configuration, an unavailable module, cancellation, timeout, transport errors, callback failures and size limits. `native_code` carries a curl error when available. `cause` preserves an original C++ exception where applicable; callback failures can be inspected with `std::rethrow_exception`.
 
 Setup/header/chunk exceptions terminate the request and call `on_error` once. They never unwind through a C callback. A successful transfer invokes `on_response` once; if that completion callback itself throws, the exception is forwarded to `on_error` once, without replaying completion. Effects already performed by that callback cannot be rolled back. Exceptions from the final error handler are contained and do not recursively call it again.
 

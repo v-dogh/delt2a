@@ -3,6 +3,7 @@
 #include <core/tree/d2_tree_element.hpp>
 #include <core/tree/d2_styles.hpp>
 #include <elements/d2_element_utils.hpp>
+#include <core/mods/d2_image_loader.hpp>
 
 namespace d2
 {
@@ -37,7 +38,11 @@ namespace d2
             public impl::ContainerHelper<Image>
         {
         private:
+            std::shared_ptr<const char> _load_ticket;
+            static mt::co_future<bool> _finish_load(std::weak_ptr<Image> target, IOContext::wptr context,
+                std::shared_ptr<const char> ticket, mt::future<image::Raster::ptr> pending);
             virtual void _frame_impl(PixelBuffer::View buffer) override;
+            void _signal_base_impl(write_flag type, style::uai_property prop) override;
         public:
             friend class ContainerHelper<Image>;
             using data = style::UAI<
@@ -48,6 +53,9 @@ namespace d2
                 style::IImage
             >;
             using data::data;
+            mt::co_future<bool> load(std::filesystem::path path, image::LoadOptions options = {},
+                                     const std::string& loader = {});
+            void cancel_load();
         };
     }
 }

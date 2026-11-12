@@ -1,4 +1,5 @@
 #include "elements/d2_text.hpp"
+#include "core/platform/d2_colors.hpp"
 
 namespace d2::dx
 {
@@ -71,5 +72,6 @@ namespace d2::dx
     Text::Text(const std::string& name, TreeState::ptr state) : data(name, state)
     {
         data::background_color.a = 0;
+        data::foreground_color = d2::colors::w::white;
     }
 } // namespace d2::dx

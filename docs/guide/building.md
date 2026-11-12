@@ -1,10 +1,14 @@
 # Building and testing
 
-Requirements: a C++20 compiler with `<format>` support, CMake 3.21+, Abseil, ada and uni-algo (when Unicode is enabled). libpng (optional PNG decoding), libcurl and PipeWire are detected independently; their backends are omitted when unavailable. The default terminal backend targets Linux/POSIX, but platform-specific terminal behavior still needs testing on each supported OS.
+[Documentation index](../index.md)
 
-moodycamel ConcurrentQueue v1.0.4 is fetched at commit `6dd38b8a1dbaa7863aa907045f32308a56a6ff5d`. To use an existing checkout or build offline, set `TPMP_CONCURRENTQUEUE_SOURCE_DIR` to the directory containing its three public headers. The installed package includes those headers and their upstream license. No new public widget dependency is introduced.
+Requirements: a C++20 compiler with `<format>` support, CMake 3.21+, Abseil, ada and uni-algo (when Unicode is enabled). libpng (optional PNG loader), libcurl and PipeWire are detected independently; their backends are omitted when unavailable. The default terminal backend targets Linux/POSIX, but platform-specific terminal behavior still needs testing on each supported OS.
+
+moodycamel ConcurrentQueue v1.0.4 is fetched at commit `6dd38b8a1dbaa7863aa907045f32308a56a6ff5d`. To use an existing checkout or build offline, set `TPMP_CONCURRENTQUEUE_SOURCE_DIR` to the directory containing its three public headers. The installed package includes those headers and their upstream license.
 
 The optional inference component uses nlohmann/json (installed CMake package 3.11+ or a fetched v3.12.0). For an offline source checkout, set `FETCHCONTENT_SOURCE_DIR_NLOHMANN_JSON`. The fallback installs JSON's headers and package config alongside DeltaAscii when installation is enabled. Set `D2_EXCLUDE_LIBRARY_INFERENCE=ON` to omit inference and its JSON dependency. Its headers are included explicitly through `<core/mods/inference/d2_std.hpp>`; the common widget umbrella does not include JSON headers.
+
+The concrete OpenAI-compatible backend is discovered under `os/inference/openai/` and exports `DeltaAscii::OpenAI`. It depends on the inference abstractions and the runtime SystemHTTP interface; no additional HTTP/JSON dependency is introduced. `D2_MODULE_EXCLUDE_DIRS=inference` omits this backend, while `D2_EXCLUDE_LIBRARY_INFERENCE=ON` omits both abstraction and backend. `D2_TEST=ON` also builds the headless `d2_inference` example, including when elements are disabled. See [OpenAI provider](openai.md).
 
 Build from the unpacked source:
 
@@ -16,7 +20,7 @@ ctest --test-dir build --output-on-failure
 
 Use `-DCMAKE_PREFIX_PATH=/path/to/dependencies` if the packages are not in a standard prefix. Build dependencies with compatible compiler, standard-library, debug and sanitizer settings. In particular, mixing an Abseil debug header configuration with release-only libraries can produce link failures.
 
-`D2_TEST` builds the example translation units and runnable `d2_hello`, `d2_selection`, `d2_editing` and `d2_images` executables (images requires its backend). Run them in a terminal; Ctrl+Q exits the selection example. Automated tests use headless consumers, including captured terminal output.
+`D2_TEST` builds the example translation units and runnable `d2_hello`, `d2_manual`, `d2_selection`, `d2_editing` and `d2_images` executables (images requires its backend). Run them in a terminal; Ctrl+Q exits the selection example. Automated tests use headless consumers, including captured terminal output, decoder limits and asynchronous image loading.
 
 ## Consuming
 
@@ -68,7 +72,9 @@ cmake -S . -B build-docs -DD2_BUILD_DOCS=ON
 cmake --build build-docs --target d2_docs
 ```
 
-Doxygen must be installed. Open `build-docs/html/index.html`. Generated listings are a reference, not a replacement for the contracts in `core-contracts.md`.
+Doxygen and Python 3.9+ must be installed. The Markdown filter keeps repository-relative header links and section anchors usable in the generated site. Doxygen may warn about older anonymous facade types/template relationships; those declarations remain available through source listings. Open `build-docs/docs/html/index.html`. XML is in `build-docs/docs/xml/`. The [documentation index](../index.md) is the HTML home page; the [API map](../reference/api.md) provides a route into source declarations. Generated listings supplement the guides and contracts.
+
+Run `python3 tools/check_docs.py` to check local Markdown links and the generated style-property reference. Run `python3 tools/style_reference.py` after changing UAI declarations.
 
 ## Editing example
 

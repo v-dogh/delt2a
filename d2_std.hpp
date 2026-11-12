@@ -11,3 +11,4 @@
 #include <core/mods/d2_ext.hpp>
 
 #include <core/mods/d2_images.hpp>
+#include <core/mods/d2_image_loader.hpp>

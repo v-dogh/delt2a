@@ -3,10 +3,22 @@
 #include <elements/d2_image.hpp>
 #include <elements/d2_text.hpp>
 #include <iostream>
+#include <os/image/kitty/d2_kitty_images.hpp>
+#include <os/image/sixel/d2_sixel_images.hpp>
+#ifdef D2_EXAMPLE_PNG
+#include <os/image/png/d2_png_loader.hpp>
+#endif
 
 using namespace d2;
 sys::SystemImages::Config image_config;
 image::Raster::ptr gradient, checker;
+std::string image_path;
+mt::co_future<void> load_image(std::shared_ptr<dx::Image> image)
+{
+    try { co_await image->load(image_path); }
+    catch (const std::exception& error)
+    { if (auto logs = rs::context::get()) logs->log(rs::Severity::Error, "images", error.what()); }
+}
 
 struct ImageState : TreeState
 {
@@ -39,6 +51,7 @@ using demo = Tree<ImageState, dx::Box,
             dstyle(Width, Unit(22)); dstyle(Height, Unit(9));
             dstyle(ZIndex, 1);
         });
+        if (!image_path.empty()) load_image(front);
         ctx.elem([](TreeCtx<Text> ctx)
         {
             dstyle(Value, " Text clips images at cell boundaries ");
@@ -77,12 +90,14 @@ int main(int argc, char** argv)
     const auto mode = argc > 1 ? std::string(argv[1]) : "plain";
     if (mode != "plain" && mode != "kitty" && mode != "sixel")
     {
-        std::cerr << "Usage: d2_images [plain|kitty|sixel] [cell-width cell-height]\n";
+        std::cerr << "Usage: d2_images [plain|kitty|sixel] [cell-width cell-height [image.png]]\n";
         return 1;
     }
-    image_config.protocol = mode == "kitty" ? sys::SystemImages::Protocol::Kitty :
-                            mode == "sixel" ? sys::SystemImages::Protocol::Sixel : sys::SystemImages::Protocol::Off;
     if (argc > 3) image_config.cell_pixels = {std::stoi(argv[2]), std::stoi(argv[3])};
+    if (argc > 4) image_path = argv[4];
+#ifndef D2_EXAMPLE_PNG
+    if (!image_path.empty()) { std::cerr << "This build has no PNG loader\n"; return 1; }
+#endif
     std::vector<image::RGBA> first(64 * 64), second(64 * 64);
     for (int y = 0; y < 64; ++y)
         for (int x = 0; x < 64; ++x)
@@ -92,8 +107,15 @@ int main(int argc, char** argv)
         }
     gradient = image::Raster::rgba(64,64,std::move(first));
     checker = image::Raster::rgba(64,64,std::move(second));
+#ifdef D2_EXAMPLE_PNG
+    using Loader = sys::SystemPngLoader;
+#else
+    using Loader = void;
+#endif
     if (mode == "plain")
-        IOContext::make<sys::input, sys::output, sys::screen>()->run<NamedTree<"Images",demo>>();
+        IOContext::make<sys::input, sys::output, sys::screen, Loader>()->run<NamedTree<"Images",demo>>();
+    else if (mode == "kitty")
+        IOContext::make<sys::input, sys::output, sys::screen, Loader, sys::SystemImagesKitty>()->run<NamedTree<"Images",demo>>();
     else
-        IOContext::make<sys::input, sys::output, sys::screen, sys::images>()->run<NamedTree<"Images",demo>>();
+        IOContext::make<sys::input, sys::output, sys::screen, Loader, sys::SystemImagesSixel>()->run<NamedTree<"Images",demo>>();
 }

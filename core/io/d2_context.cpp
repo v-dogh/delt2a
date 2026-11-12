@@ -465,6 +465,7 @@ namespace d2
         _scheduler->start(
             [&](std::size_t, mt::Node::Config& cfg)
             {
+                cfg.min_workers = 2;
                 cfg.growth_callback =
                     [main = _worker](std::size_t count, const mt::Node::Snapshot& snapshot)
                 {
@@ -504,7 +505,7 @@ namespace d2
         _scheduler->reconfigure(
             [this](mt::Node::Config& cfg)
             {
-                cfg.min_workers = 0;
+                cfg.min_workers = 2;
                 cfg.on_worker_start.push_back(
                     [this, ptr = weak_from_this()](mt::Worker& worker, mt::Node::Snapshot snapshot)
                     {

@@ -6,15 +6,31 @@
 #include <core/mods/inference/d2_std.hpp>
 #endif
 #ifdef D2_PACKAGE_IMAGES
-#include <os/image/terminal/d2_terminal_images.hpp>
+#include <os/image/kitty/d2_kitty_images.hpp>
+#endif
+#ifdef D2_PACKAGE_OPENAI
+#include <os/inference/openai/d2_openai.hpp>
 #endif
 #ifdef D2_PACKAGE_EDITORS
 #include <elements/d2_input.hpp>
 #include <elements/d2_multiline_input.hpp>
 #endif
 
+#ifdef D2_PACKAGE_PNG
+#include <os/image/png/d2_png_loader.hpp>
+#endif
+
 int main()
 {
+#ifdef D2_PACKAGE_OPENAI
+    auto provider = d2::sys::SystemModule::make<d2::sys::SystemOpenAI>(std::shared_ptr<d2::IOContext>{});
+    provider->configure({});
+    if (provider->model_info("unknown").context_window) return 1;
+#endif
+#ifdef D2_PACKAGE_PNG
+    auto loader = d2::sys::SystemModule::make<d2::sys::SystemPngLoader>(std::shared_ptr<d2::IOContext>{});
+    try { loader->decode({}); return 1; } catch (const std::invalid_argument&) {}
+#endif
     d2::PixelBuffer buffer(1, 1);
     buffer.at(0, 0).v = 'X';
     d2::text::Layout text("package\ncheck");
@@ -33,8 +49,8 @@ int main()
     if (chat->snapshot().context.size() != 1) return 1;
 #endif
 #ifdef D2_PACKAGE_IMAGES
-    auto images = d2::sys::SystemModule::make<d2::sys::TerminalImages>(std::shared_ptr<d2::IOContext>{});
-    images->configure({d2::sys::SystemImages::Protocol::Kitty,{1,1}});
+    auto images = d2::sys::SystemModule::make<d2::sys::SystemImagesKitty>(std::shared_ptr<d2::IOContext>{});
+    images->configure({true,{1,1}});
 #endif
     auto raster = d2::image::Raster::rgba(1,1,{{40,80,120,255}});
     d2::PixelBuffer::View view(&buffer,0,0,1,1);

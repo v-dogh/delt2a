@@ -1,5 +1,6 @@
 #include "check.hpp"
-#include <os/image/terminal/d2_terminal_images.hpp>
+#include <os/image/kitty/d2_kitty_images.hpp>
+#include <os/image/sixel/d2_sixel_images.hpp>
 #include <os/io/unix/d2_unix_system_io.hpp>
 #include <core/io/d2_context.hpp>
 #include <absl/strings/escaping.h>
@@ -7,7 +8,6 @@
 #include <unistd.h>
 
 using namespace d2;
-using Protocol = sys::SystemImages::Protocol;
 
 std::string capture(auto action)
 {
@@ -75,10 +75,10 @@ struct Output : sys::UnixTerminalOutput
     Output(std::weak_ptr<IOContext> ctx, ModPreset preset, std::size_t size) :
         UnixTerminalOutput(ctx, preset, size) { _mark_safe(); }
 };
-struct Images : sys::TerminalImages
+struct Images : sys::SystemImagesKitty
 {
     Images(std::weak_ptr<IOContext> ctx, ModPreset preset, std::size_t size) :
-        TerminalImages(ctx, preset, size) { _mark_safe(); }
+        SystemImagesKitty(ctx, preset, size) { _mark_safe(); }
 };
 
 int main()
@@ -124,8 +124,8 @@ int main()
         for (int x = 0; x < 7; ++x)
             CHECK(decoded_sixel[y * 7 + x] == (y == 7 ? 30 : x < 3 ? 180 : x == 3 ? -1 : 110));
 
-    auto renderer = sys::SystemModule::make<sys::TerminalImages>(std::shared_ptr<IOContext>{});
-    renderer->configure({Protocol::Kitty, {8,16}});
+    std::shared_ptr<sys::SystemImages> renderer = sys::SystemModule::make<sys::SystemImagesKitty>(std::shared_ptr<IOContext>{});
+    renderer->configure({true, {8,16}});
     std::vector<pixel> cells(72);
     auto plan = renderer->prepare(cells,{12,6},scene,{});
     CHECK(!plan.after.empty() && plan.before.empty() && !plan.repaint);
@@ -134,9 +134,11 @@ int main()
     renderer->invalidate();
     plan = renderer->prepare(cells,{12,6},scene,{});
     CHECK(!plan.after.empty() && plan.before.find("a=d,d=I") != std::string::npos);
-    renderer->configure({Protocol::Sixel,{1,1}});
+    CHECK(renderer->reset().before.find("a=d,d=I") != std::string::npos);
+    renderer = sys::SystemModule::make<sys::SystemImagesSixel>(std::shared_ptr<IOContext>{});
+    renderer->configure({true,{1,1}});
     plan = renderer->prepare(cells,{12,6},scene,{});
-    CHECK(plan.repaint && plan.before.find("a=d,d=I") != std::string::npos);
+    CHECK(plan.repaint);
     CHECK(plan.after.find("\x1b[?80l") != std::string::npos);
     CHECK(plan.before.find("\x1b[2J") != std::string::npos);
     CHECK(plan.after.find("\x1bP0;1;0q\"1;1;10;4") != std::string::npos);
@@ -147,27 +149,18 @@ int main()
     CHECK(renderer->prepare(cells,{12,6},scene,{}).repaint);
     plan = renderer->prepare(cells,{12,6},{},{});
     CHECK(plan.repaint && plan.after.empty());
-    renderer->configure({Protocol::Sixel,{}});
+    renderer->configure({true,{}});
     throws<std::invalid_argument>([&] { renderer->prepare(cells,{12,6},scene,{}); });
-    renderer->configure({Protocol::Off,{}});
+    renderer->configure({false,{}});
     CHECK(renderer->prepare(cells,{12,6},scene,{}).after.empty());
-    throws<std::invalid_argument>([&] { renderer->configure({Protocol::Kitty,{0,4}}); });
-#ifdef D2_IMAGE_PNG
-    const unsigned char png[] = {137,80,78,71,13,10,26,10,0,0,0,13,73,72,68,82,0,0,0,2,0,0,0,1,8,6,0,0,0,244,34,127,138,0,0,0,17,73,68,65,84,120,156,99,248,207,192,208,192,192,240,255,63,0,13,126,3,126,234,30,23,33,0,0,0,0,73,69,78,68,174,66,96,130};
-    const auto png_image = renderer->decode_png(png);
-    CHECK(png_image->width() == 2 && png_image->height() == 1);
-    CHECK((png_image->pixels()[0] == image::RGBA{255,0,0,128}));
-    CHECK((png_image->pixels()[1] == image::RGBA{0,0,255,255}));
-    throws<std::invalid_argument>([&] { renderer->decode_png({png, 12}); });
-#else
-    throws<std::logic_error>([&] { renderer->decode_png({}); });
-#endif
+    throws<std::invalid_argument>([&] { renderer->configure({true,{0,4}}); });
+
 
     auto ctx = std::make_shared<IOContext>(mt::ConcurrentPool::make<>(), nullptr);
     ctx->load<Output, Images>();
     auto output = ctx->sys<sys::SystemOutput>();
     auto images = ctx->sys<sys::SystemImages>();
-    images->configure({Protocol::Kitty,{1,1}});
+    images->configure({true,{1,1}});
     PixelBuffer buffer(3,2);
     buffer.at(0,0).v = 'a';
     PixelBuffer::View view(&buffer,0,0,3,2);
@@ -181,7 +174,7 @@ int main()
     CHECK(capture([&] { output->write_frame(view); }).find("\x1b_G") == std::string::npos);
     ctx->load<Images>();
     images = ctx->sys<sys::SystemImages>();
-    images->configure({Protocol::Kitty,{1,1}});
+    images->configure({true,{1,1}});
     auto full = open("/dev/full", O_WRONLY);
     CHECK(full >= 0);
     const auto saved = dup(STDOUT_FILENO);

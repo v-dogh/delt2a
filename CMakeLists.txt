@@ -227,6 +227,10 @@ add_library(DeltaCore STATIC
     # Mods
     core/io/d2_module.hpp
     core/io/d2_module.cpp
+    core/mods/d2_images.hpp
+    core/mods/d2_images.cpp
+    core/mods/d2_image_loader.hpp
+    core/mods/d2_image_loader.cpp
     core/mods/d2_core.hpp
     core/mods/d2_core.cpp
     core/mods/d2_ext.hpp
@@ -440,23 +444,45 @@ if (D2_BUILD_TESTS)
 endif()
 
 if (D2_TEST AND TARGET DeltaExtras)
+    add_executable(d2_manual examples/manual.cpp)
+    target_link_libraries(d2_manual PRIVATE DeltaAscii::Core)
     add_executable(d2_hello examples/hello.cpp)
     target_link_libraries(d2_hello PRIVATE DeltaAscii::Core)
     add_executable(d2_selection examples/selection.cpp)
     target_link_libraries(d2_selection PRIVATE DeltaAscii::Core)
-    if (TARGET TerminalImages)
+    if (TARGET ImagesKitty AND TARGET ImagesSixel)
         add_executable(d2_images examples/images.cpp)
         target_link_libraries(d2_images PRIVATE DeltaAscii::Core)
+        if (TARGET PngLoader)
+            target_link_libraries(d2_images PRIVATE PngLoader)
+            target_compile_definitions(d2_images PRIVATE D2_EXAMPLE_PNG)
+        endif()
     endif()
     add_executable(d2_editing examples/editing.cpp)
     target_link_libraries(d2_editing PRIVATE DeltaAscii::Core)
 endif()
 
+if (D2_TEST AND TARGET OpenAIProvider)
+    add_executable(d2_inference examples/inference.cpp)
+    target_link_libraries(d2_inference PRIVATE DeltaAscii::Core DeltaAscii::OpenAI)
+endif()
+
 if (D2_BUILD_DOCS)
     find_package(Doxygen REQUIRED)
+    find_package(Python3 3.9 REQUIRED COMPONENTS Interpreter)
     set(DOXYGEN_EXTRACT_ALL YES)
     set(DOXYGEN_WARN_IF_UNDOCUMENTED NO)
     set(DOXYGEN_GENERATE_LATEX NO)
-    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "${CMAKE_CURRENT_SOURCE_DIR}/docs/core-contracts.md")
-    doxygen_add_docs(d2_docs core elements extras mt logs docs)
+    set(DOXYGEN_FILTER_PATTERNS "*.md=\"${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/doxygen_filter.py\"")
+    set(DOXYGEN_VERBATIM_VARS DOXYGEN_FILTER_PATTERNS)
+    set(DOXYGEN_GENERATE_XML YES)
+    set(DOXYGEN_GENERATE_TREEVIEW YES)
+    set(DOXYGEN_SOURCE_BROWSER YES)
+    set(DOXYGEN_HAVE_DOT NO)
+    set(DOXYGEN_QUIET YES)
+    set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/docs")
+    set(DOXYGEN_STRIP_FROM_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
+    set(DOXYGEN_EXCLUDE_PATTERNS "*/generated/*" "*/detail/*")
+    set(DOXYGEN_USE_MDFILE_AS_MAINPAGE "${CMAKE_CURRENT_SOURCE_DIR}/docs/index.md")
+    doxygen_add_docs(d2_docs d2_std.hpp core elements extras mt logs os docs)
 endif()

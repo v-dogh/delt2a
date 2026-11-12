@@ -147,7 +147,7 @@ namespace d2::sys
     {
         if (stop.stop_requested()) throw ai::Error(ai::ErrorCode::Cancelled, "Generation cancelled");
         if (request.deadline && std::chrono::steady_clock::now() >= *request.deadline)
-            throw ai::Error(ai::ErrorCode::Cancelled, "Generation deadline expired");
+            throw ai::Error(ai::ErrorCode::Timeout, "Generation deadline expired");
         ai::validate_request(request, model_info(request.model.name));
         // Only the selected binding's extensions reach the implementation.
         std::erase_if(request.settings.extensions, [&](const auto& item) { return item.first != request.model.provider; });

@@ -17,8 +17,10 @@ namespace d2::ai
         }
         void check_stop(std::stop_token stop, const Request& request)
         {
-            if (stop.stop_requested() || (request.deadline && std::chrono::steady_clock::now() >= *request.deadline))
-                throw Error(ErrorCode::Cancelled, "Conversation step cancelled or expired");
+            if (stop.stop_requested())
+                throw Error(ErrorCode::Cancelled, "Conversation step cancelled");
+            if (request.deadline && std::chrono::steady_clock::now() >= *request.deadline)
+                throw Error(ErrorCode::Timeout, "Conversation step deadline expired");
         }
     }
     void Conversation::_validate_config(const ConversationConfig& config)
