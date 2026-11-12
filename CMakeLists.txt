@@ -12,7 +12,6 @@ include(cmake/system.cmake)
 
 # General
 
-option(D2_EXCLUDE_LIBRARY_INFERENCE "Disable inference abstractions"             OFF)
 option(D2_EXCLUDE_LIBRARY_EXTRAS    "Disable extras module"                      OFF)
 option(D2_EXCLUDE_LIBRARY_ELEMENTS  "Disable elements module"                    OFF)
 option(D2_SECURITY_WATCH            "Enable runtime debug checks"                ON)
@@ -324,10 +323,6 @@ if (NOT D2_EXCLUDE_LIBRARY_EXTRAS AND NOT D2_EXCLUDE_LIBRARY_ELEMENTS)
     delta_setup_target(DeltaExtras)
 endif()
 
-if (NOT D2_EXCLUDE_LIBRARY_INFERENCE)
-    add_subdirectory(core/mods/inference)
-endif()
-
 # Platform library
 add_library(DeltaCoreOS STATIC
     os/d2_registry.cpp
@@ -365,7 +360,7 @@ add_library(DeltaAscii::Core ALIAS DeltaAscii)
 set_target_properties(DeltaAscii PROPERTIES EXPORT_NAME Core)
 set(_delta_targets DeltaCore DeltaLSX DeltaCoreOS TPMP TPMPQueue logd)
 set(_delta_interface DeltaCore DeltaCoreOS)
-foreach(component IN ITEMS DeltaElements DeltaExtras DeltaInference)
+foreach(component IN ITEMS DeltaElements DeltaExtras)
     if (TARGET ${component})
         list(APPEND _delta_targets ${component})
         list(APPEND _delta_interface ${component})
@@ -460,11 +455,6 @@ if (D2_TEST AND TARGET DeltaExtras)
     endif()
     add_executable(d2_editing examples/editing.cpp)
     target_link_libraries(d2_editing PRIVATE DeltaAscii::Core)
-endif()
-
-if (D2_TEST AND TARGET OpenAIProvider)
-    add_executable(d2_inference examples/inference.cpp)
-    target_link_libraries(d2_inference PRIVATE DeltaAscii::Core DeltaAscii::OpenAI)
 endif()
 
 if (D2_BUILD_DOCS)
