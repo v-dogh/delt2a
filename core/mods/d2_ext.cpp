@@ -97,5 +97,4 @@ namespace d2::sys
         clear();
         return Status::Ok;
     }
-    SystemSelector::~SystemSelector() { unload(); }
 } // namespace d2::sys

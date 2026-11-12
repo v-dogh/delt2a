@@ -59,7 +59,6 @@ namespace d2::ai
             _next_id = std::max(_next_id, message.id + 1);
         }
     }
-    Conversation::~Conversation() { cancel(); }
     void Conversation::_editable(bool allow_pending) const
     {
         if (_closed) throw Error(ErrorCode::Closed, "Conversation is closed");

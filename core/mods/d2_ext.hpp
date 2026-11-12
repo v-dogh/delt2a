@@ -99,9 +99,10 @@ namespace d2::sys
         virtual Status _unload_impl() override;
     public:
         using Module::Module;
-        ~SystemSelector() override;
+
         TextSelection& selection() noexcept { return _selection; }
         std::string value() { return _selection.value(); }
+        
         void clear() { _selection.clear(); }
         bool copy();
     };

@@ -96,7 +96,7 @@ namespace d2::sys
         Status _unload_impl() override;
     public:
         using Module::Module;
-        ~SystemConversations() override;
+
         void bind(std::string name, std::shared_ptr<SystemProvider> provider);
         ai::Conversation::ptr create(std::string name, ai::ConversationConfig config);
         ai::Conversation::ptr restore(std::string name, ai::Snapshot snapshot);
