@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1text_1_1Line" kind="struct" language="C++" prot="public">
+    <compoundname>d2::text::Line</compoundname>
+    <includes refid="d2__text__layout_8hpp" local="no">d2_text_layout.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1text_1_1Line_1a10d5d47283fa072f77b12fba2c0eae3c" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1text_1_1Range" kindref="compound">Range</ref></type>
+        <definition>Range d2::text::Line::graphemes</definition>
+        <argsstring></argsstring>
+        <name>graphemes</name>
+        <qualifiedname>d2::text::Line::graphemes</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="43" column="15" bodyfile="core/platform/d2_text_layout.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Line_1a84ffc5143a880200828012d0b908e582" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::text::Line::columns</definition>
+        <argsstring></argsstring>
+        <name>columns</name>
+        <qualifiedname>d2::text::Line::columns</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="44" column="13" bodyfile="core/platform/d2_text_layout.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Line_1a54b538c74b4b70d6c6683f99988baf01" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::text::Line::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <qualifiedname>d2::text::Line::offset</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="45" column="13" bodyfile="core/platform/d2_text_layout.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Line_1aba33f9084992d3803fc6638e797e968e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::text::Line::hard_break</definition>
+        <argsstring></argsstring>
+        <name>hard_break</name>
+        <qualifiedname>d2::text::Line::hard_break</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="46" column="14" bodyfile="core/platform/d2_text_layout.hpp" bodystart="46" bodyend="46"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::text::Line</label>
+        <link refid="structd2_1_1text_1_1Line"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>graphemes</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::text::Range</label>
+        <link refid="structd2_1_1text_1_1Range"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/platform/d2_text_layout.hpp" line="41" column="5" bodyfile="core/platform/d2_text_layout.hpp" bodystart="42" bodyend="47"/>
+    <listofallmembers>
+      <member refid="structd2_1_1text_1_1Line_1a84ffc5143a880200828012d0b908e582" prot="public" virt="non-virtual"><scope>d2::text::Line</scope><name>columns</name></member>
+      <member refid="structd2_1_1text_1_1Line_1a10d5d47283fa072f77b12fba2c0eae3c" prot="public" virt="non-virtual"><scope>d2::text::Line</scope><name>graphemes</name></member>
+      <member refid="structd2_1_1text_1_1Line_1aba33f9084992d3803fc6638e797e968e" prot="public" virt="non-virtual"><scope>d2::text::Line</scope><name>hard_break</name></member>
+      <member refid="structd2_1_1text_1_1Line_1a54b538c74b4b70d6c6683f99988baf01" prot="public" virt="non-virtual"><scope>d2::text::Line</scope><name>offset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

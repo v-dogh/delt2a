@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1meta_1_1ConstString" kind="struct" language="C++" prot="public">
+    <compoundname>d2::meta::ConstString</compoundname>
+    <includes refid="d2__meta_8hpp" local="no">d2_meta.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>Count</declname>
+        <defname>Count</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1meta_1_1ConstString_1ae103a93e00a5975cd7bc498446821b48" prot="public" static="no" mutable="no">
+        <type>std::array&lt; char, Count &gt;</type>
+        <definition>std::array&lt;char, Count&gt; d2::meta::ConstString&lt; Count &gt;::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::meta::ConstString::data</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_meta.hpp" line="20" column="20" bodyfile="core/utils/d2_meta.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1meta_1_1ConstString_1ae85df2f64625bd5c1ec669c304860d9e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::meta::ConstString&lt; Count &gt;::ConstString</definition>
+        <argsstring>(const char(&amp;str)[Count])</argsstring>
+        <name>ConstString</name>
+        <qualifiedname>d2::meta::ConstString::ConstString</qualifiedname>
+        <param>
+          <type>const char(&amp;)</type>
+          <declname>str</declname>
+          <array>[Count]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_meta.hpp" line="11" column="19" bodyfile="core/utils/d2_meta.hpp" bodystart="11" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1meta_1_1ConstString_1a02d76e6f88b11a8c675798663e29493d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::meta::ConstString&lt; Count &gt;::ConstString</definition>
+        <argsstring>(std::string_view str)</argsstring>
+        <name>ConstString</name>
+        <qualifiedname>d2::meta::ConstString::ConstString</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_meta.hpp" line="15" column="19" bodyfile="core/utils/d2_meta.hpp" bodystart="15" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1meta_1_1ConstString_1a282067f8a1f349eb8608dc4a67df0ce5" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::meta::ConstString&lt; Count &gt;::view</definition>
+        <argsstring>() const</argsstring>
+        <name>view</name>
+        <qualifiedname>d2::meta::ConstString::view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_meta.hpp" line="22" column="24" bodyfile="core/utils/d2_meta.hpp" bodystart="22" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1meta_1_1ConstString_1a3c566f68c30a881ab1cc54fa982c9df1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::meta::ConstString&lt; Count &gt;::view</definition>
+        <argsstring>()</argsstring>
+        <name>view</name>
+        <qualifiedname>d2::meta::ConstString::view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_meta.hpp" line="26" column="24" bodyfile="core/utils/d2_meta.hpp" bodystart="26" bodyend="29"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/utils/d2_meta.hpp" line="9" column="5" bodyfile="core/utils/d2_meta.hpp" bodystart="10" bodyend="30"/>
+    <listofallmembers>
+      <member refid="structd2_1_1meta_1_1ConstString_1ae85df2f64625bd5c1ec669c304860d9e" prot="public" virt="non-virtual"><scope>d2::meta::ConstString</scope><name>ConstString</name></member>
+      <member refid="structd2_1_1meta_1_1ConstString_1a02d76e6f88b11a8c675798663e29493d" prot="public" virt="non-virtual"><scope>d2::meta::ConstString</scope><name>ConstString</name></member>
+      <member refid="structd2_1_1meta_1_1ConstString_1ae103a93e00a5975cd7bc498446821b48" prot="public" virt="non-virtual"><scope>d2::meta::ConstString</scope><name>data</name></member>
+      <member refid="structd2_1_1meta_1_1ConstString_1a282067f8a1f349eb8608dc4a67df0ce5" prot="public" virt="non-virtual"><scope>d2::meta::ConstString</scope><name>view</name></member>
+      <member refid="structd2_1_1meta_1_1ConstString_1a3c566f68c30a881ab1cc54fa982c9df1" prot="public" virt="non-virtual"><scope>d2::meta::ConstString</scope><name>view</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

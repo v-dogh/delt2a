@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemSession_1_1ScopeLookup" kind="struct" language="C++" prot="private">
+    <compoundname>d2::sys::net::SystemSession::ScopeLookup</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1ScopeLookup_1a9239ba4f7dc09245919d619443890faf" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope" kindref="compound">Scope</ref></type>
+        <definition>Scope d2::sys::net::SystemSession::ScopeLookup::scope</definition>
+        <argsstring></argsstring>
+        <name>scope</name>
+        <qualifiedname>d2::sys::net::SystemSession::ScopeLookup::scope</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="29" column="19" bodyfile="core/mods/d2_session.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1ScopeLookup_1a665672903e868fca5a9cb381f182d490" prot="public" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; std::string, std::string &gt;</type>
+        <definition>absl::flat_hash_map&lt;std::string, std::string&gt; d2::sys::net::SystemSession::ScopeLookup::headers</definition>
+        <argsstring></argsstring>
+        <name>headers</name>
+        <qualifiedname>d2::sys::net::SystemSession::ScopeLookup::headers</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="30" column="33" bodyfile="core/mods/d2_session.hpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::net::SystemSession::Scope</label>
+        <link refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::net::SystemSession::ScopeLookup</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>scope</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_session.hpp" line="27" column="9" bodyfile="core/mods/d2_session.hpp" bodystart="28" bodyend="31"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1ScopeLookup_1a665672903e868fca5a9cb381f182d490" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::ScopeLookup</scope><name>headers</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1ScopeLookup_1a9239ba4f7dc09245919d619443890faf" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::ScopeLookup</scope><name>scope</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1DispatchSpecifier" kind="struct" language="C++" prot="public">
+    <compoundname>d2::DispatchSpecifier</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1DispatchSpecifier_1a99415d276ed66a66136bc72775bab22d" prot="public" static="no">
+        <type>std::decay_t&lt; Type &gt;</type>
+        <definition>using d2::DispatchSpecifier&lt; Type &gt;::value_t = std::decay_t&lt;Type&gt;</definition>
+        <argsstring></argsstring>
+        <name>value_t</name>
+        <qualifiedname>d2::DispatchSpecifier::value_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="379" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="379" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1DispatchSpecifier_1ae0c58df7f0c72277ec1f1f0992a7e41a" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1DispatchSpecifier_1a99415d276ed66a66136bc72775bab22d" kindref="member">value_t</ref></type>
+        <definition>value_t d2::DispatchSpecifier&lt; Type &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <qualifiedname>d2::DispatchSpecifier::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="380" column="17" bodyfile="core/io/d2_signal_handler.hpp" bodystart="380" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="377" column="15" bodyfile="core/io/d2_signal_handler.hpp" bodystart="378" bodyend="381"/>
+    <listofallmembers>
+      <member refid="structd2_1_1DispatchSpecifier_1ae0c58df7f0c72277ec1f1f0992a7e41a" prot="public" virt="non-virtual"><scope>d2::DispatchSpecifier</scope><name>value</name></member>
+      <member refid="structd2_1_1DispatchSpecifier_1a99415d276ed66a66136bc72775bab22d" prot="public" virt="non-virtual"><scope>d2::DispatchSpecifier</scope><name>value_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

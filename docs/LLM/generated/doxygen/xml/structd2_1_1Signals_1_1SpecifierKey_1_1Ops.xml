@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops" kind="struct" language="C++" prot="private">
+    <compoundname>d2::Signals::SpecifierKey::Ops</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1af7c64cf8ed4d9c0530eebc212e64b236" prot="public" static="no" mutable="no">
+        <type>const void *</type>
+        <definition>const void* d2::Signals::SpecifierKey::Ops::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>d2::Signals::SpecifierKey::Ops::type</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="432" column="28" bodyfile="core/io/d2_signal_handler.hpp" bodystart="432" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a6d21a0ec4928cf78844d421585ddf597" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Signals::SpecifierKey::Ops::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <qualifiedname>d2::Signals::SpecifierKey::Ops::size</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="433" column="29" bodyfile="core/io/d2_signal_handler.hpp" bodystart="433" bodyend="433"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a14f0bc910fa210b58fd077eb1150b02e" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Signals::SpecifierKey::Ops::alignment</definition>
+        <argsstring></argsstring>
+        <name>alignment</name>
+        <qualifiedname>d2::Signals::SpecifierKey::Ops::alignment</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="434" column="29" bodyfile="core/io/d2_signal_handler.hpp" bodystart="434" bodyend="434"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1ad9d6f1ef9a10dd557f4932e0e2c1d45f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::Signals::SpecifierKey::Ops::local</definition>
+        <argsstring></argsstring>
+        <name>local</name>
+        <qualifiedname>d2::Signals::SpecifierKey::Ops::local</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="435" column="22" bodyfile="core/io/d2_signal_handler.hpp" bodystart="435" bodyend="435"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a6156a6ca517cb5051741335f5e427848" prot="public" static="no" mutable="no">
+        <type>std::size_t(*)</type>
+        <definition>std::size_t(*) d2::Signals::SpecifierKey::Ops::hash(const void *)</definition>
+        <argsstring>(const void *)</argsstring>
+        <name>hash</name>
+        <qualifiedname>d2::Signals::SpecifierKey::Ops::hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="436" column="17" bodyfile="core/io/d2_signal_handler.hpp" bodystart="436" bodyend="436"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1af7dfe7a5fb26f80aeef101a1a12e647e" prot="public" static="no" mutable="no">
+        <type>bool(*)</type>
+        <definition>bool(*) d2::Signals::SpecifierKey::Ops::equal(const void *, const void *)</definition>
+        <argsstring>(const void *, const void *)</argsstring>
+        <name>equal</name>
+        <qualifiedname>d2::Signals::SpecifierKey::Ops::equal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="437" column="17" bodyfile="core/io/d2_signal_handler.hpp" bodystart="437" bodyend="437"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a6ad3ec22a6bcda918eda4da4397a40bc" prot="public" static="no" mutable="no">
+        <type>void(*)</type>
+        <definition>void(*) d2::Signals::SpecifierKey::Ops::copy(void *, const void *)</definition>
+        <argsstring>(void *, const void *)</argsstring>
+        <name>copy</name>
+        <qualifiedname>d2::Signals::SpecifierKey::Ops::copy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="438" column="17" bodyfile="core/io/d2_signal_handler.hpp" bodystart="438" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1ae443bd5e227cde8a1ad4387059fbe6f9" prot="public" static="no" mutable="no">
+        <type>void(*)</type>
+        <definition>void(*) d2::Signals::SpecifierKey::Ops::move(void *, void *)</definition>
+        <argsstring>(void *, void *)</argsstring>
+        <name>move</name>
+        <qualifiedname>d2::Signals::SpecifierKey::Ops::move</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="439" column="17" bodyfile="core/io/d2_signal_handler.hpp" bodystart="439" bodyend="439"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a2acf32d9733a9e2247281e707de0e0eb" prot="public" static="no" mutable="no">
+        <type>void(*)</type>
+        <definition>void(*) d2::Signals::SpecifierKey::Ops::destroy(void *)</definition>
+        <argsstring>(void *)</argsstring>
+        <name>destroy</name>
+        <qualifiedname>d2::Signals::SpecifierKey::Ops::destroy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="440" column="17" bodyfile="core/io/d2_signal_handler.hpp" bodystart="440" bodyend="440"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="430" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="431" bodyend="441"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a14f0bc910fa210b58fd077eb1150b02e" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey::Ops</scope><name>alignment</name></member>
+      <member refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a6ad3ec22a6bcda918eda4da4397a40bc" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey::Ops</scope><name>copy</name></member>
+      <member refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a2acf32d9733a9e2247281e707de0e0eb" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey::Ops</scope><name>destroy</name></member>
+      <member refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1af7dfe7a5fb26f80aeef101a1a12e647e" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey::Ops</scope><name>equal</name></member>
+      <member refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a6156a6ca517cb5051741335f5e427848" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey::Ops</scope><name>hash</name></member>
+      <member refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1ad9d6f1ef9a10dd557f4932e0e2c1d45f" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey::Ops</scope><name>local</name></member>
+      <member refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1ae443bd5e227cde8a1ad4387059fbe6f9" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey::Ops</scope><name>move</name></member>
+      <member refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1a6d21a0ec4928cf78844d421585ddf597" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey::Ops</scope><name>size</name></member>
+      <member refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops_1af7c64cf8ed4d9c0530eebc212e64b236" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey::Ops</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

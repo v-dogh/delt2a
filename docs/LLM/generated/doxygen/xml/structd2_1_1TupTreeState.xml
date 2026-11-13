@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1TupTreeState" kind="struct" language="C++" prot="public">
+    <compoundname>d2::TupTreeState</compoundname>
+    <basecompoundref refid="classd2_1_1TreeState" prot="public" virt="non-virtual">d2::TreeState</basecompoundref>
+    <includes refid="d2__tree__state_8hpp" local="no">d2_tree_state.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>Argv</declname>
+        <defname>Argv</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1TupTreeState_1a24bf39972fd8841d930625bb76948574" prot="public" static="no" mutable="no">
+        <type>std::tuple&lt; Argv... &gt;</type>
+        <definition>std::tuple&lt;Argv...&gt; d2::TupTreeState&lt; Argv &gt;::params</definition>
+        <argsstring></argsstring>
+        <name>params</name>
+        <qualifiedname>d2::TupTreeState::params</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_state.hpp" line="78" column="20" bodyfile="core/tree/d2_tree_state.hpp" bodystart="78" bodyend="78"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1TupTreeState_1a1d3c551f72ba4fc1a71e935091fd9153" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TupTreeState&lt; Argv &gt;::TupTreeState</definition>
+        <argsstring>(std::shared_ptr&lt; ParentElement &gt; rptr, std::shared_ptr&lt; ParentElement &gt; coreptr, std::shared_ptr&lt; IOContext &gt; ctx, Argv... args)</argsstring>
+        <name>TupTreeState</name>
+        <qualifiedname>d2::TupTreeState::TupTreeState</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>rptr</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>coreptr</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>Argv...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_state.hpp" line="79" column="9" bodyfile="core/tree/d2_tree_state.hpp" bodystart="79" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1TupTreeState_1a5455c746dc4c4cbc9ddff58753d4339e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeState::TreeState</definition>
+        <argsstring>(std::shared_ptr&lt; ParentElement &gt; rptr, std::shared_ptr&lt; ParentElement &gt; coreptr, std::shared_ptr&lt; IOContext &gt; ctx)</argsstring>
+        <name>TreeState</name>
+        <qualifiedname>d2::TupTreeState::TreeState</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>rptr</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>coreptr</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_state.hpp" line="87" column="9" bodyfile="core/tree/d2_tree_state.cpp" bodystart="6" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1TupTreeState_1a3bae78093db7f2a9e3ab5c1cfa8a1d63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeState::TreeState</definition>
+        <argsstring>(const TreeState &amp;)=delete</argsstring>
+        <name>TreeState</name>
+        <qualifiedname>d2::TupTreeState::TreeState</qualifiedname>
+        <param>
+          <type>const TreeState &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_state.hpp" line="87" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1TupTreeState_1a6d43f6c1560afbbb01e5e8cd960c85f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeState::TreeState</definition>
+        <argsstring>(TreeState &amp;&amp;)=default</argsstring>
+        <name>TreeState</name>
+        <qualifiedname>d2::TupTreeState::TreeState</qualifiedname>
+        <param>
+          <type>TreeState &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_state.hpp" line="87" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::TreeState</label>
+        <link refid="classd2_1_1TreeState"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::TupTreeState&lt; Argv &gt;</label>
+        <link refid="structd2_1_1TupTreeState"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; TreeState &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::TreeState</label>
+        <link refid="classd2_1_1TreeState"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::TupTreeState&lt; Argv &gt;</label>
+        <link refid="structd2_1_1TupTreeState"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; TreeState &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_tree_state.hpp" line="76" column="15" bodyfile="core/tree/d2_tree_state.hpp" bodystart="77" bodyend="88"/>
+    <listofallmembers>
+      <member refid="classd2_1_1TreeState_1a78e1db2a4a27b44dc49c900143043610" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>as</name></member>
+      <member refid="classd2_1_1TreeState_1a895379fdcc816a8054b420b93036ac41" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>as</name></member>
+      <member refid="classd2_1_1TreeState_1af7cc34efbb36903047b4e36ffd260eba" prot="public" virt="virtual"><scope>d2::TupTreeState</scope><name>construct</name></member>
+      <member refid="classd2_1_1TreeState_1ab40e09b1b45a3061f532606d83333ddf" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>context</name></member>
+      <member refid="classd2_1_1TreeState_1a4b9669a5fd120619fe56e0c2b0a58624" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>core</name></member>
+      <member refid="classd2_1_1TreeState_1a51e34616389b28b8d9a2f367863b5924" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>make</name></member>
+      <member refid="classd2_1_1TreeState_1a53205839a5269e469259b4b9dd9be9d0" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>operator=</name></member>
+      <member refid="classd2_1_1TreeState_1abe86c1c00ac6bf63809c5988279eb79d" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>operator=</name></member>
+      <member refid="structd2_1_1TupTreeState_1a24bf39972fd8841d930625bb76948574" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>params</name></member>
+      <member refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>ptr</name></member>
+      <member refid="classd2_1_1TreeState_1a9380347310e895590952818f506d19c9" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>root</name></member>
+      <member refid="classd2_1_1TreeState_1a0121e1ae2f65a016c0c1fad78d70a4f7" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>root_state</name></member>
+      <member refid="classd2_1_1TreeState_1a33172c4ebea8f4abb84be43b7a1efdaf" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>screen</name></member>
+      <member refid="classd2_1_1TreeState_1af01b3b68abdf1595d7be2482fd5ba7df" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>set_context</name></member>
+      <member refid="classd2_1_1TreeState_1a5f27236417b98a37cf774b3dec74823a" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>set_core</name></member>
+      <member refid="classd2_1_1TreeState_1accd128c6c59dbde81d0cf5b4189efd5d" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>set_root</name></member>
+      <member refid="classd2_1_1TreeState_1a977aee415c5830e2ee2a865246a80b96" prot="public" virt="virtual"><scope>d2::TupTreeState</scope><name>swap_in</name></member>
+      <member refid="classd2_1_1TreeState_1adebaaa2c2bea2827ab6fa2e9ef1d6c74" prot="public" virt="virtual"><scope>d2::TupTreeState</scope><name>swap_out</name></member>
+      <member refid="structd2_1_1TupTreeState_1a5455c746dc4c4cbc9ddff58753d4339e" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>TreeState</name></member>
+      <member refid="structd2_1_1TupTreeState_1a3bae78093db7f2a9e3ab5c1cfa8a1d63" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>TreeState</name></member>
+      <member refid="structd2_1_1TupTreeState_1a6d43f6c1560afbbb01e5e8cd960c85f2" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>TreeState</name></member>
+      <member refid="structd2_1_1TupTreeState_1a1d3c551f72ba4fc1a71e935091fd9153" prot="public" virt="non-virtual"><scope>d2::TupTreeState</scope><name>TupTreeState</name></member>
+      <member refid="classd2_1_1TreeState_1aa9f7f4cfa74d28966afc243eb0a7b6f0" prot="public" virt="virtual"><scope>d2::TupTreeState</scope><name>update</name></member>
+      <member refid="classd2_1_1TreeState_1acd28eb51d9786669bc271a6829342106" prot="public" virt="virtual"><scope>d2::TupTreeState</scope><name>~TreeState</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

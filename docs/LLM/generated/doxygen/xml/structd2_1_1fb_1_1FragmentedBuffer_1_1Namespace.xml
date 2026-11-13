@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1fb_1_1FragmentedBuffer_1_1Namespace" kind="struct" language="C++" prot="private">
+    <compoundname>d2::fb::FragmentedBuffer::Namespace</compoundname>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="structd2_1_1fb_1_1FragmentedBuffer_1_1Namespace_1a61f9f6167bdd36af998b1e4d44490cd4" prot="protected" static="no" mutable="no">
+        <type><ref refid="classd2_1_1fb_1_1FragmentedBuffer_1abcc4197ebc9ac0ff40535c3394aa5095" kindref="member">FragmentedBuffer</ref> *</type>
+        <definition>FragmentedBuffer* d2::fb::FragmentedBuffer::Namespace::_buf</definition>
+        <argsstring></argsstring>
+        <name>_buf</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::Namespace::_buf</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="110" column="30" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="110" bodyend="110"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1fb_1_1FragmentedBuffer_1_1Namespace_1a4d533f498e6a418a4fd99c88f0f6a965" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::fb::FragmentedBuffer::Namespace::Namespace</definition>
+        <argsstring>(FragmentedBuffer *buf)</argsstring>
+        <name>Namespace</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::Namespace::Namespace</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1fb_1_1FragmentedBuffer_1abcc4197ebc9ac0ff40535c3394aa5095" kindref="member">FragmentedBuffer</ref> *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="112" column="13" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="112" bodyend="112"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::fb::FragmentedBuffer</label>
+        <link refid="classd2_1_1fb_1_1FragmentedBuffer"/>
+      </node>
+      <node id="1">
+        <label>d2::fb::FragmentedBuffer::Namespace</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_buf</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/platform/d2_fragmented_buffer.hpp" line="107" column="9" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="108" bodyend="113"/>
+    <listofallmembers>
+      <member refid="structd2_1_1fb_1_1FragmentedBuffer_1_1Namespace_1a61f9f6167bdd36af998b1e4d44490cd4" prot="protected" virt="non-virtual"><scope>d2::fb::FragmentedBuffer::Namespace</scope><name>_buf</name></member>
+      <member refid="structd2_1_1fb_1_1FragmentedBuffer_1_1Namespace_1a4d533f498e6a418a4fd99c88f0f6a965" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer::Namespace</scope><name>Namespace</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

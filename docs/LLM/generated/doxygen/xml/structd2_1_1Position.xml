@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Position" kind="struct" language="C++" prot="public">
+    <compoundname>d2::Position</compoundname>
+    <includes refid="d2__vtypes_8hpp" local="no">d2_vtypes.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1Position_1ab75162195fab19ad3d8b47536faf4429" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::Position::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>d2::Position::x</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="9" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="9" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Position_1adad6f0c38b3be60501805649935def7c" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::Position::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>d2::Position::y</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="10" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="10" bodyend="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1Position_1ad5c98e6adf9524999a664a824b2a6835" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::Position::operator+</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::Position::operator+</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="12" column="29" bodyfile="core/types/d2_vtypes.hpp" bodystart="12" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Position_1ae027066678784c4fe5380b96abc861f3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::Position::operator-</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>d2::Position::operator-</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="16" column="29" bodyfile="core/types/d2_vtypes.hpp" bodystart="16" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Position_1adf4e21865f3aeae85620567d1a247f20" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref> &amp;</type>
+        <definition>Position &amp; d2::Position::operator+=</definition>
+        <argsstring>(Position rhs) noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>d2::Position::operator+=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="21" column="28" bodyfile="core/types/d2_vtypes.hpp" bodystart="21" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Position_1afcf02f4ffd63d409008157da9381132b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::Position::operator-=</definition>
+        <argsstring>(Position rhs) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>d2::Position::operator-=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="28" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="28" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Position_1a636d6f12e4162aa5bdebd2dd25260b3e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::Position::operator*=</definition>
+        <argsstring>(int scalar) noexcept</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>d2::Position::operator*=</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="34" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="34" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Position_1a2a7208e3dca8156b93cc7824a074a054" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::Position::operator/=</definition>
+        <argsstring>(int scalar) noexcept</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>d2::Position::operator/=</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="40" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="40" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Position_1a1f506140e4b9489306bb58b1180e0754" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::Position::operator&lt;=&gt;</definition>
+        <argsstring>(const Position &amp;) const =default</argsstring>
+        <name>operator&lt;=&gt;</name>
+        <qualifiedname>d2::Position::operator&lt;=&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1Position" kindref="compound">Position</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="73" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structd2_1_1Position_1abd1d63c734159fdbcdd8f1f7e0fb287c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position operator+</definition>
+        <argsstring>(Position lhs, Position rhs) noexcept</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::Position::operator+</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="47" column="36" bodyfile="core/types/d2_vtypes.hpp" bodystart="47" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="friend" id="structd2_1_1Position_1ae449ce4b2ef0d2526f5e5fc350dc17bb" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position operator-</definition>
+        <argsstring>(Position lhs, Position rhs) noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>d2::Position::operator-</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="52" column="36" bodyfile="core/types/d2_vtypes.hpp" bodystart="52" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="friend" id="structd2_1_1Position_1adf2688aaae389bbf0487d3bbb94e4903" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position operator*</definition>
+        <argsstring>(Position lhs, int scalar) noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::Position::operator*</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="57" column="36" bodyfile="core/types/d2_vtypes.hpp" bodystart="57" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="friend" id="structd2_1_1Position_1ad7b7cf935f8c306443d37cb00cbefc52" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position operator*</definition>
+        <argsstring>(int scalar, Position rhs) noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::Position::operator*</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="62" column="36" bodyfile="core/types/d2_vtypes.hpp" bodystart="62" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="friend" id="structd2_1_1Position_1aca870a269fa13e7053c59a2754ca7bf1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position operator/</definition>
+        <argsstring>(Position lhs, int scalar) noexcept</argsstring>
+        <name>operator/</name>
+        <qualifiedname>d2::Position::operator/</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="67" column="36" bodyfile="core/types/d2_vtypes.hpp" bodystart="67" bodyend="71"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_vtypes.hpp" line="7" column="5" bodyfile="core/types/d2_vtypes.hpp" bodystart="8" bodyend="74"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Position_1adf2688aaae389bbf0487d3bbb94e4903" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator*</name></member>
+      <member refid="structd2_1_1Position_1ad7b7cf935f8c306443d37cb00cbefc52" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator*</name></member>
+      <member refid="structd2_1_1Position_1a636d6f12e4162aa5bdebd2dd25260b3e" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator*=</name></member>
+      <member refid="structd2_1_1Position_1ad5c98e6adf9524999a664a824b2a6835" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator+</name></member>
+      <member refid="structd2_1_1Position_1abd1d63c734159fdbcdd8f1f7e0fb287c" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator+</name></member>
+      <member refid="structd2_1_1Position_1adf4e21865f3aeae85620567d1a247f20" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator+=</name></member>
+      <member refid="structd2_1_1Position_1ae027066678784c4fe5380b96abc861f3" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator-</name></member>
+      <member refid="structd2_1_1Position_1ae449ce4b2ef0d2526f5e5fc350dc17bb" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator-</name></member>
+      <member refid="structd2_1_1Position_1afcf02f4ffd63d409008157da9381132b" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator-=</name></member>
+      <member refid="structd2_1_1Position_1aca870a269fa13e7053c59a2754ca7bf1" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator/</name></member>
+      <member refid="structd2_1_1Position_1a2a7208e3dca8156b93cc7824a074a054" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator/=</name></member>
+      <member refid="structd2_1_1Position_1a1f506140e4b9489306bb58b1180e0754" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>operator&lt;=&gt;</name></member>
+      <member refid="structd2_1_1Position_1ab75162195fab19ad3d8b47536faf4429" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>x</name></member>
+      <member refid="structd2_1_1Position_1adad6f0c38b3be60501805649935def7c" prot="public" virt="non-virtual"><scope>d2::Position</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

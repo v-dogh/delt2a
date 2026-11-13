@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="dir_e4b68c8315169aad370f562dff4689e7" kind="dir">
+    <compoundname>core/io</compoundname>
+    <innerfile refid="d2__context_8cpp">d2_context.cpp</innerfile>
+    <innerfile refid="d2__context_8hpp">d2_context.hpp</innerfile>
+    <innerfile refid="d2__context__frwd_8hpp">d2_context_frwd.hpp</innerfile>
+    <innerfile refid="d2__input__base_8cpp">d2_input_base.cpp</innerfile>
+    <innerfile refid="d2__input__base_8hpp">d2_input_base.hpp</innerfile>
+    <innerfile refid="d2__main__worker_8cpp">d2_main_worker.cpp</innerfile>
+    <innerfile refid="d2__main__worker_8hpp">d2_main_worker.hpp</innerfile>
+    <innerfile refid="d2__module_8cpp">d2_module.cpp</innerfile>
+    <innerfile refid="d2__module_8hpp">d2_module.hpp</innerfile>
+    <innerfile refid="d2__signal__handler_8cpp">d2_signal_handler.cpp</innerfile>
+    <innerfile refid="d2__signal__handler_8hpp">d2_signal_handler.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/"/>
+  </compounddef>
+</doxygen>

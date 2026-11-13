@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1SignalManifest_1_1FindCase" kind="struct" language="C++" prot="private">
+    <compoundname>d2::SignalManifest::FindCase</compoundname>
+    <templateparamlist>
+      <param>
+        <type>auto</type>
+        <declname>Ev</declname>
+        <defname>Ev</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structd2_1_1SignalManifest_1_1FindCase_1a85245d6a5e1dc340ab1b7801d0baee6b" prot="private" static="no">
+        <type>typename FindExactImpl&lt; Ev, Spec, Specs... &gt;::type</type>
+        <definition>using d2::SignalManifest&lt; Spec, Specs &gt;::FindCase&lt; Ev &gt;::exact_t = typename FindExactImpl&lt;Ev, Spec, Specs...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>exact_t</name>
+        <qualifiedname>d2::SignalManifest::FindCase::exact_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="256" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1SignalManifest_1_1FindCase_1a8db3984b6138ec227e8e4e0147fdbb2a" prot="private" static="no">
+        <type>typename FindDefaultImpl&lt; Spec, Specs... &gt;::type</type>
+        <definition>using d2::SignalManifest&lt; Spec, Specs &gt;::FindCase&lt; Ev &gt;::default_t = typename FindDefaultImpl&lt;Spec, Specs...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>default_t</name>
+        <qualifiedname>d2::SignalManifest::FindCase::default_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="257" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="257" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1SignalManifest_1_1FindCase_1ac28e7c8c4f2cf8ff1973a64248289b4f" prot="public" static="no">
+        <type>std::conditional_t&lt; std::is_void_v&lt; exact_t &gt;, default_t, exact_t &gt;</type>
+        <definition>using d2::SignalManifest&lt; Spec, Specs &gt;::FindCase&lt; Ev &gt;::case_t = std::conditional_t&lt;std::is_void_v&lt;exact_t&gt;, default_t, exact_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>case_t</name>
+        <qualifiedname>d2::SignalManifest::FindCase::case_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="259" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="259" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="253" column="19" bodyfile="core/io/d2_signal_handler.hpp" bodystart="254" bodyend="260"/>
+    <listofallmembers>
+      <member refid="structd2_1_1SignalManifest_1_1FindCase_1ac28e7c8c4f2cf8ff1973a64248289b4f" prot="public" virt="non-virtual"><scope>d2::SignalManifest::FindCase</scope><name>case_t</name></member>
+      <member refid="structd2_1_1SignalManifest_1_1FindCase_1a8db3984b6138ec227e8e4e0147fdbb2a" prot="private" virt="non-virtual"><scope>d2::SignalManifest::FindCase</scope><name>default_t</name></member>
+      <member refid="structd2_1_1SignalManifest_1_1FindCase_1a85245d6a5e1dc340ab1b7801d0baee6b" prot="private" virt="non-virtual"><scope>d2::SignalManifest::FindCase</scope><name>exact_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::net::SystemWS::Client</compoundname>
+    <includes refid="d2__ws_8hpp" local="no">d2_ws.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a65c0c81220e56970298f44a47c8bf881" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client" kindref="compound">Client</ref> &gt;</type>
+        <definition>using d2::sys::net::SystemWS::Client::ptr = std::shared_ptr&lt;Client&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::sys::net::SystemWS::Client::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="29" column="13" bodyfile="core/mods/d2_ws.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1ab7058fa18b662e041eac18946bb00f3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemWS::Client::send</definition>
+        <argsstring>(std::string_view msg, Type type=Type::Text)=0</argsstring>
+        <name>send</name>
+        <qualifiedname>d2::sys::net::SystemWS::Client::send</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1net_1_1SystemWS_1af67f663146cc884dbd765ec8eb77cc69" kindref="member">Type</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="classd2_1_1sys_1_1net_1_1SystemWS_1af67f663146cc884dbd765ec8eb77cc69a9dffbf69ffba8bc38bc4e01abf4b1675" kindref="member">Type::Text</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="31" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a1c3af988ca37a50f7ca409dbfc7ea9d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemWS::Client::close</definition>
+        <argsstring>(std::uint16_t code=1000, std::string_view reason=&quot;&quot;)=0</argsstring>
+        <name>close</name>
+        <qualifiedname>d2::sys::net::SystemWS::Client::close</qualifiedname>
+        <param>
+          <type>std::uint16_t</type>
+          <declname>code</declname>
+          <defval>1000</defval>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>reason</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="32" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1af867cf023bbae9d04683f18fc30053b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423" kindref="member">State</ref></type>
+        <definition>virtual State d2::sys::net::SystemWS::Client::state</definition>
+        <argsstring>()=0</argsstring>
+        <name>state</name>
+        <qualifiedname>d2::sys::net::SystemWS::Client::state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="33" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a2d30665f934432cfd6f60e60bf71a89e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::sys::net::SystemWS::Client::~Client</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Client</name>
+        <qualifiedname>d2::sys::net::SystemWS::Client::~Client</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="35" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_ws.hpp" line="27" column="9" bodyfile="core/mods/d2_ws.hpp" bodystart="28" bodyend="36"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a1c3af988ca37a50f7ca409dbfc7ea9d1" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemWS::Client</scope><name>close</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a65c0c81220e56970298f44a47c8bf881" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Client</scope><name>ptr</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1ab7058fa18b662e041eac18946bb00f3a" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemWS::Client</scope><name>send</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1af867cf023bbae9d04683f18fc30053b3" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemWS::Client</scope><name>state</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a2d30665f934432cfd6f60e60bf71a89e" prot="public" virt="virtual"><scope>d2::sys::net::SystemWS::Client</scope><name>~Client</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

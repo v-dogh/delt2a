@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::net::SystemWS::Connection</compoundname>
+    <includes refid="d2__ws_8hpp" local="no">d2_ws.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1ac4fbda1432aa8b0230ac86e496ce0b96" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::net::SystemWS::Connection::url</definition>
+        <argsstring></argsstring>
+        <name>url</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::url</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="43" column="25" bodyfile="core/mods/d2_ws.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1abce3a50b0627e2c5e47393196eee961c" prot="public" static="no" mutable="no">
+        <type>std::chrono::seconds</type>
+        <definition>std::chrono::seconds d2::sys::net::SystemWS::Connection::ping_interval</definition>
+        <argsstring></argsstring>
+        <name>ping_interval</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::ping_interval</qualifiedname>
+        <initializer>{30}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="45" column="34" bodyfile="core/mods/d2_ws.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a235c19449f788f9f08c17f1b1ef956f4" prot="public" static="no" mutable="no">
+        <type>std::chrono::seconds</type>
+        <definition>std::chrono::seconds d2::sys::net::SystemWS::Connection::timeout</definition>
+        <argsstring></argsstring>
+        <name>timeout</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::timeout</qualifiedname>
+        <initializer>{std::chrono::seconds::max()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="46" column="34" bodyfile="core/mods/d2_ws.hpp" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a3722e57aa7e3b64fa5e58266411ba7cf" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::net::SystemWS::Connection::reconnect</definition>
+        <argsstring></argsstring>
+        <name>reconnect</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::reconnect</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="48" column="18" bodyfile="core/mods/d2_ws.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a3c60ed3004cc2eca92a7966959a78429" prot="public" static="no" mutable="no">
+        <type>std::chrono::milliseconds</type>
+        <definition>std::chrono::milliseconds d2::sys::net::SystemWS::Connection::reconnect_min_delay</definition>
+        <argsstring></argsstring>
+        <name>reconnect_min_delay</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::reconnect_min_delay</qualifiedname>
+        <initializer>{500}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="49" column="39" bodyfile="core/mods/d2_ws.hpp" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a022f794c3ac4525e536bb94b30c28232" prot="public" static="no" mutable="no">
+        <type>std::chrono::milliseconds</type>
+        <definition>std::chrono::milliseconds d2::sys::net::SystemWS::Connection::reconnect_max_delay</definition>
+        <argsstring></argsstring>
+        <name>reconnect_max_delay</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::reconnect_max_delay</qualifiedname>
+        <initializer>{30000}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="50" column="39" bodyfile="core/mods/d2_ws.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1ac0a18c03b33802db254c6e77db76dfa1" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::net::SystemWS::Connection::reconnect_max_attempts</definition>
+        <argsstring></argsstring>
+        <name>reconnect_max_attempts</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::reconnect_max_attempts</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="51" column="25" bodyfile="core/mods/d2_ws.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a8c71638772c3ec9ad5455a1b43b474fa" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1RequestBuilder" kindref="compound">RequestBuilder</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(RequestBuilder&amp;)&gt; d2::sys::net::SystemWS::Connection::on_setup</definition>
+        <argsstring></argsstring>
+        <name>on_setup</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::on_setup</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="53" column="27" bodyfile="core/mods/d2_ws.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a3bccbd2414c190e03760b803783539ab" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a65c0c81220e56970298f44a47c8bf881" kindref="member">Client::ptr</ref>)&gt;</type>
+        <definition>std::function&lt;void(Client::ptr)&gt; d2::sys::net::SystemWS::Connection::on_open</definition>
+        <argsstring></argsstring>
+        <name>on_open</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::on_open</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="54" column="27" bodyfile="core/mods/d2_ws.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a3c8c68e14d30aab5c5730909a9d3a10d" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(std::string_view, <ref refid="classd2_1_1sys_1_1net_1_1SystemWS_1af67f663146cc884dbd765ec8eb77cc69" kindref="member">Type</ref>, <ref refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a65c0c81220e56970298f44a47c8bf881" kindref="member">Client::ptr</ref>)&gt;</type>
+        <definition>std::function&lt;void(std::string_view, Type, Client::ptr)&gt; d2::sys::net::SystemWS::Connection::on_message</definition>
+        <argsstring></argsstring>
+        <name>on_message</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::on_message</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="55" column="27" bodyfile="core/mods/d2_ws.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a0663760b03b213248c3c12ee0c48b859" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(std::string)&gt;</type>
+        <definition>std::function&lt;void(std::string)&gt; d2::sys::net::SystemWS::Connection::on_error</definition>
+        <argsstring></argsstring>
+        <name>on_error</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::on_error</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="56" column="27" bodyfile="core/mods/d2_ws.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a83b741f40bae0a6a465c63acf3db70d1" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(std::uint16_t, std::string_view)&gt;</type>
+        <definition>std::function&lt;void(std::uint16_t, std::string_view)&gt; d2::sys::net::SystemWS::Connection::on_close</definition>
+        <argsstring></argsstring>
+        <name>on_close</name>
+        <qualifiedname>d2::sys::net::SystemWS::Connection::on_close</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="57" column="27" bodyfile="core/mods/d2_ws.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_ws.hpp" line="41" column="9" bodyfile="core/mods/d2_ws.hpp" bodystart="42" bodyend="58"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a83b741f40bae0a6a465c63acf3db70d1" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>on_close</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a0663760b03b213248c3c12ee0c48b859" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>on_error</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a3c8c68e14d30aab5c5730909a9d3a10d" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>on_message</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a3bccbd2414c190e03760b803783539ab" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>on_open</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a8c71638772c3ec9ad5455a1b43b474fa" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>on_setup</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1abce3a50b0627e2c5e47393196eee961c" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>ping_interval</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a3722e57aa7e3b64fa5e58266411ba7cf" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>reconnect</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1ac0a18c03b33802db254c6e77db76dfa1" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>reconnect_max_attempts</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a022f794c3ac4525e536bb94b30c28232" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>reconnect_max_delay</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a3c60ed3004cc2eca92a7966959a78429" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>reconnect_min_delay</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1a235c19449f788f9f08c17f1b1ef956f4" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>timeout</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection_1ac4fbda1432aa8b0230ac86e496ce0b96" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS::Connection</scope><name>url</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

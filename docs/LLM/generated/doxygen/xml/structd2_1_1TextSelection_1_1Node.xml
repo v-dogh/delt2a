@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1TextSelection_1_1Node" kind="struct" language="C++" prot="private">
+    <compoundname>d2::TextSelection::Node</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1TextSelection_1_1Node_1a835c40dd60e34eaca71f78c671b2f1c9" prot="public" static="no" mutable="no">
+        <type>std::weak_ptr&lt; <ref refid="classd2_1_1Element" kindref="compound">Element</ref> &gt;</type>
+        <definition>std::weak_ptr&lt;Element&gt; d2::TextSelection::Node::element</definition>
+        <argsstring></argsstring>
+        <name>element</name>
+        <qualifiedname>d2::TextSelection::Node::element</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="32" column="27" bodyfile="core/tree/d2_text_select.hpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1TextSelection_1_1Node_1a002213982aaf08b46339826fbe679d93" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::TextSelection::Node::revision</definition>
+        <argsstring></argsstring>
+        <name>revision</name>
+        <qualifiedname>d2::TextSelection::Node::revision</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="33" column="25" bodyfile="core/tree/d2_text_select.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1TextSelection_1_1Node_1a441c518a71e45974b3b7ff382dea5c66" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::TextSelection::Node::origin</definition>
+        <argsstring></argsstring>
+        <name>origin</name>
+        <qualifiedname>d2::TextSelection::Node::origin</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="34" column="22" bodyfile="core/tree/d2_text_select.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1TextSelection_1_1Node_1a15569e4e403ebc1ab45a2ad6366bf4f2" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::TextSelection::Node::clip_origin</definition>
+        <argsstring></argsstring>
+        <name>clip_origin</name>
+        <qualifiedname>d2::TextSelection::Node::clip_origin</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="35" column="22" bodyfile="core/tree/d2_text_select.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1TextSelection_1_1Node_1a1a233c7be8f99393367aac69d3b52e91" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::TextSelection::Node::clip</definition>
+        <argsstring></argsstring>
+        <name>clip</name>
+        <qualifiedname>d2::TextSelection::Node::clip</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="36" column="25" bodyfile="core/tree/d2_text_select.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>d2::BoundingBox</label>
+        <link refid="structd2_1_1BoundingBox"/>
+      </node>
+      <node id="2">
+        <label>d2::Position</label>
+        <link refid="structd2_1_1Position"/>
+      </node>
+      <node id="1">
+        <label>d2::TextSelection::Node</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>clip_origin</edgelabel>
+          <edgelabel>origin</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>clip</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_text_select.hpp" line="30" column="9" bodyfile="core/tree/d2_text_select.hpp" bodystart="31" bodyend="37"/>
+    <listofallmembers>
+      <member refid="structd2_1_1TextSelection_1_1Node_1a1a233c7be8f99393367aac69d3b52e91" prot="public" virt="non-virtual"><scope>d2::TextSelection::Node</scope><name>clip</name></member>
+      <member refid="structd2_1_1TextSelection_1_1Node_1a15569e4e403ebc1ab45a2ad6366bf4f2" prot="public" virt="non-virtual"><scope>d2::TextSelection::Node</scope><name>clip_origin</name></member>
+      <member refid="structd2_1_1TextSelection_1_1Node_1a835c40dd60e34eaca71f78c671b2f1c9" prot="public" virt="non-virtual"><scope>d2::TextSelection::Node</scope><name>element</name></member>
+      <member refid="structd2_1_1TextSelection_1_1Node_1a441c518a71e45974b3b7ff382dea5c66" prot="public" virt="non-virtual"><scope>d2::TextSelection::Node</scope><name>origin</name></member>
+      <member refid="structd2_1_1TextSelection_1_1Node_1a002213982aaf08b46339826fbe679d93" prot="public" virt="non-virtual"><scope>d2::TextSelection::Node</scope><name>revision</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

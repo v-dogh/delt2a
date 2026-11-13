@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1Dynavar" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::Dynavar</compoundname>
+    <includes refid="d2__theme_8hpp" local="no">d2_theme.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>auto</type>
+        <declname>Func</declname>
+        <defname>Func</defname>
+      </param>
+      <param>
+        <type>typename Type</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1Dynavar_1a6ad208b59605a37908762086929fd796" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::style::Dynavar&lt; Func, Type &gt;::filter</definition>
+        <argsstring></argsstring>
+        <name>filter</name>
+        <qualifiedname>d2::style::Dynavar::filter</qualifiedname>
+        <initializer>= Func</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="662" column="31" bodyfile="core/tree/d2_theme.hpp" bodystart="662" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1Dynavar_1a0a1a7af56566ff13e76a644a6966e8a1" prot="public" static="no" mutable="no">
+        <type>Type &amp;</type>
+        <definition>Type&amp; d2::style::Dynavar&lt; Func, Type &gt;::dependency</definition>
+        <argsstring></argsstring>
+        <name>dependency</name>
+        <qualifiedname>d2::style::Dynavar::dependency</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="663" column="14" bodyfile="core/tree/d2_theme.hpp" bodystart="663" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1style_1_1Dynavar_1a8f0cb4d15c1d2999168e347bbef42486" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::Dynavar&lt; Func, Type &gt;::Dynavar</definition>
+        <argsstring>(Type &amp;dep)</argsstring>
+        <name>Dynavar</name>
+        <qualifiedname>d2::style::Dynavar::Dynavar</qualifiedname>
+        <param>
+          <type>Type &amp;</type>
+          <declname>dep</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="665" column="18" bodyfile="core/tree/d2_theme.hpp" bodystart="665" bodyend="665"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1style_1_1Dynavar_1aee2563f5b13d51fabcf365758b5b3393" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Value</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>d2::style::Dynavar&lt; Func, Type &gt;::operator Value</definition>
+        <argsstring>() const</argsstring>
+        <name>operator Value</name>
+        <qualifiedname>d2::style::Dynavar::operator Value</qualifiedname>
+    <requiresclause>(!std::is_reference_v&lt;Value&gt; || std::is_const_v&lt;Value&gt;)    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="668" column="9" bodyfile="core/tree/d2_theme.hpp" bodystart="668" bodyend="672"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_theme.hpp" line="660" column="17" bodyfile="core/tree/d2_theme.hpp" bodystart="661" bodyend="673"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1Dynavar_1a0a1a7af56566ff13e76a644a6966e8a1" prot="public" virt="non-virtual"><scope>d2::style::Dynavar</scope><name>dependency</name></member>
+      <member refid="structd2_1_1style_1_1Dynavar_1a8f0cb4d15c1d2999168e347bbef42486" prot="public" virt="non-virtual"><scope>d2::style::Dynavar</scope><name>Dynavar</name></member>
+      <member refid="structd2_1_1style_1_1Dynavar_1a6ad208b59605a37908762086929fd796" prot="public" virt="non-virtual"><scope>d2::style::Dynavar</scope><name>filter</name></member>
+      <member refid="structd2_1_1style_1_1Dynavar_1aee2563f5b13d51fabcf365758b5b3393" prot="public" virt="non-virtual"><scope>d2::style::Dynavar</scope><name>operator Value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

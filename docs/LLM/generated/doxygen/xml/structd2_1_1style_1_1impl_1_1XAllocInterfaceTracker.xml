@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1impl_1_1XAllocInterfaceTracker" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::impl::XAllocInterfaceTracker</compoundname>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1impl_1_1XAllocInterfaceTracker_1a1bf417c2895225e385de2392976da994" prot="public" static="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::style::impl::XAllocInterfaceTracker::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>d2::style::impl::XAllocInterfaceTracker::id</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="702" column="39" bodyfile="core/tree/d2_styles.hpp" bodystart="702" bodyend="702"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="700" column="9" bodyfile="core/tree/d2_styles.hpp" bodystart="701" bodyend="703"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1impl_1_1XAllocInterfaceTracker_1a1bf417c2895225e385de2392976da994" prot="public" virt="non-virtual"><scope>d2::style::impl::XAllocInterfaceTracker</scope><name>id</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

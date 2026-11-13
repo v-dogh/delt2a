@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4" kind="class" language="C++" prot="public">
+    <compoundname>d2::impl::LinearInterpolationWriter&lt; pixel &gt;</compoundname>
+    <includes refid="d2__animate_8hpp" local="no">d2_animate.hpp</includes>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a1e5ccc4ee60e7c24d10c9964194e163e" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+        <definition>pixel d2::impl::LinearInterpolationWriter&lt; pixel &gt;::_source</definition>
+        <argsstring></argsstring>
+        <name>_source</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; pixel &gt;::_source</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="85" column="19" bodyfile="core/screen/d2_animate.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a7002b429662a45992b5edf295247bca5" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+        <definition>pixel d2::impl::LinearInterpolationWriter&lt; pixel &gt;::_dest</definition>
+        <argsstring></argsstring>
+        <name>_dest</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; pixel &gt;::_dest</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="86" column="19" bodyfile="core/screen/d2_animate.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a77a70a3b3e6fda44ae143586aba456fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::impl::LinearInterpolationWriter&lt; pixel &gt;::LinearInterpolationWriter</definition>
+        <argsstring>(pixel source, pixel dest)</argsstring>
+        <name>LinearInterpolationWriter</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; pixel &gt;::LinearInterpolationWriter</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="88" column="13" bodyfile="core/screen/d2_animate.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a142a63a3fda345e2460073cfaa682495" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::impl::LinearInterpolationWriter&lt; pixel &gt;::reset</definition>
+        <argsstring>(const pixel &amp;source, const pixel &amp;dest)</argsstring>
+        <name>reset</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; pixel &gt;::reset</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="90" column="18" bodyfile="core/screen/d2_animate.hpp" bodystart="90" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a5103aa4a43ef7f3d98cfc3aa58534b57" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+        <definition>pixel d2::impl::LinearInterpolationWriter&lt; pixel &gt;::write</definition>
+        <argsstring>(float progress)</argsstring>
+        <name>write</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; pixel &gt;::write</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="95" column="19" bodyfile="core/screen/d2_animate.hpp" bodystart="95" bodyend="98"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/screen/d2_animate.hpp" line="82" column="18" bodyfile="core/screen/d2_animate.hpp" bodystart="83" bodyend="99"/>
+    <listofallmembers>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a7002b429662a45992b5edf295247bca5" prot="private" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; pixel &gt;</scope><name>_dest</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a1e5ccc4ee60e7c24d10c9964194e163e" prot="private" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; pixel &gt;</scope><name>_source</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a77a70a3b3e6fda44ae143586aba456fd" prot="public" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; pixel &gt;</scope><name>LinearInterpolationWriter</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a142a63a3fda345e2460073cfaa682495" prot="public" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; pixel &gt;</scope><name>reset</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4_1a5103aa4a43ef7f3d98cfc3aa58534b57" prot="public" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; pixel &gt;</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

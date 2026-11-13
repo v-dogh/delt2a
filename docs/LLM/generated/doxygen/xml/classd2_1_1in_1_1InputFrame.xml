@@ -1,0 +1,640 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1in_1_1InputFrame" kind="class" language="C++" prot="public">
+    <compoundname>d2::in::InputFrame</compoundname>
+    <includes refid="d2__input__base_8hpp" local="no">d2_input_base.hpp</includes>
+    <innerclass refid="structd2_1_1in_1_1InputFrame_1_1ExportKeymap" prot="public">d2::in::InputFrame::ExportKeymap</innerclass>
+    <innerclass refid="structd2_1_1in_1_1InputFrame_1_1ActiveList" prot="public">d2::in::InputFrame::ActiveList</innerclass>
+    <innerclass refid="structd2_1_1in_1_1InputFrame_1_1ConsumeState" prot="private">d2::in::InputFrame::ConsumeState</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1in_1_1InputFrame_1aa337a4f54377a45d52d522cadf050929" prot="public" static="no">
+        <type>std::bitset&lt; std::size_t(<ref refid="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64abe33449d8073a56c508e45cc711cb610" kindref="member">Mouse::MouseKeyMax</ref>)&gt;</type>
+        <definition>using d2::in::InputFrame::keymap = std::bitset&lt;std::size_t(Mouse::MouseKeyMax)&gt;</definition>
+        <argsstring></argsstring>
+        <name>keymap</name>
+        <qualifiedname>d2::in::InputFrame::keymap</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="112" column="9" bodyfile="core/io/d2_input_base.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1in_1_1InputFrame_1a836604c8ca7d6b287f19246c78de5ac6" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1in_1_1InputFrame_1aad362a4e38c85cec5db13231798e17d3" kindref="member">InputFrame</ref> &gt;</type>
+        <definition>using d2::in::InputFrame::ptr = std::shared_ptr&lt;InputFrame&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::in::InputFrame::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="113" column="9" bodyfile="core/io/d2_input_base.hpp" bodystart="113" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1aa01589800cc917be300c17473dc6fe79" prot="private" static="no" mutable="no">
+        <type>std::thread::id</type>
+        <definition>std::thread::id d2::in::InputFrame::_consume_ctx</definition>
+        <argsstring></argsstring>
+        <name>_consume_ctx</name>
+        <qualifiedname>d2::in::InputFrame::_consume_ctx</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="143" column="25" bodyfile="core/io/d2_input_base.hpp" bodystart="143" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1ad58e42fae6e575e04ae01f31b7147316" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::in::InputFrame::_consume</definition>
+        <argsstring></argsstring>
+        <name>_consume</name>
+        <qualifiedname>d2::in::InputFrame::_consume</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="144" column="14" bodyfile="core/io/d2_input_base.hpp" bodystart="144" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1a5be8f22e091ef073152163e26bdc66f0" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::in::InputFrame::_poll_index</definition>
+        <argsstring></argsstring>
+        <name>_poll_index</name>
+        <qualifiedname>d2::in::InputFrame::_poll_index</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="145" column="14" bodyfile="core/io/d2_input_base.hpp" bodystart="145" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1ad1e8a9c043fab4afd31bcc0110f75a15" prot="private" static="no" mutable="no">
+        <type>ConsumeState</type>
+        <definition>ConsumeState d2::in::InputFrame::_active_consume</definition>
+        <argsstring></argsstring>
+        <name>_active_consume</name>
+        <qualifiedname>d2::in::InputFrame::_active_consume</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="147" column="22" bodyfile="core/io/d2_input_base.hpp" bodystart="147" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1ae5a4a74ff7aeae526858ac355df13b0f" prot="private" static="no" mutable="no">
+        <type>ConsumeState</type>
+        <definition>ConsumeState d2::in::InputFrame::_consume_swap</definition>
+        <argsstring></argsstring>
+        <name>_consume_swap</name>
+        <qualifiedname>d2::in::InputFrame::_consume_swap</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="148" column="22" bodyfile="core/io/d2_input_base.hpp" bodystart="148" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1a9a7399277a3cc429ffc1fce7a5ac9de2" prot="private" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char d2::in::InputFrame::_event_state</definition>
+        <argsstring></argsstring>
+        <name>_event_state</name>
+        <qualifiedname>d2::in::InputFrame::_event_state</qualifiedname>
+        <initializer>{0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="150" column="23" bodyfile="core/io/d2_input_base.hpp" bodystart="150" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1a7d59a6c3d96321d88dc81a369bb43b82" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::in::InputFrame::_screen_capacity</definition>
+        <argsstring></argsstring>
+        <name>_screen_capacity</name>
+        <qualifiedname>d2::in::InputFrame::_screen_capacity</qualifiedname>
+        <initializer>{-1, -1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="152" column="21" bodyfile="core/io/d2_input_base.hpp" bodystart="152" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1a3ac8c3a0d535453ab5bfa0924619b158" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::in::InputFrame::_BoundingBox</definition>
+        <argsstring></argsstring>
+        <name>_BoundingBox</name>
+        <qualifiedname>d2::in::InputFrame::_BoundingBox</qualifiedname>
+        <initializer>{-1, -1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="153" column="21" bodyfile="core/io/d2_input_base.hpp" bodystart="153" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1aa4cecf33e9e7bed0f6eb8872da7134f5" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::in::InputFrame::_mouse_pos</definition>
+        <argsstring></argsstring>
+        <name>_mouse_pos</name>
+        <qualifiedname>d2::in::InputFrame::_mouse_pos</qualifiedname>
+        <initializer>{0, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="154" column="18" bodyfile="core/io/d2_input_base.hpp" bodystart="154" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1aac460c1ca3b27776f6668524257b5baf" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::in::InputFrame::_scroll_delta</definition>
+        <argsstring></argsstring>
+        <name>_scroll_delta</name>
+        <qualifiedname>d2::in::InputFrame::_scroll_delta</qualifiedname>
+        <initializer>{0, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="155" column="18" bodyfile="core/io/d2_input_base.hpp" bodystart="155" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1af18e26f8be1c31a43b5d76e8fd51afd9" prot="private" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="classd2_1_1in_1_1InputFrame_1aa337a4f54377a45d52d522cadf050929" kindref="member">keymap</ref>, 2 &gt;</type>
+        <definition>std::array&lt;keymap, 2&gt; d2::in::InputFrame::_keys_poll</definition>
+        <argsstring></argsstring>
+        <name>_keys_poll</name>
+        <qualifiedname>d2::in::InputFrame::_keys_poll</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="162" column="20" bodyfile="core/io/d2_input_base.hpp" bodystart="162" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1a5deba65d2e3b2dadd0ea310e59042973" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1in_1_1InputFrame_1aa337a4f54377a45d52d522cadf050929" kindref="member">keymap</ref></type>
+        <definition>keymap d2::in::InputFrame::_pulse</definition>
+        <argsstring></argsstring>
+        <name>_pulse</name>
+        <qualifiedname>d2::in::InputFrame::_pulse</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="163" column="16" bodyfile="core/io/d2_input_base.hpp" bodystart="163" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1in_1_1InputFrame_1a9b9c4bab62bb8488fbcad2d006ae7a22" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::in::InputFrame::_sequence</definition>
+        <argsstring></argsstring>
+        <name>_sequence</name>
+        <qualifiedname>d2::in::InputFrame::_sequence</qualifiedname>
+        <initializer>{&quot;&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="165" column="21" bodyfile="core/io/d2_input_base.hpp" bodystart="165" bodyend="165"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classd2_1_1in_1_1InputFrame_1a6e023b55207ea65d19c3ee059a945df9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class internal::InputFrameView</definition>
+        <argsstring></argsstring>
+        <name>internal::InputFrameView</name>
+        <qualifiedname>d2::in::InputFrame::InputFrameView</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1in_1_1internal_1_1InputFrameView" kindref="compound">internal::InputFrameView</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="175" column="22" bodyfile="core/io/d2_input_base.hpp" bodystart="175" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a51ef4eb5a60f26732fa9802b7e999d3b" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::in::InputFrame::_cur_poll_idx</definition>
+        <argsstring>() const</argsstring>
+        <name>_cur_poll_idx</name>
+        <qualifiedname>d2::in::InputFrame::_cur_poll_idx</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="167" column="21" bodyfile="core/io/d2_input_base.cpp" bodystart="7" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1ab52cb958ac6ce63d7d751372eabdc92d" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::in::InputFrame::_prev_poll_idx</definition>
+        <argsstring>() const</argsstring>
+        <name>_prev_poll_idx</name>
+        <qualifiedname>d2::in::InputFrame::_prev_poll_idx</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="168" column="21" bodyfile="core/io/d2_input_base.cpp" bodystart="11" bodyend="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a77008f4d6e66713ba528ab697dfac48f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::in::InputFrame::make</definition>
+        <argsstring>()</argsstring>
+        <name>make</name>
+        <qualifiedname>d2::in::InputFrame::make</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="170" column="21" bodyfile="core/io/d2_input_base.hpp" bodystart="170" bodyend="173"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1aad362a4e38c85cec5db13231798e17d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::in::InputFrame::InputFrame</definition>
+        <argsstring>()=default</argsstring>
+        <name>InputFrame</name>
+        <qualifiedname>d2::in::InputFrame::InputFrame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="177" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a1f013121052411cba6b6b397fb25927b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::in::InputFrame::InputFrame</definition>
+        <argsstring>(const InputFrame &amp;)=default</argsstring>
+        <name>InputFrame</name>
+        <qualifiedname>d2::in::InputFrame::InputFrame</qualifiedname>
+        <param>
+          <type>const InputFrame &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="178" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1aa0a668e8654bf67cd57630fa0fba9bb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::in::InputFrame::InputFrame</definition>
+        <argsstring>(InputFrame &amp;&amp;)=default</argsstring>
+        <name>InputFrame</name>
+        <qualifiedname>d2::in::InputFrame::InputFrame</qualifiedname>
+        <param>
+          <type>InputFrame &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="179" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a2aac081117f7a86b7d0d03a877ffd331" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::in::InputFrame::had_event</definition>
+        <argsstring>(Event ev) const</argsstring>
+        <name>had_event</name>
+        <qualifiedname>d2::in::InputFrame::had_event</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527b" kindref="member">Event</ref></type>
+          <declname>ev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="181" column="14" bodyfile="core/io/d2_input_base.cpp" bodystart="16" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1ae93cadc138ac5a7b912f3cee3fdf1778" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::in::InputFrame::had_pulse</definition>
+        <argsstring>() const</argsstring>
+        <name>had_pulse</name>
+        <qualifiedname>d2::in::InputFrame::had_pulse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="182" column="14" bodyfile="core/io/d2_input_base.cpp" bodystart="20" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1ae9a393adac639ddd04e9dba12705f2eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::in::InputFrame::scroll_delta</definition>
+        <argsstring>()</argsstring>
+        <name>scroll_delta</name>
+        <qualifiedname>d2::in::InputFrame::scroll_delta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="184" column="18" bodyfile="core/io/d2_input_base.cpp" bodystart="30" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1add8af69058f491e24afe9d6acd47781e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::in::InputFrame::mouse_position</definition>
+        <argsstring>()</argsstring>
+        <name>mouse_position</name>
+        <qualifiedname>d2::in::InputFrame::mouse_position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="185" column="18" bodyfile="core/io/d2_input_base.cpp" bodystart="26" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1ac863ec85d2d45f7b0aef66e29af8e7c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::in::InputFrame::screen_capacity</definition>
+        <argsstring>()</argsstring>
+        <name>screen_capacity</name>
+        <qualifiedname>d2::in::InputFrame::screen_capacity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="186" column="21" bodyfile="core/io/d2_input_base.cpp" bodystart="44" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1ae96b779f8a1a37a26c757e7bf8278a38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::in::InputFrame::screen_size</definition>
+        <argsstring>()</argsstring>
+        <name>screen_size</name>
+        <qualifiedname>d2::in::InputFrame::screen_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="187" column="21" bodyfile="core/io/d2_input_base.cpp" bodystart="40" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a00db11bc02e7ba0debfc15d57a5968bc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>absl::InlinedVector&lt; std::pair&lt; <ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref>, <ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">mode</ref> &gt;, 8 &gt;</type>
+        <definition>absl::InlinedVector&lt; std::pair&lt; keytype, mode &gt;, 8 &gt; d2::in::InputFrame::active_list</definition>
+        <argsstring>() const</argsstring>
+        <name>active_list</name>
+        <qualifiedname>d2::in::InputFrame::active_list</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="189" column="29" bodyfile="core/io/d2_input_base.cpp" bodystart="49" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1ab2c00c273f26fba01fa88ee7721b5a93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::in::InputFrame::active</definition>
+        <argsstring>(Mouse mouse, Mode mode)</argsstring>
+        <name>active</name>
+        <qualifiedname>d2::in::InputFrame::active</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64" kindref="member">Mouse</ref></type>
+          <declname>mouse</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">Mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="191" column="14" bodyfile="core/io/d2_input_base.cpp" bodystart="73" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1aa554b7aa08bdaf4979d00fcf8d5ff06a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::in::InputFrame::active</definition>
+        <argsstring>(Special mod, Mode mode)</argsstring>
+        <name>active</name>
+        <qualifiedname>d2::in::InputFrame::active</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265b" kindref="member">Special</ref></type>
+          <declname>mod</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">Mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="192" column="14" bodyfile="core/io/d2_input_base.cpp" bodystart="77" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a3a0ac43871d805511fa1fea43197f461" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::in::InputFrame::active</definition>
+        <argsstring>(keytype key, Mode mode)</argsstring>
+        <name>active</name>
+        <qualifiedname>d2::in::InputFrame::active</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">Mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="193" column="14" bodyfile="core/io/d2_input_base.cpp" bodystart="81" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a512a23ac205049a24eadd62ccd0c98eb" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1in_1_1InputFrame_1_1ExportKeymap" kindref="compound">ExportKeymap</ref>&lt; <ref refid="classd2_1_1in_1_1InputFrame_1aa337a4f54377a45d52d522cadf050929" kindref="member">keymap</ref> &gt;</type>
+        <definition>InputFrame::ExportKeymap&lt; InputFrame::keymap &gt; d2::in::InputFrame::map</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>map</name>
+        <qualifiedname>d2::in::InputFrame::map</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="195" column="22" bodyfile="core/io/d2_input_base.cpp" bodystart="113" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1ab03121a8ed6f8097159e12273bcd3ae2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>std::string_view d2::in::InputFrame::sequence</definition>
+        <argsstring>()</argsstring>
+        <name>sequence</name>
+        <qualifiedname>d2::in::InputFrame::sequence</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="197" column="26" bodyfile="core/io/d2_input_base.cpp" bodystart="118" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a3d6f128ec12f102e148b42cc18119889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::in::InputFrame::mask</definition>
+        <argsstring>()</argsstring>
+        <name>mask</name>
+        <qualifiedname>d2::in::InputFrame::mask</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="199" column="14" bodyfile="core/io/d2_input_base.cpp" bodystart="129" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a084bb2069bb109d2ba72c53472bf7eff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1in_1_1InputFrame_1aad362a4e38c85cec5db13231798e17d3" kindref="member">InputFrame</ref> &amp;</type>
+        <definition>InputFrame &amp; d2::in::InputFrame::operator=</definition>
+        <argsstring>(const InputFrame &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::in::InputFrame::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1in_1_1InputFrame_1aad362a4e38c85cec5db13231798e17d3" kindref="member">InputFrame</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="201" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1in_1_1InputFrame_1a145d202b8a9f09e8a195e3d36245f6bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1in_1_1InputFrame_1aad362a4e38c85cec5db13231798e17d3" kindref="member">InputFrame</ref> &amp;</type>
+        <definition>InputFrame &amp; d2::in::InputFrame::operator=</definition>
+        <argsstring>(InputFrame &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::in::InputFrame::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame_1aad362a4e38c85cec5db13231798e17d3" kindref="member">InputFrame</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="202" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_input_base.hpp" line="109" column="5" bodyfile="core/io/d2_input_base.hpp" bodystart="110" bodyend="203"/>
+    <listofallmembers>
+      <member refid="classd2_1_1in_1_1InputFrame_1ad1e8a9c043fab4afd31bcc0110f75a15" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_active_consume</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a3ac8c3a0d535453ab5bfa0924619b158" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_BoundingBox</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1ad58e42fae6e575e04ae01f31b7147316" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_consume</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1aa01589800cc917be300c17473dc6fe79" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_consume_ctx</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1ae5a4a74ff7aeae526858ac355df13b0f" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_consume_swap</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a51ef4eb5a60f26732fa9802b7e999d3b" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_cur_poll_idx</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a9a7399277a3cc429ffc1fce7a5ac9de2" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_event_state</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1af18e26f8be1c31a43b5d76e8fd51afd9" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_keys_poll</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1aa4cecf33e9e7bed0f6eb8872da7134f5" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_mouse_pos</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a5be8f22e091ef073152163e26bdc66f0" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_poll_index</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1ab52cb958ac6ce63d7d751372eabdc92d" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_prev_poll_idx</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a5deba65d2e3b2dadd0ea310e59042973" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_pulse</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a7d59a6c3d96321d88dc81a369bb43b82" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_screen_capacity</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1aac460c1ca3b27776f6668524257b5baf" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_scroll_delta</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a9b9c4bab62bb8488fbcad2d006ae7a22" prot="private" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>_sequence</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1ab2c00c273f26fba01fa88ee7721b5a93" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>active</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1aa554b7aa08bdaf4979d00fcf8d5ff06a" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>active</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a3a0ac43871d805511fa1fea43197f461" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>active</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a00db11bc02e7ba0debfc15d57a5968bc" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>active_list</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a2aac081117f7a86b7d0d03a877ffd331" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>had_event</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1ae93cadc138ac5a7b912f3cee3fdf1778" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>had_pulse</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1aad362a4e38c85cec5db13231798e17d3" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>InputFrame</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a1f013121052411cba6b6b397fb25927b" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>InputFrame</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1aa0a668e8654bf67cd57630fa0fba9bb2" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>InputFrame</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a6e023b55207ea65d19c3ee059a945df9" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>internal::InputFrameView</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1aa337a4f54377a45d52d522cadf050929" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>keymap</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a77008f4d6e66713ba528ab697dfac48f" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>make</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a512a23ac205049a24eadd62ccd0c98eb" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>map</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a3d6f128ec12f102e148b42cc18119889" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>mask</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1add8af69058f491e24afe9d6acd47781e" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>mouse_position</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a084bb2069bb109d2ba72c53472bf7eff" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>operator=</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a145d202b8a9f09e8a195e3d36245f6bb" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>operator=</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1a836604c8ca7d6b287f19246c78de5ac6" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>ptr</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1ac863ec85d2d45f7b0aef66e29af8e7c9" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>screen_capacity</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1ae96b779f8a1a37a26c757e7bf8278a38" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>screen_size</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1ae9a393adac639ddd04e9dba12705f2eb" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>scroll_delta</name></member>
+      <member refid="classd2_1_1in_1_1InputFrame_1ab03121a8ed6f8097159e12273bcd3ae2" prot="public" virt="non-virtual"><scope>d2::in::InputFrame</scope><name>sequence</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

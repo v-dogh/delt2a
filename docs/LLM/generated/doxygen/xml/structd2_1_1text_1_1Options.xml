@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1text_1_1Options" kind="struct" language="C++" prot="public">
+    <compoundname>d2::text::Options</compoundname>
+    <includes refid="d2__text__layout_8hpp" local="no">d2_text_layout.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1text_1_1Options_1ada52bc8be6012de0ba0c786bbcd29730" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::text::Options::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>d2::text::Options::width</qualifiedname>
+        <initializer>{INT_MAX}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="23" column="13" bodyfile="core/platform/d2_text_layout.hpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Options_1a1514520fc8894276e539c104e448e963" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::text::Options::tab_width</definition>
+        <argsstring></argsstring>
+        <name>tab_width</name>
+        <qualifiedname>d2::text::Options::tab_width</qualifiedname>
+        <initializer>{4}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="24" column="13" bodyfile="core/platform/d2_text_layout.hpp" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Options_1adf1595dde40ea8f62b0a8ba5048a40b9" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1text_1a53ef82581edd49e5f0d0c41ebe0a253b" kindref="member">Wrap</ref></type>
+        <definition>Wrap d2::text::Options::wrap</definition>
+        <argsstring></argsstring>
+        <name>wrap</name>
+        <qualifiedname>d2::text::Options::wrap</qualifiedname>
+        <initializer>{<ref refid="namespaced2_1_1text_1a53ef82581edd49e5f0d0c41ebe0a253ba6adf97f83acf6453d4a6a4b1070f3754" kindref="member">Wrap::None</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="25" column="14" bodyfile="core/platform/d2_text_layout.hpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Options_1a2544f111c78baa4fdec8cd4cec01d5b5" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1text_1aca1a47e17deaf9a5459e4e048d081e25" kindref="member">Alignment</ref></type>
+        <definition>Alignment d2::text::Options::alignment</definition>
+        <argsstring></argsstring>
+        <name>alignment</name>
+        <qualifiedname>d2::text::Options::alignment</qualifiedname>
+        <initializer>{<ref refid="namespaced2_1_1text_1aca1a47e17deaf9a5459e4e048d081e25a945d5e233cf7d6240f6b783b36a374ff" kindref="member">Alignment::Left</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="26" column="19" bodyfile="core/platform/d2_text_layout.hpp" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Options_1af8a41a70fedd86bcfdbb35058f66953d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::text::Options::newlines</definition>
+        <argsstring></argsstring>
+        <name>newlines</name>
+        <qualifiedname>d2::text::Options::newlines</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="27" column="14" bodyfile="core/platform/d2_text_layout.hpp" bodystart="27" bodyend="27"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1text_1_1Options_1a85f91202fe7a1102fce70754a7c1df85" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::text::Options::operator&lt;=&gt;</definition>
+        <argsstring>(const Options &amp;) const =default</argsstring>
+        <name>operator&lt;=&gt;</name>
+        <qualifiedname>d2::text::Options::operator&lt;=&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1text_1_1Options" kindref="compound">Options</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="28" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_text_layout.hpp" line="21" column="5" bodyfile="core/platform/d2_text_layout.hpp" bodystart="22" bodyend="29"/>
+    <listofallmembers>
+      <member refid="structd2_1_1text_1_1Options_1a2544f111c78baa4fdec8cd4cec01d5b5" prot="public" virt="non-virtual"><scope>d2::text::Options</scope><name>alignment</name></member>
+      <member refid="structd2_1_1text_1_1Options_1af8a41a70fedd86bcfdbb35058f66953d" prot="public" virt="non-virtual"><scope>d2::text::Options</scope><name>newlines</name></member>
+      <member refid="structd2_1_1text_1_1Options_1a85f91202fe7a1102fce70754a7c1df85" prot="public" virt="non-virtual"><scope>d2::text::Options</scope><name>operator&lt;=&gt;</name></member>
+      <member refid="structd2_1_1text_1_1Options_1a1514520fc8894276e539c104e448e963" prot="public" virt="non-virtual"><scope>d2::text::Options</scope><name>tab_width</name></member>
+      <member refid="structd2_1_1text_1_1Options_1ada52bc8be6012de0ba0c786bbcd29730" prot="public" virt="non-virtual"><scope>d2::text::Options</scope><name>width</name></member>
+      <member refid="structd2_1_1text_1_1Options_1adf1595dde40ea8f62b0a8ba5048a40b9" prot="public" virt="non-virtual"><scope>d2::text::Options</scope><name>wrap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

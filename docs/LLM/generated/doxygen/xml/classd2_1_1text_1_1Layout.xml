@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1text_1_1Layout" kind="class" language="C++" prot="public">
+    <compoundname>d2::text::Layout</compoundname>
+    <includes refid="d2__text__layout_8hpp" local="no">d2_text_layout.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1text_1_1Layout_1ad361fb5d1678e88d27393fae07dae61e" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::text::Layout::_source</definition>
+        <argsstring></argsstring>
+        <name>_source</name>
+        <qualifiedname>d2::text::Layout::_source</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="54" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1text_1_1Layout_1aa774bca0ae8a93f34e9b2e72e3d6eae3" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1text_1_1Options" kindref="compound">Options</ref></type>
+        <definition>Options d2::text::Layout::_options</definition>
+        <argsstring></argsstring>
+        <name>_options</name>
+        <qualifiedname>d2::text::Layout::_options</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="55" column="17" bodyfile="core/platform/d2_text_layout.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1text_1_1Layout_1a0240510450d815f8c0d6aa2d18bd60eb" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structd2_1_1text_1_1Glyph" kindref="compound">Glyph</ref> &gt;</type>
+        <definition>std::vector&lt;Glyph&gt; d2::text::Layout::_glyphs</definition>
+        <argsstring></argsstring>
+        <name>_glyphs</name>
+        <qualifiedname>d2::text::Layout::_glyphs</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="56" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1text_1_1Layout_1a0946c8db37e6a724a66ff6c3dbe6f910" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structd2_1_1text_1_1Line" kindref="compound">Line</ref> &gt;</type>
+        <definition>std::vector&lt;Line&gt; d2::text::Layout::_lines</definition>
+        <argsstring></argsstring>
+        <name>_lines</name>
+        <qualifiedname>d2::text::Layout::_lines</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="57" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1text_1_1Layout_1ac029818311f2c682c6f6887104ec9a83" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::text::Layout::_bounds</definition>
+        <argsstring></argsstring>
+        <name>_bounds</name>
+        <qualifiedname>d2::text::Layout::_bounds</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="58" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1text_1_1Layout_1a170d8ca4f46390079b4cc2b844d0939f" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::text::Layout::_revision</definition>
+        <argsstring></argsstring>
+        <name>_revision</name>
+        <qualifiedname>d2::text::Layout::_revision</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="59" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a4431e02f128bfbf307b9b7ef9a12295e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::text::Layout::_build</definition>
+        <argsstring>()</argsstring>
+        <name>_build</name>
+        <qualifiedname>d2::text::Layout::_build</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="61" column="14" bodyfile="core/platform/d2_text_layout.cpp" bodystart="77" bodyend="163"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a9a135ca9c636116bba197daf7989cd10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::text::Layout::Layout</definition>
+        <argsstring>()</argsstring>
+        <name>Layout</name>
+        <qualifiedname>d2::text::Layout::Layout</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="63" column="9" bodyfile="core/platform/d2_text_layout.cpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a98c337652dec5a2097e52ac064048bac" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::text::Layout::Layout</definition>
+        <argsstring>(std::string_view source, Options options={})</argsstring>
+        <name>Layout</name>
+        <qualifiedname>d2::text::Layout::Layout</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1text_1_1Options" kindref="compound">Options</ref></type>
+          <declname>options</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="64" column="18" bodyfile="core/platform/d2_text_layout.cpp" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a789a81d2f0c77c8459be7eba9cb7ee9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::text::Layout::reset</definition>
+        <argsstring>(std::string_view source, Options options={})</argsstring>
+        <name>reset</name>
+        <qualifiedname>d2::text::Layout::reset</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1text_1_1Options" kindref="compound">Options</ref></type>
+          <declname>options</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="66" column="14" bodyfile="core/platform/d2_text_layout.cpp" bodystart="62" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a1e7f76176549c24c5d98447522210163" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>std::string_view d2::text::Layout::source</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>source</name>
+        <qualifiedname>d2::text::Layout::source</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="67" column="26" bodyfile="core/platform/d2_text_layout.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1aaf3805a2f469a328c4fdf14970bc9a5a" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structd2_1_1text_1_1Options" kindref="compound">Options</ref> &amp;</type>
+        <definition>const Options &amp; d2::text::Layout::options</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>options</name>
+        <qualifiedname>d2::text::Layout::options</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="68" column="23" bodyfile="core/platform/d2_text_layout.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1af912822d6c55b93c918bea7593070bb8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; <ref refid="structd2_1_1text_1_1Glyph" kindref="compound">Glyph</ref> &gt; &amp;</type>
+        <definition>const std::vector&lt; Glyph &gt; &amp; d2::text::Layout::glyphs</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>glyphs</name>
+        <qualifiedname>d2::text::Layout::glyphs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="69" column="27" bodyfile="core/platform/d2_text_layout.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a4bcf2c3453baf1157a704ae8846bae79" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; <ref refid="structd2_1_1text_1_1Line" kindref="compound">Line</ref> &gt; &amp;</type>
+        <definition>const std::vector&lt; Line &gt; &amp; d2::text::Layout::lines</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>lines</name>
+        <qualifiedname>d2::text::Layout::lines</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="70" column="27" bodyfile="core/platform/d2_text_layout.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a34f932316bd66628154130776f1e954c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::text::Layout::bounds</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>bounds</name>
+        <qualifiedname>d2::text::Layout::bounds</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="71" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1ac915d4109ee46956c3decc9079f4f20d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::text::Layout::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>d2::text::Layout::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="72" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a6d1fb182c8f0392cecfd18a06271e1b9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::text::Layout::revision</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>revision</name>
+        <qualifiedname>d2::text::Layout::revision</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="73" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1af0162abf0c07ad72bb3f9c04c4ef84ab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::text::Layout::byte_offset</definition>
+        <argsstring>(std::size_t grapheme) const</argsstring>
+        <name>byte_offset</name>
+        <qualifiedname>d2::text::Layout::byte_offset</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>grapheme</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="75" column="21" bodyfile="core/platform/d2_text_layout.cpp" bodystart="165" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1af2fb3e0ae52ab1009a43ffc3b4057a1d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::text::Layout::grapheme_at</definition>
+        <argsstring>(std::size_t byte, Affinity affinity=Affinity::Upstream) const</argsstring>
+        <name>grapheme_at</name>
+        <qualifiedname>d2::text::Layout::grapheme_at</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>byte</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1text_1a52598e031ee757237f313e21d1be5181" kindref="member">Affinity</ref></type>
+          <declname>affinity</declname>
+          <defval><ref refid="namespaced2_1_1text_1a52598e031ee757237f313e21d1be5181a6b8723ed8ce2d285d63d9682f60b0287" kindref="member">Affinity::Upstream</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="76" column="21" bodyfile="core/platform/d2_text_layout.cpp" bodystart="171" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a13aedadd7b30d7d449d592ca39a8d4a8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>std::string_view d2::text::Layout::extract</definition>
+        <argsstring>(Range range) const</argsstring>
+        <name>extract</name>
+        <qualifiedname>d2::text::Layout::extract</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1text_1_1Range" kindref="compound">Range</ref></type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="77" column="26" bodyfile="core/platform/d2_text_layout.cpp" bodystart="182" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1af68aa110773da07331384367dd3de457" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::text::Layout::hit_test</definition>
+        <argsstring>(Position position) const</argsstring>
+        <name>hit_test</name>
+        <qualifiedname>d2::text::Layout::hit_test</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="78" column="21" bodyfile="core/platform/d2_text_layout.cpp" bodystart="189" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a31858baff1c35f46fcdfb3e78f099140" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::text::Layout::caret</definition>
+        <argsstring>(std::size_t grapheme, Affinity affinity=Affinity::Downstream) const</argsstring>
+        <name>caret</name>
+        <qualifiedname>d2::text::Layout::caret</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>grapheme</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1text_1a52598e031ee757237f313e21d1be5181" kindref="member">Affinity</ref></type>
+          <declname>affinity</declname>
+          <defval><ref refid="namespaced2_1_1text_1a52598e031ee757237f313e21d1be5181a1f26ed6d29f1966178f4eaa5b920f551" kindref="member">Affinity::Downstream</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="79" column="18" bodyfile="core/platform/d2_text_layout.cpp" bodystart="206" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1text_1_1Layout_1a4aa229aa2a84976e15ff6d39cf53e7fb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::text::Layout::draw</definition>
+        <argsstring>(PixelBuffer::View buffer, pixel color, Position origin={}, std::optional&lt; Range &gt; selection={}, px::background highlight={}, std::optional&lt; std::size_t &gt; caret_gap={}) const</argsstring>
+        <name>draw</name>
+        <qualifiedname>d2::text::Layout::draw</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>origin</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>std::optional&lt; <ref refid="structd2_1_1text_1_1Range" kindref="compound">Range</ref> &gt;</type>
+          <declname>selection</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref></type>
+          <declname>highlight</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>std::optional&lt; std::size_t &gt;</type>
+          <declname>caret_gap</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="81" column="14" bodyfile="core/platform/d2_text_layout.cpp" bodystart="221" bodyend="262"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_text_layout.hpp" line="51" column="5" bodyfile="core/platform/d2_text_layout.hpp" bodystart="52" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classd2_1_1text_1_1Layout_1ac029818311f2c682c6f6887104ec9a83" prot="private" virt="non-virtual"><scope>d2::text::Layout</scope><name>_bounds</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a4431e02f128bfbf307b9b7ef9a12295e" prot="private" virt="non-virtual"><scope>d2::text::Layout</scope><name>_build</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a0240510450d815f8c0d6aa2d18bd60eb" prot="private" virt="non-virtual"><scope>d2::text::Layout</scope><name>_glyphs</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a0946c8db37e6a724a66ff6c3dbe6f910" prot="private" virt="non-virtual"><scope>d2::text::Layout</scope><name>_lines</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1aa774bca0ae8a93f34e9b2e72e3d6eae3" prot="private" virt="non-virtual"><scope>d2::text::Layout</scope><name>_options</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a170d8ca4f46390079b4cc2b844d0939f" prot="private" virt="non-virtual"><scope>d2::text::Layout</scope><name>_revision</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1ad361fb5d1678e88d27393fae07dae61e" prot="private" virt="non-virtual"><scope>d2::text::Layout</scope><name>_source</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a34f932316bd66628154130776f1e954c" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>bounds</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1af0162abf0c07ad72bb3f9c04c4ef84ab" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>byte_offset</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a31858baff1c35f46fcdfb3e78f099140" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>caret</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a4aa229aa2a84976e15ff6d39cf53e7fb" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>draw</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a13aedadd7b30d7d449d592ca39a8d4a8" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>extract</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1af912822d6c55b93c918bea7593070bb8" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>glyphs</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1af2fb3e0ae52ab1009a43ffc3b4057a1d" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>grapheme_at</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1af68aa110773da07331384367dd3de457" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>hit_test</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a9a135ca9c636116bba197daf7989cd10" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>Layout</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a98c337652dec5a2097e52ac064048bac" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>Layout</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a4bcf2c3453baf1157a704ae8846bae79" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>lines</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1aaf3805a2f469a328c4fdf14970bc9a5a" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>options</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a789a81d2f0c77c8459be7eba9cb7ee9e" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>reset</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a6d1fb182c8f0392cecfd18a06271e1b9" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>revision</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1ac915d4109ee46956c3decc9079f4f20d" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>size</name></member>
+      <member refid="classd2_1_1text_1_1Layout_1a1e7f76176549c24c5d98447522210163" prot="public" virt="non-virtual"><scope>d2::text::Layout</scope><name>source</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemImages_1_1Plan" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::SystemImages::Plan</compoundname>
+    <includes refid="d2__images_8hpp" local="no">d2_images.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemImages_1_1Plan_1a313c2bf654892e8b1310dc9a4232608a" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::SystemImages::Plan::before</definition>
+        <argsstring></argsstring>
+        <name>before</name>
+        <qualifiedname>d2::sys::SystemImages::Plan::before</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="13" column="25" bodyfile="core/mods/d2_images.hpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemImages_1_1Plan_1af8d16c4d8a56ab6dc0585e08ba053b93" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::SystemImages::Plan::after</definition>
+        <argsstring></argsstring>
+        <name>after</name>
+        <qualifiedname>d2::sys::SystemImages::Plan::after</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="13" column="32" bodyfile="core/mods/d2_images.hpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemImages_1_1Plan_1a16dcdb818ebf96160444e424d32dd4ba" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemImages::Plan::repaint</definition>
+        <argsstring></argsstring>
+        <name>repaint</name>
+        <qualifiedname>d2::sys::SystemImages::Plan::repaint</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="14" column="18" bodyfile="core/mods/d2_images.hpp" bodystart="14" bodyend="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_images.hpp" line="11" column="9" bodyfile="core/mods/d2_images.hpp" bodystart="12" bodyend="15"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemImages_1_1Plan_1af8d16c4d8a56ab6dc0585e08ba053b93" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages::Plan</scope><name>after</name></member>
+      <member refid="structd2_1_1sys_1_1SystemImages_1_1Plan_1a313c2bf654892e8b1310dc9a4232608a" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages::Plan</scope><name>before</name></member>
+      <member refid="structd2_1_1sys_1_1SystemImages_1_1Plan_1a16dcdb818ebf96160444e424d32dd4ba" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages::Plan</scope><name>repaint</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

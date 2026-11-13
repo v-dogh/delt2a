@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1UniversalAccessInterface_1_1SearchInterfaceImpl" kind="struct" language="C++" prot="private">
+    <compoundname>d2::style::UniversalAccessInterface::SearchInterfaceImpl</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>Offset</declname>
+        <defname>Offset</defname>
+      </param>
+      <param>
+        <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+        <declname>Search</declname>
+        <defname>Search</defname>
+      </param>
+      <param>
+        <type>D2_UAI_INTERFACE_TEMPL...</type>
+        <declname>Rest</declname>
+        <defname>Rest</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="134" column="9" bodyfile="core/tree/d2_styles.hpp" bodystart="135" bodyend="136"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

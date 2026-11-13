@@ -1,0 +1,563 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1AutoValueType" kind="class" language="C++" prot="public">
+    <compoundname>d2::AutoValueType</compoundname>
+    <includes refid="d2__extended__page_8hpp" local="no">d2_extended_page.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1AutoValueType_1a276312a5189d2f0c9f1a5c755b756089" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref></type>
+        <definition>standard_value_type d2::AutoValueType::_value</definition>
+        <argsstring></argsstring>
+        <name>_value</name>
+        <qualifiedname>d2::AutoValueType::_value</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="17" column="29" bodyfile="core/platform/d2_extended_page.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AutoValueType::AutoValueType</definition>
+        <argsstring>()=default</argsstring>
+        <name>AutoValueType</name>
+        <qualifiedname>d2::AutoValueType::AutoValueType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="19" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a7e4f9276f6a32ad6c0f9464d91caf77b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AutoValueType::AutoValueType</definition>
+        <argsstring>(standard_value_type ch)</argsstring>
+        <name>AutoValueType</name>
+        <qualifiedname>d2::AutoValueType::AutoValueType</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref></type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="20" column="19" bodyfile="core/platform/d2_extended_page.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a568b6045dcdcb951b32b59f93a00d168" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::AutoValueType::AutoValueType</definition>
+        <argsstring>(const std::string &amp;ext)</argsstring>
+        <name>AutoValueType</name>
+        <qualifiedname>d2::AutoValueType::AutoValueType</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>ext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="21" column="9" bodyfile="core/platform/d2_extended_page.cpp" bodystart="6" bodyend="7"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a4be7ac548a404b4cb6e261b58fa82063" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::AutoValueType::AutoValueType</definition>
+        <argsstring>(const char *ext)</argsstring>
+        <name>AutoValueType</name>
+        <qualifiedname>d2::AutoValueType::AutoValueType</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>ext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="22" column="9" bodyfile="core/platform/d2_extended_page.cpp" bodystart="8" bodyend="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a7b402e4ff1dc56441f5558d94cee6142" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::AutoValueType::AutoValueType</definition>
+        <argsstring>(const AutoValueType &amp;other)=default</argsstring>
+        <name>AutoValueType</name>
+        <qualifiedname>d2::AutoValueType::AutoValueType</qualifiedname>
+        <param>
+          <type>const AutoValueType &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="23" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a38d2a69ab762a27d86230a6ec2f0f4b2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+        <definition>AutoValueType &amp; d2::AutoValueType::operator=</definition>
+        <argsstring>(standard_value_type ch)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::AutoValueType::operator=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref></type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="25" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a3be24112255351d7cf0dabaeb0b78587" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+        <definition>AutoValueType &amp; d2::AutoValueType::operator=</definition>
+        <argsstring>(const AutoValueType &amp;copy)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::AutoValueType::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="26" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1aced1b2a2a58920337e764fd95304e0b6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AutoValueType::operator const standard_value_type &amp;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator const standard_value_type &amp;</name>
+        <qualifiedname>d2::AutoValueType::operator const standard_value_type &amp;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="28" column="19" bodyfile="core/platform/d2_extended_page.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a471e859ad901ca145491cb407d8a9836" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AutoValueType::operator standard_value_type &amp;</definition>
+        <argsstring>()</argsstring>
+        <name>operator standard_value_type &amp;</name>
+        <qualifiedname>d2::AutoValueType::operator standard_value_type &amp;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="29" column="19" bodyfile="core/platform/d2_extended_page.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1adfab4aa0fc58c14d27f137cb748b1ad8" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::AutoValueType::operator==</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::AutoValueType::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="31" column="24" bodyfile="core/platform/d2_extended_page.hpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a6648757b8afc2d3307accd830e894818" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::AutoValueType::operator!=</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>d2::AutoValueType::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="32" column="24" bodyfile="core/platform/d2_extended_page.hpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a98dd8157ca052063725901ccade755d5" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::AutoValueType::operator&lt;</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>d2::AutoValueType::operator&lt;</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="33" column="19" bodyfile="core/platform/d2_extended_page.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a2b0fb8409f2b1422669d7c4e9bfda767" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::AutoValueType::operator&gt;</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>d2::AutoValueType::operator&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="34" column="24" bodyfile="core/platform/d2_extended_page.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1aebb6de6bc50c9fb7ca6d118f006d2262" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::AutoValueType::operator&lt;=</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>d2::AutoValueType::operator&lt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="35" column="19" bodyfile="core/platform/d2_extended_page.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a383747f7836e60f810fdf73669d0a8f9" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::AutoValueType::operator&gt;=</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>d2::AutoValueType::operator&gt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="36" column="24" bodyfile="core/platform/d2_extended_page.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a0cb080677d9282bbe70cdef2c385335f" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref></type>
+        <definition>AutoValueType d2::AutoValueType::operator+</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::AutoValueType::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="38" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a9bd16a5ed3278181866cbfc89f15a208" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref></type>
+        <definition>AutoValueType d2::AutoValueType::operator-</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator-</name>
+        <qualifiedname>d2::AutoValueType::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="39" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a9be7230435bed62cf0898a91c148265c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref></type>
+        <definition>AutoValueType d2::AutoValueType::operator*</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::AutoValueType::operator*</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="40" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1ae745fde45ad3982ea5b8a9f5e9d97aef" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref></type>
+        <definition>AutoValueType d2::AutoValueType::operator/</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator/</name>
+        <qualifiedname>d2::AutoValueType::operator/</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="41" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a09e7237f283b0b0ae0722eb7c735e5bd" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref></type>
+        <definition>AutoValueType d2::AutoValueType::operator%</definition>
+        <argsstring>(const standard_value_type &amp;copy) const</argsstring>
+        <name>operator%</name>
+        <qualifiedname>d2::AutoValueType::operator%</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="42" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a5c97628b18a3c957ca5015726e99d87f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+        <definition>AutoValueType &amp; d2::AutoValueType::operator+=</definition>
+        <argsstring>(const standard_value_type &amp;copy)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>d2::AutoValueType::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="44" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a9026d20c7f0f872e0d9d69f3979238cf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+        <definition>AutoValueType &amp; d2::AutoValueType::operator-=</definition>
+        <argsstring>(const standard_value_type &amp;copy)</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>d2::AutoValueType::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="45" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a3e48165607897d4c39d44bee6a2b1c3d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+        <definition>AutoValueType &amp; d2::AutoValueType::operator*=</definition>
+        <argsstring>(const standard_value_type &amp;copy)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>d2::AutoValueType::operator*=</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="46" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1afe9cffb4f17188ed59ba61eba315e45f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+        <definition>AutoValueType &amp; d2::AutoValueType::operator/=</definition>
+        <argsstring>(const standard_value_type &amp;copy)</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>d2::AutoValueType::operator/=</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="47" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a3daadeeaf461f11a3a781b041dc9e6d5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+        <definition>AutoValueType &amp; d2::AutoValueType::operator%=</definition>
+        <argsstring>(const standard_value_type &amp;copy)</argsstring>
+        <name>operator%=</name>
+        <qualifiedname>d2::AutoValueType::operator%=</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="48" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="48" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1af652b85183c723481ca226caaa28ec0c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+        <definition>AutoValueType &amp; d2::AutoValueType::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>d2::AutoValueType::operator++</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="50" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1ae1cb788442f138707124935221c425be" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref></type>
+        <definition>AutoValueType d2::AutoValueType::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>d2::AutoValueType::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="51" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a8d318e812cd9736dba248264fb9b2064" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref> &amp;</type>
+        <definition>AutoValueType &amp; d2::AutoValueType::operator--</definition>
+        <argsstring>()</argsstring>
+        <name>operator--</name>
+        <qualifiedname>d2::AutoValueType::operator--</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="52" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AutoValueType_1a05cb8c9aa096f9e535f7f67a625f0f6b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" kindref="member">AutoValueType</ref></type>
+        <definition>AutoValueType d2::AutoValueType::operator--</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator--</name>
+        <qualifiedname>d2::AutoValueType::operator--</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="53" column="33" bodyfile="core/platform/d2_extended_page.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_extended_page.hpp" line="14" column="5" bodyfile="core/platform/d2_extended_page.hpp" bodystart="15" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classd2_1_1AutoValueType_1a276312a5189d2f0c9f1a5c755b756089" prot="private" virt="non-virtual"><scope>d2::AutoValueType</scope><name>_value</name></member>
+      <member refid="classd2_1_1AutoValueType_1a01e733bf47f6d316dbecf37cc1819e83" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>AutoValueType</name></member>
+      <member refid="classd2_1_1AutoValueType_1a7e4f9276f6a32ad6c0f9464d91caf77b" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>AutoValueType</name></member>
+      <member refid="classd2_1_1AutoValueType_1a568b6045dcdcb951b32b59f93a00d168" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>AutoValueType</name></member>
+      <member refid="classd2_1_1AutoValueType_1a4be7ac548a404b4cb6e261b58fa82063" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>AutoValueType</name></member>
+      <member refid="classd2_1_1AutoValueType_1a7b402e4ff1dc56441f5558d94cee6142" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>AutoValueType</name></member>
+      <member refid="classd2_1_1AutoValueType_1aced1b2a2a58920337e764fd95304e0b6" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator const standard_value_type &amp;</name></member>
+      <member refid="classd2_1_1AutoValueType_1a471e859ad901ca145491cb407d8a9836" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator standard_value_type &amp;</name></member>
+      <member refid="classd2_1_1AutoValueType_1a6648757b8afc2d3307accd830e894818" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator!=</name></member>
+      <member refid="classd2_1_1AutoValueType_1a09e7237f283b0b0ae0722eb7c735e5bd" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator%</name></member>
+      <member refid="classd2_1_1AutoValueType_1a3daadeeaf461f11a3a781b041dc9e6d5" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator%=</name></member>
+      <member refid="classd2_1_1AutoValueType_1a9be7230435bed62cf0898a91c148265c" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator*</name></member>
+      <member refid="classd2_1_1AutoValueType_1a3e48165607897d4c39d44bee6a2b1c3d" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator*=</name></member>
+      <member refid="classd2_1_1AutoValueType_1a0cb080677d9282bbe70cdef2c385335f" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator+</name></member>
+      <member refid="classd2_1_1AutoValueType_1af652b85183c723481ca226caaa28ec0c" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator++</name></member>
+      <member refid="classd2_1_1AutoValueType_1ae1cb788442f138707124935221c425be" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator++</name></member>
+      <member refid="classd2_1_1AutoValueType_1a5c97628b18a3c957ca5015726e99d87f" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator+=</name></member>
+      <member refid="classd2_1_1AutoValueType_1a9bd16a5ed3278181866cbfc89f15a208" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator-</name></member>
+      <member refid="classd2_1_1AutoValueType_1a8d318e812cd9736dba248264fb9b2064" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator--</name></member>
+      <member refid="classd2_1_1AutoValueType_1a05cb8c9aa096f9e535f7f67a625f0f6b" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator--</name></member>
+      <member refid="classd2_1_1AutoValueType_1a9026d20c7f0f872e0d9d69f3979238cf" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator-=</name></member>
+      <member refid="classd2_1_1AutoValueType_1ae745fde45ad3982ea5b8a9f5e9d97aef" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator/</name></member>
+      <member refid="classd2_1_1AutoValueType_1afe9cffb4f17188ed59ba61eba315e45f" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator/=</name></member>
+      <member refid="classd2_1_1AutoValueType_1a98dd8157ca052063725901ccade755d5" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator&lt;</name></member>
+      <member refid="classd2_1_1AutoValueType_1aebb6de6bc50c9fb7ca6d118f006d2262" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator&lt;=</name></member>
+      <member refid="classd2_1_1AutoValueType_1a38d2a69ab762a27d86230a6ec2f0f4b2" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator=</name></member>
+      <member refid="classd2_1_1AutoValueType_1a3be24112255351d7cf0dabaeb0b78587" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator=</name></member>
+      <member refid="classd2_1_1AutoValueType_1adfab4aa0fc58c14d27f137cb748b1ad8" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator==</name></member>
+      <member refid="classd2_1_1AutoValueType_1a2b0fb8409f2b1422669d7c4e9bfda767" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator&gt;</name></member>
+      <member refid="classd2_1_1AutoValueType_1a383747f7836e60f810fdf73669d0a8f9" prot="public" virt="non-virtual"><scope>d2::AutoValueType</scope><name>operator&gt;=</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

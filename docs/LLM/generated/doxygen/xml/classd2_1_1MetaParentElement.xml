@@ -1,0 +1,561 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1MetaParentElement" kind="class" language="C++" prot="public">
+    <compoundname>d2::MetaParentElement</compoundname>
+    <basecompoundref refid="classd2_1_1ParentElement" prot="public" virt="non-virtual">d2::ParentElement</basecompoundref>
+    <includes refid="d2__tree__parent_8hpp" local="no">d2_tree_parent.hpp</includes>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1a1462b004bf540bd708c7b86ae8e39a64" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>int</type>
+        <definition>virtual int d2::MetaParentElement::_index_of_impl</definition>
+        <argsstring>(id) const override</argsstring>
+        <name>_index_of_impl</name>
+        <qualifiedname>d2::MetaParentElement::_index_of_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1aa856288083083f7e10d9228c868523b7">_index_of_impl</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1ParentElement_1a6171e59aeb3b7d5c3fcfa8f0fbbfe82d" kindref="member">id</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="165" column="21" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="165" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1a842b8223415c05f0013c638351aec240" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::MetaParentElement::_empty_impl</definition>
+        <argsstring>() const override</argsstring>
+        <name>_empty_impl</name>
+        <qualifiedname>d2::MetaParentElement::_empty_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1a5d161b6c8a1c8133b357fcc4b0542f36">_empty_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="170" column="22" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="170" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1aed7d4ecf32d22547af69a32a9508f5f7" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::MetaParentElement::_exists_impl</definition>
+        <argsstring>(const std::string &amp;name) const override</argsstring>
+        <name>_exists_impl</name>
+        <qualifiedname>d2::MetaParentElement::_exists_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1a0722e07c8dbd57bef0c995d78b6c4696">_exists_impl</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="174" column="22" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="174" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1ad29ae0ab262a3bfbdef0050094d6c36c" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::MetaParentElement::_exists_impl</definition>
+        <argsstring>(ptr ptr) const override</argsstring>
+        <name>_exists_impl</name>
+        <qualifiedname>d2::MetaParentElement::_exists_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1a47e3e5b66c03effb100c6912f5954464">_exists_impl</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="178" column="22" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="178" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1a31858dda02e8f3e9f5a432d533853d0c" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>virtual TreeIter d2::MetaParentElement::_at_impl</definition>
+        <argsstring>(id id) const override</argsstring>
+        <name>_at_impl</name>
+        <qualifiedname>d2::MetaParentElement::_at_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1ac6ce9c367b87505ae1b75fa8b2d4bba7">_at_impl</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1ParentElement_1a6171e59aeb3b7d5c3fcfa8f0fbbfe82d" kindref="member">id</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="183" column="18" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="183" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1adad19aa0c77ee5bbc5d24af848088524" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>virtual TreeIter d2::MetaParentElement::_create_impl</definition>
+        <argsstring>(ptr ptr) override</argsstring>
+        <name>_create_impl</name>
+        <qualifiedname>d2::MetaParentElement::_create_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1a7b3b323f6306da54a741a81a5c5be2d5">_create_impl</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="187" column="18" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="187" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1a64ab89d6f8e05a91252ee167ddd18684" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>virtual TreeIter d2::MetaParentElement::_override_impl</definition>
+        <argsstring>(ptr ptr) override</argsstring>
+        <name>_override_impl</name>
+        <qualifiedname>d2::MetaParentElement::_override_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1af3460f4cbcc911e6f628365615ae7680">_override_impl</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="191" column="18" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="191" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1aea96e60120c8e03b88f26d7694293c9d" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>virtual TreeIter d2::MetaParentElement::_create_after_impl</definition>
+        <argsstring>(ptr p, id after) override</argsstring>
+        <name>_create_after_impl</name>
+        <qualifiedname>d2::MetaParentElement::_create_after_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1a3f668c7f195395d7ecc0bf602f3a9bda">_create_after_impl</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1ParentElement_1a6171e59aeb3b7d5c3fcfa8f0fbbfe82d" kindref="member">id</ref></type>
+          <declname>after</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="195" column="18" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="195" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1abbdf6aa170db14b74486561f96792816" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>virtual TreeIter d2::MetaParentElement::_override_after_impl</definition>
+        <argsstring>(ptr p, id after) override</argsstring>
+        <name>_override_after_impl</name>
+        <qualifiedname>d2::MetaParentElement::_override_after_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1a05f1b9fe23a763bd6bb32322220dcdd3">_override_after_impl</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1ParentElement_1a6171e59aeb3b7d5c3fcfa8f0fbbfe82d" kindref="member">id</ref></type>
+          <declname>after</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="199" column="18" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="199" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1a749c6b43c8a027f3013f0164fea50e05" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::MetaParentElement::_remove_impl</definition>
+        <argsstring>(id id) override</argsstring>
+        <name>_remove_impl</name>
+        <qualifiedname>d2::MetaParentElement::_remove_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1a78b05f0e8eb0ae1101556e2fa278af9f">_remove_impl</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1ParentElement_1a6171e59aeb3b7d5c3fcfa8f0fbbfe82d" kindref="member">id</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="204" column="22" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="204" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1a0292ba6539097bc997ded28dd76b6451" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+        <definition>virtual ptr d2::MetaParentElement::_extract_impl</definition>
+        <argsstring>(id id) override</argsstring>
+        <name>_extract_impl</name>
+        <qualifiedname>d2::MetaParentElement::_extract_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1ae7a3d7c16d01f1d395bcd297006134d6">_extract_impl</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1ParentElement_1a6171e59aeb3b7d5c3fcfa8f0fbbfe82d" kindref="member">id</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="208" column="21" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="208" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1aa433ee70d5bd6634903b9c525a0b9505" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::MetaParentElement::_clear_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_clear_impl</name>
+        <qualifiedname>d2::MetaParentElement::_clear_impl</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1add53ab7b0c102c36fcc633648d5a8622">_clear_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="212" column="22" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="212" bodyend="212"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1ae89429202045d0cff42b6ed63c035180" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::MetaParentElement::foreach_internal</definition>
+        <argsstring>(foreach_internal_callback callback) const override</argsstring>
+        <name>foreach_internal</name>
+        <qualifiedname>d2::MetaParentElement::foreach_internal</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1a3fc41c44c572efb4629037d7ea595c86">foreach_internal</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ab90fea8bb045f8675328f7aebab40702" kindref="member">foreach_internal_callback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="216" column="22" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="216" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MetaParentElement_1abcc780f8bdeeb60466b8f7e33ef0c9c5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::MetaParentElement::foreach</definition>
+        <argsstring>(foreach_callback callback) const override</argsstring>
+        <name>foreach</name>
+        <qualifiedname>d2::MetaParentElement::foreach</qualifiedname>
+        <reimplements refid="classd2_1_1ParentElement_1a9c87c43145d67fc9460eff2a16d7c368">foreach</reimplements>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a7c2334444cc16acefb1ae606718b13b0" kindref="member">foreach_callback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.hpp" line="217" column="22" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="217" bodyend="217"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>d2::Element</label>
+        <link refid="classd2_1_1Element"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::MetaParentElement</label>
+        <link refid="classd2_1_1MetaParentElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::ParentElement</label>
+        <link refid="classd2_1_1ParentElement"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::style::UniversalAccessInterfaceBase</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterfaceBase"/>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Element &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>d2::Element</label>
+        <link refid="classd2_1_1Element"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::MetaParentElement</label>
+        <link refid="classd2_1_1MetaParentElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::ParentElement</label>
+        <link refid="classd2_1_1ParentElement"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::style::UniversalAccessInterfaceBase</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterfaceBase"/>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; Element &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_tree_parent.hpp" line="162" column="5" bodyfile="core/tree/d2_tree_parent.hpp" bodystart="163" bodyend="218"/>
+    <listofallmembers>
+      <member refid="classd2_1_1MetaParentElement_1a31858dda02e8f3e9f5a432d533853d0c" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_at_impl</name></member>
+      <member refid="classd2_1_1Element_1a40705ac231418d71418fc58a0af08242" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_bind_dep</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ab20ac99011dd48dd3275d9cb721cc601" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_clear_anims_impl</name></member>
+      <member refid="classd2_1_1MetaParentElement_1aa433ee70d5bd6634903b9c525a0b9505" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_clear_impl</name></member>
+      <member refid="classd2_1_1Element_1aa751fbdbd55008143a4c775fd11c6042" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_clone_state_if</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a60ca48dab2508af3d7c684edcd65a15c" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_context_impl</name></member>
+      <member refid="classd2_1_1MetaParentElement_1aea96e60120c8e03b88f26d7694293c9d" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_create_after_impl</name></member>
+      <member refid="classd2_1_1MetaParentElement_1adad19aa0c77ee5bbc5d24af848088524" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_create_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1adb6bd25928ab3ff9098b995ed3c6584e" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_deregister_dep_bind</name></member>
+      <member refid="classd2_1_1MetaParentElement_1a842b8223415c05f0013c638351aec240" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_empty_impl</name></member>
+      <member refid="classd2_1_1Element_1a3d253c0f661d8dfe33420e0457b15009" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_event_impl</name></member>
+      <member refid="classd2_1_1MetaParentElement_1aed7d4ecf32d22547af69a32a9508f5f7" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_exists_impl</name></member>
+      <member refid="classd2_1_1MetaParentElement_1ad29ae0ab262a3bfbdef0050094d6c36c" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_exists_impl</name></member>
+      <member refid="classd2_1_1MetaParentElement_1a0292ba6539097bc997ded28dd76b6451" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_extract_impl</name></member>
+      <member refid="classd2_1_1ParentElement_1aa5e8d5bcb34f184649da125265d1a8bd" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_extract_setstate</name></member>
+      <member refid="classd2_1_1Element_1aa7171f8f3ab36b549b840a0589da64af" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_fetch_pixel_buffer_impl</name></member>
+      <member refid="classd2_1_1Element_1a87177c8536fc85909568820911a31763" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1ParentElement_1a8d90320d1b99f313fefbc239c0503585" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_get_border_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a97ab723c8ea2b04df5f304935eb30da7" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_handle_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ae801365b735eb99e905f578a704ba214" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_has_interface_impl</name></member>
+      <member refid="classd2_1_1Element_1abdc10f60982a33e74e8cb33e490b6e6b" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_index_impl</name></member>
+      <member refid="classd2_1_1MetaParentElement_1a1462b004bf540bd708c7b86ae8e39a64" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_index_of_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a2f5ad74c60f37781f8aec18e1fbfbb2a" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_initialize_impl</name></member>
+      <member refid="classd2_1_1ParentElement_1a4a9eebc6c6941823abc37cdd1b9902ca" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_insert_setstate</name></member>
+      <member refid="classd2_1_1Element_1a7aaa53a3b510f69174abe3ba92b26d17" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_is_write_type</name></member>
+      <member refid="classd2_1_1ParentElement_1ab1ca9b82dd7e3db03257995dd4756afe" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_layout_for_impl</name></member>
+      <member refid="classd2_1_1Element_1a310ffe58500b157592c673325a8f8919" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_layout_impl</name></member>
+      <member refid="classd2_1_1Element_1a471087a22802a9740d971bb277d5481e" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_obliterate_dep_bind</name></member>
+      <member refid="classd2_1_1MetaParentElement_1abbdf6aa170db14b74486561f96792816" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_override_after_impl</name></member>
+      <member refid="classd2_1_1MetaParentElement_1a64ab89d6f8e05a91252ee167ddd18684" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_override_impl</name></member>
+      <member refid="classd2_1_1Element_1ac80c164f4efb9a631c981f24f307cebf" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_provides_buffer_impl</name></member>
+      <member refid="classd2_1_1Element_1aaa63262087666273db2041939ea33bc2" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_provides_input_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a963442b0e81f3e8f380b1cb31af2ddb3" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_register_dep_bind</name></member>
+      <member refid="classd2_1_1MetaParentElement_1a749c6b43c8a027f3013f0164fea50e05" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_remove_impl</name></member>
+      <member refid="classd2_1_1ParentElement_1af6384d4942c1562fdf8dcdbe24120bec" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_remove_setstate</name></member>
+      <member refid="classd2_1_1Element_1a7af1225ef2d5226cfb78465296d24a82" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_reserve_buffer_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1aea20a0dbd31ffcbd09a4aba5238a5168" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_set_dynamic_impl</name></member>
+      <member refid="classd2_1_1ParentElement_1aaf8e9165e26abe0629fd00c9198ff78b" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_setparent_of</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ae3fac535f79a25c293c2cf2ba070fc68" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_signal_base_impl</name></member>
+      <member refid="classd2_1_1Element_1a35a72f15dc295577438540448345c234" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_context_change</name></member>
+      <member refid="classd2_1_1Element_1a98a87cee046b32126eb7e1e44e21bb61" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_context_change</name></member>
+      <member refid="classd2_1_1ParentElement_1a1afd5148fbd345350b54e389fce77c04" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_signal_context_change_impl</name></member>
+      <member refid="classd2_1_1Element_1af3178761b5dceb929fe78656e052db32" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_context_change_sub</name></member>
+      <member refid="classd2_1_1Element_1afb551839422348ad46217cc581fb3e4e" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_context_change_sub</name></member>
+      <member refid="classd2_1_1Element_1a3fd60fe0f59d776e2fc6106fc8fe6882" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_initialization</name></member>
+      <member refid="classd2_1_1Element_1a2919fc7435da905c6f5d300fd091ac81" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_update</name></member>
+      <member refid="classd2_1_1Element_1adc2d4d968599a78b512d992832564a05" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_write</name></member>
+      <member refid="classd2_1_1Element_1ae6c4da7d4f22b6c57aade93fa40581a0" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_write</name></member>
+      <member refid="classd2_1_1Element_1afb410f4dc026ec5908038594eef7904c" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_write_child</name></member>
+      <member refid="classd2_1_1Element_1a49fc0d03580f77bec356567dfebdb4d6" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_signal_write_child_impl</name></member>
+      <member refid="classd2_1_1Element_1a752828e23893873b7dc6f877e36dc95e" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_signal_write_impl</name></member>
+      <member refid="classd2_1_1Element_1a79e851e7123a1b67a4efbb0cfe2fa697" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_signal_write_update</name></member>
+      <member refid="classd2_1_1ParentElement_1abc867e95dddb793f33a188c48ba0fe32" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_state_change_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a4deaa42e1d9cfdfb7abbf442eb905541" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_test_dynamic_impl</name></member>
+      <member refid="classd2_1_1Element_1a692b785cf9ee7971060c5c4e19ee3a7f" prot="protected" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>_trigger_event</name></member>
+      <member refid="classd2_1_1Element_1a10dd593ff2dd3c1929e4d6a4704bdada" prot="protected" virt="pure-virtual"><scope>d2::MetaParentElement</scope><name>_unit_report_impl</name></member>
+      <member refid="classd2_1_1Element_1ae004f38fbadd8a43376a83b14f0565fd" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_update_layout_impl</name></member>
+      <member refid="classd2_1_1Element_1a0144b1e82c4a52e7b03da682e0729a1a" prot="protected" virt="virtual"><scope>d2::MetaParentElement</scope><name>_update_style_impl</name></member>
+      <member refid="classd2_1_1Element_1aef45b860b44a05bf567f6aff5e7c5510" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>accept_layout</name></member>
+      <member refid="classd2_1_1Element_1a4ccecbcf24dba3a5a44592784d4a63d3" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>accept_layout</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a6e2f3650e4408415fc06aee68eda6018" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>apply_get_for</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a61e14e94bd5227f27a72f4d73977f5b6" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>apply_set_for</name></member>
+      <member refid="classd2_1_1ParentElement_1ab87a1b43db5b6db15f8d874e77123d13" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>at</name></member>
+      <member refid="classd2_1_1ParentElement_1a2285853fc4bcc0a3e9071add235d365f" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>at</name></member>
+      <member refid="classd2_1_1ParentElement_1a1b71422f2417ee0a4811024c795faf77" prot="public" virt="virtual"><scope>d2::MetaParentElement</scope><name>begin</name></member>
+      <member refid="classd2_1_1ParentElement_1af8f5b517098483feb447e301c2da8792" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>border_for</name></member>
+      <member refid="classd2_1_1ParentElement_1a86a9c77ab5ade3a249d2debda7288913" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>BorderType</name></member>
+      <member refid="classd2_1_1Element_1ac847ad981455d23dad5dadbc91a68079" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>box</name></member>
+      <member refid="classd2_1_1Element_1abfb56ffec1565b561c99fb2ff6408b38" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>CachePolicy</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a77342524e1014bc5cf8c806a3fb33814" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>CachePolicyBypass</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5af84ec7d68ed99f7e2389a0ae5e22e50c" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>CachePolicyDynamic</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a4092b4cad128bda4a1fae8dd58600435" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>CachePolicyStatic</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a517ab6545fb01e8f27e0724036b51014" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>CachePolicyVolatile</name></member>
+      <member refid="classd2_1_1ParentElement_1a4cf1f7313576c465572153c05a2ee8bf" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>clear</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eae2c05ad55da057d3f4471dbcc2a3440f" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Clicked</name></member>
+      <member refid="classd2_1_1Element_1a93179c68c4bc0cad9fbde49cad62e5da" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>context</name></member>
+      <member refid="classd2_1_1Element_1a12316381a9501f84b6ee9270ee223075" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>contextual_layout</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a38c0ded57405bb7c6e4e2ddf259b41d0" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>ContextualHeight</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3aca8c4cda597cd33b06b5adfa85600d57" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>ContextualWidth</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a3ad9452d15c7690584c67e6f59b4d20b" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>ContextualXPos</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a528581b10d5a9df067506c6954f6c7d9" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>ContextualYPos</name></member>
+      <member refid="classd2_1_1Element_1ab8339c087465699c724cdf8fbc647d5e" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>cpptr</name></member>
+      <member refid="classd2_1_1Element_1a77cb0a3434fb6e8ce0e8189936e749a6" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>cptr</name></member>
+      <member refid="classd2_1_1ParentElement_1a6d3226f055dcea7c81a0a8434fbbee9b" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>create</name></member>
+      <member refid="classd2_1_1ParentElement_1a76b67e3c281def5555039c30b8758bf3" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>create</name></member>
+      <member refid="classd2_1_1ParentElement_1a19da12fae14f74f141743408745d3f0d" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>create_after</name></member>
+      <member refid="classd2_1_1ParentElement_1a3537b2220702d460204b8476165b3cba" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>create_after</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea484cdecbbcf06608aaecacd636c7a42f" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Created</name></member>
+      <member refid="classd2_1_1Element_1a6e6c7f6cf773237479aeded7cf907b9f" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>depth</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8abb554a878cbc4e9c0da0fb202cde8390" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Dimensions</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a00b0f90798c471f9a7832b96a7fbd135" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>DimensionsHeightUpdated</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a50846f36269ec74b8026783ccadc1345" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>DimensionsWidthUpdated</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea6e7200768b6620145a3e40985b641136" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Display</name></member>
+      <member refid="classd2_1_1ParentElement_1a5b68d8100b9bfbf62c5bb8fdf8111b8f" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>DynamicIterator</name></member>
+      <member refid="classd2_1_1ParentElement_1a6d4f780a7a61d561f6a35acd7c9483c5" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Element</name></member>
+      <member refid="classd2_1_1ParentElement_1a26a95af327ccf70f623acf8cf455d4d1" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Element</name></member>
+      <member refid="classd2_1_1ParentElement_1a789e8d7ae300e01e108dee39cfb75627" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Element</name></member>
+      <member refid="classd2_1_1ParentElement_1a8cfe860586c85380df5a5f1167fdf2b4" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Element</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea762e0750f73366248b1f947bc929a636" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Embedded</name></member>
+      <member refid="classd2_1_1ParentElement_1a604739db516b5bcf622967dd81ee34fb" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>empty</name></member>
+      <member refid="classd2_1_1ParentElement_1abf13adf1b0b4859c3fdcb5318ffd4535" prot="public" virt="virtual"><scope>d2::MetaParentElement</scope><name>end</name></member>
+      <member refid="classd2_1_1Element_1a58116e63a422c097c04b57538f28c13c" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>eptr</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eabfaea5553443e3391264dcfdb0109076" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Event</name></member>
+      <member refid="classd2_1_1Element_1a471bc822139b4d9d2fe679de101f1785" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>event_callback</name></member>
+      <member refid="classd2_1_1ParentElement_1a6f7b5352caae8a569ca4d204eeffddf1" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>exists</name></member>
+      <member refid="classd2_1_1ParentElement_1a1b46146157478b0b38afd28ec7733b6e" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>exists</name></member>
+      <member refid="classd2_1_1ParentElement_1ac53fe47cc16961e7f60c4bf9e60f97a8" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>extract</name></member>
+      <member refid="classd2_1_1ParentElement_1a485d2d7388635657908c2ec1cccf95c2" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>extract</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea1d48be968cce83013b238e15f8998da0" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Focused</name></member>
+      <member refid="classd2_1_1MetaParentElement_1abcc780f8bdeeb60466b8f7e33ef0c9c5" prot="public" virt="virtual"><scope>d2::MetaParentElement</scope><name>foreach</name></member>
+      <member refid="classd2_1_1Element_1a7c2334444cc16acefb1ae606718b13b0" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>foreach_callback</name></member>
+      <member refid="classd2_1_1MetaParentElement_1ae89429202045d0cff42b6ed63c035180" prot="public" virt="virtual"><scope>d2::MetaParentElement</scope><name>foreach_internal</name></member>
+      <member refid="classd2_1_1Element_1ab90fea8bb045f8675328f7aebab40702" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>foreach_internal_callback</name></member>
+      <member refid="classd2_1_1Element_1a0921b422adef3a3728e5fe7585323145" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>frame</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ad1200201fb357ade25421484dc86e7aa" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>get_for</name></member>
+      <member refid="classd2_1_1Element_1abf89d265be9aa7324d183db46c623d97" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>getistate</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1fd6b506e5dd238c0cd173a9692c0cab" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>getref_for</name></member>
+      <member refid="classd2_1_1Element_1a075c6e41be9bd39f8a791cce5c331f8e" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>getstate</name></member>
+      <member refid="classd2_1_1Element_1a39424c79c34e19f0d9315e8c9f681231" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>getzindex</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a5d2d148e1e31b3fb1a8a8762049ec2f5" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>has_interface</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea7508cb38fd55ecc97d8b1261daf015d7" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Hovered</name></member>
+      <member refid="classd2_1_1ParentElement_1a6171e59aeb3b7d5c3fcfa8f0fbbfe82d" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>id</name></member>
+      <member refid="classd2_1_1ParentElement_1a6799013b65a2203e0d3edaddc96dd736" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>index_of</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a6bde9a056a8856b5c07d2d9427fa6727" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>initial_property</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a5d952a778bfa4ef1738cc6affede11bf" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>initialize</name></member>
+      <member refid="classd2_1_1Element_1a572cafac3ed1e5ed0422224e14d00c18" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>input_frame</name></member>
+      <member refid="classd2_1_1Element_1a166481944f7ea316db7e1410eb5ac0c0" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>internal_box</name></member>
+      <member refid="classd2_1_1Element_1aa1f6afafcaf8c9a2630d23500858230e" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>internal_flag</name></member>
+      <member refid="classd2_1_1Element_1af332bc7bfabf20efd8b6b4c83ee16f0e" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>internal_layout</name></member>
+      <member refid="classd2_1_1Element_1ad439136396e65005120a8380d0737a14" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>internal_position</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8afb2edb9e46a9433b78756445377a8656" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>InternalLayout</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>InternalState</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eadc309166dcf9888c353f906760fc16ee" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Invalid</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ac555ee9cd245ffade8b8533b2e146bac" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>invalid_property</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a18f9a3a0b7dc12c3542c3d1a57fb8936" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>InvertedHeight</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a051cf9aff7fd56ed17c2c72afa892c8e" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>InvertedWidth</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a24d092b6dedba76380bdc480f4526fdb" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>InvertedXPos</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3ae0a02e29d15e80b25fcefb7741219564" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>InvertedYPos</name></member>
+      <member refid="classd2_1_1Element_1ae52a0f188c68387d40f209bc8af18824" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>iptr</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5aab135f99d9552a04e9ebb3189f1e5c86" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>IsBeingInitialized</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5abaf501fb7c238a010891e3bb929ed69a" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>IsBeingRendered</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea6fd188fa6424e4d24fbc8d15fdf46b71" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Keynavi</name></member>
+      <member refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Layout</name></member>
+      <member refid="classd2_1_1Element_1a4b2777f7dad26097e21498dbb17ceca5" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>layout</name></member>
+      <member refid="classd2_1_1ParentElement_1a798f92fa0052a73874d34894693b74ff" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>layout_for</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a361dc259e83842273faec5f59c1deef0" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>LayoutHeight</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a1235ef9bb7682c1e1ba8d78244ad91df" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>LayoutWidth</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8ad7984d80f9eb93e0e9561a069a7cca25" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>LayoutXPos</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a17fe83833761996d853ce82b6ca55ec2" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>LayoutYPos</name></member>
+      <member refid="classd2_1_1Element_1ae4b203e28f1efe7ceca3d06fef649880" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>listen</name></member>
+      <member refid="classd2_1_1Element_1a50c5fd3f6580870e99a6260b72d7cd60" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>listen</name></member>
+      <member refid="classd2_1_1Element_1af3f4e7d502411469fa5b721bc797e0f8" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>make</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aa3b94f2a78f8e0bf9174fde838ff6184" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Masked</name></member>
+      <member refid="classd2_1_1Element_1ab14910dff69bbe3ea9a0d62cb81dc0f7" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>mouse_object_space</name></member>
+      <member refid="classd2_1_1Element_1ae9916d8895d01882f699e8448d2084d9" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>name</name></member>
+      <member refid="classd2_1_1Element_1ae110e3769d1e8227a655971ec9428868" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>needs_update</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8ae47e1856724eda8b3c18f9945e098115" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>None</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aef55e2f39a8c4587683f13cda2be5e09" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Offset</name></member>
+      <member refid="classd2_1_1Element_1a9a15f4c156e7b71e3cd0488025161816" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>operator+</name></member>
+      <member refid="classd2_1_1Element_1aa595f9dc1d45e6c8236d3939cf7c7588" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Element_1aa32c3e082e25efb4095957768d71ef27" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>operator=</name></member>
+      <member refid="classd2_1_1ParentElement_1a030c65b8db4530a8d49bc792578f88b6" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>overlap</name></member>
+      <member refid="classd2_1_1ParentElement_1af9901edec16ac92375f504e14d7cceab" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>override</name></member>
+      <member refid="classd2_1_1ParentElement_1a8fea09e1597a524b53f3055d70bcd6ff" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>override</name></member>
+      <member refid="classd2_1_1ParentElement_1ad6902ea66b4d7482a5a651c49e72762b" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>override_after</name></member>
+      <member refid="classd2_1_1ParentElement_1aebcecf53f67f3907d3061ee26adc4d38" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>override_after</name></member>
+      <member refid="classd2_1_1Element_1a16c51a9a85f01152a70165dcd1d85a8a" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>override_dimensions</name></member>
+      <member refid="classd2_1_1Element_1afd4f3934eadc23293c68e19a35472f71" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>override_layout</name></member>
+      <member refid="classd2_1_1Element_1a7a1f33c7176ed90518c5003f59935c2c" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>override_position</name></member>
+      <member refid="classd2_1_1Element_1aa5d4c5a01df678c41935f6fde6640a7f" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>parent</name></member>
+      <member refid="classd2_1_1Element_1a8f780627e082e708652f0475b839c262" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>position</name></member>
+      <member refid="classd2_1_1Element_1a44be626040a8843032803f91a0abb386" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>position_screen_space</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a27627c9f6fb246bf91cb1d8d595cbf5d" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>PositionXUpdated</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5aafe8698afda69970c8bf18ee9380f3cd" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>PositionYUpdated</name></member>
+      <member refid="classd2_1_1Element_1abd57face94a1b6b39b12fbea90189d05" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>pptr</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>property</name></member>
+      <member refid="classd2_1_1Element_1a94f0dd567889fe6675b5a2645a47b9ea" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>provides_cursor_sink</name></member>
+      <member refid="classd2_1_1Element_1afdd2fcd9a138de2c2f18cba65d039db5" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>provides_input</name></member>
+      <member refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>ptr</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eaac46903858f0e47dc412d72a8a7b8257" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Public1</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea9c8fe368905520911a39260bdcf0ff5e" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Public2</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea87ade9b277110fc35e95c5519883398a" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Public3</name></member>
+      <member refid="classd2_1_1Element_1ad51034e46beecb0b04252f84c17d00c4" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>pwptr</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ead984049a1327dd30b9f1aa361235fc79" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>RcClick</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea16e508c7d79acb50a761c04b8fb645fc" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>RcEvent</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea84e7a5bfaa5b96bf4517ad6a11cbe6f1" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>RcFocus</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea9d8b9c503842b02b5012d09143cf8fd5" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>RcHover</name></member>
+      <member refid="classd2_1_1Element_1a678e3be9f3834fa0e32df46074325e9b" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>relative_layout</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a5777785c146df9eb35434b6e8cb45b72" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>RelativeHeight</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a55d77576a41b72dd8d8b5981b367e9ad" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>RelativeWidth</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a8393ce090bcab053fba77365cc83d326" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>RelativeXPos</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3af235e4f171d6a5bf75e432215f415a61" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>RelativeYPos</name></member>
+      <member refid="classd2_1_1ParentElement_1ae7491dbb0e6fbb50b8b3e1f195b59a74" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>remove</name></member>
+      <member refid="classd2_1_1ParentElement_1a8eb74bc2114d40835a0c58c2932f4e60" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>remove</name></member>
+      <member refid="classd2_1_1ParentElement_1a6576cf0303694523e42a2ea50c5dc932" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>remove_if</name></member>
+      <member refid="classd2_1_1ParentElement_1a87d116992d3724fc0593d733d5c37a94" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>resolve_units</name></member>
+      <member refid="classd2_1_1ParentElement_1a9f16486fd793309fb2c373e196b139ad" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>resolve_units</name></member>
+      <member refid="classd2_1_1Element_1aae0d3b85c5f0b1b1181b99643103935f" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>screen</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a7bba69ecbc402496dea6f287d930a14d" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>set_for</name></member>
+      <member refid="classd2_1_1Element_1ad8ac4c7b2e33e4bc19694603b42c6ecd" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>setcache</name></member>
+      <member refid="classd2_1_1Element_1aa3dc103db9356f8b8cdc1e9a688e2762" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>setstate</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>State</name></member>
+      <member refid="classd2_1_1Element_1a46eb075f8c65a9183c2ab414958d21ca" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>state</name></member>
+      <member refid="classd2_1_1Element_1a722263aff6c2cc69cb2e2708c3deb458" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>state_flag</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8ac4aad62c208b99eb077991bda7f771b0" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Strip</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a28f56923c2807491ee4dfde6223fbfcf" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>StripPerm</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8afad14e7cd74b0976b0aa37ce18014a40" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Style</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea36d3dc97265a5776782c490060e84fd4" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>Swapped</name></member>
+      <member refid="classd2_1_1Element_1a65f8848ebe026ea195cd9e864008bf3a" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>traverse</name></member>
+      <member refid="classd2_1_1ParentElement_1ac7a1f6f547074a55681735a4c5dfaa8c" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>underlap</name></member>
+      <member refid="classd2_1_1Element_1afa06d59b6436a6cfb1eb88508e905da4" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>unit_meta_flag</name></member>
+      <member refid="classd2_1_1Element_1af6410415e8f051ce8079868c15dd3537" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>unit_report</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>UnitState</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a1eb4a8c3c9725361a174f039e7323678" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>WasWritten</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a76ff642fda92149d3b3867b5218d87b6" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>WasWrittenLayout</name></member>
+      <member refid="classd2_1_1Element_1af8c212acaa09e075352d4c96db2f9be2" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>wptr</name></member>
+      <member refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>write_flag</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8" prot="public" virt="non-virtual"><scope>d2::MetaParentElement</scope><name>WriteType</name></member>
+      <member refid="classd2_1_1Element_1a6a4ba15f266d67e8d28b2c8cef2dcadd" prot="public" virt="virtual"><scope>d2::MetaParentElement</scope><name>~Element</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

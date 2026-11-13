@@ -1,0 +1,508 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemAudio_1_1Stream" kind="class" language="C++" prot="public">
+    <compoundname>d2::sys::SystemAudio::Stream</compoundname>
+    <includes refid="d2__audio_8hpp" local="no">d2_audio.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a4e4293ef18260fe921d673f6e79bb374" prot="private" static="no" mutable="no">
+        <type>std::span&lt; float &gt;</type>
+        <definition>std::span&lt;float&gt; d2::sys::SystemAudio::Stream::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::_data</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="50" column="23" bodyfile="core/mods/d2_audio.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1afb8a63f69155291791e92ef71da0e5cb" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemAudio::Stream::_total</definition>
+        <argsstring></argsstring>
+        <name>_total</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::_total</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="51" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a6a53262ed6bc4ebec26fcab614e0a764" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemAudio::Stream::_offset</definition>
+        <argsstring></argsstring>
+        <name>_offset</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::_offset</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="52" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1abcd0dbeaeecb8f8fb137f784b6371c72" prot="private" static="no" mutable="no">
+        <type>const <ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">FormatInfo</ref> *</type>
+        <definition>const FormatInfo* d2::sys::SystemAudio::Stream::_format</definition>
+        <argsstring></argsstring>
+        <name>_format</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::_format</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="53" column="30" bodyfile="core/mods/d2_audio.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a595701873854efe218916539ca8dfbdb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemAudio::Stream::_stop</definition>
+        <argsstring></argsstring>
+        <name>_stop</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::_stop</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="54" column="18" bodyfile="core/mods/d2_audio.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1abaf3a99f797df74d375def34ea6edd1f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float d2::sys::SystemAudio::Stream::mix</definition>
+        <argsstring>(float a, float b, float prog=0.5f)</argsstring>
+        <name>mix</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::mix</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>prog</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="56" column="26" bodyfile="core/mods/d2_audio.cpp" bodystart="108" bodyend="111"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a23720d4e8606eb8aa99f11f32f5ad643" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::SystemAudio::Stream::Stream</definition>
+        <argsstring>(std::span&lt; float &gt; data, std::size_t offset, std::size_t total, const FormatInfo *format)</argsstring>
+        <name>Stream</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::Stream</qualifiedname>
+        <param>
+          <type>std::span&lt; float &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>total</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">FormatInfo</ref> *</type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="58" column="13" bodyfile="core/mods/d2_audio.hpp" bodystart="58" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a8a111d1a382522cb45da16e75d06630f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::SystemAudio::Stream::Stream</definition>
+        <argsstring>(const Stream &amp;)=default</argsstring>
+        <name>Stream</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::Stream</qualifiedname>
+        <param>
+          <type>const Stream &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="66" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a67db5413973c93ca1b855399906bfcdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::SystemAudio::Stream::Stream</definition>
+        <argsstring>(Stream &amp;&amp;)=default</argsstring>
+        <name>Stream</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::Stream</qualifiedname>
+        <param>
+          <type>Stream &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="67" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1aaa3f24b308e77b5ad48cf98fec4419aa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::Stream::apply</definition>
+        <argsstring>(auto &amp;&amp;func, std::size_t channel, float start=0.f, float end=1.f)</argsstring>
+        <name>apply</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::apply</qualifiedname>
+        <param>
+          <type>auto &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>channel</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>start</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>end</declname>
+          <defval>1.f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="69" column="18" bodyfile="core/mods/d2_audio.hpp" bodystart="69" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a3306e3d53db625f77edc89ce0b57ad72" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::Stream::apply</definition>
+        <argsstring>(auto &amp;&amp;func, float start=0.f, float end=1.f)</argsstring>
+        <name>apply</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::apply</qualifiedname>
+        <param>
+          <type>auto &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>start</declname>
+          <defval>0.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>end</declname>
+          <defval>1.f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="78" column="18" bodyfile="core/mods/d2_audio.hpp" bodystart="78" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a0cf7143d566e2fc0a521e6e9404e5baf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::Stream::push</definition>
+        <argsstring>(std::span&lt; float &gt; in)</argsstring>
+        <name>push</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::push</qualifiedname>
+        <param>
+          <type>std::span&lt; float &gt;</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="108" column="18" bodyfile="core/mods/d2_audio.cpp" bodystart="53" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a280b631fed0cf85ca1be612595ac7f14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::Stream::push_expand</definition>
+        <argsstring>(std::span&lt; float &gt; in)</argsstring>
+        <name>push_expand</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::push_expand</qualifiedname>
+        <param>
+          <type>std::span&lt; float &gt;</type>
+          <declname>in</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="109" column="18" bodyfile="core/mods/d2_audio.cpp" bodystart="58" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a2948ddc1b4922579f92a2608c8379e6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::Stream::push</definition>
+        <argsstring>(std::span&lt; float &gt; in, float mul, float shift=0.f)</argsstring>
+        <name>push</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::push</qualifiedname>
+        <param>
+          <type>std::span&lt; float &gt;</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>mul</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>shift</declname>
+          <defval>0.f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="111" column="18" bodyfile="core/mods/d2_audio.cpp" bodystart="65" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1ae03a27590eeb3566c0da21961a3ca224" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::Stream::push_expand</definition>
+        <argsstring>(std::span&lt; float &gt; in, float mul, float shift=0.f)</argsstring>
+        <name>push_expand</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::push_expand</qualifiedname>
+        <param>
+          <type>std::span&lt; float &gt;</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>mul</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>shift</declname>
+          <defval>0.f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="112" column="18" bodyfile="core/mods/d2_audio.cpp" bodystart="70" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a878a0a0e14d9d7dd3023e0443631f13c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::Stream::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::stop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="114" column="18" bodyfile="core/mods/d2_audio.cpp" bodystart="77" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a85dbaf6934cabad808575d3457bc27ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemAudio::Stream::is_stopped</definition>
+        <argsstring>()</argsstring>
+        <name>is_stopped</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::is_stopped</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="115" column="18" bodyfile="core/mods/d2_audio.cpp" bodystart="81" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a54ceb9df80f56aa8bf041aaddbfbb5c9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">FormatInfo</ref> &amp;</type>
+        <definition>const SystemAudio::FormatInfo &amp; d2::sys::SystemAudio::Stream::info</definition>
+        <argsstring>() const</argsstring>
+        <name>info</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::info</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="117" column="30" bodyfile="core/mods/d2_audio.cpp" bodystart="86" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1ab40241558ae05f58d0ddd5c2512be994" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemAudio::Stream::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="118" column="25" bodyfile="core/mods/d2_audio.cpp" bodystart="90" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1ab5f980abffc14fba990a38986326c152" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemAudio::Stream::chunk</definition>
+        <argsstring>() const</argsstring>
+        <name>chunk</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::chunk</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="119" column="25" bodyfile="core/mods/d2_audio.cpp" bodystart="94" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1afc607ca7568b75b1fa6dec6719991620" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float &amp;</type>
+        <definition>float &amp; d2::sys::SystemAudio::Stream::at</definition>
+        <argsstring>(std::size_t idx, std::size_t channel) const</argsstring>
+        <name>at</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::at</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>channel</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="121" column="19" bodyfile="core/mods/d2_audio.cpp" bodystart="99" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a5e12e3687eba813b1c20f8880058aa69" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>float &amp;</type>
+        <definition>float &amp; d2::sys::SystemAudio::Stream::at</definition>
+        <argsstring>(float idx, std::size_t channel) const</argsstring>
+        <name>at</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::at</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>channel</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="122" column="19" bodyfile="core/mods/d2_audio.cpp" bodystart="103" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a40dbaeb7e30a678d74a9830c875c1c5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a23720d4e8606eb8aa99f11f32f5ad643" kindref="member">Stream</ref> &amp;</type>
+        <definition>Stream &amp; d2::sys::SystemAudio::Stream::operator=</definition>
+        <argsstring>(const Stream &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a23720d4e8606eb8aa99f11f32f5ad643" kindref="member">Stream</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="124" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a1ab06f4e46b56787b90f13e7d0cc0cdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a23720d4e8606eb8aa99f11f32f5ad643" kindref="member">Stream</ref> &amp;</type>
+        <definition>Stream &amp; d2::sys::SystemAudio::Stream::operator=</definition>
+        <argsstring>(Stream &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::sys::SystemAudio::Stream::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a23720d4e8606eb8aa99f11f32f5ad643" kindref="member">Stream</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="125" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_audio.hpp" line="47" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="48" bodyend="126"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a4e4293ef18260fe921d673f6e79bb374" prot="private" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>_data</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1abcd0dbeaeecb8f8fb137f784b6371c72" prot="private" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>_format</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a6a53262ed6bc4ebec26fcab614e0a764" prot="private" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>_offset</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a595701873854efe218916539ca8dfbdb" prot="private" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>_stop</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1afb8a63f69155291791e92ef71da0e5cb" prot="private" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>_total</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1aaa3f24b308e77b5ad48cf98fec4419aa" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>apply</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a3306e3d53db625f77edc89ce0b57ad72" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>apply</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1afc607ca7568b75b1fa6dec6719991620" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>at</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a5e12e3687eba813b1c20f8880058aa69" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>at</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1ab5f980abffc14fba990a38986326c152" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>chunk</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a54ceb9df80f56aa8bf041aaddbfbb5c9" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a85dbaf6934cabad808575d3457bc27ee" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>is_stopped</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1abaf3a99f797df74d375def34ea6edd1f" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>mix</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a40dbaeb7e30a678d74a9830c875c1c5d" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>operator=</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a1ab06f4e46b56787b90f13e7d0cc0cdb" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>operator=</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a0cf7143d566e2fc0a521e6e9404e5baf" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>push</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a2948ddc1b4922579f92a2608c8379e6c" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>push</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a280b631fed0cf85ca1be612595ac7f14" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>push_expand</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1ae03a27590eeb3566c0da21961a3ca224" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>push_expand</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1ab40241558ae05f58d0ddd5c2512be994" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>size</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a878a0a0e14d9d7dd3023e0443631f13c" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>stop</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a23720d4e8606eb8aa99f11f32f5ad643" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>Stream</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a8a111d1a382522cb45da16e75d06630f" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>Stream</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1Stream_1a67db5413973c93ca1b855399906bfcdd" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::Stream</scope><name>Stream</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

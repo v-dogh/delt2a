@@ -1,0 +1,35 @@
+# Run from the delt2a repository root: doxygen Doxyfile.llm
+# API inventory for coding agents, not a replacement for curated guidance.
+PROJECT_NAME           = delt2a
+OUTPUT_DIRECTORY       = docs/LLM/generated/doxygen
+INPUT                  = core elements d2_std.hpp
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.hpp *.hh *.cpp *.cc *.cxx
+EXCLUDE_PATTERNS       = */generated/* */inference/*
+
+# Public API (including undocumented public members)
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+HIDE_UNDOC_MEMBERS     = NO
+
+# Do not expand implementation-heavy macros into thousands of tokens.
+ENABLE_PREPROCESSING   = YES
+MACRO_EXPANSION        = NO
+
+# Machine-readable source + optionally browseable human reference.
+GENERATE_XML           = YES
+XML_OUTPUT             = xml
+XML_PROGRAMLISTING     = NO
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+REFERENCES_RELATION    = NO
+REFERENCED_BY_RELATION = NO
+
+# No page of warnings about missing comments in an early-stage API.
+QUIET                  = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_IF_UNDOCUMENTED   = NO

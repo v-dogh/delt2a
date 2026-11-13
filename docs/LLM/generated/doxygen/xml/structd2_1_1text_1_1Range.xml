@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1text_1_1Range" kind="struct" language="C++" prot="public">
+    <compoundname>d2::text::Range</compoundname>
+    <includes refid="d2__text__layout_8hpp" local="no">d2_text_layout.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1text_1_1Range_1a70999cfa3d014f4aeaf0bb2b4ac49370" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::text::Range::begin</definition>
+        <argsstring></argsstring>
+        <name>begin</name>
+        <qualifiedname>d2::text::Range::begin</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="17" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Range_1a2f43da3cc0017b1828491544edbbef7c" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::text::Range::end</definition>
+        <argsstring></argsstring>
+        <name>end</name>
+        <qualifiedname>d2::text::Range::end</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="18" column="21" bodyfile="core/platform/d2_text_layout.hpp" bodystart="18" bodyend="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1text_1_1Range_1a611e8bc451de5fff6c50fcc34f8863b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::text::Range::operator&lt;=&gt;</definition>
+        <argsstring>(const Range &amp;) const =default</argsstring>
+        <name>operator&lt;=&gt;</name>
+        <qualifiedname>d2::text::Range::operator&lt;=&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1text_1_1Range" kindref="compound">Range</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="19" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_text_layout.hpp" line="15" column="5" bodyfile="core/platform/d2_text_layout.hpp" bodystart="16" bodyend="20"/>
+    <listofallmembers>
+      <member refid="structd2_1_1text_1_1Range_1a70999cfa3d014f4aeaf0bb2b4ac49370" prot="public" virt="non-virtual"><scope>d2::text::Range</scope><name>begin</name></member>
+      <member refid="structd2_1_1text_1_1Range_1a2f43da3cc0017b1828491544edbbef7c" prot="public" virt="non-virtual"><scope>d2::text::Range</scope><name>end</name></member>
+      <member refid="structd2_1_1text_1_1Range_1a611e8bc451de5fff6c50fcc34f8863b3" prot="public" virt="non-virtual"><scope>d2::text::Range</scope><name>operator&lt;=&gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

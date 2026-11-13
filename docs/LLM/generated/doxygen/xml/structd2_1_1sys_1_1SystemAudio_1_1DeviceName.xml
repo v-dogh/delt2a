@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemAudio_1_1DeviceName" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::SystemAudio::DeviceName</compoundname>
+    <includes refid="d2__audio_8hpp" local="no">d2_audio.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemAudio_1_1DeviceName_1a6ddbbe06360945437832a4d71a6c8cef" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::SystemAudio::DeviceName::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>d2::sys::SystemAudio::DeviceName::id</qualifiedname>
+        <initializer>{&quot;&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="44" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemAudio_1_1DeviceName_1a070beb10c80bcfcfaf9f8de3ff45bde8" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::SystemAudio::DeviceName::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>d2::sys::SystemAudio::DeviceName::name</qualifiedname>
+        <initializer>{&quot;Unknown&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="45" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_audio.hpp" line="42" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="43" bodyend="46"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName_1a6ddbbe06360945437832a4d71a6c8cef" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::DeviceName</scope><name>id</name></member>
+      <member refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName_1a070beb10c80bcfcfaf9f8de3ff45bde8" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::DeviceName</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

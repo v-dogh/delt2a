@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1in_1_1InputFrame_1_1ConsumeState" kind="struct" language="C++" prot="private">
+    <compoundname>d2::in::InputFrame::ConsumeState</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1in_1_1InputFrame_1_1ConsumeState_1a038a15663cc7abf476b88120df70be3f" prot="public" static="no" mutable="no">
+        <type><ref refid="classd2_1_1in_1_1InputFrame_1aa337a4f54377a45d52d522cadf050929" kindref="member">keymap</ref></type>
+        <definition>keymap d2::in::InputFrame::ConsumeState::keys_consumed</definition>
+        <argsstring></argsstring>
+        <name>keys_consumed</name>
+        <qualifiedname>d2::in::InputFrame::ConsumeState::keys_consumed</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="133" column="20" bodyfile="core/io/d2_input_base.hpp" bodystart="133" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1in_1_1InputFrame_1_1ConsumeState_1a2fa16b30dbe45f1794ed51cfdb718e0b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::in::InputFrame::ConsumeState::consumed_scroll</definition>
+        <argsstring></argsstring>
+        <name>consumed_scroll</name>
+        <qualifiedname>d2::in::InputFrame::ConsumeState::consumed_scroll</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="134" column="18" bodyfile="core/io/d2_input_base.hpp" bodystart="134" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1in_1_1InputFrame_1_1ConsumeState_1ae828251ea5dff5ea3f2632c55a0c4d8c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::in::InputFrame::ConsumeState::consumed_sequence</definition>
+        <argsstring></argsstring>
+        <name>consumed_sequence</name>
+        <qualifiedname>d2::in::InputFrame::ConsumeState::consumed_sequence</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="135" column="18" bodyfile="core/io/d2_input_base.hpp" bodystart="135" bodyend="135"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_input_base.hpp" line="131" column="9" bodyfile="core/io/d2_input_base.hpp" bodystart="132" bodyend="136"/>
+    <listofallmembers>
+      <member refid="structd2_1_1in_1_1InputFrame_1_1ConsumeState_1a2fa16b30dbe45f1794ed51cfdb718e0b" prot="public" virt="non-virtual"><scope>d2::in::InputFrame::ConsumeState</scope><name>consumed_scroll</name></member>
+      <member refid="structd2_1_1in_1_1InputFrame_1_1ConsumeState_1ae828251ea5dff5ea3f2632c55a0c4d8c" prot="public" virt="non-virtual"><scope>d2::in::InputFrame::ConsumeState</scope><name>consumed_sequence</name></member>
+      <member refid="structd2_1_1in_1_1InputFrame_1_1ConsumeState_1a038a15663cc7abf476b88120df70be3f" prot="public" virt="non-virtual"><scope>d2::in::InputFrame::ConsumeState</scope><name>keys_consumed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1497 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1Signals" kind="class" language="C++" prot="public">
+    <compoundname>d2::Signals</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::enable_shared_from_this&lt; Signals &gt;</basecompoundref>
+    <derivedcompoundref refid="classd2_1_1IOContext" prot="public" virt="non-virtual">d2::IOContext</derivedcompoundref>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <innerclass refid="classd2_1_1Signals_1_1SpecifierKey" prot="private">d2::Signals::SpecifierKey</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1SpecifierKeyHash" prot="private">d2::Signals::SpecifierKeyHash</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1SpecifierKeyEqual" prot="private">d2::Signals::SpecifierKeyEqual</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1SignalKey" prot="private">d2::Signals::SignalKey</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1SignalKeyHash" prot="private">d2::Signals::SignalKeyHash</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1SignalKeyEqual" prot="private">d2::Signals::SignalKeyEqual</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1HandleState" prot="private">d2::Signals::HandleState</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1SignalInstance" prot="private">d2::Signals::SignalInstance</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1SignalEnvelope" prot="private">d2::Signals::SignalEnvelope</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1SignalStorage" prot="private">d2::Signals::SignalStorage</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1Handle" prot="public">d2::Signals::Handle</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1Signal" prot="public">d2::Signals::Signal</innerclass>
+    <innerclass refid="structd2_1_1Signals_1_1Config" prot="public">d2::Signals::Config</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968" prot="public" static="no" strong="no">
+        <type>unsigned char</type>
+        <name>SignalFlags</name>
+        <qualifiedname>d2::Signals::SignalFlags</qualifiedname>
+        <enumvalue id="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968a73bbb3d74bd8dab115d7c8618062f3bb" prot="public">
+          <name>Async</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968ac62c99d98b33c102078a9be949a77775" prot="public">
+          <name>Deferred</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968aaae4fc6d1f8736b38895289fe5fbe573" prot="public">
+          <name>Combine</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968a03591b4f7900aad9376259f2bdb0d830" prot="public">
+          <name>DropIfFull</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="777" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="778" bodyend="783"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Signals_1ad556c4fc418e094d961863e3b571e575" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" kindref="member">Signals</ref> &gt;</type>
+        <definition>using d2::Signals::ptr = std::shared_ptr&lt;Signals&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::Signals::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="842" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="842" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classd2_1_1Signals_1aafd8965473e86b05bb841c01847a8450" prot="private" static="no">
+        <type>std::type_index</type>
+        <definition>using d2::Signals::signal_id = std::type_index</definition>
+        <argsstring></argsstring>
+        <name>signal_id</name>
+        <qualifiedname>d2::Signals::signal_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="422" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="422" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Signals_1a29003864fa6512146e35d4a6b6bca8ad" prot="private" static="no">
+        <type>std::uint64_t</type>
+        <definition>using d2::Signals::event_idx = std::uint64_t</definition>
+        <argsstring></argsstring>
+        <name>event_idx</name>
+        <qualifiedname>d2::Signals::event_idx</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="423" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="423" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Signals_1a673107a3141e72b3f965a87339484ff1" prot="private" static="no">
+        <type>bool(*)(event_idx, <ref refid="structd2_1_1impl_1_1RuntimeSignature" kindref="compound">impl::RuntimeSignature</ref>)</type>
+        <definition>using d2::Signals::signature_verifier = bool (*)(event_idx, impl::RuntimeSignature)</definition>
+        <argsstring></argsstring>
+        <name>signature_verifier</name>
+        <qualifiedname>d2::Signals::signature_verifier</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="424" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="424" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1Signals_1a353bee2bc9effcd7159430d8f588a523" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Signals::_static_storage_length</definition>
+        <argsstring></argsstring>
+        <name>_static_storage_length</name>
+        <qualifiedname>d2::Signals::_static_storage_length</qualifiedname>
+        <initializer>{16}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="419" column="31" bodyfile="core/io/d2_signal_handler.hpp" bodystart="419" bodyend="419"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Signals_1a84bdd098516686e71cc89ac40538d892" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Signals::_max_concurrent_signals</definition>
+        <argsstring></argsstring>
+        <name>_max_concurrent_signals</name>
+        <qualifiedname>d2::Signals::_max_concurrent_signals</qualifiedname>
+        <initializer>{8}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="420" column="31" bodyfile="core/io/d2_signal_handler.hpp" bodystart="420" bodyend="420"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1Signals_1a8e9ab1fee6b8662a871ce5fd90b15f0f" prot="private" static="no" mutable="no">
+        <type>std::shared_mutex</type>
+        <definition>std::shared_mutex d2::Signals::_mtx</definition>
+        <argsstring></argsstring>
+        <name>_mtx</name>
+        <qualifiedname>d2::Signals::_mtx</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="771" column="27" bodyfile="core/io/d2_signal_handler.hpp" bodystart="771" bodyend="771"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Signals_1a647527d0bcbbb3b983d4f58ce3dccd9e" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; SignalKey, std::shared_ptr&lt; SignalStorage &gt;, SignalKeyHash, SignalKeyEqual &gt;</type>
+        <definition>absl:: flat_hash_map&lt;SignalKey, std::shared_ptr&lt;SignalStorage&gt;, SignalKeyHash, SignalKeyEqual&gt; d2::Signals::_sigs</definition>
+        <argsstring></argsstring>
+        <name>_sigs</name>
+        <qualifiedname>d2::Signals::_sigs</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="774" column="17" bodyfile="core/io/d2_signal_handler.hpp" bodystart="774" bodyend="774"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Signals_1a1cfc354d795af40ac981fa9bd258050e" prot="private" static="no" mutable="no">
+        <type>mt::ConcurrentPool::ptr</type>
+        <definition>mt::ConcurrentPool::ptr d2::Signals::_pool</definition>
+        <argsstring></argsstring>
+        <name>_pool</name>
+        <qualifiedname>d2::Signals::_pool</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="775" column="33" bodyfile="core/io/d2_signal_handler.hpp" bodystart="775" bodyend="775"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1Signals_1a4df6ea075f19102d2ade49608f4d2d1d" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Sig</type>
+          </param>
+        </templateparamlist>
+        <type>signal_id</type>
+        <definition>signal_id d2::Signals::_sig_id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>_sig_id</name>
+        <qualifiedname>d2::Signals::_sig_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="844" column="30" bodyfile="core/io/d2_signal_handler.hpp" bodystart="844" bodyend="847"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1ad64e115514045798ba088b86046f47a3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Signals::Handle d2::Signals::_sig_listen</definition>
+        <argsstring>(signal_id id, SpecifierKey signal_specifier, event_idx ev, SpecifierKey dispatch_specifier, impl::RuntimeSignature signature, std::function&lt; void(SignalInstance &amp;)&gt; callback)</argsstring>
+        <name>_sig_listen</name>
+        <qualifiedname>d2::Signals::_sig_listen</qualifiedname>
+        <param>
+          <type>signal_id</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type>event_idx</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1impl_1_1RuntimeSignature" kindref="compound">impl::RuntimeSignature</ref></type>
+          <declname>signature</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(SignalInstance &amp;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="878" column="16" bodyfile="core/io/d2_signal_handler.cpp" bodystart="366" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a3393fe9eebb98b2456dde396eee1d7ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Signals::Handle d2::Signals::_sig_listen_unchecked</definition>
+        <argsstring>(signal_id id, SpecifierKey signal_specifier, event_idx ev, SpecifierKey dispatch_specifier, std::function&lt; void(SignalInstance &amp;)&gt; callback)</argsstring>
+        <name>_sig_listen_unchecked</name>
+        <qualifiedname>d2::Signals::_sig_listen_unchecked</qualifiedname>
+        <param>
+          <type>signal_id</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type>event_idx</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(SignalInstance &amp;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="886" column="16" bodyfile="core/io/d2_signal_handler.cpp" bodystart="403" bodyend="434"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a5f8ab8c06ba31bd94316daffe5ec3c16" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::_sig_apply</definition>
+        <argsstring>(SignalStorage &amp;storage, event_idx ev, const SpecifierKey &amp;dispatch_specifier, SignalInstance &amp;args)</argsstring>
+        <name>_sig_apply</name>
+        <qualifiedname>d2::Signals::_sig_apply</qualifiedname>
+        <param>
+          <type>SignalStorage &amp;</type>
+          <declname>storage</declname>
+        </param>
+        <param>
+          <type>event_idx</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>const SpecifierKey &amp;</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>SignalInstance &amp;</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="894" column="14" bodyfile="core/io/d2_signal_handler.cpp" bodystart="436" bodyend="502"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a66d978dfabf1e039e892f21fddadc7c8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::_sig_apply_all</definition>
+        <argsstring>(SignalStorage &amp;storage)</argsstring>
+        <name>_sig_apply_all</name>
+        <qualifiedname>d2::Signals::_sig_apply_all</qualifiedname>
+        <param>
+          <type>SignalStorage &amp;</type>
+          <declname>storage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="900" column="14" bodyfile="core/io/d2_signal_handler.cpp" bodystart="504" bodyend="522"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a2e8e59d533ab739089fd3e467264c543" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Signals::_sig_pending</definition>
+        <argsstring>(const SignalStorage &amp;storage) const</argsstring>
+        <name>_sig_pending</name>
+        <qualifiedname>d2::Signals::_sig_pending</qualifiedname>
+        <param>
+          <type>const SignalStorage &amp;</type>
+          <declname>storage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="902" column="14" bodyfile="core/io/d2_signal_handler.cpp" bodystart="524" bodyend="533"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1af64a2f04b629b9d57542a4ba27dad3c3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::_sig_drain_queued</definition>
+        <argsstring>(std::shared_ptr&lt; SignalStorage &gt; storage)</argsstring>
+        <name>_sig_drain_queued</name>
+        <qualifiedname>d2::Signals::_sig_drain_queued</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; SignalStorage &gt;</type>
+          <declname>storage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="903" column="14" bodyfile="core/io/d2_signal_handler.cpp" bodystart="535" bodyend="570"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1ac21935eeff93b5c0208a91898956e78c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::_sig_schedule_drain</definition>
+        <argsstring>(std::shared_ptr&lt; SignalStorage &gt; storage)</argsstring>
+        <name>_sig_schedule_drain</name>
+        <qualifiedname>d2::Signals::_sig_schedule_drain</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; SignalStorage &gt;</type>
+          <declname>storage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="904" column="14" bodyfile="core/io/d2_signal_handler.cpp" bodystart="572" bodyend="612"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1ade245ea58db546f9414900c0033792b0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::_sig_trigger</definition>
+        <argsstring>(signal_id id, SpecifierKey signal_specifier, event_idx ev, SpecifierKey dispatch_specifier, impl::RuntimeSignature signature, SignalInstance sig)</argsstring>
+        <name>_sig_trigger</name>
+        <qualifiedname>d2::Signals::_sig_trigger</qualifiedname>
+        <param>
+          <type>signal_id</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type>event_idx</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1impl_1_1RuntimeSignature" kindref="compound">impl::RuntimeSignature</ref></type>
+          <declname>signature</declname>
+        </param>
+        <param>
+          <type>SignalInstance</type>
+          <declname>sig</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="906" column="14" bodyfile="core/io/d2_signal_handler.cpp" bodystart="614" bodyend="663"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a9fbb2db4adf8e303965379467f9d2686" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::_sig_trigger_unchecked</definition>
+        <argsstring>(signal_id id, SpecifierKey signal_specifier, event_idx ev, SpecifierKey dispatch_specifier, SignalInstance sig)</argsstring>
+        <name>_sig_trigger_unchecked</name>
+        <qualifiedname>d2::Signals::_sig_trigger_unchecked</qualifiedname>
+        <param>
+          <type>signal_id</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type>event_idx</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>SignalInstance</type>
+          <declname>sig</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="914" column="14" bodyfile="core/io/d2_signal_handler.cpp" bodystart="665" bodyend="709"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a39a8ae89e21f381fe063cdc372c8092c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Signals_1_1Signal" kindref="compound">Signal</ref></type>
+        <definition>Signals::Signal d2::Signals::_sig_register</definition>
+        <argsstring>(signal_id id, SpecifierKey signal_specifier, signature_verifier verifier, unsigned char flags)</argsstring>
+        <name>_sig_register</name>
+        <qualifiedname>d2::Signals::_sig_register</qualifiedname>
+        <param>
+          <type>signal_id</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type>signature_verifier</type>
+          <declname>verifier</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="922" column="16" bodyfile="core/io/d2_signal_handler.cpp" bodystart="711" bodyend="729"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a478f81f629913d4c3a0564d821743797" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::_sig_deregister</definition>
+        <argsstring>(signal_id id, SpecifierKey signal_specifier)</argsstring>
+        <name>_sig_deregister</name>
+        <qualifiedname>d2::Signals::_sig_deregister</qualifiedname>
+        <param>
+          <type>signal_id</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="928" column="14" bodyfile="core/io/d2_signal_handler.cpp" bodystart="731" bodyend="738"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classd2_1_1Signals_1a7e726357e31b02c282123a05b316d5cd" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>static bool d2::Signals::_verify_single_signature</definition>
+        <argsstring>(event_idx, impl::RuntimeSignature signature) noexcept</argsstring>
+        <name>_verify_single_signature</name>
+        <qualifiedname>d2::Signals::_verify_single_signature</qualifiedname>
+        <param>
+          <type>event_idx</type>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1impl_1_1RuntimeSignature" kindref="compound">impl::RuntimeSignature</ref></type>
+          <declname>signature</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="849" column="21" bodyfile="core/io/d2_signal_handler.hpp" bodystart="849" bodyend="853"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1ad832cfd9397b0619d036b4547ba68e59" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>signature_verifier</type>
+        <definition>static signature_verifier d2::Signals::_single_signature_verifier</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>_single_signature_verifier</name>
+        <qualifiedname>d2::Signals::_single_signature_verifier</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="854" column="46" bodyfile="core/io/d2_signal_handler.hpp" bodystart="854" bodyend="857"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a82b26152b69c6871b6a9aad6563f6f6a" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>std::function&lt; void(SignalInstance &amp;)&gt;</type>
+        <definition>static std::function&lt; void(SignalInstance &amp;)&gt; d2::Signals::_make_listener_callback</definition>
+        <argsstring>(Func &amp;&amp;callback, std::tuple&lt; Argv... &gt; *)</argsstring>
+        <name>_make_listener_callback</name>
+        <qualifiedname>d2::Signals::_make_listener_callback</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>std::tuple&lt; Argv... &gt; *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="860" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="860" bodyend="876"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1Signals_1aec8ed4cf23c868038f7658ae60821f0f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Signals_1ad556c4fc418e094d961863e3b571e575" kindref="member">ptr</ref></type>
+        <definition>Signals::ptr d2::Signals::make</definition>
+        <argsstring>(mt::ConcurrentPool::ptr pool=nullptr)</argsstring>
+        <name>make</name>
+        <qualifiedname>d2::Signals::make</qualifiedname>
+        <param>
+          <type>mt::ConcurrentPool::ptr</type>
+          <declname>pool</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="930" column="20" bodyfile="core/io/d2_signal_handler.cpp" bodystart="359" bodyend="362"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::Signals</definition>
+        <argsstring>(mt::ConcurrentPool::ptr pool)</argsstring>
+        <name>Signals</name>
+        <qualifiedname>d2::Signals::Signals</qualifiedname>
+        <param>
+          <type>mt::ConcurrentPool::ptr</type>
+          <declname>pool</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="932" column="9" bodyfile="core/io/d2_signal_handler.cpp" bodystart="364" bodyend="364"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a37f07c05a6582593a11a28d573afc701" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::Signals</definition>
+        <argsstring>(const Signals &amp;)=delete</argsstring>
+        <name>Signals</name>
+        <qualifiedname>d2::Signals::Signals</qualifiedname>
+        <param>
+          <type>const Signals &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="933" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a917e5f6897fd39a661ff26c0f096f8e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::Signals</definition>
+        <argsstring>(Signals &amp;&amp;)=delete</argsstring>
+        <name>Signals</name>
+        <qualifiedname>d2::Signals::Signals</qualifiedname>
+        <param>
+          <type>Signals &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="934" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a9155c4b86a8a097d7f448df6cb93227e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Manifest</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Signal" kindref="compound">Signal</ref></type>
+        <definition>Signal d2::Signals::connect</definition>
+        <argsstring>(Config cfg=Config{})</argsstring>
+        <name>connect</name>
+        <qualifiedname>d2::Signals::connect</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Signals_1_1Config" kindref="compound">Config</ref></type>
+          <declname>cfg</declname>
+          <defval><ref refid="structd2_1_1Signals_1_1Config" kindref="compound">Config</ref>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="936" column="27" bodyfile="core/io/d2_signal_handler.hpp" bodystart="936" bodyend="940"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1af7c26d903731d0bb178fe3be6dde06e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Manifest</type>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Signal" kindref="compound">Signal</ref></type>
+        <definition>Signal d2::Signals::connect</definition>
+        <argsstring>(SignalSpecifier&lt; SigSpec &gt; specifier, Config cfg=Config{})</argsstring>
+        <name>connect</name>
+        <qualifiedname>d2::Signals::connect</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>specifier</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Signals_1_1Config" kindref="compound">Config</ref></type>
+          <declname>cfg</declname>
+          <defval><ref refid="structd2_1_1Signals_1_1Config" kindref="compound">Config</ref>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="942" column="16" bodyfile="core/io/d2_signal_handler.hpp" bodystart="942" bodyend="951"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a203504e91a96b04a8fcb3a2a7b4c5b65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Manifest</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::disconnect</definition>
+        <argsstring>()</argsstring>
+        <name>disconnect</name>
+        <qualifiedname>d2::Signals::disconnect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="952" column="25" bodyfile="core/io/d2_signal_handler.hpp" bodystart="952" bodyend="956"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1ac0a8f9cda876d3f5e52b4181fabfa6e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Manifest</type>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::disconnect</definition>
+        <argsstring>(SignalSpecifier&lt; SigSpec &gt; specifier)</argsstring>
+        <name>disconnect</name>
+        <qualifiedname>d2::Signals::disconnect</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>specifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="958" column="14" bodyfile="core/io/d2_signal_handler.hpp" bodystart="958" bodyend="962"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a4ab36a7cc7e2da1f86a97e050dbb03bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Ev</declname>
+            <defname>Ev</defname>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Handle d2::Signals::listen</definition>
+        <argsstring>(Func &amp;&amp;callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Signals::listen</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="964" column="29" bodyfile="core/io/d2_signal_handler.hpp" bodystart="964" bodyend="982"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a0020b9be06217cfca1738854d5c1dbea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Ev</declname>
+            <defname>Ev</defname>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Handle d2::Signals::listen</definition>
+        <argsstring>(SignalSpecifier&lt; SigSpec &gt; signal_specifier, Func &amp;&amp;callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Signals::listen</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="984" column="16" bodyfile="core/io/d2_signal_handler.hpp" bodystart="984" bodyend="1002"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a5c278e277dc44d32048b0e595bd9038b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Ev</declname>
+            <defname>Ev</defname>
+          </param>
+          <param>
+            <type>typename DispatchSpec</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Handle d2::Signals::listen</definition>
+        <argsstring>(DispatchSpecifier&lt; DispatchSpec &gt; dispatch_specifier, Func &amp;&amp;callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Signals::listen</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1DispatchSpecifier" kindref="compound">DispatchSpecifier</ref>&lt; DispatchSpec &gt;</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1004" column="16" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1004" bodyend="1022"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a4e7a3aa64171bc4a137332ed9f6ed1d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Ev</declname>
+            <defname>Ev</defname>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+          <param>
+            <type>typename DispatchSpec</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Handle d2::Signals::listen</definition>
+        <argsstring>(SignalSpecifier&lt; SigSpec &gt; signal_specifier, DispatchSpecifier&lt; DispatchSpec &gt; dispatch_specifier, Func &amp;&amp;callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Signals::listen</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1DispatchSpecifier" kindref="compound">DispatchSpecifier</ref>&lt; DispatchSpec &gt;</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1024" column="16" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1024" bodyend="1046"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a31c4eb6ee0aad359f7b44598c599b072" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Event</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Handle d2::Signals::listen</definition>
+        <argsstring>(Event ev, Func &amp;&amp;callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Signals::listen</qualifiedname>
+        <param>
+          <type>Event</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1047" column="29" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1047" bodyend="1064"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a706c199fdd5cf3dc018d98c898827ecc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Event</type>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Handle d2::Signals::listen</definition>
+        <argsstring>(Event ev, SignalSpecifier&lt; SigSpec &gt; signal_specifier, Func &amp;&amp;callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Signals::listen</qualifiedname>
+        <param>
+          <type>Event</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1066" column="16" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1066" bodyend="1083"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a6ab9035041c8351c2a7aca773c5c4e44" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Event</type>
+          </param>
+          <param>
+            <type>typename DispatchSpec</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Handle d2::Signals::listen</definition>
+        <argsstring>(Event ev, DispatchSpecifier&lt; DispatchSpec &gt; dispatch_specifier, Func &amp;&amp;callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Signals::listen</qualifiedname>
+        <param>
+          <type>Event</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1DispatchSpecifier" kindref="compound">DispatchSpecifier</ref>&lt; DispatchSpec &gt;</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1085" column="16" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1085" bodyend="1102"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a07fb31d03e76ba7a8b2b4a63493d1ea8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Event</type>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+          <param>
+            <type>typename DispatchSpec</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>Handle d2::Signals::listen</definition>
+        <argsstring>(Event ev, SignalSpecifier&lt; SigSpec &gt; signal_specifier, DispatchSpecifier&lt; DispatchSpec &gt; dispatch_specifier, Func &amp;&amp;callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Signals::listen</qualifiedname>
+        <param>
+          <type>Event</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1DispatchSpecifier" kindref="compound">DispatchSpecifier</ref>&lt; DispatchSpec &gt;</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1104" column="16" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1104" bodyend="1126"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a26bfd86a43347f691f4bafb890a18e2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Ev</declname>
+            <defname>Ev</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::signal</definition>
+        <argsstring>(Argv &amp;&amp;... args)</argsstring>
+        <name>signal</name>
+        <qualifiedname>d2::Signals::signal</qualifiedname>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1128" column="27" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1128" bodyend="1143"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a66149a778f6393d37afc8448260fcf91" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Ev</declname>
+            <defname>Ev</defname>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::signal</definition>
+        <argsstring>(SignalSpecifier&lt; SigSpec &gt; signal_specifier, Argv &amp;&amp;... args)</argsstring>
+        <name>signal</name>
+        <qualifiedname>d2::Signals::signal</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1145" column="14" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1145" bodyend="1160"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a8c50c1359ea066eaa3a5363b42a78242" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Ev</declname>
+            <defname>Ev</defname>
+          </param>
+          <param>
+            <type>typename DispatchSpec</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::signal</definition>
+        <argsstring>(DispatchSpecifier&lt; DispatchSpec &gt; dispatch_specifier, Argv &amp;&amp;... args)</argsstring>
+        <name>signal</name>
+        <qualifiedname>d2::Signals::signal</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1DispatchSpecifier" kindref="compound">DispatchSpecifier</ref>&lt; DispatchSpec &gt;</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1162" column="14" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1162" bodyend="1177"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1aff28e5d40d1661d49792333d178e8bdb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Ev</declname>
+            <defname>Ev</defname>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+          <param>
+            <type>typename DispatchSpec</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::signal</definition>
+        <argsstring>(SignalSpecifier&lt; SigSpec &gt; signal_specifier, DispatchSpecifier&lt; DispatchSpec &gt; dispatch_specifier, Argv &amp;&amp;... args)</argsstring>
+        <name>signal</name>
+        <qualifiedname>d2::Signals::signal</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1DispatchSpecifier" kindref="compound">DispatchSpecifier</ref>&lt; DispatchSpec &gt;</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1179" column="14" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1179" bodyend="1198"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a9c31c99ce6f46453b662f53817ebc8d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Event</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::signal</definition>
+        <argsstring>(Event ev, Argv &amp;&amp;... args)</argsstring>
+        <name>signal</name>
+        <qualifiedname>d2::Signals::signal</qualifiedname>
+        <param>
+          <type>Event</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1199" column="27" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1199" bodyend="1212"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a57b4d894b9b507fdfbfcefe0ac84c886" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Event</type>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::signal</definition>
+        <argsstring>(Event ev, SignalSpecifier&lt; SigSpec &gt; signal_specifier, Argv &amp;&amp;... args)</argsstring>
+        <name>signal</name>
+        <qualifiedname>d2::Signals::signal</qualifiedname>
+        <param>
+          <type>Event</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1214" column="14" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1214" bodyend="1227"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a389fb7068f6a89fcb752e6a0bfa0e65a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Event</type>
+          </param>
+          <param>
+            <type>typename DispatchSpec</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::signal</definition>
+        <argsstring>(Event ev, DispatchSpecifier&lt; DispatchSpec &gt; dispatch_specifier, Argv &amp;&amp;... args)</argsstring>
+        <name>signal</name>
+        <qualifiedname>d2::Signals::signal</qualifiedname>
+        <param>
+          <type>Event</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1DispatchSpecifier" kindref="compound">DispatchSpecifier</ref>&lt; DispatchSpec &gt;</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1229" column="14" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1229" bodyend="1242"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a4e8274a5b91ac5a4cb50cf0e20fa7bc3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Event</type>
+          </param>
+          <param>
+            <type>typename SigSpec</type>
+          </param>
+          <param>
+            <type>typename DispatchSpec</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::Signals::signal</definition>
+        <argsstring>(Event ev, SignalSpecifier&lt; SigSpec &gt; signal_specifier, DispatchSpecifier&lt; DispatchSpec &gt; dispatch_specifier, Argv &amp;&amp;... args)</argsstring>
+        <name>signal</name>
+        <qualifiedname>d2::Signals::signal</qualifiedname>
+        <param>
+          <type>Event</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; SigSpec &gt;</type>
+          <declname>signal_specifier</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1DispatchSpecifier" kindref="compound">DispatchSpecifier</ref>&lt; DispatchSpec &gt;</type>
+          <declname>dispatch_specifier</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1244" column="14" bodyfile="core/io/d2_signal_handler.hpp" bodystart="1244" bodyend="1262"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a506b304a42597a1e202861ebf6c384e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" kindref="member">Signals</ref> &amp;</type>
+        <definition>Signals &amp; d2::Signals::operator=</definition>
+        <argsstring>(const Signals &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Signals::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" kindref="member">Signals</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1264" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1a44691e3045fe817f0912dbab99391cfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" kindref="member">Signals</ref> &amp;</type>
+        <definition>Signals &amp; d2::Signals::operator=</definition>
+        <argsstring>(Signals &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Signals::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" kindref="member">Signals</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="1265" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>d2::IOContext</label>
+        <link refid="classd2_1_1IOContext"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::Signals</label>
+        <link refid="classd2_1_1Signals"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; Signals &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::Signals</label>
+        <link refid="classd2_1_1Signals"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; Signals &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_signal_handler.hpp" line="415" column="5" bodyfile="core/io/d2_signal_handler.hpp" bodystart="416" bodyend="1266"/>
+    <listofallmembers>
+      <member refid="classd2_1_1Signals_1a82b26152b69c6871b6a9aad6563f6f6a" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_make_listener_callback</name></member>
+      <member refid="classd2_1_1Signals_1a84bdd098516686e71cc89ac40538d892" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_max_concurrent_signals</name></member>
+      <member refid="classd2_1_1Signals_1a8e9ab1fee6b8662a871ce5fd90b15f0f" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_mtx</name></member>
+      <member refid="classd2_1_1Signals_1a1cfc354d795af40ac981fa9bd258050e" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_pool</name></member>
+      <member refid="classd2_1_1Signals_1a5f8ab8c06ba31bd94316daffe5ec3c16" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_apply</name></member>
+      <member refid="classd2_1_1Signals_1a66d978dfabf1e039e892f21fddadc7c8" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_apply_all</name></member>
+      <member refid="classd2_1_1Signals_1a478f81f629913d4c3a0564d821743797" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_deregister</name></member>
+      <member refid="classd2_1_1Signals_1af64a2f04b629b9d57542a4ba27dad3c3" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_drain_queued</name></member>
+      <member refid="classd2_1_1Signals_1a4df6ea075f19102d2ade49608f4d2d1d" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_id</name></member>
+      <member refid="classd2_1_1Signals_1ad64e115514045798ba088b86046f47a3" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_listen</name></member>
+      <member refid="classd2_1_1Signals_1a3393fe9eebb98b2456dde396eee1d7ab" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_listen_unchecked</name></member>
+      <member refid="classd2_1_1Signals_1a2e8e59d533ab739089fd3e467264c543" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_pending</name></member>
+      <member refid="classd2_1_1Signals_1a39a8ae89e21f381fe063cdc372c8092c" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_register</name></member>
+      <member refid="classd2_1_1Signals_1ac21935eeff93b5c0208a91898956e78c" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_schedule_drain</name></member>
+      <member refid="classd2_1_1Signals_1ade245ea58db546f9414900c0033792b0" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_trigger</name></member>
+      <member refid="classd2_1_1Signals_1a9fbb2db4adf8e303965379467f9d2686" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sig_trigger_unchecked</name></member>
+      <member refid="classd2_1_1Signals_1a647527d0bcbbb3b983d4f58ce3dccd9e" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_sigs</name></member>
+      <member refid="classd2_1_1Signals_1ad832cfd9397b0619d036b4547ba68e59" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_single_signature_verifier</name></member>
+      <member refid="classd2_1_1Signals_1a353bee2bc9effcd7159430d8f588a523" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_static_storage_length</name></member>
+      <member refid="classd2_1_1Signals_1a7e726357e31b02c282123a05b316d5cd" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>_verify_single_signature</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968a73bbb3d74bd8dab115d7c8618062f3bb" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>Async</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968aaae4fc6d1f8736b38895289fe5fbe573" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>Combine</name></member>
+      <member refid="classd2_1_1Signals_1a9155c4b86a8a097d7f448df6cb93227e" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>connect</name></member>
+      <member refid="classd2_1_1Signals_1af7c26d903731d0bb178fe3be6dde06e2" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>connect</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968ac62c99d98b33c102078a9be949a77775" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>Deferred</name></member>
+      <member refid="classd2_1_1Signals_1a203504e91a96b04a8fcb3a2a7b4c5b65" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>disconnect</name></member>
+      <member refid="classd2_1_1Signals_1ac0a8f9cda876d3f5e52b4181fabfa6e2" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>disconnect</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968a03591b4f7900aad9376259f2bdb0d830" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>DropIfFull</name></member>
+      <member refid="classd2_1_1Signals_1a29003864fa6512146e35d4a6b6bca8ad" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>event_idx</name></member>
+      <member refid="classd2_1_1Signals_1a4ab36a7cc7e2da1f86a97e050dbb03bf" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a0020b9be06217cfca1738854d5c1dbea" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a5c278e277dc44d32048b0e595bd9038b" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a4e7a3aa64171bc4a137332ed9f6ed1d2" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a31c4eb6ee0aad359f7b44598c599b072" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a706c199fdd5cf3dc018d98c898827ecc" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a6ab9035041c8351c2a7aca773c5c4e44" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a07fb31d03e76ba7a8b2b4a63493d1ea8" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1aec8ed4cf23c868038f7658ae60821f0f" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>make</name></member>
+      <member refid="classd2_1_1Signals_1a506b304a42597a1e202861ebf6c384e8" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Signals_1a44691e3045fe817f0912dbab99391cfc" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Signals_1ad556c4fc418e094d961863e3b571e575" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>ptr</name></member>
+      <member refid="classd2_1_1Signals_1a26bfd86a43347f691f4bafb890a18e2a" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a66149a778f6393d37afc8448260fcf91" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a8c50c1359ea066eaa3a5363b42a78242" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1aff28e5d40d1661d49792333d178e8bdb" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a9c31c99ce6f46453b662f53817ebc8d2" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a57b4d894b9b507fdfbfcefe0ac84c886" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a389fb7068f6a89fcb752e6a0bfa0e65a" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a4e8274a5b91ac5a4cb50cf0e20fa7bc3" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1aafd8965473e86b05bb841c01847a8450" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>signal_id</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>SignalFlags</name></member>
+      <member refid="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>Signals</name></member>
+      <member refid="classd2_1_1Signals_1a37f07c05a6582593a11a28d573afc701" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>Signals</name></member>
+      <member refid="classd2_1_1Signals_1a917e5f6897fd39a661ff26c0f096f8e7" prot="public" virt="non-virtual"><scope>d2::Signals</scope><name>Signals</name></member>
+      <member refid="classd2_1_1Signals_1a673107a3141e72b3f965a87339484ff1" prot="private" virt="non-virtual"><scope>d2::Signals</scope><name>signature_verifier</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="dir_30659b311ed6f721b395195fdd1a3bb1" kind="dir">
+    <compoundname>core/tree</compoundname>
+    <innerfile refid="d2__styles_8hpp">d2_styles.hpp</innerfile>
+    <innerfile refid="d2__styles__base_8hpp">d2_styles_base.hpp</innerfile>
+    <innerfile refid="d2__text__select_8cpp">d2_text_select.cpp</innerfile>
+    <innerfile refid="d2__text__select_8hpp">d2_text_select.hpp</innerfile>
+    <innerfile refid="d2__theme_8cpp">d2_theme.cpp</innerfile>
+    <innerfile refid="d2__theme_8hpp">d2_theme.hpp</innerfile>
+    <innerfile refid="d2__tree_8hpp">d2_tree.hpp</innerfile>
+    <innerfile refid="d2__tree__construct_8hpp">d2_tree_construct.hpp</innerfile>
+    <innerfile refid="d2__tree__element_8cpp">d2_tree_element.cpp</innerfile>
+    <innerfile refid="d2__tree__element_8hpp">d2_tree_element.hpp</innerfile>
+    <innerfile refid="d2__tree__element__frwd_8hpp">d2_tree_element_frwd.hpp</innerfile>
+    <innerfile refid="d2__tree__parent_8cpp">d2_tree_parent.cpp</innerfile>
+    <innerfile refid="d2__tree__parent_8hpp">d2_tree_parent.hpp</innerfile>
+    <innerfile refid="d2__tree__state_8cpp">d2_tree_state.cpp</innerfile>
+    <innerfile refid="d2__tree__state_8hpp">d2_tree_state.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/"/>
+  </compounddef>
+</doxygen>

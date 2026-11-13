@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1dx_1_1MultiInput_1_1DocModel" kind="struct" language="C++" prot="protected">
+    <compoundname>d2::dx::MultiInput::DocModel</compoundname>
+    <includes refid="d2__multiline__input_8hpp" local="no">d2_multiline_input.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1dx_1_1MultiInput_1_1DocModel_1adc7c7fe3eb5d9c60b03c094f24031743" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1dx_1_1detail_1_1InputLayout" kindref="compound">detail::InputLayout</ref></type>
+        <definition>detail::InputLayout d2::dx::MultiInput::DocModel::text</definition>
+        <argsstring></argsstring>
+        <name>text</name>
+        <qualifiedname>d2::dx::MultiInput::DocModel::text</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_multiline_input.hpp" line="66" column="37" bodyfile="elements/d2_multiline_input.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1dx_1_1MultiInput_1_1DocModel_1a2431477a989d93425e4dd4d571a3ee8b" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::MultiInput::DocModel::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <qualifiedname>d2::dx::MultiInput::DocModel::length</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_multiline_input.hpp" line="67" column="29" bodyfile="elements/d2_multiline_input.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1dx_1_1MultiInput_1_1DocModel_1a80fe5025705e2bbe89843d2c23760935" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::MultiInput::DocModel::max_width</definition>
+        <argsstring></argsstring>
+        <name>max_width</name>
+        <qualifiedname>d2::dx::MultiInput::DocModel::max_width</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_multiline_input.hpp" line="68" column="29" bodyfile="elements/d2_multiline_input.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::dx::MultiInput::DocModel</label>
+        <link refid="structd2_1_1dx_1_1MultiInput_1_1DocModel"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>text</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::dx::detail::InputLayout</label>
+        <link refid="structd2_1_1dx_1_1detail_1_1InputLayout"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>masked</edgelabel>
+          <edgelabel>source</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::text::Layout</label>
+        <link refid="classd2_1_1text_1_1Layout"/>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_multiline_input.hpp" line="64" column="13" bodyfile="elements/d2_multiline_input.hpp" bodystart="65" bodyend="69"/>
+    <listofallmembers>
+      <member refid="structd2_1_1dx_1_1MultiInput_1_1DocModel_1a2431477a989d93425e4dd4d571a3ee8b" prot="public" virt="non-virtual"><scope>d2::dx::MultiInput::DocModel</scope><name>length</name></member>
+      <member refid="structd2_1_1dx_1_1MultiInput_1_1DocModel_1a80fe5025705e2bbe89843d2c23760935" prot="public" virt="non-virtual"><scope>d2::dx::MultiInput::DocModel</scope><name>max_width</name></member>
+      <member refid="structd2_1_1dx_1_1MultiInput_1_1DocModel_1adc7c7fe3eb5d9c60b03c094f24031743" prot="public" virt="non-virtual"><scope>d2::dx::MultiInput::DocModel</scope><name>text</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

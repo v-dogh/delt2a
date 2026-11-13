@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1colors_1_1r" kind="namespace" language="C++">
+    <compoundname>d2::colors::r</compoundname>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaced2_1_1colors_1_1r_1a1bf50640befde8b87527ac77078309d0" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="namespaced2_1_1colors_1abfad75eefae5d71375257acea473565a" kindref="member">pf</ref></type>
+        <definition>pf d2::colors::r::red</definition>
+        <argsstring></argsstring>
+        <name>red</name>
+        <qualifiedname>d2::colors::r::red</qualifiedname>
+        <initializer>{.<ref refid="namespaced2_1_1colors_1_1r" kindref="compound">r</ref> = 255, .<ref refid="namespaced2_1_1colors_1_1g" kindref="compound">g</ref> = 0, .<ref refid="namespaced2_1_1colors_1_1b" kindref="compound">b</ref> = 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_colors.hpp" line="10" column="22" bodyfile="core/platform/d2_colors.hpp" bodystart="10" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1colors_1_1r_1a24aaf957245469cba618448003bfc14a" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="namespaced2_1_1colors_1abfad75eefae5d71375257acea473565a" kindref="member">pf</ref></type>
+        <definition>pf d2::colors::r::coral</definition>
+        <argsstring></argsstring>
+        <name>coral</name>
+        <qualifiedname>d2::colors::r::coral</qualifiedname>
+        <initializer>{.<ref refid="namespaced2_1_1colors_1_1r" kindref="compound">r</ref> = 255, .<ref refid="namespaced2_1_1colors_1_1g" kindref="compound">g</ref> = 127, .<ref refid="namespaced2_1_1colors_1_1b" kindref="compound">b</ref> = 80}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_colors.hpp" line="11" column="22" bodyfile="core/platform/d2_colors.hpp" bodystart="11" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1colors_1_1r_1aa6ebfc1f61a9260c59b4bbae7f914a74" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="namespaced2_1_1colors_1abfad75eefae5d71375257acea473565a" kindref="member">pf</ref></type>
+        <definition>pf d2::colors::r::chrome_yellow</definition>
+        <argsstring></argsstring>
+        <name>chrome_yellow</name>
+        <qualifiedname>d2::colors::r::chrome_yellow</qualifiedname>
+        <initializer>{.<ref refid="namespaced2_1_1colors_1_1r" kindref="compound">r</ref> = 255, .<ref refid="namespaced2_1_1colors_1_1g" kindref="compound">g</ref> = 167, .<ref refid="namespaced2_1_1colors_1_1b" kindref="compound">b</ref> = 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_colors.hpp" line="12" column="22" bodyfile="core/platform/d2_colors.hpp" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1colors_1_1r_1ac774c74a5b3ed44ecd4e9cf75b1a99f6" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="namespaced2_1_1colors_1abfad75eefae5d71375257acea473565a" kindref="member">pf</ref></type>
+        <definition>pf d2::colors::r::yellow</definition>
+        <argsstring></argsstring>
+        <name>yellow</name>
+        <qualifiedname>d2::colors::r::yellow</qualifiedname>
+        <initializer>{.<ref refid="namespaced2_1_1colors_1_1r" kindref="compound">r</ref> = 255, .<ref refid="namespaced2_1_1colors_1_1g" kindref="compound">g</ref> = 255, .<ref refid="namespaced2_1_1colors_1_1b" kindref="compound">b</ref> = 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_colors.hpp" line="13" column="22" bodyfile="core/platform/d2_colors.hpp" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1colors_1_1r_1a7f48076b8b359f7858f1a43e5259cfb8" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="namespaced2_1_1colors_1abfad75eefae5d71375257acea473565a" kindref="member">pf</ref></type>
+        <definition>pf d2::colors::r::magenta</definition>
+        <argsstring></argsstring>
+        <name>magenta</name>
+        <qualifiedname>d2::colors::r::magenta</qualifiedname>
+        <initializer>{.<ref refid="namespaced2_1_1colors_1_1r" kindref="compound">r</ref> = 255, .<ref refid="namespaced2_1_1colors_1_1b" kindref="compound">b</ref> = 255}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_colors.hpp" line="14" column="22" bodyfile="core/platform/d2_colors.hpp" bodystart="14" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1colors_1_1r_1a20b9919ed124f9760dd76b66c1cd30a6" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="namespaced2_1_1colors_1abfad75eefae5d71375257acea473565a" kindref="member">pf</ref></type>
+        <definition>pf d2::colors::r::crimson</definition>
+        <argsstring></argsstring>
+        <name>crimson</name>
+        <qualifiedname>d2::colors::r::crimson</qualifiedname>
+        <initializer>{.<ref refid="namespaced2_1_1colors_1_1r" kindref="compound">r</ref> = 220, .<ref refid="namespaced2_1_1colors_1_1g" kindref="compound">g</ref> = 20, .<ref refid="namespaced2_1_1colors_1_1b" kindref="compound">b</ref> = 60}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_colors.hpp" line="15" column="22" bodyfile="core/platform/d2_colors.hpp" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1colors_1_1r_1a61cb2ac387b882eabc30e43fa60e656d" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="namespaced2_1_1colors_1abfad75eefae5d71375257acea473565a" kindref="member">pf</ref></type>
+        <definition>pf d2::colors::r::salmon</definition>
+        <argsstring></argsstring>
+        <name>salmon</name>
+        <qualifiedname>d2::colors::r::salmon</qualifiedname>
+        <initializer>{.<ref refid="namespaced2_1_1colors_1_1r" kindref="compound">r</ref> = 250, .<ref refid="namespaced2_1_1colors_1_1g" kindref="compound">g</ref> = 128, .<ref refid="namespaced2_1_1colors_1_1b" kindref="compound">b</ref> = 114}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_colors.hpp" line="16" column="22" bodyfile="core/platform/d2_colors.hpp" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1colors_1_1r_1a797f59b6a29c8685a6e6d4ca81a5c906" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="namespaced2_1_1colors_1abfad75eefae5d71375257acea473565a" kindref="member">pf</ref></type>
+        <definition>pf d2::colors::r::firebrick</definition>
+        <argsstring></argsstring>
+        <name>firebrick</name>
+        <qualifiedname>d2::colors::r::firebrick</qualifiedname>
+        <initializer>{.<ref refid="namespaced2_1_1colors_1_1r" kindref="compound">r</ref> = 178, .<ref refid="namespaced2_1_1colors_1_1g" kindref="compound">g</ref> = 34, .<ref refid="namespaced2_1_1colors_1_1b" kindref="compound">b</ref> = 34}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_colors.hpp" line="17" column="22" bodyfile="core/platform/d2_colors.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_colors.hpp" line="8" column="5"/>
+  </compounddef>
+</doxygen>

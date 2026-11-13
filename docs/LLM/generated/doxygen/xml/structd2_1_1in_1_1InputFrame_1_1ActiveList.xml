@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1in_1_1InputFrame_1_1ActiveList" kind="struct" language="C++" prot="public">
+    <compoundname>d2::in::InputFrame::ActiveList</compoundname>
+    <includes refid="d2__input__base_8hpp" local="no">d2_input_base.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structd2_1_1in_1_1InputFrame_1_1ActiveList_1a59a08dd90953ea6d5d9a013348e477d1" prot="private" static="no" mutable="no">
+        <type>std::array&lt; std::pair&lt; <ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref>, <ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">mode</ref> &gt;, 8 &gt;</type>
+        <definition>std::array&lt;std::pair&lt;keytype, mode&gt;, 8&gt; d2::in::InputFrame::ActiveList::_active_keys_cache_buf_storage</definition>
+        <argsstring></argsstring>
+        <name>_active_keys_cache_buf_storage</name>
+        <qualifiedname>d2::in::InputFrame::ActiveList::_active_keys_cache_buf_storage</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="124" column="24" bodyfile="core/io/d2_input_base.hpp" bodystart="124" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1in_1_1InputFrame_1_1ActiveList_1a4878b8c36042861d7a952233f00adff2" prot="private" static="no" mutable="no">
+        <type>std::pmr::monotonic_buffer_resource</type>
+        <definition>std::pmr::monotonic_buffer_resource d2::in::InputFrame::ActiveList::_active_keys_cache_buf</definition>
+        <argsstring></argsstring>
+        <name>_active_keys_cache_buf</name>
+        <qualifiedname>d2::in::InputFrame::ActiveList::_active_keys_cache_buf</qualifiedname>
+        <initializer>{
+                _active_keys_cache_buf_storage.data(), _active_keys_cache_buf_storage.size()
+            }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="125" column="49" bodyfile="core/io/d2_input_base.hpp" bodystart="125" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1in_1_1InputFrame_1_1ActiveList_1ad6170c324f1a7e5cb0f3aaffb9de9ada" prot="private" static="no" mutable="no">
+        <type>std::pmr::vector&lt; std::pair&lt; <ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref>, <ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">mode</ref> &gt; &gt;</type>
+        <definition>std::pmr::vector&lt;std::pair&lt;keytype, mode&gt; &gt; d2::in::InputFrame::ActiveList::_active_keys_cache</definition>
+        <argsstring></argsstring>
+        <name>_active_keys_cache</name>
+        <qualifiedname>d2::in::InputFrame::ActiveList::_active_keys_cache</qualifiedname>
+        <initializer>{&amp;_active_keys_cache_buf}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="128" column="30" bodyfile="core/io/d2_input_base.hpp" bodystart="128" bodyend="128"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_input_base.hpp" line="121" column="9" bodyfile="core/io/d2_input_base.hpp" bodystart="122" bodyend="129"/>
+    <listofallmembers>
+      <member refid="structd2_1_1in_1_1InputFrame_1_1ActiveList_1ad6170c324f1a7e5cb0f3aaffb9de9ada" prot="private" virt="non-virtual"><scope>d2::in::InputFrame::ActiveList</scope><name>_active_keys_cache</name></member>
+      <member refid="structd2_1_1in_1_1InputFrame_1_1ActiveList_1a4878b8c36042861d7a952233f00adff2" prot="private" virt="non-virtual"><scope>d2::in::InputFrame::ActiveList</scope><name>_active_keys_cache_buf</name></member>
+      <member refid="structd2_1_1in_1_1InputFrame_1_1ActiveList_1a59a08dd90953ea6d5d9a013348e477d1" prot="private" virt="non-virtual"><scope>d2::in::InputFrame::ActiveList</scope><name>_active_keys_cache_buf_storage</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

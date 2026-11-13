@@ -1,0 +1,516 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemBinder" kind="class" language="C++" prot="public">
+    <compoundname>d2::sys::SystemBinder</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1Module" prot="public" virt="non-virtual">d2::sys::Module&lt; SystemBinder, &quot;Binder&quot;, Access::TUnsafe, Load::Lazy, sys::SystemScreen &gt;</basecompoundref>
+    <includes refid="d2__binder_8hpp" local="no">d2_binder.hpp</includes>
+    <innerclass refid="structd2_1_1sys_1_1SystemBinder_1_1Bind" prot="public">d2::sys::SystemBinder::Bind</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1SystemBinder_1_1BindError" prot="public">d2::sys::SystemBinder::BindError</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1SystemBinder_1_1BindValue" prot="private">d2::sys::SystemBinder::BindValue</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1SystemBinder_1_1PendingCall" prot="private">d2::sys::SystemBinder::PendingCall</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1sys_1_1SystemBinder_1af769cdf7bc98063192d29ddc7ee9207e" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>ConflictType</name>
+        <qualifiedname>d2::sys::SystemBinder::ConflictType</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1SystemBinder_1af769cdf7bc98063192d29ddc7ee9207ea778f0a4cbdc7e22f17964daa6ebee02a" prot="public">
+          <name>Whitelist</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemBinder_1af769cdf7bc98063192d29ddc7ee9207ea85fffe8f5074d606fa202fa5ae90d8bb" prot="public">
+          <name>Blacklist</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemBinder_1af769cdf7bc98063192d29ddc7ee9207ea15fb6ccbd11ebebcea2b48dc477f3561" prot="public">
+          <name>Collision</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemBinder_1af769cdf7bc98063192d29ddc7ee9207eae139a585510a502bbf1841cf589f5086" prot="public">
+          <name>Failure</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="70" column="9" bodyfile="core/mods/d2_binder.hpp" bodystart="71" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemBinder_1aa156c72be006a9662a1d95a99cb56325" prot="public" static="no">
+        <type>std::vector&lt; std::pair&lt; <ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">in::keytype</ref>, <ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">in::mode</ref> &gt; &gt;</type>
+        <definition>using d2::sys::SystemBinder::key_list = std::vector&lt;std::pair&lt;in::keytype, in::mode&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>key_list</name>
+        <qualifiedname>d2::sys::SystemBinder::key_list</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="27" column="9" bodyfile="core/mods/d2_binder.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemBinder_1aab6ff74b045c6bf0604964e1b91a1980" prot="public" static="no">
+        <type>absl::flat_hash_set&lt; std::pair&lt; <ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">in::keytype</ref>, std::optional&lt; <ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">in::mode</ref> &gt; &gt; &gt;</type>
+        <definition>using d2::sys::SystemBinder::control_list = absl::flat_hash_set&lt;std::pair&lt;in::keytype, std::optional&lt;in::mode&gt;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>control_list</name>
+        <qualifiedname>d2::sys::SystemBinder::control_list</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="28" column="9" bodyfile="core/mods/d2_binder.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemBinder_1ae6a1436e19ea2ab5169e1a39f8704d5c" prot="public" static="no">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>using d2::sys::SystemBinder::callback_type = std::function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>callback_type</name>
+        <qualifiedname>d2::sys::SystemBinder::callback_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="29" column="9" bodyfile="core/mods/d2_binder.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemBinder_1a81aab82ce61404d07d716d053d907fd3" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemBinder::_epoch_ctr</definition>
+        <argsstring></argsstring>
+        <name>_epoch_ctr</name>
+        <qualifiedname>d2::sys::SystemBinder::_epoch_ctr</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="99" column="21" bodyfile="core/mods/d2_binder.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemBinder_1a22cc62c67105d120a303875a138c622d" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; std::string, BindValue &gt;</type>
+        <definition>absl::flat_hash_map&lt;std::string, BindValue&gt; d2::sys::SystemBinder::_binds</definition>
+        <argsstring></argsstring>
+        <name>_binds</name>
+        <qualifiedname>d2::sys::SystemBinder::_binds</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="100" column="29" bodyfile="core/mods/d2_binder.hpp" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemBinder_1a872023d8e7af1b86be655ef87fc5a624" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_set&lt; std::string &gt;</type>
+        <definition>absl::flat_hash_set&lt;std::string&gt; d2::sys::SystemBinder::_active_set</definition>
+        <argsstring></argsstring>
+        <name>_active_set</name>
+        <qualifiedname>d2::sys::SystemBinder::_active_set</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="101" column="29" bodyfile="core/mods/d2_binder.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemBinder_1a1f56b15a8e3348743ed9d352ed546a37" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; <ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">in::keytype</ref>, std::chrono::steady_clock::time_point &gt;</type>
+        <definition>absl::flat_hash_map&lt;in::keytype, std::chrono::steady_clock::time_point&gt; d2::sys::SystemBinder::_hold_ts</definition>
+        <argsstring></argsstring>
+        <name>_hold_ts</name>
+        <qualifiedname>d2::sys::SystemBinder::_hold_ts</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="102" column="29" bodyfile="core/mods/d2_binder.hpp" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemBinder_1ad268dd2f9d07a24adf86aec7475de2e1" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Signals::Handle</ref></type>
+        <definition>Signals::Handle d2::sys::SystemBinder::_key_event</definition>
+        <argsstring></argsstring>
+        <name>_key_event</name>
+        <qualifiedname>d2::sys::SystemBinder::_key_event</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="103" column="25" bodyfile="core/mods/d2_binder.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1a8c6b8cab78c6674da44f8f475549f8e4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="structd2_1_1sys_1_1SystemBinder_1_1BindError" kindref="compound">SystemBinder::BindError</ref> &gt;</type>
+        <definition>std::optional&lt; SystemBinder::BindError &gt; d2::sys::SystemBinder::_bind_dcheck</definition>
+        <argsstring>(absl::flat_hash_map&lt; std::string, BindValue &gt;::iterator it)</argsstring>
+        <name>_bind_dcheck</name>
+        <qualifiedname>d2::sys::SystemBinder::_bind_dcheck</qualifiedname>
+        <param>
+          <type>absl::flat_hash_map&lt; std::string, BindValue &gt;::iterator</type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="106" column="9" bodyfile="core/mods/d2_binder.cpp" bodystart="266" bodyend="477"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1aaf4d91d7807ac97d8e3a381e6034c34c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemBinder::_check_event</definition>
+        <argsstring>()</argsstring>
+        <name>_check_event</name>
+        <qualifiedname>d2::sys::SystemBinder::_check_event</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="107" column="14" bodyfile="core/mods/d2_binder.cpp" bodystart="8" bodyend="264"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1aac888d263952610eca7dc94968b94209" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::SystemBinder::~SystemBinder</definition>
+        <argsstring>() override</argsstring>
+        <name>~SystemBinder</name>
+        <qualifiedname>d2::sys::SystemBinder::~SystemBinder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="110" column="9" bodyfile="core/mods/d2_binder.cpp" bodystart="583" bodyend="588"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1adfc7c78a2dd4eb8a0ce2699330021066" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="structd2_1_1sys_1_1SystemBinder_1_1BindError" kindref="compound">BindError</ref> &gt;</type>
+        <definition>std::optional&lt; SystemBinder::BindError &gt; d2::sys::SystemBinder::bind</definition>
+        <argsstring>(const std::string &amp;name, Bind value, callback_type callback)</argsstring>
+        <name>bind</name>
+        <qualifiedname>d2::sys::SystemBinder::bind</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemBinder_1_1Bind" kindref="compound">Bind</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemBinder_1ae6a1436e19ea2ab5169e1a39f8704d5c" kindref="member">callback_type</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="112" column="23" bodyfile="core/mods/d2_binder.cpp" bodystart="480" bodyend="514"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1adbd6638f24fcee7bba93ea73961e5c35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="structd2_1_1sys_1_1SystemBinder_1_1BindError" kindref="compound">BindError</ref> &gt;</type>
+        <definition>std::optional&lt; SystemBinder::BindError &gt; d2::sys::SystemBinder::rebind</definition>
+        <argsstring>(const std::string &amp;name, Bind value)</argsstring>
+        <name>rebind</name>
+        <qualifiedname>d2::sys::SystemBinder::rebind</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemBinder_1_1Bind" kindref="compound">Bind</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="113" column="23" bodyfile="core/mods/d2_binder.cpp" bodystart="515" bodyend="547"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1a62f99c90685e318b7c78c467c7aea796" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structd2_1_1sys_1_1SystemBinder_1_1Bind" kindref="compound">Bind</ref> &amp;</type>
+        <definition>const SystemBinder::Bind &amp; d2::sys::SystemBinder::check</definition>
+        <argsstring>(const std::string &amp;name) const noexcept</argsstring>
+        <name>check</name>
+        <qualifiedname>d2::sys::SystemBinder::check</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="114" column="20" bodyfile="core/mods/d2_binder.cpp" bodystart="548" bodyend="555"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1ac81ce6318dddcf4cb0bc530ffb28750f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemBinder::unbind</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>unbind</name>
+        <qualifiedname>d2::sys::SystemBinder::unbind</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="115" column="14" bodyfile="core/mods/d2_binder.cpp" bodystart="590" bodyend="600"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1a55978d17884865dda1ed63c45d900c4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemBinder::freeze</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>freeze</name>
+        <qualifiedname>d2::sys::SystemBinder::freeze</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="116" column="14" bodyfile="core/mods/d2_binder.cpp" bodystart="556" bodyend="574"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1a7a860f40b51f4d7dd54b3234274af264" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemBinder::unfreeze</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>unfreeze</name>
+        <qualifiedname>d2::sys::SystemBinder::unfreeze</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="117" column="14" bodyfile="core/mods/d2_binder.cpp" bodystart="575" bodyend="582"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemBinder_1a3fca6f2a1d90170ee4c6b912800ddb45" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="structd2_1_1sys_1_1SystemBinder_1_1Bind" kindref="compound">Bind</ref> &gt;</type>
+        <definition>std::vector&lt; SystemBinder::Bind &gt; d2::sys::SystemBinder::list</definition>
+        <argsstring>() const</argsstring>
+        <name>list</name>
+        <qualifiedname>d2::sys::SystemBinder::list</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="118" column="21" bodyfile="core/mods/d2_binder.cpp" bodystart="601" bodyend="608"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::sys::Module&lt; SystemBinder, &quot;Binder&quot;, Access::TUnsafe, Load::Lazy, sys::SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::ModuleDecl&lt; SystemBinder, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>d2::sys::ModuleImpl&lt; SystemBinder, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="8" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>d2::sys::ModuleImplTag</label>
+        <link refid="structd2_1_1sys_1_1ModuleImplTag"/>
+      </node>
+      <node id="6">
+        <label>d2::sys::ModuleLocalGet&lt; SystemBinder &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemBinder</label>
+        <link refid="classd2_1_1sys_1_1SystemBinder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::Module&lt; SystemBinder, &quot;Binder&quot;, Access::TUnsafe, Load::Lazy, sys::SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::ModuleDecl&lt; SystemBinder, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>d2::sys::ModuleImpl&lt; SystemBinder, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="8" relation="private-inheritance">
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>module_preset</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>d2::sys::ModuleImplTag</label>
+        <link refid="structd2_1_1sys_1_1ModuleImplTag"/>
+      </node>
+      <node id="6">
+        <label>d2::sys::ModuleLocalGet&lt; SystemBinder &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemBinder</label>
+        <link refid="classd2_1_1sys_1_1SystemBinder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>d2::sys::SystemModule::ModPreset</label>
+        <link refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset"/>
+      </node>
+      <node id="5">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_binder.hpp" line="22" column="5" bodyfile="core/mods/d2_binder.hpp" bodystart="24" bodyend="119"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1a872023d8e7af1b86be655ef87fc5a624" prot="private" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_active_set</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1a8c6b8cab78c6674da44f8f475549f8e4" prot="private" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_bind_dcheck</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1a22cc62c67105d120a303875a138c622d" prot="private" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_binds</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1aaf4d91d7807ac97d8e3a381e6034c34c" prot="private" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_check_event</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1a81aab82ce61404d07d716d053d907fd3" prot="private" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_epoch_ctr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1a1f56b15a8e3348743ed9d352ed546a37" prot="private" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_hold_ts</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1ad268dd2f9d07a24adf86aec7475de2e1" prot="private" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_key_event</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3" prot="protected" virt="virtual"><scope>d2::sys::SystemBinder</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::SystemBinder</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::SystemBinder</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730" prot="protected" virt="virtual"><scope>d2::sys::SystemBinder</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1adfc7c78a2dd4eb8a0ce2699330021066" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>bind</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1ae6a1436e19ea2ab5169e1a39f8704d5c" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>callback_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1a62f99c90685e318b7c78c467c7aea796" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>check</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1af769cdf7bc98063192d29ddc7ee9207e" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>ConflictType</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>context</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1aab6ff74b045c6bf0604964e1b91a1980" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>control_list</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>dependency_names</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1a55978d17884865dda1ed63c45d900c4f" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>freeze</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::SystemBinder</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1aa156c72be006a9662a1d95a99cb56325" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>key_list</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1a3fca6f2a1d90170ee4c6b912800ddb45" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>list</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>make</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>module_info</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleImpl_1a3b770ad91cfdb330c60ca064add754c7" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>module_preset</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1adbd6638f24fcee7bba93ea73961e5c35" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>rebind</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>status</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1ac81ce6318dddcf4cb0bc530ffb28750f" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>unbind</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1a7a860f40b51f4d7dd54b3234274af264" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>unfreeze</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemBinder_1aac888d263952610eca7dc94968b94209" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder</scope><name>~SystemBinder</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::SystemBinder</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

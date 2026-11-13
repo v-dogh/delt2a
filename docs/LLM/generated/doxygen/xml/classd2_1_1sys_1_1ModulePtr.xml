@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1ModulePtr" kind="class" language="C++" prot="public">
+    <compoundname>d2::sys::ModulePtr</compoundname>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref></type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1ModulePtr_1adacdcc194fdfd488b69e8c7e71f5dbe4" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;Module&gt; d2::sys::ModulePtr&lt; Module &gt;::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::sys::ModulePtr::_ptr</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="137" column="25" bodyfile="core/io/d2_module.hpp" bodystart="137" bodyend="137"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1a4ea3644279106b0a32a5b5d2a9adb0e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModulePtr&lt; Module &gt;::ModulePtr</definition>
+        <argsstring>(std::nullptr_t)</argsstring>
+        <name>ModulePtr</name>
+        <qualifiedname>d2::sys::ModulePtr::ModulePtr</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="139" column="9" bodyfile="core/io/d2_module.hpp" bodystart="139" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1ac10c3c24c3ed1f1130ef58efefae5e3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModulePtr&lt; Module &gt;::ModulePtr</definition>
+        <argsstring>()=default</argsstring>
+        <name>ModulePtr</name>
+        <qualifiedname>d2::sys::ModulePtr::ModulePtr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="140" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1ab4ca8eeba4f4e4445f987f5d1f3feddd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModulePtr&lt; Module &gt;::ModulePtr</definition>
+        <argsstring>(const ModulePtr &amp;)=default</argsstring>
+        <name>ModulePtr</name>
+        <qualifiedname>d2::sys::ModulePtr::ModulePtr</qualifiedname>
+        <param>
+          <type>const ModulePtr &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="141" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1aca43df94bf74db819401e5583c17b6ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModulePtr&lt; Module &gt;::ModulePtr</definition>
+        <argsstring>(ModulePtr &amp;&amp;)=default</argsstring>
+        <name>ModulePtr</name>
+        <qualifiedname>d2::sys::ModulePtr::ModulePtr</qualifiedname>
+        <param>
+          <type>ModulePtr &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="142" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1a6b30c584bf16472b2c871de9e1ddf459" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModulePtr&lt; Module &gt;::ModulePtr</definition>
+        <argsstring>(std::shared_ptr&lt; Module &gt; ptr)</argsstring>
+        <name>ModulePtr</name>
+        <qualifiedname>d2::sys::ModulePtr::ModulePtr</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="143" column="9" bodyfile="core/io/d2_module.hpp" bodystart="143" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1a4f91295e92631028450182c6d2f8c660" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; Module &gt; d2::sys::ModulePtr&lt; Module &gt;::ptr</definition>
+        <argsstring>() const</argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::sys::ModulePtr::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="145" column="25" bodyfile="core/io/d2_module.hpp" bodystart="145" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1a554be524702581fbfad66ea934351982" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::uintptr_t</type>
+        <definition>std::uintptr_t d2::sys::ModulePtr&lt; Module &gt;::id</definition>
+        <argsstring>() const</argsstring>
+        <name>id</name>
+        <qualifiedname>d2::sys::ModulePtr::id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="154" column="24" bodyfile="core/io/d2_module.hpp" bodystart="154" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1aa2340b3bc68498a6f59f93852c94c511" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; Module &gt; d2::sys::ModulePtr&lt; Module &gt;::operator-&gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>d2::sys::ModulePtr::operator-&gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="159" column="25" bodyfile="core/io/d2_module.hpp" bodystart="159" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1a02815ae068ac2651d93a58b3f34046ac" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModulePtr&lt; Module &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>d2::sys::ModulePtr::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="164" column="9" bodyfile="core/io/d2_module.hpp" bodystart="164" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1a88011167aa9b4d37cbc6f04a817246f8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::ModulePtr&lt; Module &gt;::operator==</definition>
+        <argsstring>(const ModulePtr &amp;ptr) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::sys::ModulePtr::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1sys_1_1ModulePtr_1a4ea3644279106b0a32a5b5d2a9adb0e1" kindref="member">ModulePtr</ref> &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="169" column="14" bodyfile="core/io/d2_module.hpp" bodystart="169" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1afb1980698142e7aaf588b992c889344c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::ModulePtr&lt; Module &gt;::operator!=</definition>
+        <argsstring>(const ModulePtr &amp;ptr) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>d2::sys::ModulePtr::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1sys_1_1ModulePtr_1a4ea3644279106b0a32a5b5d2a9adb0e1" kindref="member">ModulePtr</ref> &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="173" column="14" bodyfile="core/io/d2_module.hpp" bodystart="173" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1a79b483b4f9a4cd3102421b4340df7ac0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1sys_1_1ModulePtr_1a4ea3644279106b0a32a5b5d2a9adb0e1" kindref="member">ModulePtr</ref> &amp;</type>
+        <definition>ModulePtr &amp; d2::sys::ModulePtr&lt; Module &gt;::operator=</definition>
+        <argsstring>(const ModulePtr &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::sys::ModulePtr::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1sys_1_1ModulePtr_1a4ea3644279106b0a32a5b5d2a9adb0e1" kindref="member">ModulePtr</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="178" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1ModulePtr_1a6d630e7bc9b49c895b3accc00645e20b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1sys_1_1ModulePtr_1a4ea3644279106b0a32a5b5d2a9adb0e1" kindref="member">ModulePtr</ref> &amp;</type>
+        <definition>ModulePtr &amp; d2::sys::ModulePtr&lt; Module &gt;::operator=</definition>
+        <argsstring>(ModulePtr &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::sys::ModulePtr::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1ModulePtr_1a4ea3644279106b0a32a5b5d2a9adb0e1" kindref="member">ModulePtr</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="179" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_module.hpp" line="134" column="15" bodyfile="core/io/d2_module.hpp" bodystart="135" bodyend="180"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1adacdcc194fdfd488b69e8c7e71f5dbe4" prot="private" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1a554be524702581fbfad66ea934351982" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>id</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1a4ea3644279106b0a32a5b5d2a9adb0e1" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>ModulePtr</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1ac10c3c24c3ed1f1130ef58efefae5e3f" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>ModulePtr</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1ab4ca8eeba4f4e4445f987f5d1f3feddd" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>ModulePtr</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1aca43df94bf74db819401e5583c17b6ac" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>ModulePtr</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1a6b30c584bf16472b2c871de9e1ddf459" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>ModulePtr</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1a02815ae068ac2651d93a58b3f34046ac" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>operator bool</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1afb1980698142e7aaf588b992c889344c" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>operator!=</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1aa2340b3bc68498a6f59f93852c94c511" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>operator-&gt;</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1a79b483b4f9a4cd3102421b4340df7ac0" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>operator=</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1a6d630e7bc9b49c895b3accc00645e20b" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>operator=</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1a88011167aa9b4d37cbc6f04a817246f8" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>operator==</name></member>
+      <member refid="classd2_1_1sys_1_1ModulePtr_1a4f91295e92631028450182c6d2f8c660" prot="public" virt="non-virtual"><scope>d2::sys::ModulePtr</scope><name>ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1IResponsive_1_1type" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::IResponsive::type</compoundname>
+    <basecompoundref refid="structd2_1_1style_1_1Responsive" prot="public" virt="non-virtual">d2::style::Responsive&lt; Type, Argv... &gt;</basecompoundref>
+    <basecompoundref refid="structd2_1_1style_1_1impl_1_1InterfaceHelper" prot="public" virt="non-virtual">d2::style::impl::InterfaceHelper&lt; type, PropBase, 1 &gt;</basecompoundref>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>PropBase</declname>
+        <defname>PropBase</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structd2_1_1style_1_1IResponsive_1_1type_1ae02985d618720fbbd5a8dac1397aa176" prot="public" static="no" strong="no">
+        <type><ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">uai_property</ref></type>
+        <name>Property</name>
+        <qualifiedname>d2::style::IResponsive::type::Property</qualifiedname>
+        <enumvalue id="structd2_1_1style_1_1IResponsive_1_1type_1ae02985d618720fbbd5a8dac1397aa176aa02e0d422c16d345b112977de98a66d8" prot="public">
+          <name>OnSubmit</name>
+          <initializer>= PropBase</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="1002" column="13" bodyfile="core/tree/d2_styles.hpp" bodystart="1003" bodyend="1005"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1style_1_1IResponsive_1_1type_1afb3ed788f4aa379bd6ebbb5f56c67b2b" prot="public" static="no">
+        <type><ref refid="structd2_1_1style_1_1Responsive" kindref="compound">Responsive</ref>&lt; Type, Argv... &gt;</type>
+        <definition>using d2::style::IResponsive&lt; Type, Argv &gt;::type&lt; PropBase &gt;::data = Responsive&lt;Type, Argv...&gt;</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::style::IResponsive::type::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="1001" column="13" bodyfile="core/tree/d2_styles.hpp" bodystart="1001" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::style::IResponsive&lt; Type, Argv &gt;::type&lt; PropBase &gt;</label>
+        <link refid="structd2_1_1style_1_1IResponsive_1_1type"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::style::Responsive&lt; Type, Argv... &gt;</label>
+        <link refid="structd2_1_1style_1_1Responsive"/>
+      </node>
+      <node id="3">
+        <label>d2::style::impl::InterfaceHelper&lt; type, PropBase, 1 &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1InterfaceHelper"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::style::impl::XAllocInterface&lt; type &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1XAllocInterface"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::style::IResponsive&lt; Type, Argv &gt;::type&lt; PropBase &gt;</label>
+        <link refid="structd2_1_1style_1_1IResponsive_1_1type"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::style::Responsive&lt; Type, Argv... &gt;</label>
+        <link refid="structd2_1_1style_1_1Responsive"/>
+      </node>
+      <node id="3">
+        <label>d2::style::impl::InterfaceHelper&lt; type, PropBase, 1 &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1InterfaceHelper"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::style::impl::XAllocInterface&lt; type &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1XAllocInterface"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_styles.hpp" line="999" column="9" bodyfile="core/tree/d2_styles.hpp" bodystart="1000" bodyend="1006"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1impl_1_1InterfaceHelper_1a78a0d8ce1294593fc8296f3ef683c480" prot="public" virt="non-virtual"><scope>d2::style::IResponsive::type</scope><name>base</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1InterfaceHelper_1a50ff6dc576c03d6aec585a4d444906f1" prot="public" virt="non-virtual"><scope>d2::style::IResponsive::type</scope><name>count</name></member>
+      <member refid="structd2_1_1style_1_1IResponsive_1_1type_1afb3ed788f4aa379bd6ebbb5f56c67b2b" prot="public" virt="non-virtual"><scope>d2::style::IResponsive::type</scope><name>data</name></member>
+      <member refid="structd2_1_1style_1_1Responsive_1ad2bc7b86d2215737aabd7547cf6b0560" prot="public" virt="non-virtual"><scope>d2::style::IResponsive::type</scope><name>get</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1InterfaceHelper_1aadf016091c9adc625ddcc4c0787950c0" prot="public" virt="non-virtual"><scope>d2::style::IResponsive::type</scope><name>offset</name></member>
+      <member refid="structd2_1_1style_1_1Responsive_1a1b4717798cf5acb24d7d75c6a8be6568" prot="public" virt="non-virtual"><scope>d2::style::IResponsive::type</scope><name>on_submit</name></member>
+      <member refid="structd2_1_1style_1_1IResponsive_1_1type_1ae02985d618720fbbd5a8dac1397aa176aa02e0d422c16d345b112977de98a66d8" prot="public" virt="non-virtual"><scope>d2::style::IResponsive::type</scope><name>OnSubmit</name></member>
+      <member refid="structd2_1_1style_1_1IResponsive_1_1type_1ae02985d618720fbbd5a8dac1397aa176" prot="public" virt="non-virtual"><scope>d2::style::IResponsive::type</scope><name>Property</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1XAllocInterface_1ad946296926110c4511f2381d7f0fd39c" prot="protected" virt="non-virtual"><scope>d2::style::IResponsive::type</scope><name>xid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

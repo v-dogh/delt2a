@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Signals_1_1SignalStorage_1_1EventBucket" kind="struct" language="C++" prot="public">
+    <compoundname>d2::Signals::SignalStorage::EventBucket</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1_1EventBucket_1a22f3082a382022a2be9bebec0c401172" prot="public" static="no" mutable="no">
+        <type>HandleList</type>
+        <definition>HandleList d2::Signals::SignalStorage::EventBucket::generic</definition>
+        <argsstring></argsstring>
+        <name>generic</name>
+        <qualifiedname>d2::Signals::SignalStorage::EventBucket::generic</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="756" column="28" bodyfile="core/io/d2_signal_handler.hpp" bodystart="756" bodyend="756"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1_1EventBucket_1a6614897c549276a8232ae9f2c841a260" prot="public" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; SpecifierKey, HandleList, SpecifierKeyHash, SpecifierKeyEqual &gt;</type>
+        <definition>absl::flat_hash_map&lt;SpecifierKey, HandleList, SpecifierKeyHash, SpecifierKeyEqual&gt; d2::Signals::SignalStorage::EventBucket::keyed</definition>
+        <argsstring></argsstring>
+        <name>keyed</name>
+        <qualifiedname>d2::Signals::SignalStorage::EventBucket::keyed</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="758" column="21" bodyfile="core/io/d2_signal_handler.hpp" bodystart="758" bodyend="758"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="754" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="755" bodyend="759"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1_1EventBucket_1a22f3082a382022a2be9bebec0c401172" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage::EventBucket</scope><name>generic</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1_1EventBucket_1a6614897c549276a8232ae9f2c841a260" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage::EventBucket</scope><name>keyed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

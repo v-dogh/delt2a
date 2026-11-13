@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1style_1_1Theme" kind="class" language="C++" prot="public">
+    <compoundname>d2::style::Theme</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::enable_shared_from_this&lt; Theme &gt;</basecompoundref>
+    <derivedcompoundref refid="classd2_1_1style_1_1DeclTheme" prot="public" virt="non-virtual">d2::style::DeclTheme&lt; Base, Deps, Ts &gt;</derivedcompoundref>
+    <includes refid="d2__theme_8hpp" local="no">d2_theme.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1style_1_1Theme_1ae2b911c9b8525c4f0e2c11bc9207bb0a" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" kindref="member">Theme</ref> &gt;</type>
+        <definition>using d2::style::Theme::ptr = std::shared_ptr&lt;Theme&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::style::Theme::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="616" column="9" bodyfile="core/tree/d2_theme.hpp" bodystart="616" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1style_1_1Theme_1a92e18f06ba8f4ff657350a9b48649047" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::style::Theme::_code</definition>
+        <argsstring></argsstring>
+        <name>_code</name>
+        <qualifiedname>d2::style::Theme::_code</qualifiedname>
+        <initializer>{0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="618" column="21" bodyfile="core/tree/d2_theme.hpp" bodystart="618" bodyend="618"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1ab4be829f19ece053d799e375dbac588e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>static std::size_t d2::style::Theme::id_to_code</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>id_to_code</name>
+        <qualifiedname>d2::style::Theme::id_to_code</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="620" column="28" bodyfile="core/tree/d2_theme.hpp" bodystart="620" bodyend="623"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1ab531f02f9eaa3bca8a7a0bebe3019e7a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>static auto d2::style::Theme::make</definition>
+        <argsstring>(std::vector&lt; px::background &gt; accents={})</argsstring>
+        <name>make</name>
+        <qualifiedname>d2::style::Theme::make</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref> &gt;</type>
+          <declname>accents</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="625" column="32" bodyfile="core/tree/d2_theme.hpp" bodystart="625" bodyend="631"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1a37a522b44b50858eeed60bdb4c41d7b2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>static auto d2::style::Theme::make_named</definition>
+        <argsstring>(const std::string &amp;name, std::vector&lt; px::background &gt; accents={})</argsstring>
+        <name>make_named</name>
+        <qualifiedname>d2::style::Theme::make_named</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref> &gt;</type>
+          <declname>accents</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="633" column="21" bodyfile="core/tree/d2_theme.hpp" bodystart="633" bodyend="639"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::Theme::Theme</definition>
+        <argsstring>()=default</argsstring>
+        <name>Theme</name>
+        <qualifiedname>d2::style::Theme::Theme</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="641" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1a082949ccd9f0833aa3825a1ab2d97ca4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::Theme::Theme</definition>
+        <argsstring>(const Theme &amp;)=default</argsstring>
+        <name>Theme</name>
+        <qualifiedname>d2::style::Theme::Theme</qualifiedname>
+        <param>
+          <type>const Theme &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="642" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1a33636c991ecdc1d591276e13a3692bbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::Theme::Theme</definition>
+        <argsstring>(Theme &amp;&amp;)=default</argsstring>
+        <name>Theme</name>
+        <qualifiedname>d2::style::Theme::Theme</qualifiedname>
+        <param>
+          <type>Theme &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="643" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1a9c53b54908552ab8d13d06ae3330009a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::style::Theme::~Theme</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Theme</name>
+        <qualifiedname>d2::style::Theme::~Theme</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="644" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1a51113198158173acbf0b8f54648d8d52" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::style::Theme::code</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>code</name>
+        <qualifiedname>d2::style::Theme::code</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="646" column="21" bodyfile="core/tree/d2_theme.hpp" bodystart="646" bodyend="649"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1a18c9ca6d7c1c58e179e6e5ffd85517cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" kindref="member">Theme</ref></type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" kindref="member">Theme</ref> &amp;</type>
+        <definition>Theme &amp; d2::style::Theme::as</definition>
+        <argsstring>()</argsstring>
+        <name>as</name>
+        <qualifiedname>d2::style::Theme::as</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="651" column="26" bodyfile="core/tree/d2_theme.hpp" bodystart="651" bodyend="654"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1aa3f0f65981f678f3e0d3ab027c9b1133" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" kindref="member">Theme</ref> &amp;</type>
+        <definition>Theme &amp; d2::style::Theme::operator=</definition>
+        <argsstring>(const Theme &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::style::Theme::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" kindref="member">Theme</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="656" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1Theme_1a0f99d2da312ebeb749d44b5066371018" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" kindref="member">Theme</ref> &amp;</type>
+        <definition>Theme &amp; d2::style::Theme::operator=</definition>
+        <argsstring>(Theme &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::style::Theme::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" kindref="member">Theme</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="657" column="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>d2::style::DeclTheme&lt; Base, Deps, Ts &gt;</label>
+        <link refid="classd2_1_1style_1_1DeclTheme"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::style::Theme</label>
+        <link refid="classd2_1_1style_1_1Theme"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; Theme &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::style::Theme</label>
+        <link refid="classd2_1_1style_1_1Theme"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; Theme &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_theme.hpp" line="613" column="5" bodyfile="core/tree/d2_theme.hpp" bodystart="614" bodyend="658"/>
+    <listofallmembers>
+      <member refid="classd2_1_1style_1_1Theme_1a92e18f06ba8f4ff657350a9b48649047" prot="private" virt="non-virtual"><scope>d2::style::Theme</scope><name>_code</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a18c9ca6d7c1c58e179e6e5ffd85517cd" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>as</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a51113198158173acbf0b8f54648d8d52" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>code</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1ab4be829f19ece053d799e375dbac588e" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>id_to_code</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1ab531f02f9eaa3bca8a7a0bebe3019e7a" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>make</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a37a522b44b50858eeed60bdb4c41d7b2" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>make_named</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1aa3f0f65981f678f3e0d3ab027c9b1133" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>operator=</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a0f99d2da312ebeb749d44b5066371018" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>operator=</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1ae2b911c9b8525c4f0e2c11bc9207bb0a" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>ptr</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>Theme</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a082949ccd9f0833aa3825a1ab2d97ca4" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>Theme</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a33636c991ecdc1d591276e13a3692bbe" prot="public" virt="non-virtual"><scope>d2::style::Theme</scope><name>Theme</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a9c53b54908552ab8d13d06ae3330009a" prot="public" virt="virtual"><scope>d2::style::Theme</scope><name>~Theme</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

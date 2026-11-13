@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::net::SystemHTTP::Response</compoundname>
+    <includes refid="d2__http_8hpp" local="no">d2_http.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response_1a708b12c4c0620c4354c412990b89cd6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>int</type>
+        <definition>virtual int d2::sys::net::SystemHTTP::Response::status</definition>
+        <argsstring>()=0</argsstring>
+        <name>status</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Response::status</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="27" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response_1a1849189c84efc383d65e3f5c84fe5339" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::optional&lt; std::string_view &gt;</type>
+        <definition>virtual std::optional&lt; std::string_view &gt; d2::sys::net::SystemHTTP::Response::get</definition>
+        <argsstring>(std::string_view header)=0</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Response::get</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>header</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="28" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response_1a3310837cce8ce28c3d3b4ebe6dd434f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string_view</type>
+        <definition>virtual std::string_view d2::sys::net::SystemHTTP::Response::body</definition>
+        <argsstring>()=0</argsstring>
+        <name>body</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Response::body</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="29" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response_1a5cc50f3c8b02a45f5e4d226a94dc1b92" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::sys::net::SystemHTTP::Response::~Response</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Response</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Response::~Response</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="30" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_http.hpp" line="25" column="9" bodyfile="core/mods/d2_http.hpp" bodystart="26" bodyend="31"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response_1a3310837cce8ce28c3d3b4ebe6dd434f7" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Response</scope><name>body</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response_1a1849189c84efc383d65e3f5c84fe5339" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Response</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response_1a708b12c4c0620c4354c412990b89cd6f" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Response</scope><name>status</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response_1a5cc50f3c8b02a45f5e4d226a94dc1b92" prot="public" virt="virtual"><scope>d2::sys::net::SystemHTTP::Response</scope><name>~Response</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

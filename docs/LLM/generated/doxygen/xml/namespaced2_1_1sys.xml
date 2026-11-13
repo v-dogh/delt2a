@@ -1,0 +1,445 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1sys" kind="namespace" language="C++">
+    <compoundname>d2::sys</compoundname>
+    <innerclass refid="structd2_1_1sys_1_1Module" prot="public">d2::sys::Module</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1ModuleDecl" prot="public">d2::sys::ModuleDecl</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1ModuleImpl" prot="public">d2::sys::ModuleImpl</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1ModuleImplTag" prot="public">d2::sys::ModuleImplTag</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1ModuleLocalGet" prot="public">d2::sys::ModuleLocalGet</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1ModulePtr" prot="public">d2::sys::ModulePtr</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1ModuleStub" prot="public">d2::sys::ModuleStub</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemAudio" prot="public">d2::sys::SystemAudio</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemBinder" prot="public">d2::sys::SystemBinder</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemClipboard" prot="public">d2::sys::SystemClipboard</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemImageLoader" prot="public">d2::sys::SystemImageLoader</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemImages" prot="public">d2::sys::SystemImages</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemInput" prot="public">d2::sys::SystemInput</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemModule" prot="public">d2::sys::SystemModule</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemNotify" prot="public">d2::sys::SystemNotify</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemOutput" prot="public">d2::sys::SystemOutput</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemScreen" prot="public">d2::sys::SystemScreen</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemSelector" prot="public">d2::sys::SystemSelector</innerclass>
+    <innernamespace refid="namespaced2_1_1sys_1_1impl">d2::sys::impl</innernamespace>
+    <innernamespace refid="namespaced2_1_1sys_1_1net">d2::sys::net</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespaced2_1_1sys_1a96e8068f6f21a92e0f8fc1fa71a59161" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Load</name>
+        <qualifiedname>d2::sys::Load</qualifiedname>
+        <enumvalue id="namespaced2_1_1sys_1a96e8068f6f21a92e0f8fc1fa71a59161a43f6615bbb2c40a5306ff804094420b1" prot="public">
+          <name>Immediate</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1sys_1a96e8068f6f21a92e0f8fc1fa71a59161a46a9ebdb80117bfa1f0cdea65438290a" prot="public">
+          <name>Lazy</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="19" column="5" bodyfile="core/io/d2_module.hpp" bodystart="20" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaced2_1_1sys_1a0ca7d25c3a0a481de124a30ff73dc786" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Access</name>
+        <qualifiedname>d2::sys::Access</qualifiedname>
+        <enumvalue id="namespaced2_1_1sys_1a0ca7d25c3a0a481de124a30ff73dc786a0bab56c239d61a73bb35ec3a4c16a5a3" prot="public">
+          <name>TSafe</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1sys_1a0ca7d25c3a0a481de124a30ff73dc786ae9edd8b239e9c248f733f3541c67e4b1" prot="public">
+          <name>TUnsafe</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="24" column="5" bodyfile="core/io/d2_module.hpp" bodystart="25" bodyend="28"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1sys_1_1ModulePtr" kindref="compound">ModulePtr</ref>&lt; Type &gt;</type>
+        <definition>using d2::sys::module = ModulePtr&lt;Type&gt;</definition>
+        <argsstring></argsstring>
+        <name>module</name>
+        <qualifiedname>d2::sys::module</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="181" column="16" bodyfile="core/io/d2_module.hpp" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1abd37678bbf0a73beaa6729f758204157" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemAudio" kindref="compound">SystemAudio</ref></type>
+        <definition>using d2::sys::audio = SystemAudio</definition>
+        <argsstring></argsstring>
+        <name>audio</name>
+        <qualifiedname>d2::sys::audio</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="403" column="5" bodyfile="core/mods/d2_audio.hpp" bodystart="403" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1a93f39800526eaa2e8bebd09c04ce3d6d" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemBinder" kindref="compound">SystemBinder</ref></type>
+        <definition>using d2::sys::binder = SystemBinder</definition>
+        <argsstring></argsstring>
+        <name>binder</name>
+        <qualifiedname>d2::sys::binder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="120" column="5" bodyfile="core/mods/d2_binder.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1a9977a58cd67ef4a852ffc314b7a95e55" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemInput" kindref="compound">SystemInput</ref></type>
+        <definition>using d2::sys::input = SystemInput</definition>
+        <argsstring></argsstring>
+        <name>input</name>
+        <qualifiedname>d2::sys::input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="111" column="5" bodyfile="core/mods/d2_core.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1affecbcd3aa5d1b91a99e5be1edb6e5ff" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemOutput" kindref="compound">SystemOutput</ref></type>
+        <definition>using d2::sys::output = SystemOutput</definition>
+        <argsstring></argsstring>
+        <name>output</name>
+        <qualifiedname>d2::sys::output</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="112" column="5" bodyfile="core/mods/d2_core.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1ab058ff847007d9e3636603a9db4e67c9" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemScreen" kindref="compound">SystemScreen</ref></type>
+        <definition>using d2::sys::screen = SystemScreen</definition>
+        <argsstring></argsstring>
+        <name>screen</name>
+        <qualifiedname>d2::sys::screen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="113" column="5" bodyfile="core/mods/d2_core.hpp" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1a95ae73fbf8d3f795bf16990515a2ae4d" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemClipboard" kindref="compound">SystemClipboard</ref></type>
+        <definition>using d2::sys::clipboard = SystemClipboard</definition>
+        <argsstring></argsstring>
+        <name>clipboard</name>
+        <qualifiedname>d2::sys::clipboard</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="110" column="5" bodyfile="core/mods/d2_ext.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1a104ba264c363090e225f3c35bc16cfbb" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemNotify" kindref="compound">SystemNotify</ref></type>
+        <definition>using d2::sys::notify = SystemNotify</definition>
+        <argsstring></argsstring>
+        <name>notify</name>
+        <qualifiedname>d2::sys::notify</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="111" column="5" bodyfile="core/mods/d2_ext.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1a6c8dc1d0f538a68ec958d289e7f87c5d" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemSelector" kindref="compound">SystemSelector</ref></type>
+        <definition>using d2::sys::selector = SystemSelector</definition>
+        <argsstring></argsstring>
+        <name>selector</name>
+        <qualifiedname>d2::sys::selector</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="112" column="5" bodyfile="core/mods/d2_ext.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1a49bf845c0ebd5926e2a6741eddfa2f70" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemImageLoader" kindref="compound">SystemImageLoader</ref></type>
+        <definition>using d2::sys::image_loader = SystemImageLoader</definition>
+        <argsstring></argsstring>
+        <name>image_loader</name>
+        <qualifiedname>d2::sys::image_loader</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_image_loader.hpp" line="27" column="5" bodyfile="core/mods/d2_image_loader.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1a6337beccbe753a683bec6f5f03a5e4b1" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemImages" kindref="compound">SystemImages</ref></type>
+        <definition>using d2::sys::images = SystemImages</definition>
+        <argsstring></argsstring>
+        <name>images</name>
+        <qualifiedname>d2::sys::images</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="39" column="5" bodyfile="core/mods/d2_images.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaced2_1_1sys_1aeede8562a37d02b3eed5735bd853e783" prot="public" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename Module</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool d2::sys::is_abstract</definition>
+        <argsstring></argsstring>
+        <name>is_abstract</name>
+        <qualifiedname>d2::sys::is_abstract</qualifiedname>
+        <initializer>= !std::is_base_of_v&lt;<ref refid="structd2_1_1sys_1_1ModuleImplTag" kindref="compound">ModuleImplTag</ref>, <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref>&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="251" column="27" bodyfile="core/io/d2_module.hpp" bodystart="251" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1_1sys_1ab663a162845148ebd987acf434ada293" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>SystemAudio::Format</type>
+          </param>
+        </templateparamlist>
+        <type>float</type>
+        <definition>float d2::sys::_convert_sample</definition>
+        <argsstring>(const unsigned char *sample)</argsstring>
+        <name>_convert_sample</name>
+        <qualifiedname>d2::sys::_convert_sample</qualifiedname>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>sample</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.cpp" line="113" column="28" declfile="core/mods/d2_audio.cpp" declline="113" declcolumn="28"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1sys_1a90f63ded7aa873c5e5a4ecd776b4b24f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>float</type>
+        <definition>float d2::sys::_convert_sample&lt; SystemAudio::Format::PCM16 &gt;</definition>
+        <argsstring>(const unsigned char *sample)</argsstring>
+        <name>_convert_sample&lt; SystemAudio::Format::PCM16 &gt;</name>
+        <qualifiedname>d2::sys::_convert_sample&lt; SystemAudio::Format::PCM16 &gt;</qualifiedname>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>sample</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.cpp" line="115" column="22" bodyfile="core/mods/d2_audio.cpp" bodystart="115" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1sys_1a30a79b0e46016faf0ce0b9bcee4c2ec4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>float</type>
+        <definition>float d2::sys::_convert_sample&lt; SystemAudio::Format::PCM32 &gt;</definition>
+        <argsstring>(const unsigned char *sample)</argsstring>
+        <name>_convert_sample&lt; SystemAudio::Format::PCM32 &gt;</name>
+        <qualifiedname>d2::sys::_convert_sample&lt; SystemAudio::Format::PCM32 &gt;</qualifiedname>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>sample</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.cpp" line="119" column="22" bodyfile="core/mods/d2_audio.cpp" bodystart="119" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1sys_1a219f175f78b0d587a768f223de897d4d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>float</type>
+        <definition>float d2::sys::_convert_sample&lt; SystemAudio::Format::Float32 &gt;</definition>
+        <argsstring>(const unsigned char *sample)</argsstring>
+        <name>_convert_sample&lt; SystemAudio::Format::Float32 &gt;</name>
+        <qualifiedname>d2::sys::_convert_sample&lt; SystemAudio::Format::Float32 &gt;</qualifiedname>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>sample</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.cpp" line="124" column="12" bodyfile="core/mods/d2_audio.cpp" bodystart="124" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1sys_1a08e20ee0e9a96761efb5344b03d377d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>float</type>
+        <definition>float d2::sys::_convert_sample&lt; SystemAudio::Format::Float64 &gt;</definition>
+        <argsstring>(const unsigned char *sample)</argsstring>
+        <name>_convert_sample&lt; SystemAudio::Format::Float64 &gt;</name>
+        <qualifiedname>d2::sys::_convert_sample&lt; SystemAudio::Format::Float64 &gt;</qualifiedname>
+        <param>
+          <type>const unsigned char *</type>
+          <declname>sample</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.cpp" line="129" column="12" bodyfile="core/mods/d2_audio.cpp" bodystart="129" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1sys_1a4a978ed80015f5558dcfeedab715acfe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>SystemAudio::Format</type>
+            <declname>Fmt</declname>
+            <defname>Fmt</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::sys::_convert_from</definition>
+        <argsstring>(std::span&lt; float &gt; out, std::span&lt; const unsigned char &gt; data, SystemAudio::FormatInfo format, SystemAudio::FormatInfo expected)</argsstring>
+        <name>_convert_from</name>
+        <qualifiedname>d2::sys::_convert_from</qualifiedname>
+        <param>
+          <type>std::span&lt; float &gt;</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const unsigned char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">SystemAudio::FormatInfo</ref></type>
+          <declname>format</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">SystemAudio::FormatInfo</ref></type>
+          <declname>expected</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.cpp" line="135" column="10" bodyfile="core/mods/d2_audio.cpp" bodystart="135" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1sys_1aa9ea43647f7e42de46b5ff07c75e8343" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t</type>
+            <declname>First</declname>
+            <defname>First</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>Len</declname>
+            <defname>Len</defname>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>Count</declname>
+            <defname>Count</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::sys::flip</definition>
+        <argsstring>(std::bitset&lt; Count &gt; &amp;bs)</argsstring>
+        <name>flip</name>
+        <qualifiedname>d2::sys::flip</qualifiedname>
+        <param>
+          <type>std::bitset&lt; Count &gt; &amp;</type>
+          <declname>bs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.cpp" line="10" column="10" bodyfile="core/screen/d2_screen.cpp" bodystart="10" bodyend="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_context.hpp" line="351" column="1"/>
+  </compounddef>
+</doxygen>

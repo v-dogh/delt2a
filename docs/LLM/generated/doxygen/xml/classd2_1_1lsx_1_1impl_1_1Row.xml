@@ -1,0 +1,471 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1lsx_1_1impl_1_1Row" kind="class" language="C++" prot="public">
+    <compoundname>d2::lsx::impl::Row</compoundname>
+    <includes refid="d2__solver_8hpp" local="no">d2_solver.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1impl_1_1Row_1a145e06fb7480f0e5270ba1fdb0fe5fc0" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1lsx_1a6384755e76af632bdbe97ad83dd6355a" kindref="member">hash_set</ref>&lt; <ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref> &gt;</type>
+        <definition>hash_set&lt;Symbol&gt; d2::lsx::impl::Row::_terms</definition>
+        <argsstring></argsstring>
+        <name>_terms</name>
+        <qualifiedname>d2::lsx::impl::Row::_terms</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="35" column="22" bodyfile="core/lsx/d2_solver.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1impl_1_1Row_1a9f21783c9f0315c8068f47ea56a9c896" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+        <definition>result_type d2::lsx::impl::Row::_lazy_terms_coefficient</definition>
+        <argsstring></argsstring>
+        <name>_lazy_terms_coefficient</name>
+        <qualifiedname>d2::lsx::impl::Row::_lazy_terms_coefficient</qualifiedname>
+        <initializer>{1.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="36" column="25" bodyfile="core/lsx/d2_solver.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1impl_1_1Row_1a6183125f2f7e6ebff530ece4725e57af" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+        <definition>result_type d2::lsx::impl::Row::_constant</definition>
+        <argsstring></argsstring>
+        <name>_constant</name>
+        <qualifiedname>d2::lsx::impl::Row::_constant</qualifiedname>
+        <initializer>{0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="37" column="25" bodyfile="core/lsx/d2_solver.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1adf79176d5c8a9560021eaa44160133e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::impl::Row::Row</definition>
+        <argsstring>()=default</argsstring>
+        <name>Row</name>
+        <qualifiedname>d2::lsx::impl::Row::Row</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="39" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a7bd505ac36e22287f81edeb776625012" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::impl::Row::Row</definition>
+        <argsstring>(const Row &amp;)=default</argsstring>
+        <name>Row</name>
+        <qualifiedname>d2::lsx::impl::Row::Row</qualifiedname>
+        <param>
+          <type>const Row &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="40" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a08f4eef6fc04a3ed84b55ea3c3c5414a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::impl::Row::Row</definition>
+        <argsstring>(Row &amp;&amp;)=default</argsstring>
+        <name>Row</name>
+        <qualifiedname>d2::lsx::impl::Row::Row</qualifiedname>
+        <param>
+          <type>Row &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="41" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a8cfede719e641d7e6900600d44fad7bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::impl::Row::substitute</definition>
+        <argsstring>(Symbol lhs, const Row &amp;rhs)</argsstring>
+        <name>substitute</name>
+        <qualifiedname>d2::lsx::impl::Row::substitute</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1impl_1_1Row_1adf79176d5c8a9560021eaa44160133e8" kindref="member">Row</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="44" column="18" bodyfile="core/lsx/d2_solver.cpp" bodystart="9" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a29365cf942629697f73ac8ae7c08801f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::impl::Row::normalize</definition>
+        <argsstring>()</argsstring>
+        <name>normalize</name>
+        <qualifiedname>d2::lsx::impl::Row::normalize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="46" column="18" bodyfile="core/lsx/d2_solver.cpp" bodystart="50" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a4660c0e295af0961f4ac3e3ae310ed60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref> &gt;</type>
+        <definition>std::optional&lt; Symbol &gt; d2::lsx::impl::Row::find</definition>
+        <argsstring>(Symbol symbol)</argsstring>
+        <name>find</name>
+        <qualifiedname>d2::lsx::impl::Row::find</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref></type>
+          <declname>symbol</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="49" column="27" bodyfile="core/lsx/d2_solver.cpp" bodystart="59" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1ab25f6bb40b9a4a70ff5ee2dcc1910294" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::impl::Row::insert</definition>
+        <argsstring>(Symbol term)</argsstring>
+        <name>insert</name>
+        <qualifiedname>d2::lsx::impl::Row::insert</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref></type>
+          <declname>term</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="52" column="18" bodyfile="core/lsx/d2_solver.cpp" bodystart="67" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a0a5f0fa7b035f14ccc516fade9b1f9e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::lsx::impl::Row::insert</definition>
+        <argsstring>(Argv &amp;&amp;... args)</argsstring>
+        <name>insert</name>
+        <qualifiedname>d2::lsx::impl::Row::insert</qualifiedname>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="53" column="29" bodyfile="core/lsx/d2_solver.hpp" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a479ad0527b2e50f0ab9e1ef66e95b598" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::impl::Row::insert_range</definition>
+        <argsstring>(auto &amp;&amp;begin, auto &amp;&amp;end)</argsstring>
+        <name>insert_range</name>
+        <qualifiedname>d2::lsx::impl::Row::insert_range</qualifiedname>
+        <param>
+          <type>auto &amp;&amp;</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>auto &amp;&amp;</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="57" column="18" bodyfile="core/lsx/d2_solver.hpp" bodystart="57" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a1dafa1678d321e5b0e8507f258e834e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::impl::Row::erase</definition>
+        <argsstring>(Symbol term)</argsstring>
+        <name>erase</name>
+        <qualifiedname>d2::lsx::impl::Row::erase</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref></type>
+          <declname>term</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="63" column="18" bodyfile="core/lsx/d2_solver.cpp" bodystart="71" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1ab73436a757bd22eb978ac3ba9c02a11f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::impl::Row::reserve</definition>
+        <argsstring>(std::size_t count)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>d2::lsx::impl::Row::reserve</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="65" column="18" bodyfile="core/lsx/d2_solver.cpp" bodystart="76" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a18e2a68933b73a46c37b071395722440" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::lsx::impl::Row::contains</definition>
+        <argsstring>(Symbol term)</argsstring>
+        <name>contains</name>
+        <qualifiedname>d2::lsx::impl::Row::contains</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref></type>
+          <declname>term</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="68" column="18" bodyfile="core/lsx/d2_solver.cpp" bodystart="81" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1ae5c57b4f03bc8f9685ccecb6373722ea" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::lsx::impl::Row::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>d2::lsx::impl::Row::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="70" column="25" bodyfile="core/lsx/d2_solver.cpp" bodystart="95" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1ac126fcea960458448608ab5e267108fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref> &amp;</type>
+        <definition>const result_type &amp; d2::lsx::impl::Row::constant</definition>
+        <argsstring>() const</argsstring>
+        <name>constant</name>
+        <qualifiedname>d2::lsx::impl::Row::constant</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="72" column="31" bodyfile="core/lsx/d2_solver.cpp" bodystart="86" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a8732a82890a93a3e4fa40fb1162e3905" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref> &amp;</type>
+        <definition>result_type &amp; d2::lsx::impl::Row::constant</definition>
+        <argsstring>()</argsstring>
+        <name>constant</name>
+        <qualifiedname>d2::lsx::impl::Row::constant</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="73" column="25" bodyfile="core/lsx/d2_solver.cpp" bodystart="90" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1afd881b3ee2bf2fbbf1b26ad6c5bce126" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::impl::Row::foreach</definition>
+        <argsstring>(auto &amp;&amp;func) const</argsstring>
+        <name>foreach</name>
+        <qualifiedname>d2::lsx::impl::Row::foreach</qualifiedname>
+        <param>
+          <type>auto &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="75" column="25" bodyfile="core/lsx/d2_solver.hpp" bodystart="75" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1ab309e132397617b7b1e9420d42bf328d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::impl::Row::foreach</definition>
+        <argsstring>(auto &amp;&amp;func)</argsstring>
+        <name>foreach</name>
+        <qualifiedname>d2::lsx::impl::Row::foreach</qualifiedname>
+        <param>
+          <type>auto &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="81" column="25" bodyfile="core/lsx/d2_solver.hpp" bodystart="81" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a7086dfa55b78821a1de26667f9829748" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string d2::lsx::impl::Row::print</definition>
+        <argsstring>() const</argsstring>
+        <name>print</name>
+        <qualifiedname>d2::lsx::impl::Row::print</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="88" column="25" bodyfile="core/lsx/d2_solver.cpp" bodystart="100" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1adc93d944781531dc3ac0ca3d92d12879" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1impl_1_1Row_1adf79176d5c8a9560021eaa44160133e8" kindref="member">Row</ref> &amp;</type>
+        <definition>Row &amp; d2::lsx::impl::Row::operator=</definition>
+        <argsstring>(const Row &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::lsx::impl::Row::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1impl_1_1Row_1adf79176d5c8a9560021eaa44160133e8" kindref="member">Row</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="90" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a286673a52d0b238e141381ddb25bbe58" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1impl_1_1Row_1adf79176d5c8a9560021eaa44160133e8" kindref="member">Row</ref> &amp;</type>
+        <definition>Row &amp; d2::lsx::impl::Row::operator=</definition>
+        <argsstring>(Row &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::lsx::impl::Row::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1impl_1_1Row_1adf79176d5c8a9560021eaa44160133e8" kindref="member">Row</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="91" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1a30489becd2c893e298af038d6a0613cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1impl_1_1Row_1adf79176d5c8a9560021eaa44160133e8" kindref="member">Row</ref> &amp;</type>
+        <definition>Row &amp; d2::lsx::impl::Row::operator*=</definition>
+        <argsstring>(result_type cf)</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>d2::lsx::impl::Row::operator*=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="93" column="17" bodyfile="core/lsx/d2_solver.cpp" bodystart="116" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1impl_1_1Row_1aac24b5ce8b9089adf1b171884db3f043" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1impl_1_1Row_1adf79176d5c8a9560021eaa44160133e8" kindref="member">Row</ref> &amp;</type>
+        <definition>Row &amp; d2::lsx::impl::Row::operator/=</definition>
+        <argsstring>(result_type cf)</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>d2::lsx::impl::Row::operator/=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="94" column="17" bodyfile="core/lsx/d2_solver.cpp" bodystart="122" bodyend="127"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver.hpp" line="32" column="9" bodyfile="core/lsx/d2_solver.hpp" bodystart="33" bodyend="95"/>
+    <listofallmembers>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a6183125f2f7e6ebff530ece4725e57af" prot="private" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>_constant</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a9f21783c9f0315c8068f47ea56a9c896" prot="private" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>_lazy_terms_coefficient</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a145e06fb7480f0e5270ba1fdb0fe5fc0" prot="private" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>_terms</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1ac126fcea960458448608ab5e267108fe" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>constant</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a8732a82890a93a3e4fa40fb1162e3905" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>constant</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a18e2a68933b73a46c37b071395722440" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>contains</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a1dafa1678d321e5b0e8507f258e834e6" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>erase</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a4660c0e295af0961f4ac3e3ae310ed60" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>find</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1afd881b3ee2bf2fbbf1b26ad6c5bce126" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>foreach</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1ab309e132397617b7b1e9420d42bf328d" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>foreach</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1ab25f6bb40b9a4a70ff5ee2dcc1910294" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>insert</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a0a5f0fa7b035f14ccc516fade9b1f9e6" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>insert</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a479ad0527b2e50f0ab9e1ef66e95b598" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>insert_range</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a29365cf942629697f73ac8ae7c08801f" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>normalize</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a30489becd2c893e298af038d6a0613cd" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>operator*=</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1aac24b5ce8b9089adf1b171884db3f043" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>operator/=</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1adc93d944781531dc3ac0ca3d92d12879" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>operator=</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a286673a52d0b238e141381ddb25bbe58" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>operator=</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a7086dfa55b78821a1de26667f9829748" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>print</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1ab73436a757bd22eb978ac3ba9c02a11f" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>reserve</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1adf79176d5c8a9560021eaa44160133e8" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>Row</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a7bd505ac36e22287f81edeb776625012" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>Row</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a08f4eef6fc04a3ed84b55ea3c3c5414a" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>Row</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1ae5c57b4f03bc8f9685ccecb6373722ea" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>size</name></member>
+      <member refid="classd2_1_1lsx_1_1impl_1_1Row_1a8cfede719e641d7e6900600d44fad7bb" prot="public" virt="non-virtual"><scope>d2::lsx::impl::Row</scope><name>substitute</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

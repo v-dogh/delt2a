@@ -1,0 +1,1098 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1px_1_1combined" kind="struct" language="C++" prot="public">
+    <compoundname>d2::px::combined</compoundname>
+    <includes refid="d2__vtypes_8hpp" local="no">d2_vtypes.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1a3965c99196ddffb77ebbf1bf3902a009" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::combined::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <qualifiedname>d2::px::combined::r</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="491" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="491" bodyend="491"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1a2eb7eca48e693ea5f4d6106761132cf6" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::combined::g</definition>
+        <argsstring></argsstring>
+        <name>g</name>
+        <qualifiedname>d2::px::combined::g</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="492" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="492" bodyend="492"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1a78f58fec108e435f6910d804feca68e8" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::combined::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <qualifiedname>d2::px::combined::b</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="493" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="493" bodyend="493"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1afa48226543a8c84734645cff6ac0ff16" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::combined::a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <qualifiedname>d2::px::combined::a</qualifiedname>
+        <initializer>{255}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="494" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="494" bodyend="494"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1aa2298f944e12e5f4fac7ce03592cd103" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::combined::rf</definition>
+        <argsstring></argsstring>
+        <name>rf</name>
+        <qualifiedname>d2::px::combined::rf</qualifiedname>
+        <initializer>{255}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="496" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="496" bodyend="496"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1a413c524819dddf52f27df5765b9b85c6" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::combined::gf</definition>
+        <argsstring></argsstring>
+        <name>gf</name>
+        <qualifiedname>d2::px::combined::gf</qualifiedname>
+        <initializer>{255}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="497" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="497" bodyend="497"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1a16209e97491f8e0790c69adeb184dd35" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::combined::bf</definition>
+        <argsstring></argsstring>
+        <name>bf</name>
+        <qualifiedname>d2::px::combined::bf</qualifiedname>
+        <initializer>{255}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="498" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="498" bodyend="498"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1a9e40bd72cf32984fa652279d7db421d5" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::combined::af</definition>
+        <argsstring></argsstring>
+        <name>af</name>
+        <qualifiedname>d2::px::combined::af</qualifiedname>
+        <initializer>{255}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="499" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="499" bodyend="499"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1ae646ccbb3288af68ca11f1ef7ca79f43" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a65fae78759ab1cfcc9a93ad54653dbfe" kindref="member">value_type</ref></type>
+        <definition>value_type d2::px::combined::v</definition>
+        <argsstring></argsstring>
+        <name>v</name>
+        <qualifiedname>d2::px::combined::v</qualifiedname>
+        <initializer>{&apos; &apos;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="501" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="501" bodyend="501"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1combined_1a1c5c7072c26b36198595c075bdd15d13" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">px::style</ref></type>
+        <definition>px::style d2::px::combined::style</definition>
+        <argsstring></argsstring>
+        <name>style</name>
+        <qualifiedname>d2::px::combined::style</qualifiedname>
+        <initializer>{<ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">px::style::None</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="502" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="502" bodyend="502"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a839c5ccaa3d02da860f010875bec1e8f" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>static constexpr combined d2::px::combined::combine</definition>
+        <argsstring>(background bg, foreground fg) noexcept</argsstring>
+        <name>combine</name>
+        <qualifiedname>d2::px::combined::combine</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+          <declname>bg</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+          <declname>fg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="504" column="40" bodyfile="core/types/d2_vtypes.hpp" bodystart="504" bodyend="518"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1abe3a33d634e125b8d4b82a860766578c" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>static constexpr combined d2::px::combined::combine</definition>
+        <argsstring>(foreground fg, background bg) noexcept</argsstring>
+        <name>combine</name>
+        <qualifiedname>d2::px::combined::combine</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+          <declname>fg</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+          <declname>bg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="519" column="40" bodyfile="core/types/d2_vtypes.hpp" bodystart="519" bodyend="533"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1ab84fbd852d1bf44be10402e312de40bf" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>static constexpr combined d2::px::combined::interpolate</definition>
+        <argsstring>(combined from, combined to, float progress) noexcept</argsstring>
+        <name>interpolate</name>
+        <qualifiedname>d2::px::combined::interpolate</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="810" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="810" bodyend="813"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1abe4d9628e4437522289740ddcac702f2" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>static constexpr combined d2::px::combined::cform</definition>
+        <argsstring>(std::uint64_t len) noexcept</argsstring>
+        <name>cform</name>
+        <qualifiedname>d2::px::combined::cform</qualifiedname>
+        <param>
+          <type>std::uint64_t</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="815" column="40" bodyfile="core/types/d2_vtypes.hpp" bodystart="815" bodyend="829"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a72acbe8a15763cc8edfefd3f51c0268a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>background d2::px::combined::as_background</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>as_background</name>
+        <qualifiedname>d2::px::combined::as_background</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="535" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="535" bodyend="538"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a5f2d6b5cfcba585a713950048a6f1549" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+        <definition>foreground d2::px::combined::as_foreground</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>as_foreground</name>
+        <qualifiedname>d2::px::combined::as_foreground</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="539" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="539" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1acb2e93838fd385d2a252b15e3084ec6a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_background</definition>
+        <argsstring>(background value) const noexcept</argsstring>
+        <name>with_background</name>
+        <qualifiedname>d2::px::combined::with_background</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="544" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="544" bodyend="552"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1aa35589c397edbe5998050bb7a351b123" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_foreground</definition>
+        <argsstring>(foreground value) const noexcept</argsstring>
+        <name>with_foreground</name>
+        <qualifiedname>d2::px::combined::with_foreground</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="554" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="554" bodyend="564"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1aebddc4b37ba28cdd1aeea538f2e0141c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_value</definition>
+        <argsstring>(value_type value) const noexcept</argsstring>
+        <name>with_value</name>
+        <qualifiedname>d2::px::combined::with_value</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a65fae78759ab1cfcc9a93ad54653dbfe" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="566" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="566" bodyend="571"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1ad52feb6ee172261e9fa2475f106a3329" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::extend</definition>
+        <argsstring>(value_type value) const noexcept</argsstring>
+        <name>extend</name>
+        <qualifiedname>d2::px::combined::extend</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a65fae78759ab1cfcc9a93ad54653dbfe" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="573" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="573" bodyend="576"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1af4b5392ed263280fff3e4d855946d2ee" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_style</definition>
+        <argsstring>(px::style value) const noexcept</argsstring>
+        <name>with_style</name>
+        <qualifiedname>d2::px::combined::with_style</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">px::style</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="578" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="578" bodyend="583"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a488bea0a4c27d72453f21446b61fa728" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::stylize</definition>
+        <argsstring>(px::style value) const noexcept</argsstring>
+        <name>stylize</name>
+        <qualifiedname>d2::px::combined::stylize</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">px::style</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="585" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="585" bodyend="588"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a9fcea5c10d51abb20d5cd1eb3c345e95" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::add_style</definition>
+        <argsstring>(px::style value) const noexcept</argsstring>
+        <name>add_style</name>
+        <qualifiedname>d2::px::combined::add_style</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">px::style</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="590" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="590" bodyend="595"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a4b6abf5ed054498efaadb1257b055444" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::remove_style</definition>
+        <argsstring>(px::style value) const noexcept</argsstring>
+        <name>remove_style</name>
+        <qualifiedname>d2::px::combined::remove_style</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">px::style</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="597" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="597" bodyend="602"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1ae066ad02c2b4d72c2a5bab3130796012" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::px::combined::has_style</definition>
+        <argsstring>(px::style value) const noexcept</argsstring>
+        <name>has_style</name>
+        <qualifiedname>d2::px::combined::has_style</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">px::style</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="604" column="29" bodyfile="core/types/d2_vtypes.hpp" bodystart="604" bodyend="607"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1af475cb272749056e214d91c7233d647e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_alpha</definition>
+        <argsstring>(component background_alpha, component foreground_alpha) const noexcept</argsstring>
+        <name>with_alpha</name>
+        <qualifiedname>d2::px::combined::with_alpha</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>background_alpha</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>foreground_alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="610" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="610" bodyend="616"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1ad6f06bbdd6d819e3418367a17fa05551" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_alpha</definition>
+        <argsstring>(float background_alpha, float foreground_alpha) const noexcept</argsstring>
+        <name>with_alpha</name>
+        <qualifiedname>d2::px::combined::with_alpha</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>background_alpha</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>foreground_alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="619" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="619" bodyend="624"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a52755c54d4640f3d1e60144abf3fee66" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::alpha</definition>
+        <argsstring>(component background_alpha, component foreground_alpha) const noexcept</argsstring>
+        <name>alpha</name>
+        <qualifiedname>d2::px::combined::alpha</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>background_alpha</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>foreground_alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="627" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="627" bodyend="630"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1aabb2f9c547d41a0088ad02bfcc97fa15" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::alpha</definition>
+        <argsstring>(float background_alpha, float foreground_alpha) const noexcept</argsstring>
+        <name>alpha</name>
+        <qualifiedname>d2::px::combined::alpha</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>background_alpha</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>foreground_alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="633" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="633" bodyend="636"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a1eba693b5d52edc2bb2af84357fa3728" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_background_alpha</definition>
+        <argsstring>(component value) const noexcept</argsstring>
+        <name>with_background_alpha</name>
+        <qualifiedname>d2::px::combined::with_background_alpha</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="638" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="638" bodyend="643"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a63b28f4a92adcaff0125f0089d661bfb" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_background_alpha</definition>
+        <argsstring>(float value) const noexcept</argsstring>
+        <name>with_background_alpha</name>
+        <qualifiedname>d2::px::combined::with_background_alpha</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="645" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="645" bodyend="648"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a3f47730e751cec30cf6c1b2a6a5936b4" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::balpha</definition>
+        <argsstring>(component value) const noexcept</argsstring>
+        <name>balpha</name>
+        <qualifiedname>d2::px::combined::balpha</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="650" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="650" bodyend="653"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1ae8c5f7ff1a8a2921858d1c1db7bc3b02" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::balpha</definition>
+        <argsstring>(float value) const noexcept</argsstring>
+        <name>balpha</name>
+        <qualifiedname>d2::px::combined::balpha</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="654" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="654" bodyend="657"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a768e1887603698f260c179443fe965d9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_foreground_alpha</definition>
+        <argsstring>(component value) const noexcept</argsstring>
+        <name>with_foreground_alpha</name>
+        <qualifiedname>d2::px::combined::with_foreground_alpha</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="659" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="659" bodyend="664"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a0692e6a8baf0e6c081cd6be9114c91e9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::with_foreground_alpha</definition>
+        <argsstring>(float value) const noexcept</argsstring>
+        <name>with_foreground_alpha</name>
+        <qualifiedname>d2::px::combined::with_foreground_alpha</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="666" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="666" bodyend="669"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1aafef11a69d0c4311d1c94c848e1c7a40" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::falpha</definition>
+        <argsstring>(component value) const noexcept</argsstring>
+        <name>falpha</name>
+        <qualifiedname>d2::px::combined::falpha</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="671" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="671" bodyend="674"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a865ab989bfa2152135762f12958e6873" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::falpha</definition>
+        <argsstring>(float value) const noexcept</argsstring>
+        <name>falpha</name>
+        <qualifiedname>d2::px::combined::falpha</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="675" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="675" bodyend="678"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a3c770be9e90986bc644da0b74eced6c7" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::inverted</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>inverted</name>
+        <qualifiedname>d2::px::combined::inverted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="680" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="680" bodyend="683"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1aaa13ca44b44708ed07bdb7dbd02d8977" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::invert</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>invert</name>
+        <qualifiedname>d2::px::combined::invert</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="685" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="685" bodyend="688"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1ac968640c974c7acc79fc1bd266ab0d19" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::mix</definition>
+        <argsstring>(combined to, float progress=0.5f) const noexcept</argsstring>
+        <name>mix</name>
+        <qualifiedname>d2::px::combined::mix</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="690" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="690" bodyend="696"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a43fab540729142535ffda5c631ffe82e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::mask</definition>
+        <argsstring>(combined to, float progress=0.5f) const noexcept</argsstring>
+        <name>mask</name>
+        <qualifiedname>d2::px::combined::mask</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="698" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="698" bodyend="701"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a8c26f3a847a7ed3df93616adff77f2e7" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::mix_background</definition>
+        <argsstring>(combined to, float progress=0.5f) const noexcept</argsstring>
+        <name>mix_background</name>
+        <qualifiedname>d2::px::combined::mix_background</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="704" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="704" bodyend="707"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a32ef536a9a601209c3a4f4911731f9f6" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::mask_background</definition>
+        <argsstring>(combined to, float progress=0.5f) const noexcept</argsstring>
+        <name>mask_background</name>
+        <qualifiedname>d2::px::combined::mask_background</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="710" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="710" bodyend="713"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1ac865656e381e15ecb01d560c3fdc1fe7" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::mix_foreground</definition>
+        <argsstring>(combined to, float progress=0.5f) const noexcept</argsstring>
+        <name>mix_foreground</name>
+        <qualifiedname>d2::px::combined::mix_foreground</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="716" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="716" bodyend="719"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1abbef0ec8bd7d251d42184cb466b722b7" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::mask_foreground</definition>
+        <argsstring>(combined to, float progress=0.5f) const noexcept</argsstring>
+        <name>mask_foreground</name>
+        <qualifiedname>d2::px::combined::mask_foreground</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="722" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="722" bodyend="725"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a813d2b2739f380b6e62d2e3af629e002" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::px::combined::same_colors</definition>
+        <argsstring>(combined other) const noexcept</argsstring>
+        <name>same_colors</name>
+        <qualifiedname>d2::px::combined::same_colors</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="727" column="29" bodyfile="core/types/d2_vtypes.hpp" bodystart="727" bodyend="731"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1acfd2d6c2b5c285999abba23913e85b07" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::px::combined::compare_colors</definition>
+        <argsstring>(combined other) const noexcept</argsstring>
+        <name>compare_colors</name>
+        <qualifiedname>d2::px::combined::compare_colors</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="733" column="29" bodyfile="core/types/d2_vtypes.hpp" bodystart="733" bodyend="736"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1adc342db2f00c26becfd68c43dc861b69" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::px::combined::blend</definition>
+        <argsstring>(combined src) noexcept</argsstring>
+        <name>blend</name>
+        <qualifiedname>d2::px::combined::blend</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="738" column="28" bodyfile="core/types/d2_vtypes.hpp" bodystart="738" bodyend="800"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a819dd4ca13a6c655167c3b7c45199041" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::combined::blended</definition>
+        <argsstring>(combined src) const noexcept</argsstring>
+        <name>blended</name>
+        <qualifiedname>d2::px::combined::blended</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>src</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="802" column="33" bodyfile="core/types/d2_vtypes.hpp" bodystart="802" bodyend="807"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1aac4da5683f5a5c0b0f8cfbfb8857a5e8" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::px::combined::is_cform_marker</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_cform_marker</name>
+        <qualifiedname>d2::px::combined::is_cform_marker</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="830" column="29" bodyfile="core/types/d2_vtypes.hpp" bodystart="830" bodyend="833"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a09e6cc816a0ab580fcbb058c176abdc9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::uint64_t</type>
+        <definition>std::uint64_t d2::px::combined::cform_length</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cform_length</name>
+        <qualifiedname>d2::px::combined::cform_length</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="834" column="38" bodyfile="core/types/d2_vtypes.hpp" bodystart="834" bodyend="849"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a86e2b675f284df5f730ab537551d96f2" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::px::combined::is_cform</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_cform</name>
+        <qualifiedname>d2::px::combined::is_cform</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="850" column="36" bodyfile="core/types/d2_vtypes.hpp" bodystart="850" bodyend="853"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a415558df750d3c31e3c00b59a2061339" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::px::combined::operator background</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator background</name>
+        <qualifiedname>d2::px::combined::operator background</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="855" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="855" bodyend="858"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a3311bbd8c85359665dbebba67fbb92a9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::px::combined::operator foreground</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator foreground</name>
+        <qualifiedname>d2::px::combined::operator foreground</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="859" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="859" bodyend="862"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1abd80c8c3550c20e30124e92ec4a5a673" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref> &amp;</type>
+        <definition>combined &amp; d2::px::combined::operator=</definition>
+        <argsstring>(background value) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::px::combined::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="864" column="22" bodyfile="core/types/d2_vtypes.hpp" bodystart="864" bodyend="871"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1ad4f951f7790cf34ce862d4d224812a13" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref> &amp;</type>
+        <definition>combined &amp; d2::px::combined::operator=</definition>
+        <argsstring>(foreground value) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::px::combined::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="873" column="22" bodyfile="core/types/d2_vtypes.hpp" bodystart="873" bodyend="882"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1combined_1a0c6d8f29a221e8bde711ad4cc93fa218" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::px::combined::operator&lt;=&gt;</definition>
+        <argsstring>(const combined &amp;) const =default</argsstring>
+        <name>operator&lt;=&gt;</name>
+        <qualifiedname>d2::px::combined::operator&lt;=&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="884" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_vtypes.hpp" line="489" column="9" bodyfile="core/types/d2_vtypes.hpp" bodystart="490" bodyend="885"/>
+    <listofallmembers>
+      <member refid="structd2_1_1px_1_1combined_1afa48226543a8c84734645cff6ac0ff16" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>a</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a9fcea5c10d51abb20d5cd1eb3c345e95" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>add_style</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a9e40bd72cf32984fa652279d7db421d5" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>af</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a52755c54d4640f3d1e60144abf3fee66" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>alpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1aabb2f9c547d41a0088ad02bfcc97fa15" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>alpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a72acbe8a15763cc8edfefd3f51c0268a" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>as_background</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a5f2d6b5cfcba585a713950048a6f1549" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>as_foreground</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a78f58fec108e435f6910d804feca68e8" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>b</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a3f47730e751cec30cf6c1b2a6a5936b4" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>balpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1ae8c5f7ff1a8a2921858d1c1db7bc3b02" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>balpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a16209e97491f8e0790c69adeb184dd35" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>bf</name></member>
+      <member refid="structd2_1_1px_1_1combined_1adc342db2f00c26becfd68c43dc861b69" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>blend</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a819dd4ca13a6c655167c3b7c45199041" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>blended</name></member>
+      <member refid="structd2_1_1px_1_1combined_1abe4d9628e4437522289740ddcac702f2" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>cform</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a09e6cc816a0ab580fcbb058c176abdc9" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>cform_length</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a839c5ccaa3d02da860f010875bec1e8f" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>combine</name></member>
+      <member refid="structd2_1_1px_1_1combined_1abe3a33d634e125b8d4b82a860766578c" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>combine</name></member>
+      <member refid="structd2_1_1px_1_1combined_1acfd2d6c2b5c285999abba23913e85b07" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>compare_colors</name></member>
+      <member refid="structd2_1_1px_1_1combined_1ad52feb6ee172261e9fa2475f106a3329" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>extend</name></member>
+      <member refid="structd2_1_1px_1_1combined_1aafef11a69d0c4311d1c94c848e1c7a40" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>falpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a865ab989bfa2152135762f12958e6873" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>falpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a2eb7eca48e693ea5f4d6106761132cf6" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>g</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a413c524819dddf52f27df5765b9b85c6" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>gf</name></member>
+      <member refid="structd2_1_1px_1_1combined_1ae066ad02c2b4d72c2a5bab3130796012" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>has_style</name></member>
+      <member refid="structd2_1_1px_1_1combined_1ab84fbd852d1bf44be10402e312de40bf" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>interpolate</name></member>
+      <member refid="structd2_1_1px_1_1combined_1aaa13ca44b44708ed07bdb7dbd02d8977" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>invert</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a3c770be9e90986bc644da0b74eced6c7" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>inverted</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a86e2b675f284df5f730ab537551d96f2" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>is_cform</name></member>
+      <member refid="structd2_1_1px_1_1combined_1aac4da5683f5a5c0b0f8cfbfb8857a5e8" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>is_cform_marker</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a43fab540729142535ffda5c631ffe82e" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>mask</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a32ef536a9a601209c3a4f4911731f9f6" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>mask_background</name></member>
+      <member refid="structd2_1_1px_1_1combined_1abbef0ec8bd7d251d42184cb466b722b7" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>mask_foreground</name></member>
+      <member refid="structd2_1_1px_1_1combined_1ac968640c974c7acc79fc1bd266ab0d19" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>mix</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a8c26f3a847a7ed3df93616adff77f2e7" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>mix_background</name></member>
+      <member refid="structd2_1_1px_1_1combined_1ac865656e381e15ecb01d560c3fdc1fe7" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>mix_foreground</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a415558df750d3c31e3c00b59a2061339" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>operator background</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a3311bbd8c85359665dbebba67fbb92a9" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>operator foreground</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a0c6d8f29a221e8bde711ad4cc93fa218" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>operator&lt;=&gt;</name></member>
+      <member refid="structd2_1_1px_1_1combined_1abd80c8c3550c20e30124e92ec4a5a673" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>operator=</name></member>
+      <member refid="structd2_1_1px_1_1combined_1ad4f951f7790cf34ce862d4d224812a13" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>operator=</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a3965c99196ddffb77ebbf1bf3902a009" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>r</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a4b6abf5ed054498efaadb1257b055444" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>remove_style</name></member>
+      <member refid="structd2_1_1px_1_1combined_1aa2298f944e12e5f4fac7ce03592cd103" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>rf</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a813d2b2739f380b6e62d2e3af629e002" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>same_colors</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a1c5c7072c26b36198595c075bdd15d13" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>style</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a488bea0a4c27d72453f21446b61fa728" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>stylize</name></member>
+      <member refid="structd2_1_1px_1_1combined_1ae646ccbb3288af68ca11f1ef7ca79f43" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>v</name></member>
+      <member refid="structd2_1_1px_1_1combined_1af475cb272749056e214d91c7233d647e" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_alpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1ad6f06bbdd6d819e3418367a17fa05551" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_alpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1acb2e93838fd385d2a252b15e3084ec6a" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_background</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a1eba693b5d52edc2bb2af84357fa3728" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_background_alpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a63b28f4a92adcaff0125f0089d661bfb" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_background_alpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1aa35589c397edbe5998050bb7a351b123" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_foreground</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a768e1887603698f260c179443fe965d9" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_foreground_alpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1a0692e6a8baf0e6c081cd6be9114c91e9" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_foreground_alpha</name></member>
+      <member refid="structd2_1_1px_1_1combined_1af4b5392ed263280fff3e4d855946d2ee" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_style</name></member>
+      <member refid="structd2_1_1px_1_1combined_1aebddc4b37ba28cdd1aeea538f2e0141c" prot="public" virt="non-virtual"><scope>d2::px::combined</scope><name>with_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

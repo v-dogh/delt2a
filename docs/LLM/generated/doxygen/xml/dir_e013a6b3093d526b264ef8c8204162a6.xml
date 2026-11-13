@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="dir_e013a6b3093d526b264ef8c8204162a6" kind="dir">
+    <compoundname>core/platform</compoundname>
+    <innerfile refid="d2__chardef_8hpp">d2_chardef.hpp</innerfile>
+    <innerfile refid="d2__colors_8hpp">d2_colors.hpp</innerfile>
+    <innerfile refid="d2__extended__page_8cpp">d2_extended_page.cpp</innerfile>
+    <innerfile refid="d2__extended__page_8hpp">d2_extended_page.hpp</innerfile>
+    <innerfile refid="d2__fragmented__buffer_8cpp">d2_fragmented_buffer.cpp</innerfile>
+    <innerfile refid="d2__fragmented__buffer_8hpp">d2_fragmented_buffer.hpp</innerfile>
+    <innerfile refid="d2__locale_8cpp">d2_locale.cpp</innerfile>
+    <innerfile refid="d2__locale_8hpp">d2_locale.hpp</innerfile>
+    <innerfile refid="d2__platform__string_8cpp">d2_platform_string.cpp</innerfile>
+    <innerfile refid="d2__platform__string_8hpp">d2_platform_string.hpp</innerfile>
+    <innerfile refid="d2__text__layout_8cpp">d2_text_layout.cpp</innerfile>
+    <innerfile refid="d2__text__layout_8hpp">d2_text_layout.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/"/>
+  </compounddef>
+</doxygen>

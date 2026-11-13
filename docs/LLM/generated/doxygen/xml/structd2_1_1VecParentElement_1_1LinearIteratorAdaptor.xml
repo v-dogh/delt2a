@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor" kind="struct" language="C++" prot="public">
+    <compoundname>d2::VecParentElement::LinearIteratorAdaptor</compoundname>
+    <basecompoundref refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor" prot="public" virt="non-virtual">d2::internal::DynamicIterator::DynamicIteratorAdaptor</basecompoundref>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a199b716adeb9b12c4961e541b6e12676" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ParentElement::ptr</ref> &gt;::iterator</type>
+        <definition>std::vector&lt;ParentElement::ptr&gt;::iterator d2::VecParentElement::LinearIteratorAdaptor::current</definition>
+        <argsstring></argsstring>
+        <name>current</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::current</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="370" column="32" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="370" bodyend="370"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a2e20ff4ead530fb56c15dbe3d4b0dffe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::VecParentElement::LinearIteratorAdaptor::LinearIteratorAdaptor</definition>
+        <argsstring>()=default</argsstring>
+        <name>LinearIteratorAdaptor</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::LinearIteratorAdaptor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="365" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a9fcc50358b62237a720032487d647e37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::VecParentElement::LinearIteratorAdaptor::LinearIteratorAdaptor</definition>
+        <argsstring>(const LinearIteratorAdaptor &amp;)=default</argsstring>
+        <name>LinearIteratorAdaptor</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::LinearIteratorAdaptor</qualifiedname>
+        <param>
+          <type>const LinearIteratorAdaptor &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="366" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a85b4fef0179555b898991cc09f4dcd1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::VecParentElement::LinearIteratorAdaptor::LinearIteratorAdaptor</definition>
+        <argsstring>(LinearIteratorAdaptor &amp;&amp;)=default</argsstring>
+        <name>LinearIteratorAdaptor</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::LinearIteratorAdaptor</qualifiedname>
+        <param>
+          <type>LinearIteratorAdaptor &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="367" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1acab5c7ad3fb12b5606ed1a1a3882c39e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::VecParentElement::LinearIteratorAdaptor::LinearIteratorAdaptor</definition>
+        <argsstring>(std::vector&lt; ParentElement::ptr &gt;::iterator it)</argsstring>
+        <name>LinearIteratorAdaptor</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::LinearIteratorAdaptor</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ParentElement::ptr</ref> &gt;::iterator</type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="368" column="9" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="368" bodyend="368"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a57c9eb435e4093f9db145d867d96d7c6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::VecParentElement::LinearIteratorAdaptor::ptr</definition>
+        <argsstring>(std::shared_ptr&lt; ParentElement &gt; elem) const</argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::ptr</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="372" column="14" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="372" bodyend="375"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a1f4cb3e6444254909208b7280a198c5b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>TreeIter d2::VecParentElement::LinearIteratorAdaptor::value</definition>
+        <argsstring>(std::shared_ptr&lt; ParentElement &gt; elem) const</argsstring>
+        <name>value</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::value</qualifiedname>
+        <reimplements refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1a34a1f06fda90166f8c8e9e9c33370c36">value</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="377" column="10" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="377" bodyend="380"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a6a5a8ab8c4cee72742209809b974ed12" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void d2::VecParentElement::LinearIteratorAdaptor::increment</definition>
+        <argsstring>(std::shared_ptr&lt; ParentElement &gt; elem)</argsstring>
+        <name>increment</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::increment</qualifiedname>
+        <reimplements refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1ac6641a483fe2f15955dca04c1b0887d4">increment</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="381" column="14" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="381" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a46236fc88bee893aa4f5cefada1aecc1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void d2::VecParentElement::LinearIteratorAdaptor::decrement</definition>
+        <argsstring>(std::shared_ptr&lt; ParentElement &gt; elem)</argsstring>
+        <name>decrement</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::decrement</qualifiedname>
+        <reimplements refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1a0efcf52b1a785452027159687e0ebd3a">decrement</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="386" column="14" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="386" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1ae5170a64095794b2b29fc3766f2aa016" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool d2::VecParentElement::LinearIteratorAdaptor::is_null</definition>
+        <argsstring>(std::shared_ptr&lt; ParentElement &gt; elem) const</argsstring>
+        <name>is_null</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::is_null</qualifiedname>
+        <reimplements refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1ae60fd67f4fa00250fcc0c0baffb1a41c">is_null</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="391" column="14" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="391" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1abe53ee96184fbbd44bc3750c780320fe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool d2::VecParentElement::LinearIteratorAdaptor::is_begin</definition>
+        <argsstring>(std::shared_ptr&lt; ParentElement &gt; elem) const</argsstring>
+        <name>is_begin</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::is_begin</qualifiedname>
+        <reimplements refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1aa10ccb0095132a72502be8c85c67d866">is_begin</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="395" column="14" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="395" bodyend="398"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1aa0ca748216776d68bdc8b927abfcb436" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool d2::VecParentElement::LinearIteratorAdaptor::is_end</definition>
+        <argsstring>(std::shared_ptr&lt; ParentElement &gt; elem) const</argsstring>
+        <name>is_end</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::is_end</qualifiedname>
+        <reimplements refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1aee99b9df89e32703100afaad07e89e5a">is_end</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="399" column="14" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="399" bodyend="402"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a1cf7a327dcbdd78b4622d484be3b75ed" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::VecParentElement::LinearIteratorAdaptor::is_equal</definition>
+        <argsstring>(DynamicIteratorAdaptor *adapter, std::shared_ptr&lt; ParentElement &gt; elem) const</argsstring>
+        <name>is_equal</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::is_equal</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1a81fa1c63d26db7d9af0afc6129b65189" kindref="member">DynamicIteratorAdaptor</ref> *</type>
+          <declname>adapter</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="403" column="14" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="403" bodyend="406"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a33a6284bce129b17b978cb1f0810b6bb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::unique_ptr&lt; <ref refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1a81fa1c63d26db7d9af0afc6129b65189" kindref="member">DynamicIteratorAdaptor</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; DynamicIteratorAdaptor &gt; d2::VecParentElement::LinearIteratorAdaptor::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <qualifiedname>d2::VecParentElement::LinearIteratorAdaptor::clone</qualifiedname>
+        <reimplements refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1a1e32741b833deccdd38cda0eb8cc2cf3">clone</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_parent.cpp" line="407" column="25" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="407" bodyend="410"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::VecParentElement::LinearIteratorAdaptor</label>
+        <link refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::internal::DynamicIterator::DynamicIteratorAdaptor</label>
+        <link refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::VecParentElement::LinearIteratorAdaptor</label>
+        <link refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::internal::DynamicIterator::DynamicIteratorAdaptor</label>
+        <link refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_tree_parent.cpp" line="362" column="5" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="364" bodyend="411"/>
+    <listofallmembers>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a33a6284bce129b17b978cb1f0810b6bb" prot="public" virt="virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>clone</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a199b716adeb9b12c4961e541b6e12676" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>current</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a46236fc88bee893aa4f5cefada1aecc1" prot="public" virt="virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>decrement</name></member>
+      <member refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1a9e093c5034943708ad732e3e1e710247" prot="public" virt="non-virtual" ambiguityscope="d2::internal::DynamicIterator::DynamicIteratorAdaptor::"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>decrement</name></member>
+      <member refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1a81fa1c63d26db7d9af0afc6129b65189" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>DynamicIteratorAdaptor</name></member>
+      <member refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1ac582f3c029795ee64189145d84e4c7c0" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>DynamicIteratorAdaptor</name></member>
+      <member refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1a8ce24a79e67febce53ec511f52818b90" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>DynamicIteratorAdaptor</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a6a5a8ab8c4cee72742209809b974ed12" prot="public" virt="virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>increment</name></member>
+      <member refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1ad7301c9907974c87aa061c9d8e038046" prot="public" virt="non-virtual" ambiguityscope="d2::internal::DynamicIterator::DynamicIteratorAdaptor::"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>increment</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1abe53ee96184fbbd44bc3750c780320fe" prot="public" virt="virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>is_begin</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1aa0ca748216776d68bdc8b927abfcb436" prot="public" virt="virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>is_end</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a1cf7a327dcbdd78b4622d484be3b75ed" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>is_equal</name></member>
+      <member refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1ae30e8b98c20f6381a7d2b2f7c400dc6d" prot="public" virt="pure-virtual" ambiguityscope="d2::internal::DynamicIterator::DynamicIteratorAdaptor::"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>is_equal</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1ae5170a64095794b2b29fc3766f2aa016" prot="public" virt="virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>is_null</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a2e20ff4ead530fb56c15dbe3d4b0dffe" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>LinearIteratorAdaptor</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a9fcc50358b62237a720032487d647e37" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>LinearIteratorAdaptor</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a85b4fef0179555b898991cc09f4dcd1c" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>LinearIteratorAdaptor</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1acab5c7ad3fb12b5606ed1a1a3882c39e" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>LinearIteratorAdaptor</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a57c9eb435e4093f9db145d867d96d7c6" prot="public" virt="non-virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>ptr</name></member>
+      <member refid="structd2_1_1VecParentElement_1_1LinearIteratorAdaptor_1a1f4cb3e6444254909208b7280a198c5b" prot="public" virt="virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>value</name></member>
+      <member refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor_1ae6489437951679c67eab01f2b3dc91a6" prot="public" virt="virtual"><scope>d2::VecParentElement::LinearIteratorAdaptor</scope><name>~DynamicIteratorAdaptor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

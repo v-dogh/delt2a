@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemScreen_1_1AnimationState" kind="struct" language="C++" prot="private">
+    <compoundname>d2::sys::SystemScreen::AnimationState</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1AnimationState_1a67ad6d91b7dbd92f0e0ab9b868dd9334" prot="public" static="no" mutable="no">
+        <type><ref refid="classd2_1_1Animation_1ac67703e78b0a043865e0a5f767139b53" kindref="member">Animation::ptr</ref></type>
+        <definition>Animation::ptr d2::sys::SystemScreen::AnimationState::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::sys::SystemScreen::AnimationState::ptr</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="63" column="28" bodyfile="core/screen/d2_screen.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1AnimationState_1a88b94d6a3b3ef4acd8c6a8a07989c0b0" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt;&gt;)&gt;</type>
+        <definition>std::function&lt;void(d2::TreeIter&lt;&gt;)&gt; d2::sys::SystemScreen::AnimationState::callback</definition>
+        <argsstring></argsstring>
+        <name>callback</name>
+        <qualifiedname>d2::sys::SystemScreen::AnimationState::callback</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="64" column="27" bodyfile="core/screen/d2_screen.hpp" bodystart="64" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/screen/d2_screen.hpp" line="61" column="9" bodyfile="core/screen/d2_screen.hpp" bodystart="62" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1AnimationState_1a88b94d6a3b3ef4acd8c6a8a07989c0b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::AnimationState</scope><name>callback</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1AnimationState_1a67ad6d91b7dbd92f0e0ab9b868dd9334" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::AnimationState</scope><name>ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

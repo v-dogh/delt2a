@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1VirtualBox" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::VirtualBox</compoundname>
+    <basecompoundref refid="classd2_1_1style_1_1UniversalAccessInterface" prot="public" virt="non-virtual">d2::style::UniversalAccessInterface&lt; Chain, Base, Interface, Interfaces... &gt;</basecompoundref>
+    <derivedcompoundref refid="classd2_1_1dx_1_1VirtualFlowBox" prot="public" virt="non-virtual">d2::dx::VirtualFlowBox</derivedcompoundref>
+    <includes refid="d2__draggable__box_8hpp" local="no">d2_draggable_box.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1dx_1_1VirtualBox_1ab7f1cc863a0a9feb00ebd476ab730893" prot="public" static="no">
+        <type><ref refid="namespaced2_1_1style_1a907f2784dac2c79abf8869c5345c1ce4" kindref="member">style::UAIC</ref>&lt; <ref refid="classd2_1_1dx_1_1Box" kindref="compound">Box</ref>, <ref refid="classd2_1_1dx_1_1VirtualBox" kindref="compound">VirtualBox</ref>, style::IDraggableBox, style::IKeyboardNav &gt;</type>
+        <definition>using d2::dx::VirtualBox::data = style::UAIC&lt;Box, VirtualBox, style::IDraggableBox, style::IKeyboardNav&gt;</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::dx::VirtualBox::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="51" column="13" bodyfile="elements/d2_draggable_box.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1VirtualBox_1a6aafda276b0e758dd570bb4cc9fd2fc5" prot="protected" static="no" mutable="no">
+        <type>std::pair&lt; int, int &gt;</type>
+        <definition>std::pair&lt;int, int&gt; d2::dx::VirtualBox::offset_</definition>
+        <argsstring></argsstring>
+        <name>offset_</name>
+        <qualifiedname>d2::dx::VirtualBox::offset_</qualifiedname>
+        <initializer>{0, 0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="54" column="23" bodyfile="elements/d2_draggable_box.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1VirtualBox_1a5745d0d3ef4fc565d05232a98540f8b2" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::dx::VirtualBox::minimized_</definition>
+        <argsstring></argsstring>
+        <name>minimized_</name>
+        <qualifiedname>d2::dx::VirtualBox::minimized_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="55" column="18" bodyfile="elements/d2_draggable_box.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1VirtualBox_1a5d96f3178e79d8da045eaa3bb3bde853" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::dx::VirtualBox::_is_being_resized</definition>
+        <argsstring>() const</argsstring>
+        <name>_is_being_resized</name>
+        <qualifiedname>d2::dx::VirtualBox::_is_being_resized</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="57" column="18" bodyfile="elements/d2_draggable_box.cpp" bodystart="5" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1VirtualBox_1a1cf575fc91c3fa5373b6ffb3fb1a3072" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">Unit</ref></type>
+        <definition>Unit d2::dx::VirtualBox::_layout_impl</definition>
+        <argsstring>(enum Element::Layout type) const override</argsstring>
+        <name>_layout_impl</name>
+        <qualifiedname>d2::dx::VirtualBox::_layout_impl</qualifiedname>
+        <param>
+          <type>enum <ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Element::Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="59" column="26" bodyfile="elements/d2_draggable_box.cpp" bodystart="12" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1VirtualBox_1ad6aabffeb1c78ac9c0e8089d68fc0daf" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool d2::dx::VirtualBox::_provides_input_impl</definition>
+        <argsstring>() const override</argsstring>
+        <name>_provides_input_impl</name>
+        <qualifiedname>d2::dx::VirtualBox::_provides_input_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="60" column="26" bodyfile="elements/d2_draggable_box.cpp" bodystart="37" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1VirtualBox_1a1797931ccb75062b0684af39c3ae9790" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>int d2::dx::VirtualBox::_get_border_impl</definition>
+        <argsstring>(BorderType type, Element::cptr elem) const override</argsstring>
+        <name>_get_border_impl</name>
+        <qualifiedname>d2::dx::VirtualBox::_get_border_impl</qualifiedname>
+        <param>
+          <type>BorderType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a77cb0a3434fb6e8ce0e8189936e749a6" kindref="member">Element::cptr</ref></type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="61" column="25" bodyfile="elements/d2_draggable_box.cpp" bodystart="31" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1VirtualBox_1a6a490360ae85786e6031799b72432dd5" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::VirtualBox::_state_change_impl</definition>
+        <argsstring>(State state, bool value) override</argsstring>
+        <name>_state_change_impl</name>
+        <qualifiedname>d2::dx::VirtualBox::_state_change_impl</qualifiedname>
+        <param>
+          <type>State</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="62" column="26" bodyfile="elements/d2_draggable_box.cpp" bodystart="42" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1VirtualBox_1a8543278c13924cf34720807cc53aae43" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::VirtualBox::_event_impl</definition>
+        <argsstring>(in::InputFrame &amp;frame) override</argsstring>
+        <name>_event_impl</name>
+        <qualifiedname>d2::dx::VirtualBox::_event_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="63" column="26" bodyfile="elements/d2_draggable_box.cpp" bodystart="63" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1VirtualBox_1acc7f127d97b067f12ddc122a38f80f16" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::VirtualBox::_frame_impl</definition>
+        <argsstring>(PixelBuffer::View buffer) override</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::dx::VirtualBox::_frame_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="64" column="26" bodyfile="elements/d2_draggable_box.cpp" bodystart="181" bodyend="209"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1VirtualBox_1a91f5055aacc21ea4d86eb0bafcf55c31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::VirtualBox::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <qualifiedname>d2::dx::VirtualBox::close</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_draggable_box.hpp" line="66" column="18" bodyfile="elements/d2_draggable_box.cpp" bodystart="211" bodyend="214"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Chain</label>
+      </node>
+      <node id="4">
+        <label>Interface&lt; impl::ResolveChain&lt; Chain &gt;::offset &gt;</label>
+      </node>
+      <node id="5">
+        <label>Interfaces&lt; impl::OffsetHelper&lt; impl::ResolveChain&lt; Chain &gt;::offset, Interfaces, Interface, Interfaces... &gt;::offset &gt;</label>
+      </node>
+      <node id="1">
+        <label>d2::dx::VirtualBox</label>
+        <link refid="classd2_1_1dx_1_1VirtualBox"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>d2::dx::VirtualFlowBox</label>
+        <link refid="classd2_1_1dx_1_1VirtualFlowBox"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>style::UAIC&lt; Box, VirtualBox, style::IDraggableBox, style::IKeyboardNav &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterface"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>Chain</label>
+      </node>
+      <node id="4">
+        <label>Interface&lt; impl::ResolveChain&lt; Chain &gt;::offset &gt;</label>
+      </node>
+      <node id="5">
+        <label>Interfaces&lt; impl::OffsetHelper&lt; impl::ResolveChain&lt; Chain &gt;::offset, Interfaces, Interface, Interfaces... &gt;::offset &gt;</label>
+      </node>
+      <node id="1">
+        <label>d2::dx::VirtualBox</label>
+        <link refid="classd2_1_1dx_1_1VirtualBox"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>style::UAIC&lt; Box, VirtualBox, style::IDraggableBox, style::IKeyboardNav &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterface"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_draggable_box.hpp" line="47" column="9" bodyfile="elements/d2_draggable_box.hpp" bodystart="49" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1acba02ced51b68e1c8b12e57a65a6c6c4" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_clear_anims_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a484b34334f398425634a51c0d7847e96" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_context_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ad9b021ad1fcdbdb38bfb04ac6d3c867a" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_deregister_dep_bind</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1a8543278c13924cf34720807cc53aae43" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_event_impl</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1acc7f127d97b067f12ddc122a38f80f16" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1a1797931ccb75062b0684af39c3ae9790" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_get_border_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a88822a6e794d489cb4d9d2d48a9eac27" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_handle_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a17636cd536cba1ade0f043be67663a7b" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_has_interface_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aec6d1ebe3f9fd530c0cc9070b8b2f079" prot="protected" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>_has_interface_own_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a787a2f4cb747d5f7a3665753961ed5d8" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_initialize_impl</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1a5d96f3178e79d8da045eaa3bb3bde853" prot="protected" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>_is_being_resized</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1a1cf575fc91c3fa5373b6ffb3fb1a3072" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_layout_impl</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1ad6aabffeb1c78ac9c0e8089d68fc0daf" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_provides_input_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a90594412c08060a28df8a2813960ccbe" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_register_dep_bind</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a97ccfaa6b03ac7e36b7e26cae4460484" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_set_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a7697343fbdbe2ff88bbe4ac5d0b79a59" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_signal_base_impl</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1a6a490360ae85786e6031799b72432dd5" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_state_change_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a2a4a0da9d046965ff9a67f952e045a78" prot="protected" virt="virtual"><scope>d2::dx::VirtualBox</scope><name>_test_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a25ddba284572cdec9f63676331fa617e" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>apply_get</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a706f047fb93be4001d1419650b6c823e" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>apply_set</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1a91f5055aacc21ea4d86eb0bafcf55c31" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>close</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1ab7f1cc863a0a9feb00ebd476ab730893" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>data</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ad813debc279767724c892a29e01cddba" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>get</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ae1039af891cf36e6a328d79866c17754" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>getref</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a9001a0c242aaa9d25c010c5b6196fbb6" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>interface</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1a5745d0d3ef4fc565d05232a98540f8b2" prot="protected" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>minimized_</name></member>
+      <member refid="classd2_1_1dx_1_1VirtualBox_1a6aafda276b0e758dd570bb4cc9fd2fc5" prot="protected" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>offset_</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a8a224c017ad9f97d8df9bbe04c49b445" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>property</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aeb450621d768c7eaa608764a57c62f0c" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>set</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aed33fa9d3fc115078dfc14f6bf14b9a0" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>type_of</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1adf5ef2bd8a40d986f53b72e76a0c5b0a" prot="public" virt="non-virtual"><scope>d2::dx::VirtualBox</scope><name>uai_chain</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

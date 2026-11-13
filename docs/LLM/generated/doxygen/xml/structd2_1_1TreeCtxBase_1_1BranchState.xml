@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1TreeCtxBase_1_1BranchState" kind="struct" language="C++" prot="private">
+    <compoundname>d2::TreeCtxBase::BranchState</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1TreeCtxBase_1_1BranchState_1a51cfee7c8579eb5fe24d2b24b1443fdf" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt; &gt;</type>
+        <definition>std::vector&lt;TreeIter&lt;&gt; &gt; d2::TreeCtxBase::BranchState::ptrs</definition>
+        <argsstring></argsstring>
+        <name>ptrs</name>
+        <qualifiedname>d2::TreeCtxBase::BranchState::ptrs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="66" column="25" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1TreeCtxBase_1_1BranchState_1ab9cc97beadf55b568f7cf38f6bc9bae9" prot="public" static="no" mutable="no">
+        <type>std::uintptr_t</type>
+        <definition>std::uintptr_t d2::TreeCtxBase::BranchState::origin</definition>
+        <argsstring></argsstring>
+        <name>origin</name>
+        <qualifiedname>d2::TreeCtxBase::BranchState::origin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="67" column="28" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_construct.hpp" line="64" column="9" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="65" bodyend="68"/>
+    <listofallmembers>
+      <member refid="structd2_1_1TreeCtxBase_1_1BranchState_1ab9cc97beadf55b568f7cf38f6bc9bae9" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase::BranchState</scope><name>origin</name></member>
+      <member refid="structd2_1_1TreeCtxBase_1_1BranchState_1a51cfee7c8579eb5fe24d2b24b1443fdf" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase::BranchState</scope><name>ptrs</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

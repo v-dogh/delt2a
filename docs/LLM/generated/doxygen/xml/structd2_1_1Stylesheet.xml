@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Stylesheet" kind="struct" language="C++" prot="public">
+    <compoundname>d2::Stylesheet</compoundname>
+    <includes refid="d2__tree__construct_8hpp" local="no">d2_tree_construct.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>auto</type>
+        <declname>Callback</declname>
+        <defname>Callback</defname>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Argv</declname>
+        <defname>Argv</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1Stylesheet_1a02e265d4e583277bf8b32c8e0562e9f3" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Parent</type>
+          </param>
+          <param>
+            <type>typename State</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void d2::Stylesheet&lt; Callback, Argv &gt;::apply</definition>
+        <argsstring>(TreeCtx&lt; Parent, State &gt; ctx, Argv... args)</argsstring>
+        <name>apply</name>
+        <qualifiedname>d2::Stylesheet::apply</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeCtx" kindref="compound">TreeCtx</ref>&lt; Parent, State &gt;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>Argv...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="627" column="21" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="627" bodyend="630"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Stylesheet_1ab5ea4c3918b2df384a64e18c10e2ab17" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void d2::Stylesheet&lt; Callback, Argv &gt;::apply</definition>
+        <argsstring>(TreeIter&lt; Type &gt; ptr, Argv... args)</argsstring>
+        <name>apply</name>
+        <qualifiedname>d2::Stylesheet::apply</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt; Type &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>Argv...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="631" column="32" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="631" bodyend="634"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_construct.hpp" line="624" column="17" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="625" bodyend="635"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Stylesheet_1a02e265d4e583277bf8b32c8e0562e9f3" prot="public" virt="non-virtual"><scope>d2::Stylesheet</scope><name>apply</name></member>
+      <member refid="structd2_1_1Stylesheet_1ab5ea4c3918b2df384a64e18c10e2ab17" prot="public" virt="non-virtual"><scope>d2::Stylesheet</scope><name>apply</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

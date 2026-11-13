@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="dir_d513240a25a82b7f7ffaf060ff459f62" kind="dir">
+    <compoundname>core/screen</compoundname>
+    <innerfile refid="d2__animate_8cpp">d2_animate.cpp</innerfile>
+    <innerfile refid="d2__animate_8hpp">d2_animate.hpp</innerfile>
+    <innerfile refid="d2__screen_8cpp">d2_screen.cpp</innerfile>
+    <innerfile refid="d2__screen_8hpp">d2_screen.hpp</innerfile>
+    <innerfile refid="d2__screen__comps_8cpp">d2_screen_comps.cpp</innerfile>
+    <innerfile refid="d2__screen__comps_8hpp">d2_screen_comps.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/screen/"/>
+  </compounddef>
+</doxygen>

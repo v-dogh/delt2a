@@ -1,0 +1,674 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1fb_1_1FragmentedBuffer" kind="class" language="C++" prot="public">
+    <compoundname>d2::fb::FragmentedBuffer</compoundname>
+    <includes refid="d2__fragmented__buffer_8hpp" local="no">d2_fragmented_buffer.hpp</includes>
+    <innerclass refid="structd2_1_1fb_1_1FragmentedBuffer_1_1Namespace" prot="private">d2::fb::FragmentedBuffer::Namespace</innerclass>
+    <innerclass refid="structd2_1_1fb_1_1FragmentedBuffer_1_1Action" prot="private">d2::fb::FragmentedBuffer::Action</innerclass>
+    <innerclass refid="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState" prot="private">d2::fb::FragmentedBuffer::PtrState</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1fb_1_1FragmentedBuffer_1a7836d8ee46adb2c9d197eb33cbc3620a" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>It</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::It</qualifiedname>
+        <enumvalue id="classd2_1_1fb_1_1FragmentedBuffer_1a7836d8ee46adb2c9d197eb33cbc3620aae4c38d6d45baf080943d323dd51a2ce8" prot="public">
+          <name>Break</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1fb_1_1FragmentedBuffer_1a7836d8ee46adb2c9d197eb33cbc3620aacbd1d6e487c88e5d3e486a87c7d36684" prot="public">
+          <name>BreakLine</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1fb_1_1FragmentedBuffer_1a7836d8ee46adb2c9d197eb33cbc3620aaa0bfb8e59e6c13fc8d990781f77694fe" prot="public">
+          <name>Continue</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="100" column="9" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="101" bodyend="105"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1a30d97e4440befbc138e0cb807db4e909" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::fb::FragmentedBuffer::_block_size</definition>
+        <argsstring></argsstring>
+        <name>_block_size</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_block_size</qualifiedname>
+        <initializer>{128}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="201" column="31" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="201" bodyend="201"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1af5c48970194f79eb647559446c389c0d" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="structd2_1_1fb_1_1Locale" kindref="compound">Locale</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;Locale&gt; d2::fb::FragmentedBuffer::_locale</definition>
+        <argsstring></argsstring>
+        <name>_locale</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_locale</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="203" column="25" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="203" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1a1d632cb2fffeb52f413e9e83fcb19479" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; Action &gt;</type>
+        <definition>std::vector&lt;Action&gt; d2::fb::FragmentedBuffer::_history</definition>
+        <argsstring></argsstring>
+        <name>_history</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_history</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="204" column="21" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="204" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1a7dc44a8d5afc595e48383495d2d93a4b" prot="private" static="no" mutable="no">
+        <type>std::list&lt; <ref refid="classd2_1_1fb_1_1Shard" kindref="compound">Shard</ref> &gt;</type>
+        <definition>std::list&lt;Shard&gt; d2::fb::FragmentedBuffer::_shards</definition>
+        <argsstring></argsstring>
+        <name>_shards</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_shards</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="205" column="19" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="205" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1a7f80f2bb9af7048c0ee8c8c2bd5e454a" prot="private" static="no" mutable="no">
+        <type>std::list&lt; <ref refid="classd2_1_1fb_1_1Shard" kindref="compound">Shard</ref> &gt;::iterator</type>
+        <definition>std::list&lt;Shard&gt;::iterator d2::fb::FragmentedBuffer::_shard</definition>
+        <argsstring></argsstring>
+        <name>_shard</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_shard</qualifiedname>
+        <initializer>{_shards.end()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="206" column="30" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="206" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1a37518c661ebc0dfecf90ad7ab336d530" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::fb::FragmentedBuffer::_source</definition>
+        <argsstring></argsstring>
+        <name>_source</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_source</qualifiedname>
+        <initializer>{&quot;&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="207" column="21" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="207" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1ad789724fcff72d1c1337f7ce1dbc209b" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::fb::FragmentedBuffer::_history_offset</definition>
+        <argsstring></argsstring>
+        <name>_history_offset</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_history_offset</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="208" column="21" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="208" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1a2fa4fdcda921647f697747cb630ad549" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::fb::FragmentedBuffer::_enabled_history</definition>
+        <argsstring></argsstring>
+        <name>_enabled_history</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_enabled_history</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="209" column="14" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="209" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1aedc31dc482997c60adb9d1b3bf96a588" prot="private" static="no" mutable="no">
+        <type>PtrState</type>
+        <definition>PtrState d2::fb::FragmentedBuffer::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_ptr</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="210" column="18" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="210" bodyend="210"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classd2_1_1fb_1_1FragmentedBuffer_1aa83b7cf02f133b9d87a185cb22557744" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>d2::fb::FragmentedBuffer::this</definition>
+        <argsstring></argsstring>
+        <name>this</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::this</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="281" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a32a568f76aa04e40005501bae55fc8d9" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_iterate</definition>
+        <argsstring>(std::function&lt; It(Locale::Value)&gt; callback, std::size_t pos) const</argsstring>
+        <name>_iterate</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_iterate</qualifiedname>
+        <param>
+          <type>std::function&lt; <ref refid="classd2_1_1fb_1_1FragmentedBuffer_1a7836d8ee46adb2c9d197eb33cbc3620a" kindref="member">It</ref>(<ref refid="structd2_1_1fb_1_1Locale_1_1Value" kindref="compound">Locale::Value</ref>)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="214" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="175" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a2982291b044b9f7843418674573f3646" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_iterate_ptr</definition>
+        <argsstring>(std::function&lt; It(Locale::Value)&gt; callback) const</argsstring>
+        <name>_iterate_ptr</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_iterate_ptr</qualifiedname>
+        <param>
+          <type>std::function&lt; <ref refid="classd2_1_1fb_1_1FragmentedBuffer_1a7836d8ee46adb2c9d197eb33cbc3620a" kindref="member">It</ref>(<ref refid="structd2_1_1fb_1_1Locale_1_1Value" kindref="compound">Locale::Value</ref>)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="215" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="207" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a5b0701d540a04988bba0a5773d7e4f14" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_iterate_raw</definition>
+        <argsstring>(std::function&lt; bool(std::string_view)&gt; callback) const</argsstring>
+        <name>_iterate_raw</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_iterate_raw</qualifiedname>
+        <param>
+          <type>std::function&lt; bool(std::string_view)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="216" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="211" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a15668f274066b65f7b02e24f48d302b5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_move_left</definition>
+        <argsstring>(std::size_t off)</argsstring>
+        <name>_move_left</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_move_left</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>off</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="220" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="222" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1aa7b7ff5fb6f5e7bab61ffbafb1d31d27" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_move_right</definition>
+        <argsstring>(std::size_t off)</argsstring>
+        <name>_move_right</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_move_right</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>off</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="221" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="226" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a776e120336bfa763f980ab86fbd74599" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_move_up</definition>
+        <argsstring>(std::size_t off)</argsstring>
+        <name>_move_up</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_move_up</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>off</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="222" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="230" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1ad07faf47bbe8ed4c3f8e21db33a922f5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_move_down</definition>
+        <argsstring>(std::size_t off)</argsstring>
+        <name>_move_down</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_move_down</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>off</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="223" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="254" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a1a7fc9d47d0904a99cdbb1461eeff804" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_jump_char</definition>
+        <argsstring>(std::size_t pos)</argsstring>
+        <name>_jump_char</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_jump_char</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="224" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="278" bodyend="333"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a095f0909cb7dec36e7c190df16df75b0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_push_action</definition>
+        <argsstring>(Action action)</argsstring>
+        <name>_push_action</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_push_action</qualifiedname>
+        <param>
+          <type>Action</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="228" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="342" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a59740ca186d3618a75cf698e868b87b2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_undo_action</definition>
+        <argsstring>()</argsstring>
+        <name>_undo_action</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_undo_action</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="229" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="356" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a693ad53379cd0049d78a756d25c40ae1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_redo_action</definition>
+        <argsstring>()</argsstring>
+        <name>_redo_action</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_redo_action</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="230" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="364" bodyend="371"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1acf365012e762b1e0ebd3b4ba638b363c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_set_locale</definition>
+        <argsstring>(std::unique_ptr&lt; Locale &gt; locale)</argsstring>
+        <name>_set_locale</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_set_locale</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="structd2_1_1fb_1_1Locale" kindref="compound">Locale</ref> &gt;</type>
+          <declname>locale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="234" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="375" bodyend="378"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a2472eb889c52a2b307c22fbced6c9521" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_setup_buffer</definition>
+        <argsstring>(std::string value)</argsstring>
+        <name>_setup_buffer</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_setup_buffer</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="235" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="379" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1aa497b253e889ffbcb7566db088ee0b7d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_setup_view</definition>
+        <argsstring>(std::string_view value)</argsstring>
+        <name>_setup_view</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_setup_view</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="236" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="384" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a069e7e56d06b6f6f5099423fc888932a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_split_shard</definition>
+        <argsstring>()</argsstring>
+        <name>_split_shard</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_split_shard</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="240" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="396" bodyend="415"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a1aa24704c5482cc066c213ebe6f6f3ef" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_insert_data</definition>
+        <argsstring>(std::string_view data)</argsstring>
+        <name>_insert_data</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_insert_data</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="241" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="416" bodyend="457"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a3b08b3ff4b34e5330f59a7710a5a7af9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_action_replace</definition>
+        <argsstring>(std::size_t pos, std::size_t len, std::string_view data, std::optional&lt; std::size_t &gt; cursor_after)</argsstring>
+        <name>_action_replace</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_action_replace</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::size_t &gt;</type>
+          <declname>cursor_after</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="243" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="459" bodyend="522"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a48044b738c614cc634dd041a908915d9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_action_insert</definition>
+        <argsstring>(std::string_view data)</argsstring>
+        <name>_action_insert</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_action_insert</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="244" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="524" bodyend="567"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1aef6f8e6b166ae8dc7a33b8c233661d35" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::fb::FragmentedBuffer::_action_erase</definition>
+        <argsstring>(std::size_t len)</argsstring>
+        <name>_action_erase</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::_action_erase</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="245" column="14" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="568" bodyend="641"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1abcc4197ebc9ac0ff40535c3394aa5095" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::fb::FragmentedBuffer::FragmentedBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>FragmentedBuffer</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::FragmentedBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="247" column="9" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="337" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1af1da9ade5b6bbec4d70d0c0cb0f10693" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::fb::FragmentedBuffer::FragmentedBuffer</definition>
+        <argsstring>(const FragmentedBuffer &amp;)=delete</argsstring>
+        <name>FragmentedBuffer</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::FragmentedBuffer</qualifiedname>
+        <param>
+          <type>const FragmentedBuffer &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="248" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1ad450a06755a8513eb2e1652e843a6614" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::fb::FragmentedBuffer::FragmentedBuffer</definition>
+        <argsstring>(FragmentedBuffer &amp;&amp;)=delete</argsstring>
+        <name>FragmentedBuffer</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::FragmentedBuffer</qualifiedname>
+        <param>
+          <type>FragmentedBuffer &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="249" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1a6cbe3e3f120843b64a9c59885bbdc1d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1fb_1_1FragmentedBuffer_1abcc4197ebc9ac0ff40535c3394aa5095" kindref="member">FragmentedBuffer</ref> &amp;</type>
+        <definition>FragmentedBuffer &amp; d2::fb::FragmentedBuffer::operator=</definition>
+        <argsstring>(const FragmentedBuffer &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1fb_1_1FragmentedBuffer_1abcc4197ebc9ac0ff40535c3394aa5095" kindref="member">FragmentedBuffer</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="366" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1fb_1_1FragmentedBuffer_1aabfd5c7626771d45ccd29b9113546e9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1fb_1_1FragmentedBuffer_1abcc4197ebc9ac0ff40535c3394aa5095" kindref="member">FragmentedBuffer</ref> &amp;</type>
+        <definition>FragmentedBuffer &amp; d2::fb::FragmentedBuffer::operator=</definition>
+        <argsstring>(FragmentedBuffer &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1fb_1_1FragmentedBuffer_1abcc4197ebc9ac0ff40535c3394aa5095" kindref="member">FragmentedBuffer</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="367" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_fragmented_buffer.hpp" line="97" column="5" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="98" bodyend="368"/>
+    <listofallmembers>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1aef6f8e6b166ae8dc7a33b8c233661d35" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_action_erase</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a48044b738c614cc634dd041a908915d9" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_action_insert</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a3b08b3ff4b34e5330f59a7710a5a7af9" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_action_replace</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a30d97e4440befbc138e0cb807db4e909" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_block_size</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a2fa4fdcda921647f697747cb630ad549" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_enabled_history</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a1d632cb2fffeb52f413e9e83fcb19479" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_history</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1ad789724fcff72d1c1337f7ce1dbc209b" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_history_offset</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a1aa24704c5482cc066c213ebe6f6f3ef" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_insert_data</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a32a568f76aa04e40005501bae55fc8d9" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_iterate</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a2982291b044b9f7843418674573f3646" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_iterate_ptr</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a5b0701d540a04988bba0a5773d7e4f14" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_iterate_raw</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a1a7fc9d47d0904a99cdbb1461eeff804" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_jump_char</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1af5c48970194f79eb647559446c389c0d" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_locale</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1ad07faf47bbe8ed4c3f8e21db33a922f5" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_move_down</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a15668f274066b65f7b02e24f48d302b5" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_move_left</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1aa7b7ff5fb6f5e7bab61ffbafb1d31d27" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_move_right</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a776e120336bfa763f980ab86fbd74599" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_move_up</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1aedc31dc482997c60adb9d1b3bf96a588" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a095f0909cb7dec36e7c190df16df75b0" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_push_action</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a693ad53379cd0049d78a756d25c40ae1" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_redo_action</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1acf365012e762b1e0ebd3b4ba638b363c" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_set_locale</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a2472eb889c52a2b307c22fbced6c9521" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_setup_buffer</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1aa497b253e889ffbcb7566db088ee0b7d" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_setup_view</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a7f80f2bb9af7048c0ee8c8c2bd5e454a" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_shard</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a7dc44a8d5afc595e48383495d2d93a4b" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_shards</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a37518c661ebc0dfecf90ad7ab336d530" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_source</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a069e7e56d06b6f6f5099423fc888932a" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_split_shard</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a59740ca186d3618a75cf698e868b87b2" prot="private" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>_undo_action</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1abcc4197ebc9ac0ff40535c3394aa5095" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>FragmentedBuffer</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1af1da9ade5b6bbec4d70d0c0cb0f10693" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>FragmentedBuffer</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1ad450a06755a8513eb2e1652e843a6614" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>FragmentedBuffer</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a7836d8ee46adb2c9d197eb33cbc3620a" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>It</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1a6cbe3e3f120843b64a9c59885bbdc1d8" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>operator=</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1aabfd5c7626771d45ccd29b9113546e9b" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>operator=</name></member>
+      <member refid="classd2_1_1fb_1_1FragmentedBuffer_1aa83b7cf02f133b9d87a185cb22557744" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer</scope><name>this</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

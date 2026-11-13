@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1IOContext_1_1ModuleEntry" kind="struct" language="C++" prot="private">
+    <compoundname>d2::IOContext::ModuleEntry</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1IOContext_1_1ModuleEntry_1ab9faab373efa285494095e3a1a470e8d" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1ModuleStub" kindref="compound">sys::ModuleStub</ref></type>
+        <definition>sys::ModuleStub d2::IOContext::ModuleEntry::unnamed</definition>
+        <argsstring></argsstring>
+        <name>unnamed</name>
+        <qualifiedname>d2::IOContext::ModuleEntry::unnamed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="32" column="29" bodyfile="core/io/d2_context.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1IOContext_1_1ModuleEntry_1aa35d828e4dd009efae0ea64000df9348" prot="public" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; std::string, <ref refid="structd2_1_1sys_1_1ModuleStub" kindref="compound">sys::ModuleStub</ref> &gt;</type>
+        <definition>absl::flat_hash_map&lt;std::string, sys::ModuleStub&gt; d2::IOContext::ModuleEntry::named</definition>
+        <argsstring></argsstring>
+        <name>named</name>
+        <qualifiedname>d2::IOContext::ModuleEntry::named</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="33" column="33" bodyfile="core/io/d2_context.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::IOContext::ModuleEntry</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>unnamed</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::sys::ModuleStub</label>
+        <link refid="structd2_1_1sys_1_1ModuleStub"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_context.hpp" line="30" column="9" bodyfile="core/io/d2_context.hpp" bodystart="31" bodyend="34"/>
+    <listofallmembers>
+      <member refid="structd2_1_1IOContext_1_1ModuleEntry_1aa35d828e4dd009efae0ea64000df9348" prot="public" virt="non-virtual"><scope>d2::IOContext::ModuleEntry</scope><name>named</name></member>
+      <member refid="structd2_1_1IOContext_1_1ModuleEntry_1ab9faab373efa285494095e3a1a470e8d" prot="public" virt="non-virtual"><scope>d2::IOContext::ModuleEntry</scope><name>unnamed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="d2__main__worker_8cpp" kind="file" language="C++">
+    <compoundname>d2_main_worker.cpp</compoundname>
+    <includes refid="d2__main__worker_8hpp" local="yes">core/io/d2_main_worker.hpp</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>core/io/d2_main_worker.cpp</label>
+        <link refid="d2__main__worker_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>core/io/d2_main_worker.hpp</label>
+        <link refid="d2__main__worker_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>mt/pool.hpp</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaced2">d2</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_main_worker.cpp"/>
+  </compounddef>
+</doxygen>

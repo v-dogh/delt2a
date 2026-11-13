@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Tree" kind="struct" language="C++" prot="public">
+    <compoundname>d2::Tree</compoundname>
+    <basecompoundref refid="structd2_1_1TreeTemplateInit" prot="public" virt="non-virtual">d2::TreeTemplateInit&lt; State, void, Root &gt;</basecompoundref>
+    <basecompoundref refid="structd2_1_1TreeTag" prot="public" virt="non-virtual">d2::TreeTag</basecompoundref>
+    <includes refid="d2__tree__construct_8hpp" local="no">d2_tree_construct.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename State</type>
+      </param>
+      <param>
+        <type>typename Root</type>
+      </param>
+      <param>
+        <type>auto</type>
+        <declname>Build</declname>
+        <defname>Build</defname>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Argv</declname>
+        <defname>Argv</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1Tree_1a0529ea90e84675a63ccc94784e9c7132" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void d2::Tree&lt; State, Root, Build, Argv &gt;::create_at</definition>
+        <argsstring>(TreeIter&lt;&gt; root, TreeState::ptr state, Argv... args)</argsstring>
+        <name>create_at</name>
+        <qualifiedname>d2::Tree::create_at</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref></type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>Argv...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="647" column="21" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="647" bodyend="650"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::Tree&lt; State, Root, Build, Argv &gt;</label>
+        <link refid="structd2_1_1Tree"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::TreeTag</label>
+        <link refid="structd2_1_1TreeTag"/>
+      </node>
+      <node id="2">
+        <label>d2::TreeTemplateInit&lt; State, void, Root &gt;</label>
+        <link refid="structd2_1_1TreeTemplateInit"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::Tree&lt; State, Root, Build, Argv &gt;</label>
+        <link refid="structd2_1_1Tree"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::TreeTag</label>
+        <link refid="structd2_1_1TreeTag"/>
+      </node>
+      <node id="2">
+        <label>d2::TreeTemplateInit&lt; State, void, Root &gt;</label>
+        <link refid="structd2_1_1TreeTemplateInit"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_tree_construct.hpp" line="641" column="5" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="642" bodyend="651"/>
+    <listofallmembers>
+      <member refid="structd2_1_1TreeTemplateInit_1a965ffc910d4b2e3974b1cbfacc56d29d" prot="public" virt="non-virtual"><scope>d2::Tree</scope><name>build</name></member>
+      <member refid="structd2_1_1TreeTemplateInit_1a503af8f8f459b6eb9d5f04bd44856e97" prot="public" virt="non-virtual"><scope>d2::Tree</scope><name>build_sub</name></member>
+      <member refid="structd2_1_1Tree_1a0529ea90e84675a63ccc94784e9c7132" prot="public" virt="non-virtual"><scope>d2::Tree</scope><name>create_at</name></member>
+      <member refid="structd2_1_1TreeTemplateInit_1a4e874b038d56ec9296449a0ce3816024" prot="public" virt="non-virtual"><scope>d2::Tree</scope><name>root</name></member>
+      <member refid="structd2_1_1TreeTemplateInit_1aade151f1040ea1925de26de7345939c6" prot="public" virt="non-virtual"><scope>d2::Tree</scope><name>state</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

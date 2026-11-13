@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1BoundingBox" kind="struct" language="C++" prot="public">
+    <compoundname>d2::BoundingBox</compoundname>
+    <includes refid="d2__vtypes_8hpp" local="no">d2_vtypes.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1BoundingBox_1abf53ad44314e2cd92ccaed5e5c6167e0" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::BoundingBox::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>d2::BoundingBox::width</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="78" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1BoundingBox_1ab86555fdafc58737d1675e61350848e0" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::BoundingBox::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>d2::BoundingBox::height</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="79" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1BoundingBox_1ab2bc8c8e5863a7042aa42067a8131559" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::BoundingBox::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>d2::BoundingBox::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="81" column="25" bodyfile="core/types/d2_vtypes.hpp" bodystart="81" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1BoundingBox_1ae224f3788eaaf625fc5119336e51354d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::BoundingBox::area</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>area</name>
+        <qualifiedname>d2::BoundingBox::area</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="85" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="85" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1BoundingBox_1a284946b924574f187a0c2d633b516984" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::BoundingBox::contains</definition>
+        <argsstring>(Position p) const noexcept</argsstring>
+        <name>contains</name>
+        <qualifiedname>d2::BoundingBox::contains</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="89" column="25" bodyfile="core/types/d2_vtypes.hpp" bodystart="89" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1BoundingBox_1abafbff99a28e10f8b7e53464fadcd3e0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::BoundingBox::operator+=</definition>
+        <argsstring>(BoundingBox rhs) noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>d2::BoundingBox::operator+=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="94" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="94" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1BoundingBox_1a05021f5fc68a8108f172e18be996b9a7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::BoundingBox::operator-=</definition>
+        <argsstring>(BoundingBox rhs) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>d2::BoundingBox::operator-=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="100" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="100" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1BoundingBox_1aed62d249dbc3b74246dd74731fb6190e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::BoundingBox::operator*=</definition>
+        <argsstring>(int scalar) noexcept</argsstring>
+        <name>operator*=</name>
+        <qualifiedname>d2::BoundingBox::operator*=</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="106" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="106" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1BoundingBox_1a09d987a7a2daafa94a8cd294b5d26f50" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::BoundingBox::operator/=</definition>
+        <argsstring>(int scalar) noexcept</argsstring>
+        <name>operator/=</name>
+        <qualifiedname>d2::BoundingBox::operator/=</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="112" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="112" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1BoundingBox_1a70b2994ca917ecd081d7d882a6cd9550" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::BoundingBox::operator&lt;=&gt;</definition>
+        <argsstring>(const BoundingBox &amp;) const =default</argsstring>
+        <name>operator&lt;=&gt;</name>
+        <qualifiedname>d2::BoundingBox::operator&lt;=&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="147" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structd2_1_1BoundingBox_1afbb1fa8708e2e79ef9b6b65c8036c55f" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox operator+</definition>
+        <argsstring>(BoundingBox lhs, BoundingBox rhs) noexcept</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::BoundingBox::operator+</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="120" column="9" bodyfile="core/types/d2_vtypes.hpp" bodystart="120" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="friend" id="structd2_1_1BoundingBox_1adbd5334d2a11ef520a734a1946d5fc4e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox operator-</definition>
+        <argsstring>(BoundingBox lhs, BoundingBox rhs) noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>d2::BoundingBox::operator-</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="126" column="9" bodyfile="core/types/d2_vtypes.hpp" bodystart="126" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="friend" id="structd2_1_1BoundingBox_1a4d56865bd723a4dfbad264ecdfb12a20" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox operator*</definition>
+        <argsstring>(BoundingBox lhs, int scalar) noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::BoundingBox::operator*</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="131" column="39" bodyfile="core/types/d2_vtypes.hpp" bodystart="131" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="friend" id="structd2_1_1BoundingBox_1a733ce29e568631a5e3e6187c9d45f93c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox operator*</definition>
+        <argsstring>(int scalar, BoundingBox rhs) noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::BoundingBox::operator*</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="136" column="39" bodyfile="core/types/d2_vtypes.hpp" bodystart="136" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="friend" id="structd2_1_1BoundingBox_1afd48389db2b2218543a2a2a1b8aacace" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox operator/</definition>
+        <argsstring>(BoundingBox lhs, int scalar) noexcept</argsstring>
+        <name>operator/</name>
+        <qualifiedname>d2::BoundingBox::operator/</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="141" column="39" bodyfile="core/types/d2_vtypes.hpp" bodystart="141" bodyend="145"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_vtypes.hpp" line="76" column="5" bodyfile="core/types/d2_vtypes.hpp" bodystart="77" bodyend="148"/>
+    <listofallmembers>
+      <member refid="structd2_1_1BoundingBox_1ae224f3788eaaf625fc5119336e51354d" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>area</name></member>
+      <member refid="structd2_1_1BoundingBox_1a284946b924574f187a0c2d633b516984" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>contains</name></member>
+      <member refid="structd2_1_1BoundingBox_1ab2bc8c8e5863a7042aa42067a8131559" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>empty</name></member>
+      <member refid="structd2_1_1BoundingBox_1ab86555fdafc58737d1675e61350848e0" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>height</name></member>
+      <member refid="structd2_1_1BoundingBox_1a4d56865bd723a4dfbad264ecdfb12a20" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator*</name></member>
+      <member refid="structd2_1_1BoundingBox_1a733ce29e568631a5e3e6187c9d45f93c" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator*</name></member>
+      <member refid="structd2_1_1BoundingBox_1aed62d249dbc3b74246dd74731fb6190e" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator*=</name></member>
+      <member refid="structd2_1_1BoundingBox_1afbb1fa8708e2e79ef9b6b65c8036c55f" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator+</name></member>
+      <member refid="structd2_1_1BoundingBox_1abafbff99a28e10f8b7e53464fadcd3e0" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator+=</name></member>
+      <member refid="structd2_1_1BoundingBox_1adbd5334d2a11ef520a734a1946d5fc4e" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator-</name></member>
+      <member refid="structd2_1_1BoundingBox_1a05021f5fc68a8108f172e18be996b9a7" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator-=</name></member>
+      <member refid="structd2_1_1BoundingBox_1afd48389db2b2218543a2a2a1b8aacace" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator/</name></member>
+      <member refid="structd2_1_1BoundingBox_1a09d987a7a2daafa94a8cd294b5d26f50" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator/=</name></member>
+      <member refid="structd2_1_1BoundingBox_1a70b2994ca917ecd081d7d882a6cd9550" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>operator&lt;=&gt;</name></member>
+      <member refid="structd2_1_1BoundingBox_1abf53ad44314e2cd92ccaed5e5c6167e0" prot="public" virt="non-virtual"><scope>d2::BoundingBox</scope><name>width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

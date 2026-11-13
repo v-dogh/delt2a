@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1image" kind="namespace" language="C++">
+    <compoundname>d2::image</compoundname>
+    <innerclass refid="structd2_1_1image_1_1Composite" prot="public">d2::image::Composite</innerclass>
+    <innerclass refid="structd2_1_1image_1_1LoadOptions" prot="public">d2::image::LoadOptions</innerclass>
+    <innerclass refid="structd2_1_1image_1_1Placement" prot="public">d2::image::Placement</innerclass>
+    <innerclass refid="classd2_1_1image_1_1Raster" prot="public">d2::image::Raster</innerclass>
+    <innerclass refid="structd2_1_1image_1_1Rect" prot="public">d2::image::Rect</innerclass>
+    <innerclass refid="structd2_1_1image_1_1RGBA" prot="public">d2::image::RGBA</innerclass>
+    <innerclass refid="classd2_1_1image_1_1Scene" prot="public">d2::image::Scene</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1_1image_1a471c45b1ed78bbeea20da1dcf2628f96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref></type>
+        <definition>Rect d2::image::intersect</definition>
+        <argsstring>(Rect a, Rect b)</argsstring>
+        <name>intersect</name>
+        <qualifiedname>d2::image::intersect</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref></type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref></type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.cpp" line="8" column="10" bodyfile="core/types/d2_image.cpp" bodystart="8" bodyend="16" declfile="core/types/d2_image.hpp" declline="21" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1image_1a2b98f82504095d0f938cbc986677fc26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1image_1_1Composite" kindref="compound">Composite</ref></type>
+        <definition>Composite d2::image::compose</definition>
+        <argsstring>(const Scene &amp;scene, BoundingBox viewport, BoundingBox cell_pixels)</argsstring>
+        <name>compose</name>
+        <qualifiedname>d2::image::compose</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1image_1_1Scene" kindref="compound">Scene</ref> &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>viewport</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>cell_pixels</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.cpp" line="120" column="15" bodyfile="core/types/d2_image.cpp" bodystart="120" bodyend="178" declfile="core/types/d2_image.hpp" declline="71" declcolumn="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_image_loader.cpp" line="6" column="1"/>
+  </compounddef>
+</doxygen>

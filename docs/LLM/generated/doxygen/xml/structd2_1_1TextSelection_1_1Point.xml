@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1TextSelection_1_1Point" kind="struct" language="C++" prot="private">
+    <compoundname>d2::TextSelection::Point</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1TextSelection_1_1Point_1a4cfb98e1abbeef776717e36a7f7a9b9e" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::TextSelection::Point::node</definition>
+        <argsstring></argsstring>
+        <name>node</name>
+        <qualifiedname>d2::TextSelection::Point::node</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="40" column="25" bodyfile="core/tree/d2_text_select.hpp" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1TextSelection_1_1Point_1aa900f26f993a2bd75c267f052d9bdfe1" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::TextSelection::Point::grapheme</definition>
+        <argsstring></argsstring>
+        <name>grapheme</name>
+        <qualifiedname>d2::TextSelection::Point::grapheme</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="41" column="25" bodyfile="core/tree/d2_text_select.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1TextSelection_1_1Point_1a3166d82fb8886284f0bf4baeec37d741" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::TextSelection::Point::operator&lt;=&gt;</definition>
+        <argsstring>(const Point &amp;) const =default</argsstring>
+        <name>operator&lt;=&gt;</name>
+        <qualifiedname>d2::TextSelection::Point::operator&lt;=&gt;</qualifiedname>
+        <param>
+          <type>const Point &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="42" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_text_select.hpp" line="38" column="9" bodyfile="core/tree/d2_text_select.hpp" bodystart="39" bodyend="43"/>
+    <listofallmembers>
+      <member refid="structd2_1_1TextSelection_1_1Point_1aa900f26f993a2bd75c267f052d9bdfe1" prot="public" virt="non-virtual"><scope>d2::TextSelection::Point</scope><name>grapheme</name></member>
+      <member refid="structd2_1_1TextSelection_1_1Point_1a4cfb98e1abbeef776717e36a7f7a9b9e" prot="public" virt="non-virtual"><scope>d2::TextSelection::Point</scope><name>node</name></member>
+      <member refid="structd2_1_1TextSelection_1_1Point_1a3166d82fb8886284f0bf4baeec37d741" prot="public" virt="non-virtual"><scope>d2::TextSelection::Point</scope><name>operator&lt;=&gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1365 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1IOContext" kind="class" language="C++" prot="public">
+    <compoundname>d2::IOContext</compoundname>
+    <basecompoundref refid="classd2_1_1Signals" prot="public" virt="non-virtual">d2::Signals</basecompoundref>
+    <includes refid="d2__context_8hpp" local="no">d2_context.hpp</includes>
+    <innerclass refid="structd2_1_1IOContext_1_1ModuleEntry" prot="private">d2::IOContext::ModuleEntry</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">sys::module</ref>&lt; Type &gt;</type>
+        <definition>using d2::IOContext::module = sys::module&lt;Type&gt;</definition>
+        <argsstring></argsstring>
+        <name>module</name>
+        <qualifiedname>d2::IOContext::module</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="25" column="20" bodyfile="core/io/d2_context.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1IOContext_1ae7ba66e43fda338bd09550fe34f1c4ad" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>mt::future&lt; Type &gt;</type>
+        <definition>using d2::IOContext::future = mt::future&lt;Type&gt;</definition>
+        <argsstring></argsstring>
+        <name>future</name>
+        <qualifiedname>d2::IOContext::future</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="26" column="20" bodyfile="core/io/d2_context.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1IOContext_1a9c76fe75ebb04356f058588837967455" kindref="member">IOContext</ref> &gt;</type>
+        <definition>using d2::IOContext::ptr = std::shared_ptr&lt;IOContext&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::IOContext::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="27" column="9" bodyfile="core/io/d2_context.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1IOContext_1a78e2500e6898d747d4b636c6d6a185d6" prot="public" static="no">
+        <type>std::weak_ptr&lt; <ref refid="classd2_1_1IOContext_1a9c76fe75ebb04356f058588837967455" kindref="member">IOContext</ref> &gt;</type>
+        <definition>using d2::IOContext::wptr = std::weak_ptr&lt;IOContext&gt;</definition>
+        <argsstring></argsstring>
+        <name>wptr</name>
+        <qualifiedname>d2::IOContext::wptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="28" column="9" bodyfile="core/io/d2_context.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1IOContext_1a654d5e9256c455c2b42dbb1bac611231" prot="private" static="yes" mutable="no" thread_local="yes">
+        <type><ref refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" kindref="member">ptr</ref></type>
+        <definition>ptr d2::IOContext::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::IOContext::_ptr</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="36" column="40" bodyfile="core/io/d2_context.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1IOContext_1aaf94a00ebbe6b02a65d4d71997b91bd8" prot="private" static="no" mutable="no">
+        <type>std::shared_mutex</type>
+        <definition>std::shared_mutex d2::IOContext::_module_mtx</definition>
+        <argsstring></argsstring>
+        <name>_module_mtx</name>
+        <qualifiedname>d2::IOContext::_module_mtx</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="38" column="27" bodyfile="core/io/d2_context.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1a1147ece4b3900c57e7e7baedda3860c6" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; std::type_index, ModuleEntry &gt;</type>
+        <definition>absl::flat_hash_map&lt;std::type_index, ModuleEntry&gt; d2::IOContext::_modules</definition>
+        <argsstring></argsstring>
+        <name>_modules</name>
+        <qualifiedname>d2::IOContext::_modules</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="39" column="29" bodyfile="core/io/d2_context.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1a06e2ca62d1784f298aea8e5d687d3b15" prot="private" static="no" mutable="no">
+        <type>rs::RuntimeLogs::ptr</type>
+        <definition>rs::RuntimeLogs::ptr d2::IOContext::_logs</definition>
+        <argsstring></argsstring>
+        <name>_logs</name>
+        <qualifiedname>d2::IOContext::_logs</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="41" column="30" bodyfile="core/io/d2_context.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1a6c44b397471c59ddcb58f224203234b2" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1MainWorker_1ab3922518d3df0b55c6a0bd0040a3b411" kindref="member">MainWorker::ptr</ref></type>
+        <definition>MainWorker::ptr d2::IOContext::_worker</definition>
+        <argsstring></argsstring>
+        <name>_worker</name>
+        <qualifiedname>d2::IOContext::_worker</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="43" column="25" bodyfile="core/io/d2_context.hpp" bodystart="43" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1a0edbfa88f136269adfe457c43ac030a7" prot="private" static="no" mutable="no">
+        <type>mt::ConcurrentPool::ptr</type>
+        <definition>mt::ConcurrentPool::ptr d2::IOContext::_scheduler</definition>
+        <argsstring></argsstring>
+        <name>_scheduler</name>
+        <qualifiedname>d2::IOContext::_scheduler</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="44" column="33" bodyfile="core/io/d2_context.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1a89005d955cc8354c115a71212ad13638" prot="private" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" kindref="member">ptr</ref>)&gt;</type>
+        <definition>std::function&lt;void(ptr)&gt; d2::IOContext::_module_manifest</definition>
+        <argsstring></argsstring>
+        <name>_module_manifest</name>
+        <qualifiedname>d2::IOContext::_module_manifest</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="45" column="23" bodyfile="core/io/d2_context.hpp" bodystart="45" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1aa33a7812519b29ed47e922c72ca753b9" prot="private" static="no" mutable="no">
+        <type>std::function&lt; <ref refid="classd2_1_1MainWorker_1ab3922518d3df0b55c6a0bd0040a3b411" kindref="member">MainWorker::ptr</ref>(<ref refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" kindref="member">ptr</ref>)&gt;</type>
+        <definition>std::function&lt;MainWorker::ptr(ptr)&gt; d2::IOContext::_early_manifest</definition>
+        <argsstring></argsstring>
+        <name>_early_manifest</name>
+        <qualifiedname>d2::IOContext::_early_manifest</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="46" column="23" bodyfile="core/io/d2_context.hpp" bodystart="46" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1a5aab5baa703fb3ce7dc701f43623ee6a" prot="private" static="no" mutable="no">
+        <type>std::thread::id</type>
+        <definition>std::thread::id d2::IOContext::_main_thread</definition>
+        <argsstring></argsstring>
+        <name>_main_thread</name>
+        <qualifiedname>d2::IOContext::_main_thread</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="47" column="25" bodyfile="core/io/d2_context.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1a73548f78d0808629ed83b94cc7973fbb" prot="private" static="no" mutable="no">
+        <type>std::chrono::steady_clock::time_point</type>
+        <definition>std::chrono::steady_clock::time_point d2::IOContext::_deadline</definition>
+        <argsstring></argsstring>
+        <name>_deadline</name>
+        <qualifiedname>d2::IOContext::_deadline</qualifiedname>
+        <initializer>{
+            std::chrono::steady_clock::time_point::max()
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="48" column="47" bodyfile="core/io/d2_context.hpp" bodystart="48" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1a5a7d576de34e48be7c3f09a815e8ba29" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; d2::IOContext::_stop</definition>
+        <argsstring></argsstring>
+        <name>_stop</name>
+        <qualifiedname>d2::IOContext::_stop</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="52" column="21" bodyfile="core/io/d2_context.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1IOContext_1ad3a105271675cc9eea18f0d1fe516bf6" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; d2::IOContext::_suspended</definition>
+        <argsstring></argsstring>
+        <name>_suspended</name>
+        <qualifiedname>d2::IOContext::_suspended</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="53" column="21" bodyfile="core/io/d2_context.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1IOContext_1a822ee542946b7cfcb511a79e26767fd8" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::weak_ptr&lt; const <ref refid="classd2_1_1IOContext_1a9c76fe75ebb04356f058588837967455" kindref="member">IOContext</ref> &gt;</type>
+        <definition>std::weak_ptr&lt; const IOContext &gt; d2::IOContext::_weak</definition>
+        <argsstring>() const</argsstring>
+        <name>_weak</name>
+        <qualifiedname>d2::IOContext::_weak</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="55" column="23" bodyfile="core/io/d2_context.cpp" bodystart="14" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a4a215e3c19a1cc11dae5cd20c8ae1567" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; const <ref refid="classd2_1_1IOContext_1a9c76fe75ebb04356f058588837967455" kindref="member">IOContext</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; const IOContext &gt; d2::IOContext::_shared</definition>
+        <argsstring>() const</argsstring>
+        <name>_shared</name>
+        <qualifiedname>d2::IOContext::_shared</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="56" column="25" bodyfile="core/io/d2_context.cpp" bodystart="18" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a42c74bcc800007c31cf907747ddd7f05" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::weak_ptr&lt; <ref refid="classd2_1_1IOContext_1a9c76fe75ebb04356f058588837967455" kindref="member">IOContext</ref> &gt;</type>
+        <definition>std::weak_ptr&lt; IOContext &gt; d2::IOContext::_weak</definition>
+        <argsstring>()</argsstring>
+        <name>_weak</name>
+        <qualifiedname>d2::IOContext::_weak</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="57" column="23" bodyfile="core/io/d2_context.cpp" bodystart="22" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a91c133f737dfc1cbbd0be6ab7230df31" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1IOContext_1a9c76fe75ebb04356f058588837967455" kindref="member">IOContext</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; IOContext &gt; d2::IOContext::_shared</definition>
+        <argsstring>()</argsstring>
+        <name>_shared</name>
+        <qualifiedname>d2::IOContext::_shared</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="58" column="25" bodyfile="core/io/d2_context.cpp" bodystart="26" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1afcfe26b9c973cdff12d491f891b6e20f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::_initialize</definition>
+        <argsstring>()</argsstring>
+        <name>_initialize</name>
+        <qualifiedname>d2::IOContext::_initialize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="60" column="14" bodyfile="core/io/d2_context.cpp" bodystart="459" bodyend="540"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a5880b69265148064f07c63d981f14806" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::_deinitialize</definition>
+        <argsstring>()</argsstring>
+        <name>_deinitialize</name>
+        <qualifiedname>d2::IOContext::_deinitialize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="61" column="14" bodyfile="core/io/d2_context.cpp" bodystart="541" bodyend="549"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1aae128dd624e39d0691810436280fdc59" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::_unload_modules</definition>
+        <argsstring>()</argsstring>
+        <name>_unload_modules</name>
+        <qualifiedname>d2::IOContext::_unload_modules</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="62" column="14" bodyfile="core/io/d2_context.cpp" bodystart="418" bodyend="450"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a229521933219be1ed18ac9057220d0d2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::_run</definition>
+        <argsstring>()</argsstring>
+        <name>_run</name>
+        <qualifiedname>d2::IOContext::_run</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="63" column="14" bodyfile="core/io/d2_context.cpp" bodystart="550" bodyend="582"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a832a46e16a770d639b2b2940c6f25bfa" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; Type &gt;</type>
+        <definition>module&lt; Type &gt; d2::IOContext::_get_module</definition>
+        <argsstring>()</argsstring>
+        <name>_get_module</name>
+        <qualifiedname>d2::IOContext::_get_module</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="65" column="27" bodyfile="core/io/d2_context.hpp" bodystart="65" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a81262288bae2fdd4702a7642f96e5a1e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; Type &gt;</type>
+        <definition>module&lt; Type &gt; d2::IOContext::_get_module_if</definition>
+        <argsstring>()</argsstring>
+        <name>_get_module_if</name>
+        <qualifiedname>d2::IOContext::_get_module_if</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="72" column="27" bodyfile="core/io/d2_context.hpp" bodystart="72" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a1220dc439b43c95a779c90c4e0a0adac" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; Type &gt;</type>
+        <definition>module&lt; Type &gt; d2::IOContext::_get_module</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>_get_module</name>
+        <qualifiedname>d2::IOContext::_get_module</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="77" column="27" bodyfile="core/io/d2_context.hpp" bodystart="77" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1af2fddc95da6d779db970ffad160d7862" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; Type &gt;</type>
+        <definition>module&lt; Type &gt; d2::IOContext::_get_module_if</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>_get_module_if</name>
+        <qualifiedname>d2::IOContext::_get_module_if</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="84" column="27" bodyfile="core/io/d2_context.hpp" bodystart="84" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a334edcd35a36d95df739712f60a7cafc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1ModuleStub" kindref="compound">d2::sys::ModuleStub</ref> *</type>
+        <definition>d2::sys::ModuleStub * d2::IOContext::_find_module</definition>
+        <argsstring>(std::type_index index, std::optional&lt; std::string &gt; id)</argsstring>
+        <name>_find_module</name>
+        <qualifiedname>d2::IOContext::_find_module</qualifiedname>
+        <param>
+          <type>std::type_index</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::string &gt;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="89" column="29" bodyfile="core/io/d2_context.cpp" bodystart="32" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a680f11c189f1055d9d51511f6a0f7496" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1sys_1_1SystemModule" kindref="compound">sys::SystemModule</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; sys::SystemModule &gt; d2::IOContext::_remove_module</definition>
+        <argsstring>(std::type_index idx, std::optional&lt; std::string &gt; id=std::nullopt)</argsstring>
+        <name>_remove_module</name>
+        <qualifiedname>d2::IOContext::_remove_module</qualifiedname>
+        <param>
+          <type>std::type_index</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::string &gt;</type>
+          <declname>id</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="91" column="25" bodyfile="core/io/d2_context.cpp" bodystart="45" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1ac177aecbf05419319f80dabe5241d142" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::_insert_module</definition>
+        <argsstring>(sys::ModuleStub stub, std::optional&lt; std::string &gt; id=std::nullopt)</argsstring>
+        <name>_insert_module</name>
+        <qualifiedname>d2::IOContext::_insert_module</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1ModuleStub" kindref="compound">sys::ModuleStub</ref></type>
+          <declname>stub</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::string &gt;</type>
+          <declname>id</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="92" column="14" bodyfile="core/io/d2_context.cpp" bodystart="90" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a8003c783cee0c12f55952dad1a77e24b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1sys_1_1SystemModule" kindref="compound">sys::SystemModule</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; sys::SystemModule &gt; d2::IOContext::_get_module_if_uc</definition>
+        <argsstring>(std::type_index idx, std::optional&lt; std::string &gt; id=std::nullopt)</argsstring>
+        <name>_get_module_if_uc</name>
+        <qualifiedname>d2::IOContext::_get_module_if_uc</qualifiedname>
+        <param>
+          <type>std::type_index</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::string &gt;</type>
+          <declname>id</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="95" column="9" bodyfile="core/io/d2_context.cpp" bodystart="119" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a96a75faa8d1a04e94607707c122eeb46" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::_load_modules</definition>
+        <argsstring>(std::vector&lt; std::pair&lt; sys::ModuleStub, std::optional&lt; std::string &gt; &gt; &gt; comps)</argsstring>
+        <name>_load_modules</name>
+        <qualifiedname>d2::IOContext::_load_modules</qualifiedname>
+        <param>
+          <type>std::vector&lt; std::pair&lt; <ref refid="structd2_1_1sys_1_1ModuleStub" kindref="compound">sys::ModuleStub</ref>, std::optional&lt; std::string &gt; &gt; &gt;</type>
+          <declname>comps</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="97" column="9" bodyfile="core/io/d2_context.cpp" bodystart="179" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a80d057d55ca56ef677e9004ba3a793e2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::IOContext::_load_module_recursive</definition>
+        <argsstring>(std::type_index idx, absl::flat_hash_set&lt; std::type_index &gt; &amp;visit_map)</argsstring>
+        <name>_load_module_recursive</name>
+        <qualifiedname>d2::IOContext::_load_module_recursive</qualifiedname>
+        <param>
+          <type>std::type_index</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>absl::flat_hash_set&lt; std::type_index &gt; &amp;</type>
+          <declname>visit_map</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="98" column="14" bodyfile="core/io/d2_context.cpp" bodystart="305" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a20dcb0e029c11cc76d8c063a0425143d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::_sysenum</definition>
+        <argsstring>(std::optional&lt; std::type_index &gt; index, std::function&lt; void(sys::SystemModule::ModInfo, sys::SystemModule::ModPreset, std::optional&lt; sys::module&lt; sys::SystemModule &gt; &gt;, std::optional&lt; std::string &gt;)&gt; callback)</argsstring>
+        <name>_sysenum</name>
+        <qualifiedname>d2::IOContext::_sysenum</qualifiedname>
+        <param>
+          <type>std::optional&lt; std::type_index &gt;</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo" kindref="compound">sys::SystemModule::ModInfo</ref>, <ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">sys::SystemModule::ModPreset</ref>, std::optional&lt; <ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">sys::module</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemModule" kindref="compound">sys::SystemModule</ref> &gt; &gt;, std::optional&lt; std::string &gt;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="102" column="14" bodyfile="core/io/d2_context.cpp" bodystart="342" bodyend="397"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1IOContext_1ab5b99e22cbc0d1d4a129b0e50312840e" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::set</definition>
+        <argsstring>(ptr) noexcept</argsstring>
+        <name>set</name>
+        <qualifiedname>d2::IOContext::set</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" kindref="member">ptr</ref></type>
+          <defname>ptr</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="112" column="21" bodyfile="core/io/d2_context.cpp" bodystart="399" bodyend="402"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a9cd05ae88adf49897a80e812b3847efa" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" kindref="member">ptr</ref></type>
+        <definition>IOContext::ptr d2::IOContext::get</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::IOContext::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="113" column="20" bodyfile="core/io/d2_context.cpp" bodystart="403" bodyend="406"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1abb19de1dace2754ba4654cf964e3c6b7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Modules</declname>
+            <defname>Modules</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" kindref="member">ptr</ref></type>
+        <definition>static ptr d2::IOContext::make</definition>
+        <argsstring>(rs::Config logs_cfg={})</argsstring>
+        <name>make</name>
+        <qualifiedname>d2::IOContext::make</qualifiedname>
+        <param>
+          <type>rs::Config</type>
+          <declname>logs_cfg</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="115" column="31" bodyfile="core/io/d2_context.hpp" bodystart="115" bodyend="142"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1IOContext_1a9c76fe75ebb04356f058588837967455" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::IOContext::IOContext</definition>
+        <argsstring>(mt::ConcurrentPool::ptr scheduler, rs::RuntimeLogs::ptr logs)</argsstring>
+        <name>IOContext</name>
+        <qualifiedname>d2::IOContext::IOContext</qualifiedname>
+        <param>
+          <type>mt::ConcurrentPool::ptr</type>
+          <declname>scheduler</declname>
+        </param>
+        <param>
+          <type>rs::RuntimeLogs::ptr</type>
+          <declname>logs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="144" column="9" bodyfile="core/io/d2_context.cpp" bodystart="408" bodyend="412"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1acf6dfba1e0e28c80a761f79e01ee1c71" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>d2::IOContext::~IOContext</definition>
+        <argsstring>()</argsstring>
+        <name>~IOContext</name>
+        <qualifiedname>d2::IOContext::~IOContext</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="145" column="17" bodyfile="core/io/d2_context.cpp" bodystart="413" bodyend="416"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a4c850422e1711616f684fe1762c47a12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="structd2_1_1Tree" kindref="compound">Tree</ref></type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Trees</declname>
+            <defname>Trees</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::IOContext::run</definition>
+        <argsstring>(auto &amp;&amp;... themes)</argsstring>
+        <name>run</name>
+        <qualifiedname>d2::IOContext::run</qualifiedname>
+        <param>
+          <type>auto &amp;&amp;...</type>
+          <declname>themes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="149" column="27" bodyfile="core/screen/d2_screen.hpp" bodystart="394" bodyend="402"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a3e5b9ebaeebadee61cbbb02686084c12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>d2::IOContext::stop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="150" column="14" bodyfile="core/io/d2_context.cpp" bodystart="593" bodyend="597"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1aa61c2446a08f28401b017173c06d726a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::ping</definition>
+        <argsstring>()</argsstring>
+        <name>ping</name>
+        <qualifiedname>d2::IOContext::ping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="151" column="14" bodyfile="core/io/d2_context.cpp" bodystart="589" bodyend="592"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a6b09df27239eae0bb71c0f89a71337d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::chrono::steady_clock::time_point</type>
+        <definition>std::chrono::steady_clock::time_point d2::IOContext::deadline</definition>
+        <argsstring>(std::chrono::steady_clock::time_point tp)</argsstring>
+        <name>deadline</name>
+        <qualifiedname>d2::IOContext::deadline</qualifiedname>
+        <param>
+          <type>std::chrono::steady_clock::time_point</type>
+          <declname>tp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="153" column="47" bodyfile="core/io/d2_context.cpp" bodystart="600" bodyend="604"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a126f0dd94da8e606ed24e0ba4944d836" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::chrono::steady_clock::time_point</type>
+        <definition>std::chrono::steady_clock::time_point d2::IOContext::deadline</definition>
+        <argsstring>(std::chrono::milliseconds ms)</argsstring>
+        <name>deadline</name>
+        <qualifiedname>d2::IOContext::deadline</qualifiedname>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>ms</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="154" column="47" bodyfile="core/io/d2_context.cpp" bodystart="605" bodyend="613"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a2fa2c1656e411fda5fe8c9019a656e90" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::IOContext::is_suspended</definition>
+        <argsstring>() const</argsstring>
+        <name>is_suspended</name>
+        <qualifiedname>d2::IOContext::is_suspended</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="156" column="14" bodyfile="core/io/d2_context.cpp" bodystart="615" bodyend="618"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1ae475c9101d5aab37891c82cebf2a1565" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::suspend</definition>
+        <argsstring>(bool state)</argsstring>
+        <name>suspend</name>
+        <qualifiedname>d2::IOContext::suspend</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="157" column="14" bodyfile="core/io/d2_context.cpp" bodystart="619" bodyend="622"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1abb8c674efa33ad7c84ef3e066ac13cc1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>mt::ConcurrentPool::ptr</type>
+        <definition>mt::ConcurrentPool::ptr d2::IOContext::scheduler</definition>
+        <argsstring>()</argsstring>
+        <name>scheduler</name>
+        <qualifiedname>d2::IOContext::scheduler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="161" column="33" bodyfile="core/io/d2_context.cpp" bodystart="624" bodyend="627"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a9386eb0cc4f9ccba8a2810458361d13c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::IOContext::is_synced</definition>
+        <argsstring>() const</argsstring>
+        <name>is_synced</name>
+        <qualifiedname>d2::IOContext::is_synced</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="163" column="14" bodyfile="core/io/d2_context.cpp" bodystart="584" bodyend="587"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1ad37e76acd7d3259feb1fe204431bf6d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>std::invoke_result_t&lt; Func &amp;, Argv... &gt;</type>
+        <definition>std::invoke_result_t&lt; Func &amp;, Argv... &gt; d2::IOContext::sync</definition>
+        <argsstring>(Func &amp;&amp;callback, Argv &amp;&amp;... args)</argsstring>
+        <name>sync</name>
+        <qualifiedname>d2::IOContext::sync</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="166" column="14" bodyfile="core/io/d2_context.hpp" bodystart="166" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a72ceda1a64a95a1eda584a60c520e3c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>mt::future&lt; std::invoke_result_t&lt; Func &amp;, Argv... &gt; &gt;</type>
+        <definition>mt::future&lt; std::invoke_result_t&lt; Func &amp;, Argv... &gt; &gt; d2::IOContext::sync_async</definition>
+        <argsstring>(Func &amp;&amp;callback, Argv &amp;&amp;... args)</argsstring>
+        <name>sync_async</name>
+        <qualifiedname>d2::IOContext::sync_async</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="174" column="14" bodyfile="core/io/d2_context.hpp" bodystart="174" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a863c91beef08ebde358310dd6fd1fe5d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>std::jthread</type>
+        <definition>std::jthread d2::IOContext::launch_thread</definition>
+        <argsstring>(Func &amp;&amp;callback, Argv &amp;&amp;... args)</argsstring>
+        <name>launch_thread</name>
+        <qualifiedname>d2::IOContext::launch_thread</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="222" column="22" bodyfile="core/io/d2_context.hpp" bodystart="222" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1aca75be67b53ef8a16aa0e37f76cf7b11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::launch_thread</definition>
+        <argsstring>()</argsstring>
+        <name>launch_thread</name>
+        <qualifiedname>d2::IOContext::launch_thread</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="256" column="14" bodyfile="core/io/d2_context.cpp" bodystart="452" bodyend="457"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1abf47bef6b0ed1d8d451fbf6588cb3ec6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Module</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::IOContext::unload</definition>
+        <argsstring>()</argsstring>
+        <name>unload</name>
+        <qualifiedname>d2::IOContext::unload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="260" column="25" bodyfile="core/io/d2_context.hpp" bodystart="260" bodyend="266"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a8c44e5f9f4d0d9f0ec9775faa0bd69e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Module</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::IOContext::unload</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>unload</name>
+        <qualifiedname>d2::IOContext::unload</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="267" column="25" bodyfile="core/io/d2_context.hpp" bodystart="267" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1ad0c3dd38e115844911808a3b9dbadb1f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Modules</declname>
+            <defname>Modules</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::IOContext::load</definition>
+        <argsstring>()</argsstring>
+        <name>load</name>
+        <qualifiedname>d2::IOContext::load</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="274" column="25" bodyfile="core/io/d2_context.hpp" bodystart="274" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a9191ae7d7c1a24c7e2fb55ec9cc5d64d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Module</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::IOContext::load</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>load</name>
+        <qualifiedname>d2::IOContext::load</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="293" column="25" bodyfile="core/io/d2_context.hpp" bodystart="293" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a4b945732bf5d2f757e2b4245e368ee41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::IOContext::sysenum</definition>
+        <argsstring>(std::function&lt; void(sys::SystemModule::ModInfo, sys::SystemModule::ModPreset, std::optional&lt; sys::module&lt; sys::SystemModule &gt; &gt;, std::optional&lt; std::string &gt;)&gt; callback)</argsstring>
+        <name>sysenum</name>
+        <qualifiedname>d2::IOContext::sysenum</qualifiedname>
+        <param>
+          <type>std::function&lt; void(<ref refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo" kindref="compound">sys::SystemModule::ModInfo</ref>, <ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">sys::SystemModule::ModPreset</ref>, std::optional&lt; <ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">sys::module</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemModule" kindref="compound">sys::SystemModule</ref> &gt; &gt;, std::optional&lt; std::string &gt;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="299" column="14" bodyfile="core/io/d2_context.cpp" bodystart="629" bodyend="639"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a197b1e0da0da4e049f8b768415cb4b89" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Module</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::IOContext::sysenum</definition>
+        <argsstring>(std::function&lt; void(sys::SystemModule::ModInfo, sys::SystemModule::ModPreset, std::optional&lt; sys::module&lt; sys::SystemModule &gt; &gt;, std::optional&lt; std::string &gt;)&gt; callback)</argsstring>
+        <name>sysenum</name>
+        <qualifiedname>d2::IOContext::sysenum</qualifiedname>
+        <param>
+          <type>std::function&lt; void(<ref refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo" kindref="compound">sys::SystemModule::ModInfo</ref>, <ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">sys::SystemModule::ModPreset</ref>, std::optional&lt; <ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">sys::module</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemModule" kindref="compound">sys::SystemModule</ref> &gt; &gt;, std::optional&lt; std::string &gt;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="308" column="14" bodyfile="core/io/d2_context.hpp" bodystart="308" bodyend="318"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a7ea4de6530c547537e7adc75b6c6043d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Module</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; Module &gt;</type>
+        <definition>module&lt; Module &gt; d2::IOContext::sys</definition>
+        <argsstring>()</argsstring>
+        <name>sys</name>
+        <qualifiedname>d2::IOContext::sys</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="320" column="27" bodyfile="core/io/d2_context.hpp" bodystart="320" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a97d3462b34a766babed5ec6cc5b922d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Module</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; Module &gt;</type>
+        <definition>module&lt; Module &gt; d2::IOContext::sys_if</definition>
+        <argsstring>()</argsstring>
+        <name>sys_if</name>
+        <qualifiedname>d2::IOContext::sys_if</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="324" column="27" bodyfile="core/io/d2_context.hpp" bodystart="324" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a824e3156453a1df2df0b6c810bccec38" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Module</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; Module &gt;</type>
+        <definition>module&lt; Module &gt; d2::IOContext::sys</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>sys</name>
+        <qualifiedname>d2::IOContext::sys</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="332" column="27" bodyfile="core/io/d2_context.hpp" bodystart="332" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1aaf9e6ffaf55f117c4ca457d50d83bf49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Module</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; Module &gt;</type>
+        <definition>module&lt; Module &gt; d2::IOContext::sys_if</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>sys_if</name>
+        <qualifiedname>d2::IOContext::sys_if</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="336" column="27" bodyfile="core/io/d2_context.hpp" bodystart="336" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1a4fba7558e8901d5c37cf694f3063c205" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; <ref refid="namespaced2_1_1sys_1a9977a58cd67ef4a852ffc314b7a95e55" kindref="member">sys::input</ref> &gt;</type>
+        <definition>IOContext::module&lt; sys::input &gt; d2::IOContext::input</definition>
+        <argsstring>()</argsstring>
+        <name>input</name>
+        <qualifiedname>d2::IOContext::input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="344" column="16" bodyfile="core/io/d2_context.cpp" bodystart="641" bodyend="644"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1aa2ca65cfabf163174df1a0d2a7fdfbe4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; <ref refid="namespaced2_1_1sys_1affecbcd3aa5d1b91a99e5be1edb6e5ff" kindref="member">sys::output</ref> &gt;</type>
+        <definition>IOContext::module&lt; sys::output &gt; d2::IOContext::output</definition>
+        <argsstring>()</argsstring>
+        <name>output</name>
+        <qualifiedname>d2::IOContext::output</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="345" column="16" bodyfile="core/io/d2_context.cpp" bodystart="645" bodyend="648"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1IOContext_1aaf946af9ba8078e06b0adc3f75f9c5db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" kindref="member">module</ref>&lt; <ref refid="namespaced2_1_1sys_1ab058ff847007d9e3636603a9db4e67c9" kindref="member">sys::screen</ref> &gt;</type>
+        <definition>IOContext::module&lt; sys::screen &gt; d2::IOContext::screen</definition>
+        <argsstring>()</argsstring>
+        <name>screen</name>
+        <qualifiedname>d2::IOContext::screen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_context.hpp" line="346" column="16" bodyfile="core/io/d2_context.cpp" bodystart="649" bodyend="652"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::IOContext</label>
+        <link refid="classd2_1_1IOContext"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::Signals</label>
+        <link refid="classd2_1_1Signals"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Signals &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::IOContext</label>
+        <link refid="classd2_1_1IOContext"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::Signals</label>
+        <link refid="classd2_1_1Signals"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Signals &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_context.hpp" line="21" column="5" bodyfile="core/io/d2_context.hpp" bodystart="22" bodyend="347"/>
+    <listofallmembers>
+      <member refid="classd2_1_1IOContext_1a73548f78d0808629ed83b94cc7973fbb" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_deadline</name></member>
+      <member refid="classd2_1_1IOContext_1a5880b69265148064f07c63d981f14806" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_deinitialize</name></member>
+      <member refid="classd2_1_1IOContext_1aa33a7812519b29ed47e922c72ca753b9" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_early_manifest</name></member>
+      <member refid="classd2_1_1IOContext_1a334edcd35a36d95df739712f60a7cafc" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_find_module</name></member>
+      <member refid="classd2_1_1IOContext_1a832a46e16a770d639b2b2940c6f25bfa" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_get_module</name></member>
+      <member refid="classd2_1_1IOContext_1a1220dc439b43c95a779c90c4e0a0adac" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_get_module</name></member>
+      <member refid="classd2_1_1IOContext_1a81262288bae2fdd4702a7642f96e5a1e" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_get_module_if</name></member>
+      <member refid="classd2_1_1IOContext_1af2fddc95da6d779db970ffad160d7862" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_get_module_if</name></member>
+      <member refid="classd2_1_1IOContext_1a8003c783cee0c12f55952dad1a77e24b" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_get_module_if_uc</name></member>
+      <member refid="classd2_1_1IOContext_1afcfe26b9c973cdff12d491f891b6e20f" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_initialize</name></member>
+      <member refid="classd2_1_1IOContext_1ac177aecbf05419319f80dabe5241d142" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_insert_module</name></member>
+      <member refid="classd2_1_1IOContext_1a80d057d55ca56ef677e9004ba3a793e2" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_load_module_recursive</name></member>
+      <member refid="classd2_1_1IOContext_1a96a75faa8d1a04e94607707c122eeb46" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_load_modules</name></member>
+      <member refid="classd2_1_1IOContext_1a06e2ca62d1784f298aea8e5d687d3b15" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_logs</name></member>
+      <member refid="classd2_1_1IOContext_1a5aab5baa703fb3ce7dc701f43623ee6a" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_main_thread</name></member>
+      <member refid="classd2_1_1IOContext_1a89005d955cc8354c115a71212ad13638" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_module_manifest</name></member>
+      <member refid="classd2_1_1IOContext_1aaf94a00ebbe6b02a65d4d71997b91bd8" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_module_mtx</name></member>
+      <member refid="classd2_1_1IOContext_1a1147ece4b3900c57e7e7baedda3860c6" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_modules</name></member>
+      <member refid="classd2_1_1IOContext_1a654d5e9256c455c2b42dbb1bac611231" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1IOContext_1a680f11c189f1055d9d51511f6a0f7496" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_remove_module</name></member>
+      <member refid="classd2_1_1IOContext_1a229521933219be1ed18ac9057220d0d2" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_run</name></member>
+      <member refid="classd2_1_1IOContext_1a0edbfa88f136269adfe457c43ac030a7" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_scheduler</name></member>
+      <member refid="classd2_1_1IOContext_1a4a215e3c19a1cc11dae5cd20c8ae1567" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_shared</name></member>
+      <member refid="classd2_1_1IOContext_1a91c133f737dfc1cbbd0be6ab7230df31" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_shared</name></member>
+      <member refid="classd2_1_1IOContext_1a5a7d576de34e48be7c3f09a815e8ba29" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_stop</name></member>
+      <member refid="classd2_1_1IOContext_1ad3a105271675cc9eea18f0d1fe516bf6" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_suspended</name></member>
+      <member refid="classd2_1_1IOContext_1a20dcb0e029c11cc76d8c063a0425143d" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_sysenum</name></member>
+      <member refid="classd2_1_1IOContext_1aae128dd624e39d0691810436280fdc59" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_unload_modules</name></member>
+      <member refid="classd2_1_1IOContext_1a822ee542946b7cfcb511a79e26767fd8" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_weak</name></member>
+      <member refid="classd2_1_1IOContext_1a42c74bcc800007c31cf907747ddd7f05" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_weak</name></member>
+      <member refid="classd2_1_1IOContext_1a6c44b397471c59ddcb58f224203234b2" prot="private" virt="non-virtual"><scope>d2::IOContext</scope><name>_worker</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968a73bbb3d74bd8dab115d7c8618062f3bb" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>Async</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968aaae4fc6d1f8736b38895289fe5fbe573" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>Combine</name></member>
+      <member refid="classd2_1_1Signals_1a9155c4b86a8a097d7f448df6cb93227e" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>connect</name></member>
+      <member refid="classd2_1_1Signals_1af7c26d903731d0bb178fe3be6dde06e2" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>connect</name></member>
+      <member refid="classd2_1_1IOContext_1a6b09df27239eae0bb71c0f89a71337d2" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>deadline</name></member>
+      <member refid="classd2_1_1IOContext_1a126f0dd94da8e606ed24e0ba4944d836" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>deadline</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968ac62c99d98b33c102078a9be949a77775" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>Deferred</name></member>
+      <member refid="classd2_1_1Signals_1a203504e91a96b04a8fcb3a2a7b4c5b65" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>disconnect</name></member>
+      <member refid="classd2_1_1Signals_1ac0a8f9cda876d3f5e52b4181fabfa6e2" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>disconnect</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968a03591b4f7900aad9376259f2bdb0d830" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>DropIfFull</name></member>
+      <member refid="classd2_1_1IOContext_1ae7ba66e43fda338bd09550fe34f1c4ad" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>future</name></member>
+      <member refid="classd2_1_1IOContext_1a9cd05ae88adf49897a80e812b3847efa" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>get</name></member>
+      <member refid="classd2_1_1IOContext_1a4fba7558e8901d5c37cf694f3063c205" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>input</name></member>
+      <member refid="classd2_1_1IOContext_1a9c76fe75ebb04356f058588837967455" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>IOContext</name></member>
+      <member refid="classd2_1_1IOContext_1a2fa2c1656e411fda5fe8c9019a656e90" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>is_suspended</name></member>
+      <member refid="classd2_1_1IOContext_1a9386eb0cc4f9ccba8a2810458361d13c" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>is_synced</name></member>
+      <member refid="classd2_1_1IOContext_1a863c91beef08ebde358310dd6fd1fe5d" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>launch_thread</name></member>
+      <member refid="classd2_1_1IOContext_1aca75be67b53ef8a16aa0e37f76cf7b11" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>launch_thread</name></member>
+      <member refid="classd2_1_1Signals_1a4ab36a7cc7e2da1f86a97e050dbb03bf" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a0020b9be06217cfca1738854d5c1dbea" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a5c278e277dc44d32048b0e595bd9038b" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a4e7a3aa64171bc4a137332ed9f6ed1d2" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a31c4eb6ee0aad359f7b44598c599b072" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a706c199fdd5cf3dc018d98c898827ecc" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a6ab9035041c8351c2a7aca773c5c4e44" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>listen</name></member>
+      <member refid="classd2_1_1Signals_1a07fb31d03e76ba7a8b2b4a63493d1ea8" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>listen</name></member>
+      <member refid="classd2_1_1IOContext_1ad0c3dd38e115844911808a3b9dbadb1f" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>load</name></member>
+      <member refid="classd2_1_1IOContext_1a9191ae7d7c1a24c7e2fb55ec9cc5d64d" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>load</name></member>
+      <member refid="classd2_1_1IOContext_1abb19de1dace2754ba4654cf964e3c6b7" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>make</name></member>
+      <member refid="classd2_1_1Signals_1aec8ed4cf23c868038f7658ae60821f0f" prot="public" virt="non-virtual" ambiguityscope="d2::Signals::"><scope>d2::IOContext</scope><name>make</name></member>
+      <member refid="classd2_1_1IOContext_1ae6b4e439faf473868f7994a66bab75fc" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>module</name></member>
+      <member refid="classd2_1_1Signals_1a506b304a42597a1e202861ebf6c384e8" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Signals_1a44691e3045fe817f0912dbab99391cfc" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>operator=</name></member>
+      <member refid="classd2_1_1IOContext_1aa2ca65cfabf163174df1a0d2a7fdfbe4" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>output</name></member>
+      <member refid="classd2_1_1IOContext_1aa61c2446a08f28401b017173c06d726a" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>ping</name></member>
+      <member refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>ptr</name></member>
+      <member refid="classd2_1_1IOContext_1a4c850422e1711616f684fe1762c47a12" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>run</name></member>
+      <member refid="classd2_1_1IOContext_1abb8c674efa33ad7c84ef3e066ac13cc1" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>scheduler</name></member>
+      <member refid="classd2_1_1IOContext_1aaf946af9ba8078e06b0adc3f75f9c5db" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>screen</name></member>
+      <member refid="classd2_1_1IOContext_1ab5b99e22cbc0d1d4a129b0e50312840e" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>set</name></member>
+      <member refid="classd2_1_1Signals_1a26bfd86a43347f691f4bafb890a18e2a" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a66149a778f6393d37afc8448260fcf91" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a8c50c1359ea066eaa3a5363b42a78242" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1aff28e5d40d1661d49792333d178e8bdb" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a9c31c99ce6f46453b662f53817ebc8d2" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a57b4d894b9b507fdfbfcefe0ac84c886" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a389fb7068f6a89fcb752e6a0bfa0e65a" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1a4e8274a5b91ac5a4cb50cf0e20fa7bc3" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>signal</name></member>
+      <member refid="classd2_1_1Signals_1aa647ccbcb4116c7c83557fb541089968" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>SignalFlags</name></member>
+      <member refid="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>Signals</name></member>
+      <member refid="classd2_1_1Signals_1a37f07c05a6582593a11a28d573afc701" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>Signals</name></member>
+      <member refid="classd2_1_1Signals_1a917e5f6897fd39a661ff26c0f096f8e7" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>Signals</name></member>
+      <member refid="classd2_1_1IOContext_1a3e5b9ebaeebadee61cbbb02686084c12" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>stop</name></member>
+      <member refid="classd2_1_1IOContext_1ae475c9101d5aab37891c82cebf2a1565" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>suspend</name></member>
+      <member refid="classd2_1_1IOContext_1ad37e76acd7d3259feb1fe204431bf6d1" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>sync</name></member>
+      <member refid="classd2_1_1IOContext_1a72ceda1a64a95a1eda584a60c520e3c4" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>sync_async</name></member>
+      <member refid="classd2_1_1IOContext_1a7ea4de6530c547537e7adc75b6c6043d" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>sys</name></member>
+      <member refid="classd2_1_1IOContext_1a824e3156453a1df2df0b6c810bccec38" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>sys</name></member>
+      <member refid="classd2_1_1IOContext_1a97d3462b34a766babed5ec6cc5b922d7" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>sys_if</name></member>
+      <member refid="classd2_1_1IOContext_1aaf9e6ffaf55f117c4ca457d50d83bf49" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>sys_if</name></member>
+      <member refid="classd2_1_1IOContext_1a4b945732bf5d2f757e2b4245e368ee41" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>sysenum</name></member>
+      <member refid="classd2_1_1IOContext_1a197b1e0da0da4e049f8b768415cb4b89" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>sysenum</name></member>
+      <member refid="classd2_1_1IOContext_1abf47bef6b0ed1d8d451fbf6588cb3ec6" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>unload</name></member>
+      <member refid="classd2_1_1IOContext_1a8c44e5f9f4d0d9f0ec9775faa0bd69e6" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>unload</name></member>
+      <member refid="classd2_1_1IOContext_1a78e2500e6898d747d4b636c6d6a185d6" prot="public" virt="non-virtual"><scope>d2::IOContext</scope><name>wptr</name></member>
+      <member refid="classd2_1_1IOContext_1acf6dfba1e0e28c80a761f79e01ee1c71" prot="public" virt="virtual"><scope>d2::IOContext</scope><name>~IOContext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

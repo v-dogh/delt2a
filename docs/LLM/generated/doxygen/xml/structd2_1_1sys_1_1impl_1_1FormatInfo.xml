@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1impl_1_1FormatInfo" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::impl::FormatInfo</compoundname>
+    <includes refid="d2__audio_8hpp" local="no">d2_audio.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1impl_1_1FormatInfo_1a87707bcd529b01440abac0d55e830dc9" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1" kindref="member">Format</ref></type>
+        <definition>Format d2::sys::impl::FormatInfo::format</definition>
+        <argsstring></argsstring>
+        <name>format</name>
+        <qualifiedname>d2::sys::impl::FormatInfo::format</qualifiedname>
+        <initializer>{<ref refid="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1a166495adc0d0f53bee6baecc577f5204" kindref="member">Format::Float32</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="21" column="20" bodyfile="core/mods/d2_audio.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1impl_1_1FormatInfo_1a68b7e61bbafa7f1b8570c6a95ee182c1" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::impl::FormatInfo::channels</definition>
+        <argsstring></argsstring>
+        <name>channels</name>
+        <qualifiedname>d2::sys::impl::FormatInfo::channels</qualifiedname>
+        <initializer>{2}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="22" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1impl_1_1FormatInfo_1a1eb86fd33c2b59923a59a120af62973c" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::impl::FormatInfo::sample_rate</definition>
+        <argsstring></argsstring>
+        <name>sample_rate</name>
+        <qualifiedname>d2::sys::impl::FormatInfo::sample_rate</qualifiedname>
+        <initializer>{48&apos;000}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="23" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_audio.hpp" line="19" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="20" bodyend="24"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1impl_1_1FormatInfo_1a68b7e61bbafa7f1b8570c6a95ee182c1" prot="public" virt="non-virtual"><scope>d2::sys::impl::FormatInfo</scope><name>channels</name></member>
+      <member refid="structd2_1_1sys_1_1impl_1_1FormatInfo_1a87707bcd529b01440abac0d55e830dc9" prot="public" virt="non-virtual"><scope>d2::sys::impl::FormatInfo</scope><name>format</name></member>
+      <member refid="structd2_1_1sys_1_1impl_1_1FormatInfo_1a1eb86fd33c2b59923a59a120af62973c" prot="public" virt="non-virtual"><scope>d2::sys::impl::FormatInfo</scope><name>sample_rate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

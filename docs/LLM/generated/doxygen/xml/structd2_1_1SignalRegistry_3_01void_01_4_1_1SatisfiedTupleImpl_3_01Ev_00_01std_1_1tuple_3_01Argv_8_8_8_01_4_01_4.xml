@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1SignalRegistry_3_01void_01_4_1_1SatisfiedTupleImpl_3_01Ev_00_01std_1_1tuple_3_01Argv_8_8_8_01_4_01_4" kind="struct" language="C++" prot="private">
+    <compoundname>d2::SignalRegistry&lt; void &gt;::SatisfiedTupleImpl&lt; Ev, std::tuple&lt; Argv... &gt; &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::bool_constant&lt; std::is_same_v&lt; std::tuple&lt; Argv... &gt;, SignatureLookupImpl&lt; Ev, SignalRegistry&lt; decltype(Ev)&gt;::manifest_t &gt;::signature_t &gt; &gt;</basecompoundref>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1SignalRegistry_1aac08ad27a4c9296fd71e9e801e4663a9" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::SignalRegistry&lt; typename &gt;::manifest_t = </definition>
+        <argsstring></argsstring>
+        <name>manifest_t</name>
+        <qualifiedname>d2::SignalRegistry&lt; void &gt;::SatisfiedTupleImpl&lt; Ev, std::tuple&lt; Argv... &gt; &gt;::manifest_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="208" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::SignalRegistry&lt; void &gt;::SatisfiedTupleImpl&lt; Ev, std::tuple&lt; Argv... &gt; &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::bool_constant&lt; std::is_same_v&lt; std::tuple&lt; Argv... &gt;, SignatureLookupImpl&lt; Ev, SignalRegistry&lt; decltype(Ev)&gt;::manifest_t &gt;::signature_t &gt; &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::SignalRegistry&lt; void &gt;::SatisfiedTupleImpl&lt; Ev, std::tuple&lt; Argv... &gt; &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::bool_constant&lt; std::is_same_v&lt; std::tuple&lt; Argv... &gt;, SignatureLookupImpl&lt; Ev, SignalRegistry&lt; decltype(Ev)&gt;::manifest_t &gt;::signature_t &gt; &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_signal_handler.hpp" line="340" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="348" bodyend="349"/>
+    <listofallmembers>
+      <member refid="structd2_1_1SignalRegistry_1aac08ad27a4c9296fd71e9e801e4663a9" prot="public" virt="non-virtual"><scope>d2::SignalRegistry&lt; void &gt;::SatisfiedTupleImpl&lt; Ev, std::tuple&lt; Argv... &gt; &gt;</scope><name>manifest_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

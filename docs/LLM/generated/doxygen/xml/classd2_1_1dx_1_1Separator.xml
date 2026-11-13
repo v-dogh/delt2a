@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1Separator" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::Separator</compoundname>
+    <basecompoundref refid="classd2_1_1style_1_1UniversalAccessInterfaceProto" prot="public" virt="non-virtual">d2::style::UniversalAccessInterfaceProto&lt; Element, Base, Interface, Interfaces... &gt;</basecompoundref>
+    <derivedcompoundref refid="classd2_1_1dx_1_1VerticalSeparator" prot="public" virt="non-virtual">d2::dx::VerticalSeparator</derivedcompoundref>
+    <includes refid="d2__separator_8hpp" local="no">d2_separator.hpp</includes>
+    <sectiondef kind="protected-type">
+      <memberdef kind="enum" id="classd2_1_1dx_1_1Separator_1a29196dada4aaf214c3b305c14e7b7387" prot="protected" static="no" strong="yes">
+        <type></type>
+        <name>Align</name>
+        <qualifiedname>d2::dx::Separator::Align</qualifiedname>
+        <enumvalue id="classd2_1_1dx_1_1Separator_1a29196dada4aaf214c3b305c14e7b7387a06ce2a25e5d12c166a36f654dbea6012" prot="protected">
+          <name>Vertical</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1dx_1_1Separator_1a29196dada4aaf214c3b305c14e7b7387ac1b5fa03ecdb95d4a45dd1c40b02527f" prot="protected">
+          <name>Horizontal</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_separator.hpp" line="46" column="13" bodyfile="elements/d2_separator.hpp" bodystart="47" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1dx_1_1Separator_1a9e1f5a1cab7c4c42ffadb736e7bf94de" prot="public" static="no">
+        <type><ref refid="namespaced2_1_1style_1a2eed1745215f59656c18149f009b8728" kindref="member">style::UAI</ref>&lt; <ref refid="classd2_1_1dx_1_1Separator_1a3ed8ef4bcfec5261f2d603a34855ab3e" kindref="member">Separator</ref>, <ref refid="structd2_1_1style_1_1ILayout" kindref="compound">style::ILayout</ref>, style::IColors, style::ISeparator &gt;</type>
+        <definition>using d2::dx::Separator::data = style::UAI&lt;Separator, style::ILayout, style::IColors, style::ISeparator&gt;</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::dx::Separator::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_separator.hpp" line="44" column="13" bodyfile="elements/d2_separator.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classd2_1_1dx_1_1Separator_1a94317623b87f4a7436619d22f175ff10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class TextHelper</definition>
+        <argsstring></argsstring>
+        <name>TextHelper</name>
+        <qualifiedname>d2::dx::Separator::TextHelper</qualifiedname>
+        <param>
+          <type>TextHelper</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_separator.hpp" line="43" column="26" bodyfile="elements/d2_separator.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Separator_1a595055e18f8a214f44f0be5c15591411" prot="protected" static="no" mutable="no">
+        <type>enum <ref refid="classd2_1_1dx_1_1Separator_1a29196dada4aaf214c3b305c14e7b7387" kindref="member">d2::dx::Separator::Align</ref></type>
+        <definition>enum d2::dx::Separator::Align d2::dx::Separator::_orientation</definition>
+        <argsstring></argsstring>
+        <name>_orientation</name>
+        <qualifiedname>d2::dx::Separator::_orientation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_separator.hpp" line="50" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1Separator_1a61eb1e0226d68dd9c5c888dec341ac20" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::Separator::_frame_impl</definition>
+        <argsstring>(PixelBuffer::View buffer) override</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::dx::Separator::_frame_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_separator.hpp" line="52" column="26" bodyfile="elements/d2_separator.cpp" bodystart="5" bodyend="34"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1Separator_1a3ed8ef4bcfec5261f2d603a34855ab3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::dx::Separator::Separator</definition>
+        <argsstring>(const std::string &amp;name, TreeState::ptr state)</argsstring>
+        <name>Separator</name>
+        <qualifiedname>d2::dx::Separator::Separator</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref></type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_separator.hpp" line="54" column="13" bodyfile="elements/d2_separator.cpp" bodystart="36" bodyend="42"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>Chain</label>
+      </node>
+      <node id="5">
+        <label>Interface&lt; impl::ResolveChain&lt; Chain &gt;::offset &gt;</label>
+      </node>
+      <node id="6">
+        <label>Interfaces&lt; impl::OffsetHelper&lt; impl::ResolveChain&lt; Chain &gt;::offset, Interfaces, Interface, Interfaces... &gt;::offset &gt;</label>
+      </node>
+      <node id="1">
+        <label>d2::dx::Separator</label>
+        <link refid="classd2_1_1dx_1_1Separator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>d2::dx::VerticalSeparator</label>
+        <link refid="classd2_1_1dx_1_1VerticalSeparator"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::style::UniversalAccessInterface&lt; Chain, Base, Interface, Interfaces &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>style::UAI&lt; Separator, style::ILayout, style::IColors, style::ISeparator &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterfaceProto"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>Chain</label>
+      </node>
+      <node id="5">
+        <label>Interface&lt; impl::ResolveChain&lt; Chain &gt;::offset &gt;</label>
+      </node>
+      <node id="6">
+        <label>Interfaces&lt; impl::OffsetHelper&lt; impl::ResolveChain&lt; Chain &gt;::offset, Interfaces, Interface, Interfaces... &gt;::offset &gt;</label>
+      </node>
+      <node id="1">
+        <label>d2::dx::Separator</label>
+        <link refid="classd2_1_1dx_1_1Separator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::style::UniversalAccessInterface&lt; Chain, Base, Interface, Interfaces &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>style::UAI&lt; Separator, style::ILayout, style::IColors, style::ISeparator &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterfaceProto"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_separator.hpp" line="34" column="9" bodyfile="elements/d2_separator.hpp" bodystart="41" bodyend="58"/>
+    <listofallmembers>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1acba02ced51b68e1c8b12e57a65a6c6c4" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_clear_anims_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a484b34334f398425634a51c0d7847e96" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_context_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ad9b021ad1fcdbdb38bfb04ac6d3c867a" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_deregister_dep_bind</name></member>
+      <member refid="classd2_1_1dx_1_1Separator_1a61eb1e0226d68dd9c5c888dec341ac20" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a88822a6e794d489cb4d9d2d48a9eac27" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_handle_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a17636cd536cba1ade0f043be67663a7b" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_has_interface_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aec6d1ebe3f9fd530c0cc9070b8b2f079" prot="protected" virt="non-virtual"><scope>d2::dx::Separator</scope><name>_has_interface_own_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceProto_1a493cb6c3ea9ba207b849cfe652c8b44f" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_index_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a787a2f4cb747d5f7a3665753961ed5d8" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_initialize_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceProto_1ae6e59fe1ed9de2e2242fad4fc0fd87c6" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_layout_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Separator_1a595055e18f8a214f44f0be5c15591411" prot="protected" virt="non-virtual"><scope>d2::dx::Separator</scope><name>_orientation</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a90594412c08060a28df8a2813960ccbe" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_register_dep_bind</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a97ccfaa6b03ac7e36b7e26cae4460484" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_set_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a7697343fbdbe2ff88bbe4ac5d0b79a59" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_signal_base_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a2a4a0da9d046965ff9a67f952e045a78" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_test_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceProto_1a133a1c6f37958c58fafa10436f023bbc" prot="protected" virt="virtual"><scope>d2::dx::Separator</scope><name>_unit_report_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Separator_1a29196dada4aaf214c3b305c14e7b7387" prot="protected" virt="non-virtual"><scope>d2::dx::Separator</scope><name>Align</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a25ddba284572cdec9f63676331fa617e" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>apply_get</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a706f047fb93be4001d1419650b6c823e" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>apply_set</name></member>
+      <member refid="classd2_1_1dx_1_1Separator_1a9e1f5a1cab7c4c42ffadb736e7bf94de" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>data</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ad813debc279767724c892a29e01cddba" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>get</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ae1039af891cf36e6a328d79866c17754" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>getref</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a9001a0c242aaa9d25c010c5b6196fbb6" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>interface</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a8a224c017ad9f97d8df9bbe04c49b445" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>property</name></member>
+      <member refid="classd2_1_1dx_1_1Separator_1a3ed8ef4bcfec5261f2d603a34855ab3e" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>Separator</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aeb450621d768c7eaa608764a57c62f0c" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>set</name></member>
+      <member refid="classd2_1_1dx_1_1Separator_1a94317623b87f4a7436619d22f175ff10" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>TextHelper</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aed33fa9d3fc115078dfc14f6bf14b9a0" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>type_of</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1adf5ef2bd8a40d986f53b72e76a0c5b0a" prot="public" virt="non-virtual"><scope>d2::dx::Separator</scope><name>uai_chain</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

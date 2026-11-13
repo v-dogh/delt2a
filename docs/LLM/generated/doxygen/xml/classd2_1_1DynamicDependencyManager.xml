@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1DynamicDependencyManager" kind="class" language="C++" prot="public">
+    <compoundname>d2::DynamicDependencyManager</compoundname>
+    <includes refid="d2__screen__comps_8hpp" local="no">d2_screen_comps.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1DynamicDependencyManager_1acb1cb0ea320ad7f818daf88df5d2deef" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; std::string, std::any &gt;</type>
+        <definition>absl::flat_hash_map&lt;std::string, std::any&gt; d2::DynamicDependencyManager::_deps</definition>
+        <argsstring></argsstring>
+        <name>_deps</name>
+        <qualifiedname>d2::DynamicDependencyManager::_deps</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen_comps.hpp" line="59" column="29" bodyfile="core/screen/d2_screen_comps.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1DynamicDependencyManager_1a4ce30528b43c6430c97db86d967bff27" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::DynamicDependencyManager::set</definition>
+        <argsstring>(const std::string &amp;name, Type value)</argsstring>
+        <name>set</name>
+        <qualifiedname>d2::DynamicDependencyManager::set</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Type</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen_comps.hpp" line="61" column="25" bodyfile="core/screen/d2_screen_comps.hpp" bodystart="61" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1DynamicDependencyManager_1a360f5a64236b83737743627a7a0f9e27" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1style_1_1Dependency" kindref="compound">style::Dependency</ref>&lt; Type &gt; &amp;</type>
+        <definition>style::Dependency&lt; Type &gt; &amp; d2::DynamicDependencyManager::get</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::DynamicDependencyManager::get</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen_comps.hpp" line="69" column="38" bodyfile="core/screen/d2_screen_comps.hpp" bodystart="69" bodyend="79"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/screen/d2_screen_comps.hpp" line="56" column="5" bodyfile="core/screen/d2_screen_comps.hpp" bodystart="57" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classd2_1_1DynamicDependencyManager_1acb1cb0ea320ad7f818daf88df5d2deef" prot="private" virt="non-virtual"><scope>d2::DynamicDependencyManager</scope><name>_deps</name></member>
+      <member refid="classd2_1_1DynamicDependencyManager_1a360f5a64236b83737743627a7a0f9e27" prot="public" virt="non-virtual"><scope>d2::DynamicDependencyManager</scope><name>get</name></member>
+      <member refid="classd2_1_1DynamicDependencyManager_1a4ce30528b43c6430c97db86d967bff27" prot="public" virt="non-virtual"><scope>d2::DynamicDependencyManager</scope><name>set</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

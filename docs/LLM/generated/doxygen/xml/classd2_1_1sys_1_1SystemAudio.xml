@@ -1,0 +1,1126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemAudio" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::SystemAudio</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemAudio, &quot;Audio&quot;, Access::TSafe &gt;</basecompoundref>
+    <includes refid="d2__audio_8hpp" local="no">d2_audio.hpp</includes>
+    <innerclass refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName" prot="public">d2::sys::SystemAudio::DeviceName</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemAudio_1_1Stream" prot="public">d2::sys::SystemAudio::Stream</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" prot="public">d2::sys::SystemAudio::FilterPipeline</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1SystemAudio_1_1preset" prot="public">d2::sys::SystemAudio::preset</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData" prot="protected">d2::sys::SystemAudio::DeviceData</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Event</name>
+        <qualifiedname>d2::sys::SystemAudio::Event</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0aa13367a8e2a3f3bf4f3409079e3fdf87" prot="public">
+          <name>Activate</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0a109fec06829bd79d222cfc8af52aaaf1" prot="public">
+          <name>Deactivate</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0a686e697538050e4664636337cc3b834f" prot="public">
+          <name>Create</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0a0e181f89f47654b86f3beb42f5cc08b8" prot="public">
+          <name>Destroy</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0a6ca33b1f5de2b2497a794ae17e9f25ed" prot="public">
+          <name>DefaultChange</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="298" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="299" bodyend="305"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Device</name>
+        <qualifiedname>d2::sys::SystemAudio::Device</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6eaa324118a6721dd6b8a9b9f4e327df2bf5" prot="public">
+          <name>Input</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6eaa29c2c02a361c9d7028472e5d92cd4a54" prot="public">
+          <name>Output</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="306" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="307" bodyend="310"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemAudio_1a6d1061c7669f60d406be7ff694953ec1" prot="public" static="no">
+        <type><ref refid="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1" kindref="member">impl::Format</ref></type>
+        <definition>using d2::sys::SystemAudio::Format = impl::Format</definition>
+        <argsstring></argsstring>
+        <name>Format</name>
+        <qualifiedname>d2::sys::SystemAudio::Format</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="38" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" prot="public" static="no">
+        <type><ref refid="structd2_1_1sys_1_1impl_1_1FormatInfo" kindref="compound">impl::FormatInfo</ref></type>
+        <definition>using d2::sys::SystemAudio::FormatInfo = impl::FormatInfo</definition>
+        <argsstring></argsstring>
+        <name>FormatInfo</name>
+        <qualifiedname>d2::sys::SystemAudio::FormatInfo</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="39" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemAudio_1af6651ce36109aa9100bbfe3bd161c00a" prot="public" static="no">
+        <type><ref refid="structd2_1_1sys_1_1impl_1_1DeviceConfig" kindref="compound">impl::DeviceConfig</ref></type>
+        <definition>using d2::sys::SystemAudio::DeviceConfig = impl::DeviceConfig</definition>
+        <argsstring></argsstring>
+        <name>DeviceConfig</name>
+        <qualifiedname>d2::sys::SystemAudio::DeviceConfig</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="40" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemAudio_1ac0591e3a33b7eafa75b45f27ecfa132b" prot="public" static="no">
+        <type><ref refid="classd2_1_1SignalManifest" kindref="compound">SignalManifest</ref>&lt; <ref refid="structd2_1_1EvDefault" kindref="compound">EvDefault</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0" kindref="member">Event</ref>, <ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref>, const <ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName" kindref="compound">DeviceName</ref> &amp; &gt; &gt;</type>
+        <definition>using d2::sys::SystemAudio::EventManifest = SignalManifest&lt;EvDefault&lt;Event, Device, const DeviceName&amp;&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>EventManifest</name>
+        <qualifiedname>d2::sys::SystemAudio::EventManifest</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="312" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="312" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemAudio_1a12a10a5b6432e3eda11ea88c98747566" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">d2::sys::SystemAudio::FilterPipeline</ref></type>
+        <definition>struct d2::sys::SystemAudio::FilterPipeline d2::sys::SystemAudio::signal</definition>
+        <argsstring></argsstring>
+        <name>signal</name>
+        <qualifiedname>d2::sys::SystemAudio::signal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="139" column="36"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemAudio_1a38eed54629249ca39950abd56b7f05d7" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Signals_1_1Signal" kindref="compound">Signals::Signal</ref></type>
+        <definition>Signals::Signal d2::sys::SystemAudio::_sig_generic</definition>
+        <argsstring></argsstring>
+        <name>_sig_generic</name>
+        <qualifiedname>d2::sys::SystemAudio::_sig_generic</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="314" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="314" bodyend="314"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemAudio_1a320fd4cdf3f2e0d780df093b24faadfe" prot="protected" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData" kindref="compound">DeviceData</ref>, 2 &gt;</type>
+        <definition>std::array&lt;DeviceData, 2&gt; d2::sys::SystemAudio::_device_data</definition>
+        <argsstring></argsstring>
+        <name>_device_data</name>
+        <qualifiedname>d2::sys::SystemAudio::_device_data</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="328" column="20" bodyfile="core/mods/d2_audio.hpp" bodystart="328" bodyend="328"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a06023c7fae5f67bdacc1fb421bd70879" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemAudio::_stream_normalize_required</definition>
+        <argsstring>(std::span&lt; const unsigned char &gt; data, FormatInfo format)</argsstring>
+        <name>_stream_normalize_required</name>
+        <qualifiedname>d2::sys::SystemAudio::_stream_normalize_required</qualifiedname>
+        <param>
+          <type>std::span&lt; const unsigned char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">FormatInfo</ref></type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="331" column="9" bodyfile="core/mods/d2_audio.cpp" bodystart="238" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a5af53aa069e3d96cf53866724882c64e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_stream_normalize</definition>
+        <argsstring>(std::span&lt; float &gt; out, std::span&lt; const unsigned char &gt; data, FormatInfo format)</argsstring>
+        <name>_stream_normalize</name>
+        <qualifiedname>d2::sys::SystemAudio::_stream_normalize</qualifiedname>
+        <param>
+          <type>std::span&lt; float &gt;</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const unsigned char &gt;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">FormatInfo</ref></type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="332" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="246" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a4520cb4c10ed2e8beb9227a4e38b98eb" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_set_device_status</definition>
+        <argsstring>(Device dev, DeviceData::Status status)</argsstring>
+        <name>_set_device_status</name>
+        <qualifiedname>d2::sys::SystemAudio::_set_device_status</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998c" kindref="member">DeviceData::Status</ref></type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="335" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="267" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a30a967257036b75d183554aac3bccc90" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998c" kindref="member">DeviceData::Status</ref></type>
+        <definition>SystemAudio::DeviceData::Status d2::sys::SystemAudio::_get_device_status</definition>
+        <argsstring>(Device dev)</argsstring>
+        <name>_get_device_status</name>
+        <qualifiedname>d2::sys::SystemAudio::_get_device_status</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="336" column="28" bodyfile="core/mods/d2_audio.cpp" bodystart="271" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1aba554d079a2740c75bc1053f722106e7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_run_device_filter</definition>
+        <argsstring>(Device dev, Stream &amp;stream)</argsstring>
+        <name>_run_device_filter</name>
+        <qualifiedname>d2::sys::SystemAudio::_run_device_filter</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1_1Stream" kindref="compound">Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="337" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="275" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a3f96bbdf3cb20b36cab5b13042e9eda5" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_run_filter</definition>
+        <argsstring>(Stream &amp;stream, FilterPipeline &amp;pipeline)</argsstring>
+        <name>_run_filter</name>
+        <qualifiedname>d2::sys::SystemAudio::_run_filter</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1_1Stream" kindref="compound">Stream</ref> &amp;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref> &amp;</type>
+          <declname>pipeline</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="338" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="280" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a443c3b785e9f71fb47314266b38a8684" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_trigger_device_event</definition>
+        <argsstring>(Device dev, Event ev, const DeviceName &amp;)</argsstring>
+        <name>_trigger_device_event</name>
+        <qualifiedname>d2::sys::SystemAudio::_trigger_device_event</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0" kindref="member">Event</ref></type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName" kindref="compound">DeviceName</ref> &amp;</type>
+          <defname>name</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="339" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="294" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a73b630bc5a9363358bd80292f36cdb25" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_filter</definition>
+        <argsstring>(Device dev, FilterPipeline filter)</argsstring>
+        <name>_filter</name>
+        <qualifiedname>d2::sys::SystemAudio::_filter</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="345" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="299" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a25ad766a16acad7c2c634ffdb85b3e43" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_filter_push</definition>
+        <argsstring>(Device dev, const std::string &amp;after, FilterPipeline filter)</argsstring>
+        <name>_filter_push</name>
+        <qualifiedname>d2::sys::SystemAudio::_filter_push</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>after</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="346" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="303" bodyend="325"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a4c3b77bed4144e5f8306713a02ce0f9f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_filter_push</definition>
+        <argsstring>(Device dev, FilterPipeline filter)</argsstring>
+        <name>_filter_push</name>
+        <qualifiedname>d2::sys::SystemAudio::_filter_push</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="347" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="326" bodyend="334"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a841afb076c47fd7eff25b1d82bbcf100" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_filter_override</definition>
+        <argsstring>(Device dev, const std::string &amp;name, std::function&lt; bool(Stream)&gt; filter)</argsstring>
+        <name>_filter_override</name>
+        <qualifiedname>d2::sys::SystemAudio::_filter_override</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::function&lt; bool(<ref refid="classd2_1_1sys_1_1SystemAudio_1_1Stream" kindref="compound">Stream</ref>)&gt;</type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="349" column="9" bodyfile="core/mods/d2_audio.cpp" bodystart="335" bodyend="345"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a0a689366028642881188ce98b7598499" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_filter_remove</definition>
+        <argsstring>(Device dev, const std::string &amp;name)</argsstring>
+        <name>_filter_remove</name>
+        <qualifiedname>d2::sys::SystemAudio::_filter_remove</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="350" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="346" bodyend="354"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a14f86e9194df547367f733bbb63c2346" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemAudio::_filter_clear</definition>
+        <argsstring>(Device dev)</argsstring>
+        <name>_filter_clear</name>
+        <qualifiedname>d2::sys::SystemAudio::_filter_clear</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="351" column="14" bodyfile="core/mods/d2_audio.cpp" bodystart="355" bodyend="358"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a7a5128c85e2649f03683364effb31342" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemAudio::Status d2::sys::SystemAudio::_load_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_load_impl</name>
+        <qualifiedname>d2::sys::SystemAudio::_load_impl</qualifiedname>
+        <reimplements refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3">_load_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="353" column="24" bodyfile="core/mods/d2_audio.cpp" bodystart="42" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a579e75c694e31451a81ce86ad096167b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemAudio::Status d2::sys::SystemAudio::_unload_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_unload_impl</name>
+        <qualifiedname>d2::sys::SystemAudio::_unload_impl</qualifiedname>
+        <reimplements refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730">_unload_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="354" column="24" bodyfile="core/mods/d2_audio.cpp" bodystart="47" bodyend="51"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a1789a07948780b1eea9f79921e7faedb" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>static constexpr std::size_t d2::sys::SystemAudio::sample_size</definition>
+        <argsstring>(Format format)</argsstring>
+        <name>sample_size</name>
+        <qualifiedname>d2::sys::SystemAudio::sample_size</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1" kindref="member">Format</ref></type>
+          <declname>format</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="356" column="38" bodyfile="core/mods/d2_audio.hpp" bodystart="356" bodyend="369"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1ab45f2c11e98c3921ec3253bc4fba70e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::flush</definition>
+        <argsstring>(Device dev)=0</argsstring>
+        <name>flush</name>
+        <qualifiedname>d2::sys::SystemAudio::flush</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="373" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a05b6be3bd46f9ea0dbbfba4c6acd0fe8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::record</definition>
+        <argsstring>(std::function&lt; void(std::span&lt; const unsigned char &gt;)&gt; stream)=0</argsstring>
+        <name>record</name>
+        <qualifiedname>d2::sys::SystemAudio::record</qualifiedname>
+        <param>
+          <type>std::function&lt; void(std::span&lt; const unsigned char &gt;)&gt;</type>
+          <declname>stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="374" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a05bc2f76d784c00d0818b0d895c0ca25" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::transmit</definition>
+        <argsstring>(std::span&lt; const unsigned char &gt; stream, FormatInfo format, FilterPipeline filter={})=0</argsstring>
+        <name>transmit</name>
+        <qualifiedname>d2::sys::SystemAudio::transmit</qualifiedname>
+        <param>
+          <type>std::span&lt; const unsigned char &gt;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">FormatInfo</ref></type>
+          <declname>format</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+          <declname>filter</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="375" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a8a6f690f1b783d4377e67fd441cb15ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::transmit</definition>
+        <argsstring>(std::vector&lt; unsigned char &gt; stream, FormatInfo format, FilterPipeline filter={})=0</argsstring>
+        <name>transmit</name>
+        <qualifiedname>d2::sys::SystemAudio::transmit</qualifiedname>
+        <param>
+          <type>std::vector&lt; unsigned char &gt;</type>
+          <declname>stream</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">FormatInfo</ref></type>
+          <declname>format</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+          <declname>filter</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="378" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a8a38329c9c7deaa517a6faacbc093795" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::transmit</definition>
+        <argsstring>(std::chrono::seconds time, FilterPipeline filter={})=0</argsstring>
+        <name>transmit</name>
+        <qualifiedname>d2::sys::SystemAudio::transmit</qualifiedname>
+        <param>
+          <type>std::chrono::seconds</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+          <declname>filter</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="381" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1aba0b2f8ab9ac917fd5db30b9296b86f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::deactivate</definition>
+        <argsstring>(Device dev)=0</argsstring>
+        <name>deactivate</name>
+        <qualifiedname>d2::sys::SystemAudio::deactivate</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="382" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1aeca13036d10b5b46744e6159798bdc69" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::activate</definition>
+        <argsstring>(Device dev, const std::string &amp;name=&quot;&quot;, DeviceConfig cfg={})=0</argsstring>
+        <name>activate</name>
+        <qualifiedname>d2::sys::SystemAudio::activate</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1af6651ce36109aa9100bbfe3bd161c00a" kindref="member">DeviceConfig</ref></type>
+          <declname>cfg</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="383" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a19742cc94496b94c889a27ed8fede8bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::reactivate</definition>
+        <argsstring>(Device dev, DeviceConfig cfg={})=0</argsstring>
+        <name>reactivate</name>
+        <qualifiedname>d2::sys::SystemAudio::reactivate</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1af6651ce36109aa9100bbfe3bd161c00a" kindref="member">DeviceConfig</ref></type>
+          <declname>cfg</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="384" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a524a2464f99512705510043d076015db" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName" kindref="compound">DeviceName</ref></type>
+        <definition>virtual DeviceName d2::sys::SystemAudio::active</definition>
+        <argsstring>(Device dev)=0</argsstring>
+        <name>active</name>
+        <qualifiedname>d2::sys::SystemAudio::active</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="385" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a634eca9a3e86e414c62f3993e0487376" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName" kindref="compound">DeviceName</ref></type>
+        <definition>virtual DeviceName d2::sys::SystemAudio::default_device</definition>
+        <argsstring>(Device dev)=0</argsstring>
+        <name>default_device</name>
+        <qualifiedname>d2::sys::SystemAudio::default_device</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="386" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1ad14c7da152c8d90e3bd9c3c465bbc3b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" kindref="member">FormatInfo</ref></type>
+        <definition>virtual FormatInfo d2::sys::SystemAudio::format</definition>
+        <argsstring>(Device dev)=0</argsstring>
+        <name>format</name>
+        <qualifiedname>d2::sys::SystemAudio::format</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="387" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1aff5f8acad0a5534ec2e2ca03a8adbd9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::vector&lt; <ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName" kindref="compound">DeviceName</ref> &gt;</type>
+        <definition>virtual std::vector&lt; DeviceName &gt; d2::sys::SystemAudio::enumerate</definition>
+        <argsstring>(Device dev)=0</argsstring>
+        <name>enumerate</name>
+        <qualifiedname>d2::sys::SystemAudio::enumerate</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="388" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1ab7931b78b31e554c1a6f7144429c2380" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::filter</definition>
+        <argsstring>(Device dev, FilterPipeline filter)=0</argsstring>
+        <name>filter</name>
+        <qualifiedname>d2::sys::SystemAudio::filter</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="390" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a4b3bf9805aab149a971258d39f2286cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::filter_push</definition>
+        <argsstring>(Device dev, const std::string &amp;after, FilterPipeline filter)=0</argsstring>
+        <name>filter_push</name>
+        <qualifiedname>d2::sys::SystemAudio::filter_push</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>after</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="391" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a88c30b1f8632ba9db0690510a245dd70" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::filter_push</definition>
+        <argsstring>(Device dev, FilterPipeline filter)=0</argsstring>
+        <name>filter_push</name>
+        <qualifiedname>d2::sys::SystemAudio::filter_push</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="392" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a358e523ac04eaa2a6bfb082a33ece560" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::filter_override</definition>
+        <argsstring>(Device dev, const std::string &amp;name, std::function&lt; bool(Stream)&gt; filter)=0</argsstring>
+        <name>filter_override</name>
+        <qualifiedname>d2::sys::SystemAudio::filter_override</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::function&lt; bool(<ref refid="classd2_1_1sys_1_1SystemAudio_1_1Stream" kindref="compound">Stream</ref>)&gt;</type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="393" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a94fb6547c82b32a6fd78e41545af1d8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::filter_remove</definition>
+        <argsstring>(Device dev, const std::string &amp;name)=0</argsstring>
+        <name>filter_remove</name>
+        <qualifiedname>d2::sys::SystemAudio::filter_remove</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="396" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a0e446e41bc196e0d35177ea192c47554" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemAudio::filter_clear</definition>
+        <argsstring>(Device dev)=0</argsstring>
+        <name>filter_clear</name>
+        <qualifiedname>d2::sys::SystemAudio::filter_clear</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="397" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a412cc6fe471e23ab47c5674ea08b268f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Signals::Handle</ref></type>
+        <definition>Signals::Handle d2::sys::SystemAudio::watch</definition>
+        <argsstring>(Device dev, Event ev, std::function&lt; void(const DeviceName &amp;)&gt; callback)</argsstring>
+        <name>watch</name>
+        <qualifiedname>d2::sys::SystemAudio::watch</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0" kindref="member">Event</ref></type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(const <ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName" kindref="compound">DeviceName</ref> &amp;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="400" column="9" bodyfile="core/mods/d2_audio.cpp" bodystart="361" bodyend="372"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1a717e994bb9c135bb54d441aa2ac3fab9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Signals::Handle</ref></type>
+        <definition>Signals::Handle d2::sys::SystemAudio::watch</definition>
+        <argsstring>(Device dev, std::function&lt; void(const DeviceName &amp;, Event)&gt; callback)</argsstring>
+        <name>watch</name>
+        <qualifiedname>d2::sys::SystemAudio::watch</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" kindref="member">Device</ref></type>
+          <declname>dev</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(const <ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceName" kindref="compound">DeviceName</ref> &amp;, <ref refid="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0" kindref="member">Event</ref>)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="401" column="25" bodyfile="core/mods/d2_audio.cpp" bodystart="374" bodyend="377"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemAudio, &quot;Audio&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemAudio &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemAudio</label>
+        <link refid="classd2_1_1sys_1_1SystemAudio"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemAudio, &quot;Audio&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemAudio &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemAudio</label>
+        <link refid="classd2_1_1sys_1_1SystemAudio"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>signal</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>d2::sys::SystemAudio::FilterPipeline</label>
+        <link refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline"/>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_audio.hpp" line="35" column="5" bodyfile="core/mods/d2_audio.hpp" bodystart="36" bodyend="402"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a320fd4cdf3f2e0d780df093b24faadfe" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_device_data</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a73b630bc5a9363358bd80292f36cdb25" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_filter</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a14f86e9194df547367f733bbb63c2346" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_filter_clear</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a841afb076c47fd7eff25b1d82bbcf100" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_filter_override</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a25ad766a16acad7c2c634ffdb85b3e43" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_filter_push</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a4c3b77bed4144e5f8306713a02ce0f9f" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_filter_push</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a0a689366028642881188ce98b7598499" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_filter_remove</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a30a967257036b75d183554aac3bccc90" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_get_device_status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a7a5128c85e2649f03683364effb31342" prot="protected" virt="virtual"><scope>d2::sys::SystemAudio</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::SystemAudio</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::SystemAudio</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1aba554d079a2740c75bc1053f722106e7" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_run_device_filter</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a3f96bbdf3cb20b36cab5b13042e9eda5" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_run_filter</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a4520cb4c10ed2e8beb9227a4e38b98eb" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_set_device_status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a38eed54629249ca39950abd56b7f05d7" prot="private" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_sig_generic</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a5af53aa069e3d96cf53866724882c64e" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_stream_normalize</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a06023c7fae5f67bdacc1fb421bd70879" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_stream_normalize_required</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a443c3b785e9f71fb47314266b38a8684" prot="protected" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>_trigger_device_event</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a579e75c694e31451a81ce86ad096167b" prot="protected" virt="virtual"><scope>d2::sys::SystemAudio</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1aeca13036d10b5b46744e6159798bdc69" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>activate</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a524a2464f99512705510043d076015db" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>active</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>context</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1aba0b2f8ab9ac917fd5db30b9296b86f4" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>deactivate</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a634eca9a3e86e414c62f3993e0487376" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>default_device</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>dependency_names</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1ae13331e594ae98ed013859179d9df6ea" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>Device</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1af6651ce36109aa9100bbfe3bd161c00a" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>DeviceConfig</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1aff5f8acad0a5534ec2e2ca03a8adbd9a" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>enumerate</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a2dda33be92e8260e5a13ed5bcccb50b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>Event</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1ac0591e3a33b7eafa75b45f27ecfa132b" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>EventManifest</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1ab7931b78b31e554c1a6f7144429c2380" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>filter</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a0e446e41bc196e0d35177ea192c47554" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>filter_clear</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a358e523ac04eaa2a6bfb082a33ece560" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>filter_override</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a4b3bf9805aab149a971258d39f2286cc" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>filter_push</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a88c30b1f8632ba9db0690510a245dd70" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>filter_push</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a94fb6547c82b32a6fd78e41545af1d8a" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>filter_remove</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1ab45f2c11e98c3921ec3253bc4fba70e2" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>flush</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a6d1061c7669f60d406be7ff694953ec1" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>Format</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1ad14c7da152c8d90e3bd9c3c465bbc3b0" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>format</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a5ec3bfd8f6c3698a43baec4afa338770" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>FormatInfo</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::SystemAudio</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>make</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>module_info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a19742cc94496b94c889a27ed8fede8bb" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>reactivate</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a05b6be3bd46f9ea0dbbfba4c6acd0fe8" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>record</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a1789a07948780b1eea9f79921e7faedb" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>sample_size</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a12a10a5b6432e3eda11ea88c98747566" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>signal</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>status</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a05bc2f76d784c00d0818b0d895c0ca25" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>transmit</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a8a6f690f1b783d4377e67fd441cb15ba" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>transmit</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a8a38329c9c7deaa517a6faacbc093795" prot="public" virt="pure-virtual"><scope>d2::sys::SystemAudio</scope><name>transmit</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a412cc6fe471e23ab47c5674ea08b268f" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>watch</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1a717e994bb9c135bb54d441aa2ac3fab9" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio</scope><name>watch</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::SystemAudio</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

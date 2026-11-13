@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemNotify" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::SystemNotify</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemNotify, &quot;Notifications&quot;, Access::TSafe &gt;</basecompoundref>
+    <includes refid="d2__ext_8hpp" local="no">d2_ext.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561" prot="public" static="no" strong="no">
+        <type>unsigned char</type>
+        <name>Mode</name>
+        <qualifiedname>d2::sys::SystemNotify::Mode</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561ac13d8241f6ee4475f32b2dbdd445429e" prot="public">
+          <name>Local</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561a7a17bc7a92ca2aa68cca02595b873377" prot="public">
+          <name>System</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561a14a9c3fa3c7bb3e79a3b512bf43ae8ac" prot="public">
+          <name>Passive</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561ab3adc22f091fe541b5302fde945fe838" prot="public">
+          <name>Prompt</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561a44333ef01b13f068dcf5a1f8afdd87c6" prot="public">
+          <name>SoftPrompt</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="27" column="9" bodyfile="core/mods/d2_ext.hpp" bodystart="28" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1sys_1_1SystemNotify_1a60735e5357b24011c18708f8976ee233" prot="public" static="no" strong="yes">
+        <type>unsigned char</type>
+        <name>Level</name>
+        <qualifiedname>d2::sys::SystemNotify::Level</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1SystemNotify_1a60735e5357b24011c18708f8976ee233a4059b0251f66a18cb56f544728796875" prot="public">
+          <name>Info</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemNotify_1a60735e5357b24011c18708f8976ee233a0eaadb4fcb48a0a0ed7bc9868be9fbaa" prot="public">
+          <name>Warning</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemNotify_1a60735e5357b24011c18708f8976ee233a902b0d55fddef6f8d651fe1035b7d4bd" prot="public">
+          <name>Error</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="42" column="9" bodyfile="core/mods/d2_ext.hpp" bodystart="43" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemNotify_1a58a6c588c52799b228f8e295bfd1bac9" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::sys::SystemNotify::supports</definition>
+        <argsstring>(unsigned char mode)=0</argsstring>
+        <name>supports</name>
+        <qualifiedname>d2::sys::SystemNotify::supports</qualifiedname>
+        <param>
+          <type>unsigned char</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="51" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemNotify_1a813c0ebe118a5d80127884b9b1962339" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemNotify::notify</definition>
+        <argsstring>(Level level, std::string_view title, std::string_view content, unsigned char targets=Local|Passive)=0</argsstring>
+        <name>notify</name>
+        <qualifiedname>d2::sys::SystemNotify::notify</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemNotify_1a60735e5357b24011c18708f8976ee233" kindref="member">Level</ref></type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>content</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>targets</declname>
+          <defval><ref refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561ac13d8241f6ee4475f32b2dbdd445429e" kindref="member">Local</ref>|<ref refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561a14a9c3fa3c7bb3e79a3b512bf43ae8ac" kindref="member">Passive</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="53" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemNotify_1a5cfe70e54704dafc39a2b4b1f2b52135" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemNotify::notify</definition>
+        <argsstring>(Level level, std::string_view title, std::string_view content, Element::ptr view, unsigned char targets=Local|Passive)=0</argsstring>
+        <name>notify</name>
+        <qualifiedname>d2::sys::SystemNotify::notify</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemNotify_1a60735e5357b24011c18708f8976ee233" kindref="member">Level</ref></type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>title</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>content</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">Element::ptr</ref></type>
+          <declname>view</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>targets</declname>
+          <defval><ref refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561ac13d8241f6ee4475f32b2dbdd445429e" kindref="member">Local</ref>|<ref refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561a14a9c3fa3c7bb3e79a3b512bf43ae8ac" kindref="member">Passive</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="59" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemNotify_1a4a208135f041881176712f32eaf1942a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemNotify::clear</definition>
+        <argsstring>()=0</argsstring>
+        <name>clear</name>
+        <qualifiedname>d2::sys::SystemNotify::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="67" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemNotify, &quot;Notifications&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemNotify &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemNotify</label>
+        <link refid="classd2_1_1sys_1_1SystemNotify"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemNotify, &quot;Notifications&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemNotify &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemNotify</label>
+        <link refid="classd2_1_1sys_1_1SystemNotify"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_ext.hpp" line="24" column="5" bodyfile="core/mods/d2_ext.hpp" bodystart="25" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3" prot="protected" virt="virtual"><scope>d2::sys::SystemNotify</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::SystemNotify</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::SystemNotify</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730" prot="protected" virt="virtual"><scope>d2::sys::SystemNotify</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a4a208135f041881176712f32eaf1942a" prot="public" virt="pure-virtual"><scope>d2::sys::SystemNotify</scope><name>clear</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>context</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>dependency_names</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::SystemNotify</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a60735e5357b24011c18708f8976ee233" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>Level</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561ac13d8241f6ee4475f32b2dbdd445429e" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>Local</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>make</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>Mode</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>module_info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a813c0ebe118a5d80127884b9b1962339" prot="public" virt="pure-virtual"><scope>d2::sys::SystemNotify</scope><name>notify</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a5cfe70e54704dafc39a2b4b1f2b52135" prot="public" virt="pure-virtual"><scope>d2::sys::SystemNotify</scope><name>notify</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561a14a9c3fa3c7bb3e79a3b512bf43ae8ac" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>Passive</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>preset</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561ab3adc22f091fe541b5302fde945fe838" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>Prompt</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561a44333ef01b13f068dcf5a1f8afdd87c6" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>SoftPrompt</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a58a6c588c52799b228f8e295bfd1bac9" prot="public" virt="pure-virtual"><scope>d2::sys::SystemNotify</scope><name>supports</name></member>
+      <member refid="classd2_1_1sys_1_1SystemNotify_1a18a2d2360aec529b07cf7a3386d2c561a7a17bc7a92ca2aa68cca02595b873377" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>System</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemNotify</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::SystemNotify</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

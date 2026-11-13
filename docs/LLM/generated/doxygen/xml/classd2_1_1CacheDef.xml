@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1CacheDef" kind="class" language="C++" prot="public">
+    <compoundname>d2::CacheDef</compoundname>
+    <includes refid="d2__tree__element_8hpp" local="no">d2_tree_element.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Base</type>
+      </param>
+      <param>
+        <type><ref refid="classd2_1_1Element_1abfb56ffec1565b561c99fb2ff6408b38" kindref="member">Element::CachePolicy</ref></type>
+        <declname>Policy</declname>
+        <defname>Policy</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1CacheDef_1a100737fec093b32492551c466a53077b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::CacheDef&lt; Base, Policy &gt;::CacheDef</definition>
+        <argsstring>()</argsstring>
+        <name>CacheDef</name>
+        <qualifiedname>d2::CacheDef::CacheDef</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="538" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="538" bodyend="541"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_element.hpp" line="535" column="17" bodyfile="core/tree/d2_tree_element.hpp" bodystart="536" bodyend="542"/>
+    <listofallmembers>
+      <member refid="classd2_1_1CacheDef_1a100737fec093b32492551c466a53077b" prot="public" virt="non-virtual"><scope>d2::CacheDef</scope><name>CacheDef</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1impl_1_1OffsetHelperImpl" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::impl::OffsetHelperImpl</compoundname>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+        <declname>Search</declname>
+        <defname>Search</defname>
+      </param>
+      <param>
+        <type>typename Current</type>
+      </param>
+      <param>
+        <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+        <declname>CurrentType</declname>
+        <defname>CurrentType</defname>
+      </param>
+      <param>
+        <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+        <declname>Next</declname>
+        <defname>Next</defname>
+      </param>
+      <param>
+        <type>D2_UAI_INTERFACE_TEMPL...</type>
+        <declname>Rest</declname>
+        <defname>Rest</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1style_1_1impl_1_1OffsetHelperImpl_1aabc1712471a85090dcc2c6415746d778" prot="public" static="no">
+        <type>std::conditional&lt; std::is_same_v&lt; Next&lt; 0 &gt;, Search&lt; 0 &gt; &gt;, Current, typename <ref refid="structd2_1_1style_1_1impl_1_1OffsetHelperImpl" kindref="compound">OffsetHelperImpl</ref>&lt; Search, Next&lt; Current::offset &gt;, Next, Rest... &gt;::type &gt;::type</type>
+        <definition>using d2::style::impl::OffsetHelperImpl&lt; Search, Current, CurrentType, Next, Rest &gt;::type = std::conditional&lt;
+               std::is_same_v&lt;Next&lt;0&gt;, Search&lt;0&gt;&gt;,
+               Current,
+               typename OffsetHelperImpl&lt;Search, Next&lt;Current::offset&gt;, Next, Rest...&gt;::type
+           &gt;::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>d2::style::impl::OffsetHelperImpl::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="51" column="13" bodyfile="core/tree/d2_styles.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="49" column="9" bodyfile="core/tree/d2_styles.hpp" bodystart="50" bodyend="56"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1impl_1_1OffsetHelperImpl_1aabc1712471a85090dcc2c6415746d778" prot="public" virt="non-virtual"><scope>d2::style::impl::OffsetHelperImpl</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

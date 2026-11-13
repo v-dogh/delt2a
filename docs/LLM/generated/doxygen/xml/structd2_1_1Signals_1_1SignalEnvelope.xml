@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Signals_1_1SignalEnvelope" kind="struct" language="C++" prot="private">
+    <compoundname>d2::Signals::SignalEnvelope</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalEnvelope_1aa2a7473a5c94e50afd87b818b9a2da7b" prot="public" static="no" mutable="no">
+        <type>event_idx</type>
+        <definition>event_idx d2::Signals::SignalEnvelope::event</definition>
+        <argsstring></argsstring>
+        <name>event</name>
+        <qualifiedname>d2::Signals::SignalEnvelope::event</qualifiedname>
+        <initializer>{~0ull}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="735" column="23" bodyfile="core/io/d2_signal_handler.hpp" bodystart="735" bodyend="735"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalEnvelope_1a35c3e9aae98d58281bceb9ca402d649f" prot="public" static="no" mutable="no">
+        <type>SpecifierKey</type>
+        <definition>SpecifierKey d2::Signals::SignalEnvelope::dispatch</definition>
+        <argsstring></argsstring>
+        <name>dispatch</name>
+        <qualifiedname>d2::Signals::SignalEnvelope::dispatch</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="736" column="26" bodyfile="core/io/d2_signal_handler.hpp" bodystart="736" bodyend="736"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalEnvelope_1a091aba73b9d662cc1eeb840f097f0f98" prot="public" static="no" mutable="no">
+        <type>SignalInstance</type>
+        <definition>SignalInstance d2::Signals::SignalEnvelope::instance</definition>
+        <argsstring></argsstring>
+        <name>instance</name>
+        <qualifiedname>d2::Signals::SignalEnvelope::instance</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="737" column="28" bodyfile="core/io/d2_signal_handler.hpp" bodystart="737" bodyend="737"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1Signals_1_1SignalEnvelope_1a5fdc156a85ebfa3535ce26860e50d9e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::SignalEnvelope::SignalEnvelope</definition>
+        <argsstring>()=default</argsstring>
+        <name>SignalEnvelope</name>
+        <qualifiedname>d2::Signals::SignalEnvelope::SignalEnvelope</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="739" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1SignalEnvelope_1a016ef5bca084bf0ed47bf3f5c65d1e2f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::SignalEnvelope::SignalEnvelope</definition>
+        <argsstring>(event_idx event, SpecifierKey dispatch, SignalInstance instance)</argsstring>
+        <name>SignalEnvelope</name>
+        <qualifiedname>d2::Signals::SignalEnvelope::SignalEnvelope</qualifiedname>
+        <param>
+          <type>event_idx</type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>SpecifierKey</type>
+          <declname>dispatch</declname>
+        </param>
+        <param>
+          <type>SignalInstance</type>
+          <declname>instance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="740" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="740" bodyend="743"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1SignalEnvelope_1aba8483179dc15332a82f7a2ae6bcd6d0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::SignalEnvelope::SignalEnvelope</definition>
+        <argsstring>(SignalEnvelope &amp;&amp;) noexcept=default</argsstring>
+        <name>SignalEnvelope</name>
+        <qualifiedname>d2::Signals::SignalEnvelope::SignalEnvelope</qualifiedname>
+        <param>
+          <type>SignalEnvelope &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="744" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1SignalEnvelope_1a08ec501d9c8c247d77cac573dbc8f169" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::SignalEnvelope::SignalEnvelope</definition>
+        <argsstring>(const SignalEnvelope &amp;)=delete</argsstring>
+        <name>SignalEnvelope</name>
+        <qualifiedname>d2::Signals::SignalEnvelope::SignalEnvelope</qualifiedname>
+        <param>
+          <type>const SignalEnvelope &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="745" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1SignalEnvelope_1a75ce570cafac7b6d3976ec2edbb43f04" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SignalEnvelope &amp;</type>
+        <definition>SignalEnvelope &amp; d2::Signals::SignalEnvelope::operator=</definition>
+        <argsstring>(SignalEnvelope &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Signals::SignalEnvelope::operator=</qualifiedname>
+        <param>
+          <type>SignalEnvelope &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="747" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1SignalEnvelope_1a069b4727419181865d97e39badeca756" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SignalEnvelope &amp;</type>
+        <definition>SignalEnvelope &amp; d2::Signals::SignalEnvelope::operator=</definition>
+        <argsstring>(const SignalEnvelope &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Signals::SignalEnvelope::operator=</qualifiedname>
+        <param>
+          <type>const SignalEnvelope &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="748" column="28"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::Signals::SignalEnvelope</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>dispatch</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>instance</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::Signals::SignalInstance</label>
+      </node>
+      <node id="2">
+        <label>d2::Signals::SpecifierKey</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_signal_handler.hpp" line="733" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="734" bodyend="749"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Signals_1_1SignalEnvelope_1a35c3e9aae98d58281bceb9ca402d649f" prot="public" virt="non-virtual"><scope>d2::Signals::SignalEnvelope</scope><name>dispatch</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalEnvelope_1aa2a7473a5c94e50afd87b818b9a2da7b" prot="public" virt="non-virtual"><scope>d2::Signals::SignalEnvelope</scope><name>event</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalEnvelope_1a091aba73b9d662cc1eeb840f097f0f98" prot="public" virt="non-virtual"><scope>d2::Signals::SignalEnvelope</scope><name>instance</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalEnvelope_1a75ce570cafac7b6d3976ec2edbb43f04" prot="public" virt="non-virtual"><scope>d2::Signals::SignalEnvelope</scope><name>operator=</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalEnvelope_1a069b4727419181865d97e39badeca756" prot="public" virt="non-virtual"><scope>d2::Signals::SignalEnvelope</scope><name>operator=</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalEnvelope_1a5fdc156a85ebfa3535ce26860e50d9e9" prot="public" virt="non-virtual"><scope>d2::Signals::SignalEnvelope</scope><name>SignalEnvelope</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalEnvelope_1a016ef5bca084bf0ed47bf3f5c65d1e2f" prot="public" virt="non-virtual"><scope>d2::Signals::SignalEnvelope</scope><name>SignalEnvelope</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalEnvelope_1aba8483179dc15332a82f7a2ae6bcd6d0" prot="public" virt="non-virtual"><scope>d2::Signals::SignalEnvelope</scope><name>SignalEnvelope</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalEnvelope_1a08ec501d9c8c247d77cac573dbc8f169" prot="public" virt="non-virtual"><scope>d2::Signals::SignalEnvelope</scope><name>SignalEnvelope</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

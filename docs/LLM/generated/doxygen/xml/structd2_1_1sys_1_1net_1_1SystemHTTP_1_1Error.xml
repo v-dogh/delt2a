@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::net::SystemHTTP::Error</compoundname>
+    <includes refid="d2__http_8hpp" local="no">d2_http.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Code</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Error::Code</qualifiedname>
+        <enumvalue id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1ad544eb3da2f68d24cf92a8519ed53a31" prot="public">
+          <name>InvalidRequest</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1a453e6aa38d87b28ccae545967c53004f" prot="public">
+          <name>Unavailable</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1aa149e85a44aeec9140e92733d9ed694e" prot="public">
+          <name>Cancelled</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1ac85a251cc457840f1e032f1b733e9398" prot="public">
+          <name>Timeout</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1af5f0c488ed56cf789d19a13ffba8abe3" prot="public">
+          <name>Transport</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1a406c70d61a3eefd08d468bd8a7b1b77f" prot="public">
+          <name>Callback</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1a80d2677cf518f4d04320042f4ea6c146" prot="public">
+          <name>Limit</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="66" column="13" bodyfile="core/mods/d2_http.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1aba72d477d2d1ca5e69b017a3e283542b" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1" kindref="member">Code</ref></type>
+        <definition>Code d2::sys::net::SystemHTTP::Error::code</definition>
+        <argsstring></argsstring>
+        <name>code</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Error::code</qualifiedname>
+        <initializer>{<ref refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1af5f0c488ed56cf789d19a13ffba8abe3" kindref="member">Code::Transport</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="67" column="18" bodyfile="core/mods/d2_http.hpp" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1a62abb1adcb0d0b296c60233259c13b15" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::net::SystemHTTP::Error::message</definition>
+        <argsstring></argsstring>
+        <name>message</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Error::message</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="68" column="25" bodyfile="core/mods/d2_http.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab117e8b2c356bdd50c5da31ceed4dbd8" prot="public" static="no" mutable="no">
+        <type>std::exception_ptr</type>
+        <definition>std::exception_ptr d2::sys::net::SystemHTTP::Error::cause</definition>
+        <argsstring></argsstring>
+        <name>cause</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Error::cause</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="69" column="32" bodyfile="core/mods/d2_http.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1a17e14c22e0a42b834c0133734b13b4ea" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; int &gt;</type>
+        <definition>std::optional&lt;int&gt; d2::sys::net::SystemHTTP::Error::native_code</definition>
+        <argsstring></argsstring>
+        <name>native_code</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Error::native_code</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="70" column="27" bodyfile="core/mods/d2_http.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_http.hpp" line="64" column="9" bodyfile="core/mods/d2_http.hpp" bodystart="65" bodyend="71"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab117e8b2c356bdd50c5da31ceed4dbd8" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Error</scope><name>cause</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1ab3ad51e1d8d7d48ad9932a11e38c4eb1" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Error</scope><name>Code</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1aba72d477d2d1ca5e69b017a3e283542b" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Error</scope><name>code</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1a62abb1adcb0d0b296c60233259c13b15" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Error</scope><name>message</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error_1a17e14c22e0a42b834c0133734b13b4ea" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Error</scope><name>native_code</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

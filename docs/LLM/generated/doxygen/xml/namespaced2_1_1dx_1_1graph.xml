@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1dx_1_1graph" kind="namespace" language="C++">
+    <compoundname>d2::dx::graph</compoundname>
+    <innerclass refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar" prot="public">d2::dx::graph::CyclicVerticalBar</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph" prot="public">d2::dx::graph::NodeWaveGraph</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="elements/d2_graph.cpp" line="3" column="1"/>
+  </compounddef>
+</doxygen>

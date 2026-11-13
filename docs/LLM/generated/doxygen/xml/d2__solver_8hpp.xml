@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="d2__solver_8hpp" kind="file" language="C++">
+    <compoundname>d2_solver.hpp</compoundname>
+    <includes local="no">absl/container/flat_hash_map.h</includes>
+    <includes local="no">absl/container/flat_hash_set.h</includes>
+    <includes local="no">limits</includes>
+    <includes refid="d2__solver__ops_8hpp" local="no">core/lsx/d2_solver_ops.hpp</includes>
+    <includes refid="d2__solver__types_8hpp" local="no">core/lsx/d2_solver_types.hpp</includes>
+    <includes local="no">optional</includes>
+    <includedby refid="d2__solver_8cpp" local="yes">core/lsx/d2_solver.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>core/lsx/d2_solver.hpp</label>
+        <link refid="d2__solver_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>core/lsx/d2_solver_ops.hpp</label>
+        <link refid="d2__solver__ops_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>core/lsx/d2_solver_types.hpp</label>
+        <link refid="d2__solver__types_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>absl/container/flat_hash_map.h</label>
+      </node>
+      <node id="3">
+        <label>absl/container/flat_hash_set.h</label>
+      </node>
+      <node id="7">
+        <label>array</label>
+      </node>
+      <node id="8">
+        <label>cstdint</label>
+      </node>
+      <node id="4">
+        <label>limits</label>
+      </node>
+      <node id="11">
+        <label>optional</label>
+      </node>
+      <node id="9">
+        <label>span</label>
+      </node>
+      <node id="10">
+        <label>string</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>core/lsx/d2_solver.cpp</label>
+        <link refid="d2__solver_8cpp"/>
+      </node>
+      <node id="1">
+        <label>core/lsx/d2_solver.hpp</label>
+        <link refid="d2__solver_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classd2_1_1lsx_1_1impl_1_1Row" prot="public">d2::lsx::impl::Row</innerclass>
+    <innerclass refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle" prot="public">d2::lsx::impl::ConstraintHandle</innerclass>
+    <innerclass refid="classd2_1_1lsx_1_1ConstraintArray" prot="public">d2::lsx::ConstraintArray</innerclass>
+    <innernamespace refid="namespaced2">d2</innernamespace>
+    <innernamespace refid="namespaced2_1_1lsx">d2::lsx</innernamespace>
+    <innernamespace refid="namespaced2_1_1lsx_1_1impl">d2::lsx::impl</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver.hpp"/>
+  </compounddef>
+</doxygen>

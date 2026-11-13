@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1TreeTemplate" kind="struct" language="C++" prot="public">
+    <compoundname>d2::TreeTemplate</compoundname>
+    <basecompoundref refid="structd2_1_1TreeTemplateInit" prot="public" virt="non-virtual">d2::TreeTemplateInit&lt; TreeState, Tree, Root &gt;</basecompoundref>
+    <includes refid="d2__tree_8hpp" local="no">d2_tree.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename <ref refid="structd2_1_1Tree" kindref="compound">Tree</ref></type>
+      </param>
+      <param>
+        <type>typename Root</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::TreeTemplate&lt; Tree, Root &gt;</label>
+        <link refid="structd2_1_1TreeTemplate"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::TreeTemplateInit&lt; TreeState, Tree, Root &gt;</label>
+        <link refid="structd2_1_1TreeTemplateInit"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::TreeTemplate&lt; Tree, Root &gt;</label>
+        <link refid="structd2_1_1TreeTemplate"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::TreeTemplateInit&lt; TreeState, Tree, Root &gt;</label>
+        <link refid="structd2_1_1TreeTemplateInit"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_tree.hpp" line="44" column="5" bodyfile="core/tree/d2_tree.hpp" bodystart="45" bodyend="46"/>
+    <listofallmembers>
+      <member refid="structd2_1_1TreeTemplateInit_1a965ffc910d4b2e3974b1cbfacc56d29d" prot="public" virt="non-virtual"><scope>d2::TreeTemplate</scope><name>build</name></member>
+      <member refid="structd2_1_1TreeTemplateInit_1a503af8f8f459b6eb9d5f04bd44856e97" prot="public" virt="non-virtual"><scope>d2::TreeTemplate</scope><name>build_sub</name></member>
+      <member refid="structd2_1_1TreeTemplateInit_1a4e874b038d56ec9296449a0ce3816024" prot="public" virt="non-virtual"><scope>d2::TreeTemplate</scope><name>root</name></member>
+      <member refid="structd2_1_1TreeTemplateInit_1aade151f1040ea1925de26de7345939c6" prot="public" virt="non-virtual"><scope>d2::TreeTemplate</scope><name>state</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

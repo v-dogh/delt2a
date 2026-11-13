@@ -1,0 +1,408 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1Signals_1_1SpecifierKey" kind="class" language="C++" prot="private">
+    <compoundname>d2::Signals::SpecifierKey</compoundname>
+    <innerclass refid="structd2_1_1Signals_1_1SpecifierKey_1_1Ops" prot="private">d2::Signals::SpecifierKey::Ops</innerclass>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1Signals_1_1SpecifierKey_1a001c6f625950383cecfbefb6a43a2e36" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Signals::SpecifierKey::_specifier_storage_length</definition>
+        <argsstring></argsstring>
+        <name>_specifier_storage_length</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_specifier_storage_length</qualifiedname>
+        <initializer>{16}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="429" column="35" bodyfile="core/io/d2_signal_handler.hpp" bodystart="429" bodyend="429"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1Signals_1_1SpecifierKey_1a1a1ee98c899bc93a756a0e2558db2b12" prot="private" static="no" mutable="no">
+        <type>const Ops *</type>
+        <definition>const Ops* d2::Signals::SpecifierKey::_ops</definition>
+        <argsstring></argsstring>
+        <name>_ops</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_ops</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="443" column="23" bodyfile="core/io/d2_signal_handler.hpp" bodystart="443" bodyend="443"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Signals_1_1SpecifierKey_1a14f9967713ee2b31edce58ad0f895792" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Signals::SpecifierKey::_hash</definition>
+        <argsstring></argsstring>
+        <name>_hash</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_hash</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="444" column="25" bodyfile="core/io/d2_signal_handler.hpp" bodystart="444" bodyend="444"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Signals_1_1SpecifierKey_1a66003459b9776d76a52505054f9a28a7" prot="private" static="no" mutable="no">
+        <type>union d2::Signals::SpecifierKey::@166110152043264011013160107244023334010120041350</type>
+        <definition>union d2::Signals::SpecifierKey::@166110152043264011013160107244023334010120041350 d2::Signals::SpecifierKey::@223372330065353302107275370110173250316010066366</definition>
+        <argsstring></argsstring>
+        <name>@223372330065353302107275370110173250316010066366</name>
+        <qualifiedname>d2::Signals::SpecifierKey::@223372330065353302107275370110173250316010066366</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="451" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a32c0fa1af75cc1dd804bf76c83320474" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>const void *</type>
+        <definition>static const void * d2::Signals::SpecifierKey::_type_tag</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>_type_tag</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_type_tag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="453" column="42" bodyfile="core/io/d2_signal_handler.hpp" bodystart="453" bodyend="457"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a88a473d45f865cb0785daf7037dc443d" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>const Ops *</type>
+        <definition>static const Ops * d2::Signals::SpecifierKey::_ops_for</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>_ops_for</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_ops_for</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="458" column="41" bodyfile="core/io/d2_signal_handler.hpp" bodystart="458" bodyend="489"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a3e5f50873b3ab9a24984c1cc2c76b0d5" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * d2::Signals::SpecifierKey::_ptr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="491" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="35" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1ae7a9db5b1bca7351c0d1b161e9bd507a" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const void *</type>
+        <definition>const void * d2::Signals::SpecifierKey::_ptr</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="492" column="24" bodyfile="core/io/d2_signal_handler.cpp" bodystart="39" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a4120f1ebee9653f5ea61034c8a07ff1f" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::SpecifierKey::_destroy</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>_destroy</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_destroy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="494" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="44" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a32a6592e065ebdec1d1eb6f9ebc2b491" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::SpecifierKey::_copy_from</definition>
+        <argsstring>(const SpecifierKey &amp;copy)</argsstring>
+        <name>_copy_from</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_copy_from</qualifiedname>
+        <param>
+          <type>const SpecifierKey &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="496" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="60" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1aa62c4e5ac4ebb8ee92d7d9af41efc869" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::SpecifierKey::_move_from</definition>
+        <argsstring>(SpecifierKey &amp;&amp;copy) noexcept</argsstring>
+        <name>_move_from</name>
+        <qualifiedname>d2::Signals::SpecifierKey::_move_from</qualifiedname>
+        <param>
+          <type>SpecifierKey &amp;&amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="497" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="88" bodyend="108"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1ac00d273d0a9ec9eea9928238a62ddb93" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::SpecifierKey::SpecifierKey</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>SpecifierKey</name>
+        <qualifiedname>d2::Signals::SpecifierKey::SpecifierKey</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="499" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a492247e0d0b97dd04bbef5cfb07a4f0a" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>d2::Signals::SpecifierKey::SpecifierKey</definition>
+        <argsstring>(Type &amp;&amp;value)</argsstring>
+        <name>SpecifierKey</name>
+        <qualifiedname>d2::Signals::SpecifierKey::SpecifierKey</qualifiedname>
+        <param>
+          <type>Type &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+    <requiresclause>(!std::is_same_v&lt;std::decay_t&lt;Type&gt;, SpecifierKey&gt;)    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="503" column="22" bodyfile="core/io/d2_signal_handler.hpp" bodystart="503" bodyend="539"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a22e9dfc27ccf0abee3a05f8837ce122c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::SpecifierKey::SpecifierKey</definition>
+        <argsstring>(const SpecifierKey &amp;copy)</argsstring>
+        <name>SpecifierKey</name>
+        <qualifiedname>d2::Signals::SpecifierKey::SpecifierKey</qualifiedname>
+        <param>
+          <type>const SpecifierKey &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="541" column="13" bodyfile="core/io/d2_signal_handler.cpp" bodystart="110" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a9c3fe483443184b96ad13ab366dac05e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::SpecifierKey::SpecifierKey</definition>
+        <argsstring>(SpecifierKey &amp;&amp;copy) noexcept</argsstring>
+        <name>SpecifierKey</name>
+        <qualifiedname>d2::Signals::SpecifierKey::SpecifierKey</qualifiedname>
+        <param>
+          <type>SpecifierKey &amp;&amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="542" column="13" bodyfile="core/io/d2_signal_handler.cpp" bodystart="114" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1aed382c32f8eb178d28674529b691406a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::SpecifierKey::~SpecifierKey</definition>
+        <argsstring>()</argsstring>
+        <name>~SpecifierKey</name>
+        <qualifiedname>d2::Signals::SpecifierKey::~SpecifierKey</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="543" column="13" bodyfile="core/io/d2_signal_handler.cpp" bodystart="118" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a0197fdb2e44276b5744f46f961097266" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SpecifierKey &amp;</type>
+        <definition>Signals::SpecifierKey &amp; d2::Signals::SpecifierKey::operator=</definition>
+        <argsstring>(const SpecifierKey &amp;copy)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Signals::SpecifierKey::operator=</qualifiedname>
+        <param>
+          <type>const SpecifierKey &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="545" column="26" bodyfile="core/io/d2_signal_handler.cpp" bodystart="123" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a59c882a49868155eff4909c7473e28eb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>SpecifierKey &amp;</type>
+        <definition>Signals::SpecifierKey &amp; d2::Signals::SpecifierKey::operator=</definition>
+        <argsstring>(SpecifierKey &amp;&amp;copy) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Signals::SpecifierKey::operator=</qualifiedname>
+        <param>
+          <type>SpecifierKey &amp;&amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="546" column="26" bodyfile="core/io/d2_signal_handler.cpp" bodystart="133" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a769f331d56c3d5f988b2114252df38fa" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Signals::SpecifierKey::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>d2::Signals::SpecifierKey::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="548" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="144" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a0b4272b5af8d114c81ef2338866a40f5" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Signals::SpecifierKey::hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hash</name>
+        <qualifiedname>d2::Signals::SpecifierKey::hash</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="549" column="25" bodyfile="core/io/d2_signal_handler.cpp" bodystart="148" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1aefc23afa0ee262826b1f925857d523a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Signals::SpecifierKey::operator==</definition>
+        <argsstring>(const SpecifierKey &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::Signals::SpecifierKey::operator==</qualifiedname>
+        <param>
+          <type>const SpecifierKey &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="551" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="153" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Signals_1_1SpecifierKey_1a63e29c97e37bfd865feeded445caa299" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Signals::SpecifierKey::operator!=</definition>
+        <argsstring>(const SpecifierKey &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>d2::Signals::SpecifierKey::operator!=</qualifiedname>
+        <param>
+          <type>const SpecifierKey &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="552" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="159" bodyend="162"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="426" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="427" bodyend="553"/>
+    <listofallmembers>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a32a6592e065ebdec1d1eb6f9ebc2b491" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_copy_from</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a4120f1ebee9653f5ea61034c8a07ff1f" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_destroy</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a14f9967713ee2b31edce58ad0f895792" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_hash</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1aa62c4e5ac4ebb8ee92d7d9af41efc869" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_move_from</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a1a1ee98c899bc93a756a0e2558db2b12" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_ops</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a88a473d45f865cb0785daf7037dc443d" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_ops_for</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a3e5f50873b3ab9a24984c1cc2c76b0d5" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1ae7a9db5b1bca7351c0d1b161e9bd507a" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a001c6f625950383cecfbefb6a43a2e36" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_specifier_storage_length</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a32c0fa1af75cc1dd804bf76c83320474" prot="private" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>_type_tag</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a769f331d56c3d5f988b2114252df38fa" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>empty</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a0b4272b5af8d114c81ef2338866a40f5" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>hash</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a63e29c97e37bfd865feeded445caa299" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>operator!=</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a0197fdb2e44276b5744f46f961097266" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a59c882a49868155eff4909c7473e28eb" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1aefc23afa0ee262826b1f925857d523a1" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>operator==</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1ac00d273d0a9ec9eea9928238a62ddb93" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>SpecifierKey</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a492247e0d0b97dd04bbef5cfb07a4f0a" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>SpecifierKey</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a22e9dfc27ccf0abee3a05f8837ce122c" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>SpecifierKey</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1a9c3fe483443184b96ad13ab366dac05e" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>SpecifierKey</name></member>
+      <member refid="classd2_1_1Signals_1_1SpecifierKey_1aed382c32f8eb178d28674529b691406a" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKey</scope><name>~SpecifierKey</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemOutput" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::SystemOutput</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemOutput, &quot;Output&quot;, Access::TUnsafe &gt;</basecompoundref>
+    <includes refid="d2__core_8hpp" local="no">d2_core.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemOutput_1aa1b249542b1dd57efd5dc68e03dbfaae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemOutput::clear_images</definition>
+        <argsstring>()</argsstring>
+        <name>clear_images</name>
+        <qualifiedname>d2::sys::SystemOutput::clear_images</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="90" column="22" bodyfile="core/mods/d2_core.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemOutput_1ab66cbc7fe5193412c2aede8fcfc62c07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemOutput::write_frame</definition>
+        <argsstring>(PixelBuffer::View frame)</argsstring>
+        <name>write_frame</name>
+        <qualifiedname>d2::sys::SystemOutput::write_frame</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="91" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="152" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemOutput_1ad9dfed330d912e428e4b992ac8876730" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemOutput::write</definition>
+        <argsstring>(std::span&lt; const pixel &gt; buffer, std::size_t width, std::size_t height, const image::Scene &amp;images)</argsstring>
+        <name>write</name>
+        <qualifiedname>d2::sys::SystemOutput::write</qualifiedname>
+        <param>
+          <type>std::span&lt; const <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1image_1_1Scene" kindref="compound">image::Scene</ref> &amp;</type>
+          <declname>images</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="92" column="22" bodyfile="core/mods/d2_core.hpp" bodystart="92" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemOutput_1af958f7ce9eb0f489da7b48ce90ef69bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::size_t</type>
+        <definition>virtual std::size_t d2::sys::SystemOutput::delta_size</definition>
+        <argsstring>()=0</argsstring>
+        <name>delta_size</name>
+        <qualifiedname>d2::sys::SystemOutput::delta_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="98" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemOutput_1ad663ed0bae966eb9a4661a92608e00fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::size_t</type>
+        <definition>virtual std::size_t d2::sys::SystemOutput::swapframe_size</definition>
+        <argsstring>()=0</argsstring>
+        <name>swapframe_size</name>
+        <qualifiedname>d2::sys::SystemOutput::swapframe_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="99" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemOutput_1aaabcc9a9c5a313a1bd327aac3d89cfff" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemOutput::write</definition>
+        <argsstring>(std::span&lt; const pixel &gt; buffer, std::size_t width, std::size_t height)=0</argsstring>
+        <name>write</name>
+        <qualifiedname>d2::sys::SystemOutput::write</qualifiedname>
+        <param>
+          <type>std::span&lt; const <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &gt;</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="102" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemOutput, &quot;Output&quot;, Access::TUnsafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemOutput &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemOutput</label>
+        <link refid="classd2_1_1sys_1_1SystemOutput"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemOutput, &quot;Output&quot;, Access::TUnsafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemOutput &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemOutput</label>
+        <link refid="classd2_1_1sys_1_1SystemOutput"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_core.hpp" line="86" column="5" bodyfile="core/mods/d2_core.hpp" bodystart="87" bodyend="103"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3" prot="protected" virt="virtual"><scope>d2::sys::SystemOutput</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::SystemOutput</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::SystemOutput</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730" prot="protected" virt="virtual"><scope>d2::sys::SystemOutput</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemOutput_1aa1b249542b1dd57efd5dc68e03dbfaae" prot="public" virt="virtual"><scope>d2::sys::SystemOutput</scope><name>clear_images</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>context</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemOutput_1af958f7ce9eb0f489da7b48ce90ef69bb" prot="public" virt="pure-virtual"><scope>d2::sys::SystemOutput</scope><name>delta_size</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>dependency_names</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::SystemOutput</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>make</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>module_info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemOutput_1ad663ed0bae966eb9a4661a92608e00fc" prot="public" virt="pure-virtual"><scope>d2::sys::SystemOutput</scope><name>swapframe_size</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemOutput_1ad9dfed330d912e428e4b992ac8876730" prot="public" virt="virtual"><scope>d2::sys::SystemOutput</scope><name>write</name></member>
+      <member refid="classd2_1_1sys_1_1SystemOutput_1aaabcc9a9c5a313a1bd327aac3d89cfff" prot="public" virt="pure-virtual"><scope>d2::sys::SystemOutput</scope><name>write</name></member>
+      <member refid="classd2_1_1sys_1_1SystemOutput_1ab66cbc7fe5193412c2aede8fcfc62c07" prot="public" virt="non-virtual"><scope>d2::sys::SystemOutput</scope><name>write_frame</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::SystemOutput</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

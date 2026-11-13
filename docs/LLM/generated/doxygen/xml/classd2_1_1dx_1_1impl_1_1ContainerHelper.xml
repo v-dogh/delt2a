@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1impl_1_1ContainerHelper" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::impl::ContainerHelper</compoundname>
+    <includes refid="d2__element__utils_8hpp" local="no">d2_element_utils.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Base</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1impl_1_1ContainerHelper_1afe7017510c948a9efafaea9c704a168e" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::dx::impl::ContainerHelper&lt; Base &gt;::_border_base</definition>
+        <argsstring>() const</argsstring>
+        <name>_border_base</name>
+        <qualifiedname>d2::dx::impl::ContainerHelper::_border_base</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_element_utils.hpp" line="130" column="18" bodyfile="elements/d2_element_utils.hpp" bodystart="130" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1impl_1_1ContainerHelper_1aa2f0017ca6fec0f9db96278be3caf5f2" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::dx::impl::ContainerHelper&lt; Base &gt;::_border_base_inv</definition>
+        <argsstring>() const</argsstring>
+        <name>_border_base_inv</name>
+        <qualifiedname>d2::dx::impl::ContainerHelper::_border_base_inv</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_element_utils.hpp" line="144" column="18" bodyfile="elements/d2_element_utils.hpp" bodystart="144" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1impl_1_1ContainerHelper_1a3d010f4d71277eb6666c8e5da1d721f7" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::impl::ContainerHelper&lt; Base &gt;::_render_border</definition>
+        <argsstring>(PixelBuffer::View buffer) const</argsstring>
+        <name>_render_border</name>
+        <qualifiedname>d2::dx::impl::ContainerHelper::_render_border</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_element_utils.hpp" line="159" column="14" bodyfile="elements/d2_element_utils.hpp" bodystart="159" bodyend="231"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="elements/d2_element_utils.hpp" line="127" column="15" bodyfile="elements/d2_element_utils.hpp" bodystart="128" bodyend="232"/>
+    <listofallmembers>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1afe7017510c948a9efafaea9c704a168e" prot="protected" virt="non-virtual"><scope>d2::dx::impl::ContainerHelper</scope><name>_border_base</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1aa2f0017ca6fec0f9db96278be3caf5f2" prot="protected" virt="non-virtual"><scope>d2::dx::impl::ContainerHelper</scope><name>_border_base_inv</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1a3d010f4d71277eb6666c8e5da1d721f7" prot="protected" virt="non-virtual"><scope>d2::dx::impl::ContainerHelper</scope><name>_render_border</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

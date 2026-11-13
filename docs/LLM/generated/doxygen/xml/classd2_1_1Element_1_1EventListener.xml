@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1Element_1_1EventListener" kind="class" language="C++" prot="public">
+    <compoundname>d2::Element::EventListener</compoundname>
+    <includes refid="d2__tree__element_8hpp" local="no">d2_tree_element.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1Element_1_1EventListener_1acb2c8112719b097d63613ea42041668f" prot="private" static="no" mutable="no">
+        <type>EventListenerState::wptr</type>
+        <definition>EventListenerState::wptr d2::Element::EventListener::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::Element::EventListener::_ptr</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="267" column="38" bodyfile="core/tree/d2_tree_element.hpp" bodystart="267" bodyend="267"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1ac83b9230e5cdc257a68eee1bac683571" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Element::EventListener::EventListener</definition>
+        <argsstring>()=default</argsstring>
+        <name>EventListener</name>
+        <qualifiedname>d2::Element::EventListener::EventListener</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="269" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1aa9ff4d7d2d46207fbb79b65c33ca8eb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Element::EventListener::EventListener</definition>
+        <argsstring>(EventListener &amp;&amp;)=default</argsstring>
+        <name>EventListener</name>
+        <qualifiedname>d2::Element::EventListener::EventListener</qualifiedname>
+        <param>
+          <type>EventListener &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="270" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1a368d3063cc0662637fa90da4ba3b87d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Element::EventListener::EventListener</definition>
+        <argsstring>(const EventListener &amp;)=default</argsstring>
+        <name>EventListener</name>
+        <qualifiedname>d2::Element::EventListener::EventListener</qualifiedname>
+        <param>
+          <type>const EventListener &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="271" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1ac04eabfe4ef9b3950d802faee3bbf1ad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::Element::EventListener::EventListener</definition>
+        <argsstring>(EventListenerState::ptr ptr)</argsstring>
+        <name>EventListener</name>
+        <qualifiedname>d2::Element::EventListener::EventListener</qualifiedname>
+        <param>
+          <type>EventListenerState::ptr</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="272" column="13" bodyfile="core/tree/d2_tree_element.hpp" bodystart="272" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1ad8485f7b3500a3e8fd6de7c3b716ae76" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">State</ref></type>
+        <definition>State d2::Element::EventListener::event</definition>
+        <argsstring>() const</argsstring>
+        <name>event</name>
+        <qualifiedname>d2::Element::EventListener::event</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="274" column="19" bodyfile="core/tree/d2_tree_element.hpp" bodystart="274" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1ab88f3c2e1940a96b0b416f02a7fd4d22" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Element::EventListener::index</definition>
+        <argsstring>() const</argsstring>
+        <name>index</name>
+        <qualifiedname>d2::Element::EventListener::index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="280" column="25" bodyfile="core/tree/d2_tree_element.hpp" bodystart="280" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1a87b90aaed060c69c55007a0a2c93719f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::EventListener::unmute</definition>
+        <argsstring>()</argsstring>
+        <name>unmute</name>
+        <qualifiedname>d2::Element::EventListener::unmute</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="287" column="18" bodyfile="core/tree/d2_tree_element.hpp" bodystart="287" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1a8854b10ef7d9805674af9d33a30f0505" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::EventListener::mute</definition>
+        <argsstring>()</argsstring>
+        <name>mute</name>
+        <qualifiedname>d2::Element::EventListener::mute</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="294" column="18" bodyfile="core/tree/d2_tree_element.hpp" bodystart="294" bodyend="300"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1a8e631a2027ca79df654fe3e3d9b682a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::EventListener::destroy</definition>
+        <argsstring>()</argsstring>
+        <name>destroy</name>
+        <qualifiedname>d2::Element::EventListener::destroy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="301" column="18" bodyfile="core/tree/d2_tree_element.hpp" bodystart="301" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1ab928ffaa35c4a74993301e144ad6dc08" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::Element::EventListener::operator bool</definition>
+        <argsstring>() const</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>d2::Element::EventListener::operator bool</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="309" column="13" bodyfile="core/tree/d2_tree_element.hpp" bodystart="309" bodyend="312"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1ad2e39169546cf4f976ce13b774582045" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::EventListener::operator==</definition>
+        <argsstring>(std::nullptr_t) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::Element::EventListener::operator==</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="314" column="18" bodyfile="core/tree/d2_tree_element.hpp" bodystart="314" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1a517e25beb6f8c6ef666734fb4b1f01c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::EventListener::operator!=</definition>
+        <argsstring>(std::nullptr_t) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>d2::Element::EventListener::operator!=</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="318" column="18" bodyfile="core/tree/d2_tree_element.hpp" bodystart="318" bodyend="321"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1a7d0aa730e4d1916a5b3f956a06ed731d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1_1EventListener_1ac83b9230e5cdc257a68eee1bac683571" kindref="member">EventListener</ref> &amp;</type>
+        <definition>EventListener &amp; d2::Element::EventListener::operator=</definition>
+        <argsstring>(EventListener &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Element::EventListener::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1_1EventListener_1ac83b9230e5cdc257a68eee1bac683571" kindref="member">EventListener</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="323" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1_1EventListener_1aa4108a8c79173b1f132337d7bcfb7c92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1_1EventListener_1ac83b9230e5cdc257a68eee1bac683571" kindref="member">EventListener</ref> &amp;</type>
+        <definition>EventListener &amp; d2::Element::EventListener::operator=</definition>
+        <argsstring>(const EventListener &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Element::EventListener::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1Element_1_1EventListener_1ac83b9230e5cdc257a68eee1bac683571" kindref="member">EventListener</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="324" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_element.hpp" line="264" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="265" bodyend="325"/>
+    <listofallmembers>
+      <member refid="classd2_1_1Element_1_1EventListener_1acb2c8112719b097d63613ea42041668f" prot="private" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1a8e631a2027ca79df654fe3e3d9b682a8" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>destroy</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1ad8485f7b3500a3e8fd6de7c3b716ae76" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>event</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1ac83b9230e5cdc257a68eee1bac683571" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>EventListener</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1aa9ff4d7d2d46207fbb79b65c33ca8eb8" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>EventListener</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1a368d3063cc0662637fa90da4ba3b87d0" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>EventListener</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1ac04eabfe4ef9b3950d802faee3bbf1ad" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>EventListener</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1ab88f3c2e1940a96b0b416f02a7fd4d22" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>index</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1a8854b10ef7d9805674af9d33a30f0505" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>mute</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1ab928ffaa35c4a74993301e144ad6dc08" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>operator bool</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1a517e25beb6f8c6ef666734fb4b1f01c0" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>operator!=</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1a7d0aa730e4d1916a5b3f956a06ed731d" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1aa4108a8c79173b1f132337d7bcfb7c92" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1ad2e39169546cf4f976ce13b774582045" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>operator==</name></member>
+      <member refid="classd2_1_1Element_1_1EventListener_1a87b90aaed060c69c55007a0a2c93719f" prot="public" virt="non-virtual"><scope>d2::Element::EventListener</scope><name>unmute</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Signals_1_1SpecifierKeyHash" kind="struct" language="C++" prot="private">
+    <compoundname>d2::Signals::SpecifierKeyHash</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1Signals_1_1SpecifierKeyHash_1a58d147178fbb8be8b2c6546927fa7f9b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Signals::SpecifierKeyHash::operator()</definition>
+        <argsstring>(const SpecifierKey &amp;key) const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>d2::Signals::SpecifierKeyHash::operator()</qualifiedname>
+        <param>
+          <type>const SpecifierKey &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="557" column="25" bodyfile="core/io/d2_signal_handler.cpp" bodystart="164" bodyend="167"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="555" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="556" bodyend="558"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Signals_1_1SpecifierKeyHash_1a58d147178fbb8be8b2c6546927fa7f9b" prot="public" virt="non-virtual"><scope>d2::Signals::SpecifierKeyHash</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

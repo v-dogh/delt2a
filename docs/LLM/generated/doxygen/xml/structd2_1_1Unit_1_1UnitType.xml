@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Unit_1_1UnitType" kind="struct" language="C++" prot="private">
+    <compoundname>d2::Unit::UnitType</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1Unit_1_1UnitType_1a2d44d38f9876be9a09f6a06b5dccf84c" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char d2::Unit::UnitType::mods</definition>
+        <argsstring></argsstring>
+        <name>mods</name>
+        <qualifiedname>d2::Unit::UnitType::mods</qualifiedname>
+        <initializer>{0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="54" column="27" bodyfile="core/types/d2_element_units.hpp" bodystart="54" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Unit_1_1UnitType_1a360227662fea5e59e6656a6091104cba" prot="public" static="no" mutable="no">
+        <type><ref refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091" kindref="member">Type</ref></type>
+        <definition>Type d2::Unit::UnitType::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>d2::Unit::UnitType::type</qualifiedname>
+        <initializer>{<ref refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091abb7ddf5f8c19cff35c7849094d1cc2c8" kindref="member">Px</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="55" column="18" bodyfile="core/types/d2_element_units.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1Unit_1_1UnitType_1af6365193de649e4f8341d174fddb202c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::Unit::UnitType::UnitType</definition>
+        <argsstring>()=default</argsstring>
+        <name>UnitType</name>
+        <qualifiedname>d2::Unit::UnitType::UnitType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="57" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Unit_1_1UnitType_1acb4bbf954ad9f7b2cf6aff744630586c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::Unit::UnitType::UnitType</definition>
+        <argsstring>(Type type, unsigned char mods=0x00)</argsstring>
+        <name>UnitType</name>
+        <qualifiedname>d2::Unit::UnitType::UnitType</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091" kindref="member">Type</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>mods</declname>
+          <defval>0x00</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="58" column="23" bodyfile="core/types/d2_element_units.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_element_units.hpp" line="52" column="9" bodyfile="core/types/d2_element_units.hpp" bodystart="53" bodyend="59"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Unit_1_1UnitType_1a2d44d38f9876be9a09f6a06b5dccf84c" prot="public" virt="non-virtual"><scope>d2::Unit::UnitType</scope><name>mods</name></member>
+      <member refid="structd2_1_1Unit_1_1UnitType_1a360227662fea5e59e6656a6091104cba" prot="public" virt="non-virtual"><scope>d2::Unit::UnitType</scope><name>type</name></member>
+      <member refid="structd2_1_1Unit_1_1UnitType_1af6365193de649e4f8341d174fddb202c" prot="public" virt="non-virtual"><scope>d2::Unit::UnitType</scope><name>UnitType</name></member>
+      <member refid="structd2_1_1Unit_1_1UnitType_1acb4bbf954ad9f7b2cf6aff744630586c" prot="public" virt="non-virtual"><scope>d2::Unit::UnitType</scope><name>UnitType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

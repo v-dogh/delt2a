@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemWS_1_1RequestBuilder" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::net::SystemWS::RequestBuilder</compoundname>
+    <includes refid="d2__ws_8hpp" local="no">d2_ws.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemWS_1_1RequestBuilder_1af5e85d919aad1ffdb78bb414ffdcb8dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemWS::RequestBuilder::set</definition>
+        <argsstring>(std::string_view header, std::string_view value)=0</argsstring>
+        <name>set</name>
+        <qualifiedname>d2::sys::net::SystemWS::RequestBuilder::set</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>header</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="39" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_ws.hpp" line="37" column="9" bodyfile="core/mods/d2_ws.hpp" bodystart="38" bodyend="40"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1RequestBuilder_1af5e85d919aad1ffdb78bb414ffdcb8dc" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemWS::RequestBuilder</scope><name>set</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1impl_1_1args__normalize" kind="struct" language="C++" prot="public">
+    <compoundname>d2::impl::args_normalize</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structd2_1_1impl_1_1args__normalize_1a7110e04a24f50476c9c556d831ce2623" prot="private" static="no">
+        <type>std::remove_reference_t&lt; Type &gt;</type>
+        <definition>using d2::impl::args_normalize&lt; Type &gt;::no_ref_t = std::remove_reference_t&lt;Type&gt;</definition>
+        <argsstring></argsstring>
+        <name>no_ref_t</name>
+        <qualifiedname>d2::impl::args_normalize::no_ref_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="111" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1impl_1_1args__normalize_1a33100ee8752bd37e096c93c6e149289f" prot="private" static="no">
+        <type>std::remove_cv_t&lt; no_ref_t &gt;</type>
+        <definition>using d2::impl::args_normalize&lt; Type &gt;::value_t = std::remove_cv_t&lt;no_ref_t&gt;</definition>
+        <argsstring></argsstring>
+        <name>value_t</name>
+        <qualifiedname>d2::impl::args_normalize::value_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="112" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1impl_1_1args__normalize_1ab47cb65cecda9116604b76a04e0e93cd" prot="public" static="no">
+        <type>std::conditional_t&lt; std::is_lvalue_reference_v&lt; Type &gt;, Type, const value_t &amp; &gt;</type>
+        <definition>using d2::impl::args_normalize&lt; Type &gt;::type = std::conditional_t&lt;std::is_lvalue_reference_v&lt;Type&gt;, Type, const value_t&amp;&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>d2::impl::args_normalize::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="114" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="108" column="19" bodyfile="core/io/d2_signal_handler.hpp" bodystart="109" bodyend="115"/>
+    <listofallmembers>
+      <member refid="structd2_1_1impl_1_1args__normalize_1a7110e04a24f50476c9c556d831ce2623" prot="private" virt="non-virtual"><scope>d2::impl::args_normalize</scope><name>no_ref_t</name></member>
+      <member refid="structd2_1_1impl_1_1args__normalize_1ab47cb65cecda9116604b76a04e0e93cd" prot="public" virt="non-virtual"><scope>d2::impl::args_normalize</scope><name>type</name></member>
+      <member refid="structd2_1_1impl_1_1args__normalize_1a33100ee8752bd37e096c93c6e149289f" prot="private" virt="non-virtual"><scope>d2::impl::args_normalize</scope><name>value_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

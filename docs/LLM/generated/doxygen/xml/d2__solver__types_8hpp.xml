@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="d2__solver__types_8hpp" kind="file" language="C++">
+    <compoundname>d2_solver_types.hpp</compoundname>
+    <includes local="no">array</includes>
+    <includes local="no">cstdint</includes>
+    <includes local="no">span</includes>
+    <includes local="no">string</includes>
+    <includedby refid="d2__solver_8hpp" local="no">core/lsx/d2_solver.hpp</includedby>
+    <includedby refid="d2__solver__ops_8hpp" local="no">core/lsx/d2_solver_ops.hpp</includedby>
+    <includedby refid="d2__solver__types_8cpp" local="yes">core/lsx/d2_solver_types.cpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>core/lsx/d2_solver_types.hpp</label>
+        <link refid="d2__solver__types_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>array</label>
+      </node>
+      <node id="3">
+        <label>cstdint</label>
+      </node>
+      <node id="4">
+        <label>span</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>core/lsx/d2_solver.cpp</label>
+        <link refid="d2__solver_8cpp"/>
+      </node>
+      <node id="2">
+        <label>core/lsx/d2_solver.hpp</label>
+        <link refid="d2__solver_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>core/lsx/d2_solver_ops.hpp</label>
+        <link refid="d2__solver__ops_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>core/lsx/d2_solver_types.cpp</label>
+        <link refid="d2__solver__types_8cpp"/>
+      </node>
+      <node id="1">
+        <label>core/lsx/d2_solver_types.hpp</label>
+        <link refid="d2__solver__types_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classd2_1_1lsx_1_1VariableIndex" prot="public">d2::lsx::VariableIndex</innerclass>
+    <innerclass refid="classd2_1_1lsx_1_1Variable" prot="public">d2::lsx::Variable</innerclass>
+    <innerclass refid="classd2_1_1lsx_1_1Symbol" prot="public">d2::lsx::Symbol</innerclass>
+    <innerclass refid="classd2_1_1lsx_1_1Expression" prot="public">d2::lsx::Expression</innerclass>
+    <innerclass refid="structd2_1_1lsx_1_1ParentVarWrapper" prot="public">d2::lsx::ParentVarWrapper</innerclass>
+    <innerclass refid="structstd_1_1hash_3_01d2_1_1lsx_1_1VariableIndex_01_4" prot="public">std::hash&lt; d2::lsx::VariableIndex &gt;</innerclass>
+    <innerclass refid="structstd_1_1hash_3_01d2_1_1lsx_1_1Symbol_01_4" prot="public">std::hash&lt; d2::lsx::Symbol &gt;</innerclass>
+    <innernamespace refid="namespaced2">d2</innernamespace>
+    <innernamespace refid="namespaced2_1_1lsx">d2::lsx</innernamespace>
+    <innernamespace refid="namespacestd">std</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver_types.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::net::SystemSession::Scope</compoundname>
+    <includes refid="d2__session_8hpp" local="no">d2_session.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ac5b5c9af251f62bc67fc911932f418b7" prot="public" static="no">
+        <type>std::variant&lt; std::string, std::regex, std::monostate &gt;</type>
+        <definition>using d2::sys::net::SystemSession::Scope::rule = std::variant&lt;std::string, std::regex, std::monostate&gt;</definition>
+        <argsstring></argsstring>
+        <name>rule</name>
+        <qualifiedname>d2::sys::net::SystemSession::Scope::rule</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="16" column="13" bodyfile="core/mods/d2_session.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a1943ccc99b06ed7374ae975cd9fa6349" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ac5b5c9af251f62bc67fc911932f418b7" kindref="member">rule</ref></type>
+        <definition>rule d2::sys::net::SystemSession::Scope::protocol</definition>
+        <argsstring></argsstring>
+        <name>protocol</name>
+        <qualifiedname>d2::sys::net::SystemSession::Scope::protocol</qualifiedname>
+        <initializer>{std::monostate{}}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="17" column="18" bodyfile="core/mods/d2_session.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ae4d1d976f13fc01c69e39151fded2a0b" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ac5b5c9af251f62bc67fc911932f418b7" kindref="member">rule</ref></type>
+        <definition>rule d2::sys::net::SystemSession::Scope::method</definition>
+        <argsstring></argsstring>
+        <name>method</name>
+        <qualifiedname>d2::sys::net::SystemSession::Scope::method</qualifiedname>
+        <initializer>{std::monostate{}}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="18" column="18" bodyfile="core/mods/d2_session.hpp" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a29874f4fac562e0c90d5234c3ebb3102" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ac5b5c9af251f62bc67fc911932f418b7" kindref="member">rule</ref></type>
+        <definition>rule d2::sys::net::SystemSession::Scope::domain</definition>
+        <argsstring></argsstring>
+        <name>domain</name>
+        <qualifiedname>d2::sys::net::SystemSession::Scope::domain</qualifiedname>
+        <initializer>{std::monostate{}}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="19" column="18" bodyfile="core/mods/d2_session.hpp" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1acf98804053e79ff5e5d20b46261b652e" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ac5b5c9af251f62bc67fc911932f418b7" kindref="member">rule</ref></type>
+        <definition>rule d2::sys::net::SystemSession::Scope::path</definition>
+        <argsstring></argsstring>
+        <name>path</name>
+        <qualifiedname>d2::sys::net::SystemSession::Scope::path</qualifiedname>
+        <initializer>{std::monostate{}}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="20" column="18" bodyfile="core/mods/d2_session.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a6457cf8b5988e80b3574938736f01478" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ac5b5c9af251f62bc67fc911932f418b7" kindref="member">rule</ref></type>
+        <definition>rule d2::sys::net::SystemSession::Scope::port</definition>
+        <argsstring></argsstring>
+        <name>port</name>
+        <qualifiedname>d2::sys::net::SystemSession::Scope::port</qualifiedname>
+        <initializer>{std::monostate{}}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="21" column="18" bodyfile="core/mods/d2_session.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a643d1bfdbeefd8637b24ae06fa40cbe6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::net::SystemSession::Scope::short_circuit</definition>
+        <argsstring></argsstring>
+        <name>short_circuit</name>
+        <qualifiedname>d2::sys::net::SystemSession::Scope::short_circuit</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="22" column="18" bodyfile="core/mods/d2_session.hpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a059d6150bb7fe1a6116d1ac2564f4fed" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::net::SystemSession::Scope::parse</definition>
+        <argsstring>(const rule &amp;rule, std::string_view input)</argsstring>
+        <name>parse</name>
+        <qualifiedname>d2::sys::net::SystemSession::Scope::parse</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ac5b5c9af251f62bc67fc911932f418b7" kindref="member">rule</ref> &amp;</type>
+          <declname>rule</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="24" column="25" bodyfile="core/mods/d2_session.cpp" bodystart="8" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_session.hpp" line="14" column="9" bodyfile="core/mods/d2_session.hpp" bodystart="15" bodyend="25"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a29874f4fac562e0c90d5234c3ebb3102" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::Scope</scope><name>domain</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ae4d1d976f13fc01c69e39151fded2a0b" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::Scope</scope><name>method</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a059d6150bb7fe1a6116d1ac2564f4fed" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::Scope</scope><name>parse</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1acf98804053e79ff5e5d20b46261b652e" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::Scope</scope><name>path</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a6457cf8b5988e80b3574938736f01478" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::Scope</scope><name>port</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a1943ccc99b06ed7374ae975cd9fa6349" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::Scope</scope><name>protocol</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1ac5b5c9af251f62bc67fc911932f418b7" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::Scope</scope><name>rule</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemSession_1_1Scope_1a643d1bfdbeefd8637b24ae06fa40cbe6" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemSession::Scope</scope><name>short_circuit</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

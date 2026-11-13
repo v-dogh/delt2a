@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1image_1_1Raster" kind="class" language="C++" prot="public">
+    <compoundname>d2::image::Raster</compoundname>
+    <includes refid="core_2types_2d2__image_8hpp" local="no">d2_image.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1image_1_1Raster_1a36afa304406dbee46722c43f16aba98a" prot="public" static="no">
+        <type>std::shared_ptr&lt; const <ref refid="classd2_1_1image_1_1Raster_1a39f12ff8a859aacf46e2ed38827c157c" kindref="member">Raster</ref> &gt;</type>
+        <definition>using d2::image::Raster::ptr = std::shared_ptr&lt;const Raster&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::image::Raster::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="29" column="9" bodyfile="core/types/d2_image.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1image_1_1Raster_1a1dbb94b9b39c3b3867d3221ed8db5a74" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::image::Raster::_width</definition>
+        <argsstring></argsstring>
+        <name>_width</name>
+        <qualifiedname>d2::image::Raster::_width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="26" column="13" bodyfile="core/types/d2_image.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1image_1_1Raster_1adb558bbbe1195b7b454621cd26bb7c9e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::image::Raster::_height</definition>
+        <argsstring></argsstring>
+        <name>_height</name>
+        <qualifiedname>d2::image::Raster::_height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="26" column="20" bodyfile="core/types/d2_image.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1image_1_1Raster_1a157d2ea003973769b3583b12e89b8498" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structd2_1_1image_1_1RGBA" kindref="compound">RGBA</ref> &gt;</type>
+        <definition>std::vector&lt;RGBA&gt; d2::image::Raster::_pixels</definition>
+        <argsstring></argsstring>
+        <name>_pixels</name>
+        <qualifiedname>d2::image::Raster::_pixels</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="27" column="21" bodyfile="core/types/d2_image.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1image_1_1Raster_1a956f66912dc607c5dbd3e0d5643bb66f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::image::Raster::max_pixels</definition>
+        <argsstring></argsstring>
+        <name>max_pixels</name>
+        <qualifiedname>d2::image::Raster::max_pixels</qualifiedname>
+        <initializer>= 16 * 1024 * 1024</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="30" column="38" bodyfile="core/types/d2_image.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1image_1_1Raster_1a39f12ff8a859aacf46e2ed38827c157c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::image::Raster::Raster</definition>
+        <argsstring>(int width, int height, std::vector&lt; RGBA &gt; pixels)</argsstring>
+        <name>Raster</name>
+        <qualifiedname>d2::image::Raster::Raster</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="structd2_1_1image_1_1RGBA" kindref="compound">RGBA</ref> &gt;</type>
+          <declname>pixels</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="31" column="9" bodyfile="core/types/d2_image.cpp" bodystart="17" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Raster_1ae07e05e3918326df370e641a4f6f2cbf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::image::Raster::width</definition>
+        <argsstring>() const</argsstring>
+        <name>width</name>
+        <qualifiedname>d2::image::Raster::width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="34" column="13" bodyfile="core/types/d2_image.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Raster_1a7ba0cdcfc922c8291deac321dac0d4f1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::image::Raster::height</definition>
+        <argsstring>() const</argsstring>
+        <name>height</name>
+        <qualifiedname>d2::image::Raster::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="35" column="13" bodyfile="core/types/d2_image.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Raster_1aca26a3b088b482744f3f299d8ce75877" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::span&lt; const <ref refid="structd2_1_1image_1_1RGBA" kindref="compound">RGBA</ref> &gt;</type>
+        <definition>std::span&lt; const RGBA &gt; d2::image::Raster::pixels</definition>
+        <argsstring>() const</argsstring>
+        <name>pixels</name>
+        <qualifiedname>d2::image::Raster::pixels</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="36" column="19" bodyfile="core/types/d2_image.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1image_1_1Raster_1a89dac3d6e4fc77015258ed245be52fa5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1image_1_1Raster_1a36afa304406dbee46722c43f16aba98a" kindref="member">ptr</ref></type>
+        <definition>Raster::ptr d2::image::Raster::rgba</definition>
+        <argsstring>(int width, int height, std::vector&lt; RGBA &gt; pixels)</argsstring>
+        <name>rgba</name>
+        <qualifiedname>d2::image::Raster::rgba</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="structd2_1_1image_1_1RGBA" kindref="compound">RGBA</ref> &gt;</type>
+          <declname>pixels</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="32" column="20" bodyfile="core/types/d2_image.cpp" bodystart="24" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Raster_1a7b4a2ac882311467bcde577295928062" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1image_1_1Raster_1a36afa304406dbee46722c43f16aba98a" kindref="member">ptr</ref></type>
+        <definition>Raster::ptr d2::image::Raster::rgb</definition>
+        <argsstring>(int width, int height, std::span&lt; const unsigned char &gt; bytes)</argsstring>
+        <name>rgb</name>
+        <qualifiedname>d2::image::Raster::rgb</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const unsigned char &gt;</type>
+          <declname>bytes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="33" column="20" bodyfile="core/types/d2_image.cpp" bodystart="28" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_image.hpp" line="23" column="5" bodyfile="core/types/d2_image.hpp" bodystart="24" bodyend="37"/>
+    <listofallmembers>
+      <member refid="classd2_1_1image_1_1Raster_1adb558bbbe1195b7b454621cd26bb7c9e" prot="private" virt="non-virtual"><scope>d2::image::Raster</scope><name>_height</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1a157d2ea003973769b3583b12e89b8498" prot="private" virt="non-virtual"><scope>d2::image::Raster</scope><name>_pixels</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1a1dbb94b9b39c3b3867d3221ed8db5a74" prot="private" virt="non-virtual"><scope>d2::image::Raster</scope><name>_width</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1a7ba0cdcfc922c8291deac321dac0d4f1" prot="public" virt="non-virtual"><scope>d2::image::Raster</scope><name>height</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1a956f66912dc607c5dbd3e0d5643bb66f" prot="public" virt="non-virtual"><scope>d2::image::Raster</scope><name>max_pixels</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1aca26a3b088b482744f3f299d8ce75877" prot="public" virt="non-virtual"><scope>d2::image::Raster</scope><name>pixels</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1a36afa304406dbee46722c43f16aba98a" prot="public" virt="non-virtual"><scope>d2::image::Raster</scope><name>ptr</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1a39f12ff8a859aacf46e2ed38827c157c" prot="public" virt="non-virtual"><scope>d2::image::Raster</scope><name>Raster</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1a7b4a2ac882311467bcde577295928062" prot="public" virt="non-virtual"><scope>d2::image::Raster</scope><name>rgb</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1a89dac3d6e4fc77015258ed245be52fa5" prot="public" virt="non-virtual"><scope>d2::image::Raster</scope><name>rgba</name></member>
+      <member refid="classd2_1_1image_1_1Raster_1ae07e05e3918326df370e641a4f6f2cbf" prot="public" virt="non-virtual"><scope>d2::image::Raster</scope><name>width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

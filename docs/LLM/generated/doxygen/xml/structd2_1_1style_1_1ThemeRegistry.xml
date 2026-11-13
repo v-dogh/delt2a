@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1ThemeRegistry" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::ThemeRegistry</compoundname>
+    <includes refid="d2__theme_8hpp" local="no">d2_theme.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Deps</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1style_1_1ThemeRegistry_1ae271788cfb25078f385d95302d081fc9" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::style::ThemeRegistry&lt; Deps &gt;::type = void</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>d2::style::ThemeRegistry::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="711" column="9" bodyfile="core/tree/d2_theme.hpp" bodystart="711" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_theme.hpp" line="709" column="15" bodyfile="core/tree/d2_theme.hpp" bodystart="710" bodyend="712"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1ThemeRegistry_1ae271788cfb25078f385d95302d081fc9" prot="public" virt="non-virtual"><scope>d2::style::ThemeRegistry</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

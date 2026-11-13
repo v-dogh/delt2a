@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1impl_1_1OffsetHelper_3_01BaseOffset_00_01Current_00_01First_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First &gt;</compoundname>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>BaseOffset</declname>
+        <defname>BaseOffset</defname>
+      </param>
+      <param>
+        <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+        <declname>Current</declname>
+        <defname>Current</defname>
+      </param>
+      <param>
+        <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+        <declname>First</declname>
+        <defname>First</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1impl_1_1OffsetHelper_3_01BaseOffset_00_01Current_00_01First_01_4_1af9448e6fe616ddf05108e9b6c616ef5a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First &gt;::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <qualifiedname>d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First &gt;::offset</qualifiedname>
+        <initializer>= BaseOffset</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="87" column="35" bodyfile="core/tree/d2_styles.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1style_1_1impl_1_1OffsetHelper_1a27b8fe55ed631628403bee2f65e15263" prot="public" static="no">
+        <type><ref refid="structd2_1_1style_1_1impl_1_1OffsetHelperImpl" kindref="compound">OffsetHelperImpl</ref>&lt; Current, First&lt; BaseOffset &gt;, First, Rest... &gt;</type>
+        <definition>using d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First, Rest &gt;::result = </definition>
+        <argsstring></argsstring>
+        <name>result</name>
+        <qualifiedname>d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First &gt;::result</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="76" column="13" bodyfile="core/tree/d2_styles.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1style_1_1impl_1_1OffsetHelper_1a70c63bd637b7a3c1b792cf6f35cd5e7d" prot="public" static="no">
+        <type><ref refid="structd2_1_1style_1_1impl_1_1OffsetHelperImpl_1aabc1712471a85090dcc2c6415746d778" kindref="member">result::type</ref></type>
+        <definition>using d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First, Rest &gt;::type = </definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First &gt;::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="77" column="13" bodyfile="core/tree/d2_styles.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="85" column="9" bodyfile="core/tree/d2_styles.hpp" bodystart="86" bodyend="88"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1impl_1_1OffsetHelper_3_01BaseOffset_00_01Current_00_01First_01_4_1af9448e6fe616ddf05108e9b6c616ef5a" prot="public" virt="non-virtual"><scope>d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First &gt;</scope><name>offset</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1OffsetHelper_1a27b8fe55ed631628403bee2f65e15263" prot="public" virt="non-virtual"><scope>d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First &gt;</scope><name>result</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1OffsetHelper_1a70c63bd637b7a3c1b792cf6f35cd5e7d" prot="public" virt="non-virtual"><scope>d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="dir_03e7175e9523256c8402585302211dc5" kind="dir">
+    <compoundname>core/types</compoundname>
+    <innerfile refid="d2__element__units_8hpp">d2_element_units.hpp</innerfile>
+    <innerfile refid="core_2types_2d2__image_8cpp">d2_image.cpp</innerfile>
+    <innerfile refid="core_2types_2d2__image_8hpp">d2_image.hpp</innerfile>
+    <innerfile refid="d2__pixel_8cpp">d2_pixel.cpp</innerfile>
+    <innerfile refid="d2__pixel_8hpp">d2_pixel.hpp</innerfile>
+    <innerfile refid="d2__vtypes_8hpp">d2_vtypes.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/"/>
+  </compounddef>
+</doxygen>

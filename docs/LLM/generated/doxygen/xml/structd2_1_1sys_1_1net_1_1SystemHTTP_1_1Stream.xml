@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::net::SystemHTTP::Stream</compoundname>
+    <includes refid="d2__http_8hpp" local="no">d2_http.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a8f7479afd04131ef39d4647e7cef25e1" prot="public" static="no">
+        <type>std::unique_ptr&lt; <ref refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream" kindref="compound">Stream</ref> &gt;</type>
+        <definition>using d2::sys::net::SystemHTTP::Stream::ptr = std::unique_ptr&lt;Stream&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Stream::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="34" column="13" bodyfile="core/mods/d2_http.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a2cf4ffad4dc3c2b4d71090da9cb65b70" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemHTTP::Stream::write</definition>
+        <argsstring>(std::string_view data)=0</argsstring>
+        <name>write</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Stream::write</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="36" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1ac79c02560d8b7263f9e64ddbdb8b9654" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemHTTP::Stream::finish</definition>
+        <argsstring>()=0</argsstring>
+        <name>finish</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Stream::finish</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="37" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a07aa5123ba0df4119ebafa2e14e3cd42" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemHTTP::Stream::cancel</definition>
+        <argsstring>()=0</argsstring>
+        <name>cancel</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Stream::cancel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="38" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a8efd116b9d1a926b61ebc6a634f6b0c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::sys::net::SystemHTTP::Stream::is_open</definition>
+        <argsstring>()=0</argsstring>
+        <name>is_open</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Stream::is_open</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="39" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a775da9b9bfc981137ce9e7644419d511" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::size_t</type>
+        <definition>virtual std::size_t d2::sys::net::SystemHTTP::Stream::up_current</definition>
+        <argsstring>()=0</argsstring>
+        <name>up_current</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Stream::up_current</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="41" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1ad5862b8aed35c53bfd412fca4ef86f46" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::size_t</type>
+        <definition>virtual std::size_t d2::sys::net::SystemHTTP::Stream::up_total</definition>
+        <argsstring>()=0</argsstring>
+        <name>up_total</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Stream::up_total</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="42" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1aec13169d4c2e59fff24c4986dd58a488" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::sys::net::SystemHTTP::Stream::~Stream</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Stream</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Stream::~Stream</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="44" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_http.hpp" line="32" column="9" bodyfile="core/mods/d2_http.hpp" bodystart="33" bodyend="45"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a07aa5123ba0df4119ebafa2e14e3cd42" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Stream</scope><name>cancel</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1ac79c02560d8b7263f9e64ddbdb8b9654" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Stream</scope><name>finish</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a8efd116b9d1a926b61ebc6a634f6b0c5" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Stream</scope><name>is_open</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a8f7479afd04131ef39d4647e7cef25e1" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Stream</scope><name>ptr</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a775da9b9bfc981137ce9e7644419d511" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Stream</scope><name>up_current</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1ad5862b8aed35c53bfd412fca4ef86f46" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Stream</scope><name>up_total</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1a2cf4ffad4dc3c2b4d71090da9cb65b70" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Stream</scope><name>write</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Stream_1aec13169d4c2e59fff24c4986dd58a488" prot="public" virt="virtual"><scope>d2::sys::net::SystemHTTP::Stream</scope><name>~Stream</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

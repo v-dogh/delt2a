@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemAudio_1_1DeviceData" kind="struct" language="C++" prot="protected">
+    <compoundname>d2::sys::SystemAudio::DeviceData</compoundname>
+    <includes refid="d2__audio_8hpp" local="no">d2_audio.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998c" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Status</name>
+        <qualifiedname>d2::sys::SystemAudio::DeviceData::Status</qualifiedname>
+        <enumvalue id="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998ca9bd99a0beea48f10663fc4a7d7a33140" prot="public">
+          <name>Opening</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998ca1a11b1adc359c03db0ca798a00e2632c" prot="public">
+          <name>Opened</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998ca03f4a47830f97377a35321051685071e" prot="public">
+          <name>Closed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998ca5c8de6f894682fdb1786037b2040a26e" prot="public">
+          <name>Closing</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="318" column="13" bodyfile="core/mods/d2_audio.hpp" bodystart="319" bodyend="324"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1ab43582948b8152ea10eb68d6b248ba97" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline" kindref="compound">FilterPipeline</ref></type>
+        <definition>FilterPipeline d2::sys::SystemAudio::DeviceData::filter</definition>
+        <argsstring></argsstring>
+        <name>filter</name>
+        <qualifiedname>d2::sys::SystemAudio::DeviceData::filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="325" column="28" bodyfile="core/mods/d2_audio.hpp" bodystart="325" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a0348015752cefde8338a9684b7b5a4cf" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998c" kindref="member">Status</ref></type>
+        <definition>Status d2::sys::SystemAudio::DeviceData::status</definition>
+        <argsstring></argsstring>
+        <name>status</name>
+        <qualifiedname>d2::sys::SystemAudio::DeviceData::status</qualifiedname>
+        <initializer>{<ref refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998ca03f4a47830f97377a35321051685071e" kindref="member">Status::Closed</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="326" column="20" bodyfile="core/mods/d2_audio.hpp" bodystart="326" bodyend="326"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::sys::SystemAudio::DeviceData</label>
+        <link refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>filter</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::sys::SystemAudio::FilterPipeline</label>
+        <link refid="structd2_1_1sys_1_1SystemAudio_1_1FilterPipeline"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_audio.hpp" line="316" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="317" bodyend="327"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1ab43582948b8152ea10eb68d6b248ba97" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::DeviceData</scope><name>filter</name></member>
+      <member refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a4bb294a4f42acdec28ccef152ef8998c" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::DeviceData</scope><name>Status</name></member>
+      <member refid="structd2_1_1sys_1_1SystemAudio_1_1DeviceData_1a0348015752cefde8338a9684b7b5a4cf" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::DeviceData</scope><name>status</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

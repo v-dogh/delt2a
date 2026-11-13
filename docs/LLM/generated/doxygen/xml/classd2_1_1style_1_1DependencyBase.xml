@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1style_1_1DependencyBase" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::style::DependencyBase</compoundname>
+    <derivedcompoundref refid="classd2_1_1style_1_1Dependency" prot="public" virt="non-virtual">d2::style::Dependency&lt; Type &gt;</derivedcompoundref>
+    <includes refid="d2__theme_8hpp" local="no">d2_theme.hpp</includes>
+    <innerclass refid="structd2_1_1style_1_1DependencyBase_1_1Deps" prot="protected">d2::style::DependencyBase::Deps</innerclass>
+    <innerclass refid="structd2_1_1style_1_1DependencyBase_1_1StateData" prot="private">d2::style::DependencyBase::StateData</innerclass>
+    <innerclass refid="classd2_1_1style_1_1DependencyBase_1_1Handle" prot="public">d2::style::DependencyBase::Handle</innerclass>
+    <innerclass refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard" prot="protected">d2::style::DependencyBase::InvokeGuard</innerclass>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1style_1_1DependencyBase_1a7ef64d669fe6a99066a20367f169d1ef" prot="protected" static="no" mutable="yes">
+        <type>std::shared_ptr&lt; StateData &gt;</type>
+        <definition>std::shared_ptr&lt;StateData&gt; d2::style::DependencyBase::_state</definition>
+        <argsstring></argsstring>
+        <name>_state</name>
+        <qualifiedname>d2::style::DependencyBase::_state</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="97" column="33" bodyfile="core/tree/d2_theme.hpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-static-func">
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a97a761898a9a28e3555bb9775a99eae3" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>std::invoke_result_t&lt; Func &gt;</type>
+        <definition>static std::invoke_result_t&lt; Func &gt; d2::style::DependencyBase::_sync</definition>
+        <argsstring>(Func &amp;&amp;func)</argsstring>
+        <name>_sync</name>
+        <qualifiedname>d2::style::DependencyBase::_sync</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="83" column="48" bodyfile="core/tree/d2_theme.hpp" bodystart="83" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1aec451aac0889c8c54c8316b145f645c8" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>static void d2::style::DependencyBase::_sync_async</definition>
+        <argsstring>(Func &amp;&amp;func)</argsstring>
+        <name>_sync_async</name>
+        <qualifiedname>d2::style::DependencyBase::_sync_async</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="89" column="32" bodyfile="core/tree/d2_theme.hpp" bodystart="89" bodyend="95"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a901901c66534209ef3a2789716dfd094" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DependencyBase::DependencyBase</definition>
+        <argsstring>()=default</argsstring>
+        <name>DependencyBase</name>
+        <qualifiedname>d2::style::DependencyBase::DependencyBase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="112" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1afa2a52be12a64021f1deb6e49e8e6990" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DependencyBase::DependencyBase</definition>
+        <argsstring>(const DependencyBase &amp;)</argsstring>
+        <name>DependencyBase</name>
+        <qualifiedname>d2::style::DependencyBase::DependencyBase</qualifiedname>
+        <param>
+          <type>const DependencyBase &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="113" column="9" bodyfile="core/tree/d2_theme.hpp" bodystart="113" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1aa7814789ccd6d904ac38975f99ec9938" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DependencyBase::DependencyBase</definition>
+        <argsstring>(DependencyBase &amp;&amp;)=delete</argsstring>
+        <name>DependencyBase</name>
+        <qualifiedname>d2::style::DependencyBase::DependencyBase</qualifiedname>
+        <param>
+          <type>DependencyBase &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="114" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a84c6a021d661e5e3134ad1a687260c34" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DependencyBase::~DependencyBase</definition>
+        <argsstring>()</argsstring>
+        <name>~DependencyBase</name>
+        <qualifiedname>d2::style::DependencyBase::~DependencyBase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="115" column="9" bodyfile="core/tree/d2_theme.cpp" bodystart="103" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1ad8771043f8fdd48e44661ee636a6602a" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; StateData &gt;</type>
+        <definition>std::shared_ptr&lt; DependencyBase::StateData &gt; d2::style::DependencyBase::_ensure_state</definition>
+        <argsstring>() const</argsstring>
+        <name>_ensure_state</name>
+        <qualifiedname>d2::style::DependencyBase::_ensure_state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="117" column="25" bodyfile="core/tree/d2_theme.cpp" bodystart="117" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a40f475135b6039847837bc69a015a890" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::uint32_t</type>
+        <definition>std::uint32_t d2::style::DependencyBase::_next_generation</definition>
+        <argsstring>() const</argsstring>
+        <name>_next_generation</name>
+        <qualifiedname>d2::style::DependencyBase::_next_generation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="118" column="23" bodyfile="core/tree/d2_theme.cpp" bodystart="126" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1ab979dd24f4a936ba8f58149af0feac19" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1style_1_1DependencyBase_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>DependencyBase::Handle d2::style::DependencyBase::_make_handle</definition>
+        <argsstring>(std::uint32_t index) const</argsstring>
+        <name>_make_handle</name>
+        <qualifiedname>d2::style::DependencyBase::_make_handle</qualifiedname>
+        <param>
+          <type>std::uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="120" column="16" bodyfile="core/tree/d2_theme.cpp" bodystart="134" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a7461cd1997e47d77ba5d636dac4f4b04" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1style_1_1DependencyBase_1_1Handle" kindref="compound">Handle</ref></type>
+        <definition>DependencyBase::Handle d2::style::DependencyBase::_insert_slot</definition>
+        <argsstring>(Deps dependency) const</argsstring>
+        <name>_insert_slot</name>
+        <qualifiedname>d2::style::DependencyBase::_insert_slot</qualifiedname>
+        <param>
+          <type>Deps</type>
+          <declname>dependency</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="121" column="16" bodyfile="core/tree/d2_theme.cpp" bodystart="138" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a6a89c26049a11692d0bfb10296c6b6aa" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::style::DependencyBase::_close_slot_local</definition>
+        <argsstring>(std::uint32_t index, std::uint32_t generation) const</argsstring>
+        <name>_close_slot_local</name>
+        <qualifiedname>d2::style::DependencyBase::_close_slot_local</qualifiedname>
+        <param>
+          <type>std::uint32_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>std::uint32_t</type>
+          <declname>generation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="123" column="14" bodyfile="core/tree/d2_theme.cpp" bodystart="172" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a6e7b4e98b5a79e7caa2a13e198ce54da" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::style::DependencyBase::_cleanup_local</definition>
+        <argsstring>() const</argsstring>
+        <name>_cleanup_local</name>
+        <qualifiedname>d2::style::DependencyBase::_cleanup_local</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="124" column="14" bodyfile="core/tree/d2_theme.cpp" bodystart="203" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a6d4fb381469417b6a99e92ee1d25401c" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::style::DependencyBase::_flush_pending_local</definition>
+        <argsstring>() const</argsstring>
+        <name>_flush_pending_local</name>
+        <qualifiedname>d2::style::DependencyBase::_flush_pending_local</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="125" column="14" bodyfile="core/tree/d2_theme.cpp" bodystart="213" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a374aff46907a9d68684c89965972a0ae" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::style::DependencyBase::_destroy_state_local</definition>
+        <argsstring>() const</argsstring>
+        <name>_destroy_state_local</name>
+        <qualifiedname>d2::style::DependencyBase::_destroy_state_local</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="126" column="14" bodyfile="core/tree/d2_theme.cpp" bodystart="242" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DependencyBase_1a7a1e02f531f77f922359003f56b9fff6" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::style::DependencyBase::_destroy</definition>
+        <argsstring>(Deps dependency) const =0</argsstring>
+        <name>_destroy</name>
+        <qualifiedname>d2::style::DependencyBase::_destroy</qualifiedname>
+        <reimplementedby refid="classd2_1_1style_1_1Dependency_1a75081f57f5365436aad205d20441804d">_destroy</reimplementedby>
+        <param>
+          <type>Deps</type>
+          <declname>dependency</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="128" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::style::Dependency&lt; Type &gt;</label>
+        <link refid="classd2_1_1style_1_1Dependency"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::style::DependencyBase</label>
+        <link refid="classd2_1_1style_1_1DependencyBase"/>
+      </node>
+    </inheritancegraph>
+    <location file="core/tree/d2_theme.hpp" line="19" column="5" bodyfile="core/tree/d2_theme.hpp" bodystart="20" bodyend="129"/>
+    <listofallmembers>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a6e7b4e98b5a79e7caa2a13e198ce54da" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_cleanup_local</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a6a89c26049a11692d0bfb10296c6b6aa" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_close_slot_local</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a7a1e02f531f77f922359003f56b9fff6" prot="protected" virt="pure-virtual"><scope>d2::style::DependencyBase</scope><name>_destroy</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a374aff46907a9d68684c89965972a0ae" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_destroy_state_local</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1ad8771043f8fdd48e44661ee636a6602a" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_ensure_state</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a6d4fb381469417b6a99e92ee1d25401c" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_flush_pending_local</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a7461cd1997e47d77ba5d636dac4f4b04" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_insert_slot</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1ab979dd24f4a936ba8f58149af0feac19" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_make_handle</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a40f475135b6039847837bc69a015a890" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_next_generation</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a7ef64d669fe6a99066a20367f169d1ef" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_state</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a97a761898a9a28e3555bb9775a99eae3" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_sync</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1aec451aac0889c8c54c8316b145f645c8" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>_sync_async</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a901901c66534209ef3a2789716dfd094" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>DependencyBase</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1afa2a52be12a64021f1deb6e49e8e6990" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>DependencyBase</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1aa7814789ccd6d904ac38975f99ec9938" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>DependencyBase</name></member>
+      <member refid="classd2_1_1style_1_1DependencyBase_1a84c6a021d661e5e3134ad1a687260c34" prot="protected" virt="non-virtual"><scope>d2::style::DependencyBase</scope><name>~DependencyBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

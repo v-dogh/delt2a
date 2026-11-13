@@ -1,0 +1,403 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1internal_1_1DynamicIterator" kind="class" language="C++" prot="public">
+    <compoundname>d2::internal::DynamicIterator</compoundname>
+    <includes refid="d2__tree__element__frwd_8hpp" local="no">d2_tree_element_frwd.hpp</includes>
+    <innerclass refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor" prot="public">d2::internal::DynamicIterator::DynamicIteratorAdaptor</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1internal_1_1DynamicIterator_1a89312ebe7c3eb47a60c77808863697ce" prot="private" static="no" mutable="no">
+        <type>std::weak_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>std::weak_ptr&lt;ParentElement&gt; d2::internal::DynamicIterator::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::internal::DynamicIterator::_ptr</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="148" column="27" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="148" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1internal_1_1DynamicIterator_1a572bf9f7c3837856cf06afec1af75f2c" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor" kindref="compound">DynamicIteratorAdaptor</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;DynamicIteratorAdaptor&gt; d2::internal::DynamicIterator::_adaptor</definition>
+        <argsstring></argsstring>
+        <name>_adaptor</name>
+        <qualifiedname>d2::internal::DynamicIterator::_adaptor</qualifiedname>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="149" column="29" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="149" bodyend="149"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1ac33fb5e6aaaaa4dcc64fdfa95d712d9c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Adaptor</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>static auto d2::internal::DynamicIterator::make</definition>
+        <argsstring>(std::weak_ptr&lt; ParentElement &gt; ptr, Argv &amp;&amp;... args)</argsstring>
+        <name>make</name>
+        <qualifiedname>d2::internal::DynamicIterator::make</qualifiedname>
+        <param>
+          <type>std::weak_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="152" column="25" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="152" bodyend="157"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a160ca7cc8283f832931429c904ba1ca4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::internal::DynamicIterator::DynamicIterator</definition>
+        <argsstring>()=default</argsstring>
+        <name>DynamicIterator</name>
+        <qualifiedname>d2::internal::DynamicIterator::DynamicIterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="159" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a92132ff5576f8d7f0f51414efca451e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::internal::DynamicIterator::DynamicIterator</definition>
+        <argsstring>(std::nullptr_t)</argsstring>
+        <name>DynamicIterator</name>
+        <qualifiedname>d2::internal::DynamicIterator::DynamicIterator</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="160" column="13" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="160" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a04ee32b9592c05f8eb17dab4a3156eeb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::internal::DynamicIterator::DynamicIterator</definition>
+        <argsstring>(const DynamicIterator &amp;copy)</argsstring>
+        <name>DynamicIterator</name>
+        <qualifiedname>d2::internal::DynamicIterator::DynamicIterator</qualifiedname>
+        <param>
+          <type>const DynamicIterator &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="161" column="13" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="161" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a2808947aa54276959687b9de7ec2df91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::internal::DynamicIterator::DynamicIterator</definition>
+        <argsstring>(DynamicIterator &amp;&amp;)=default</argsstring>
+        <name>DynamicIterator</name>
+        <qualifiedname>d2::internal::DynamicIterator::DynamicIterator</qualifiedname>
+        <param>
+          <type>DynamicIterator &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="163" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1aba88f0ccec03b092be947a98295e1bdf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::internal::DynamicIterator::DynamicIterator</definition>
+        <argsstring>(std::weak_ptr&lt; ParentElement &gt; ptr, std::unique_ptr&lt; DynamicIteratorAdaptor &gt; adaptor)</argsstring>
+        <name>DynamicIterator</name>
+        <qualifiedname>d2::internal::DynamicIterator::DynamicIterator</qualifiedname>
+        <param>
+          <type>std::weak_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="structd2_1_1internal_1_1DynamicIterator_1_1DynamicIteratorAdaptor" kindref="compound">DynamicIteratorAdaptor</ref> &gt;</type>
+          <declname>adaptor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="164" column="13" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="164" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1adad452f48e69939caf890090515e6ce3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::DynamicIterator::increment</definition>
+        <argsstring>(int cnt=1)</argsstring>
+        <name>increment</name>
+        <qualifiedname>d2::internal::DynamicIterator::increment</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>cnt</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="167" column="18" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="15" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a8b298377ff8a0a2382f2b6461dda8ba5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::DynamicIterator::decrement</definition>
+        <argsstring>(int cnt=1)</argsstring>
+        <name>decrement</name>
+        <qualifiedname>d2::internal::DynamicIterator::decrement</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>cnt</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="168" column="18" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="20" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1afb32b890dd1c1c6a95ecb89da54828dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::internal::DynamicIterator::is_begin</definition>
+        <argsstring>() const</argsstring>
+        <name>is_begin</name>
+        <qualifiedname>d2::internal::DynamicIterator::is_begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="170" column="18" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="26" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1abf4bf1e82c467c9f72e98021da705977" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::internal::DynamicIterator::is_end</definition>
+        <argsstring>() const</argsstring>
+        <name>is_end</name>
+        <qualifiedname>d2::internal::DynamicIterator::is_end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="171" column="18" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="32" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1aa00bc52454336897ff9b85149bd1eb46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::internal::DynamicIterator::is_null</definition>
+        <argsstring>() const</argsstring>
+        <name>is_null</name>
+        <qualifiedname>d2::internal::DynamicIterator::is_null</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="172" column="18" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="38" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a7b449cb90091c3f1599118ba11bba2e6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::internal::DynamicIterator::is_equal</definition>
+        <argsstring>(DynamicIterator it) const</argsstring>
+        <name>is_equal</name>
+        <qualifiedname>d2::internal::DynamicIterator::is_equal</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1internal_1_1DynamicIterator_1a160ca7cc8283f832931429c904ba1ca4" kindref="member">DynamicIterator</ref></type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="173" column="18" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="42" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a91c5f31242d9f7c5daa89a0d0845de1a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>TreeIter d2::internal::DynamicIterator::value</definition>
+        <argsstring>() const</argsstring>
+        <name>value</name>
+        <qualifiedname>d2::internal::DynamicIterator::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="175" column="14" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="54" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1aa526d2693cdb6ac79c0a80ea0261f2b6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>TreeIter d2::internal::DynamicIterator::operator-&gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>d2::internal::DynamicIterator::operator-&gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="177" column="14" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="61" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a45ae5e433b066842889372dea6d8f811" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element" kindref="compound">Element</ref> &amp;</type>
+        <definition>Element &amp; d2::internal::DynamicIterator::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::internal::DynamicIterator::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="178" column="21" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="65" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a3b2f4cf59ea95dd0c65b897264f92b62" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::internal::DynamicIterator::operator==</definition>
+        <argsstring>(const DynamicIterator &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::internal::DynamicIterator::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1internal_1_1DynamicIterator_1a160ca7cc8283f832931429c904ba1ca4" kindref="member">DynamicIterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="180" column="18" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="70" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1aac3b19c398891801f6a2165574f8154a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::internal::DynamicIterator::operator!=</definition>
+        <argsstring>(const DynamicIterator &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>d2::internal::DynamicIterator::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1internal_1_1DynamicIterator_1a160ca7cc8283f832931429c904ba1ca4" kindref="member">DynamicIterator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="181" column="18" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="77" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1aec859c92b460de40832aacf25bcbec7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1internal_1_1DynamicIterator_1a160ca7cc8283f832931429c904ba1ca4" kindref="member">DynamicIterator</ref> &amp;</type>
+        <definition>DynamicIterator &amp; d2::internal::DynamicIterator::operator=</definition>
+        <argsstring>(const DynamicIterator &amp;copy)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::internal::DynamicIterator::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1internal_1_1DynamicIterator_1a160ca7cc8283f832931429c904ba1ca4" kindref="member">DynamicIterator</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="183" column="29" bodyfile="core/tree/d2_tree_parent.cpp" bodystart="82" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1internal_1_1DynamicIterator_1a06ee0c91aef1e6a36ee0f5faa238eaaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1internal_1_1DynamicIterator_1a160ca7cc8283f832931429c904ba1ca4" kindref="member">DynamicIterator</ref> &amp;</type>
+        <definition>DynamicIterator &amp; d2::internal::DynamicIterator::operator=</definition>
+        <argsstring>(DynamicIterator &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::internal::DynamicIterator::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1internal_1_1DynamicIterator_1a160ca7cc8283f832931429c904ba1ca4" kindref="member">DynamicIterator</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="184" column="29"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_element_frwd.hpp" line="117" column="9" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="118" bodyend="185"/>
+    <listofallmembers>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a572bf9f7c3837856cf06afec1af75f2c" prot="private" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>_adaptor</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a89312ebe7c3eb47a60c77808863697ce" prot="private" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a8b298377ff8a0a2382f2b6461dda8ba5" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>decrement</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a160ca7cc8283f832931429c904ba1ca4" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>DynamicIterator</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a92132ff5576f8d7f0f51414efca451e0" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>DynamicIterator</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a04ee32b9592c05f8eb17dab4a3156eeb" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>DynamicIterator</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a2808947aa54276959687b9de7ec2df91" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>DynamicIterator</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1aba88f0ccec03b092be947a98295e1bdf" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>DynamicIterator</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1adad452f48e69939caf890090515e6ce3" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>increment</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1afb32b890dd1c1c6a95ecb89da54828dc" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>is_begin</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1abf4bf1e82c467c9f72e98021da705977" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>is_end</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a7b449cb90091c3f1599118ba11bba2e6" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>is_equal</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1aa00bc52454336897ff9b85149bd1eb46" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>is_null</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1ac33fb5e6aaaaa4dcc64fdfa95d712d9c" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>make</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1aac3b19c398891801f6a2165574f8154a" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>operator!=</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a45ae5e433b066842889372dea6d8f811" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>operator*</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1aa526d2693cdb6ac79c0a80ea0261f2b6" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>operator-&gt;</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1aec859c92b460de40832aacf25bcbec7d" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>operator=</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a06ee0c91aef1e6a36ee0f5faa238eaaf" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>operator=</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a3b2f4cf59ea95dd0c65b897264f92b62" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>operator==</name></member>
+      <member refid="classd2_1_1internal_1_1DynamicIterator_1a91c5f31242d9f7c5daa89a0d0845de1a" prot="public" virt="non-virtual"><scope>d2::internal::DynamicIterator</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
