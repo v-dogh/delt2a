@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemScreen_1_1TreeData" kind="struct" language="C++" prot="private">
+    <compoundname>d2::sys::SystemScreen::TreeData</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1aa4c77a19b07228da99bdb5ea3ca448f6" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;, <ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref>)&gt;</type>
+        <definition>std::function&lt;void(TreeIter&lt;ParentElement&gt;, TreeState::ptr)&gt; d2::sys::SystemScreen::TreeData::rebuild</definition>
+        <argsstring></argsstring>
+        <name>rebuild</name>
+        <qualifiedname>d2::sys::SystemScreen::TreeData::rebuild</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="68" column="27" bodyfile="core/screen/d2_screen.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a87d48d52a6058a2ea20b0c6a15208d8b" prot="public" static="no" mutable="no">
+        <type>absl::node_hash_map&lt; std::pair&lt; <ref refid="classd2_1_1Element" kindref="compound">Element</ref> *, <ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">style::uai_property</ref> &gt;, AnimationState &gt;</type>
+        <definition>absl::node_hash_map&lt;std::pair&lt;Element*, style::uai_property&gt;, AnimationState&gt; d2::sys::SystemScreen::TreeData::animations</definition>
+        <argsstring></argsstring>
+        <name>animations</name>
+        <qualifiedname>d2::sys::SystemScreen::TreeData::animations</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="70" column="17" bodyfile="core/screen/d2_screen.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a9faa1f1e06f70b6bf620bef0235c094d" prot="public" static="no" mutable="no">
+        <type><ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref></type>
+        <definition>TreeState::ptr d2::sys::SystemScreen::TreeData::state</definition>
+        <argsstring></argsstring>
+        <name>state</name>
+        <qualifiedname>d2::sys::SystemScreen::TreeData::state</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="71" column="28" bodyfile="core/screen/d2_screen.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1afa6c29549534e7d861d1a8685da55dbc" prot="public" static="no" mutable="no">
+        <type><ref refid="classd2_1_1TreeTags" kindref="compound">TreeTags</ref></type>
+        <definition>TreeTags d2::sys::SystemScreen::TreeData::tags</definition>
+        <argsstring></argsstring>
+        <name>tags</name>
+        <qualifiedname>d2::sys::SystemScreen::TreeData::tags</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="72" column="22" bodyfile="core/screen/d2_screen.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a9b51098bbac3fcb95612f96899ddcbf8" prot="public" static="no" mutable="no">
+        <type><ref refid="classd2_1_1DynamicDependencyManager" kindref="compound">DynamicDependencyManager</ref></type>
+        <definition>DynamicDependencyManager d2::sys::SystemScreen::TreeData::deps</definition>
+        <argsstring></argsstring>
+        <name>deps</name>
+        <qualifiedname>d2::sys::SystemScreen::TreeData::deps</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="73" column="38" bodyfile="core/screen/d2_screen.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a32c52ba3ef5c202c075c2a5b0b503596" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::TreeData::unbuilt</definition>
+        <argsstring></argsstring>
+        <name>unbuilt</name>
+        <qualifiedname>d2::sys::SystemScreen::TreeData::unbuilt</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="74" column="18" bodyfile="core/screen/d2_screen.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a71d5fa34ce1d092acd9c34a4eaaf3e49" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::TreeData::swapped_out</definition>
+        <argsstring></argsstring>
+        <name>swapped_out</name>
+        <qualifiedname>d2::sys::SystemScreen::TreeData::swapped_out</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="75" column="18" bodyfile="core/screen/d2_screen.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>d2::DynamicDependencyManager</label>
+        <link refid="classd2_1_1DynamicDependencyManager"/>
+      </node>
+      <node id="2">
+        <label>d2::TreeTags</label>
+        <link refid="classd2_1_1TreeTags"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemScreen::TreeData</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>tags</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>deps</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/screen/d2_screen.hpp" line="66" column="9" bodyfile="core/screen/d2_screen.hpp" bodystart="67" bodyend="76"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a87d48d52a6058a2ea20b0c6a15208d8b" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TreeData</scope><name>animations</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a9b51098bbac3fcb95612f96899ddcbf8" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TreeData</scope><name>deps</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1aa4c77a19b07228da99bdb5ea3ca448f6" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TreeData</scope><name>rebuild</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a9faa1f1e06f70b6bf620bef0235c094d" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TreeData</scope><name>state</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a71d5fa34ce1d092acd9c34a4eaaf3e49" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TreeData</scope><name>swapped_out</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1afa6c29549534e7d861d1a8685da55dbc" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TreeData</scope><name>tags</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TreeData_1a32c52ba3ef5c202c075c2a5b0b503596" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TreeData</scope><name>unbuilt</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

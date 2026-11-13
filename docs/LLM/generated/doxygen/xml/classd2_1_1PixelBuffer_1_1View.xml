@@ -1,0 +1,685 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1PixelBuffer_1_1View" kind="class" language="C++" prot="public">
+    <compoundname>d2::PixelBuffer::View</compoundname>
+    <includes refid="d2__pixel_8hpp" local="no">d2_pixel.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1PixelBuffer_1_1View_1a89646eb86688fc6d46c7a75ff77b2159" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1PixelBuffer_1a0811954974ec98040ccde37cf00377e5" kindref="member">PixelBuffer</ref> *</type>
+        <definition>PixelBuffer* d2::PixelBuffer::View::buffer_</definition>
+        <argsstring></argsstring>
+        <name>buffer_</name>
+        <qualifiedname>d2::PixelBuffer::View::buffer_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="27" column="25" bodyfile="core/types/d2_pixel.hpp" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1PixelBuffer_1_1View_1a1935239d66bf6b4ad7154b886272b919" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::PixelBuffer::View::xoff_</definition>
+        <argsstring></argsstring>
+        <name>xoff_</name>
+        <qualifiedname>d2::PixelBuffer::View::xoff_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="28" column="17" bodyfile="core/types/d2_pixel.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1PixelBuffer_1_1View_1a5cda386a96e5f7d3d708444619b09307" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::PixelBuffer::View::yoff_</definition>
+        <argsstring></argsstring>
+        <name>yoff_</name>
+        <qualifiedname>d2::PixelBuffer::View::yoff_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="29" column="17" bodyfile="core/types/d2_pixel.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1PixelBuffer_1_1View_1a1034a613878c427434b06da2b4b1ea89" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::PixelBuffer::View::width_</definition>
+        <argsstring></argsstring>
+        <name>width_</name>
+        <qualifiedname>d2::PixelBuffer::View::width_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="30" column="17" bodyfile="core/types/d2_pixel.hpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1PixelBuffer_1_1View_1abb87f2b5132c2c7d409c7bb0601cbbf7" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::PixelBuffer::View::height_</definition>
+        <argsstring></argsstring>
+        <name>height_</name>
+        <qualifiedname>d2::PixelBuffer::View::height_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="31" column="17" bodyfile="core/types/d2_pixel.hpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a610605cd138cc44f67396240392228c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::View::View</definition>
+        <argsstring>()=default</argsstring>
+        <name>View</name>
+        <qualifiedname>d2::PixelBuffer::View::View</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="33" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1ab075159f3d5959e2263b47eab1501241" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::View::View</definition>
+        <argsstring>(std::nullptr_t)</argsstring>
+        <name>View</name>
+        <qualifiedname>d2::PixelBuffer::View::View</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="34" column="13" bodyfile="core/types/d2_pixel.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a567cf8f93ad1eb27c2d52da38f225523" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::View::View</definition>
+        <argsstring>(View &amp;&amp;)=default</argsstring>
+        <name>View</name>
+        <qualifiedname>d2::PixelBuffer::View::View</qualifiedname>
+        <param>
+          <type>View &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="35" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1abe1397e201dc0ffdd5abaccd03044481" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::View::View</definition>
+        <argsstring>(const View &amp;)=default</argsstring>
+        <name>View</name>
+        <qualifiedname>d2::PixelBuffer::View::View</qualifiedname>
+        <param>
+          <type>const View &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="36" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1ab8fac5ea0326d90fa578f107a80925f3" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::View::View</definition>
+        <argsstring>(PixelBuffer *ptr, int x, int y, int width, int height)</argsstring>
+        <name>View</name>
+        <qualifiedname>d2::PixelBuffer::View::View</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1a0811954974ec98040ccde37cf00377e5" kindref="member">PixelBuffer</ref> *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="37" column="22" bodyfile="core/types/d2_pixel.hpp" bodystart="37" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a648c2db909d63fbe3061477580177ab9" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::View::View</definition>
+        <argsstring>(const View &amp;ptr, int x, int y, int width, int height)</argsstring>
+        <name>View</name>
+        <qualifiedname>d2::PixelBuffer::View::View</qualifiedname>
+        <param>
+          <type>const View &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="45" column="22" bodyfile="core/types/d2_pixel.hpp" bodystart="45" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a7e96a6718ba9da06880d20e08e00bfe0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::span&lt; const <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &gt;</type>
+        <definition>std::span&lt; const pixel &gt; d2::PixelBuffer::View::data</definition>
+        <argsstring>() const</argsstring>
+        <name>data</name>
+        <qualifiedname>d2::PixelBuffer::View::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="56" column="23" bodyfile="core/types/d2_pixel.cpp" bodystart="12" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a3c740beef72182fa3960cee669cdf810" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::PixelBuffer::View::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>d2::PixelBuffer::View::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="58" column="18" bodyfile="core/types/d2_pixel.cpp" bodystart="30" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1ac4f06b6b1279fa99a1e6bffe216023dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::PixelBuffer::View::fill</definition>
+        <argsstring>(pixel px)</argsstring>
+        <name>fill</name>
+        <qualifiedname>d2::PixelBuffer::View::fill</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>px</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="59" column="18" bodyfile="core/types/d2_pixel.cpp" bodystart="35" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a512ef4d00eee5f55d8db5cca0d04109a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::PixelBuffer::View::fill</definition>
+        <argsstring>(pixel px, int x, int y, int width, int height)</argsstring>
+        <name>fill</name>
+        <qualifiedname>d2::PixelBuffer::View::fill</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>px</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="60" column="18" bodyfile="core/types/d2_pixel.cpp" bodystart="40" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a4e75729f73a6a9af92754f035376e486" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::PixelBuffer::View::fill_blend</definition>
+        <argsstring>(pixel px)</argsstring>
+        <name>fill_blend</name>
+        <qualifiedname>d2::PixelBuffer::View::fill_blend</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>px</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="61" column="18" bodyfile="core/types/d2_pixel.cpp" bodystart="47" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1ae3c68fbbf7deded859d0de48816e2fd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::PixelBuffer::View::fill_blend</definition>
+        <argsstring>(pixel px, int x, int y, int width, int height)</argsstring>
+        <name>fill_blend</name>
+        <qualifiedname>d2::PixelBuffer::View::fill_blend</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>px</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="62" column="18" bodyfile="core/types/d2_pixel.cpp" bodystart="51" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1af8d98f57acdb85ae68ac1451f23663ba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::PixelBuffer::View::compressed</definition>
+        <argsstring>() const</argsstring>
+        <name>compressed</name>
+        <qualifiedname>d2::PixelBuffer::View::compressed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="64" column="18" bodyfile="core/types/d2_pixel.cpp" bodystart="59" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1af4d302d53db48460612f0ec33ffa51a5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::PixelBuffer::View::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>d2::PixelBuffer::View::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="65" column="18" bodyfile="core/types/d2_pixel.cpp" bodystart="64" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a3b1a7a2f6b91b1bc55394d52cf2e6b92" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::PixelBuffer::View::width</definition>
+        <argsstring>() const</argsstring>
+        <name>width</name>
+        <qualifiedname>d2::PixelBuffer::View::width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="67" column="17" bodyfile="core/types/d2_pixel.cpp" bodystart="69" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1aef921c9cd015c6b876466c22e5442b4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::PixelBuffer::View::height</definition>
+        <argsstring>() const</argsstring>
+        <name>height</name>
+        <qualifiedname>d2::PixelBuffer::View::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="68" column="17" bodyfile="core/types/d2_pixel.cpp" bodystart="74" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1adf8661b59363d39a3c6db037055e2d5a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::PixelBuffer::View::xpos</definition>
+        <argsstring>() const</argsstring>
+        <name>xpos</name>
+        <qualifiedname>d2::PixelBuffer::View::xpos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="69" column="17" bodyfile="core/types/d2_pixel.cpp" bodystart="79" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a2f31465af182958e0546597902fa6180" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::PixelBuffer::View::ypos</definition>
+        <argsstring>() const</argsstring>
+        <name>ypos</name>
+        <qualifiedname>d2::PixelBuffer::View::ypos</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="70" column="17" bodyfile="core/types/d2_pixel.cpp" bodystart="83" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a27783a84717e3e68042b1dfcd19ddef6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &amp;</type>
+        <definition>const pixel &amp; d2::PixelBuffer::View::at</definition>
+        <argsstring>(int x, int y) const</argsstring>
+        <name>at</name>
+        <qualifiedname>d2::PixelBuffer::View::at</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="72" column="25" bodyfile="core/types/d2_pixel.cpp" bodystart="88" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1afd791ebab3bad47d3b35a4e0f4fd2b04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &amp;</type>
+        <definition>pixel &amp; d2::PixelBuffer::View::at</definition>
+        <argsstring>(int x, int y)</argsstring>
+        <name>at</name>
+        <qualifiedname>d2::PixelBuffer::View::at</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="73" column="19" bodyfile="core/types/d2_pixel.cpp" bodystart="94" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1aee8c27452d96508cc3e9d4ba5646d091" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &amp;</type>
+        <definition>const pixel &amp; d2::PixelBuffer::View::at</definition>
+        <argsstring>(int c) const</argsstring>
+        <name>at</name>
+        <qualifiedname>d2::PixelBuffer::View::at</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="75" column="25" bodyfile="core/types/d2_pixel.cpp" bodystart="101" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a6f828d1ea01407010a4ed59c0622b881" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &amp;</type>
+        <definition>pixel &amp; d2::PixelBuffer::View::at</definition>
+        <argsstring>(int c)</argsstring>
+        <name>at</name>
+        <qualifiedname>d2::PixelBuffer::View::at</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="76" column="19" bodyfile="core/types/d2_pixel.cpp" bodystart="110" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a798568c001f626b47b8b00ab21e305d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::PixelBuffer::View::inscribe</definition>
+        <argsstring>(int x, int y, const View &amp;sub)</argsstring>
+        <name>inscribe</name>
+        <qualifiedname>d2::PixelBuffer::View::inscribe</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1PixelBuffer_1_1View_1a610605cd138cc44f67396240392228c1" kindref="member">View</ref> &amp;</type>
+          <declname>sub</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="78" column="18" bodyfile="core/types/d2_pixel.cpp" bodystart="116" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a703143e6aa915807ece7c15fe6bd5b80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::PixelBuffer::View::image</definition>
+        <argsstring>(image::Raster::ptr source, image::Rect destination, image::Rect crop={})</argsstring>
+        <name>image</name>
+        <qualifiedname>d2::PixelBuffer::View::image</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1image_1_1Raster_1a36afa304406dbee46722c43f16aba98a" kindref="member">image::Raster::ptr</ref></type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">image::Rect</ref></type>
+          <declname>destination</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">image::Rect</ref></type>
+          <declname>crop</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="79" column="18" bodyfile="core/types/d2_pixel.cpp" bodystart="170" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a86939eca7fd2d9712a2adc3e27180ed8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1image_1_1Scene" kindref="compound">image::Scene</ref></type>
+        <definition>image::Scene d2::PixelBuffer::View::image_scene</definition>
+        <argsstring>() const</argsstring>
+        <name>image_scene</name>
+        <qualifiedname>d2::PixelBuffer::View::image_scene</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="80" column="26" bodyfile="core/types/d2_pixel.cpp" bodystart="181" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a79f0f2b5909404b1158fbd5ac22f999a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::PixelBuffer::View::has_images</definition>
+        <argsstring>() const</argsstring>
+        <name>has_images</name>
+        <qualifiedname>d2::PixelBuffer::View::has_images</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="81" column="18" bodyfile="core/types/d2_pixel.hpp" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1aec883f7e7c9626b68f3047e42b3e5137" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &gt;</type>
+        <definition>std::vector&lt; pixel &gt; d2::PixelBuffer::View::unpack</definition>
+        <argsstring>() const</argsstring>
+        <name>unpack</name>
+        <qualifiedname>d2::PixelBuffer::View::unpack</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="82" column="25" bodyfile="core/types/d2_pixel.cpp" bodystart="189" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1afa1de1e5007825aa5933c098237a5469" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1PixelBuffer_1_1View_1a610605cd138cc44f67396240392228c1" kindref="member">View</ref> &amp;</type>
+        <definition>View &amp; d2::PixelBuffer::View::operator=</definition>
+        <argsstring>(const View &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::PixelBuffer::View::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1PixelBuffer_1_1View_1a610605cd138cc44f67396240392228c1" kindref="member">View</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="84" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1PixelBuffer_1_1View_1a6525b2abb2c5297b34a84e6e88fa5edc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1PixelBuffer_1_1View_1a610605cd138cc44f67396240392228c1" kindref="member">View</ref> &amp;</type>
+        <definition>View &amp; d2::PixelBuffer::View::operator=</definition>
+        <argsstring>(View &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::PixelBuffer::View::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View_1a610605cd138cc44f67396240392228c1" kindref="member">View</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_pixel.hpp" line="85" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_pixel.hpp" line="24" column="9" bodyfile="core/types/d2_pixel.hpp" bodystart="25" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a27783a84717e3e68042b1dfcd19ddef6" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>at</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1afd791ebab3bad47d3b35a4e0f4fd2b04" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>at</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1aee8c27452d96508cc3e9d4ba5646d091" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>at</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a6f828d1ea01407010a4ed59c0622b881" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>at</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a89646eb86688fc6d46c7a75ff77b2159" prot="private" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>buffer_</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a3c740beef72182fa3960cee669cdf810" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>clear</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1af8d98f57acdb85ae68ac1451f23663ba" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>compressed</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a7e96a6718ba9da06880d20e08e00bfe0" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>data</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1af4d302d53db48460612f0ec33ffa51a5" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>empty</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1ac4f06b6b1279fa99a1e6bffe216023dc" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>fill</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a512ef4d00eee5f55d8db5cca0d04109a" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>fill</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a4e75729f73a6a9af92754f035376e486" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>fill_blend</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1ae3c68fbbf7deded859d0de48816e2fd0" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>fill_blend</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a79f0f2b5909404b1158fbd5ac22f999a" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>has_images</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1aef921c9cd015c6b876466c22e5442b4a" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>height</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1abb87f2b5132c2c7d409c7bb0601cbbf7" prot="private" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>height_</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a703143e6aa915807ece7c15fe6bd5b80" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>image</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a86939eca7fd2d9712a2adc3e27180ed8" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>image_scene</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a798568c001f626b47b8b00ab21e305d3" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>inscribe</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1afa1de1e5007825aa5933c098237a5469" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>operator=</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a6525b2abb2c5297b34a84e6e88fa5edc" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>operator=</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1aec883f7e7c9626b68f3047e42b3e5137" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>unpack</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a610605cd138cc44f67396240392228c1" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>View</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1ab075159f3d5959e2263b47eab1501241" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>View</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a567cf8f93ad1eb27c2d52da38f225523" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>View</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1abe1397e201dc0ffdd5abaccd03044481" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>View</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1ab8fac5ea0326d90fa578f107a80925f3" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>View</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a648c2db909d63fbe3061477580177ab9" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>View</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a3b1a7a2f6b91b1bc55394d52cf2e6b92" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>width</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a1034a613878c427434b06da2b4b1ea89" prot="private" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>width_</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a1935239d66bf6b4ad7154b886272b919" prot="private" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>xoff_</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1adf8661b59363d39a3c6db037055e2d5a" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>xpos</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a5cda386a96e5f7d3d708444619b09307" prot="private" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>yoff_</name></member>
+      <member refid="classd2_1_1PixelBuffer_1_1View_1a2f31465af182958e0546597902fa6180" prot="public" virt="non-virtual"><scope>d2::PixelBuffer::View</scope><name>ypos</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

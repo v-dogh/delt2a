@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1SignalManifest_1_1CaseMatches_3_01Ev_00_01Candidate_00_01true_01_4" kind="struct" language="C++" prot="private">
+    <compoundname>d2::SignalManifest::CaseMatches&lt; Ev, Candidate, true &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>auto</type>
+        <declname>Ev</declname>
+        <defname>Ev</defname>
+      </param>
+      <param>
+        <type>typename Candidate</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::SignalManifest&lt; Spec, Specs &gt;::CaseMatches&lt; Ev, Candidate, true &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::SignalManifest&lt; Spec, Specs &gt;::CaseMatches&lt; Ev, Candidate, true &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_signal_handler.hpp" line="219" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="220" bodyend="221"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

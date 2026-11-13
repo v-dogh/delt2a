@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1impl_1_1MergeDeps_3_01std_1_1tuple_3_01DepsA_8_8_8_01_4_00_01DepsB_8_8_8_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::impl::MergeDeps&lt; std::tuple&lt; DepsA... &gt;, DepsB... &gt;</compoundname>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>DepsA</declname>
+        <defname>DepsA</defname>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>DepsB</declname>
+        <defname>DepsB</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1impl_1_1MergeDeps_3_01std_1_1tuple_3_01DepsA_8_8_8_01_4_00_01DepsB_8_8_8_01_4_1a363363450d9a7dd8a56e093bf02e271d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::impl::MergeDeps&lt; std::tuple&lt; DepsA... &gt;, DepsB... &gt;::list</definition>
+        <argsstring>()</argsstring>
+        <name>list</name>
+        <qualifiedname>d2::sys::impl::MergeDeps&lt; std::tuple&lt; DepsA... &gt;, DepsB... &gt;::list</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="190" column="25" bodyfile="core/io/d2_module.hpp" bodystart="190" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1impl_1_1MergeDeps_3_01std_1_1tuple_3_01DepsA_8_8_8_01_4_00_01DepsB_8_8_8_01_4_1a73ebab05ad13d17b707cf7cfa699d17d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::impl::MergeDeps&lt; std::tuple&lt; DepsA... &gt;, DepsB... &gt;::names</definition>
+        <argsstring>()</argsstring>
+        <name>names</name>
+        <qualifiedname>d2::sys::impl::MergeDeps&lt; std::tuple&lt; DepsA... &gt;, DepsB... &gt;::names</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="194" column="25" bodyfile="core/io/d2_module.hpp" bodystart="194" bodyend="200"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_module.hpp" line="188" column="9" bodyfile="core/io/d2_module.hpp" bodystart="189" bodyend="201"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1impl_1_1MergeDeps_3_01std_1_1tuple_3_01DepsA_8_8_8_01_4_00_01DepsB_8_8_8_01_4_1a363363450d9a7dd8a56e093bf02e271d" prot="public" virt="non-virtual"><scope>d2::sys::impl::MergeDeps&lt; std::tuple&lt; DepsA... &gt;, DepsB... &gt;</scope><name>list</name></member>
+      <member refid="structd2_1_1sys_1_1impl_1_1MergeDeps_3_01std_1_1tuple_3_01DepsA_8_8_8_01_4_00_01DepsB_8_8_8_01_4_1a73ebab05ad13d17b707cf7cfa699d17d" prot="public" virt="non-virtual"><scope>d2::sys::impl::MergeDeps&lt; std::tuple&lt; DepsA... &gt;, DepsB... &gt;</scope><name>names</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

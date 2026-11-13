@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1style_1_1impl" kind="namespace" language="C++">
+    <compoundname>d2::style::impl</compoundname>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper" prot="public">d2::style::impl::BitFlagPtrWrapper</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1InterfaceHelper" prot="public">d2::style::impl::InterfaceHelper</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1is__dynavar__impl" prot="public">d2::style::impl::is_dynavar_impl</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1is__dynavar__impl_3_01Dynavar_3_01Func_00_01Dep_01_4_01_4" prot="public">d2::style::impl::is_dynavar_impl&lt; Dynavar&lt; Func, Dep &gt; &gt;</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1is__var__impl" prot="public">d2::style::impl::is_var_impl</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1is__var__impl_3_01Dependency_3_01Arg_01_4_01_4" prot="public">d2::style::impl::is_var_impl&lt; Dependency&lt; Arg &gt; &gt;</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1LastImpl" prot="public">d2::style::impl::LastImpl</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1LastImpl_3_01Last_01_4" prot="public">d2::style::impl::LastImpl&lt; Last &gt;</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1OffsetHelper" prot="public">d2::style::impl::OffsetHelper</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1OffsetHelper_3_01BaseOffset_00_01Current_00_01First_01_4" prot="public">d2::style::impl::OffsetHelper&lt; BaseOffset, Current, First &gt;</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1OffsetHelperImpl" prot="public">d2::style::impl::OffsetHelperImpl</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1OffsetHelperImpl_3_01Search_00_01Current_00_01CurrentType_00_01Next_01_4" prot="public">d2::style::impl::OffsetHelperImpl&lt; Search, Current, CurrentType, Next &gt;</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1ResolveChain" prot="public">d2::style::impl::ResolveChain</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1ResolveChain_3_01Chain_01_4" prot="public">d2::style::impl::ResolveChain&lt; Chain &gt;</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1XAllocInterface" prot="public">d2::style::impl::XAllocInterface</innerclass>
+    <innerclass refid="structd2_1_1style_1_1impl_1_1XAllocInterfaceTracker" prot="public">d2::style::impl::XAllocInterfaceTracker</innerclass>
+    <innerconcept refid="conceptd2_1_1style_1_1impl_1_1chained">d2::style::impl::chained</innerconcept>
+    <innerconcept refid="conceptd2_1_1style_1_1impl_1_1is__dynavar">d2::style::impl::is_dynavar</innerconcept>
+    <innerconcept refid="conceptd2_1_1style_1_1impl_1_1is__var">d2::style::impl::is_var</innerconcept>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaced2_1_1style_1_1impl_1aec2cfd412eb26ee7e5f2ac8192213f86" prot="public" static="no">
+        <type><ref refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper" kindref="compound">BitFlagPtrWrapper</ref>&lt; unsigned char &gt;</type>
+        <definition>using d2::style::impl::uchar_bit_ptr = BitFlagPtrWrapper&lt;unsigned char&gt;</definition>
+        <argsstring></argsstring>
+        <name>uchar_bit_ptr</name>
+        <qualifiedname>d2::style::impl::uchar_bit_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="698" column="9" bodyfile="core/tree/d2_styles.hpp" bodystart="698" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="19" column="5"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1image_1_1RGBA" kind="struct" language="C++" prot="public">
+    <compoundname>d2::image::RGBA</compoundname>
+    <includes refid="core_2types_2d2__image_8hpp" local="no">d2_image.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1image_1_1RGBA_1a4ef37d4c9f1de5260c083a4f39683471" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char d2::image::RGBA::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <qualifiedname>d2::image::RGBA::r</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="12" column="23" bodyfile="core/types/d2_image.hpp" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1image_1_1RGBA_1a5462e1ab3f66ae32995bebe2ca6e6059" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char d2::image::RGBA::g</definition>
+        <argsstring></argsstring>
+        <name>g</name>
+        <qualifiedname>d2::image::RGBA::g</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="12" column="25" bodyfile="core/types/d2_image.hpp" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1image_1_1RGBA_1afe30aa61f34388a750d546fcb3663150" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char d2::image::RGBA::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <qualifiedname>d2::image::RGBA::b</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="12" column="27" bodyfile="core/types/d2_image.hpp" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1image_1_1RGBA_1a5723f27e7b30c9bbb4b78f5f7b5426c7" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char d2::image::RGBA::a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <qualifiedname>d2::image::RGBA::a</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="12" column="29" bodyfile="core/types/d2_image.hpp" bodystart="12" bodyend="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1image_1_1RGBA_1a3623bc8049b63fb272e018d36ffb6736" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::image::RGBA::operator&lt;=&gt;</definition>
+        <argsstring>(const RGBA &amp;) const =default</argsstring>
+        <name>operator&lt;=&gt;</name>
+        <qualifiedname>d2::image::RGBA::operator&lt;=&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1image_1_1RGBA" kindref="compound">RGBA</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="13" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_image.hpp" line="10" column="5" bodyfile="core/types/d2_image.hpp" bodystart="11" bodyend="14"/>
+    <listofallmembers>
+      <member refid="structd2_1_1image_1_1RGBA_1a5723f27e7b30c9bbb4b78f5f7b5426c7" prot="public" virt="non-virtual"><scope>d2::image::RGBA</scope><name>a</name></member>
+      <member refid="structd2_1_1image_1_1RGBA_1afe30aa61f34388a750d546fcb3663150" prot="public" virt="non-virtual"><scope>d2::image::RGBA</scope><name>b</name></member>
+      <member refid="structd2_1_1image_1_1RGBA_1a5462e1ab3f66ae32995bebe2ca6e6059" prot="public" virt="non-virtual"><scope>d2::image::RGBA</scope><name>g</name></member>
+      <member refid="structd2_1_1image_1_1RGBA_1a3623bc8049b63fb272e018d36ffb6736" prot="public" virt="non-virtual"><scope>d2::image::RGBA</scope><name>operator&lt;=&gt;</name></member>
+      <member refid="structd2_1_1image_1_1RGBA_1a4ef37d4c9f1de5260c083a4f39683471" prot="public" virt="non-virtual"><scope>d2::image::RGBA</scope><name>r</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

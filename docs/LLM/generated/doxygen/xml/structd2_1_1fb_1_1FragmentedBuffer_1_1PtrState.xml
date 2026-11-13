@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState" kind="struct" language="C++" prot="private">
+    <compoundname>d2::fb::FragmentedBuffer::PtrState</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState_1acdeee93757a252b4e8e48a0bacdf6eb0" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::fb::FragmentedBuffer::PtrState::abs</definition>
+        <argsstring></argsstring>
+        <name>abs</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::PtrState::abs</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="196" column="25" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="196" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState_1a846c7490b869ef2a688ce3ce449cdf78" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::fb::FragmentedBuffer::PtrState::rel</definition>
+        <argsstring></argsstring>
+        <name>rel</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::PtrState::rel</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="197" column="25" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="197" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState_1a90eec9b9ae1ff13eb64adac02f7c1c0e" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::fb::FragmentedBuffer::PtrState::line_off</definition>
+        <argsstring></argsstring>
+        <name>line_off</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::PtrState::line_off</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="198" column="25" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="198" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState_1a2016d211701d2fea2b37acbb4ddc053b" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::fb::FragmentedBuffer::PtrState::prev_line_off</definition>
+        <argsstring></argsstring>
+        <name>prev_line_off</name>
+        <qualifiedname>d2::fb::FragmentedBuffer::PtrState::prev_line_off</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="199" column="25" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="199" bodyend="199"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_fragmented_buffer.hpp" line="187" column="9" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="188" bodyend="200"/>
+    <listofallmembers>
+      <member refid="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState_1acdeee93757a252b4e8e48a0bacdf6eb0" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer::PtrState</scope><name>abs</name></member>
+      <member refid="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState_1a90eec9b9ae1ff13eb64adac02f7c1c0e" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer::PtrState</scope><name>line_off</name></member>
+      <member refid="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState_1a2016d211701d2fea2b37acbb4ddc053b" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer::PtrState</scope><name>prev_line_off</name></member>
+      <member refid="structd2_1_1fb_1_1FragmentedBuffer_1_1PtrState_1a846c7490b869ef2a688ce3ce449cdf78" prot="public" virt="non-virtual"><scope>d2::fb::FragmentedBuffer::PtrState</scope><name>rel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

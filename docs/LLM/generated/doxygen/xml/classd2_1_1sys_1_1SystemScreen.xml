@@ -1,0 +1,1993 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemScreen" kind="class" language="C++" prot="public">
+    <compoundname>d2::sys::SystemScreen</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1Module" prot="public" virt="non-virtual">d2::sys::Module&lt; SystemScreen, &quot;Screen&quot;, Access::TUnsafe, Load::Immediate, SystemInput, SystemOutput &gt;</basecompoundref>
+    <includes refid="d2__screen_8hpp" local="no">d2_screen.hpp</includes>
+    <innerclass refid="structd2_1_1sys_1_1SystemScreen_1_1AnimationState" prot="private">d2::sys::SystemScreen::AnimationState</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1SystemScreen_1_1TreeData" prot="private">d2::sys::SystemScreen::TreeData</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState" prot="private">d2::sys::SystemScreen::TempTreeState</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Event</name>
+        <qualifiedname>d2::sys::SystemScreen::Event</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a9d723d04c40bfd81835c0766a698cf63" prot="public">
+          <name>Resize</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a14c109e59e7d4478a7dad57d3b5d235b" prot="public">
+          <name>PreRedraw</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989acc05d7249a3b22d7ab1c2ed6b27b2317" prot="public">
+          <name>PostRedraw</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a9edb25f45590ca0fb6e31f1bc5ee96b8" prot="public">
+          <name>KeyInput</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a03dfabba0777c81647ec4028aa91c154" prot="public">
+          <name>KeySequenceInput</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a52282462b49e177046da79ce2b93b1c0" prot="public">
+          <name>KeyMouseInput</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989ac2770ad109c8063ce69a3608a9a16c08" prot="public">
+          <name>MouseMoved</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a58f4ecbf00c252a02de6da0d82592242" prot="public">
+          <name>MouseInput</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a06933067aafd48425d67bcb01bba5cb6" prot="public">
+          <name>Update</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989aee2d03d592b616df477d61281732af99" prot="public">
+          <name>TreeSwap</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="34" column="9" bodyfile="core/screen/d2_screen.hpp" bodystart="35" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemScreen_1a750a8933f175bc040e597fd960b8fea8" prot="public" static="no">
+        <type><ref refid="classd2_1_1SignalManifest" kindref="compound">SignalManifest</ref>&lt; <ref refid="structd2_1_1EvDefault" kindref="compound">EvDefault</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989" kindref="member">Event</ref> &gt;, <ref refid="structd2_1_1EvCase" kindref="compound">EvCase</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a9d723d04c40bfd81835c0766a698cf63" kindref="member">Event::Resize</ref>, <ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref> &gt;, <ref refid="structd2_1_1EvCase" kindref="compound">EvCase</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a9edb25f45590ca0fb6e31f1bc5ee96b8" kindref="member">Event::KeyInput</ref>, <ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp; &gt;, <ref refid="structd2_1_1EvCase" kindref="compound">EvCase</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a03dfabba0777c81647ec4028aa91c154" kindref="member">Event::KeySequenceInput</ref>, <ref refid="namespaced2_1a7fe2118fa5d105aea8dc60a5aca629cc" kindref="member">d2::string_view</ref> &gt;, <ref refid="structd2_1_1EvCase" kindref="compound">EvCase</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a52282462b49e177046da79ce2b93b1c0" kindref="member">Event::KeyMouseInput</ref>, <ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp; &gt;, <ref refid="structd2_1_1EvCase" kindref="compound">EvCase</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989ac2770ad109c8063ce69a3608a9a16c08" kindref="member">Event::MouseMoved</ref>, <ref refid="structd2_1_1Position" kindref="compound">Position</ref> &gt;, <ref refid="structd2_1_1EvCase" kindref="compound">EvCase</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989a58f4ecbf00c252a02de6da0d82592242" kindref="member">Event::MouseInput</ref>, <ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp; &gt;, <ref refid="structd2_1_1EvCase" kindref="compound">EvCase</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989aee2d03d592b616df477d61281732af99" kindref="member">Event::TreeSwap</ref>, std::string, std::string &gt; &gt;</type>
+        <definition>using d2::sys::SystemScreen::EventManifest = SignalManifest&lt;
+           EvDefault&lt;Event&gt;,
+           
+           EvCase&lt;Event::Resize, BoundingBox&gt;,
+           EvCase&lt;Event::KeyInput, in::InputFrame&amp;&gt;,
+           EvCase&lt;Event::KeySequenceInput, d2::string_view&gt;,
+           EvCase&lt;Event::KeyMouseInput, in::InputFrame&amp;&gt;,
+           EvCase&lt;Event::MouseMoved, Position&gt;,
+           EvCase&lt;Event::MouseInput, in::InputFrame&amp;&gt;,
+           
+           EvCase&lt;Event::TreeSwap, std::string, std::string&gt;
+       &gt;</definition>
+        <argsstring></argsstring>
+        <name>EventManifest</name>
+        <qualifiedname>d2::sys::SystemScreen::EventManifest</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="47" column="9" bodyfile="core/screen/d2_screen.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemScreen_1ae218dbbdcda1a8e093edf796ebe32ec1" prot="public" static="no">
+        <type><ref refid="classd2_1_1MatrixModel_1aa08b921ef07dc6a42626be5b6d9b8df9" kindref="member">MatrixModel::ModelType</ref></type>
+        <definition>using d2::sys::SystemScreen::ModelType = MatrixModel::ModelType</definition>
+        <argsstring></argsstring>
+        <name>ModelType</name>
+        <qualifiedname>d2::sys::SystemScreen::ModelType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="59" column="9" bodyfile="core/screen/d2_screen.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemScreen_1af9b685623c63247d5e94851359591802" prot="private" static="no">
+        <type>std::shared_ptr&lt; TreeData &gt;</type>
+        <definition>using d2::sys::SystemScreen::tree = std::shared_ptr&lt;TreeData&gt;</definition>
+        <argsstring></argsstring>
+        <name>tree</name>
+        <qualifiedname>d2::sys::SystemScreen::tree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="77" column="9" bodyfile="core/screen/d2_screen.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemScreen_1a904f37269f7ad52165900c8b0c6cfdcb" prot="private" static="no">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;</type>
+        <definition>using d2::sys::SystemScreen::eptr = TreeIter&lt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>eptr</name>
+        <qualifiedname>d2::sys::SystemScreen::eptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="78" column="9" bodyfile="core/screen/d2_screen.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1affbfd08ec7b9009e9cea7aeaf8107493" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Signals_1_1Signal" kindref="compound">Signals::Signal</ref></type>
+        <definition>Signals::Signal d2::sys::SystemScreen::_sig</definition>
+        <argsstring></argsstring>
+        <name>_sig</name>
+        <qualifiedname>d2::sys::SystemScreen::_sig</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="90" column="25" bodyfile="core/screen/d2_screen.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1aed57066e82b62d75a7cac34f3092a053" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; std::string, tree &gt;</type>
+        <definition>absl::flat_hash_map&lt;std::string, tree&gt; d2::sys::SystemScreen::_trees</definition>
+        <argsstring></argsstring>
+        <name>_trees</name>
+        <qualifiedname>d2::sys::SystemScreen::_trees</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="92" column="29" bodyfile="core/screen/d2_screen.hpp" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1a7b672f186882d3ef85163f1f86d5c11a" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; std::string, <ref refid="classd2_1_1MatrixModel_1a9f8f4438cdd7d1383d98715a61aeb893" kindref="member">MatrixModel::ptr</ref> &gt;</type>
+        <definition>absl::flat_hash_map&lt;std::string, MatrixModel::ptr&gt; d2::sys::SystemScreen::_models</definition>
+        <argsstring></argsstring>
+        <name>_models</name>
+        <qualifiedname>d2::sys::SystemScreen::_models</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="93" column="29" bodyfile="core/screen/d2_screen.hpp" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1af9b158464b9887eea67974d4a72be068" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; std::size_t, <ref refid="classd2_1_1style_1_1Theme_1ae2b911c9b8525c4f0e2c11bc9207bb0a" kindref="member">style::Theme::ptr</ref> &gt;</type>
+        <definition>absl::flat_hash_map&lt;std::size_t, style::Theme::ptr&gt; d2::sys::SystemScreen::_themes</definition>
+        <argsstring></argsstring>
+        <name>_themes</name>
+        <qualifiedname>d2::sys::SystemScreen::_themes</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="94" column="29" bodyfile="core/screen/d2_screen.hpp" bodystart="94" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1a83c14d012d68a64c56b2fedd9ee6c557" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> *</type>
+        <definition>in::InputFrame* d2::sys::SystemScreen::_frame</definition>
+        <argsstring></argsstring>
+        <name>_frame</name>
+        <qualifiedname>d2::sys::SystemScreen::_frame</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="96" column="24" bodyfile="core/screen/d2_screen.hpp" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1a2b9b6f4a23571c5279a66e642042fa0b" prot="private" static="no" mutable="no">
+        <type>TempTreeState</type>
+        <definition>TempTreeState d2::sys::SystemScreen::_ts</definition>
+        <argsstring></argsstring>
+        <name>_ts</name>
+        <qualifiedname>d2::sys::SystemScreen::_ts</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="97" column="23" bodyfile="core/screen/d2_screen.hpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1a48ede6e07c4140acd5057a4e47d747be" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemScreen::_fps_ctr</definition>
+        <argsstring></argsstring>
+        <name>_fps_ctr</name>
+        <qualifiedname>d2::sys::SystemScreen::_fps_ctr</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="99" column="21" bodyfile="core/screen/d2_screen.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1adba1e9f8e703105f18c061a490b040d5" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemScreen::_fps_avg</definition>
+        <argsstring></argsstring>
+        <name>_fps_avg</name>
+        <qualifiedname>d2::sys::SystemScreen::_fps_avg</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="100" column="21" bodyfile="core/screen/d2_screen.hpp" bodystart="100" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1a458877122ea41f3b6236dcd46e23bfe3" prot="private" static="no" mutable="no">
+        <type>std::chrono::steady_clock::time_point</type>
+        <definition>std::chrono::steady_clock::time_point d2::sys::SystemScreen::_last_mes</definition>
+        <argsstring></argsstring>
+        <name>_last_mes</name>
+        <qualifiedname>d2::sys::SystemScreen::_last_mes</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="101" column="47" bodyfile="core/screen/d2_screen.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1aa9dc3c7695085305c423c5f7f93324d6" prot="private" static="no" mutable="no">
+        <type>std::chrono::microseconds</type>
+        <definition>std::chrono::microseconds d2::sys::SystemScreen::_prev_delta</definition>
+        <argsstring></argsstring>
+        <name>_prev_delta</name>
+        <qualifiedname>d2::sys::SystemScreen::_prev_delta</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="102" column="35" bodyfile="core/screen/d2_screen.hpp" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1aa6a846be829e7e1630aff6f0b9c08a7e" prot="private" static="no" mutable="no">
+        <type>std::chrono::milliseconds</type>
+        <definition>std::chrono::milliseconds d2::sys::SystemScreen::_restore_refresh</definition>
+        <argsstring></argsstring>
+        <name>_restore_refresh</name>
+        <qualifiedname>d2::sys::SystemScreen::_restore_refresh</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="103" column="35" bodyfile="core/screen/d2_screen.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1a3d83ffd3633ac8a11d073134418d5bf2" prot="private" static="no" mutable="no">
+        <type>std::chrono::milliseconds</type>
+        <definition>std::chrono::milliseconds d2::sys::SystemScreen::_refresh_rate</definition>
+        <argsstring></argsstring>
+        <name>_refresh_rate</name>
+        <qualifiedname>d2::sys::SystemScreen::_refresh_rate</qualifiedname>
+        <initializer>{std::chrono::milliseconds::max()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="104" column="35" bodyfile="core/screen/d2_screen.hpp" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1a3a7d1b000ca6b4aac734ec7056893ca8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::_is_stop</definition>
+        <argsstring></argsstring>
+        <name>_is_stop</name>
+        <qualifiedname>d2::sys::SystemScreen::_is_stop</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="105" column="14" bodyfile="core/screen/d2_screen.hpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemScreen_1a2a3b1e96bd0b2b79f2328d560d563e18" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::_is_running</definition>
+        <argsstring></argsstring>
+        <name>_is_running</name>
+        <qualifiedname>d2::sys::SystemScreen::_is_running</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="106" column="14" bodyfile="core/screen/d2_screen.hpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a368b4be8b34f14a1b09080613c06bf94" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemScreen::Status d2::sys::SystemScreen::_load_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_load_impl</name>
+        <qualifiedname>d2::sys::SystemScreen::_load_impl</qualifiedname>
+        <reimplements refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3">_load_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="108" column="24" bodyfile="core/screen/d2_screen.cpp" bodystart="64" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ab6effeea66a4713269015da96fb68c26" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemScreen::Status d2::sys::SystemScreen::_unload_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_unload_impl</name>
+        <qualifiedname>d2::sys::SystemScreen::_unload_impl</qualifiedname>
+        <reimplements refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730">_unload_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="109" column="24" bodyfile="core/screen/d2_screen.cpp" bodystart="69" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a20ea97fd639729bfa5b865af7bb09317" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>eptr</type>
+        <definition>SystemScreen::eptr d2::sys::SystemScreen::_lca</definition>
+        <argsstring>(eptr a, eptr b)</argsstring>
+        <name>_lca</name>
+        <qualifiedname>d2::sys::SystemScreen::_lca</qualifiedname>
+        <param>
+          <type>eptr</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>eptr</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="111" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="315" bodyend="329"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a9260e63721bc88d2e8ad19252146cea8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_keynav_cycle_up</definition>
+        <argsstring>(eptr ptr)</argsstring>
+        <name>_keynav_cycle_up</name>
+        <qualifiedname>d2::sys::SystemScreen::_keynav_cycle_up</qualifiedname>
+        <param>
+          <type>eptr</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="113" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="75" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1aca33cac02dc7016880ccd90d6e0e30f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_keynav_cycle</definition>
+        <argsstring>()</argsstring>
+        <name>_keynav_cycle</name>
+        <qualifiedname>d2::sys::SystemScreen::_keynav_cycle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="114" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="104" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1aebdcf34378132b76fc1e54158195c4cc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_keynav_cycle_up_reverse</definition>
+        <argsstring>()</argsstring>
+        <name>_keynav_cycle_up_reverse</name>
+        <qualifiedname>d2::sys::SystemScreen::_keynav_cycle_up_reverse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="115" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="131" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a1fcd2e5ba7f941bd0a70557bebe9805c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_keynav_cycle_reverse</definition>
+        <argsstring>()</argsstring>
+        <name>_keynav_cycle_reverse</name>
+        <qualifiedname>d2::sys::SystemScreen::_keynav_cycle_reverse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="116" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="157" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a7f66831da48fbe4c7f0f278430d5a0a5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_keynav_cycle_macro</definition>
+        <argsstring>()</argsstring>
+        <name>_keynav_cycle_macro</name>
+        <qualifiedname>d2::sys::SystemScreen::_keynav_cycle_macro</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="117" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="189" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a6675c5016b25a97f87421f9531038179" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_keynav_cycle_macro_reverse</definition>
+        <argsstring>()</argsstring>
+        <name>_keynav_cycle_macro_reverse</name>
+        <qualifiedname>d2::sys::SystemScreen::_keynav_cycle_macro_reverse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="118" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="207" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1aa524eba6cf80186c4e117e7bd0661d17" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::_keynav_has_input</definition>
+        <argsstring>() const</argsstring>
+        <name>_keynav_has_input</name>
+        <qualifiedname>d2::sys::SystemScreen::_keynav_has_input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="120" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="227" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ab36dad424e4d4d1930ab07e48de21323" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::_keynav_prepare</definition>
+        <argsstring>()</argsstring>
+        <name>_keynav_prepare</name>
+        <qualifiedname>d2::sys::SystemScreen::_keynav_prepare</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="121" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="245" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ab32fddf13f57285149ac63cb729fb35b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_keynav_apply</definition>
+        <argsstring>()</argsstring>
+        <name>_keynav_apply</name>
+        <qualifiedname>d2::sys::SystemScreen::_keynav_apply</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="122" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="271" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a46206244d15847086f9d164c2991d6bb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_trigger_events</definition>
+        <argsstring>()</argsstring>
+        <name>_trigger_events</name>
+        <qualifiedname>d2::sys::SystemScreen::_trigger_events</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="124" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="364" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1aba1066532e40969b910881322c1c7d99" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_trigger_focused_events</definition>
+        <argsstring>(in::InputFrame &amp;frame, eptr ptr)</argsstring>
+        <name>_trigger_focused_events</name>
+        <qualifiedname>d2::sys::SystemScreen::_trigger_focused_events</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>eptr</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="125" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="401" bodyend="408"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ab70c3db89c3ab1f137227105c631f57b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_trigger_focused_events</definition>
+        <argsstring>(in::InputFrame &amp;frame)</argsstring>
+        <name>_trigger_focused_events</name>
+        <qualifiedname>d2::sys::SystemScreen::_trigger_focused_events</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="126" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="409" bodyend="425"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1af321ebbfae70a677efb21d8c08344405" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_trigger_hovered_events</definition>
+        <argsstring>(in::InputFrame &amp;frame, eptr ptr)</argsstring>
+        <name>_trigger_hovered_events</name>
+        <qualifiedname>d2::sys::SystemScreen::_trigger_hovered_events</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>eptr</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="127" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="426" bodyend="433"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a36a79e82df1799b2c78933f1f3f164fd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_trigger_hovered_events</definition>
+        <argsstring>(in::InputFrame &amp;frame)</argsstring>
+        <name>_trigger_hovered_events</name>
+        <qualifiedname>d2::sys::SystemScreen::_trigger_hovered_events</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="128" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="434" bodyend="450"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ac908317976a8ee39194d602e6f1bcdbf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_trigger_rc_hover_events</definition>
+        <argsstring>(eptr n, eptr o)</argsstring>
+        <name>_trigger_rc_hover_events</name>
+        <qualifiedname>d2::sys::SystemScreen::_trigger_rc_hover_events</qualifiedname>
+        <param>
+          <type>eptr</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>eptr</type>
+          <declname>o</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="129" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="451" bodyend="458"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a4dfd014aa8c4b1f86e7d47b989108111" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_trigger_rc_click_events</definition>
+        <argsstring>(eptr n, eptr o)</argsstring>
+        <name>_trigger_rc_click_events</name>
+        <qualifiedname>d2::sys::SystemScreen::_trigger_rc_click_events</qualifiedname>
+        <param>
+          <type>eptr</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>eptr</type>
+          <declname>o</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="130" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="459" bodyend="466"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1aaa701cca14bce926fe774d590a1a9026" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_trigger_rc_focus_events</definition>
+        <argsstring>(eptr n, eptr o)</argsstring>
+        <name>_trigger_rc_focus_events</name>
+        <qualifiedname>d2::sys::SystemScreen::_trigger_rc_focus_events</qualifiedname>
+        <param>
+          <type>eptr</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>eptr</type>
+          <declname>o</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="131" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="467" bodyend="474"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a0bac3e97b7d04086add4d338a9f2263c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_update_viewport</definition>
+        <argsstring>()</argsstring>
+        <name>_update_viewport</name>
+        <qualifiedname>d2::sys::SystemScreen::_update_viewport</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="133" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="476" bodyend="494"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a494f98401b91c873b07e8a880c473fe2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>eptr</type>
+        <definition>SystemScreen::eptr d2::sys::SystemScreen::_update_states</definition>
+        <argsstring>(eptr container, Position mouse)</argsstring>
+        <name>_update_states</name>
+        <qualifiedname>d2::sys::SystemScreen::_update_states</qualifiedname>
+        <param>
+          <type>eptr</type>
+          <declname>container</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>mouse</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="134" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="495" bodyend="525"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a9ec8add51a80b3fd0c813efa0bd72d08" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>eptr</type>
+        <definition>SystemScreen::eptr d2::sys::SystemScreen::_update_states_reverse</definition>
+        <argsstring>(eptr ptr)</argsstring>
+        <name>_update_states_reverse</name>
+        <qualifiedname>d2::sys::SystemScreen::_update_states_reverse</qualifiedname>
+        <param>
+          <type>eptr</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="135" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="526" bodyend="533"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a7badd9cb3b95854d3adb574c86e20f3b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::chrono::milliseconds</type>
+        <definition>std::chrono::milliseconds d2::sys::SystemScreen::_run_animations</definition>
+        <argsstring>()</argsstring>
+        <name>_run_animations</name>
+        <qualifiedname>d2::sys::SystemScreen::_run_animations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="137" column="35" bodyfile="core/screen/d2_screen.cpp" bodystart="331" bodyend="363"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a2222384b14ecb86fa2d0a1a6a2ef4cfa" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_apply_impl</definition>
+        <argsstring>(const TreeIter&lt;&gt;::foreach_callback &amp;func, eptr container) const</argsstring>
+        <name>_apply_impl</name>
+        <qualifiedname>d2::sys::SystemScreen::_apply_impl</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;<ref refid="classd2_1_1TreeIter" kindref="compound">::foreach_callback</ref> &amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>eptr</type>
+          <declname>container</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="139" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="535" bodyend="546"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a401a7b10f267391776df4103690c7c23" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989" kindref="member">Event</ref></type>
+            <declname>Ev</declname>
+            <defname>Ev</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::_signal</definition>
+        <argsstring>(Argv &amp;&amp;... args)</argsstring>
+        <name>_signal</name>
+        <qualifiedname>d2::sys::SystemScreen::_signal</qualifiedname>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="141" column="27" bodyfile="core/screen/d2_screen.cpp" bodystart="27" bodyend="62"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ae533aaeef8d9c0b8bdd934d00b7a0fc5" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::chrono::milliseconds</type>
+        <definition>static constexpr std::chrono::milliseconds d2::sys::SystemScreen::fps</definition>
+        <argsstring>(std::size_t c)</argsstring>
+        <name>fps</name>
+        <qualifiedname>d2::sys::SystemScreen::fps</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="143" column="52" bodyfile="core/screen/d2_screen.hpp" bodystart="143" bodyend="148"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a70126d7f5a0ffc848443ca9fc9a00c46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>TreeIter&lt; ParentElement &gt; d2::sys::SystemScreen::root</definition>
+        <argsstring>() const</argsstring>
+        <name>root</name>
+        <qualifiedname>d2::sys::SystemScreen::root</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="152" column="18" bodyfile="core/screen/d2_screen.cpp" bodystart="607" bodyend="612"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a508fdddd4160d24e35d1e0fc18d6b437" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1MatrixModel_1a9f8f4438cdd7d1383d98715a61aeb893" kindref="member">MatrixModel::ptr</ref></type>
+        <definition>MatrixModel::ptr d2::sys::SystemScreen::fetch_model</definition>
+        <argsstring>(const std::string &amp;name, const std::string &amp;path)</argsstring>
+        <name>fetch_model</name>
+        <qualifiedname>d2::sys::SystemScreen::fetch_model</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="156" column="26" bodyfile="core/screen/d2_screen.cpp" bodystart="548" bodyend="559"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a50b600c0dd79d67788681f5b6a5c6bba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1MatrixModel_1a9f8f4438cdd7d1383d98715a61aeb893" kindref="member">MatrixModel::ptr</ref></type>
+        <definition>MatrixModel::ptr d2::sys::SystemScreen::fetch_model</definition>
+        <argsstring>(const std::string &amp;name, const std::string &amp;path, ModelType type)</argsstring>
+        <name>fetch_model</name>
+        <qualifiedname>d2::sys::SystemScreen::fetch_model</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1MatrixModel_1aa08b921ef07dc6a42626be5b6d9b8df9" kindref="member">ModelType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="158" column="9" bodyfile="core/screen/d2_screen.cpp" bodystart="561" bodyend="571"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a8b56f69ef2dffca80a5757827a9e3433" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1MatrixModel_1a9f8f4438cdd7d1383d98715a61aeb893" kindref="member">MatrixModel::ptr</ref></type>
+        <definition>MatrixModel::ptr d2::sys::SystemScreen::fetch_model</definition>
+        <argsstring>(const std::string &amp;name, int width, int height, std::vector&lt; pixel &gt; data)</argsstring>
+        <name>fetch_model</name>
+        <qualifiedname>d2::sys::SystemScreen::fetch_model</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &gt;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="160" column="9" bodyfile="core/screen/d2_screen.cpp" bodystart="572" bodyend="584"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a583309f702374f7bf20eb05a71e5e2ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1MatrixModel_1a9f8f4438cdd7d1383d98715a61aeb893" kindref="member">MatrixModel::ptr</ref></type>
+        <definition>MatrixModel::ptr d2::sys::SystemScreen::fetch_model</definition>
+        <argsstring>(const std::string &amp;name, int width, int height, std::span&lt; const pixel &gt; data)</argsstring>
+        <name>fetch_model</name>
+        <qualifiedname>d2::sys::SystemScreen::fetch_model</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &gt;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="162" column="9" bodyfile="core/screen/d2_screen.cpp" bodystart="585" bodyend="597"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a7ac521dcdd83ffa0d0e77e18ca71d344" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1MatrixModel_1a9f8f4438cdd7d1383d98715a61aeb893" kindref="member">MatrixModel::ptr</ref></type>
+        <definition>MatrixModel::ptr d2::sys::SystemScreen::fetch_model</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>fetch_model</name>
+        <qualifiedname>d2::sys::SystemScreen::fetch_model</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="163" column="26" bodyfile="core/screen/d2_screen.cpp" bodystart="598" bodyend="601"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1af8ae92c8fbe6e7e5682c6e3a5921e154" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::remove_model</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>remove_model</name>
+        <qualifiedname>d2::sys::SystemScreen::remove_model</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="164" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="602" bodyend="605"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a463d15c879da7d3584d702db251e38af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::focus</definition>
+        <argsstring>(eptr p)</argsstring>
+        <name>focus</name>
+        <qualifiedname>d2::sys::SystemScreen::focus</qualifiedname>
+        <param>
+          <type>eptr</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="168" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="698" bodyend="717"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a52c61d8edae202d9cf9e61113fa0a578" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>eptr</type>
+        <definition>SystemScreen::eptr d2::sys::SystemScreen::focused</definition>
+        <argsstring>() const</argsstring>
+        <name>focused</name>
+        <qualifiedname>d2::sys::SystemScreen::focused</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="169" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="718" bodyend="721"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a0683b2b3b20ab48c3bf7104ecbfbe2c6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>eptr</type>
+        <definition>SystemScreen::eptr d2::sys::SystemScreen::clicked</definition>
+        <argsstring>() const</argsstring>
+        <name>clicked</name>
+        <qualifiedname>d2::sys::SystemScreen::clicked</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="170" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="722" bodyend="725"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1af119afba40e32d32e2d0a6ff9a8bcb87" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>eptr</type>
+        <definition>SystemScreen::eptr d2::sys::SystemScreen::hovered</definition>
+        <argsstring>() const</argsstring>
+        <name>hovered</name>
+        <qualifiedname>d2::sys::SystemScreen::hovered</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="171" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="726" bodyend="729"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a8fff5d5a16659314a2502e80307bdca8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::focus_next_minor</definition>
+        <argsstring>(bool reverse=false)</argsstring>
+        <name>focus_next_minor</name>
+        <qualifiedname>d2::sys::SystemScreen::focus_next_minor</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>reverse</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="173" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="280" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1aa47d628c94fcd729e884ea058281ea22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::focus_next_major</definition>
+        <argsstring>(bool reverse=false)</argsstring>
+        <name>focus_next_major</name>
+        <qualifiedname>d2::sys::SystemScreen::focus_next_major</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>reverse</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="174" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="293" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ab06414ce3c58954b50521575cfbb44f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::clear_keynav</definition>
+        <argsstring>()</argsstring>
+        <name>clear_keynav</name>
+        <qualifiedname>d2::sys::SystemScreen::clear_keynav</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="175" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="306" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ac7116b95bcb70446baeb82f346678ab4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemScreen::fps</definition>
+        <argsstring>() const</argsstring>
+        <name>fps</name>
+        <qualifiedname>d2::sys::SystemScreen::fps</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="177" column="21" bodyfile="core/screen/d2_screen.cpp" bodystart="731" bodyend="734"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1aff5d3b47183042fa4dbf554230bc1cd7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemScreen::animations</definition>
+        <argsstring>() const</argsstring>
+        <name>animations</name>
+        <qualifiedname>d2::sys::SystemScreen::animations</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="178" column="21" bodyfile="core/screen/d2_screen.cpp" bodystart="735" bodyend="740"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a13f38d7f1beb8f4b84c0a48084cef5a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::chrono::microseconds</type>
+        <definition>std::chrono::microseconds d2::sys::SystemScreen::delta</definition>
+        <argsstring>() const</argsstring>
+        <name>delta</name>
+        <qualifiedname>d2::sys::SystemScreen::delta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="179" column="35" bodyfile="core/screen/d2_screen.cpp" bodystart="741" bodyend="744"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ad0c4ebff06133e40482b6275c995871e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::is_keynav</definition>
+        <argsstring>() const</argsstring>
+        <name>is_keynav</name>
+        <qualifiedname>d2::sys::SystemScreen::is_keynav</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="181" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="746" bodyend="749"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a7065404fa064c7acb530978bc5b86462" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::apply</definition>
+        <argsstring>(const TreeIter&lt;&gt;::foreach_callback &amp;func) const</argsstring>
+        <name>apply</name>
+        <qualifiedname>d2::sys::SystemScreen::apply</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;<ref refid="classd2_1_1TreeIter" kindref="compound">::foreach_callback</ref> &amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="185" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="751" bodyend="754"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a9ee221c5bca0b4cee4f33909da3b15bc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::apply_all</definition>
+        <argsstring>(const TreeIter&lt;&gt;::foreach_callback &amp;func) const</argsstring>
+        <name>apply_all</name>
+        <qualifiedname>d2::sys::SystemScreen::apply_all</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;<ref refid="classd2_1_1TreeIter" kindref="compound">::foreach_callback</ref> &amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="186" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="755" bodyend="759"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a3a8a5baa4bea8b0d70dd0db7f73c4540" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename First</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Rest</declname>
+            <defname>Rest</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::set</definition>
+        <argsstring>()</argsstring>
+        <name>set</name>
+        <qualifiedname>d2::sys::SystemScreen::set</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="191" column="27" bodyfile="core/screen/d2_screen.hpp" bodystart="191" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a5d1354794be84ab49cff641e34e1ce59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::set</definition>
+        <argsstring>(std::string_view name)</argsstring>
+        <name>set</name>
+        <qualifiedname>d2::sys::SystemScreen::set</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="219" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="614" bodyend="680"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ac6a397e125fc846c40382365ffe0c6a1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+            <defval>void</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::sys::SystemScreen::state</definition>
+        <argsstring>() const</argsstring>
+        <name>state</name>
+        <qualifiedname>d2::sys::SystemScreen::state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="221" column="27" bodyfile="core/screen/d2_screen.hpp" bodystart="221" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ab178dcb35fdc2ad3ec1a9e1df721ace9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+            <defval>void</defval>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::sys::SystemScreen::state</definition>
+        <argsstring>(std::string_view name) const</argsstring>
+        <name>state</name>
+        <qualifiedname>d2::sys::SystemScreen::state</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="232" column="27" bodyfile="core/screen/d2_screen.hpp" bodystart="232" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a281a4646d4ee1658c4c78353215e4047" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string d2::sys::SystemScreen::name</definition>
+        <argsstring>()</argsstring>
+        <name>name</name>
+        <qualifiedname>d2::sys::SystemScreen::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="251" column="21" bodyfile="core/screen/d2_screen.cpp" bodystart="795" bodyend="798"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ad59398a4fcae2a55591063136b705f73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::erase_tree</definition>
+        <argsstring>(std::string_view name)</argsstring>
+        <name>erase_tree</name>
+        <qualifiedname>d2::sys::SystemScreen::erase_tree</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="253" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="800" bodyend="810"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a09f918461184888dbee70ffcf0155b3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::erase_tree</definition>
+        <argsstring>()</argsstring>
+        <name>erase_tree</name>
+        <qualifiedname>d2::sys::SystemScreen::erase_tree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="254" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="811" bodyend="814"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ad4836f8148395c3f9863984495e5dec9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::clear_tree</definition>
+        <argsstring>()</argsstring>
+        <name>clear_tree</name>
+        <qualifiedname>d2::sys::SystemScreen::clear_tree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="255" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="815" bodyend="821"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a6d4d8fed79d6c357d1cac3c337dee9b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeTags" kindref="compound">TreeTags</ref> &amp;</type>
+        <definition>TreeTags &amp; d2::sys::SystemScreen::tags</definition>
+        <argsstring>()</argsstring>
+        <name>tags</name>
+        <qualifiedname>d2::sys::SystemScreen::tags</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="257" column="18" bodyfile="core/screen/d2_screen.cpp" bodystart="682" bodyend="685"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a6adbe4fc54f55c5a929956be3185e360" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1DynamicDependencyManager" kindref="compound">DynamicDependencyManager</ref> &amp;</type>
+        <definition>DynamicDependencyManager &amp; d2::sys::SystemScreen::deps</definition>
+        <argsstring>()</argsstring>
+        <name>deps</name>
+        <qualifiedname>d2::sys::SystemScreen::deps</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="258" column="34" bodyfile="core/screen/d2_screen.cpp" bodystart="686" bodyend="689"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a97a8e139f53a93fe3cf755a039374b96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1DynamicDependencyManager" kindref="compound">DynamicDependencyManager</ref> &amp;</type>
+        <definition>DynamicDependencyManager &amp; d2::sys::SystemScreen::deps</definition>
+        <argsstring>(std::string_view name)</argsstring>
+        <name>deps</name>
+        <qualifiedname>d2::sys::SystemScreen::deps</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="259" column="34" bodyfile="core/screen/d2_screen.cpp" bodystart="690" bodyend="696"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a445b0ad689cb4dd888b117e487104345" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> *</type>
+        <definition>in::InputFrame * d2::sys::SystemScreen::input</definition>
+        <argsstring>()</argsstring>
+        <name>input</name>
+        <qualifiedname>d2::sys::SystemScreen::input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="262" column="24" bodyfile="core/screen/d2_screen.cpp" bodystart="823" bodyend="828"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a08e1e12760547ff4412f7b634199847e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1Animation_1ac67703e78b0a043865e0a5f767139b53" kindref="member">Animation::ptr</ref></type>
+        <definition>Animation::ptr d2::sys::SystemScreen::animate</definition>
+        <argsstring>(std::chrono::milliseconds time, std::function&lt; void(d2::TreeIter&lt;&gt;)&gt; finish, d2::TreeIter&lt;&gt; elem, Argv &amp;&amp;... args)</argsstring>
+        <name>animate</name>
+        <qualifiedname>d2::sys::SystemScreen::animate</qualifiedname>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt;&gt;)&gt;</type>
+          <declname>finish</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt;&gt;</type>
+          <declname>elem</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+    <requiresclause>std::constructible_from&lt;Type, Argv...&gt;    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="268" column="24" bodyfile="core/screen/d2_screen.hpp" bodystart="268" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1adf3bdacf4f9050fb5d2b3c559a04df38" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1Animation_1ac67703e78b0a043865e0a5f767139b53" kindref="member">Animation::ptr</ref></type>
+        <definition>Animation::ptr d2::sys::SystemScreen::animate</definition>
+        <argsstring>(std::chrono::milliseconds time, d2::TreeIter&lt;&gt; target, Argv &amp;&amp;... args)</argsstring>
+        <name>animate</name>
+        <qualifiedname>d2::sys::SystemScreen::animate</qualifiedname>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt;&gt;</type>
+          <declname>target</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+    <requiresclause>std::constructible_from&lt;Type, Argv...&gt;    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="295" column="9" bodyfile="core/screen/d2_screen.hpp" bodystart="295" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a850ee8752a31912124e16b539cc3e148" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::clear_animations</definition>
+        <argsstring>(TreeIter&lt;&gt; ptr)</argsstring>
+        <name>clear_animations</name>
+        <qualifiedname>d2::sys::SystemScreen::clear_animations</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="300" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="761" bodyend="780"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1addd81463db5dc353974530044d20a244" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::clear_animations</definition>
+        <argsstring>(TreeIter&lt;&gt; ptr, style::uai_property prop)</argsstring>
+        <name>clear_animations</name>
+        <qualifiedname>d2::sys::SystemScreen::clear_animations</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">style::uai_property</ref></type>
+          <declname>prop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="301" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="781" bodyend="793"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a9372b03859275eabc0bda082676fae26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>Type &amp;</type>
+        <definition>Type &amp; d2::sys::SystemScreen::theme</definition>
+        <argsstring>()</argsstring>
+        <name>theme</name>
+        <qualifiedname>d2::sys::SystemScreen::theme</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="305" column="25" bodyfile="core/screen/d2_screen.hpp" bodystart="305" bodyend="325"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a3ae0666f961913d203ed7949f675126d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>Type &amp;</type>
+        <definition>Type &amp; d2::sys::SystemScreen::theme</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>theme</name>
+        <qualifiedname>d2::sys::SystemScreen::theme</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="326" column="25" bodyfile="core/screen/d2_screen.hpp" bodystart="326" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ab93d5712dc94d12dbb1d8924b891215b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Var</declname>
+            <defname>Var</defname>
+          </param>
+        </templateparamlist>
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::sys::SystemScreen::themev</definition>
+        <argsstring>()</argsstring>
+        <name>themev</name>
+        <qualifiedname>d2::sys::SystemScreen::themev</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="349" column="25" bodyfile="core/screen/d2_screen.hpp" bodystart="349" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a7d36085360d37a2db71cf8922a59ebbf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Var</declname>
+            <defname>Var</defname>
+          </param>
+        </templateparamlist>
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::sys::SystemScreen::themev</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>themev</name>
+        <qualifiedname>d2::sys::SystemScreen::themev</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="353" column="25" bodyfile="core/screen/d2_screen.hpp" bodystart="353" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a88476199d177f98d635e52e345e46850" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::has_theme</definition>
+        <argsstring>()</argsstring>
+        <name>has_theme</name>
+        <qualifiedname>d2::sys::SystemScreen::has_theme</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="358" column="25" bodyfile="core/screen/d2_screen.hpp" bodystart="358" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1abdaefd6e6c8f97048dd7acb725f962f6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::has_theme</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>has_theme</name>
+        <qualifiedname>d2::sys::SystemScreen::has_theme</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="362" column="14" bodyfile="core/screen/d2_screen.hpp" bodystart="362" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a818885e2c949f1af75be2a3385086049" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Themes</declname>
+            <defname>Themes</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::make_theme</definition>
+        <argsstring>(Themes &amp;&amp;... themes)</argsstring>
+        <name>make_theme</name>
+        <qualifiedname>d2::sys::SystemScreen::make_theme</qualifiedname>
+        <param>
+          <type>Themes &amp;&amp;...</type>
+          <declname>themes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="367" column="25" bodyfile="core/screen/d2_screen.hpp" bodystart="367" bodyend="376"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ad4c6169f3758e03913815b5d8366dd60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::set_refresh_rate</definition>
+        <argsstring>(std::chrono::milliseconds refresh)</argsstring>
+        <name>set_refresh_rate</name>
+        <qualifiedname>d2::sys::SystemScreen::set_refresh_rate</qualifiedname>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>refresh</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="380" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="830" bodyend="833"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a3bf1eeeca9301e1e72816fcdd9378728" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemScreen::tick</definition>
+        <argsstring>()</argsstring>
+        <name>tick</name>
+        <qualifiedname>d2::sys::SystemScreen::tick</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="381" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="834" bodyend="954"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1a9f68ddc6fadc6da948c2138cf23b3116" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>eptr</type>
+        <definition>SystemScreen::eptr d2::sys::SystemScreen::traverse</definition>
+        <argsstring>()</argsstring>
+        <name>traverse</name>
+        <qualifiedname>d2::sys::SystemScreen::traverse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="383" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="956" bodyend="959"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemScreen_1ac829a7c303e81bbdec42cab86afe903c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>eptr</type>
+        <definition>SystemScreen::eptr d2::sys::SystemScreen::operator/</definition>
+        <argsstring>(const std::string &amp;path)</argsstring>
+        <name>operator/</name>
+        <qualifiedname>d2::sys::SystemScreen::operator/</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="384" column="14" bodyfile="core/screen/d2_screen.cpp" bodystart="960" bodyend="963"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::sys::Module&lt; SystemScreen, &quot;Screen&quot;, Access::TUnsafe, Load::Immediate, SystemInput, SystemOutput &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::ModuleDecl&lt; SystemScreen, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>d2::sys::ModuleImpl&lt; SystemScreen, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="8" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>d2::sys::ModuleImplTag</label>
+        <link refid="structd2_1_1sys_1_1ModuleImplTag"/>
+      </node>
+      <node id="6">
+        <label>d2::sys::ModuleLocalGet&lt; SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="4">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemScreen</label>
+        <link refid="classd2_1_1sys_1_1SystemScreen"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::Module&lt; SystemScreen, &quot;Screen&quot;, Access::TUnsafe, Load::Immediate, SystemInput, SystemOutput &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::ModuleDecl&lt; SystemScreen, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>d2::sys::ModuleImpl&lt; SystemScreen, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="8" relation="private-inheritance">
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>module_preset</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>d2::sys::ModuleImplTag</label>
+        <link refid="structd2_1_1sys_1_1ModuleImplTag"/>
+      </node>
+      <node id="6">
+        <label>d2::sys::ModuleLocalGet&lt; SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="4">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>d2::sys::SystemModule::ModPreset</label>
+        <link refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemScreen</label>
+        <link refid="classd2_1_1sys_1_1SystemScreen"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/screen/d2_screen.hpp" line="23" column="5" bodyfile="core/screen/d2_screen.hpp" bodystart="31" bodyend="385"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a2222384b14ecb86fa2d0a1a6a2ef4cfa" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_apply_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1adba1e9f8e703105f18c061a490b040d5" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_fps_avg</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a48ede6e07c4140acd5057a4e47d747be" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_fps_ctr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a83c14d012d68a64c56b2fedd9ee6c557" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_frame</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a2a3b1e96bd0b2b79f2328d560d563e18" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_is_running</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a3a7d1b000ca6b4aac734ec7056893ca8" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_is_stop</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ab32fddf13f57285149ac63cb729fb35b" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_keynav_apply</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aca33cac02dc7016880ccd90d6e0e30f2" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_keynav_cycle</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a7f66831da48fbe4c7f0f278430d5a0a5" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_keynav_cycle_macro</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a6675c5016b25a97f87421f9531038179" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_keynav_cycle_macro_reverse</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a1fcd2e5ba7f941bd0a70557bebe9805c" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_keynav_cycle_reverse</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a9260e63721bc88d2e8ad19252146cea8" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_keynav_cycle_up</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aebdcf34378132b76fc1e54158195c4cc" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_keynav_cycle_up_reverse</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aa524eba6cf80186c4e117e7bd0661d17" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_keynav_has_input</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ab36dad424e4d4d1930ab07e48de21323" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_keynav_prepare</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a458877122ea41f3b6236dcd46e23bfe3" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_last_mes</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a20ea97fd639729bfa5b865af7bb09317" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_lca</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a368b4be8b34f14a1b09080613c06bf94" prot="private" virt="virtual"><scope>d2::sys::SystemScreen</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a7b672f186882d3ef85163f1f86d5c11a" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_models</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::SystemScreen</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::SystemScreen</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aa9dc3c7695085305c423c5f7f93324d6" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_prev_delta</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a3d83ffd3633ac8a11d073134418d5bf2" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_refresh_rate</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aa6a846be829e7e1630aff6f0b9c08a7e" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_restore_refresh</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a7badd9cb3b95854d3adb574c86e20f3b" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_run_animations</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1affbfd08ec7b9009e9cea7aeaf8107493" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_sig</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a401a7b10f267391776df4103690c7c23" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_signal</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1af9b158464b9887eea67974d4a72be068" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_themes</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aed57066e82b62d75a7cac34f3092a053" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_trees</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a46206244d15847086f9d164c2991d6bb" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_trigger_events</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aba1066532e40969b910881322c1c7d99" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_trigger_focused_events</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ab70c3db89c3ab1f137227105c631f57b" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_trigger_focused_events</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1af321ebbfae70a677efb21d8c08344405" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_trigger_hovered_events</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a36a79e82df1799b2c78933f1f3f164fd" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_trigger_hovered_events</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a4dfd014aa8c4b1f86e7d47b989108111" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_trigger_rc_click_events</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aaa701cca14bce926fe774d590a1a9026" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_trigger_rc_focus_events</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ac908317976a8ee39194d602e6f1bcdbf" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_trigger_rc_hover_events</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a2b9b6f4a23571c5279a66e642042fa0b" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_ts</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ab6effeea66a4713269015da96fb68c26" prot="private" virt="virtual"><scope>d2::sys::SystemScreen</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a494f98401b91c873b07e8a880c473fe2" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_update_states</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a9ec8add51a80b3fd0c813efa0bd72d08" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_update_states_reverse</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a0bac3e97b7d04086add4d338a9f2263c" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>_update_viewport</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a08e1e12760547ff4412f7b634199847e" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>animate</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1adf3bdacf4f9050fb5d2b3c559a04df38" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>animate</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aff5d3b47183042fa4dbf554230bc1cd7" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>animations</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a7065404fa064c7acb530978bc5b86462" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>apply</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a9ee221c5bca0b4cee4f33909da3b15bc" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>apply_all</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a850ee8752a31912124e16b539cc3e148" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>clear_animations</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1addd81463db5dc353974530044d20a244" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>clear_animations</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ab06414ce3c58954b50521575cfbb44f3" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>clear_keynav</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ad4836f8148395c3f9863984495e5dec9" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>clear_tree</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a0683b2b3b20ab48c3bf7104ecbfbe2c6" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>clicked</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>context</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a13f38d7f1beb8f4b84c0a48084cef5a1" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>delta</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>dependency_names</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a6adbe4fc54f55c5a929956be3185e360" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>deps</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a97a8e139f53a93fe3cf755a039374b96" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>deps</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a904f37269f7ad52165900c8b0c6cfdcb" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>eptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ad59398a4fcae2a55591063136b705f73" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>erase_tree</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a09f918461184888dbee70ffcf0155b3f" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>erase_tree</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a19a8310f3f36ed6a6089538e3ee99989" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>Event</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a750a8933f175bc040e597fd960b8fea8" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>EventManifest</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a508fdddd4160d24e35d1e0fc18d6b437" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>fetch_model</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a50b600c0dd79d67788681f5b6a5c6bba" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>fetch_model</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a8b56f69ef2dffca80a5757827a9e3433" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>fetch_model</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a583309f702374f7bf20eb05a71e5e2ec" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>fetch_model</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a7ac521dcdd83ffa0d0e77e18ca71d344" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>fetch_model</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a463d15c879da7d3584d702db251e38af" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>focus</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1aa47d628c94fcd729e884ea058281ea22" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>focus_next_major</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a8fff5d5a16659314a2502e80307bdca8" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>focus_next_minor</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a52c61d8edae202d9cf9e61113fa0a578" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>focused</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ae533aaeef8d9c0b8bdd934d00b7a0fc5" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>fps</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ac7116b95bcb70446baeb82f346678ab4" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>fps</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>get_if</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a88476199d177f98d635e52e345e46850" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>has_theme</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1abdaefd6e6c8f97048dd7acb725f962f6" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>has_theme</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1af119afba40e32d32e2d0a6ff9a8bcb87" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>hovered</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::SystemScreen</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a445b0ad689cb4dd888b117e487104345" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>input</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ad0c4ebff06133e40482b6275c995871e" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>is_keynav</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>make</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a818885e2c949f1af75be2a3385086049" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>make_theme</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ae218dbbdcda1a8e093edf796ebe32ec1" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>ModelType</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>module_info</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleImpl_1a3b770ad91cfdb330c60ca064add754c7" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>module_preset</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a281a4646d4ee1658c4c78353215e4047" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>name</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ac829a7c303e81bbdec42cab86afe903c" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>operator/</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1af8ae92c8fbe6e7e5682c6e3a5921e154" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>remove_model</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a70126d7f5a0ffc848443ca9fc9a00c46" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>root</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a3a8a5baa4bea8b0d70dd0db7f73c4540" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>set</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a5d1354794be84ab49cff641e34e1ce59" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>set</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ad4c6169f3758e03913815b5d8366dd60" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>set_refresh_rate</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ac6a397e125fc846c40382365ffe0c6a1" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>state</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ab178dcb35fdc2ad3ec1a9e1df721ace9" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>state</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>status</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a6d4d8fed79d6c357d1cac3c337dee9b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>tags</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a9372b03859275eabc0bda082676fae26" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>theme</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a3ae0666f961913d203ed7949f675126d" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>theme</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1ab93d5712dc94d12dbb1d8924b891215b" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>themev</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a7d36085360d37a2db71cf8922a59ebbf" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>themev</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a3bf1eeeca9301e1e72816fcdd9378728" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>tick</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1a9f68ddc6fadc6da948c2138cf23b3116" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>traverse</name></member>
+      <member refid="classd2_1_1sys_1_1SystemScreen_1af9b685623c63247d5e94851359591802" prot="private" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>tree</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::SystemScreen</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

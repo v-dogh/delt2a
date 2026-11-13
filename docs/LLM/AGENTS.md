@@ -1,6 +1,8 @@
 # Instructions for an LLM coding with delt2a
 
-Use this as a high-priority, repo-specific context file when editing applications that depend on delt2a. The companion detailed references are in [`docs/`](docs/).
+Use this as a high-priority, repo-specific context file when editing applications that depend on delt2a. The companion detailed references are in [`guide/`](guide/).
+
+Start with the curated Markdown handbook to understand delt2a's architecture, UI construction patterns, state management, and coding conventions. For exact declarations, consult docs/api/SYMBOLS.jsonl and the corresponding generated API page. Verify undocumented behavior against source code.
 
 ## Identity and entry points
 
@@ -27,9 +29,9 @@ Use this as a high-priority, repo-specific context file when editing application
 12. Input comes from `d2::in::InputFrame` and screen signals. `ctx.on(...)` returns a RAII signal handle; save or explicitly release it if the callback must persist.
 13. An element's `getref` and raw layout/frame buffer references are lower-level and can bypass safe invalidation. Prefer `set/get/apply_set/apply_get`.
 14. Do not reconstruct styles from intuitive widget names. Check `D2_UAI_*` declarations in `core/tree/d2_styles_base.hpp`, `core/tree/d2_styles.hpp` and `elements/d2_*.hpp`.
-15. If a method seems missing, look it up in [`docs/SOURCE_MAP.md`](docs/SOURCE_MAP.md) then verify the relevant header and implementation. Never fabricate API surface.
+15. If a method seems missing, look it up in [`guide/SOURCE_MAP.md`](guide/SOURCE_MAP.md) then verify the relevant header and implementation. Never fabricate API surface.
 
-For screen-writing conventions (not just library C++ formatting), follow [`docs/13_APPLICATION_UI_STYLE.md`](docs/13_APPLICATION_UI_STYLE.md).
+For screen-writing conventions (not just library C++ formatting), follow [`guide/13_APPLICATION_UI_STYLE.md`](guide/13_APPLICATION_UI_STYLE.md).
 
 ## Good implementation sequence
 
@@ -49,8 +51,8 @@ For screen-writing conventions (not just library C++ formatting), follow [`docs/
 - The active context is thread-local, not magically ambient in arbitrary threads.
 - Do not draw terminal output with `std::cout` while the UI owns the console. Use the `rs` logging system where appropriate.
 - Do not use removed inference-code examples as evidence of the public UI library.
-- See [`docs/12_GOTCHAS.md`](docs/12_GOTCHAS.md) for lifecycle, event, and threading traps before relying on edge-case behavior.
+- See [`docs/12_GOTCHAS.md`](guide/12_GOTCHAS.md) for lifecycle, event, and threading traps before relying on edge-case behavior.
 
 ## Conventions when contributing
 
-Use C++20, 4-space indentation, opening braces on a new line, `snake_case` for member functions/local variables, `_leading_underscore` for private fields, namespaced symbols, `#pragma once` for headers, `d2_` filename prefix for library headers, and explicit `const`/`noexcept` when the current adjacent API uses them. Mirror existing `D2_UAI_INTERFACE`/`D2_UAI_PROP` patterns; do not hand-roll an incompatible style storage layer. Detailed exceptions and formatting observations: [`docs/11_STYLE_GUIDE.md`](docs/11_STYLE_GUIDE.md).
+Use C++20, 4-space indentation, opening braces on a new line, `snake_case` for member functions/local variables, `_leading_underscore` for private fields, namespaced symbols, `#pragma once` for headers, `d2_` filename prefix for library headers, and explicit `const`/`noexcept` when the current adjacent API uses them. Mirror existing `D2_UAI_INTERFACE`/`D2_UAI_PROP` patterns; do not hand-roll an incompatible style storage layer. Detailed exceptions and formatting observations: [`docs/11_STYLE_GUIDE.md`](guide/11_STYLE_GUIDE.md).

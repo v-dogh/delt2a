@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4" kind="class" language="C++" prot="public">
+    <compoundname>d2::impl::LinearInterpolationWriter&lt; px::background &gt;</compoundname>
+    <includes refid="d2__animate_8hpp" local="no">d2_animate.hpp</includes>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1a5c8cb16da8f6e1ff6e9656df67afcfce" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref></type>
+        <definition>px::background d2::impl::LinearInterpolationWriter&lt; px::background &gt;::_source</definition>
+        <argsstring></argsstring>
+        <name>_source</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; px::background &gt;::_source</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="38" column="28" bodyfile="core/screen/d2_animate.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1ad3ff820d4482d0a4b2f9faa84708ca57" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref></type>
+        <definition>px::background d2::impl::LinearInterpolationWriter&lt; px::background &gt;::_dest</definition>
+        <argsstring></argsstring>
+        <name>_dest</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; px::background &gt;::_dest</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="39" column="28" bodyfile="core/screen/d2_animate.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1add627c57ed4d0d8559d191b8625f4ea1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::impl::LinearInterpolationWriter&lt; px::background &gt;::LinearInterpolationWriter</definition>
+        <argsstring>(px::background source, px::background dest)</argsstring>
+        <name>LinearInterpolationWriter</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; px::background &gt;::LinearInterpolationWriter</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref></type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref></type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="41" column="13" bodyfile="core/screen/d2_animate.hpp" bodystart="41" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1a9c90a6117d9cfbb1642b9d658bde3022" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::impl::LinearInterpolationWriter&lt; px::background &gt;::reset</definition>
+        <argsstring>(const px::background &amp;source, const px::background &amp;dest)</argsstring>
+        <name>reset</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; px::background &gt;::reset</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref> &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref> &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="46" column="18" bodyfile="core/screen/d2_animate.hpp" bodystart="46" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1ada34b0796cd772df75c0ad3b3e2055ca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">px::background</ref></type>
+        <definition>px::background d2::impl::LinearInterpolationWriter&lt; px::background &gt;::write</definition>
+        <argsstring>(float progress)</argsstring>
+        <name>write</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter&lt; px::background &gt;::write</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="51" column="28" bodyfile="core/screen/d2_animate.hpp" bodystart="51" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/screen/d2_animate.hpp" line="35" column="18" bodyfile="core/screen/d2_animate.hpp" bodystart="36" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1ad3ff820d4482d0a4b2f9faa84708ca57" prot="private" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; px::background &gt;</scope><name>_dest</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1a5c8cb16da8f6e1ff6e9656df67afcfce" prot="private" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; px::background &gt;</scope><name>_source</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1add627c57ed4d0d8559d191b8625f4ea1" prot="public" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; px::background &gt;</scope><name>LinearInterpolationWriter</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1a9c90a6117d9cfbb1642b9d658bde3022" prot="public" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; px::background &gt;</scope><name>reset</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4_1ada34b0796cd772df75c0ad3b3e2055ca" prot="public" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter&lt; px::background &gt;</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

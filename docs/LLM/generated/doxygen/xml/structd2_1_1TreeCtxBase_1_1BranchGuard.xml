@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1TreeCtxBase_1_1BranchGuard" kind="struct" language="C++" prot="protected">
+    <compoundname>d2::TreeCtxBase::BranchGuard</compoundname>
+    <includes refid="d2__tree__construct_8hpp" local="no">d2_tree_construct.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1TreeCtxBase_1_1BranchGuard_1a04166cdfaeae0fcb40216b531a4a0889" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; BranchState &gt;</type>
+        <definition>std::optional&lt;BranchState&gt; d2::TreeCtxBase::BranchGuard::saved</definition>
+        <argsstring></argsstring>
+        <name>saved</name>
+        <qualifiedname>d2::TreeCtxBase::BranchGuard::saved</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="73" column="27" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1TreeCtxBase_1_1BranchGuard_1a9d2b34a8c217308c763370ec75fd56b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeCtxBase::BranchGuard::BranchGuard</definition>
+        <argsstring>()</argsstring>
+        <name>BranchGuard</name>
+        <qualifiedname>d2::TreeCtxBase::BranchGuard::BranchGuard</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="74" column="13" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="74" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1TreeCtxBase_1_1BranchGuard_1a90a82c8cd6f90494d8097ddaac56fc6b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeCtxBase::BranchGuard::~BranchGuard</definition>
+        <argsstring>()</argsstring>
+        <name>~BranchGuard</name>
+        <qualifiedname>d2::TreeCtxBase::BranchGuard::~BranchGuard</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="79" column="13" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="79" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_construct.hpp" line="71" column="9" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="72" bodyend="83"/>
+    <listofallmembers>
+      <member refid="structd2_1_1TreeCtxBase_1_1BranchGuard_1a9d2b34a8c217308c763370ec75fd56b9" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase::BranchGuard</scope><name>BranchGuard</name></member>
+      <member refid="structd2_1_1TreeCtxBase_1_1BranchGuard_1a04166cdfaeae0fcb40216b531a4a0889" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase::BranchGuard</scope><name>saved</name></member>
+      <member refid="structd2_1_1TreeCtxBase_1_1BranchGuard_1a90a82c8cd6f90494d8097ddaac56fc6b" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase::BranchGuard</scope><name>~BranchGuard</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

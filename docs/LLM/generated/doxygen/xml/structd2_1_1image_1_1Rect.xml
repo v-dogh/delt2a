@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1image_1_1Rect" kind="struct" language="C++" prot="public">
+    <compoundname>d2::image::Rect</compoundname>
+    <includes refid="core_2types_2d2__image_8hpp" local="no">d2_image.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1image_1_1Rect_1a213c6026f0f1ef8e127bbfda5ea79cb8" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::image::Rect::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <qualifiedname>d2::image::Rect::x</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="17" column="13" bodyfile="core/types/d2_image.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1image_1_1Rect_1aebe17613ff942e0c77cb6d66badc9472" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::image::Rect::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <qualifiedname>d2::image::Rect::y</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="17" column="15" bodyfile="core/types/d2_image.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1image_1_1Rect_1af2494c141dc3edb242130a79aa5ce7ed" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::image::Rect::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <qualifiedname>d2::image::Rect::width</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="17" column="17" bodyfile="core/types/d2_image.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1image_1_1Rect_1ade8e81df5f51141c9e0f7151189290b2" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::image::Rect::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <qualifiedname>d2::image::Rect::height</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="17" column="23" bodyfile="core/types/d2_image.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1image_1_1Rect_1aac3f8fdc9e30e126cf0a7bf59da4286f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::image::Rect::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>d2::image::Rect::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="18" column="14" bodyfile="core/types/d2_image.hpp" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1image_1_1Rect_1a320c103c86b857d1c66b2dd6d3022e84" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::image::Rect::operator&lt;=&gt;</definition>
+        <argsstring>(const Rect &amp;) const =default</argsstring>
+        <name>operator&lt;=&gt;</name>
+        <qualifiedname>d2::image::Rect::operator&lt;=&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="19" column="9"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_image.hpp" line="15" column="5" bodyfile="core/types/d2_image.hpp" bodystart="16" bodyend="20"/>
+    <listofallmembers>
+      <member refid="structd2_1_1image_1_1Rect_1aac3f8fdc9e30e126cf0a7bf59da4286f" prot="public" virt="non-virtual"><scope>d2::image::Rect</scope><name>empty</name></member>
+      <member refid="structd2_1_1image_1_1Rect_1ade8e81df5f51141c9e0f7151189290b2" prot="public" virt="non-virtual"><scope>d2::image::Rect</scope><name>height</name></member>
+      <member refid="structd2_1_1image_1_1Rect_1a320c103c86b857d1c66b2dd6d3022e84" prot="public" virt="non-virtual"><scope>d2::image::Rect</scope><name>operator&lt;=&gt;</name></member>
+      <member refid="structd2_1_1image_1_1Rect_1af2494c141dc3edb242130a79aa5ce7ed" prot="public" virt="non-virtual"><scope>d2::image::Rect</scope><name>width</name></member>
+      <member refid="structd2_1_1image_1_1Rect_1a213c6026f0f1ef8e127bbfda5ea79cb8" prot="public" virt="non-virtual"><scope>d2::image::Rect</scope><name>x</name></member>
+      <member refid="structd2_1_1image_1_1Rect_1aebe17613ff942e0c77cb6d66badc9472" prot="public" virt="non-virtual"><scope>d2::image::Rect</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

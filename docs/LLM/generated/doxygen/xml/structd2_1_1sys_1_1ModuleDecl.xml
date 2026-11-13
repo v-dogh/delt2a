@@ -1,0 +1,304 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1ModuleDecl" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::ModuleDecl</compoundname>
+    <basecompoundref refid="classd2_1_1sys_1_1SystemModule" prot="public" virt="non-virtual">d2::sys::SystemModule</basecompoundref>
+    <basecompoundref refid="structd2_1_1sys_1_1ModuleLocalGet" prot="public" virt="non-virtual">d2::sys::ModuleLocalGet&lt; Base &gt;</basecompoundref>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Base</type>
+      </param>
+      <param>
+        <type><ref refid="structd2_1_1meta_1_1ConstString" kindref="compound">meta::ConstString</ref></type>
+        <declname>Name</declname>
+        <defname>Name</defname>
+      </param>
+      <param>
+        <type><ref refid="namespaced2_1_1sys_1a0ca7d25c3a0a481de124a30ff73dc786" kindref="member">Access</ref></type>
+        <declname>Ac</declname>
+        <defname>Ac</defname>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Deps</declname>
+        <defname>Deps</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structd2_1_1sys_1_1ModuleDecl_1a3cd5156caad1e3f47ca9389ffe1b6a2f" prot="private" static="no">
+        <type>std::tuple&lt; Deps... &gt;</type>
+        <definition>using d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;::module_deps = std::tuple&lt;Deps...&gt;</definition>
+        <argsstring></argsstring>
+        <name>module_deps</name>
+        <qualifiedname>d2::sys::ModuleDecl::module_deps</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="218" column="9" bodyfile="core/io/d2_module.hpp" bodystart="218" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1ModuleDecl_1af7e9e6e38cae8ad07e1c9ee8bbf23b6a" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;::module_access</definition>
+        <argsstring></argsstring>
+        <name>module_access</name>
+        <qualifiedname>d2::sys::ModuleDecl::module_access</qualifiedname>
+        <initializer>= Ac</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="217" column="31" bodyfile="core/io/d2_module.hpp" bodystart="217" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structd2_1_1sys_1_1ModuleDecl_1a57fc9ad96ff8dae4fe3648df021857ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename B</type>
+          </param>
+          <param>
+            <type><ref refid="namespaced2_1_1sys_1a96e8068f6f21a92e0f8fc1fa71a59161" kindref="member">Load</ref></type>
+            <declname>L</declname>
+            <defname>L</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>D</declname>
+            <defname>D</defname>
+          </param>
+        </templateparamlist>
+        <type>struct</type>
+        <definition>friend struct ModuleImpl</definition>
+        <argsstring></argsstring>
+        <name>ModuleImpl</name>
+        <qualifiedname>d2::sys::ModuleDecl::ModuleImpl</qualifiedname>
+        <param>
+          <type>ModuleImpl</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="220" column="38" bodyfile="core/io/d2_module.hpp" bodystart="220" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;::D2_TAG_MODULE_VALUE</definition>
+        <argsstring>(Name.view())</argsstring>
+        <name>D2_TAG_MODULE_VALUE</name>
+        <qualifiedname>d2::sys::ModuleDecl::D2_TAG_MODULE_VALUE</qualifiedname>
+        <param>
+          <type>Name.</type>
+          <declname>view</declname>
+          <array>()</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="215" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo" kindref="compound">ModInfo</ref></type>
+        <definition>virtual ModInfo d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;::info</definition>
+        <argsstring>() const override final</argsstring>
+        <name>info</name>
+        <qualifiedname>d2::sys::ModuleDecl::info</qualifiedname>
+        <reimplements refid="classd2_1_1sys_1_1SystemModule_1a56b990ee428e7704a4be33ac65e2fb66">info</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="228" column="25" bodyfile="core/io/d2_module.hpp" bodystart="228" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+            <defval>Base</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">module</ref>&lt; const Type &gt;</type>
+        <definition>module&lt; const Type &gt; d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;::ptr</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::sys::ModuleDecl::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="233" column="29" bodyfile="core/io/d2_module.hpp" bodystart="233" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleDecl_1aa850a4d7e95dc148cbb0a2988cb66d2a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+            <defval>Base</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">module</ref>&lt; Type &gt;</type>
+        <definition>module&lt; Type &gt; d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;::ptr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::sys::ModuleDecl::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="239" column="29" bodyfile="core/io/d2_module.hpp" bodystart="239" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::SystemModule::SystemModule</definition>
+        <argsstring>(std::weak_ptr&lt; IOContext &gt; ptr, ModPreset preset, std::size_t static_usage)</argsstring>
+        <name>SystemModule</name>
+        <qualifiedname>d2::sys::ModuleDecl::SystemModule</qualifiedname>
+        <param>
+          <type>std::weak_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">ModPreset</ref></type>
+          <declname>preset</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>static_usage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="222" column="9" bodyfile="core/io/d2_module.cpp" bodystart="78" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo" kindref="compound">ModInfo</ref></type>
+        <definition>static ModInfo d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;::module_info</definition>
+        <argsstring>()</argsstring>
+        <name>module_info</name>
+        <qualifiedname>d2::sys::ModuleDecl::module_info</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="224" column="24" bodyfile="core/io/d2_module.hpp" bodystart="224" bodyend="227"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::sys::ModuleLocalGet&lt; Base &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="2">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::sys::ModuleLocalGet&lt; Base &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="2">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_module.hpp" line="213" column="5" bodyfile="core/io/d2_module.hpp" bodystart="214" bodyend="245"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3" prot="protected" virt="virtual"><scope>d2::sys::ModuleDecl</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::ModuleDecl</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::ModuleDecl</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730" prot="protected" virt="virtual"><scope>d2::sys::ModuleDecl</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>context</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>dependency_names</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a2ce0bd860d7531e0c8d2bee674a9425a" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1ae8bba2eace551e09aeb99546e2d8a062" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::ModuleDecl</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>make</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1af7e9e6e38cae8ad07e1c9ee8bbf23b6a" prot="private" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>module_access</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a3cd5156caad1e3f47ca9389ffe1b6a2f" prot="private" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>module_deps</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>module_info</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a57fc9ad96ff8dae4fe3648df021857ef" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>ModuleImpl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>ptr</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1aa850a4d7e95dc148cbb0a2988cb66d2a" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>status</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::ModuleDecl</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::ModuleDecl</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

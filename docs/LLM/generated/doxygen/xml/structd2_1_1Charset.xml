@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Charset" kind="struct" language="C++" prot="public">
+    <compoundname>d2::Charset</compoundname>
+    <templateparamlist>
+      <param>
+        <type><ref refid="namespaced2_1a11d303d84cb0ba7593a0f246a95dcbbc" kindref="member">Encoding</ref></type>
+        <declname>Ed</declname>
+        <defname>Ed</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_chardef.hpp" line="7" column="15" bodyfile="core/platform/d2_chardef.hpp" bodystart="7" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

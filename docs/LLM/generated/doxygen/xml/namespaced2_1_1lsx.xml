@@ -1,0 +1,1562 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1lsx" kind="namespace" language="C++">
+    <compoundname>d2::lsx</compoundname>
+    <innerclass refid="classd2_1_1lsx_1_1ConstraintArray" prot="public">d2::lsx::ConstraintArray</innerclass>
+    <innerclass refid="classd2_1_1lsx_1_1Expression" prot="public">d2::lsx::Expression</innerclass>
+    <innerclass refid="structd2_1_1lsx_1_1ParentVarWrapper" prot="public">d2::lsx::ParentVarWrapper</innerclass>
+    <innerclass refid="classd2_1_1lsx_1_1Symbol" prot="public">d2::lsx::Symbol</innerclass>
+    <innerclass refid="classd2_1_1lsx_1_1Variable" prot="public">d2::lsx::Variable</innerclass>
+    <innerclass refid="classd2_1_1lsx_1_1VariableIndex" prot="public">d2::lsx::VariableIndex</innerclass>
+    <innernamespace refid="namespaced2_1_1lsx_1_1impl">d2::lsx::impl</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespaced2_1_1lsx_1adde6768f6558b26a861e1ebcb0426355" prot="public" static="no" strong="yes">
+        <type>unsigned int</type>
+        <name>Strength</name>
+        <qualifiedname>d2::lsx::Strength</qualifiedname>
+        <enumvalue id="namespaced2_1_1lsx_1adde6768f6558b26a861e1ebcb0426355ab651efdb98a5d6bd2b3935d0c3f4a5e2" prot="public">
+          <name>Required</name>
+          <initializer>= 100&apos;000&apos;000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1lsx_1adde6768f6558b26a861e1ebcb0426355ac43e0fd449c758dab8f891d8e19eb1a9" prot="public">
+          <name>Strong</name>
+          <initializer>= 100&apos;000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1lsx_1adde6768f6558b26a861e1ebcb0426355a87f8a6ab85c9ced3702b4ea641ad4bb5" prot="public">
+          <name>Medium</name>
+          <initializer>= 100</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1lsx_1adde6768f6558b26a861e1ebcb0426355a7324e3727807d95037eb19d304fd91ec" prot="public">
+          <name>Weak</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="22" column="5" bodyfile="core/lsx/d2_solver.hpp" bodystart="23" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211be" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Constraint</name>
+        <qualifiedname>d2::lsx::Constraint</qualifiedname>
+        <enumvalue id="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211beaf5f286e73bda105e538310b3190f75c5" prot="public">
+          <name>Equal</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211bea1cfdf0e8d0c87a228c1f40d9bee7888b" prot="public">
+          <name>Less</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211bead3da97e2d9aee5c8fbe03156ad051c99" prot="public">
+          <name>More</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211bea576bd3511f2430e27a0bea383015917a" prot="public">
+          <name>LessEq</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211bea06d266878bcbfd2a2658bc7081f789bc" prot="public">
+          <name>MoreEq</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="12" column="5" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="13" bodyend="19"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaced2_1_1lsx_1aca3726aad5d984b66e613e2996fbbd60" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Value</type>
+          </param>
+        </templateparamlist>
+        <type>absl::flat_hash_map&lt; Key, Value &gt;</type>
+        <definition>using d2::lsx::hash_map = absl::flat_hash_map&lt;Key, Value&gt;</definition>
+        <argsstring></argsstring>
+        <name>hash_map</name>
+        <qualifiedname>d2::lsx::hash_map</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="12" column="18" bodyfile="core/lsx/d2_solver.hpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1lsx_1a6384755e76af632bdbe97ad83dd6355a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Value</type>
+          </param>
+        </templateparamlist>
+        <type>absl::flat_hash_set&lt; Value &gt;</type>
+        <definition>using d2::lsx::hash_set = absl::flat_hash_set&lt;Value&gt;</definition>
+        <argsstring></argsstring>
+        <name>hash_set</name>
+        <qualifiedname>d2::lsx::hash_set</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="14" column="16" bodyfile="core/lsx/d2_solver.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" prot="public" static="no">
+        <type>float</type>
+        <definition>using d2::lsx::result_type = float</definition>
+        <argsstring></argsstring>
+        <name>result_type</name>
+        <qualifiedname>d2::lsx::result_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="10" column="5" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaced2_1_1lsx_1a40ded95a789d20b980c261e0f8d5e21a" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+        <definition>Variable d2::lsx::var</definition>
+        <argsstring></argsstring>
+        <name>var</name>
+        <qualifiedname>d2::lsx::var</qualifiedname>
+        <initializer>= <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref>(<ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref>(0, <ref refid="classd2_1_1lsx_1_1VariableIndex_1a1bc7c8f31eaf42663d5f467d06c16969a47c14840d8e15331fa420b9b2f757cd9" kindref="member">VariableIndex::Type::Variable</ref>))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="385" column="24" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="385" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1lsx_1a04af39562cfc88f5ea39b08531c4597f" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+        <definition>Variable d2::lsx::local</definition>
+        <argsstring></argsstring>
+        <name>local</name>
+        <qualifiedname>d2::lsx::local</qualifiedname>
+        <initializer>= <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref>(<ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref>(0, <ref refid="classd2_1_1lsx_1_1VariableIndex_1a1bc7c8f31eaf42663d5f467d06c16969a509820290d57f333403f490dde7316f4" kindref="member">VariableIndex::Type::Local</ref>))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="386" column="24" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="386" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1lsx_1ad4de54a347d9018d9b786e51240ddcde" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+        <definition>Variable d2::lsx::global</definition>
+        <argsstring></argsstring>
+        <name>global</name>
+        <qualifiedname>d2::lsx::global</qualifiedname>
+        <initializer>= <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref>(<ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref>(0, <ref refid="classd2_1_1lsx_1_1VariableIndex_1a1bc7c8f31eaf42663d5f467d06c16969a4cc6684df7b4a92b1dec6fce3264fac8" kindref="member">VariableIndex::Type::Global</ref>))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="387" column="24" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="387" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1_1lsx_1a6c3c588554208b5207f03339f414aa19" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="structd2_1_1lsx_1_1ParentVarWrapper" kindref="compound">ParentVarWrapper</ref></type>
+        <definition>ParentVarWrapper d2::lsx::parent</definition>
+        <argsstring></argsstring>
+        <name>parent</name>
+        <qualifiedname>d2::lsx::parent</qualifiedname>
+        <initializer>= <ref refid="structd2_1_1lsx_1_1ParentVarWrapper" kindref="compound">ParentVarWrapper</ref>()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="388" column="32" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="388" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1_1lsx_1ac726a3639739e185b4b05700f844db5d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+        <definition>Variable d2::lsx::operator*</definition>
+        <argsstring>(Variable var, result_type cf)</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::lsx::operator*</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="9" column="24" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="9" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1add23a73dd69a610f2d0d4bab09cc9173" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+        <definition>Variable d2::lsx::operator/</definition>
+        <argsstring>(Variable var, result_type cf)</argsstring>
+        <name>operator/</name>
+        <qualifiedname>d2::lsx::operator/</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="13" column="24" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="13" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a9c09e3e476f9d4ccb361bdf1c6d92336" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+        <definition>Variable d2::lsx::operator*</definition>
+        <argsstring>(result_type cf, Variable var)</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::lsx::operator*</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="17" column="24" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="17" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1acbe7c879a978c75bcfc6bedf34b0fd60" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+        <definition>Variable d2::lsx::operator/</definition>
+        <argsstring>(result_type cf, Variable var)</argsstring>
+        <name>operator/</name>
+        <qualifiedname>d2::lsx::operator/</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="21" column="24" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="21" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a20aaa79400b26a36eb4a49bbca6345d8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator+</definition>
+        <argsstring>(Variable var, result_type cf)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::lsx::operator+</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="26" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="26" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a2fbaa18b3caa71f6a8f35901b5441006" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator-</definition>
+        <argsstring>(Variable var, result_type cf)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>d2::lsx::operator-</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="30" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="30" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1ae48c8333adabc42e04b945d7b693d7b6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator+</definition>
+        <argsstring>(result_type cf, Variable var)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::lsx::operator+</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="34" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="34" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a81f9d50def741add051407a6b948f5fa" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator-</definition>
+        <argsstring>(result_type cf, Variable var)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>d2::lsx::operator-</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="38" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="38" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a7c4a85c554eee2dab9979f50e6de99a0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator+</definition>
+        <argsstring>(Variable lhs, Variable rhs)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::lsx::operator+</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="43" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="43" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1af2ef281e2600040b80f7f71093a08335" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator-</definition>
+        <argsstring>(Variable lhs, Variable rhs)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>d2::lsx::operator-</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="47" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="47" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1af4d54f86de96805a3e43e0ffec424d35" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator*</definition>
+        <argsstring>(const Expression &amp;expr, result_type cf)</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::lsx::operator*</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="54" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="54" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a9274157ba67bf8c9ef3878a8d2f86fea" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator/</definition>
+        <argsstring>(const Expression &amp;expr, result_type cf)</argsstring>
+        <name>operator/</name>
+        <qualifiedname>d2::lsx::operator/</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="58" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a3ae442559015250091dd600781ca0343" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator*</definition>
+        <argsstring>(result_type cf, const Expression &amp;expr)</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::lsx::operator*</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="62" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a3c0a9c39d0e944aaca31879ae5f18375" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator/</definition>
+        <argsstring>(result_type cf, const Expression &amp;expr)</argsstring>
+        <name>operator/</name>
+        <qualifiedname>d2::lsx::operator/</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="66" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="66" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a46509db5ae66ef7879450c95ad9e1dd0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator+</definition>
+        <argsstring>(const Expression &amp;expr, Variable var)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::lsx::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="71" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="71" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a54e3fe5b2a6fae6171def5e216c4f8c8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator-</definition>
+        <argsstring>(const Expression &amp;expr, Variable var)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>d2::lsx::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="75" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="75" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a872f7cd8617b2f0ab265e36f1f753ad8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator+</definition>
+        <argsstring>(Variable var, const Expression &amp;expr)</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::lsx::operator+</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="79" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="79" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a4d2bd4ab48141a42599fccf4d7198b01" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator-</definition>
+        <argsstring>(Variable var, const Expression &amp;expr)</argsstring>
+        <name>operator-</name>
+        <qualifiedname>d2::lsx::operator-</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="83" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="83" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a9ab2dfca7232fcdb90c758cfbe33ece3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator==</definition>
+        <argsstring>(const Expression &amp;lhs, const Expression &amp;rhs)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::lsx::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="90" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="90" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a257a02daa8fb2673bd83b8469f7cff2c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;</definition>
+        <argsstring>(const Expression &amp;lhs, const Expression &amp;rhs)</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>d2::lsx::operator&lt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="94" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="94" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1af5d01bbbcd2a3bc3325de9d60d228ed7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;</definition>
+        <argsstring>(const Expression &amp;lhs, const Expression &amp;rhs)</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>d2::lsx::operator&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="98" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="98" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a18ecb97685e80813b12bd5024aacff79" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;=</definition>
+        <argsstring>(const Expression &amp;lhs, const Expression &amp;rhs)</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>d2::lsx::operator&lt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="102" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="102" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a480bfbb0a72cd0644c81bc7125277640" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;=</definition>
+        <argsstring>(const Expression &amp;lhs, const Expression &amp;rhs)</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>d2::lsx::operator&gt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="106" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="106" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a64263155e327676709acb5ba93d40476" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator==</definition>
+        <argsstring>(Variable lhs, Variable rhs)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::lsx::operator==</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="111" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="111" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a9e8fdb6619ace7585296a216217871b1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;</definition>
+        <argsstring>(Variable lhs, Variable rhs)</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>d2::lsx::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="115" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="115" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a790ea3e5123736332670b03c8a7f2331" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;</definition>
+        <argsstring>(Variable lhs, Variable rhs)</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>d2::lsx::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="119" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="119" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a2917275fa42a26d92a460de43943f5fc" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;=</definition>
+        <argsstring>(Variable lhs, Variable rhs)</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>d2::lsx::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="123" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="123" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a413b66d2392a7f34c66acee77f0203f8" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;=</definition>
+        <argsstring>(Variable lhs, Variable rhs)</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>d2::lsx::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="127" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="127" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a0b7c862f106a413a110cbebbc0f4ce13" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator==</definition>
+        <argsstring>(const Expression &amp;expr, result_type cf)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::lsx::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="132" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="132" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1aa979db1adb1c9a2f2d504202cd8ffa09" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;</definition>
+        <argsstring>(const Expression &amp;expr, result_type cf)</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>d2::lsx::operator&lt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="136" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="136" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a89fea4388bf95764c1d12b9269013ba7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;</definition>
+        <argsstring>(const Expression &amp;expr, result_type cf)</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>d2::lsx::operator&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="140" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="140" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1ae35433554cd02b79c241c0b997d67e3c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;=</definition>
+        <argsstring>(const Expression &amp;expr, result_type cf)</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>d2::lsx::operator&lt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="144" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="144" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a57ece7bb80bab19073bb0567224c0478" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;=</definition>
+        <argsstring>(const Expression &amp;expr, result_type cf)</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>d2::lsx::operator&gt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="148" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="148" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a030b1009f21b20f1d5b4da756e1589ca" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator==</definition>
+        <argsstring>(result_type cf, const Expression &amp;expr)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::lsx::operator==</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="153" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1ad7cd1676205bd05d7b36a9ba55c79ae3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;</definition>
+        <argsstring>(result_type cf, const Expression &amp;expr)</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>d2::lsx::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="157" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="157" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1ae73df62ab53652ea11fac43cb1963f1e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;</definition>
+        <argsstring>(result_type cf, const Expression &amp;expr)</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>d2::lsx::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="161" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="161" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a0010bd6601b0aabaff25f3f48dd7e0fb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;=</definition>
+        <argsstring>(result_type cf, const Expression &amp;expr)</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>d2::lsx::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="165" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="165" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1abe4531a8ccc9e3cc492916690f1de0ff" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;=</definition>
+        <argsstring>(result_type cf, const Expression &amp;expr)</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>d2::lsx::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="169" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="169" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a45e97269365b2a183d2a2deaad321c29" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator==</definition>
+        <argsstring>(const Expression &amp;expr, Variable var)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::lsx::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="174" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="174" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1ac28210c0e020f1334eea0f2c30ad5b02" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;</definition>
+        <argsstring>(const Expression &amp;expr, Variable var)</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>d2::lsx::operator&lt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="178" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="178" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a44b67ea6e56550d1c55b418ebfdf5902" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;</definition>
+        <argsstring>(const Expression &amp;expr, Variable var)</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>d2::lsx::operator&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="182" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="182" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1ae3c9d0c757229e1b4be465f8b4728c7f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;=</definition>
+        <argsstring>(const Expression &amp;expr, Variable var)</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>d2::lsx::operator&lt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="186" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="186" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a7f3878d58c7953bf4dfee2ba3109ae88" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;=</definition>
+        <argsstring>(const Expression &amp;expr, Variable var)</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>d2::lsx::operator&gt;=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="190" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="190" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a7f284d8381e3ad93fa388e2b40fa8248" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator==</definition>
+        <argsstring>(Variable var, const Expression &amp;expr)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::lsx::operator==</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="195" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="195" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a971db18d9ffa244d47c9720b50e43638" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;</definition>
+        <argsstring>(Variable var, const Expression &amp;expr)</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>d2::lsx::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="199" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="199" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1ac0521bdb6bb3eeb4f81b312d9dffaecd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;</definition>
+        <argsstring>(Variable var, const Expression &amp;expr)</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>d2::lsx::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="203" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="203" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a7c93a87b78478fd779ae11cf05f7d455" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;=</definition>
+        <argsstring>(Variable var, const Expression &amp;expr)</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>d2::lsx::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="207" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="207" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a169624f9156b6d0e0eb4df228b9baa30" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;=</definition>
+        <argsstring>(Variable var, const Expression &amp;expr)</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>d2::lsx::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="211" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="211" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a62276f2e6b69f2143d7e95f0a73c5f37" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator==</definition>
+        <argsstring>(Variable var, result_type cf)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::lsx::operator==</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="216" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="216" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a64be4e02b4395b51861cfc96a44cb700" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;</definition>
+        <argsstring>(Variable var, result_type cf)</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>d2::lsx::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="220" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="220" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1aea587477dd1a0e7a354fa6f94f721ac9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;</definition>
+        <argsstring>(Variable var, result_type cf)</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>d2::lsx::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="224" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="224" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a0d1e79b8531443bd678409e700d85f10" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;=</definition>
+        <argsstring>(Variable var, result_type cf)</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>d2::lsx::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="228" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="228" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a96e950bd857ce186d92f95e8a3b5432a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;=</definition>
+        <argsstring>(Variable var, result_type cf)</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>d2::lsx::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="232" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="232" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1aa969463748e770ae19c92445573dc48e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator==</definition>
+        <argsstring>(result_type cf, Variable var)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::lsx::operator==</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="237" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="237" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1ac7a2e999f45481b8cc5380266bafe4b0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;</definition>
+        <argsstring>(result_type cf, Variable var)</argsstring>
+        <name>operator&lt;</name>
+        <qualifiedname>d2::lsx::operator&lt;</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="241" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="241" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a1b4dff10b294b4bbc36609912c2c0f2f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;</definition>
+        <argsstring>(result_type cf, Variable var)</argsstring>
+        <name>operator&gt;</name>
+        <qualifiedname>d2::lsx::operator&gt;</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="245" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="245" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a2f61a3006049bb96b897f1202c7e443f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&lt;=</definition>
+        <argsstring>(result_type cf, Variable var)</argsstring>
+        <name>operator&lt;=</name>
+        <qualifiedname>d2::lsx::operator&lt;=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="249" column="15" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="249" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a6310b7070ff3d3f936c2de1e4af151c6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>Expression d2::lsx::operator&gt;=</definition>
+        <argsstring>(result_type cf, Variable var)</argsstring>
+        <name>operator&gt;=</name>
+        <qualifiedname>d2::lsx::operator&gt;=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_ops.hpp" line="253" column="26" bodyfile="core/lsx/d2_solver_ops.hpp" bodystart="253" bodyend="256"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a84921f2fae579f941c54008c307edacc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Hash</type>
+          </param>
+        </templateparamlist>
+        <type>Hash</type>
+        <definition>Hash d2::lsx::AbslHashValue</definition>
+        <argsstring>(Hash hash, const lsx::Symbol &amp;val)</argsstring>
+        <name>AbslHashValue</name>
+        <qualifiedname>d2::lsx::AbslHashValue</qualifiedname>
+        <param>
+          <type>Hash</type>
+          <declname>hash</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">lsx::Symbol</ref> &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="413" column="10" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="413" bodyend="416"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1lsx_1a65182825382e4149b0f36612a07004a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Hash</type>
+          </param>
+        </templateparamlist>
+        <type>Hash</type>
+        <definition>Hash d2::lsx::AbslHashValue</definition>
+        <argsstring>(Hash hash, const lsx::VariableIndex &amp;val)</argsstring>
+        <name>AbslHashValue</name>
+        <qualifiedname>d2::lsx::AbslHashValue</qualifiedname>
+        <param>
+          <type>Hash</type>
+          <declname>hash</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">lsx::VariableIndex</ref> &amp;</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="418" column="10" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="418" bodyend="421"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver.cpp" line="5" column="1"/>
+  </compounddef>
+</doxygen>

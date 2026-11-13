@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1style_1_1IVSelectable" kind="class" language="C++" prot="public">
+    <compoundname>d2::style::IVSelectable</compoundname>
+    <includes refid="d2__text__select_8hpp" local="no">d2_text_select.hpp</includes>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1style_1_1IVSelectable_1a5dc8264ca3ea9eca79c82c82575c81e7" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::style::IVSelectable::enable_selection</definition>
+        <argsstring></argsstring>
+        <name>enable_selection</name>
+        <qualifiedname>d2::style::IVSelectable::enable_selection</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="13" column="14" bodyfile="core/tree/d2_text_select.hpp" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1style_1_1IVSelectable_1ade94c6b5328368b3034c98ec18a5026c" prot="protected" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="structd2_1_1text_1_1Range" kindref="compound">text::Range</ref> &gt;</type>
+        <definition>std::optional&lt;text::Range&gt; d2::style::IVSelectable::_text_selection</definition>
+        <argsstring></argsstring>
+        <name>_text_selection</name>
+        <qualifiedname>d2::style::IVSelectable::_text_selection</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="14" column="23" bodyfile="core/tree/d2_text_select.hpp" bodystart="14" bodyend="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1style_1_1IVSelectable_1aadd1edab62aa6b44d3ecfab4be0bc94f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::style::IVSelectable::~IVSelectable</definition>
+        <argsstring>()=default</argsstring>
+        <name>~IVSelectable</name>
+        <qualifiedname>d2::style::IVSelectable::~IVSelectable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="16" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1IVSelectable_1a33c8c5f8cb0c047db12502ed1a65e262" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::style::IVSelectable::selectable</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>selectable</name>
+        <qualifiedname>d2::style::IVSelectable::selectable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="17" column="14" bodyfile="core/tree/d2_text_select.cpp" bodystart="8" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1IVSelectable_1a9915aa24eae5a373415f3b5dd1e75253" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>const <ref refid="classd2_1_1text_1_1Layout" kindref="compound">text::Layout</ref> *</type>
+        <definition>virtual const text::Layout * d2::style::IVSelectable::text_layout</definition>
+        <argsstring>() const</argsstring>
+        <name>text_layout</name>
+        <qualifiedname>d2::style::IVSelectable::text_layout</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="18" column="36" bodyfile="core/tree/d2_text_select.hpp" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1IVSelectable_1a008a8c4260e83ea455a7beadc9e3de54" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::style::IVSelectable::select_text</definition>
+        <argsstring>(std::optional&lt; text::Range &gt; range)</argsstring>
+        <name>select_text</name>
+        <qualifiedname>d2::style::IVSelectable::select_text</qualifiedname>
+        <param>
+          <type>std::optional&lt; <ref refid="structd2_1_1text_1_1Range" kindref="compound">text::Range</ref> &gt;</type>
+          <declname>range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="19" column="22" bodyfile="core/tree/d2_text_select.hpp" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1IVSelectable_1a84c3499e7207a6499f869161e39ae7a8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>std::string_view</type>
+        <definition>virtual std::string_view d2::style::IVSelectable::selection_separator</definition>
+        <argsstring>() const</argsstring>
+        <name>selection_separator</name>
+        <qualifiedname>d2::style::IVSelectable::selection_separator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="20" column="34" bodyfile="core/tree/d2_text_select.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1IVSelectable_1aa4cd82d2f2d6e5521bb6a61866518e3c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="structd2_1_1text_1_1Range" kindref="compound">text::Range</ref> &gt;</type>
+        <definition>std::optional&lt; text::Range &gt; d2::style::IVSelectable::text_selection</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>text_selection</name>
+        <qualifiedname>d2::style::IVSelectable::text_selection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_text_select.hpp" line="21" column="23" bodyfile="core/tree/d2_text_select.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_text_select.hpp" line="10" column="5" bodyfile="core/tree/d2_text_select.hpp" bodystart="11" bodyend="22"/>
+    <listofallmembers>
+      <member refid="classd2_1_1style_1_1IVSelectable_1ade94c6b5328368b3034c98ec18a5026c" prot="protected" virt="non-virtual"><scope>d2::style::IVSelectable</scope><name>_text_selection</name></member>
+      <member refid="classd2_1_1style_1_1IVSelectable_1a5dc8264ca3ea9eca79c82c82575c81e7" prot="protected" virt="non-virtual"><scope>d2::style::IVSelectable</scope><name>enable_selection</name></member>
+      <member refid="classd2_1_1style_1_1IVSelectable_1a008a8c4260e83ea455a7beadc9e3de54" prot="public" virt="virtual"><scope>d2::style::IVSelectable</scope><name>select_text</name></member>
+      <member refid="classd2_1_1style_1_1IVSelectable_1a33c8c5f8cb0c047db12502ed1a65e262" prot="public" virt="non-virtual"><scope>d2::style::IVSelectable</scope><name>selectable</name></member>
+      <member refid="classd2_1_1style_1_1IVSelectable_1a84c3499e7207a6499f869161e39ae7a8" prot="public" virt="virtual"><scope>d2::style::IVSelectable</scope><name>selection_separator</name></member>
+      <member refid="classd2_1_1style_1_1IVSelectable_1a9915aa24eae5a373415f3b5dd1e75253" prot="public" virt="virtual"><scope>d2::style::IVSelectable</scope><name>text_layout</name></member>
+      <member refid="classd2_1_1style_1_1IVSelectable_1aa4cd82d2f2d6e5521bb6a61866518e3c" prot="public" virt="non-virtual"><scope>d2::style::IVSelectable</scope><name>text_selection</name></member>
+      <member refid="classd2_1_1style_1_1IVSelectable_1aadd1edab62aa6b44d3ecfab4be0bc94f" prot="public" virt="virtual"><scope>d2::style::IVSelectable</scope><name>~IVSelectable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="dir_a4fd64009d3b76a85ae2b8eb325672fb" kind="dir">
+    <compoundname>elements</compoundname>
+    <innerfile refid="d2__box_8cpp">d2_box.cpp</innerfile>
+    <innerfile refid="d2__box_8hpp">d2_box.hpp</innerfile>
+    <innerfile refid="d2__button_8cpp">d2_button.cpp</innerfile>
+    <innerfile refid="d2__button_8hpp">d2_button.hpp</innerfile>
+    <innerfile refid="d2__checkbox_8cpp">d2_checkbox.cpp</innerfile>
+    <innerfile refid="d2__checkbox_8hpp">d2_checkbox.hpp</innerfile>
+    <innerfile refid="d2__demand__scrollbox_8cpp">d2_demand_scrollbox.cpp</innerfile>
+    <innerfile refid="d2__demand__scrollbox_8hpp">d2_demand_scrollbox.hpp</innerfile>
+    <innerfile refid="d2__draggable__box_8cpp">d2_draggable_box.cpp</innerfile>
+    <innerfile refid="d2__draggable__box_8hpp">d2_draggable_box.hpp</innerfile>
+    <innerfile refid="d2__dropdown_8cpp">d2_dropdown.cpp</innerfile>
+    <innerfile refid="d2__dropdown_8hpp">d2_dropdown.hpp</innerfile>
+    <innerfile refid="d2__element__utils_8cpp">d2_element_utils.cpp</innerfile>
+    <innerfile refid="d2__element__utils_8hpp">d2_element_utils.hpp</innerfile>
+    <innerfile refid="d2__flow__box_8cpp">d2_flow_box.cpp</innerfile>
+    <innerfile refid="d2__flow__box_8hpp">d2_flow_box.hpp</innerfile>
+    <innerfile refid="d2__graph_8cpp">d2_graph.cpp</innerfile>
+    <innerfile refid="d2__graph_8hpp">d2_graph.hpp</innerfile>
+    <innerfile refid="elements_2d2__image_8cpp">d2_image.cpp</innerfile>
+    <innerfile refid="elements_2d2__image_8hpp">d2_image.hpp</innerfile>
+    <innerfile refid="d2__input_8cpp">d2_input.cpp</innerfile>
+    <innerfile refid="d2__input_8hpp">d2_input.hpp</innerfile>
+    <innerfile refid="d2__input__layout_8hpp">d2_input_layout.hpp</innerfile>
+    <innerfile refid="d2__matrix_8cpp">d2_matrix.cpp</innerfile>
+    <innerfile refid="d2__matrix_8hpp">d2_matrix.hpp</innerfile>
+    <innerfile refid="d2__multiline__input_8cpp">d2_multiline_input.cpp</innerfile>
+    <innerfile refid="d2__multiline__input_8hpp">d2_multiline_input.hpp</innerfile>
+    <innerfile refid="d2__scrollbox_8cpp">d2_scrollbox.cpp</innerfile>
+    <innerfile refid="d2__scrollbox_8hpp">d2_scrollbox.hpp</innerfile>
+    <innerfile refid="d2__separator_8cpp">d2_separator.cpp</innerfile>
+    <innerfile refid="d2__separator_8hpp">d2_separator.hpp</innerfile>
+    <innerfile refid="d2__slider_8cpp">d2_slider.cpp</innerfile>
+    <innerfile refid="d2__slider_8hpp">d2_slider.hpp</innerfile>
+    <innerfile refid="elements_2d2__std_8hpp">d2_std.hpp</innerfile>
+    <innerfile refid="d2__switch_8cpp">d2_switch.cpp</innerfile>
+    <innerfile refid="d2__switch_8hpp">d2_switch.hpp</innerfile>
+    <innerfile refid="d2__text_8cpp">d2_text.cpp</innerfile>
+    <innerfile refid="d2__text_8hpp">d2_text.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="elements/"/>
+  </compounddef>
+</doxygen>

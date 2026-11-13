@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['name_0',['name',['../structd2_1_1sys_1_1SystemModule_1_1ModInfo.html#a60b1b5aef987f2e02875b9dafa32fa5e',1,'d2::sys::SystemModule::ModInfo::name'],['../structd2_1_1sys_1_1SystemAudio_1_1DeviceName.html#a070beb10c80bcfcfaf9f8de3ff45bde8',1,'d2::sys::SystemAudio::DeviceName::name'],['../structd2_1_1style_1_1Dep.html#a6d66ca41e79c4aebfa891f660402ffbd',1,'d2::style::Dep::name'],['../structd2_1_1NamedTree.html#a776c36c46ed268047d9ee3bcf461adad',1,'d2::NamedTree::name'],['../classd2_1_1sys_1_1SystemScreen.html#a281a4646d4ee1658c4c78353215e4047',1,'d2::sys::SystemScreen::name()'],['../classd2_1_1Element.html#ae9916d8895d01882f699e8448d2084d9',1,'d2::Element::name()']]],
+  ['namedtree_1',['NamedTree',['../structd2_1_1NamedTree.html',1,'d2']]],
+  ['names_2',['names',['../structd2_1_1sys_1_1impl_1_1MergeDeps_3_01std_1_1tuple_3_01DepsA_8_8_8_01_4_00_01DepsB_8_8_8_01_4.html#a73ebab05ad13d17b707cf7cfa699d17d',1,'d2::sys::impl::MergeDeps&lt; std::tuple&lt; DepsA... &gt;, DepsB... &gt;']]],
+  ['native_3',['Native',['../classd2_1_1sys_1_1SystemModule.html#ab61cbe6d0870452285b8f9b2e23d1b54a925641e0b76c28cc940e8f3ca178d826',1,'d2::sys::SystemModule']]],
+  ['native_5fcode_4',['native_code',['../structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error.html#a17e14c22e0a42b834c0133734b13b4ea',1,'d2::sys::net::SystemHTTP::Error']]],
+  ['needs_5frecompute_5f_5',['needs_recompute_',['../classd2_1_1dx_1_1ScrollBox.html#a0ec5077f7c07e5e7461a57b760c78a50',1,'d2::dx::ScrollBox']]],
+  ['needs_5fupdate_6',['needs_update',['../classd2_1_1Element.html#ae110e3769d1e8227a655971ec9428868',1,'d2::Element']]],
+  ['never_7',['Never',['../structd2_1_1sys_1_1SystemBinder_1_1Bind.html#a94c9330581444167eedf4d99cdb2b2aaa6e7b34fa59e1bd229b207892956dc41c',1,'d2::sys::SystemBinder::Bind']]],
+  ['never_8',['never',['../structd2_1_1Animation_1_1Wake.html#aea84e386f95ac912b39beec268df2276',1,'d2::Animation::Wake']]],
+  ['newline_9',['newline',['../structd2_1_1text_1_1Glyph.html#a72b39eae3d0584a5143751ca2782edba',1,'d2::text::Glyph']]],
+  ['newlines_10',['newlines',['../structd2_1_1text_1_1Options.html#af8a41a70fedd86bcfdbb35058f66953d',1,'d2::text::Options']]],
+  ['next_11',['next',['../structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1_1icon.html#ac91139b50c82f66482059306a1a0808f',1,'d2::Charset&lt; Encoding::Ascii &gt;::icon::next'],['../structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon.html#ad9b8cda665b4e8372541e0a8cb6a97b0',1,'d2::Charset&lt; Encoding::Unicode &gt;::icon::next']]],
+  ['nodepair_12',['NodePair',['../structd2_1_1dx_1_1graph_1_1NodeWaveGraph_1_1NodePair.html',1,'d2::dx::graph::NodeWaveGraph']]],
+  ['nodewavegraph_13',['NodeWaveGraph',['../classd2_1_1dx_1_1graph_1_1NodeWaveGraph.html',1,'d2::dx::graph']]],
+  ['noise_14',['noise',['../classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav.html#ab6d1cfb983672826a725cc5eb0912c44',1,'d2::sys::SystemAudio::preset::wav']]],
+  ['none_15',['None',['../classd2_1_1Element.html#a7fce53d13ab95386f9095530ad7c51b8ae47e1856724eda8b3c18f9945e098115',1,'d2::Element::None'],['../namespaced2_1_1text.html#a53ef82581edd49e5f0d0c41ebe0a253ba6adf97f83acf6453d4a6a4b1070f3754',1,'d2::text::None'],['../namespaced2_1_1px.html#aa95f6b08bfa074865dee683947eb6295a6adf97f83acf6453d4a6a4b1070f3754',1,'d2::px::None']]],
+  ['normalize_16',['normalize',['../structd2_1_1impl_1_1normalize.html',1,'d2::impl::normalize&lt; Type &gt;'],['../classd2_1_1lsx_1_1impl_1_1Row.html#a29365cf942629697f73ac8ae7c08801f',1,'d2::lsx::impl::Row::normalize()']]],
+  ['normalize_3c_20ref_3c_20type_20_3e_20_3e_17',['normalize&lt; Ref&lt; Type &gt; &gt;',['../structd2_1_1impl_1_1normalize_3_01Ref_3_01Type_01_4_01_4.html',1,'d2::impl']]],
+  ['normalize_3c_20std_3a_3atuple_3c_20argv_2e_2e_2e_20_3e_20_3e_18',['normalize&lt; std::tuple&lt; Argv... &gt; &gt;',['../structd2_1_1impl_1_1normalize_3_01std_1_1tuple_3_01Argv_8_8_8_01_4_01_4.html',1,'d2::impl']]],
+  ['normalize_3c_20type_20_26_20_3e_19',['normalize&lt; Type &amp; &gt;',['../structd2_1_1impl_1_1normalize_3_01Type_01_6_01_4.html',1,'d2::impl']]],
+  ['notfound_20',['NotFound',['../classd2_1_1lsx_1_1ConstraintArray.html#a3b32d56a44b7c51013580921efc5abd8a38c300f4fc9ce8a77aad4a30de05cad8',1,'d2::lsx::ConstraintArray']]],
+  ['notifications_21',['notifications',['../structd2_1_1OSConfig.html#a21bf9b240de526be09c5d276134f3448',1,'d2::OSConfig']]],
+  ['notify_22',['notify',['../classd2_1_1sys_1_1SystemNotify.html#a813c0ebe118a5d80127884b9b1962339',1,'d2::sys::SystemNotify::notify(Level level, std::string_view title, std::string_view content, unsigned char targets=Local|Passive)=0'],['../classd2_1_1sys_1_1SystemNotify.html#a5cfe70e54704dafc39a2b4b1f2b52135',1,'d2::sys::SystemNotify::notify(Level level, std::string_view title, std::string_view content, Element::ptr view, unsigned char targets=Local|Passive)=0'],['../namespaced2_1_1sys.html#a104ba264c363090e225f3c35bc16cfbb',1,'d2::sys::notify']]],
+  ['now_23',['now',['../structd2_1_1Animation_1_1Wake.html#abef299ff8f8c7412985262fb7a71fee3',1,'d2::Animation::Wake']]]
+];

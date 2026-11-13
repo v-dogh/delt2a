@@ -1,0 +1,735 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>d2::Charset&lt; Encoding::Ascii &gt;</compoundname>
+    <includes refid="d2__chardef_8hpp" local="no">d2_chardef.hpp</includes>
+    <innerclass refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1_1icon" prot="public">d2::Charset&lt; Encoding::Ascii &gt;::icon</innerclass>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Cell</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::Cell</qualifiedname>
+        <enumvalue id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a0ec10d7cfbd18644871f53cdfc8f30fa" prot="public">
+          <name>TopLeft</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22abfc78ce5a96fb5c31f39ef0f4ca98f56" prot="public">
+          <name>TopRight</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a7e6fed00bd741a6901f4730575e80827" prot="public">
+          <name>MidTopLeft</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22aed27c31322ffa5df0030226f16a4a25d" prot="public">
+          <name>MidTopRight</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22adeda3d8429c5d9cf4cfe67436cea1ab8" prot="public">
+          <name>MidBotLeft</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a0343f988d3aad0064047339470438739" prot="public">
+          <name>MidBotRight</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a76034ddbde3f51d5d6fb072a1de1c1d0" prot="public">
+          <name>BotLeft</name>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a1e557d1f58f016cab12e46c69b173299" prot="public">
+          <name>BotRight</name>
+          <initializer>= 1 &lt;&lt; 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="107" column="9" bodyfile="core/platform/d2_chardef.hpp" bodystart="108" bodyend="117"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a1e4c77c20b0e7483b6d99ce77801a17c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::top_fix</definition>
+        <argsstring></argsstring>
+        <name>top_fix</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::top_fix</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="11" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a495a7779d4bfe98749eb24a876534815" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::corners</definition>
+        <argsstring></argsstring>
+        <name>corners</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::corners</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="12" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a470f8ff441c0f9146a709dd2a2c2943f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_top_bar</definition>
+        <argsstring></argsstring>
+        <name>box_top_bar</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_top_bar</qualifiedname>
+        <initializer>= &apos;.&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="13" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a950bd3ed9dd63e0e71c64822be819761" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_top_drag_spot</definition>
+        <argsstring></argsstring>
+        <name>box_top_drag_spot</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_top_drag_spot</qualifiedname>
+        <initializer>= &apos;,&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="14" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1af0aa1268bb374a8a8d28d636d351ccee" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_tr_corner</definition>
+        <argsstring></argsstring>
+        <name>box_tr_corner</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_tr_corner</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="15" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a09ca86b2a7155215b100425e5ab0bbf3" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_tl_corner</definition>
+        <argsstring></argsstring>
+        <name>box_tl_corner</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_tl_corner</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="16" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a690d912bec607aeabd770471dae892a6" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_br_corner</definition>
+        <argsstring></argsstring>
+        <name>box_br_corner</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_br_corner</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="17" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ae3120c4201e985e4e92920f33a95de53" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_bl_corner</definition>
+        <argsstring></argsstring>
+        <name>box_bl_corner</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_bl_corner</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="18" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad2b71368b6bad1ccb6962c987df10d9e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_tr_corner_smooth</definition>
+        <argsstring></argsstring>
+        <name>box_tr_corner_smooth</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_tr_corner_smooth</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="19" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ac2ed0fb96ca97993a18153ee4a0e8887" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_tl_corner_smooth</definition>
+        <argsstring></argsstring>
+        <name>box_tl_corner_smooth</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_tl_corner_smooth</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="20" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a90c1432468be51e01a754466a78713d8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_br_corner_smooth</definition>
+        <argsstring></argsstring>
+        <name>box_br_corner_smooth</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_br_corner_smooth</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="21" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1aa524b5747a7d5569385ca5e6968e6694" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_bl_corner_smooth</definition>
+        <argsstring></argsstring>
+        <name>box_bl_corner_smooth</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_bl_corner_smooth</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="22" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a475fda3a225801c41a41d9fd00e1f2de" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_tr_corner_rough</definition>
+        <argsstring></argsstring>
+        <name>box_tr_corner_rough</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_tr_corner_rough</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="23" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ae754d561b9d58940f57d96252e36d026" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_tl_corner_rough</definition>
+        <argsstring></argsstring>
+        <name>box_tl_corner_rough</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_tl_corner_rough</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="24" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1aeed4eb8429a7f15ba0e18020fe4c2f89" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_br_corner_rough</definition>
+        <argsstring></argsstring>
+        <name>box_br_corner_rough</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_br_corner_rough</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="25" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a6d52fae3e9bdaf55d89f2a69406820d2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_bl_corner_rough</definition>
+        <argsstring></argsstring>
+        <name>box_bl_corner_rough</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_bl_corner_rough</qualifiedname>
+        <initializer>= &apos;+&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="26" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a7e4fb028343c286a36dc40c270d6fc8c" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_border_vertical</definition>
+        <argsstring></argsstring>
+        <name>box_border_vertical</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_border_vertical</qualifiedname>
+        <initializer>= &apos;|&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="27" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a3d621bc83651c97bf437d7f9418bf6de" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_border_horizontal</definition>
+        <argsstring></argsstring>
+        <name>box_border_horizontal</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_border_horizontal</qualifiedname>
+        <initializer>= &apos;_&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="28" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a733ea0c4066a566963a498c75db9f119" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_border_connector_left</definition>
+        <argsstring></argsstring>
+        <name>box_border_connector_left</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_border_connector_left</qualifiedname>
+        <initializer>= &apos;|&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="29" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a422f0deff805db9b7d0eb263b03fe0b1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_border_connector_right</definition>
+        <argsstring></argsstring>
+        <name>box_border_connector_right</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_border_connector_right</qualifiedname>
+        <initializer>= &apos;|&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="30" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a7cf78b81d12b12a63eb27beadd63d551" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_border_connector_bottom</definition>
+        <argsstring></argsstring>
+        <name>box_border_connector_bottom</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_border_connector_bottom</qualifiedname>
+        <initializer>= &apos;_&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="31" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ace3bf6c50c001ff34ec4acaa9b1b469e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::box_border_connector_top</definition>
+        <argsstring></argsstring>
+        <name>box_border_connector_top</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::box_border_connector_top</qualifiedname>
+        <initializer>= &apos;_&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="32" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a248c2f68a419d23197c2945dfcaf178e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::checkbox_true</definition>
+        <argsstring></argsstring>
+        <name>checkbox_true</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::checkbox_true</qualifiedname>
+        <initializer>= &apos;x&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="34" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a055d581c8219032b22043fda061e22a8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::checkbox_false</definition>
+        <argsstring></argsstring>
+        <name>checkbox_false</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::checkbox_false</qualifiedname>
+        <initializer>= &apos;o&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="35" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1afe227fe2ea0708f471c6ad5399e7e1c7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::switch_separator_horizontal</definition>
+        <argsstring></argsstring>
+        <name>switch_separator_horizontal</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::switch_separator_horizontal</qualifiedname>
+        <initializer>= &apos;-&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="36" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a5836152f4124341857d47841d69cf6ab" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::switch_separator_vertical</definition>
+        <argsstring></argsstring>
+        <name>switch_separator_vertical</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::switch_separator_vertical</qualifiedname>
+        <initializer>= &apos;|&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="37" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a73794dd48719778042408d84165ece34" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::slider_horizontal</definition>
+        <argsstring></argsstring>
+        <name>slider_horizontal</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::slider_horizontal</qualifiedname>
+        <initializer>= &apos;-&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="38" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a2b4b8f1811dd3739718460d098145d56" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::slider_vertical</definition>
+        <argsstring></argsstring>
+        <name>slider_vertical</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::slider_vertical</qualifiedname>
+        <initializer>= &apos;|&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="39" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a4d8ba3644606eb802a131dd3f47bd2cc" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::slider_thumb_vertical</definition>
+        <argsstring></argsstring>
+        <name>slider_thumb_vertical</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::slider_thumb_vertical</qualifiedname>
+        <initializer>= &apos; &apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="40" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a4f7d25011d4b8b8a3826f697ec180778" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::slider_thumb_horizontal</definition>
+        <argsstring></argsstring>
+        <name>slider_thumb_horizontal</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::slider_thumb_horizontal</qualifiedname>
+        <initializer>= &apos; &apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="41" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1abb18c4273798cf8e78277bcbc5ab8f0d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::radio_checked</definition>
+        <argsstring></argsstring>
+        <name>radio_checked</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::radio_checked</qualifiedname>
+        <initializer>= &apos;*&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="42" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a5805f2c366fadd5773ad270766290e26" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::radio_unchecked</definition>
+        <argsstring></argsstring>
+        <name>radio_unchecked</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::radio_unchecked</qualifiedname>
+        <initializer>= &apos;o&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="43" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a71d7f96659531afd4598d09d03fa63f7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::arrow_up</definition>
+        <argsstring></argsstring>
+        <name>arrow_up</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::arrow_up</qualifiedname>
+        <initializer>= &apos;^&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="45" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ac50caa09a091e2e3bdfa0079818e3d86" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::arrow_down</definition>
+        <argsstring></argsstring>
+        <name>arrow_down</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::arrow_down</qualifiedname>
+        <initializer>= &apos;v&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="46" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a44d944aab43843c20d5e6ea84d7ec7c7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::arrow_left</definition>
+        <argsstring></argsstring>
+        <name>arrow_left</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::arrow_left</qualifiedname>
+        <initializer>= &apos;&lt;&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="47" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1af3715349dc2fd0b13bd70e761462f898" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::arrow_right</definition>
+        <argsstring></argsstring>
+        <name>arrow_right</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::arrow_right</qualifiedname>
+        <initializer>= &apos;&gt;&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="48" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a6bb0caebef709ac93bcb94bd9cf431a7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::shade_transparent</definition>
+        <argsstring></argsstring>
+        <name>shade_transparent</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::shade_transparent</qualifiedname>
+        <initializer>= &apos; &apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="50" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1aac05c052f02f974cb15a6d9638fbab4a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Ascii &gt;::shade_opaque</definition>
+        <argsstring></argsstring>
+        <name>shade_opaque</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::shade_opaque</qualifiedname>
+        <initializer>= &apos; &apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="51" column="31" bodyfile="core/platform/d2_chardef.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1aaa127b96969e56a61b8a3b34e3c5df1c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>char</type>
+        <definition>static char d2::Charset&lt; Encoding::Ascii &gt;::cell</definition>
+        <argsstring>(uint8_t mask)</argsstring>
+        <name>cell</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Ascii &gt;::cell</qualifiedname>
+        <param>
+          <type>uint8_t</type>
+          <declname>mask</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="118" column="21" bodyfile="core/platform/d2_chardef.hpp" bodystart="118" bodyend="121"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_chardef.hpp" line="9" column="14" bodyfile="core/platform/d2_chardef.hpp" bodystart="10" bodyend="122"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ac50caa09a091e2e3bdfa0079818e3d86" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>arrow_down</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a44d944aab43843c20d5e6ea84d7ec7c7" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>arrow_left</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1af3715349dc2fd0b13bd70e761462f898" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>arrow_right</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a71d7f96659531afd4598d09d03fa63f7" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>arrow_up</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a76034ddbde3f51d5d6fb072a1de1c1d0" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>BotLeft</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a1e557d1f58f016cab12e46c69b173299" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>BotRight</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ae3120c4201e985e4e92920f33a95de53" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_bl_corner</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a6d52fae3e9bdaf55d89f2a69406820d2" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_bl_corner_rough</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1aa524b5747a7d5569385ca5e6968e6694" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_bl_corner_smooth</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a7cf78b81d12b12a63eb27beadd63d551" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_border_connector_bottom</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a733ea0c4066a566963a498c75db9f119" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_border_connector_left</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a422f0deff805db9b7d0eb263b03fe0b1" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_border_connector_right</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ace3bf6c50c001ff34ec4acaa9b1b469e" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_border_connector_top</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a3d621bc83651c97bf437d7f9418bf6de" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_border_horizontal</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a7e4fb028343c286a36dc40c270d6fc8c" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_border_vertical</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a690d912bec607aeabd770471dae892a6" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_br_corner</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1aeed4eb8429a7f15ba0e18020fe4c2f89" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_br_corner_rough</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a90c1432468be51e01a754466a78713d8" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_br_corner_smooth</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a09ca86b2a7155215b100425e5ab0bbf3" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_tl_corner</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ae754d561b9d58940f57d96252e36d026" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_tl_corner_rough</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ac2ed0fb96ca97993a18153ee4a0e8887" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_tl_corner_smooth</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a470f8ff441c0f9146a709dd2a2c2943f" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_top_bar</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a950bd3ed9dd63e0e71c64822be819761" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_top_drag_spot</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1af0aa1268bb374a8a8d28d636d351ccee" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_tr_corner</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a475fda3a225801c41a41d9fd00e1f2de" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_tr_corner_rough</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad2b71368b6bad1ccb6962c987df10d9e" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>box_tr_corner_smooth</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>Cell</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1aaa127b96969e56a61b8a3b34e3c5df1c" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>cell</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a055d581c8219032b22043fda061e22a8" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>checkbox_false</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a248c2f68a419d23197c2945dfcaf178e" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>checkbox_true</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a495a7779d4bfe98749eb24a876534815" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>corners</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22adeda3d8429c5d9cf4cfe67436cea1ab8" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>MidBotLeft</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a0343f988d3aad0064047339470438739" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>MidBotRight</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a7e6fed00bd741a6901f4730575e80827" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>MidTopLeft</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22aed27c31322ffa5df0030226f16a4a25d" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>MidTopRight</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1abb18c4273798cf8e78277bcbc5ab8f0d" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>radio_checked</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a5805f2c366fadd5773ad270766290e26" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>radio_unchecked</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1aac05c052f02f974cb15a6d9638fbab4a" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>shade_opaque</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a6bb0caebef709ac93bcb94bd9cf431a7" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>shade_transparent</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a73794dd48719778042408d84165ece34" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>slider_horizontal</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a4f7d25011d4b8b8a3826f697ec180778" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>slider_thumb_horizontal</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a4d8ba3644606eb802a131dd3f47bd2cc" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>slider_thumb_vertical</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a2b4b8f1811dd3739718460d098145d56" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>slider_vertical</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1afe227fe2ea0708f471c6ad5399e7e1c7" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>switch_separator_horizontal</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a5836152f4124341857d47841d69cf6ab" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>switch_separator_vertical</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1a1e4c77c20b0e7483b6d99ce77801a17c" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>top_fix</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22a0ec10d7cfbd18644871f53cdfc8f30fa" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>TopLeft</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4_1ad6f6d36ff6b4dcb8d7d667302c66ec22abfc78ce5a96fb5c31f39ef0f4ca98f56" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Ascii &gt;</scope><name>TopRight</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

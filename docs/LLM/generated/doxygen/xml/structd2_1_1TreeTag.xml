@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1TreeTag" kind="struct" language="C++" prot="public">
+    <compoundname>d2::TreeTag</compoundname>
+    <derivedcompoundref refid="structd2_1_1Tree" prot="public" virt="non-virtual">d2::Tree&lt; State, Root, Build, Argv &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1TreeForward" prot="public" virt="non-virtual">d2::TreeForward&lt; Base, State, Root, Argv &gt;</derivedcompoundref>
+    <includes refid="d2__tree__construct_8hpp" local="no">d2_tree_construct.hpp</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::Tree&lt; State, Root, Build, Argv &gt;</label>
+        <link refid="structd2_1_1Tree"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::TreeForward&lt; Base, State, Root, Argv &gt;</label>
+        <link refid="structd2_1_1TreeForward"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::TreeTag</label>
+        <link refid="structd2_1_1TreeTag"/>
+      </node>
+    </inheritancegraph>
+    <location file="core/tree/d2_tree_construct.hpp" line="637" column="5" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="638" bodyend="639"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

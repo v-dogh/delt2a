@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Signals_1_1SignalStorage" kind="struct" language="C++" prot="private">
+    <compoundname>d2::Signals::SignalStorage</compoundname>
+    <innerclass refid="structd2_1_1Signals_1_1SignalStorage_1_1EventBucket" prot="public">d2::Signals::SignalStorage::EventBucket</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1Signals_1_1SignalStorage_1ab54a0838b36a2baf2eb36df1a21ce366" prot="public" static="no">
+        <type>std::vector&lt; std::shared_ptr&lt; HandleState &gt; &gt;</type>
+        <definition>using d2::Signals::SignalStorage::HandleList = std::vector&lt;std::shared_ptr&lt;HandleState&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>HandleList</name>
+        <qualifiedname>d2::Signals::SignalStorage::HandleList</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="752" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="752" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1a7b12ad9579a46cad57585f5b914319ba" prot="public" static="no" mutable="no">
+        <type>std::shared_mutex</type>
+        <definition>std::shared_mutex d2::Signals::SignalStorage::mtx</definition>
+        <argsstring></argsstring>
+        <name>mtx</name>
+        <qualifiedname>d2::Signals::SignalStorage::mtx</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="761" column="31" bodyfile="core/io/d2_signal_handler.hpp" bodystart="761" bodyend="761"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1a5a7ff2cbb4a5e891a4a9cd5a6d5e8c4c" prot="public" static="no" mutable="no">
+        <type>mt::TaskQueue&lt; SignalEnvelope &gt;</type>
+        <definition>mt::TaskQueue&lt;SignalEnvelope&gt; d2::Signals::SignalStorage::instances</definition>
+        <argsstring></argsstring>
+        <name>instances</name>
+        <qualifiedname>d2::Signals::SignalStorage::instances</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="762" column="27" bodyfile="core/io/d2_signal_handler.hpp" bodystart="762" bodyend="762"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1ab5c7fb184cbb1b57b2e400b692dfad2c" prot="public" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex d2::Signals::SignalStorage::combined_mtx</definition>
+        <argsstring></argsstring>
+        <name>combined_mtx</name>
+        <qualifiedname>d2::Signals::SignalStorage::combined_mtx</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="763" column="32" bodyfile="core/io/d2_signal_handler.hpp" bodystart="763" bodyend="763"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1abd5a3023c01d119c489628516e7e9dce" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; SignalEnvelope &gt;</type>
+        <definition>std::optional&lt;SignalEnvelope&gt; d2::Signals::SignalStorage::combined</definition>
+        <argsstring></argsstring>
+        <name>combined</name>
+        <qualifiedname>d2::Signals::SignalStorage::combined</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="764" column="27" bodyfile="core/io/d2_signal_handler.hpp" bodystart="764" bodyend="764"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1a9b38c6fd98a90e774ad8495d9ac09f59" prot="public" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; event_idx, <ref refid="structd2_1_1Signals_1_1SignalStorage_1_1EventBucket" kindref="compound">EventBucket</ref> &gt;</type>
+        <definition>absl::flat_hash_map&lt;event_idx, EventBucket&gt; d2::Signals::SignalStorage::handles</definition>
+        <argsstring></argsstring>
+        <name>handles</name>
+        <qualifiedname>d2::Signals::SignalStorage::handles</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="765" column="33" bodyfile="core/io/d2_signal_handler.hpp" bodystart="765" bodyend="765"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1abb839627e8e7b8a35c4707585db47e70" prot="public" static="no" mutable="no">
+        <type>signature_verifier</type>
+        <definition>signature_verifier d2::Signals::SignalStorage::verify</definition>
+        <argsstring></argsstring>
+        <name>verify</name>
+        <qualifiedname>d2::Signals::SignalStorage::verify</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="766" column="32" bodyfile="core/io/d2_signal_handler.hpp" bodystart="766" bodyend="766"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1a21691fc459584589f60a5702d4658dfa" prot="public" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; d2::Signals::SignalStorage::is_queued</definition>
+        <argsstring></argsstring>
+        <name>is_queued</name>
+        <qualifiedname>d2::Signals::SignalStorage::is_queued</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="767" column="25" bodyfile="core/io/d2_signal_handler.hpp" bodystart="767" bodyend="767"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1SignalStorage_1a8e13b4abfe5b4ad0e3a1e9115c37c1fa" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char d2::Signals::SignalStorage::flags</definition>
+        <argsstring></argsstring>
+        <name>flags</name>
+        <qualifiedname>d2::Signals::SignalStorage::flags</qualifiedname>
+        <initializer>{0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="768" column="27" bodyfile="core/io/d2_signal_handler.hpp" bodystart="768" bodyend="768"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::Signals::SignalStorage</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>verify</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::impl::RuntimeArg</label>
+        <link refid="structd2_1_1impl_1_1RuntimeArg"/>
+      </node>
+      <node id="2">
+        <label>d2::impl::RuntimeSignature</label>
+        <link refid="structd2_1_1impl_1_1RuntimeSignature"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>args</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_signal_handler.hpp" line="750" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="751" bodyend="769"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1abd5a3023c01d119c489628516e7e9dce" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage</scope><name>combined</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1ab5c7fb184cbb1b57b2e400b692dfad2c" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage</scope><name>combined_mtx</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1a8e13b4abfe5b4ad0e3a1e9115c37c1fa" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage</scope><name>flags</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1ab54a0838b36a2baf2eb36df1a21ce366" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage</scope><name>HandleList</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1a9b38c6fd98a90e774ad8495d9ac09f59" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage</scope><name>handles</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1a5a7ff2cbb4a5e891a4a9cd5a6d5e8c4c" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage</scope><name>instances</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1a21691fc459584589f60a5702d4658dfa" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage</scope><name>is_queued</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1a7b12ad9579a46cad57585f5b914319ba" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage</scope><name>mtx</name></member>
+      <member refid="structd2_1_1Signals_1_1SignalStorage_1abb839627e8e7b8a35c4707585db47e70" prot="public" virt="non-virtual"><scope>d2::Signals::SignalStorage</scope><name>verify</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

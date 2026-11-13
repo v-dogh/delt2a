@@ -1,0 +1,426 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1ScrollBox" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::ScrollBox</compoundname>
+    <basecompoundref refid="classd2_1_1dx_1_1Box" prot="public" virt="non-virtual">d2::dx::Box</basecompoundref>
+    <derivedcompoundref refid="classd2_1_1dx_1_1ScrollFlowBox" prot="public" virt="non-virtual">d2::dx::ScrollFlowBox</derivedcompoundref>
+    <includes refid="d2__scrollbox_8hpp" local="no">d2_scrollbox.hpp</includes>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1ScrollBox_1a06ec7ae07d17872b6f31a7da6187c1d3" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1dx_1_1VerticalSlider" kindref="compound">VerticalSlider</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;VerticalSlider&gt; d2::dx::ScrollBox::_scrollbar</definition>
+        <argsstring></argsstring>
+        <name>_scrollbar</name>
+        <qualifiedname>d2::dx::ScrollBox::_scrollbar</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="11" column="25" bodyfile="elements/d2_scrollbox.hpp" bodystart="11" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1ScrollBox_1a0bf6e9a42fc66099dc6ef606c30b3872" prot="protected" static="no" mutable="yes">
+        <type>int</type>
+        <definition>int d2::dx::ScrollBox::offset_</definition>
+        <argsstring></argsstring>
+        <name>offset_</name>
+        <qualifiedname>d2::dx::ScrollBox::offset_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="12" column="21" bodyfile="elements/d2_scrollbox.hpp" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1ScrollBox_1aaafa8015dce7272a94ca1e61711975ca" prot="protected" static="no" mutable="yes">
+        <type>int</type>
+        <definition>int d2::dx::ScrollBox::computed_height_</definition>
+        <argsstring></argsstring>
+        <name>computed_height_</name>
+        <qualifiedname>d2::dx::ScrollBox::computed_height_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="13" column="21" bodyfile="elements/d2_scrollbox.hpp" bodystart="13" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1ScrollBox_1a0ec5077f7c07e5e7461a57b760c78a50" prot="protected" static="no" mutable="yes">
+        <type>bool</type>
+        <definition>bool d2::dx::ScrollBox::needs_recompute_</definition>
+        <argsstring></argsstring>
+        <name>needs_recompute_</name>
+        <qualifiedname>d2::dx::ScrollBox::needs_recompute_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="14" column="22" bodyfile="elements/d2_scrollbox.hpp" bodystart="14" bodyend="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1aca414263b9ea2c2ae44af87fcd0d5286" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::ScrollBox::_recompute_height</definition>
+        <argsstring>() const</argsstring>
+        <name>_recompute_height</name>
+        <qualifiedname>d2::dx::ScrollBox::_recompute_height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="16" column="14" bodyfile="elements/d2_scrollbox.cpp" bodystart="5" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1ad87f4984de4dc0d538c07e1949f21dcb" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::ScrollBox::_signal_write_impl</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element) override</argsstring>
+        <name>_signal_write_impl</name>
+        <qualifiedname>d2::dx::ScrollBox::_signal_write_impl</qualifiedname>
+        <param>
+          <type>write_flag</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type>ptr</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="18" column="22" bodyfile="elements/d2_scrollbox.cpp" bodystart="44" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1abf634fad830150561386ad59d240f95b" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool d2::dx::ScrollBox::_provides_input_impl</definition>
+        <argsstring>() const override</argsstring>
+        <name>_provides_input_impl</name>
+        <qualifiedname>d2::dx::ScrollBox::_provides_input_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="19" column="22" bodyfile="elements/d2_scrollbox.cpp" bodystart="82" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a67c8d8dc327674ff144911c4f87faabc" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::ScrollBox::_state_change_impl</definition>
+        <argsstring>(State state, bool value) override</argsstring>
+        <name>_state_change_impl</name>
+        <qualifiedname>d2::dx::ScrollBox::_state_change_impl</qualifiedname>
+        <param>
+          <type>State</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="20" column="22" bodyfile="elements/d2_scrollbox.cpp" bodystart="49" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a01f6af24638d0bed2bc8470a9583b175" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::ScrollBox::_event_impl</definition>
+        <argsstring>(in::InputFrame &amp;frame) override</argsstring>
+        <name>_event_impl</name>
+        <qualifiedname>d2::dx::ScrollBox::_event_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="21" column="22" bodyfile="elements/d2_scrollbox.cpp" bodystart="86" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a4739b3409fa8ae29e4b8e4febbd57d43" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>int d2::dx::ScrollBox::_get_border_impl</definition>
+        <argsstring>(BorderType type, Element::cptr elem) const override</argsstring>
+        <name>_get_border_impl</name>
+        <qualifiedname>d2::dx::ScrollBox::_get_border_impl</qualifiedname>
+        <param>
+          <type>BorderType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a77cb0a3434fb6e8ce0e8189936e749a6" kindref="member">Element::cptr</ref></type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="23" column="21" bodyfile="elements/d2_scrollbox.cpp" bodystart="27" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1af75db3880e00f446758cbe0b22dc7baf" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::ScrollBox::_layout_for_impl</definition>
+        <argsstring>(enum Element::Layout type, cptr ptr) const override</argsstring>
+        <name>_layout_for_impl</name>
+        <qualifiedname>d2::dx::ScrollBox::_layout_for_impl</qualifiedname>
+        <reimplementedby refid="classd2_1_1dx_1_1ScrollFlowBox_1a0e867b65b713ec701da8045d6d9cbb6b">_layout_for_impl</reimplementedby>
+        <param>
+          <type>enum <ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Element::Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>cptr</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="24" column="22" bodyfile="elements/d2_scrollbox.cpp" bodystart="36" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a8ffba8b5302f7a9664ce1a75d5a24808" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::ScrollBox::_update_layout_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_update_layout_impl</name>
+        <qualifiedname>d2::dx::ScrollBox::_update_layout_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="25" column="22" bodyfile="elements/d2_scrollbox.cpp" bodystart="120" bodyend="153"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a15f01249564c4fc3c68ac6e3feb46027" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt; <ref refid="classd2_1_1dx_1_1VerticalSlider" kindref="compound">VerticalSlider</ref> &gt;</type>
+        <definition>TreeIter&lt; VerticalSlider &gt; d2::dx::ScrollBox::scrollbar</definition>
+        <argsstring>() const</argsstring>
+        <name>scrollbar</name>
+        <qualifiedname>d2::dx::ScrollBox::scrollbar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="29" column="18" bodyfile="elements/d2_scrollbox.cpp" bodystart="155" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a033c86890904ec87b58d6401ff724645" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::dx::ScrollBox::internal_height</definition>
+        <argsstring>() const</argsstring>
+        <name>internal_height</name>
+        <qualifiedname>d2::dx::ScrollBox::internal_height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="30" column="13" bodyfile="elements/d2_scrollbox.cpp" bodystart="180" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a8ad09203bdd8199575fd2985cb7753f2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::dx::ScrollBox::window_height</definition>
+        <argsstring>() const</argsstring>
+        <name>window_height</name>
+        <qualifiedname>d2::dx::ScrollBox::window_height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="31" column="13" bodyfile="elements/d2_scrollbox.cpp" bodystart="185" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a998a7b1808f8aa590d9d8ccf84b58fe3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::dx::ScrollBox::scroll_offset</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>scroll_offset</name>
+        <qualifiedname>d2::dx::ScrollBox::scroll_offset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="32" column="13" bodyfile="elements/d2_scrollbox.cpp" bodystart="192" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a95c6fe024e40f70dc6aad256b4d25c7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::ScrollBox::scroll_to</definition>
+        <argsstring>(int xoffset)</argsstring>
+        <name>scroll_to</name>
+        <qualifiedname>d2::dx::ScrollBox::scroll_to</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>xoffset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="33" column="14" bodyfile="elements/d2_scrollbox.cpp" bodystart="159" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a2e2d6458134580d81b3d819d24c06c9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::ScrollBox::sync</definition>
+        <argsstring>()</argsstring>
+        <name>sync</name>
+        <qualifiedname>d2::dx::ScrollBox::sync</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="34" column="14" bodyfile="elements/d2_scrollbox.cpp" bodystart="196" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1ScrollBox_1a687c1edfb941e01e333d48e05a1ccb53" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::ScrollBox::foreach_internal</definition>
+        <argsstring>(foreach_internal_callback callback) const override</argsstring>
+        <name>foreach_internal</name>
+        <qualifiedname>d2::dx::ScrollBox::foreach_internal</qualifiedname>
+        <param>
+          <type>foreach_internal_callback</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_scrollbox.hpp" line="36" column="22" bodyfile="elements/d2_scrollbox.cpp" bodystart="207" bodyend="213"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::dx::Box</label>
+        <link refid="classd2_1_1dx_1_1Box"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::dx::ScrollBox</label>
+        <link refid="classd2_1_1dx_1_1ScrollBox"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::dx::ScrollFlowBox</label>
+        <link refid="classd2_1_1dx_1_1ScrollFlowBox"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::dx::impl::ContainerHelper&lt; Box &gt;</label>
+        <link refid="classd2_1_1dx_1_1impl_1_1ContainerHelper"/>
+      </node>
+      <node id="3">
+        <label>style::
+                    UAIE&lt; VecParentElement, Box, style::ILayout, style::IContainer, style::IColors &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::dx::Box</label>
+        <link refid="classd2_1_1dx_1_1Box"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::dx::ScrollBox</label>
+        <link refid="classd2_1_1dx_1_1ScrollBox"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::dx::impl::ContainerHelper&lt; Box &gt;</label>
+        <link refid="classd2_1_1dx_1_1impl_1_1ContainerHelper"/>
+      </node>
+      <node id="3">
+        <label>style::
+                    UAIE&lt; VecParentElement, Box, style::ILayout, style::IContainer, style::IColors &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_scrollbox.hpp" line="8" column="5" bodyfile="elements/d2_scrollbox.hpp" bodystart="9" bodyend="37"/>
+    <listofallmembers>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1afe7017510c948a9efafaea9c704a168e" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>_border_base</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1aa2f0017ca6fec0f9db96278be3caf5f2" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>_border_base_inv</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a01f6af24638d0bed2bc8470a9583b175" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_event_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Box_1affa310f7e1574f113fd20d998e7c61bf" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a4739b3409fa8ae29e4b8e4febbd57d43" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_get_border_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Box_1a8acff31c866f685e0c6fcb81752a3755" prot="protected" virt="virtual" ambiguityscope="d2::dx::Box::"><scope>d2::dx::ScrollBox</scope><name>_get_border_impl</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1af75db3880e00f446758cbe0b22dc7baf" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_layout_for_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Box_1a4067a42125a8095c03213ad3122446a5" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_layout_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Box_1aaa592446dff60ab08648140fb122264f" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_object_render</name></member>
+      <member refid="classd2_1_1dx_1_1Box_1abf90220e3bd827c1082a98fd72be1ae2" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>_perfect_height</name></member>
+      <member refid="classd2_1_1dx_1_1Box_1a3db744e8c856009d030a220e2fdca658" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>_perfect_width</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1abf634fad830150561386ad59d240f95b" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_provides_input_impl</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1aca414263b9ea2c2ae44af87fcd0d5286" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>_recompute_height</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1a3d010f4d71277eb6666c8e5da1d721f7" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>_render_border</name></member>
+      <member refid="classd2_1_1dx_1_1Box_1af34999de99846cb97f3a313c01fc9d75" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_render_start</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a06ec7ae07d17872b6f31a7da6187c1d3" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>_scrollbar</name></member>
+      <member refid="classd2_1_1dx_1_1Box_1a43febe611b1559b1ded5a26e9e2dcebc" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_signal_write_child_impl</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1ad87f4984de4dc0d538c07e1949f21dcb" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_signal_write_impl</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a67c8d8dc327674ff144911c4f87faabc" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_state_change_impl</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a8ffba8b5302f7a9664ce1a75d5a24808" prot="protected" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>_update_layout_impl</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1aaafa8015dce7272a94ca1e61711975ca" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>computed_height_</name></member>
+      <member refid="classd2_1_1dx_1_1Box_1a98e74a2e5d82920e22bc2058371ebfde" prot="public" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>data</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a687c1edfb941e01e333d48e05a1ccb53" prot="public" virt="virtual"><scope>d2::dx::ScrollBox</scope><name>foreach_internal</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a033c86890904ec87b58d6401ff724645" prot="public" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>internal_height</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a0ec5077f7c07e5e7461a57b760c78a50" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>needs_recompute_</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a0bf6e9a42fc66099dc6ef606c30b3872" prot="protected" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>offset_</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a998a7b1808f8aa590d9d8ccf84b58fe3" prot="public" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>scroll_offset</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a95c6fe024e40f70dc6aad256b4d25c7a" prot="public" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>scroll_to</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a15f01249564c4fc3c68ac6e3feb46027" prot="public" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>scrollbar</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a2e2d6458134580d81b3d819d24c06c9d" prot="public" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>sync</name></member>
+      <member refid="classd2_1_1dx_1_1ScrollBox_1a8ad09203bdd8199575fd2985cb7753f2" prot="public" virt="non-virtual"><scope>d2::dx::ScrollBox</scope><name>window_height</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

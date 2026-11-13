@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1Responsive" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::Responsive</compoundname>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1Responsive_1a1b4717798cf5acb24d7d75c6a8be6568" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt; Type &gt;, Argv...)&gt;</type>
+        <definition>std::function&lt;void(d2::TreeIter&lt;Type&gt;, Argv...)&gt; d2::style::Responsive::on_submit</definition>
+        <argsstring></argsstring>
+        <name>on_submit</name>
+        <qualifiedname>d2::style::Responsive::on_submit</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="982" column="23" bodyfile="core/tree/d2_styles.hpp" bodystart="982" bodyend="982"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1style_1_1Responsive_1ad2bc7b86d2215737aabd7547cf6b0560" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">uai_property</ref></type>
+            <declname>Property</declname>
+            <defname>Property</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::style::Responsive::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::style::Responsive::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="984" column="25" bodyfile="core/tree/d2_styles.hpp" bodystart="984" bodyend="993"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="980" column="20" bodyfile="core/tree/d2_styles.hpp" bodystart="981" bodyend="994"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1Responsive_1ad2bc7b86d2215737aabd7547cf6b0560" prot="public" virt="non-virtual"><scope>d2::style::Responsive</scope><name>get</name></member>
+      <member refid="structd2_1_1style_1_1Responsive_1a1b4717798cf5acb24d7d75c6a8be6568" prot="public" virt="non-virtual"><scope>d2::style::Responsive</scope><name>on_submit</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1fb_1_1Locale_1_1Value" kind="struct" language="C++" prot="public">
+    <compoundname>d2::fb::Locale::Value</compoundname>
+    <includes refid="d2__fragmented__buffer_8hpp" local="no">d2_fragmented_buffer.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structd2_1_1fb_1_1Locale_1_1Value_1ad100033854c0658a7efb31ec2a90cee6" prot="private" static="no" mutable="no">
+        <type>std::string_view</type>
+        <definition>std::string_view d2::fb::Locale::Value::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>d2::fb::Locale::Value::_data</qualifiedname>
+        <initializer>{&quot;&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="23" column="30" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1fb_1_1Locale_1_1Value_1ad7e60de2e37dd4af307a18afad7087be" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::fb::Locale::Value::_width</definition>
+        <argsstring></argsstring>
+        <name>_width</name>
+        <qualifiedname>d2::fb::Locale::Value::_width</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="24" column="25" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1fb_1_1Locale_1_1Value_1a8484ee9c1476aaa9408afc7e44fade2e" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::fb::Locale::Value::_height</definition>
+        <argsstring></argsstring>
+        <name>_height</name>
+        <qualifiedname>d2::fb::Locale::Value::_height</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="25" column="25" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1_1Value_1ab465a66aa29172fdc7b293a772d0d412" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::fb::Locale::Value::Value</definition>
+        <argsstring>()=default</argsstring>
+        <name>Value</name>
+        <qualifiedname>d2::fb::Locale::Value::Value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="27" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1_1Value_1ad57c98ca7a49ea4f94e5cd9ba386002a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::fb::Locale::Value::Value</definition>
+        <argsstring>(std::string_view str, std::size_t width, std::size_t height)</argsstring>
+        <name>Value</name>
+        <qualifiedname>d2::fb::Locale::Value::Value</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="28" column="13" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="28" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1_1Value_1a00cf7f44de12941f882f1090e1528cdc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::fb::Locale::Value::Value</definition>
+        <argsstring>(const Value &amp;)=default</argsstring>
+        <name>Value</name>
+        <qualifiedname>d2::fb::Locale::Value::Value</qualifiedname>
+        <param>
+          <type>const Value &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="32" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1_1Value_1a4860a2ca08eb6ef46a6c7a427b5c5f86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::fb::Locale::Value::Value</definition>
+        <argsstring>(Value &amp;&amp;)=default</argsstring>
+        <name>Value</name>
+        <qualifiedname>d2::fb::Locale::Value::Value</qualifiedname>
+        <param>
+          <type>Value &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="33" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1_1Value_1a52c495aeb2b440fc2c0f7c476b010fde" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>std::string_view d2::fb::Locale::Value::value</definition>
+        <argsstring>() const</argsstring>
+        <name>value</name>
+        <qualifiedname>d2::fb::Locale::Value::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="35" column="30" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="25" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1_1Value_1a3f1a0eb7637b4c0e99837faf9c4aab09" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::fb::Locale::Value::width</definition>
+        <argsstring>() const</argsstring>
+        <name>width</name>
+        <qualifiedname>d2::fb::Locale::Value::width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="37" column="25" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="30" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1_1Value_1ab31caf59f5fa0ec5e9b1400d18e78eff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::fb::Locale::Value::height</definition>
+        <argsstring>() const</argsstring>
+        <name>height</name>
+        <qualifiedname>d2::fb::Locale::Value::height</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="38" column="25" bodyfile="core/platform/d2_fragmented_buffer.cpp" bodystart="34" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1_1Value_1a9bcff0311217750641790549077f4a07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1fb_1_1Locale_1_1Value_1ab465a66aa29172fdc7b293a772d0d412" kindref="member">Value</ref> &amp;</type>
+        <definition>Value &amp; d2::fb::Locale::Value::operator=</definition>
+        <argsstring>(const Value &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::fb::Locale::Value::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1fb_1_1Locale_1_1Value_1ab465a66aa29172fdc7b293a772d0d412" kindref="member">Value</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="40" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1_1Value_1a76c6fdc86b7fe257260bc293ef349ccc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1fb_1_1Locale_1_1Value_1ab465a66aa29172fdc7b293a772d0d412" kindref="member">Value</ref> &amp;</type>
+        <definition>Value &amp; d2::fb::Locale::Value::operator=</definition>
+        <argsstring>(Value &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::fb::Locale::Value::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1fb_1_1Locale_1_1Value_1ab465a66aa29172fdc7b293a772d0d412" kindref="member">Value</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="41" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_fragmented_buffer.hpp" line="20" column="9" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="21" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1ad100033854c0658a7efb31ec2a90cee6" prot="private" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>_data</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1a8484ee9c1476aaa9408afc7e44fade2e" prot="private" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>_height</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1ad7e60de2e37dd4af307a18afad7087be" prot="private" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>_width</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1ab31caf59f5fa0ec5e9b1400d18e78eff" prot="public" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>height</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1a9bcff0311217750641790549077f4a07" prot="public" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>operator=</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1a76c6fdc86b7fe257260bc293ef349ccc" prot="public" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>operator=</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1ab465a66aa29172fdc7b293a772d0d412" prot="public" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>Value</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1ad57c98ca7a49ea4f94e5cd9ba386002a" prot="public" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>Value</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1a00cf7f44de12941f882f1090e1528cdc" prot="public" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>Value</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1a4860a2ca08eb6ef46a6c7a427b5c5f86" prot="public" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>Value</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1a52c495aeb2b440fc2c0f7c476b010fde" prot="public" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>value</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1_1Value_1a3f1a0eb7637b4c0e99837faf9c4aab09" prot="public" virt="non-virtual"><scope>d2::fb::Locale::Value</scope><name>width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

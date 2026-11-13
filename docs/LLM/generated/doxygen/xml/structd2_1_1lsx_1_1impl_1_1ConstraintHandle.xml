@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle" kind="struct" language="C++" prot="public">
+    <compoundname>d2::lsx::impl::ConstraintHandle</compoundname>
+    <includes refid="d2__solver_8hpp" local="no">d2_solver.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1a6381824836148ae361b29bb110bd78d0" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref></type>
+        <definition>VariableIndex d2::lsx::impl::ConstraintHandle::_low</definition>
+        <argsstring></argsstring>
+        <name>_low</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::_low</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="99" column="27" bodyfile="core/lsx/d2_solver.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1ad12354f751029d0bd57a0d19d26e0a07" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref></type>
+        <definition>VariableIndex d2::lsx::impl::ConstraintHandle::_high</definition>
+        <argsstring></argsstring>
+        <name>_high</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::_high</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="100" column="27" bodyfile="core/lsx/d2_solver.hpp" bodystart="100" bodyend="100"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aaf3d1429331cfcd637c3a95a158d80e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::impl::ConstraintHandle::ConstraintHandle</definition>
+        <argsstring>()=default</argsstring>
+        <name>ConstraintHandle</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::ConstraintHandle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="102" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1acaa3644badea16ec42ce49fb440e9e57" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::impl::ConstraintHandle::ConstraintHandle</definition>
+        <argsstring>(std::nullptr_t)</argsstring>
+        <name>ConstraintHandle</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::ConstraintHandle</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="103" column="13" bodyfile="core/lsx/d2_solver.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1a996e1e3f8dac97c240c2289f74fda73f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::impl::ConstraintHandle::ConstraintHandle</definition>
+        <argsstring>(ConstraintHandle &amp;&amp;)=default</argsstring>
+        <name>ConstraintHandle</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::ConstraintHandle</qualifiedname>
+        <param>
+          <type>ConstraintHandle &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="104" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1a504bfc779eee7fbef9ce8c3f272e83f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::impl::ConstraintHandle::ConstraintHandle</definition>
+        <argsstring>(const ConstraintHandle &amp;)=default</argsstring>
+        <name>ConstraintHandle</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::ConstraintHandle</qualifiedname>
+        <param>
+          <type>const ConstraintHandle &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="105" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aff72767f52330ed64defbbdf4558df44" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::impl::ConstraintHandle::ConstraintHandle</definition>
+        <argsstring>(VariableIndex low, VariableIndex high=VariableIndex::Type::Constant)</argsstring>
+        <name>ConstraintHandle</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::ConstraintHandle</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref></type>
+          <declname>low</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref></type>
+          <declname>high</declname>
+          <defval><ref refid="classd2_1_1lsx_1_1VariableIndex_1a1bc7c8f31eaf42663d5f467d06c16969acb17869fe51048b5a5c4c6106551a255" kindref="member">VariableIndex::Type::Constant</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="106" column="13" bodyfile="core/lsx/d2_solver.hpp" bodystart="106" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1a7894847c8ec0833409c8fddd4e7ce6f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::lsx::impl::ConstraintHandle::operator==</definition>
+        <argsstring>(std::nullptr_t)</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::operator==</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="112" column="18" bodyfile="core/lsx/d2_solver.hpp" bodystart="112" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1ada07260f3969e3ab6f6005e627cfe766" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aaf3d1429331cfcd637c3a95a158d80e1" kindref="member">ConstraintHandle</ref> &amp;</type>
+        <definition>ConstraintHandle &amp; d2::lsx::impl::ConstraintHandle::operator=</definition>
+        <argsstring>(const ConstraintHandle &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aaf3d1429331cfcd637c3a95a158d80e1" kindref="member">ConstraintHandle</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="117" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aa68edd26cf4007ac9f1bce9f59da3dc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aaf3d1429331cfcd637c3a95a158d80e1" kindref="member">ConstraintHandle</ref> &amp;</type>
+        <definition>ConstraintHandle &amp; d2::lsx::impl::ConstraintHandle::operator=</definition>
+        <argsstring>(ConstraintHandle &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::lsx::impl::ConstraintHandle::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aaf3d1429331cfcd637c3a95a158d80e1" kindref="member">ConstraintHandle</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="118" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver.hpp" line="96" column="9" bodyfile="core/lsx/d2_solver.hpp" bodystart="97" bodyend="119"/>
+    <listofallmembers>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1ad12354f751029d0bd57a0d19d26e0a07" prot="private" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>_high</name></member>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1a6381824836148ae361b29bb110bd78d0" prot="private" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>_low</name></member>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aaf3d1429331cfcd637c3a95a158d80e1" prot="public" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>ConstraintHandle</name></member>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1acaa3644badea16ec42ce49fb440e9e57" prot="public" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>ConstraintHandle</name></member>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1a996e1e3f8dac97c240c2289f74fda73f" prot="public" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>ConstraintHandle</name></member>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1a504bfc779eee7fbef9ce8c3f272e83f7" prot="public" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>ConstraintHandle</name></member>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aff72767f52330ed64defbbdf4558df44" prot="public" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>ConstraintHandle</name></member>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1ada07260f3969e3ab6f6005e627cfe766" prot="public" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>operator=</name></member>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1aa68edd26cf4007ac9f1bce9f59da3dc8" prot="public" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>operator=</name></member>
+      <member refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle_1a7894847c8ec0833409c8fddd4e7ce6f7" prot="public" virt="non-virtual"><scope>d2::lsx::impl::ConstraintHandle</scope><name>operator==</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

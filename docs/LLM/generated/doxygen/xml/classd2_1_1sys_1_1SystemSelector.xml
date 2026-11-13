@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemSelector" kind="class" language="C++" prot="public">
+    <compoundname>d2::sys::SystemSelector</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1Module" prot="public" virt="non-virtual">d2::sys::Module&lt; SystemSelector, &quot;Selector&quot;, Access::TUnsafe, Load::Immediate, SystemScreen &gt;</basecompoundref>
+    <includes refid="d2__ext_8hpp" local="no">d2_ext.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1sys_1_1SystemSelector_1a3250dd952fca5352a5a34a36eacb691a" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Event</name>
+        <qualifiedname>d2::sys::SystemSelector::Event</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1SystemSelector_1a3250dd952fca5352a5a34a36eacb691aa91b442d385b54e1418d81adc34871053" prot="public">
+          <name>Selected</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="81" column="9" bodyfile="core/mods/d2_ext.hpp" bodystart="82" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1sys_1_1SystemSelector_1a9d90b335420f6d43a248adc7d5453117" prot="public" static="no">
+        <type><ref refid="classd2_1_1SignalManifest" kindref="compound">SignalManifest</ref>&lt; <ref refid="structd2_1_1EvDefault" kindref="compound">EvDefault</ref>&lt; <ref refid="classd2_1_1sys_1_1SystemSelector_1a3250dd952fca5352a5a34a36eacb691a" kindref="member">Event</ref>, <ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">d2::string</ref>, <ref refid="structd2_1_1Position" kindref="compound">Position</ref>, <ref refid="structd2_1_1Position" kindref="compound">Position</ref> &gt; &gt;</type>
+        <definition>using d2::sys::SystemSelector::EventManifest = SignalManifest&lt;
+           
+           EvDefault&lt;Event, d2::string, Position, Position&gt;
+       &gt;</definition>
+        <argsstring></argsstring>
+        <name>EventManifest</name>
+        <qualifiedname>d2::sys::SystemSelector::EventManifest</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="85" column="9" bodyfile="core/mods/d2_ext.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemSelector_1a87565dcadacc63165e6500944e42e8bf" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Signals_1_1Signal" kindref="compound">Signals::Signal</ref></type>
+        <definition>Signals::Signal d2::sys::SystemSelector::_sig</definition>
+        <argsstring></argsstring>
+        <name>_sig</name>
+        <qualifiedname>d2::sys::SystemSelector::_sig</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="90" column="25" bodyfile="core/mods/d2_ext.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemSelector_1a092bfd11074105f51b98598ac65e4b0f" prot="private" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Signals::Handle</ref>, 5 &gt;</type>
+        <definition>std::array&lt;Signals::Handle, 5&gt; d2::sys::SystemSelector::_events</definition>
+        <argsstring></argsstring>
+        <name>_events</name>
+        <qualifiedname>d2::sys::SystemSelector::_events</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="91" column="20" bodyfile="core/mods/d2_ext.hpp" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemSelector_1a5e63e50d61a4427cc0fb47854b1bb0c9" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1TextSelection" kindref="compound">TextSelection</ref></type>
+        <definition>TextSelection d2::sys::SystemSelector::_selection</definition>
+        <argsstring></argsstring>
+        <name>_selection</name>
+        <qualifiedname>d2::sys::SystemSelector::_selection</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="92" column="23" bodyfile="core/mods/d2_ext.hpp" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemSelector_1ab171565f63ae2158f4e889aeb38e61a6" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::sys::SystemSelector::_start</definition>
+        <argsstring></argsstring>
+        <name>_start</name>
+        <qualifiedname>d2::sys::SystemSelector::_start</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="93" column="18" bodyfile="core/mods/d2_ext.hpp" bodystart="93" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemSelector_1a2c55f1531bb2266e3003338b65efa875" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::sys::SystemSelector::_end</definition>
+        <argsstring></argsstring>
+        <name>_end</name>
+        <qualifiedname>d2::sys::SystemSelector::_end</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="93" column="25" bodyfile="core/mods/d2_ext.hpp" bodystart="93" bodyend="93"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemSelector_1a28926c2f970305362884850759d5c2ed" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemSelector::_mouse</definition>
+        <argsstring>(in::InputFrame &amp;frame)</argsstring>
+        <name>_mouse</name>
+        <qualifiedname>d2::sys::SystemSelector::_mouse</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="95" column="14" bodyfile="core/mods/d2_ext.cpp" bodystart="41" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemSelector_1a93edbdf37fe5175f7ffa5ae702884d69" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemSelector::_key</definition>
+        <argsstring>(in::InputFrame &amp;frame)</argsstring>
+        <name>_key</name>
+        <qualifiedname>d2::sys::SystemSelector::_key</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="96" column="14" bodyfile="core/mods/d2_ext.cpp" bodystart="63" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemSelector_1a3d5db74a6b6a7c8ff7bcb54f7ed8e174" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemSelector::Status d2::sys::SystemSelector::_load_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_load_impl</name>
+        <qualifiedname>d2::sys::SystemSelector::_load_impl</qualifiedname>
+        <reimplements refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3">_load_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="98" column="24" bodyfile="core/mods/d2_ext.cpp" bodystart="6" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemSelector_1ad036a5a11432bb2a085bac793757c8ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemSelector::Status d2::sys::SystemSelector::_unload_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_unload_impl</name>
+        <qualifiedname>d2::sys::SystemSelector::_unload_impl</qualifiedname>
+        <reimplements refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730">_unload_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="99" column="24" bodyfile="core/mods/d2_ext.cpp" bodystart="92" bodyend="99"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemSelector_1ae8ab862a06c0b9b545e4b9c65923dcce" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1TextSelection" kindref="compound">TextSelection</ref> &amp;</type>
+        <definition>TextSelection &amp; d2::sys::SystemSelector::selection</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>selection</name>
+        <qualifiedname>d2::sys::SystemSelector::selection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="103" column="23" bodyfile="core/mods/d2_ext.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemSelector_1ae57476ec7288acfa870fb460893a54af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string d2::sys::SystemSelector::value</definition>
+        <argsstring>()</argsstring>
+        <name>value</name>
+        <qualifiedname>d2::sys::SystemSelector::value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="104" column="21" bodyfile="core/mods/d2_ext.hpp" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemSelector_1a1a6319a04e52c81cf10421839fab518d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemSelector::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>d2::sys::SystemSelector::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="106" column="14" bodyfile="core/mods/d2_ext.hpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemSelector_1a836933b4887cc1b39c1cc240eb5a1722" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemSelector::copy</definition>
+        <argsstring>()</argsstring>
+        <name>copy</name>
+        <qualifiedname>d2::sys::SystemSelector::copy</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ext.hpp" line="107" column="14" bodyfile="core/mods/d2_ext.cpp" bodystart="80" bodyend="91"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::sys::Module&lt; SystemSelector, &quot;Selector&quot;, Access::TUnsafe, Load::Immediate, SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::ModuleDecl&lt; SystemSelector, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>d2::sys::ModuleImpl&lt; SystemSelector, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="8" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>d2::sys::ModuleImplTag</label>
+        <link refid="structd2_1_1sys_1_1ModuleImplTag"/>
+      </node>
+      <node id="6">
+        <label>d2::sys::ModuleLocalGet&lt; SystemSelector &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="4">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemSelector</label>
+        <link refid="classd2_1_1sys_1_1SystemSelector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::Module&lt; SystemSelector, &quot;Selector&quot;, Access::TUnsafe, Load::Immediate, SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::ModuleDecl&lt; SystemSelector, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>d2::sys::ModuleImpl&lt; SystemSelector, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="8" relation="private-inheritance">
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>module_preset</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>d2::sys::ModuleImplTag</label>
+        <link refid="structd2_1_1sys_1_1ModuleImplTag"/>
+      </node>
+      <node id="6">
+        <label>d2::sys::ModuleLocalGet&lt; SystemSelector &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="4">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>d2::sys::SystemModule::ModPreset</label>
+        <link refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemSelector</label>
+        <link refid="classd2_1_1sys_1_1SystemSelector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_ext.hpp" line="72" column="5" bodyfile="core/mods/d2_ext.hpp" bodystart="79" bodyend="108"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a2c55f1531bb2266e3003338b65efa875" prot="private" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_end</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a092bfd11074105f51b98598ac65e4b0f" prot="private" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_events</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a93edbdf37fe5175f7ffa5ae702884d69" prot="private" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_key</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a3d5db74a6b6a7c8ff7bcb54f7ed8e174" prot="private" virt="virtual"><scope>d2::sys::SystemSelector</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a28926c2f970305362884850759d5c2ed" prot="private" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_mouse</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::SystemSelector</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::SystemSelector</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a5e63e50d61a4427cc0fb47854b1bb0c9" prot="private" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_selection</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a87565dcadacc63165e6500944e42e8bf" prot="private" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_sig</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1ab171565f63ae2158f4e889aeb38e61a6" prot="private" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_start</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1ad036a5a11432bb2a085bac793757c8ab" prot="private" virt="virtual"><scope>d2::sys::SystemSelector</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a1a6319a04e52c81cf10421839fab518d" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>clear</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>context</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a836933b4887cc1b39c1cc240eb5a1722" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>copy</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>dependency_names</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a3250dd952fca5352a5a34a36eacb691a" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>Event</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1a9d90b335420f6d43a248adc7d5453117" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>EventManifest</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::SystemSelector</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>make</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>module_info</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleImpl_1a3b770ad91cfdb330c60ca064add754c7" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>module_preset</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1ae8ab862a06c0b9b545e4b9c65923dcce" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>selection</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>status</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemSelector_1ae57476ec7288acfa870fb460893a54af" prot="public" virt="non-virtual"><scope>d2::sys::SystemSelector</scope><name>value</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::SystemSelector</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

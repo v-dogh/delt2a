@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::SystemModule::ModPreset</compoundname>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemModule_1_1ModPreset_1a185f59a7cdfc8a9ec5f5ac6e973d146f" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1sys_1a0ca7d25c3a0a481de124a30ff73dc786" kindref="member">Access</ref></type>
+        <definition>Access d2::sys::SystemModule::ModPreset::access</definition>
+        <argsstring></argsstring>
+        <name>access</name>
+        <qualifiedname>d2::sys::SystemModule::ModPreset::access</qualifiedname>
+        <initializer>{<ref refid="namespaced2_1_1sys_1a0ca7d25c3a0a481de124a30ff73dc786ae9edd8b239e9c248f733f3541c67e4b1" kindref="member">Access::TUnsafe</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="71" column="20" bodyfile="core/io/d2_module.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemModule_1_1ModPreset_1a832a961b3a968966e0e5fa7885c5a9a4" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1sys_1a96e8068f6f21a92e0f8fc1fa71a59161" kindref="member">Load</ref></type>
+        <definition>Load d2::sys::SystemModule::ModPreset::load</definition>
+        <argsstring></argsstring>
+        <name>load</name>
+        <qualifiedname>d2::sys::SystemModule::ModPreset::load</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="72" column="18" bodyfile="core/io/d2_module.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemModule_1_1ModPreset_1a23afd3877a87f0f2ea87e7a995cc2d69" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::type_index &gt;</type>
+        <definition>std::vector&lt;std::type_index&gt; d2::sys::SystemModule::ModPreset::deps</definition>
+        <argsstring></argsstring>
+        <name>deps</name>
+        <qualifiedname>d2::sys::SystemModule::ModPreset::deps</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="73" column="25" bodyfile="core/io/d2_module.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemModule_1_1ModPreset_1a0135c2055365da48204e12df09d4e9a7" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; d2::sys::SystemModule::ModPreset::dep_names</definition>
+        <argsstring></argsstring>
+        <name>dep_names</name>
+        <qualifiedname>d2::sys::SystemModule::ModPreset::dep_names</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="74" column="25" bodyfile="core/io/d2_module.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_module.hpp" line="69" column="9" bodyfile="core/io/d2_module.hpp" bodystart="70" bodyend="75"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset_1a185f59a7cdfc8a9ec5f5ac6e973d146f" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule::ModPreset</scope><name>access</name></member>
+      <member refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset_1a0135c2055365da48204e12df09d4e9a7" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule::ModPreset</scope><name>dep_names</name></member>
+      <member refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset_1a23afd3877a87f0f2ea87e7a995cc2d69" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule::ModPreset</scope><name>deps</name></member>
+      <member refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset_1a832a961b3a968966e0e5fa7885c5a9a4" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule::ModPreset</scope><name>load</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

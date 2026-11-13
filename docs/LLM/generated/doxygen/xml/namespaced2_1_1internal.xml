@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1internal" kind="namespace" language="C++">
+    <compoundname>d2::internal</compoundname>
+    <innerclass refid="classd2_1_1internal_1_1DynamicIterator" prot="public">d2::internal::DynamicIterator</innerclass>
+    <innerclass refid="structd2_1_1internal_1_1ElementView" prot="public">d2::internal::ElementView</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_element.cpp" line="728" column="5"/>
+  </compounddef>
+</doxygen>

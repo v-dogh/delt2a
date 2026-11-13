@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1SignalRegistry_3_01void_01_4_1_1SatisfiedTupleImpl" kind="struct" language="C++" prot="private">
+    <compoundname>d2::SignalRegistry&lt; void &gt;::SatisfiedTupleImpl</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="338" column="21" bodyfile="core/io/d2_signal_handler.hpp" bodystart="338" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

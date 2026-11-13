@@ -1,0 +1,883 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1TreeCtxBase" kind="class" language="C++" prot="public">
+    <compoundname>d2::TreeCtxBase</compoundname>
+    <derivedcompoundref refid="classd2_1_1TreeCtx" prot="public" virt="non-virtual">d2::TreeCtx&lt; Type::root, Type::state &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1TreeCtx_3_01Type_00_01d2_1_1TreeState_01_4" prot="public" virt="non-virtual">d2::TreeCtx&lt; Type, d2::TreeState &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classd2_1_1TreeCtx" prot="public" virt="non-virtual">d2::TreeCtx&lt; Parent, State &gt;</derivedcompoundref>
+    <includes refid="d2__tree__construct_8hpp" local="no">d2_tree_construct.hpp</includes>
+    <innerclass refid="structd2_1_1TreeCtxBase_1_1BranchState" prot="private">d2::TreeCtxBase::BranchState</innerclass>
+    <innerclass refid="structd2_1_1TreeCtxBase_1_1BranchGuard" prot="protected">d2::TreeCtxBase::BranchGuard</innerclass>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1TreeCtxBase_1ada57d2827f025dc4c0b470d718a52ae5" prot="private" static="yes" mutable="no" thread_local="yes">
+        <type>std::optional&lt; BranchState &gt;</type>
+        <definition>std::optional&lt;BranchState&gt; d2::TreeCtxBase::_bstate</definition>
+        <argsstring></argsstring>
+        <name>_bstate</name>
+        <qualifiedname>d2::TreeCtxBase::_bstate</qualifiedname>
+        <initializer>{std::nullopt}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="69" column="50" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1TreeCtxBase_1a062f9f7fa7ca835fe5410f343d4f9bf8" prot="protected" static="no" mutable="no">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>TreeIter d2::TreeCtxBase::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::TreeCtxBase::_ptr</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="85" column="10" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a0dfd017e77a365745a135aea40f23bf6" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::TreeCtxBase::_reg_elem</definition>
+        <argsstring>(TreeIter&lt;&gt; ptr) const</argsstring>
+        <name>_reg_elem</name>
+        <qualifiedname>d2::TreeCtxBase::_reg_elem</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="87" column="14" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="87" bodyend="91"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-static-func">
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1ab95d17cb17693ba3894876458f344b8f" prot="protected" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt; &gt;</type>
+        <definition>static std::vector&lt; TreeIter&lt;&gt; &gt; d2::TreeCtxBase::_get_branch</definition>
+        <argsstring>()</argsstring>
+        <name>_get_branch</name>
+        <qualifiedname>d2::TreeCtxBase::_get_branch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="92" column="28" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="92" bodyend="95"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1adae50ef05949c42ca7f6b3adf64ba059" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeCtxBase::TreeCtxBase</definition>
+        <argsstring>(d2::TreeIter&lt;&gt; ptr)</argsstring>
+        <name>TreeCtxBase</name>
+        <qualifiedname>d2::TreeCtxBase::TreeCtxBase</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt;&gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="97" column="9" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1aa705dc0b0f3087d680ea37e2f872abe8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeCtxBase::TreeCtxBase</definition>
+        <argsstring>(const TreeCtxBase &amp;)=default</argsstring>
+        <name>TreeCtxBase</name>
+        <qualifiedname>d2::TreeCtxBase::TreeCtxBase</qualifiedname>
+        <param>
+          <type>const TreeCtxBase &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="98" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1ad24fc0b192099af3f175be95cf2f9849" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeCtxBase::TreeCtxBase</definition>
+        <argsstring>(TreeCtxBase &amp;&amp;)=default</argsstring>
+        <name>TreeCtxBase</name>
+        <qualifiedname>d2::TreeCtxBase::TreeCtxBase</qualifiedname>
+        <param>
+          <type>TreeCtxBase &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="99" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1ad121f2518babbc29df331ded6d670544" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" kindref="member">IOContext::ptr</ref></type>
+        <definition>IOContext::ptr d2::TreeCtxBase::context</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>context</name>
+        <qualifiedname>d2::TreeCtxBase::context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="101" column="24" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="101" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a20a8345cd01565e86d5d1588648a4802" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>mt::ConcurrentPool::ptr</type>
+        <definition>mt::ConcurrentPool::ptr d2::TreeCtxBase::scheduler</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>scheduler</name>
+        <qualifiedname>d2::TreeCtxBase::scheduler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="105" column="33" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="105" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1affea7b89ccf1bf5e21ac3519bb73b876" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">sys::module</ref>&lt; <ref refid="namespaced2_1_1sys_1ab058ff847007d9e3636603a9db4e67c9" kindref="member">sys::screen</ref> &gt;</type>
+        <definition>sys::module&lt; sys::screen &gt; d2::TreeCtxBase::screen</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>screen</name>
+        <qualifiedname>d2::TreeCtxBase::screen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="110" column="21" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="110" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1af636400c8fd526c3fe6ae97531c9cf51" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">sys::module</ref>&lt; <ref refid="namespaced2_1_1sys_1a9977a58cd67ef4a852ffc314b7a95e55" kindref="member">sys::input</ref> &gt;</type>
+        <definition>sys::module&lt; sys::input &gt; d2::TreeCtxBase::input</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>input</name>
+        <qualifiedname>d2::TreeCtxBase::input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="114" column="21" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="114" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1afb821a683383c640b150b4aef0c6d96d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">sys::module</ref>&lt; <ref refid="namespaced2_1_1sys_1affecbcd3aa5d1b91a99e5be1edb6e5ff" kindref="member">sys::output</ref> &gt;</type>
+        <definition>sys::module&lt; sys::output &gt; d2::TreeCtxBase::output</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>output</name>
+        <qualifiedname>d2::TreeCtxBase::output</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="118" column="21" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="118" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a397dea0babb8929f662f03ae568b5cbb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="structd2_1_1meta_1_1ConstString" kindref="compound">meta::ConstString</ref></type>
+            <declname>Name</declname>
+            <defname>Name</defname>
+          </param>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void d2::TreeCtxBase::tag</definition>
+        <argsstring>(Type &amp;&amp;value) const</argsstring>
+        <name>tag</name>
+        <qualifiedname>d2::TreeCtxBase::tag</qualifiedname>
+        <param>
+          <type>Type &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="125" column="27" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="125" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a56490fa90338c914bf7f14c4cee8cabb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::TreeCtxBase::dep</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>dep</name>
+        <qualifiedname>d2::TreeCtxBase::dep</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="142" column="25" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="142" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a9d1acbf6380abbf739fff69cc9306547" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::TreeCtxBase::dep</definition>
+        <argsstring>(const std::string &amp;tree, const std::string &amp;name) const</argsstring>
+        <name>dep</name>
+        <qualifiedname>d2::TreeCtxBase::dep</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tree</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="146" column="25" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="146" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a9e7dfb2fcfbd6a5091cd5eb9dc8aa4c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Var</declname>
+            <defname>Var</defname>
+          </param>
+        </templateparamlist>
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::TreeCtxBase::var</definition>
+        <argsstring>() const</argsstring>
+        <name>var</name>
+        <qualifiedname>d2::TreeCtxBase::var</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="151" column="25" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="151" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1aa55ba8f7606c2aae5d908ab4c33a4838" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Var</declname>
+            <defname>Var</defname>
+          </param>
+          <param>
+            <type>auto</type>
+            <declname>Callback</declname>
+            <defname>Callback</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::TreeCtxBase::dynavar</definition>
+        <argsstring>() const</argsstring>
+        <name>dynavar</name>
+        <qualifiedname>d2::TreeCtxBase::dynavar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="155" column="27" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="155" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a0be2d63b88172ea79330393814c92177" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespaced2_1_1style_1a9be043513a13eec7c51a913e09a2c649" kindref="member">style::DependencyHandle</ref></type>
+        <definition>style::DependencyHandle d2::TreeCtxBase::subscribe</definition>
+        <argsstring>(style::Dependency&lt; Type &gt; &amp;dep, Func &amp;&amp;callback) const</argsstring>
+        <name>subscribe</name>
+        <qualifiedname>d2::TreeCtxBase::subscribe</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1style_1_1Dependency" kindref="compound">style::Dependency</ref>&lt; Type &gt; &amp;</type>
+          <declname>dep</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="161" column="33" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="161" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a2fa2dda78a19a527f944f513d870c868" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespaced2_1_1style_1a9be043513a13eec7c51a913e09a2c649" kindref="member">style::DependencyHandle</ref></type>
+        <definition>style::DependencyHandle d2::TreeCtxBase::subscribe</definition>
+        <argsstring>(const std::string &amp;name, Func &amp;&amp;callback) const</argsstring>
+        <name>subscribe</name>
+        <qualifiedname>d2::TreeCtxBase::subscribe</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="180" column="33" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="180" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a741c75cf7399fc8cf2cf69bab8138925" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespaced2_1_1style_1a9be043513a13eec7c51a913e09a2c649" kindref="member">style::DependencyHandle</ref></type>
+        <definition>style::DependencyHandle d2::TreeCtxBase::subscribe</definition>
+        <argsstring>(const std::string &amp;tree, const std::string &amp;name, Func &amp;&amp;callback) const</argsstring>
+        <name>subscribe</name>
+        <qualifiedname>d2::TreeCtxBase::subscribe</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tree</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="186" column="9" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="186" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a741c75cf7399fc8cf2cf69bab8138925" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>auto</type>
+            <declname>Var</declname>
+            <defname>Var</defname>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="namespaced2_1_1style_1a9be043513a13eec7c51a913e09a2c649" kindref="member">style::DependencyHandle</ref></type>
+        <definition>style::DependencyHandle d2::TreeCtxBase::subscribe</definition>
+        <argsstring>(const std::string &amp;tree, const std::string &amp;name, Func &amp;&amp;callback) const</argsstring>
+        <name>subscribe</name>
+        <qualifiedname>d2::TreeCtxBase::subscribe</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tree</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="192" column="9" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="192" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1ac72c4f5247b813751835602e0bf3176e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>Type &amp;</type>
+        <definition>Type &amp; d2::TreeCtxBase::declare</definition>
+        <argsstring>(Argv &amp;&amp;... args) const</argsstring>
+        <name>declare</name>
+        <qualifiedname>d2::TreeCtxBase::declare</qualifiedname>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="197" column="27" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="197" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a84b932290bad374a15d8159ecc5e3cb0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::TreeCtxBase::repeat</definition>
+        <argsstring>(std::chrono::milliseconds timing, Func &amp;&amp;callback, Argv &amp;&amp;... args) const</argsstring>
+        <name>repeat</name>
+        <qualifiedname>d2::TreeCtxBase::repeat</qualifiedname>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>timing</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="211" column="14" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="211" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a1c8bf2d7a205166fcf8c09c6cc6e561a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::TreeCtxBase::defer</definition>
+        <argsstring>(std::chrono::milliseconds delay, Func &amp;&amp;callback, Argv &amp;&amp;... args) const</argsstring>
+        <name>defer</name>
+        <qualifiedname>d2::TreeCtxBase::defer</qualifiedname>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>delay</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="218" column="14" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="218" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a16f82060fa2fd3e2f62af85bab38db9b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::TreeCtxBase::async</definition>
+        <argsstring>(Func &amp;&amp;callback, Argv &amp;&amp;... args) const</argsstring>
+        <name>async</name>
+        <qualifiedname>d2::TreeCtxBase::async</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="224" column="27" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="224" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a29d995f22843133c9f4a19617c5b5c2c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::TreeCtxBase::sync</definition>
+        <argsstring>(Func &amp;&amp;callback, Argv &amp;&amp;... args) const</argsstring>
+        <name>sync</name>
+        <qualifiedname>d2::TreeCtxBase::sync</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="228" column="27" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="228" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a00c59667f7a9a5fd1842252bc2db7a8f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::TreeCtxBase::sync_async</definition>
+        <argsstring>(Func &amp;&amp;callback, Argv &amp;&amp;... args) const</argsstring>
+        <name>sync_async</name>
+        <qualifiedname>d2::TreeCtxBase::sync_async</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="234" column="14" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="234" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a69ca5e88d3fda2885ac8510816d4b58c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Event</type>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1Signals_1_1Handle" kindref="compound">Signals::Handle</ref></type>
+        <definition>Signals::Handle d2::TreeCtxBase::on</definition>
+        <argsstring>(Event ev, Func &amp;&amp;callback) const</argsstring>
+        <name>on</name>
+        <qualifiedname>d2::TreeCtxBase::on</qualifiedname>
+        <param>
+          <type>Event</type>
+          <declname>ev</declname>
+        </param>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="240" column="38" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="240" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1ad8a18cbc1f922e45c57d8f783e805413" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1_1EventListener" kindref="compound">Element::EventListener</ref></type>
+        <definition>Element::EventListener d2::TreeCtxBase::onv</definition>
+        <argsstring>(Element::State state, bool value, Element::event_callback callback) const</argsstring>
+        <name>onv</name>
+        <qualifiedname>d2::TreeCtxBase::onv</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">Element::State</ref></type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a471bc822139b4d9d2fe679de101f1785" kindref="member">Element::event_callback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="245" column="9" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="245" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a56afefbd5050cfed58bfa1f6da9484c6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1_1EventListener" kindref="compound">Element::EventListener</ref></type>
+        <definition>Element::EventListener d2::TreeCtxBase::onv</definition>
+        <argsstring>(Element::State state, Element::event_callback callback) const</argsstring>
+        <name>onv</name>
+        <qualifiedname>d2::TreeCtxBase::onv</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">Element::State</ref></type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a471bc822139b4d9d2fe679de101f1785" kindref="member">Element::event_callback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="249" column="32" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="249" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a82b1ff573162aaaaf3ca8d785dc31429" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeCtxBase_1adae50ef05949c42ca7f6b3adf64ba059" kindref="member">TreeCtxBase</ref> &amp;</type>
+        <definition>TreeCtxBase &amp; d2::TreeCtxBase::operator=</definition>
+        <argsstring>(const TreeCtxBase &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::TreeCtxBase::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1TreeCtxBase_1adae50ef05949c42ca7f6b3adf64ba059" kindref="member">TreeCtxBase</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="254" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1ae7bf7909db0daf6720ce7a68f80fac63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeCtxBase_1adae50ef05949c42ca7f6b3adf64ba059" kindref="member">TreeCtxBase</ref> &amp;</type>
+        <definition>TreeCtxBase &amp; d2::TreeCtxBase::operator=</definition>
+        <argsstring>(TreeCtxBase &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::TreeCtxBase::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeCtxBase_1adae50ef05949c42ca7f6b3adf64ba059" kindref="member">TreeCtxBase</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="255" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1abdae955dbc42d5e8b9df22c1b4b01a85" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::TreeCtxBase::operator==</definition>
+        <argsstring>(std::nullptr_t) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::TreeCtxBase::operator==</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="257" column="14" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="257" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeCtxBase_1a3b63649690489fbd5cd00d86c3cc7e03" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::TreeCtxBase::operator!=</definition>
+        <argsstring>(std::nullptr_t) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>d2::TreeCtxBase::operator!=</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="261" column="14" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="261" bodyend="264"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>d2::TreeCtx&lt; Parent, State &gt;</label>
+        <link refid="classd2_1_1TreeCtx"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::TreeCtx&lt; Type, d2::TreeState &gt;</label>
+        <link refid="structd2_1_1TreeCtx_3_01Type_00_01d2_1_1TreeState_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::TreeCtx&lt; Type::root, Type::state &gt;</label>
+        <link refid="classd2_1_1TreeCtx"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::TreeCtxBase</label>
+        <link refid="classd2_1_1TreeCtxBase"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::TreeCtxBase</label>
+        <link refid="classd2_1_1TreeCtxBase"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::TreeIter&lt; Type &gt;</label>
+        <link refid="classd2_1_1TreeIter"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_tree_construct.hpp" line="60" column="5" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="61" bodyend="265"/>
+    <listofallmembers>
+      <member refid="classd2_1_1TreeCtxBase_1ada57d2827f025dc4c0b470d718a52ae5" prot="private" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>_bstate</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1ab95d17cb17693ba3894876458f344b8f" prot="protected" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>_get_branch</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a062f9f7fa7ca835fe5410f343d4f9bf8" prot="protected" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a0dfd017e77a365745a135aea40f23bf6" prot="protected" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>_reg_elem</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a16f82060fa2fd3e2f62af85bab38db9b" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>async</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1ad121f2518babbc29df331ded6d670544" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>context</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1ac72c4f5247b813751835602e0bf3176e" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>declare</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a1c8bf2d7a205166fcf8c09c6cc6e561a" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>defer</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a56490fa90338c914bf7f14c4cee8cabb" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>dep</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a9d1acbf6380abbf739fff69cc9306547" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>dep</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1aa55ba8f7606c2aae5d908ab4c33a4838" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>dynavar</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1af636400c8fd526c3fe6ae97531c9cf51" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>input</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a69ca5e88d3fda2885ac8510816d4b58c" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>on</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1ad8a18cbc1f922e45c57d8f783e805413" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>onv</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a56afefbd5050cfed58bfa1f6da9484c6" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>onv</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a3b63649690489fbd5cd00d86c3cc7e03" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>operator!=</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a82b1ff573162aaaaf3ca8d785dc31429" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>operator=</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1ae7bf7909db0daf6720ce7a68f80fac63" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>operator=</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1abdae955dbc42d5e8b9df22c1b4b01a85" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>operator==</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1afb821a683383c640b150b4aef0c6d96d" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>output</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a84b932290bad374a15d8159ecc5e3cb0" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>repeat</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a20a8345cd01565e86d5d1588648a4802" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>scheduler</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1affea7b89ccf1bf5e21ac3519bb73b876" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>screen</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a0be2d63b88172ea79330393814c92177" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>subscribe</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a2fa2dda78a19a527f944f513d870c868" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>subscribe</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a741c75cf7399fc8cf2cf69bab8138925" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>subscribe</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a741c75cf7399fc8cf2cf69bab8138925" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>subscribe</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a29d995f22843133c9f4a19617c5b5c2c" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>sync</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a00c59667f7a9a5fd1842252bc2db7a8f" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>sync_async</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a397dea0babb8929f662f03ae568b5cbb" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>tag</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1adae50ef05949c42ca7f6b3adf64ba059" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>TreeCtxBase</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1aa705dc0b0f3087d680ea37e2f872abe8" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>TreeCtxBase</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1ad24fc0b192099af3f175be95cf2f9849" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>TreeCtxBase</name></member>
+      <member refid="classd2_1_1TreeCtxBase_1a9e7dfb2fcfbd6a5091cd5eb9dc8aa4c9" prot="public" virt="non-virtual"><scope>d2::TreeCtxBase</scope><name>var</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

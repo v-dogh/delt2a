@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::net::SystemHTTP::Request</compoundname>
+    <includes refid="d2__http_8hpp" local="no">d2_http.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1aefa140e57863404d29f58d29272c93a4" prot="public" static="no" mutable="no">
+        <type>std::string_view</type>
+        <definition>std::string_view d2::sys::net::SystemHTTP::Request::method</definition>
+        <argsstring></argsstring>
+        <name>method</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::method</qualifiedname>
+        <initializer>{Method::Get}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="74" column="30" bodyfile="core/mods/d2_http.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a02f6afb454a18114dd6488c7678846ff" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::net::SystemHTTP::Request::url</definition>
+        <argsstring></argsstring>
+        <name>url</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::url</qualifiedname>
+        <initializer>{&quot;&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="75" column="25" bodyfile="core/mods/d2_http.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a68281ac92d6093dc8ed27cde7371150c" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder" kindref="compound">RequestBuilder</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(RequestBuilder&amp;)&gt; d2::sys::net::SystemHTTP::Request::on_setup</definition>
+        <argsstring></argsstring>
+        <name>on_setup</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::on_setup</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="76" column="27" bodyfile="core/mods/d2_http.hpp" bodystart="76" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a35a0db949104a8089202d66730194834" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response" kindref="compound">Response</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(Response&amp;)&gt; d2::sys::net::SystemHTTP::Request::on_response</definition>
+        <argsstring></argsstring>
+        <name>on_response</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::on_response</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="77" column="27" bodyfile="core/mods/d2_http.hpp" bodystart="77" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1af534e5d2fdf366ba0a4d1bdd3a570e30" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(const <ref refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Error" kindref="compound">Error</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(const Error&amp;)&gt; d2::sys::net::SystemHTTP::Request::on_error</definition>
+        <argsstring></argsstring>
+        <name>on_error</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::on_error</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="78" column="27" bodyfile="core/mods/d2_http.hpp" bodystart="78" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a33e2137ed6012682377ead0492637559" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk" kindref="compound">Chunk</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(Chunk&amp;)&gt; d2::sys::net::SystemHTTP::Request::on_chunk</definition>
+        <argsstring></argsstring>
+        <name>on_chunk</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::on_chunk</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="79" column="27" bodyfile="core/mods/d2_http.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1acf1e263bd5100250d5fd9370be14757b" prot="public" static="no" mutable="no">
+        <type>std::function&lt; void(<ref refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Response" kindref="compound">Response</ref> &amp;)&gt;</type>
+        <definition>std::function&lt;void(Response&amp;)&gt; d2::sys::net::SystemHTTP::Request::on_headers</definition>
+        <argsstring></argsstring>
+        <name>on_headers</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::on_headers</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="80" column="27" bodyfile="core/mods/d2_http.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1ab44643aa51f1ee9406861f8845401562" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; std::chrono::steady_clock::time_point &gt;</type>
+        <definition>std::optional&lt;std::chrono::steady_clock::time_point&gt; d2::sys::net::SystemHTTP::Request::deadline</definition>
+        <argsstring></argsstring>
+        <name>deadline</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::deadline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="81" column="27" bodyfile="core/mods/d2_http.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a682d9a79133cce8e72ccfaa7108d0fc2" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; std::chrono::milliseconds &gt;</type>
+        <definition>std::optional&lt;std::chrono::milliseconds&gt; d2::sys::net::SystemHTTP::Request::timeout</definition>
+        <argsstring></argsstring>
+        <name>timeout</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::timeout</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="82" column="27" bodyfile="core/mods/d2_http.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1afcdd87b95390e5338093e2f6a808f2fc" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; std::chrono::milliseconds &gt;</type>
+        <definition>std::optional&lt;std::chrono::milliseconds&gt; d2::sys::net::SystemHTTP::Request::connect_timeout</definition>
+        <argsstring></argsstring>
+        <name>connect_timeout</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::connect_timeout</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="82" column="35" bodyfile="core/mods/d2_http.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1ac9eb066111369e31ee92f9b2329622db" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::net::SystemHTTP::Request::max_response_bytes</definition>
+        <argsstring></argsstring>
+        <name>max_response_bytes</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::max_response_bytes</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="83" column="25" bodyfile="core/mods/d2_http.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1aba2d0983a1f23ffabad09c981b0235bd" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::net::SystemHTTP::Request::max_header_bytes</definition>
+        <argsstring></argsstring>
+        <name>max_header_bytes</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::max_header_bytes</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="83" column="44" bodyfile="core/mods/d2_http.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a1894fb14aa7ee910e72f4901bc902fd2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::net::SystemHTTP::Request::follow_redirects</definition>
+        <argsstring></argsstring>
+        <name>follow_redirects</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::follow_redirects</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="84" column="18" bodyfile="core/mods/d2_http.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a31cb3a9add5302ba6e874340a4454248" prot="public" static="no" mutable="no">
+        <type>long</type>
+        <definition>long d2::sys::net::SystemHTTP::Request::max_redirects</definition>
+        <argsstring></argsstring>
+        <name>max_redirects</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Request::max_redirects</qualifiedname>
+        <initializer>{10}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="85" column="18" bodyfile="core/mods/d2_http.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_http.hpp" line="72" column="9" bodyfile="core/mods/d2_http.hpp" bodystart="73" bodyend="86"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1afcdd87b95390e5338093e2f6a808f2fc" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>connect_timeout</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1ab44643aa51f1ee9406861f8845401562" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>deadline</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a1894fb14aa7ee910e72f4901bc902fd2" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>follow_redirects</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1aba2d0983a1f23ffabad09c981b0235bd" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>max_header_bytes</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a31cb3a9add5302ba6e874340a4454248" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>max_redirects</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1ac9eb066111369e31ee92f9b2329622db" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>max_response_bytes</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1aefa140e57863404d29f58d29272c93a4" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>method</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a33e2137ed6012682377ead0492637559" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>on_chunk</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1af534e5d2fdf366ba0a4d1bdd3a570e30" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>on_error</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1acf1e263bd5100250d5fd9370be14757b" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>on_headers</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a35a0db949104a8089202d66730194834" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>on_response</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a68281ac92d6093dc8ed27cde7371150c" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>on_setup</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a682d9a79133cce8e72ccfaa7108d0fc2" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>timeout</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Request_1a02f6afb454a18114dd6488c7678846ff" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemHTTP::Request</scope><name>url</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

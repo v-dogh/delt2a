@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1MainWorker" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::MainWorker</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">mt::Worker</basecompoundref>
+    <includes refid="d2__main__worker_8hpp" local="no">d2_main_worker.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1MainWorker_1ab3922518d3df0b55c6a0bd0040a3b411" prot="public" static="no">
+        <type>mt::Worker::vptr&lt; <ref refid="classd2_1_1MainWorker_1a7fce4aebe25fb92bd12e89816b8782b5" kindref="member">MainWorker</ref> &gt;</type>
+        <definition>using d2::MainWorker::ptr = mt::Worker::vptr&lt;MainWorker&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::MainWorker::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_main_worker.hpp" line="10" column="9" bodyfile="core/io/d2_main_worker.hpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1MainWorker_1a7fce4aebe25fb92bd12e89816b8782b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::MainWorker::MainWorker</definition>
+        <argsstring>()</argsstring>
+        <name>MainWorker</name>
+        <qualifiedname>d2::MainWorker::MainWorker</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_main_worker.hpp" line="11" column="9" bodyfile="core/io/d2_main_worker.hpp" bodystart="11" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MainWorker_1abae5b8c9ec68ca93c32001e4d79168cf" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::MainWorker::wait</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>wait</name>
+        <qualifiedname>d2::MainWorker::wait</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_main_worker.hpp" line="12" column="14" bodyfile="core/io/d2_main_worker.cpp" bodystart="5" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MainWorker_1ab81d00d3729e9b96fd5a803e0ceae8a5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::MainWorker::wait</definition>
+        <argsstring>(std::chrono::steady_clock::time_point deadline) noexcept=0</argsstring>
+        <name>wait</name>
+        <qualifiedname>d2::MainWorker::wait</qualifiedname>
+        <param>
+          <type>std::chrono::steady_clock::time_point</type>
+          <declname>deadline</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_main_worker.hpp" line="13" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::MainWorker</label>
+        <link refid="classd2_1_1MainWorker"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>mt::Worker</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::MainWorker</label>
+        <link refid="classd2_1_1MainWorker"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>mt::Worker</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_main_worker.hpp" line="7" column="5" bodyfile="core/io/d2_main_worker.hpp" bodystart="8" bodyend="14"/>
+    <listofallmembers>
+      <member refid="classd2_1_1MainWorker_1a7fce4aebe25fb92bd12e89816b8782b5" prot="public" virt="non-virtual"><scope>d2::MainWorker</scope><name>MainWorker</name></member>
+      <member refid="classd2_1_1MainWorker_1ab3922518d3df0b55c6a0bd0040a3b411" prot="public" virt="non-virtual"><scope>d2::MainWorker</scope><name>ptr</name></member>
+      <member refid="classd2_1_1MainWorker_1abae5b8c9ec68ca93c32001e4d79168cf" prot="public" virt="non-virtual"><scope>d2::MainWorker</scope><name>wait</name></member>
+      <member refid="classd2_1_1MainWorker_1ab81d00d3729e9b96fd5a803e0ceae8a5" prot="public" virt="pure-virtual"><scope>d2::MainWorker</scope><name>wait</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

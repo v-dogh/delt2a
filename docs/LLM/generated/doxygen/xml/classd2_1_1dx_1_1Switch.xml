@@ -1,0 +1,432 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1Switch" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::Switch</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">style:: UAI&lt; Switch, style::ISwitch, style::ILayout, style::IContainer, style::IColors, style::IKeyboardNav &gt;</basecompoundref>
+    <basecompoundref refid="classd2_1_1dx_1_1impl_1_1ContainerHelper" prot="public" virt="non-virtual">d2::dx::impl::ContainerHelper&lt; Switch &gt;</basecompoundref>
+    <basecompoundref refid="classd2_1_1dx_1_1impl_1_1TextHelper" prot="public" virt="non-virtual">d2::dx::impl::TextHelper&lt; Switch &gt;</basecompoundref>
+    <includes refid="d2__switch_8hpp" local="no">d2_switch.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1dx_1_1Switch_1a0c09d72706ad7bf2c239c4d6c7866907" prot="public" static="no">
+        <type>std::vector&lt; <ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref> &gt;</type>
+        <definition>using d2::dx::Switch::opts = std::vector&lt;string&gt;</definition>
+        <argsstring></argsstring>
+        <name>opts</name>
+        <qualifiedname>d2::dx::Switch::opts</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="109" column="13" bodyfile="elements/d2_switch.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1dx_1_1Switch_1a3b63065d5a6f15fb41ccda06e9244014" prot="public" static="no">
+        <type>style:: UAI&lt; <ref refid="classd2_1_1dx_1_1Switch" kindref="compound">Switch</ref>, style::ISwitch, <ref refid="structd2_1_1style_1_1ILayout" kindref="compound">style::ILayout</ref>, style::IContainer, style::IColors, style::IKeyboardNav &gt;</type>
+        <definition>using d2::dx::Switch::data = style::
+               UAI&lt;Switch,
+                   style::ISwitch,
+                   style::ILayout,
+                   style::IContainer,
+                   style::IColors,
+                   style::IKeyboardNav&gt;</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::dx::Switch::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="110" column="13" bodyfile="elements/d2_switch.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Switch_1a5a1ec7861530065948fff93327fe0022" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::dx::Switch::invalid</definition>
+        <argsstring></argsstring>
+        <name>invalid</name>
+        <qualifiedname>d2::dx::Switch::invalid</qualifiedname>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="106" column="35" bodyfile="elements/d2_switch.hpp" bodystart="106" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classd2_1_1dx_1_1Switch_1a872fbb2ff8cbddfff7365312dce2a63d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ContainerHelper&lt; Switch &gt;</definition>
+        <argsstring></argsstring>
+        <name>ContainerHelper&lt; Switch &gt;</name>
+        <qualifiedname>d2::dx::Switch::ContainerHelper&lt; Switch &gt;</qualifiedname>
+        <param>
+          <type>ContainerHelper&lt; <ref refid="classd2_1_1dx_1_1Switch" kindref="compound">Switch</ref> &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="106" column="35" bodyfile="elements/d2_switch.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classd2_1_1dx_1_1Switch_1a85620f1289912aaf959eaa6bdd82ab55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class TextHelper&lt; Switch &gt;</definition>
+        <argsstring></argsstring>
+        <name>TextHelper&lt; Switch &gt;</name>
+        <qualifiedname>d2::dx::Switch::TextHelper&lt; Switch &gt;</qualifiedname>
+        <param>
+          <type>TextHelper&lt; <ref refid="classd2_1_1dx_1_1Switch" kindref="compound">Switch</ref> &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="106" column="35" bodyfile="elements/d2_switch.hpp" bodystart="108" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Switch_1a8fdaa932dd0b7f033b56b60caaa938e3" prot="protected" static="no" mutable="no">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::dx::Switch::_perfect_dimensions</definition>
+        <argsstring></argsstring>
+        <name>_perfect_dimensions</name>
+        <qualifiedname>d2::dx::Switch::_perfect_dimensions</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="119" column="25" bodyfile="elements/d2_switch.hpp" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Switch_1aaf703cb19cfb0a49258d1b2e6ead7f08" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::dx::Switch::_idx</definition>
+        <argsstring></argsstring>
+        <name>_idx</name>
+        <qualifiedname>d2::dx::Switch::_idx</qualifiedname>
+        <initializer>{<ref refid="classd2_1_1dx_1_1Switch_1a5a1ec7861530065948fff93327fe0022" kindref="member">invalid</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="120" column="17" bodyfile="elements/d2_switch.hpp" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Switch_1a3be548861f9f3293281003461875628a" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::dx::Switch::_old</definition>
+        <argsstring></argsstring>
+        <name>_old</name>
+        <qualifiedname>d2::dx::Switch::_old</qualifiedname>
+        <initializer>{<ref refid="classd2_1_1dx_1_1Switch_1a5a1ec7861530065948fff93327fe0022" kindref="member">invalid</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="121" column="17" bodyfile="elements/d2_switch.hpp" bodystart="121" bodyend="121"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1a5c1d687753a785654edb05e365179361" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">Unit</ref></type>
+        <definition>Unit d2::dx::Switch::_layout_impl</definition>
+        <argsstring>(Element::Layout type) const override</argsstring>
+        <name>_layout_impl</name>
+        <qualifiedname>d2::dx::Switch::_layout_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Element::Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="123" column="26" bodyfile="elements/d2_switch.cpp" bodystart="38" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1acd507fa78dd1f5ca60c1505b99f319be" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool d2::dx::Switch::_provides_input_impl</definition>
+        <argsstring>() const override</argsstring>
+        <name>_provides_input_impl</name>
+        <qualifiedname>d2::dx::Switch::_provides_input_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="124" column="26" bodyfile="elements/d2_switch.cpp" bodystart="7" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1a8414cef2b83fa6af1b77eae5789dd431" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::Switch::_signal_write_impl</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element) override</argsstring>
+        <name>_signal_write_impl</name>
+        <qualifiedname>d2::dx::Switch::_signal_write_impl</qualifiedname>
+        <param>
+          <type>write_flag</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type>ptr</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="126" column="13" bodyfile="elements/d2_switch.cpp" bodystart="12" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1a32f183283c860e8320cb7190b39d461b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::Switch::_state_change_impl</definition>
+        <argsstring>(State state, bool value) override</argsstring>
+        <name>_state_change_impl</name>
+        <qualifiedname>d2::dx::Switch::_state_change_impl</qualifiedname>
+        <param>
+          <type>State</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="127" column="26" bodyfile="elements/d2_switch.cpp" bodystart="57" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1a8abf82bbd2fd06265bce5a2d0047e5c8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::Switch::_event_impl</definition>
+        <argsstring>(in::InputFrame &amp;frame) override</argsstring>
+        <name>_event_impl</name>
+        <qualifiedname>d2::dx::Switch::_event_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="128" column="26" bodyfile="elements/d2_switch.cpp" bodystart="86" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1a940154481966d5a3731bb3c94281f7e1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::Switch::_frame_impl</definition>
+        <argsstring>(PixelBuffer::View buffer) override</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::dx::Switch::_frame_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="129" column="26" bodyfile="elements/d2_switch.cpp" bodystart="98" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1ae690f6e91cb05cd6f055b6a7df837df8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Switch::_submit</definition>
+        <argsstring>()</argsstring>
+        <name>_submit</name>
+        <qualifiedname>d2::dx::Switch::_submit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="131" column="18" bodyfile="elements/d2_switch.cpp" bodystart="169" bodyend="182"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1a33e03f617d6367599216a0ac1e56852d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Switch::reset</definition>
+        <argsstring>(int idx=-1)</argsstring>
+        <name>reset</name>
+        <qualifiedname>d2::dx::Switch::reset</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>idx</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="133" column="18" bodyfile="elements/d2_switch.cpp" bodystart="183" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1a7b00f941ccac68e551416a27241ae731" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Switch::reset</definition>
+        <argsstring>(string choice)</argsstring>
+        <name>reset</name>
+        <qualifiedname>d2::dx::Switch::reset</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref></type>
+          <declname>choice</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="134" column="18" bodyfile="elements/d2_switch.cpp" bodystart="192" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1ac69936ab35109dd9b8b902b349fd7813" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref></type>
+        <definition>string d2::dx::Switch::choice</definition>
+        <argsstring>()</argsstring>
+        <name>choice</name>
+        <qualifiedname>d2::dx::Switch::choice</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="135" column="20" bodyfile="elements/d2_switch.cpp" bodystart="198" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Switch_1a06eba9c4909ab500ea1c05d8736bc5ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::dx::Switch::index</definition>
+        <argsstring>()</argsstring>
+        <name>index</name>
+        <qualifiedname>d2::dx::Switch::index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="136" column="17" bodyfile="elements/d2_switch.cpp" bodystart="202" bodyend="205"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::dx::Switch</label>
+        <link refid="classd2_1_1dx_1_1Switch"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::dx::impl::ContainerHelper&lt; Switch &gt;</label>
+        <link refid="classd2_1_1dx_1_1impl_1_1ContainerHelper"/>
+      </node>
+      <node id="4">
+        <label>d2::dx::impl::TextHelper&lt; Switch &gt;</label>
+        <link refid="classd2_1_1dx_1_1impl_1_1TextHelper"/>
+      </node>
+      <node id="2">
+        <label>style:: UAI&lt; Switch, style::ISwitch, style::ILayout, style::IContainer, style::IColors, style::IKeyboardNav &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>d2::BoundingBox</label>
+        <link refid="structd2_1_1BoundingBox"/>
+      </node>
+      <node id="1">
+        <label>d2::dx::Switch</label>
+        <link refid="classd2_1_1dx_1_1Switch"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>_perfect_dimensions</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::dx::impl::ContainerHelper&lt; Switch &gt;</label>
+        <link refid="classd2_1_1dx_1_1impl_1_1ContainerHelper"/>
+      </node>
+      <node id="4">
+        <label>d2::dx::impl::TextHelper&lt; Switch &gt;</label>
+        <link refid="classd2_1_1dx_1_1impl_1_1TextHelper"/>
+      </node>
+      <node id="2">
+        <label>style:: UAI&lt; Switch, style::ISwitch, style::ILayout, style::IContainer, style::IColors, style::IKeyboardNav &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_switch.hpp" line="95" column="9" bodyfile="elements/d2_switch.hpp" bodystart="104" bodyend="137"/>
+    <listofallmembers>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1afe7017510c948a9efafaea9c704a168e" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_border_base</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1aa2f0017ca6fec0f9db96278be3caf5f2" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_border_base_inv</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a8abf82bbd2fd06265bce5a2d0047e5c8" prot="protected" virt="virtual"><scope>d2::dx::Switch</scope><name>_event_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a940154481966d5a3731bb3c94281f7e1" prot="protected" virt="virtual"><scope>d2::dx::Switch</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1aaf703cb19cfb0a49258d1b2e6ead7f08" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_idx</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a5c1d687753a785654edb05e365179361" prot="protected" virt="virtual"><scope>d2::dx::Switch</scope><name>_layout_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a3be548861f9f3293281003461875628a" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_old</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1TextHelper_1a32e3ec1ef29fb0ab2ff4e9e6c524ca50" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_paragraph_bounding_box</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a8fdaa932dd0b7f033b56b60caaa938e3" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_perfect_dimensions</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1acd507fa78dd1f5ca60c1505b99f319be" prot="protected" virt="virtual"><scope>d2::dx::Switch</scope><name>_provides_input_impl</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1a3d010f4d71277eb6666c8e5da1d721f7" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_render_border</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1TextHelper_1a67032e6a16fa4aa3c076cb88273066c0" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_render_paragraph</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1TextHelper_1a1c3dd6c054fd54900541c1a37156e910" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_render_text</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1TextHelper_1a48a1ed4f432adbe5e976e9450cc665ee" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_render_text_simple</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a8414cef2b83fa6af1b77eae5789dd431" prot="protected" virt="virtual"><scope>d2::dx::Switch</scope><name>_signal_write_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a32f183283c860e8320cb7190b39d461b" prot="protected" virt="virtual"><scope>d2::dx::Switch</scope><name>_state_change_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1ae690f6e91cb05cd6f055b6a7df837df8" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_submit</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1TextHelper_1a69a2c601a50cbf188ce68d3a90bd511d" prot="protected" virt="non-virtual"><scope>d2::dx::Switch</scope><name>_text_bounding_box</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1ac69936ab35109dd9b8b902b349fd7813" prot="public" virt="non-virtual"><scope>d2::dx::Switch</scope><name>choice</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a872fbb2ff8cbddfff7365312dce2a63d" prot="public" virt="non-virtual"><scope>d2::dx::Switch</scope><name>ContainerHelper&lt; Switch &gt;</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a3b63065d5a6f15fb41ccda06e9244014" prot="public" virt="non-virtual"><scope>d2::dx::Switch</scope><name>data</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a06eba9c4909ab500ea1c05d8736bc5ff" prot="public" virt="non-virtual"><scope>d2::dx::Switch</scope><name>index</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a5a1ec7861530065948fff93327fe0022" prot="public" virt="non-virtual"><scope>d2::dx::Switch</scope><name>invalid</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a0c09d72706ad7bf2c239c4d6c7866907" prot="public" virt="non-virtual"><scope>d2::dx::Switch</scope><name>opts</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a33e03f617d6367599216a0ac1e56852d" prot="public" virt="non-virtual"><scope>d2::dx::Switch</scope><name>reset</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a7b00f941ccac68e551416a27241ae731" prot="public" virt="non-virtual"><scope>d2::dx::Switch</scope><name>reset</name></member>
+      <member refid="classd2_1_1dx_1_1Switch_1a85620f1289912aaf959eaa6bdd82ab55" prot="public" virt="non-virtual"><scope>d2::dx::Switch</scope><name>TextHelper&lt; Switch &gt;</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

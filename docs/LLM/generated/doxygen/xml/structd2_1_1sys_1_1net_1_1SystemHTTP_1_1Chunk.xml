@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::net::SystemHTTP::Chunk</compoundname>
+    <includes refid="d2__http_8hpp" local="no">d2_http.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1a74d3c3f34f63cfe91f72eedd5061df41" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string_view</type>
+        <definition>virtual std::string_view d2::sys::net::SystemHTTP::Chunk::read</definition>
+        <argsstring>()=0</argsstring>
+        <name>read</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Chunk::read</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="48" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1a05c26489112ca121577f6d73f6277d98" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemHTTP::Chunk::cancel</definition>
+        <argsstring>()=0</argsstring>
+        <name>cancel</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Chunk::cancel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="49" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1ab41cc842b476d2564d7da7806be9bf1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::size_t</type>
+        <definition>virtual std::size_t d2::sys::net::SystemHTTP::Chunk::down_current</definition>
+        <argsstring>()=0</argsstring>
+        <name>down_current</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Chunk::down_current</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="51" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1a8dac96e3ae6a176d787ea9d1458899e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::size_t</type>
+        <definition>virtual std::size_t d2::sys::net::SystemHTTP::Chunk::down_total</definition>
+        <argsstring>()=0</argsstring>
+        <name>down_total</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Chunk::down_total</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="52" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1aa83710fd9f847fde5a5c51b40b17f466" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::sys::net::SystemHTTP::Chunk::~Chunk</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Chunk</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::Chunk::~Chunk</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="54" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_http.hpp" line="46" column="9" bodyfile="core/mods/d2_http.hpp" bodystart="47" bodyend="55"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1a05c26489112ca121577f6d73f6277d98" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Chunk</scope><name>cancel</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1ab41cc842b476d2564d7da7806be9bf1a" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Chunk</scope><name>down_current</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1a8dac96e3ae6a176d787ea9d1458899e2" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Chunk</scope><name>down_total</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1a74d3c3f34f63cfe91f72eedd5061df41" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::Chunk</scope><name>read</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1Chunk_1aa83710fd9f847fde5a5c51b40b17f466" prot="public" virt="virtual"><scope>d2::sys::net::SystemHTTP::Chunk</scope><name>~Chunk</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

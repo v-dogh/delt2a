@@ -1,0 +1,427 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1px_1_1background" kind="struct" language="C++" prot="public">
+    <compoundname>d2::px::background</compoundname>
+    <includes refid="d2__vtypes_8hpp" local="no">d2_vtypes.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1px_1_1background_1a5d0c761323ebe037f5f893d0ec4c34f7" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::background::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <qualifiedname>d2::px::background::r</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="268" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="268" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1background_1a4025d4b09c2008510696172bff95ffc3" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::background::g</definition>
+        <argsstring></argsstring>
+        <name>g</name>
+        <qualifiedname>d2::px::background::g</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="269" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="269" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1background_1a24e8cf32253055e34f414d46d046e269" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::background::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <qualifiedname>d2::px::background::b</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="270" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="270" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1px_1_1background_1a82f7e473a8f9215b539001da25a7bfff" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::background::a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <qualifiedname>d2::px::background::a</qualifiedname>
+        <initializer>{255}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="271" column="23" bodyfile="core/types/d2_vtypes.hpp" bodystart="271" bodyend="271"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a14176fad1c9c87c66571e2463b5a61ac" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>static constexpr background d2::px::background::from_scalar</definition>
+        <argsstring>(scalar value) noexcept</argsstring>
+        <name>from_scalar</name>
+        <qualifiedname>d2::px::background::from_scalar</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a714f0873abb82f92d82c00f6bcb44975" kindref="member">scalar</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="273" column="42" bodyfile="core/types/d2_vtypes.hpp" bodystart="273" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1aba34e201cf89fbabaa212d207810c9f0" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1a714f0873abb82f92d82c00f6bcb44975" kindref="member">scalar</ref></type>
+        <definition>static constexpr scalar d2::px::background::to_scalar</definition>
+        <argsstring>(background value) noexcept</argsstring>
+        <name>to_scalar</name>
+        <qualifiedname>d2::px::background::to_scalar</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="293" column="38" bodyfile="core/types/d2_vtypes.hpp" bodystart="293" bodyend="296"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1aac9b17e1aaa04fabaf37e02d19007a43" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1a714f0873abb82f92d82c00f6bcb44975" kindref="member">scalar</ref></type>
+        <definition>scalar d2::px::background::to_scalar</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_scalar</name>
+        <qualifiedname>d2::px::background::to_scalar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="283" column="31" bodyfile="core/types/d2_vtypes.hpp" bodystart="283" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a23d1dbdbcdae92563c3d81218abed541" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>background d2::px::background::with_alpha</definition>
+        <argsstring>(component value) const noexcept</argsstring>
+        <name>with_alpha</name>
+        <qualifiedname>d2::px::background::with_alpha</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="298" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="298" bodyend="303"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a7e35b040aca42bffda5d8559b0883e67" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>background d2::px::background::with_alpha</definition>
+        <argsstring>(float value) const noexcept</argsstring>
+        <name>with_alpha</name>
+        <qualifiedname>d2::px::background::with_alpha</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="305" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="305" bodyend="308"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a512728ce0f0427d47336f5d31eeedd36" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>background d2::px::background::alpha</definition>
+        <argsstring>(component value) const noexcept</argsstring>
+        <name>alpha</name>
+        <qualifiedname>d2::px::background::alpha</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="310" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="310" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a3a9f537b91a43c9b4de68a62fdb3aa0a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>background d2::px::background::alpha</definition>
+        <argsstring>(float value) const noexcept</argsstring>
+        <name>alpha</name>
+        <qualifiedname>d2::px::background::alpha</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="314" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="314" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a2d7e80ccd8e8da05f7b4ab060004e606" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>background d2::px::background::inverted</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>inverted</name>
+        <qualifiedname>d2::px::background::inverted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="319" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="319" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1aecd552d157df93c2a88213af7cffed47" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>background d2::px::background::invert</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>invert</name>
+        <qualifiedname>d2::px::background::invert</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="329" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="329" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a6efa435b3482c45456d277e490f9c534" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>background d2::px::background::mix</definition>
+        <argsstring>(background to, float progress=0.5f) const noexcept</argsstring>
+        <name>mix</name>
+        <qualifiedname>d2::px::background::mix</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="335" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="335" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1ab91c497a3a4afe09109742553c59931d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+        <definition>background d2::px::background::mask</definition>
+        <argsstring>(background to, float progress=0.5f) const noexcept</argsstring>
+        <name>mask</name>
+        <qualifiedname>d2::px::background::mask</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="346" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="346" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a67f9a6d07756d82f84bb9669a335e135" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+        <definition>foreground d2::px::background::with_value</definition>
+        <argsstring>(value_type value=&apos; &apos;, style flags=style::None) const noexcept</argsstring>
+        <name>with_value</name>
+        <qualifiedname>d2::px::background::with_value</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a65fae78759ab1cfcc9a93ad54653dbfe" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+          <defval>&apos; &apos;</defval>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flags</declname>
+          <defval><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">style::None</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="352" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="888" bodyend="891"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a537ba09f09571465da9fabb38011e7ca" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+        <definition>foreground d2::px::background::extend</definition>
+        <argsstring>(value_type value=&apos; &apos;, style flags=style::None) const noexcept</argsstring>
+        <name>extend</name>
+        <qualifiedname>d2::px::background::extend</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a65fae78759ab1cfcc9a93ad54653dbfe" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+          <defval>&apos; &apos;</defval>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flags</declname>
+          <defval><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a6adf97f83acf6453d4a6a4b1070f3754" kindref="member">style::None</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="354" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="894" bodyend="897"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1aa564f826d34bdd9bf7a497227d2c6112" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+        <definition>foreground d2::px::background::with_style</definition>
+        <argsstring>(style flags) const noexcept</argsstring>
+        <name>with_style</name>
+        <qualifiedname>d2::px::background::with_style</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="355" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="899" bodyend="902"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a3660e71fabdc606518ded0dd0acc9f66" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+        <definition>foreground d2::px::background::stylize</definition>
+        <argsstring>(style flags) const noexcept</argsstring>
+        <name>stylize</name>
+        <qualifiedname>d2::px::background::stylize</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="356" column="35" bodyfile="core/types/d2_vtypes.hpp" bodystart="904" bodyend="907"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a37ac2de6caca447037ff0382fdce1ef8" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::px::background::operator foreground</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator foreground</name>
+        <qualifiedname>d2::px::background::operator foreground</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="358" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="909" bodyend="912"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1ae504f72152e854dbe4ad3238ceb5be70" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::px::background::operator combined</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator combined</name>
+        <qualifiedname>d2::px::background::operator combined</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="359" column="24" bodyfile="core/types/d2_vtypes.hpp" bodystart="914" bodyend="917"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1px_1_1background_1a9ec067d8f1902e67ae95a85bdd2bcefc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto d2::px::background::operator&lt;=&gt;</definition>
+        <argsstring>(const background &amp;) const =default</argsstring>
+        <name>operator&lt;=&gt;</name>
+        <qualifiedname>d2::px::background::operator&lt;=&gt;</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="361" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_vtypes.hpp" line="266" column="9" bodyfile="core/types/d2_vtypes.hpp" bodystart="267" bodyend="362"/>
+    <listofallmembers>
+      <member refid="structd2_1_1px_1_1background_1a82f7e473a8f9215b539001da25a7bfff" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>a</name></member>
+      <member refid="structd2_1_1px_1_1background_1a512728ce0f0427d47336f5d31eeedd36" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>alpha</name></member>
+      <member refid="structd2_1_1px_1_1background_1a3a9f537b91a43c9b4de68a62fdb3aa0a" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>alpha</name></member>
+      <member refid="structd2_1_1px_1_1background_1a24e8cf32253055e34f414d46d046e269" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>b</name></member>
+      <member refid="structd2_1_1px_1_1background_1a537ba09f09571465da9fabb38011e7ca" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>extend</name></member>
+      <member refid="structd2_1_1px_1_1background_1a14176fad1c9c87c66571e2463b5a61ac" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>from_scalar</name></member>
+      <member refid="structd2_1_1px_1_1background_1a4025d4b09c2008510696172bff95ffc3" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>g</name></member>
+      <member refid="structd2_1_1px_1_1background_1aecd552d157df93c2a88213af7cffed47" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>invert</name></member>
+      <member refid="structd2_1_1px_1_1background_1a2d7e80ccd8e8da05f7b4ab060004e606" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>inverted</name></member>
+      <member refid="structd2_1_1px_1_1background_1ab91c497a3a4afe09109742553c59931d" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>mask</name></member>
+      <member refid="structd2_1_1px_1_1background_1a6efa435b3482c45456d277e490f9c534" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>mix</name></member>
+      <member refid="structd2_1_1px_1_1background_1ae504f72152e854dbe4ad3238ceb5be70" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>operator combined</name></member>
+      <member refid="structd2_1_1px_1_1background_1a37ac2de6caca447037ff0382fdce1ef8" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>operator foreground</name></member>
+      <member refid="structd2_1_1px_1_1background_1a9ec067d8f1902e67ae95a85bdd2bcefc" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>operator&lt;=&gt;</name></member>
+      <member refid="structd2_1_1px_1_1background_1a5d0c761323ebe037f5f893d0ec4c34f7" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>r</name></member>
+      <member refid="structd2_1_1px_1_1background_1a3660e71fabdc606518ded0dd0acc9f66" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>stylize</name></member>
+      <member refid="structd2_1_1px_1_1background_1aac9b17e1aaa04fabaf37e02d19007a43" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>to_scalar</name></member>
+      <member refid="structd2_1_1px_1_1background_1aba34e201cf89fbabaa212d207810c9f0" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>to_scalar</name></member>
+      <member refid="structd2_1_1px_1_1background_1a23d1dbdbcdae92563c3d81218abed541" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>with_alpha</name></member>
+      <member refid="structd2_1_1px_1_1background_1a7e35b040aca42bffda5d8559b0883e67" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>with_alpha</name></member>
+      <member refid="structd2_1_1px_1_1background_1aa564f826d34bdd9bf7a497227d2c6112" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>with_style</name></member>
+      <member refid="structd2_1_1px_1_1background_1a67f9a6d07756d82f84bb9669a335e135" prot="public" virt="non-virtual"><scope>d2::px::background</scope><name>with_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

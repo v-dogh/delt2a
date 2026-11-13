@@ -1,0 +1,377 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1AlignedUnit" kind="class" language="C++" prot="public">
+    <compoundname>d2::AlignedUnit</compoundname>
+    <basecompoundref refid="classd2_1_1Unit" prot="public" virt="non-virtual">d2::Unit</basecompoundref>
+    <includes refid="d2__element__units_8hpp" local="no">d2_element_units.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>unsigned char</type>
+        <declname>Ctx</declname>
+        <defname>Ctx</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a9bb5c7a5859ff2f27a6387191c6305a0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::AlignedUnit&lt; Ctx &gt;::_setctx</definition>
+        <argsstring>()</argsstring>
+        <name>_setctx</name>
+        <qualifiedname>d2::AlignedUnit::_setctx</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="232" column="14" bodyfile="core/types/d2_element_units.hpp" bodystart="232" bodyend="243"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a32b5036087f03b6ea30331ce37d8bba3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AlignedUnit&lt; Ctx &gt;::AlignedUnit</definition>
+        <argsstring>()=default</argsstring>
+        <name>AlignedUnit</name>
+        <qualifiedname>d2::AlignedUnit::AlignedUnit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="245" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1ab4afef19d12af549fbf20be3c9c034b0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AlignedUnit&lt; Ctx &gt;::AlignedUnit</definition>
+        <argsstring>(const Unit &amp;value)</argsstring>
+        <name>AlignedUnit</name>
+        <qualifiedname>d2::AlignedUnit::AlignedUnit</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1Unit_1a8fc6ed1fa50f1b6a74c2abf5b144a551" kindref="member">Unit</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="246" column="19" bodyfile="core/types/d2_element_units.hpp" bodystart="246" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a5347c53b812b322bb2c3d8aac9c80e63" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AlignedUnit&lt; Ctx &gt;::AlignedUnit</definition>
+        <argsstring>(float value, Type units=Px, unsigned char mods=0x00)</argsstring>
+        <name>AlignedUnit</name>
+        <qualifiedname>d2::AlignedUnit::AlignedUnit</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091" kindref="member">Type</ref></type>
+          <declname>units</declname>
+          <defval><ref refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091abb7ddf5f8c19cff35c7849094d1cc2c8" kindref="member">Px</ref></defval>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>mods</declname>
+          <defval>0x00</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="250" column="19" bodyfile="core/types/d2_element_units.hpp" bodystart="250" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a7884702d943732f99c5d4a254899c77d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AlignedUnit&lt; Ctx &gt;::AlignedUnit</definition>
+        <argsstring>(Type units, unsigned char mods=0x00)</argsstring>
+        <name>AlignedUnit</name>
+        <qualifiedname>d2::AlignedUnit::AlignedUnit</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091" kindref="member">Type</ref></type>
+          <declname>units</declname>
+        </param>
+        <param>
+          <type>unsigned char</type>
+          <declname>mods</declname>
+          <defval>0x00</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="255" column="19" bodyfile="core/types/d2_element_units.hpp" bodystart="255" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a56edf6b0f5b8fdbed1b271248c6ce9a1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AlignedUnit&lt; Ctx &gt;::AlignedUnit</definition>
+        <argsstring>(Mods mods)</argsstring>
+        <name>AlignedUnit</name>
+        <qualifiedname>d2::AlignedUnit::AlignedUnit</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7a" kindref="member">Mods</ref></type>
+          <declname>mods</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="259" column="19" bodyfile="core/types/d2_element_units.hpp" bodystart="259" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1ae120aa24b83fd5087fbd67c4ce93aef5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AlignedUnit&lt; Ctx &gt;::AlignedUnit</definition>
+        <argsstring>(const AlignedUnit &amp;)=default</argsstring>
+        <name>AlignedUnit</name>
+        <qualifiedname>d2::AlignedUnit::AlignedUnit</qualifiedname>
+        <param>
+          <type>const AlignedUnit &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="263" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a2991b11c25eed919b68308f9e1992814" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::AlignedUnit&lt; Ctx &gt;::AlignedUnit</definition>
+        <argsstring>(AlignedUnit &amp;&amp;)=default</argsstring>
+        <name>AlignedUnit</name>
+        <qualifiedname>d2::AlignedUnit::AlignedUnit</qualifiedname>
+        <param>
+          <type>AlignedUnit &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="264" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a00d4a58af55d721d5da020f457c9f63d" prot="public" static="no" consteval="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::AlignedUnit&lt; Ctx &gt;::getcontext</definition>
+        <argsstring>(UnitContext value) const</argsstring>
+        <name>getcontext</name>
+        <qualifiedname>d2::AlignedUnit::getcontext</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353a" kindref="member">UnitContext</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="266" column="24" bodyfile="core/types/d2_element_units.hpp" bodystart="266" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a48b66e9d8571b8d7f0db02439f4567e4" prot="public" static="no" consteval="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::AlignedUnit&lt; Ctx &gt;::getcontext</definition>
+        <argsstring>(UnitContext value)</argsstring>
+        <name>getcontext</name>
+        <qualifiedname>d2::AlignedUnit::getcontext</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353a" kindref="member">UnitContext</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="270" column="24" bodyfile="core/types/d2_element_units.hpp" bodystart="270" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a104598a1b7561ab8a2ef858cca8f1206" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1AlignedUnit_1a32b5036087f03b6ea30331ce37d8bba3" kindref="member">AlignedUnit</ref> &amp;</type>
+        <definition>AlignedUnit &amp; d2::AlignedUnit&lt; Ctx &gt;::operator=</definition>
+        <argsstring>(const AlignedUnit &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::AlignedUnit::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1AlignedUnit_1a32b5036087f03b6ea30331ce37d8bba3" kindref="member">AlignedUnit</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="275" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a4320601b768ad5f262e889bf683a5757" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1AlignedUnit_1a32b5036087f03b6ea30331ce37d8bba3" kindref="member">AlignedUnit</ref> &amp;</type>
+        <definition>AlignedUnit &amp; d2::AlignedUnit&lt; Ctx &gt;::operator=</definition>
+        <argsstring>(AlignedUnit &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::AlignedUnit::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1AlignedUnit_1a32b5036087f03b6ea30331ce37d8bba3" kindref="member">AlignedUnit</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="276" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a49cb380ec57a6bbaca48636a689732f2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit_1a8fc6ed1fa50f1b6a74c2abf5b144a551" kindref="member">Unit</ref> &amp;</type>
+        <definition>Unit &amp; d2::AlignedUnit&lt; Ctx &gt;::operator=</definition>
+        <argsstring>(Mods mods)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::AlignedUnit::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7a" kindref="member">Mods</ref></type>
+          <declname>mods</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="277" column="24" bodyfile="core/types/d2_element_units.hpp" bodystart="277" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1AlignedUnit_1a9db894fb2c547e42b7a99b79bb34f1f4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit_1a8fc6ed1fa50f1b6a74c2abf5b144a551" kindref="member">Unit</ref> &amp;</type>
+        <definition>Unit &amp; d2::AlignedUnit&lt; Ctx &gt;::operator=</definition>
+        <argsstring>(Type units)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::AlignedUnit::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091" kindref="member">Type</ref></type>
+          <declname>units</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="281" column="24" bodyfile="core/types/d2_element_units.hpp" bodystart="281" bodyend="284"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::AlignedUnit&lt; Ctx &gt;</label>
+        <link refid="classd2_1_1AlignedUnit"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::Unit</label>
+        <link refid="classd2_1_1Unit"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::AlignedUnit&lt; Ctx &gt;</label>
+        <link refid="classd2_1_1AlignedUnit"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::Unit</label>
+        <link refid="classd2_1_1Unit"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>units_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::Unit::UnitType</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/types/d2_element_units.hpp" line="229" column="16" bodyfile="core/types/d2_element_units.hpp" bodystart="230" bodyend="285"/>
+    <listofallmembers>
+      <member refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7aa8c193a682a938259dc573a3875d33618" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>_Dimensions</name></member>
+      <member refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7aa73bd6a1995de60a9cfeb6986b56a3d7c" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>_Position</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a9bb5c7a5859ff2f27a6387191c6305a0" prot="private" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>_setctx</name></member>
+      <member refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7aa9e7eb9b1fe601fa4690ee4e9ced0d53b" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Adjusted</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a32b5036087f03b6ea30331ce37d8bba3" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>AlignedUnit</name></member>
+      <member refid="classd2_1_1AlignedUnit_1ab4afef19d12af549fbf20be3c9c034b0" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>AlignedUnit</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a5347c53b812b322bb2c3d8aac9c80e63" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>AlignedUnit</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a7884702d943732f99c5d4a254899c77d" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>AlignedUnit</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a56edf6b0f5b8fdbed1b271248c6ce9a1" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>AlignedUnit</name></member>
+      <member refid="classd2_1_1AlignedUnit_1ae120aa24b83fd5087fbd67c4ce93aef5" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>AlignedUnit</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a2991b11c25eed919b68308f9e1992814" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>AlignedUnit</name></member>
+      <member refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091a23bbc807d63f903a84399a496d9ec39a" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Auto</name></member>
+      <member refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7aae8acc084c7c854666d759f30b243de38" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Center</name></member>
+      <member refid="classd2_1_1Unit_1a2008a6b7dbd4dd12bcfc5081245d2fc3" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>contextual</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a00d4a58af55d721d5da020f457c9f63d" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>getcontext</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a48b66e9d8571b8d7f0db02439f4567e4" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>getcontext</name></member>
+      <member refid="classd2_1_1Unit_1a6ba14ede974587bbaee77ed2abf4e91f" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>getmods</name></member>
+      <member refid="classd2_1_1Unit_1a061d94039411ede244d866b6056119d0" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>getunits</name></member>
+      <member refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7aaecdcac979e5be203fb6cb32c0696d7ce" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Horizontal</name></member>
+      <member refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7aa28400d09c148cdffbe6081d0203dcc8f" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Inverted</name></member>
+      <member refid="classd2_1_1Unit_1a204404bd4b47727fc4614adc98b806cb" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>inverted</name></member>
+      <member refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7a" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Mods</name></member>
+      <member refid="classd2_1_1Unit_1a84a2b673d0eafdf23a5e7276ca732678" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator!=</name></member>
+      <member refid="classd2_1_1Unit_1af3b61df5cfd90cb76e0ebe3e1e04bb6f" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator*</name></member>
+      <member refid="classd2_1_1Unit_1a7433671d73e47dbef52ec55c7553b499" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator*=</name></member>
+      <member refid="classd2_1_1Unit_1aca68038d47ec3d913a2de08c9ef54cee" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator+</name></member>
+      <member refid="classd2_1_1Unit_1a2e46593e46727c732106641f153ec8ed" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator++</name></member>
+      <member refid="classd2_1_1Unit_1afe8481e9c1b4fd7f17dfbeaefd741dfa" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator++</name></member>
+      <member refid="classd2_1_1Unit_1ad69c13cf0b00ddc96329dbba72c72d20" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator+=</name></member>
+      <member refid="classd2_1_1Unit_1adac0894af498259d21b609e5acb764c0" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator-</name></member>
+      <member refid="classd2_1_1Unit_1a5c7db589b47f2b7eabe798eaa7853ae0" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator-</name></member>
+      <member refid="classd2_1_1Unit_1a1223b30e629b4141cdfae78f6d1f5cfe" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator--</name></member>
+      <member refid="classd2_1_1Unit_1a7353aa9ce2f48788b14e0c60c4b28edb" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator--</name></member>
+      <member refid="classd2_1_1Unit_1a9995577cef3f709002fbc6367b4d0740" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator-=</name></member>
+      <member refid="classd2_1_1Unit_1abbcbd53b6bfd283e0b16f7600b2bf353" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator/</name></member>
+      <member refid="classd2_1_1Unit_1a04d2f2e8dc916be6e058c3f546f60695" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator/=</name></member>
+      <member refid="classd2_1_1Unit_1a2e9dc39935c4c882ec90cd1d5d3e3118" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator&lt;</name></member>
+      <member refid="classd2_1_1Unit_1a0ac637450a3b6da6df5b484e485a5779" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator&lt;=</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a104598a1b7561ab8a2ef858cca8f1206" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator=</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a4320601b768ad5f262e889bf683a5757" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator=</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a49cb380ec57a6bbaca48636a689732f2" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator=</name></member>
+      <member refid="classd2_1_1AlignedUnit_1a9db894fb2c547e42b7a99b79bb34f1f4" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Unit_1aaa03ec34f23b4aa90102fc1fda52170e" prot="public" virt="non-virtual" ambiguityscope="d2::Unit::"><scope>d2::AlignedUnit</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Unit_1a924b50209f158b350d4d7d3ba8b891a4" prot="public" virt="non-virtual" ambiguityscope="d2::Unit::"><scope>d2::AlignedUnit</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Unit_1aeaf9667cb1915e6aa422bc7caa89bc31" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator==</name></member>
+      <member refid="classd2_1_1Unit_1a7cb011d09227bda8e2c5c69c56197cd6" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator&gt;</name></member>
+      <member refid="classd2_1_1Unit_1a66b9b067b2819472477ad99a3a23e8c2" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator&gt;=</name></member>
+      <member refid="classd2_1_1Unit_1a488e04806b0109d9a27ee2d6dfe60fbe" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>operator|</name></member>
+      <member refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091a8fa14a2a2f9bd11086e16f6bf0c22238" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Pc</name></member>
+      <member refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091a0893aa6424a25f4edfd56bb24194304e" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Pv</name></member>
+      <member refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091abb7ddf5f8c19cff35c7849094d1cc2c8" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Px</name></member>
+      <member refid="classd2_1_1Unit_1a3d5e7195c35b7665349765d69a95a346" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>raw</name></member>
+      <member refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7aa41c68ef0136c8c64d75aaf1fda62d5ce" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Relative</name></member>
+      <member refid="classd2_1_1Unit_1a7be03058ef5dc3e1b557116cdb422ae1" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>relative</name></member>
+      <member refid="classd2_1_1Unit_1a93d90e1115dc0890ff0c30179885b385" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>setmods</name></member>
+      <member refid="classd2_1_1Unit_1a4538c43681c20c733e69a18e95ac5216" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>setunits</name></member>
+      <member refid="classd2_1_1Unit_1a81f2716eafb799e03196fb8e27ff9091" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Type</name></member>
+      <member refid="classd2_1_1Unit_1a8fc6ed1fa50f1b6a74c2abf5b144a551" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Unit</name></member>
+      <member refid="classd2_1_1Unit_1a550cc769199265891faa4dd97de99090" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Unit</name></member>
+      <member refid="classd2_1_1Unit_1a1a4797b1358f57bd69d823de051f885c" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Unit</name></member>
+      <member refid="classd2_1_1Unit_1a4bc89465b611c06854a3fc5d938add4a" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Unit</name></member>
+      <member refid="classd2_1_1Unit_1a7f7c9e5b6e60932f995f7cb2aeca17fa" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Unit</name></member>
+      <member refid="classd2_1_1Unit_1adb13118131bdfe4e9b9eedac6df44094" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Unit</name></member>
+      <member refid="classd2_1_1Unit_1ab6ae2327ebd054cf0e5a10acbaf827f0" prot="protected" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>units_</name></member>
+      <member refid="classd2_1_1Unit_1aafed6e45c28f7ccae3becdbf7120a0ea" prot="protected" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>value_</name></member>
+      <member refid="classd2_1_1Unit_1ab97a9dab1aae2c9d9276dc051d9cae7aa157501cf70bc981c8ee91836e79ebad0" prot="public" virt="non-virtual"><scope>d2::AlignedUnit</scope><name>Vertical</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

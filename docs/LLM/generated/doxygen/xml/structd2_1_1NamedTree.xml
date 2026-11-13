@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1NamedTree" kind="struct" language="C++" prot="public">
+    <compoundname>d2::NamedTree</compoundname>
+    <includes refid="d2__tree_8hpp" local="no">d2_tree.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="structd2_1_1meta_1_1ConstString" kindref="compound">meta::ConstString</ref></type>
+        <declname>Name</declname>
+        <defname>Name</defname>
+      </param>
+      <param>
+        <type>typename <ref refid="structd2_1_1Tree" kindref="compound">Tree</ref></type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1NamedTree_1aa137a724b5336b6ee86502d96754aaf2" prot="public" static="no">
+        <type><ref refid="structd2_1_1Tree" kindref="compound">Tree</ref></type>
+        <definition>using d2::NamedTree&lt; Name, Tree &gt;::tree = Tree</definition>
+        <argsstring></argsstring>
+        <name>tree</name>
+        <qualifiedname>d2::NamedTree::tree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree.hpp" line="51" column="9" bodyfile="core/tree/d2_tree.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1NamedTree_1a776c36c46ed268047d9ee3bcf461adad" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::NamedTree&lt; Name, Tree &gt;::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>d2::NamedTree::name</qualifiedname>
+        <initializer>= Name.view()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree.hpp" line="50" column="31" bodyfile="core/tree/d2_tree.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree.hpp" line="48" column="17" bodyfile="core/tree/d2_tree.hpp" bodystart="49" bodyend="52"/>
+    <listofallmembers>
+      <member refid="structd2_1_1NamedTree_1a776c36c46ed268047d9ee3bcf461adad" prot="public" virt="non-virtual"><scope>d2::NamedTree</scope><name>name</name></member>
+      <member refid="structd2_1_1NamedTree_1aa137a724b5336b6ee86502d96754aaf2" prot="public" virt="non-virtual"><scope>d2::NamedTree</scope><name>tree</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1dx" kind="namespace" language="C++">
+    <compoundname>d2::dx</compoundname>
+    <innerclass refid="classd2_1_1dx_1_1Box" prot="public">d2::dx::Box</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Button" prot="public">d2::dx::Button</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Checkbox" prot="public">d2::dx::Checkbox</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1DemandScrollBox" prot="public">d2::dx::DemandScrollBox</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Dropdown" prot="public">d2::dx::Dropdown</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1EntrySeed" prot="public">d2::dx::EntrySeed</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1FlowBox" prot="public">d2::dx::FlowBox</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Image" prot="public">d2::dx::Image</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Input" prot="public">d2::dx::Input</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Matrix" prot="public">d2::dx::Matrix</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1MultiInput" prot="public">d2::dx::MultiInput</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1ScrollBox" prot="public">d2::dx::ScrollBox</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1ScrollFlowBox" prot="public">d2::dx::ScrollFlowBox</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Separator" prot="public">d2::dx::Separator</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Slider" prot="public">d2::dx::Slider</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Switch" prot="public">d2::dx::Switch</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1Text" prot="public">d2::dx::Text</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1VerticalSeparator" prot="public">d2::dx::VerticalSeparator</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1VerticalSlider" prot="public">d2::dx::VerticalSlider</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1VerticalSwitch" prot="public">d2::dx::VerticalSwitch</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1VirtualBox" prot="public">d2::dx::VirtualBox</innerclass>
+    <innerclass refid="classd2_1_1dx_1_1VirtualFlowBox" prot="public">d2::dx::VirtualFlowBox</innerclass>
+    <innernamespace refid="namespaced2_1_1dx_1_1detail">d2::dx::detail</innernamespace>
+    <innernamespace refid="namespaced2_1_1dx_1_1graph">d2::dx::graph</innernamespace>
+    <innernamespace refid="namespaced2_1_1dx_1_1impl">d2::dx::impl</innernamespace>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1_1dx_1a5a0a18243f66c4803558d0a13629b5f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::recompute_layout</definition>
+        <argsstring>(Element::cpptr ptr, std::vector&lt; Element::ptr &gt; elements, int basex=0, int basey=0)</argsstring>
+        <name>recompute_layout</name>
+        <qualifiedname>d2::dx::recompute_layout</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ab8339c087465699c724cdf8fbc647d5e" kindref="member">Element::cpptr</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">Element::ptr</ref> &gt;</type>
+          <declname>elements</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>basex</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>basey</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_flow_box.cpp" line="5" column="10" bodyfile="elements/d2_flow_box.cpp" bodystart="5" bodyend="275"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="elements/d2_box.cpp" line="3" column="1"/>
+  </compounddef>
+</doxygen>

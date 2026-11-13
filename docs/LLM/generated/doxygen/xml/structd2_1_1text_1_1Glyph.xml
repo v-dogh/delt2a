@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1text_1_1Glyph" kind="struct" language="C++" prot="public">
+    <compoundname>d2::text::Glyph</compoundname>
+    <includes refid="d2__text__layout_8hpp" local="no">d2_text_layout.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1text_1_1Glyph_1af75b62365b7256aea280bd7edd5c0e07" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1text_1_1Range" kindref="compound">Range</ref></type>
+        <definition>Range d2::text::Glyph::bytes</definition>
+        <argsstring></argsstring>
+        <name>bytes</name>
+        <qualifiedname>d2::text::Glyph::bytes</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="32" column="15" bodyfile="core/platform/d2_text_layout.hpp" bodystart="32" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Glyph_1a98e1653b924dfc8fc3141dd75104a4c8" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::text::Glyph::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <qualifiedname>d2::text::Glyph::position</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="33" column="18" bodyfile="core/platform/d2_text_layout.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Glyph_1afb871918955736823a5a7683ea08c1e6" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::text::Glyph::columns</definition>
+        <argsstring></argsstring>
+        <name>columns</name>
+        <qualifiedname>d2::text::Glyph::columns</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="34" column="13" bodyfile="core/platform/d2_text_layout.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Glyph_1a72b39eae3d0584a5143751ca2782edba" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::text::Glyph::newline</definition>
+        <argsstring></argsstring>
+        <name>newline</name>
+        <qualifiedname>d2::text::Glyph::newline</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="35" column="14" bodyfile="core/platform/d2_text_layout.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Glyph_1aecc5217b0850eaf8f57e6e9bc1973e7b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::text::Glyph::tab</definition>
+        <argsstring></argsstring>
+        <name>tab</name>
+        <qualifiedname>d2::text::Glyph::tab</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="36" column="14" bodyfile="core/platform/d2_text_layout.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Glyph_1a53d51363a7775048400f3662869ef7fc" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::text::Glyph::blank</definition>
+        <argsstring></argsstring>
+        <name>blank</name>
+        <qualifiedname>d2::text::Glyph::blank</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="37" column="14" bodyfile="core/platform/d2_text_layout.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Glyph_1aed556d11d36416d8de007cd2839088ce" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::text::Glyph::space</definition>
+        <argsstring></argsstring>
+        <name>space</name>
+        <qualifiedname>d2::text::Glyph::space</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="38" column="14" bodyfile="core/platform/d2_text_layout.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1text_1_1Glyph_1a13bdc4987e31462e78f8ccb68ba7b42e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::text::Glyph::replacement</definition>
+        <argsstring></argsstring>
+        <name>replacement</name>
+        <qualifiedname>d2::text::Glyph::replacement</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_text_layout.hpp" line="39" column="14" bodyfile="core/platform/d2_text_layout.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>d2::Position</label>
+        <link refid="structd2_1_1Position"/>
+      </node>
+      <node id="1">
+        <label>d2::text::Glyph</label>
+        <link refid="structd2_1_1text_1_1Glyph"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>bytes</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>position</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::text::Range</label>
+        <link refid="structd2_1_1text_1_1Range"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/platform/d2_text_layout.hpp" line="30" column="5" bodyfile="core/platform/d2_text_layout.hpp" bodystart="31" bodyend="40"/>
+    <listofallmembers>
+      <member refid="structd2_1_1text_1_1Glyph_1a53d51363a7775048400f3662869ef7fc" prot="public" virt="non-virtual"><scope>d2::text::Glyph</scope><name>blank</name></member>
+      <member refid="structd2_1_1text_1_1Glyph_1af75b62365b7256aea280bd7edd5c0e07" prot="public" virt="non-virtual"><scope>d2::text::Glyph</scope><name>bytes</name></member>
+      <member refid="structd2_1_1text_1_1Glyph_1afb871918955736823a5a7683ea08c1e6" prot="public" virt="non-virtual"><scope>d2::text::Glyph</scope><name>columns</name></member>
+      <member refid="structd2_1_1text_1_1Glyph_1a72b39eae3d0584a5143751ca2782edba" prot="public" virt="non-virtual"><scope>d2::text::Glyph</scope><name>newline</name></member>
+      <member refid="structd2_1_1text_1_1Glyph_1a98e1653b924dfc8fc3141dd75104a4c8" prot="public" virt="non-virtual"><scope>d2::text::Glyph</scope><name>position</name></member>
+      <member refid="structd2_1_1text_1_1Glyph_1a13bdc4987e31462e78f8ccb68ba7b42e" prot="public" virt="non-virtual"><scope>d2::text::Glyph</scope><name>replacement</name></member>
+      <member refid="structd2_1_1text_1_1Glyph_1aed556d11d36416d8de007cd2839088ce" prot="public" virt="non-virtual"><scope>d2::text::Glyph</scope><name>space</name></member>
+      <member refid="structd2_1_1text_1_1Glyph_1aecc5217b0850eaf8f57e6e9bc1973e7b" prot="public" virt="non-virtual"><scope>d2::text::Glyph</scope><name>tab</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard" kind="struct" language="C++" prot="protected">
+    <compoundname>d2::style::DependencyBase::InvokeGuard</compoundname>
+    <includes refid="d2__theme_8hpp" local="no">d2_theme.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1aa9085b7ad4fe1d13b868c065ee25a0ef" prot="public" static="no" mutable="no">
+        <type>const <ref refid="classd2_1_1style_1_1DependencyBase_1a901901c66534209ef3a2789716dfd094" kindref="member">DependencyBase</ref> &amp;</type>
+        <definition>const DependencyBase&amp; d2::style::DependencyBase::InvokeGuard::self</definition>
+        <argsstring></argsstring>
+        <name>self</name>
+        <qualifiedname>d2::style::DependencyBase::InvokeGuard::self</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="101" column="34" bodyfile="core/tree/d2_theme.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a6708d04ec627bbc9e36528ddf5f5b5a0" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; StateData &gt;</type>
+        <definition>std::shared_ptr&lt;StateData&gt; d2::style::DependencyBase::InvokeGuard::state</definition>
+        <argsstring></argsstring>
+        <name>state</name>
+        <qualifiedname>d2::style::DependencyBase::InvokeGuard::state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="102" column="29" bodyfile="core/tree/d2_theme.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a3de4ccee6d250cd06393adf0b1d4806c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DependencyBase::InvokeGuard::InvokeGuard</definition>
+        <argsstring>(const DependencyBase &amp;self)</argsstring>
+        <name>InvokeGuard</name>
+        <qualifiedname>d2::style::DependencyBase::InvokeGuard::InvokeGuard</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1style_1_1DependencyBase_1a901901c66534209ef3a2789716dfd094" kindref="member">DependencyBase</ref> &amp;</type>
+          <declname>self</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="104" column="13" bodyfile="core/tree/d2_theme.cpp" bodystart="81" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a66627e30a4e0cc64482aef13f4add041" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DependencyBase::InvokeGuard::InvokeGuard</definition>
+        <argsstring>(const InvokeGuard &amp;)=delete</argsstring>
+        <name>InvokeGuard</name>
+        <qualifiedname>d2::style::DependencyBase::InvokeGuard::InvokeGuard</qualifiedname>
+        <param>
+          <type>const InvokeGuard &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="105" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a3d73c626ba0685affa84d42c62f64a02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DependencyBase::InvokeGuard::InvokeGuard</definition>
+        <argsstring>(const DependencyBase &amp;self, std::shared_ptr&lt; StateData &gt; state)</argsstring>
+        <name>InvokeGuard</name>
+        <qualifiedname>d2::style::DependencyBase::InvokeGuard::InvokeGuard</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1style_1_1DependencyBase_1a901901c66534209ef3a2789716dfd094" kindref="member">DependencyBase</ref> &amp;</type>
+          <declname>self</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; StateData &gt;</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="106" column="13" bodyfile="core/tree/d2_theme.cpp" bodystart="87" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a6719de27032d00a0dc30a47224651f0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DependencyBase::InvokeGuard::~InvokeGuard</definition>
+        <argsstring>()</argsstring>
+        <name>~InvokeGuard</name>
+        <qualifiedname>d2::style::DependencyBase::InvokeGuard::~InvokeGuard</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="107" column="13" bodyfile="core/tree/d2_theme.cpp" bodystart="94" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a51606d7c01dca605c33ca3d16ee03d92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a3de4ccee6d250cd06393adf0b1d4806c" kindref="member">InvokeGuard</ref> &amp;</type>
+        <definition>InvokeGuard &amp; d2::style::DependencyBase::InvokeGuard::operator=</definition>
+        <argsstring>(const InvokeGuard &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::style::DependencyBase::InvokeGuard::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a3de4ccee6d250cd06393adf0b1d4806c" kindref="member">InvokeGuard</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="109" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::style::DependencyBase</label>
+        <link refid="classd2_1_1style_1_1DependencyBase"/>
+      </node>
+      <node id="1">
+        <label>d2::style::DependencyBase::InvokeGuard</label>
+        <link refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>self</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_theme.hpp" line="99" column="9" bodyfile="core/tree/d2_theme.hpp" bodystart="100" bodyend="110"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a3de4ccee6d250cd06393adf0b1d4806c" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::InvokeGuard</scope><name>InvokeGuard</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a66627e30a4e0cc64482aef13f4add041" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::InvokeGuard</scope><name>InvokeGuard</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a3d73c626ba0685affa84d42c62f64a02" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::InvokeGuard</scope><name>InvokeGuard</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a51606d7c01dca605c33ca3d16ee03d92" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::InvokeGuard</scope><name>operator=</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1aa9085b7ad4fe1d13b868c065ee25a0ef" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::InvokeGuard</scope><name>self</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a6708d04ec627bbc9e36528ddf5f5b5a0" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::InvokeGuard</scope><name>state</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1InvokeGuard_1a6719de27032d00a0dc30a47224651f0b" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::InvokeGuard</scope><name>~InvokeGuard</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

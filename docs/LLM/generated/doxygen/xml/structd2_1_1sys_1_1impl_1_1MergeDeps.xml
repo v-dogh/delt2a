@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1impl_1_1MergeDeps" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::impl::MergeDeps</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename DepsA</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>DepsB</declname>
+        <defname>DepsB</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_module.hpp" line="185" column="21" bodyfile="core/io/d2_module.hpp" bodystart="185" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

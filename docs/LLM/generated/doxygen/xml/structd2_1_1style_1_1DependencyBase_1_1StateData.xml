@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1DependencyBase_1_1StateData" kind="struct" language="C++" prot="private">
+    <compoundname>d2::style::DependencyBase::StateData</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1StateData_1a1e89682a4120eff9f9064f64868b3851" prot="public" static="no" mutable="no">
+        <type>const <ref refid="classd2_1_1style_1_1DependencyBase_1a901901c66534209ef3a2789716dfd094" kindref="member">DependencyBase</ref> *</type>
+        <definition>const DependencyBase* d2::style::DependencyBase::StateData::owner</definition>
+        <argsstring></argsstring>
+        <name>owner</name>
+        <qualifiedname>d2::style::DependencyBase::StateData::owner</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="33" column="34" bodyfile="core/tree/d2_theme.hpp" bodystart="33" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1StateData_1a12442d3c3d073b46517343ffdb70dd1f" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::style::DependencyBase::StateData::recursion_ctr</definition>
+        <argsstring></argsstring>
+        <name>recursion_ctr</name>
+        <qualifiedname>d2::style::DependencyBase::StateData::recursion_ctr</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="34" column="25" bodyfile="core/tree/d2_theme.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1StateData_1a051f2caee18eac6d2e1461472adbfd2e" prot="public" static="no" mutable="no">
+        <type>std::uint32_t</type>
+        <definition>std::uint32_t d2::style::DependencyBase::StateData::next_generation</definition>
+        <argsstring></argsstring>
+        <name>next_generation</name>
+        <qualifiedname>d2::style::DependencyBase::StateData::next_generation</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="35" column="27" bodyfile="core/tree/d2_theme.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1StateData_1ab7bbcb00dcff005474f9e52703b7fcb6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::style::DependencyBase::StateData::destroying</definition>
+        <argsstring></argsstring>
+        <name>destroying</name>
+        <qualifiedname>d2::style::DependencyBase::StateData::destroying</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="36" column="18" bodyfile="core/tree/d2_theme.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1StateData_1af5a17d1d64dc06ff8c4fc6cf1dbd00fd" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; Deps &gt;</type>
+        <definition>std::vector&lt;Deps&gt; d2::style::DependencyBase::StateData::dependencies</definition>
+        <argsstring></argsstring>
+        <name>dependencies</name>
+        <qualifiedname>d2::style::DependencyBase::StateData::dependencies</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="38" column="25" bodyfile="core/tree/d2_theme.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1StateData_1a0297254c0a2b7995c7fc87e907b2018d" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::uint32_t &gt;</type>
+        <definition>std::vector&lt;std::uint32_t&gt; d2::style::DependencyBase::StateData::free_slots</definition>
+        <argsstring></argsstring>
+        <name>free_slots</name>
+        <qualifiedname>d2::style::DependencyBase::StateData::free_slots</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="39" column="25" bodyfile="core/tree/d2_theme.hpp" bodystart="39" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1StateData_1a3b8fcbd3d6df242065a41bdcd0a62eb8" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::uint32_t &gt;</type>
+        <definition>std::vector&lt;std::uint32_t&gt; d2::style::DependencyBase::StateData::pending_free</definition>
+        <argsstring></argsstring>
+        <name>pending_free</name>
+        <qualifiedname>d2::style::DependencyBase::StateData::pending_free</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="40" column="25" bodyfile="core/tree/d2_theme.hpp" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1StateData_1a8e86820798caa4dba0df278c5d4686e5" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; Deps &gt;</type>
+        <definition>std::vector&lt;Deps&gt; d2::style::DependencyBase::StateData::pending_destroy</definition>
+        <argsstring></argsstring>
+        <name>pending_destroy</name>
+        <qualifiedname>d2::style::DependencyBase::StateData::pending_destroy</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="41" column="25" bodyfile="core/tree/d2_theme.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::style::DependencyBase</label>
+        <link refid="classd2_1_1style_1_1DependencyBase"/>
+      </node>
+      <node id="1">
+        <label>d2::style::DependencyBase::StateData</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>owner</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_theme.hpp" line="31" column="9" bodyfile="core/tree/d2_theme.hpp" bodystart="32" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1StateData_1af5a17d1d64dc06ff8c4fc6cf1dbd00fd" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::StateData</scope><name>dependencies</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1StateData_1ab7bbcb00dcff005474f9e52703b7fcb6" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::StateData</scope><name>destroying</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1StateData_1a0297254c0a2b7995c7fc87e907b2018d" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::StateData</scope><name>free_slots</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1StateData_1a051f2caee18eac6d2e1461472adbfd2e" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::StateData</scope><name>next_generation</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1StateData_1a1e89682a4120eff9f9064f64868b3851" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::StateData</scope><name>owner</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1StateData_1a8e86820798caa4dba0df278c5d4686e5" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::StateData</scope><name>pending_destroy</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1StateData_1a3b8fcbd3d6df242065a41bdcd0a62eb8" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::StateData</scope><name>pending_free</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1StateData_1a12442d3c3d073b46517343ffdb70dd1f" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::StateData</scope><name>recursion_ctr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

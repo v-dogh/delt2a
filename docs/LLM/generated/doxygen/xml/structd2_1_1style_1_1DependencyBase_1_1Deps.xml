@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1DependencyBase_1_1Deps" kind="struct" language="C++" prot="protected">
+    <compoundname>d2::style::DependencyBase::Deps</compoundname>
+    <includes refid="d2__theme_8hpp" local="no">d2_theme.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1Deps_1ae55604955262edc93da6a28a4dc26d05" prot="public" static="no" mutable="no">
+        <type>std::weak_ptr&lt; void &gt;</type>
+        <definition>std::weak_ptr&lt;void&gt; d2::style::DependencyBase::Deps::obj</definition>
+        <argsstring></argsstring>
+        <name>obj</name>
+        <qualifiedname>d2::style::DependencyBase::Deps::obj</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="25" column="27" bodyfile="core/tree/d2_theme.hpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1Deps_1a51dd5ab296002106189c983a4ab3c00a" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* d2::style::DependencyBase::Deps::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <qualifiedname>d2::style::DependencyBase::Deps::base</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="26" column="18" bodyfile="core/tree/d2_theme.hpp" bodystart="26" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1Deps_1af7da09be14098fc67e0eba19747b449f" prot="public" static="no" mutable="no">
+        <type>void(*)</type>
+        <definition>void(*) d2::style::DependencyBase::Deps::func()</definition>
+        <argsstring>()</argsstring>
+        <name>func</name>
+        <qualifiedname>d2::style::DependencyBase::Deps::func</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="27" column="13" bodyfile="core/tree/d2_theme.hpp" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1DependencyBase_1_1Deps_1a6e4a2a634c0ab1917be62cf914dd7942" prot="public" static="no" mutable="no">
+        <type>std::uint32_t</type>
+        <definition>std::uint32_t d2::style::DependencyBase::Deps::generation</definition>
+        <argsstring></argsstring>
+        <name>generation</name>
+        <qualifiedname>d2::style::DependencyBase::Deps::generation</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="28" column="27" bodyfile="core/tree/d2_theme.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_theme.hpp" line="23" column="9" bodyfile="core/tree/d2_theme.hpp" bodystart="24" bodyend="29"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1Deps_1a51dd5ab296002106189c983a4ab3c00a" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::Deps</scope><name>base</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1Deps_1af7da09be14098fc67e0eba19747b449f" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::Deps</scope><name>func</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1Deps_1a6e4a2a634c0ab1917be62cf914dd7942" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::Deps</scope><name>generation</name></member>
+      <member refid="structd2_1_1style_1_1DependencyBase_1_1Deps_1ae55604955262edc93da6a28a4dc26d05" prot="public" virt="non-virtual"><scope>d2::style::DependencyBase::Deps</scope><name>obj</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

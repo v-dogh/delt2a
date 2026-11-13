@@ -1,0 +1,4 @@
+var structd2_1_1style_1_1impl_1_1OffsetHelperImpl_3_01Search_00_01Current_00_01CurrentType_00_01Next_01_4 =
+[
+    [ "type", "structd2_1_1style_1_1impl_1_1OffsetHelperImpl_3_01Search_00_01Current_00_01CurrentType_00_01Next_01_4.html#ab5f692f0041ed703bf1e2ae2a5663c16", null ]
+];

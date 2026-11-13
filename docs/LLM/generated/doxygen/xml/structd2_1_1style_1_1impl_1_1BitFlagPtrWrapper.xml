@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::impl::BitFlagPtrWrapper</compoundname>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1a30e4397a5b0424c15981c6c66fec60b4" prot="public" static="no" mutable="no">
+        <type>Type *</type>
+        <definition>Type* d2::style::impl::BitFlagPtrWrapper&lt; Type &gt;::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::style::impl::BitFlagPtrWrapper::ptr</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="679" column="18" bodyfile="core/tree/d2_styles.hpp" bodystart="679" bodyend="679"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1a540c69972e5b0649872e2ad5a61fd387" prot="public" static="no" mutable="no">
+        <type>Type</type>
+        <definition>Type d2::style::impl::BitFlagPtrWrapper&lt; Type &gt;::mask</definition>
+        <argsstring></argsstring>
+        <name>mask</name>
+        <qualifiedname>d2::style::impl::BitFlagPtrWrapper::mask</qualifiedname>
+        <initializer>{0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="680" column="18" bodyfile="core/tree/d2_styles.hpp" bodystart="680" bodyend="680"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1abd7b28aac0643e840cc7ac5f08e51261" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper" kindref="compound">BitFlagPtrWrapper</ref> &amp;</type>
+        <definition>BitFlagPtrWrapper &amp; d2::style::impl::BitFlagPtrWrapper&lt; Type &gt;::operator*</definition>
+        <argsstring>()</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::style::impl::BitFlagPtrWrapper::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="682" column="31" bodyfile="core/tree/d2_styles.hpp" bodystart="682" bodyend="685"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1af53d2db39cb08912898da64a87f3322a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper" kindref="compound">BitFlagPtrWrapper</ref> &amp;</type>
+        <definition>BitFlagPtrWrapper &amp; d2::style::impl::BitFlagPtrWrapper&lt; Type &gt;::operator=</definition>
+        <argsstring>(bool value)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::style::impl::BitFlagPtrWrapper::operator=</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="686" column="31" bodyfile="core/tree/d2_styles.hpp" bodystart="686" bodyend="691"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1aa048041b0de76563afd1d93421176cdd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper" kindref="compound">BitFlagPtrWrapper</ref> &amp;</type>
+        <definition>BitFlagPtrWrapper &amp; d2::style::impl::BitFlagPtrWrapper&lt; Type &gt;::operator&amp;</definition>
+        <argsstring>()</argsstring>
+        <name>operator&amp;</name>
+        <qualifiedname>d2::style::impl::BitFlagPtrWrapper::operator&amp;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="693" column="31" bodyfile="core/tree/d2_styles.hpp" bodystart="693" bodyend="696"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="677" column="19" bodyfile="core/tree/d2_styles.hpp" bodystart="678" bodyend="697"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1a540c69972e5b0649872e2ad5a61fd387" prot="public" virt="non-virtual"><scope>d2::style::impl::BitFlagPtrWrapper</scope><name>mask</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1aa048041b0de76563afd1d93421176cdd" prot="public" virt="non-virtual"><scope>d2::style::impl::BitFlagPtrWrapper</scope><name>operator&amp;</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1abd7b28aac0643e840cc7ac5f08e51261" prot="public" virt="non-virtual"><scope>d2::style::impl::BitFlagPtrWrapper</scope><name>operator*</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1af53d2db39cb08912898da64a87f3322a" prot="public" virt="non-virtual"><scope>d2::style::impl::BitFlagPtrWrapper</scope><name>operator=</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1BitFlagPtrWrapper_1a30e4397a5b0424c15981c6c66fec60b4" prot="public" virt="non-virtual"><scope>d2::style::impl::BitFlagPtrWrapper</scope><name>ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

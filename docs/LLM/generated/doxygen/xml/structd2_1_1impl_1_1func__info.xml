@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1impl_1_1func__info" kind="struct" language="C++" prot="public">
+    <compoundname>d2::impl::func_info</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Func</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="88" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="89" bodyend="90"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

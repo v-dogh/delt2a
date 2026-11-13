@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1in_1_1InputFrame_1_1ExportKeymap" kind="struct" language="C++" prot="public">
+    <compoundname>d2::in::InputFrame::ExportKeymap</compoundname>
+    <includes refid="d2__input__base_8hpp" local="no">d2_input_base.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1in_1_1InputFrame_1_1ExportKeymap_1a2075295718768c4ac81eac111a1f26fb" prot="public" static="no" mutable="no">
+        <type>Type</type>
+        <definition>Type d2::in::InputFrame::ExportKeymap&lt; Type &gt;::current</definition>
+        <argsstring></argsstring>
+        <name>current</name>
+        <qualifiedname>d2::in::InputFrame::ExportKeymap::current</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="117" column="18" bodyfile="core/io/d2_input_base.hpp" bodystart="117" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1in_1_1InputFrame_1_1ExportKeymap_1a6871f87922ccc381cf498dbdf6e73ae6" prot="public" static="no" mutable="no">
+        <type>Type</type>
+        <definition>Type d2::in::InputFrame::ExportKeymap&lt; Type &gt;::previous</definition>
+        <argsstring></argsstring>
+        <name>previous</name>
+        <qualifiedname>d2::in::InputFrame::ExportKeymap::previous</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="118" column="18" bodyfile="core/io/d2_input_base.hpp" bodystart="118" bodyend="118"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_input_base.hpp" line="115" column="19" bodyfile="core/io/d2_input_base.hpp" bodystart="116" bodyend="119"/>
+    <listofallmembers>
+      <member refid="structd2_1_1in_1_1InputFrame_1_1ExportKeymap_1a2075295718768c4ac81eac111a1f26fb" prot="public" virt="non-virtual"><scope>d2::in::InputFrame::ExportKeymap</scope><name>current</name></member>
+      <member refid="structd2_1_1in_1_1InputFrame_1_1ExportKeymap_1a6871f87922ccc381cf498dbdf6e73ae6" prot="public" virt="non-virtual"><scope>d2::in::InputFrame::ExportKeymap</scope><name>previous</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

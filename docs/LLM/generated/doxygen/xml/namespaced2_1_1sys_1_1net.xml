@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1sys_1_1net" kind="namespace" language="C++">
+    <compoundname>d2::sys::net</compoundname>
+    <innerclass refid="classd2_1_1sys_1_1net_1_1SystemHTTP" prot="public">d2::sys::net::SystemHTTP</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1net_1_1SystemSession" prot="public">d2::sys::net::SystemSession</innerclass>
+    <innerclass refid="classd2_1_1sys_1_1net_1_1SystemWS" prot="public">d2::sys::net::SystemWS</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1_1net_1af74585d2ea0b84356d87e30ac667327c" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1net_1_1SystemHTTP" kindref="compound">SystemHTTP</ref></type>
+        <definition>using d2::sys::net::http = SystemHTTP</definition>
+        <argsstring></argsstring>
+        <name>http</name>
+        <qualifiedname>d2::sys::net::http</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="94" column="5" bodyfile="core/mods/d2_http.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1_1net_1a5a58214789b5ae3c6dbd8e7fdc4bb343" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1net_1_1SystemSession" kindref="compound">SystemSession</ref></type>
+        <definition>using d2::sys::net::session = SystemSession</definition>
+        <argsstring></argsstring>
+        <name>session</name>
+        <qualifiedname>d2::sys::net::session</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_session.hpp" line="55" column="5" bodyfile="core/mods/d2_session.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1sys_1_1net_1af4ab4d43088ed7748760a8e18c99ed85" prot="public" static="no">
+        <type><ref refid="classd2_1_1sys_1_1net_1_1SystemWS" kindref="compound">SystemWS</ref></type>
+        <definition>using d2::sys::net::ws = SystemWS</definition>
+        <argsstring></argsstring>
+        <name>ws</name>
+        <qualifiedname>d2::sys::net::ws</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="66" column="5" bodyfile="core/mods/d2_ws.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_http.cpp" line="5" column="1"/>
+  </compounddef>
+</doxygen>

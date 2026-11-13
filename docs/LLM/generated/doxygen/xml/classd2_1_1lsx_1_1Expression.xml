@@ -1,0 +1,440 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1lsx_1_1Expression" kind="class" language="C++" prot="public">
+    <compoundname>d2::lsx::Expression</compoundname>
+    <includes refid="d2__solver__types_8hpp" local="no">d2_solver_types.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1Expression_1a42d5254270a66eb46a5ef41565609cfe" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::lsx::Expression::_size_vars</definition>
+        <argsstring></argsstring>
+        <name>_size_vars</name>
+        <qualifiedname>d2::lsx::Expression::_size_vars</qualifiedname>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="197" column="21" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="197" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1Expression_1aeee9e07ac3a1eba8a7927707196ed714" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::lsx::Expression::_size_locals</definition>
+        <argsstring></argsstring>
+        <name>_size_locals</name>
+        <qualifiedname>d2::lsx::Expression::_size_locals</qualifiedname>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="198" column="21" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="198" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1Expression_1af4d481a4f434f16434c97c48e72b5afa" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::lsx::Expression::_size_globals</definition>
+        <argsstring></argsstring>
+        <name>_size_globals</name>
+        <qualifiedname>d2::lsx::Expression::_size_globals</qualifiedname>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="199" column="21" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="199" bodyend="199"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1Expression_1aedec3c8f10975d831adb8527f4dacca8" prot="private" static="no" mutable="no">
+        <type>std::array&lt; <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref>, 24 &gt;</type>
+        <definition>std::array&lt;Variable, 24&gt; d2::lsx::Expression::_terms</definition>
+        <argsstring></argsstring>
+        <name>_terms</name>
+        <qualifiedname>d2::lsx::Expression::_terms</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="200" column="20" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="200" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1Expression_1aa009f4ba8f5a20e2c677a3648d067e97" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211be" kindref="member">Constraint</ref></type>
+        <definition>Constraint d2::lsx::Expression::_op</definition>
+        <argsstring></argsstring>
+        <name>_op</name>
+        <qualifiedname>d2::lsx::Expression::_op</qualifiedname>
+        <initializer>{ <ref refid="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211beaf5f286e73bda105e538310b3190f75c5" kindref="member">Constraint::Equal</ref> }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="201" column="20" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="201" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1Expression_1a31807d6c4cbd05ee20a278e83b87f9cc" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+        <definition>result_type d2::lsx::Expression::_constant</definition>
+        <argsstring></argsstring>
+        <name>_constant</name>
+        <qualifiedname>d2::lsx::Expression::_constant</qualifiedname>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="202" column="21" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="202" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1Expression_1a7e80be82650f6d20e94146c8b0eaeb69" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+        <definition>result_type d2::lsx::Expression::_scale</definition>
+        <argsstring></argsstring>
+        <name>_scale</name>
+        <qualifiedname>d2::lsx::Expression::_scale</qualifiedname>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="203" column="21" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="203" bodyend="203"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1afdebbdc727e1b814cf166f7f3cfdadd8" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static constexpr void d2::lsx::Expression::_accumulate_expr</definition>
+        <argsstring>(std::span&lt; Variable &gt; sink_v, std::span&lt; Variable &gt; sink_l, std::span&lt; Variable &gt; sink_g, const Expression &amp;source, Expression &amp;dest, int sign)</argsstring>
+        <name>_accumulate_expr</name>
+        <qualifiedname>d2::lsx::Expression::_accumulate_expr</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref> &gt;</type>
+          <declname>sink_v</declname>
+        </param>
+        <param>
+          <type>std::span&lt; <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref> &gt;</type>
+          <declname>sink_l</declname>
+        </param>
+        <param>
+          <type>std::span&lt; <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref> &gt;</type>
+          <declname>sink_g</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sign</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="205" column="31" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="205" bodyend="238"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1a5608ef72d5e171cb42f163fd4bc2daa5" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>static constexpr Expression d2::lsx::Expression::reduce</definition>
+        <argsstring>(const Expression &amp;lhs, const Expression &amp;rhs, Constraint op)</argsstring>
+        <name>reduce</name>
+        <qualifiedname>d2::lsx::Expression::reduce</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211be" kindref="member">Constraint</ref></type>
+          <declname>op</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="243" column="37" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="243" bodyend="303"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1a96deb0a607bb2d62cf4739c4373d40d6" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>static constexpr Expression d2::lsx::Expression::from</definition>
+        <argsstring>(Variable lhs, Variable rhs, int sign)</argsstring>
+        <name>from</name>
+        <qualifiedname>d2::lsx::Expression::from</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sign</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="304" column="37" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="304" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1af07cdc0d17c5fb97491ae6fe1357107f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>static constexpr Expression d2::lsx::Expression::from</definition>
+        <argsstring>(const Expression &amp;lhs, Variable rhs, int sign)</argsstring>
+        <name>from</name>
+        <qualifiedname>d2::lsx::Expression::from</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sign</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="312" column="37" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="312" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1aa94f4b5e2780048ce3243e3cfa5682c4" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>static constexpr Expression d2::lsx::Expression::from</definition>
+        <argsstring>(Variable lhs, const Expression &amp;rhs, int sign)</argsstring>
+        <name>from</name>
+        <qualifiedname>d2::lsx::Expression::from</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sign</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="321" column="37" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="321" bodyend="324"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1af4896a2119268dc98b9a363016d54491" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>static constexpr Expression d2::lsx::Expression::from</definition>
+        <argsstring>(const Expression &amp;lhs, result_type cf)</argsstring>
+        <name>from</name>
+        <qualifiedname>d2::lsx::Expression::from</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="325" column="37" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="325" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1a42c114a07daf1335d95415bf8ae4bd72" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>static constexpr Expression d2::lsx::Expression::from</definition>
+        <argsstring>(result_type cf, const Expression &amp;rhs, int sign)</argsstring>
+        <name>from</name>
+        <qualifiedname>d2::lsx::Expression::from</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>cf</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>sign</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="337" column="37" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="337" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1a2f0d2ed8a6369c04a63f0d20584c1e4a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref></type>
+        <definition>static constexpr Expression d2::lsx::Expression::from</definition>
+        <argsstring>(Variable var)</argsstring>
+        <name>from</name>
+        <qualifiedname>d2::lsx::Expression::from</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="341" column="37" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="341" bodyend="347"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1a029fbf0fa1e57bf425faa36f0179ea7b" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1lsx_1a56121dca902c0b4091d41d70da0211be" kindref="member">Constraint</ref></type>
+        <definition>Constraint d2::lsx::Expression::type</definition>
+        <argsstring>() const</argsstring>
+        <name>type</name>
+        <qualifiedname>d2::lsx::Expression::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="349" column="30" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="349" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1ad5e382615a7888279f2a5c454919c6e4" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::span&lt; const <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref> &gt;</type>
+        <definition>std::span&lt; const Variable &gt; d2::lsx::Expression::vars</definition>
+        <argsstring>() const</argsstring>
+        <name>vars</name>
+        <qualifiedname>d2::lsx::Expression::vars</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="354" column="29" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="354" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1a24b8b76015f21140794c50d6817431ea" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::span&lt; const <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref> &gt;</type>
+        <definition>std::span&lt; const Variable &gt; d2::lsx::Expression::locals</definition>
+        <argsstring>() const</argsstring>
+        <name>locals</name>
+        <qualifiedname>d2::lsx::Expression::locals</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="358" column="29" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="358" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1ad1732305f509f07b0d2fa5795b97d8cf" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::span&lt; const <ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref> &gt;</type>
+        <definition>std::span&lt; const Variable &gt; d2::lsx::Expression::globals</definition>
+        <argsstring>() const</argsstring>
+        <name>globals</name>
+        <qualifiedname>d2::lsx::Expression::globals</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="362" column="29" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="362" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1a5c1633603cdaa965e0d027cedaf4be86" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+        <definition>result_type d2::lsx::Expression::constant</definition>
+        <argsstring>() const</argsstring>
+        <name>constant</name>
+        <qualifiedname>d2::lsx::Expression::constant</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="367" column="31" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="367" bodyend="370"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1Expression_1ac195d4ad8b24a3c7f7517d49f1788750" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string d2::lsx::Expression::print</definition>
+        <argsstring>() const</argsstring>
+        <name>print</name>
+        <qualifiedname>d2::lsx::Expression::print</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="372" column="21" bodyfile="core/lsx/d2_solver_types.cpp" bodystart="49" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver_types.hpp" line="194" column="5" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="195" bodyend="373"/>
+    <listofallmembers>
+      <member refid="classd2_1_1lsx_1_1Expression_1afdebbdc727e1b814cf166f7f3cfdadd8" prot="private" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>_accumulate_expr</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a31807d6c4cbd05ee20a278e83b87f9cc" prot="private" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>_constant</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1aa009f4ba8f5a20e2c677a3648d067e97" prot="private" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>_op</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a7e80be82650f6d20e94146c8b0eaeb69" prot="private" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>_scale</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1af4d481a4f434f16434c97c48e72b5afa" prot="private" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>_size_globals</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1aeee9e07ac3a1eba8a7927707196ed714" prot="private" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>_size_locals</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a42d5254270a66eb46a5ef41565609cfe" prot="private" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>_size_vars</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1aedec3c8f10975d831adb8527f4dacca8" prot="private" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>_terms</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a5c1633603cdaa965e0d027cedaf4be86" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>constant</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a96deb0a607bb2d62cf4739c4373d40d6" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>from</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1af07cdc0d17c5fb97491ae6fe1357107f" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>from</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1aa94f4b5e2780048ce3243e3cfa5682c4" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>from</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1af4896a2119268dc98b9a363016d54491" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>from</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a42c114a07daf1335d95415bf8ae4bd72" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>from</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a2f0d2ed8a6369c04a63f0d20584c1e4a" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>from</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1ad1732305f509f07b0d2fa5795b97d8cf" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>globals</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a24b8b76015f21140794c50d6817431ea" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>locals</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1ac195d4ad8b24a3c7f7517d49f1788750" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>print</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a5608ef72d5e171cb42f163fd4bc2daa5" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>reduce</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1a029fbf0fa1e57bf425faa36f0179ea7b" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>type</name></member>
+      <member refid="classd2_1_1lsx_1_1Expression_1ad5e382615a7888279f2a5c454919c6e4" prot="public" virt="non-virtual"><scope>d2::lsx::Expression</scope><name>vars</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

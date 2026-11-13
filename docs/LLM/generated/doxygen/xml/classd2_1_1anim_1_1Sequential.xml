@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1anim_1_1Sequential" kind="class" language="C++" prot="public">
+    <compoundname>d2::anim::Sequential</compoundname>
+    <basecompoundref refid="classd2_1_1Animation" prot="public" virt="non-virtual">d2::Animation</basecompoundref>
+    <includes refid="d2__animate_8hpp" local="no">d2_animate.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+      <param>
+        <type><ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">style::uai_property</ref></type>
+        <declname>Property</declname>
+        <defname>Property</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classd2_1_1anim_1_1Sequential_1a2aa551d5ac729ded4251790c74165ff6" prot="private" static="no">
+        <type><ref refid="namespaced2_1_1impl_1ab38f3aedee5dcba12b5ced673e043c4b" kindref="member">impl::style_type</ref>&lt; Type, Property &gt;</type>
+        <definition>using d2::anim::Sequential&lt; Type, Property &gt;::dest_type = impl::style_type&lt;Type, Property&gt;</definition>
+        <argsstring></argsstring>
+        <name>dest_type</name>
+        <qualifiedname>d2::anim::Sequential::dest_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="185" column="13" bodyfile="core/screen/d2_animate.hpp" bodystart="185" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1anim_1_1Sequential_1a75bcea383f378c0745c3f4d88d12ae13" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; dest_type &gt;</type>
+        <definition>std::vector&lt;dest_type&gt; d2::anim::Sequential&lt; Type, Property &gt;::_stages</definition>
+        <argsstring></argsstring>
+        <name>_stages</name>
+        <qualifiedname>d2::anim::Sequential::_stages</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="187" column="25" bodyfile="core/screen/d2_animate.hpp" bodystart="187" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1anim_1_1Sequential_1a8b1c191a4eeba4e1d68598546f9d3339" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::anim::Sequential&lt; Type, Property &gt;::_idx</definition>
+        <argsstring></argsstring>
+        <name>_idx</name>
+        <qualifiedname>d2::anim::Sequential::_idx</qualifiedname>
+        <initializer>{~0ull}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="188" column="25" bodyfile="core/screen/d2_animate.hpp" bodystart="188" bodyend="188"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1anim_1_1Sequential_1a92b7ed36767a4e2f923f04ff8c069434" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::anim::Sequential&lt; Type, Property &gt;::_keep_alive_impl</definition>
+        <argsstring>(float progress) override</argsstring>
+        <name>_keep_alive_impl</name>
+        <qualifiedname>d2::anim::Sequential::_keep_alive_impl</qualifiedname>
+        <reimplements refid="classd2_1_1Animation_1a9753783f8dd407175d31f45736a1f15c">_keep_alive_impl</reimplements>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="190" column="26" bodyfile="core/screen/d2_animate.hpp" bodystart="190" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1anim_1_1Sequential_1a55631720fa7f1115e8697618e1a2c3c4" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>float</type>
+        <definition>virtual float d2::anim::Sequential&lt; Type, Property &gt;::_update_impl</definition>
+        <argsstring>(std::shared_ptr&lt; Element &gt; ptr, float progress) override</argsstring>
+        <name>_update_impl</name>
+        <qualifiedname>d2::anim::Sequential::_update_impl</qualifiedname>
+        <reimplements refid="classd2_1_1Animation_1a383cf2b090e861ef970bc3c26c6ca66a">_update_impl</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1Element" kindref="compound">Element</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="194" column="27" bodyfile="core/screen/d2_animate.hpp" bodystart="194" bodyend="215"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1anim_1_1Sequential_1aaec8998639203b4bc6255e6d9d91c3c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::anim::Sequential&lt; Type, Property &gt;::Sequential</definition>
+        <argsstring>(std::chrono::milliseconds ms, std::shared_ptr&lt; Element &gt; ptr, std::initializer_list&lt; dest_type &gt; stages)</argsstring>
+        <name>Sequential</name>
+        <qualifiedname>d2::anim::Sequential::Sequential</qualifiedname>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>ms</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1Element" kindref="compound">Element</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; dest_type &gt;</type>
+          <declname>stages</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="217" column="13" bodyfile="core/screen/d2_animate.hpp" bodystart="217" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1anim_1_1Sequential_1afb352606c3277336aafb5ca701d8cf3f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Other</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>d2::anim::Sequential&lt; Type, Property &gt;::Sequential</definition>
+        <argsstring>(std::chrono::milliseconds ms, std::shared_ptr&lt; Element &gt; ptr, Other &amp;&amp;stages)</argsstring>
+        <name>Sequential</name>
+        <qualifiedname>d2::anim::Sequential::Sequential</qualifiedname>
+        <param>
+          <type>std::chrono::milliseconds</type>
+          <declname>ms</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1Element" kindref="compound">Element</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>Other &amp;&amp;</type>
+          <declname>stages</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="225" column="13" bodyfile="core/screen/d2_animate.hpp" bodystart="225" bodyend="228"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::Animation</label>
+        <link refid="classd2_1_1Animation"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::anim::Sequential&lt; Type, Property &gt;</label>
+        <link refid="classd2_1_1anim_1_1Sequential"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Animation &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::Animation</label>
+        <link refid="classd2_1_1Animation"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::anim::Sequential&lt; Type, Property &gt;</label>
+        <link refid="classd2_1_1anim_1_1Sequential"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Animation &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/screen/d2_animate.hpp" line="182" column="21" bodyfile="core/screen/d2_animate.hpp" bodystart="183" bodyend="229"/>
+    <listofallmembers>
+      <member refid="classd2_1_1anim_1_1Sequential_1a8b1c191a4eeba4e1d68598546f9d3339" prot="private" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>_idx</name></member>
+      <member refid="classd2_1_1anim_1_1Sequential_1a92b7ed36767a4e2f923f04ff8c069434" prot="protected" virt="virtual"><scope>d2::anim::Sequential</scope><name>_keep_alive_impl</name></member>
+      <member refid="classd2_1_1Animation_1aead4770c72af7790b9598b8748ef5c30" prot="protected" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>_progress</name></member>
+      <member refid="classd2_1_1anim_1_1Sequential_1a75bcea383f378c0745c3f4d88d12ae13" prot="private" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>_stages</name></member>
+      <member refid="classd2_1_1Animation_1a89252f57e60155743d5d82d2789c605b" prot="protected" virt="virtual"><scope>d2::anim::Sequential</scope><name>_start_impl</name></member>
+      <member refid="classd2_1_1anim_1_1Sequential_1a55631720fa7f1115e8697618e1a2c3c4" prot="protected" virt="virtual"><scope>d2::anim::Sequential</scope><name>_update_impl</name></member>
+      <member refid="classd2_1_1Animation_1a46f7ff0c182abaffeacebf8428fdba42" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>Animation</name></member>
+      <member refid="classd2_1_1anim_1_1Sequential_1a2aa551d5ac729ded4251790c74165ff6" prot="private" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>dest_type</name></member>
+      <member refid="classd2_1_1Animation_1adf785d36353c10e10be18e2550c4ed78" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>duration</name></member>
+      <member refid="classd2_1_1Animation_1a1cc128934c33eb3d3bd752933483adad" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>keep_alive</name></member>
+      <member refid="classd2_1_1Animation_1ac32b371026cc1023cecce639aba12141" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>mute</name></member>
+      <member refid="classd2_1_1Animation_1ac67703e78b0a043865e0a5f767139b53" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>ptr</name></member>
+      <member refid="classd2_1_1anim_1_1Sequential_1aaec8998639203b4bc6255e6d9d91c3c3" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>Sequential</name></member>
+      <member refid="classd2_1_1anim_1_1Sequential_1afb352606c3277336aafb5ca701d8cf3f" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>Sequential</name></member>
+      <member refid="classd2_1_1Animation_1ae8084853f5585a41fbe12748c8bcb1a3" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>start</name></member>
+      <member refid="classd2_1_1Animation_1af489f88b60e10e395a6ab995ad915650" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>stop</name></member>
+      <member refid="classd2_1_1Animation_1a60485def769e3874b7c543ceb7c951fe" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>target</name></member>
+      <member refid="classd2_1_1Animation_1ad55c7382d91437f9bebd42e19b14247a" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>unmute</name></member>
+      <member refid="classd2_1_1Animation_1ad86d9bf6642313e6786ef786159565c0" prot="public" virt="non-virtual"><scope>d2::anim::Sequential</scope><name>update</name></member>
+      <member refid="classd2_1_1Animation_1a90c6a50eb31a9fd95b966ce26f07c535" prot="public" virt="virtual"><scope>d2::anim::Sequential</scope><name>~Animation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

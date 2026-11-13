@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1impl_1_1ResolveChain" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::impl::ResolveChain</compoundname>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Chain</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1impl_1_1ResolveChain_1a343b64d63a699bae4ffb03d62237a60b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::style::impl::ResolveChain&lt; Chain &gt;::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <qualifiedname>d2::style::impl::ResolveChain::offset</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="26" column="35" bodyfile="core/tree/d2_styles.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="24" column="19" bodyfile="core/tree/d2_styles.hpp" bodystart="25" bodyend="27"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1impl_1_1ResolveChain_1a343b64d63a699bae4ffb03d62237a60b" prot="public" virt="non-virtual"><scope>d2::style::impl::ResolveChain</scope><name>offset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

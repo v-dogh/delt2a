@@ -1,0 +1,582 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1style_1_1UniversalAccessInterfaceBase" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::style::UniversalAccessInterfaceBase</compoundname>
+    <derivedcompoundref refid="classd2_1_1Element" prot="public" virt="non-virtual">d2::Element</derivedcompoundref>
+    <includes refid="d2__styles__base_8hpp" local="no">d2_styles_base.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" prot="public" static="no">
+        <type>unsigned int</type>
+        <definition>using d2::style::UniversalAccessInterfaceBase::property = unsigned int</definition>
+        <argsstring></argsstring>
+        <name>property</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::property</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="57" column="9" bodyfile="core/tree/d2_styles_base.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a6bde9a056a8856b5c07d2d9427fa6727" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::style::UniversalAccessInterfaceBase::initial_property</definition>
+        <argsstring></argsstring>
+        <name>initial_property</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::initial_property</qualifiedname>
+        <initializer>= std::numeric_limits&lt;<ref refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" kindref="member">property</ref>&gt;::max() - 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="58" column="31" bodyfile="core/tree/d2_styles_base.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ac555ee9cd245ffade8b8533b2e146bac" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::style::UniversalAccessInterfaceBase::invalid_property</definition>
+        <argsstring></argsstring>
+        <name>invalid_property</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::invalid_property</qualifiedname>
+        <initializer>= std::numeric_limits&lt;<ref refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" kindref="member">property</ref>&gt;::max()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="59" column="31" bodyfile="core/tree/d2_styles_base.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ada1f44d8d17127d09cc60a8737c03ca7" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+            <declname>Interface</declname>
+            <defname>Interface</defname>
+          </param>
+        </templateparamlist>
+        <type>auto *</type>
+        <definition>auto * d2::style::UniversalAccessInterfaceBase::_interface_for</definition>
+        <argsstring>()</argsstring>
+        <name>_interface_for</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_interface_for</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="61" column="25" bodyfile="core/tree/d2_styles_base.hpp" bodystart="61" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1b3e6a9bdd1ed7dc38a44f08a2eaf532" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+            <declname>Interface</declname>
+            <defname>Interface</defname>
+          </param>
+          <param>
+            <type>Interface&lt; 0 &gt;::Property</type>
+            <declname>Property</declname>
+            <defname>Property</defname>
+          </param>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::style::UniversalAccessInterfaceBase::_int_set_for</definition>
+        <argsstring>(Type &amp;&amp;value, bool temporary=false)</argsstring>
+        <name>_int_set_for</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_int_set_for</qualifiedname>
+        <param>
+          <type>Type &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>temporary</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="67" column="14" bodyfile="core/tree/d2_styles_base.hpp" bodystart="67" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a0f0c5f2ee8f50a6c40cd4d9a173d4565" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+            <declname>Interface</declname>
+            <defname>Interface</defname>
+          </param>
+          <param>
+            <type>Interface&lt; 0 &gt;::Property</type>
+            <declname>Property</declname>
+            <defname>Property</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::style::UniversalAccessInterfaceBase::_int_get_for</definition>
+        <argsstring>() const</argsstring>
+        <name>_int_get_for</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_int_get_for</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="146" column="14" bodyfile="core/tree/d2_styles_base.hpp" bodystart="146" bodyend="149"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a2f5ad74c60f37781f8aec18e1fbfbb2a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::style::UniversalAccessInterfaceBase::_initialize_impl</definition>
+        <argsstring>(bool force)=0</argsstring>
+        <name>_initialize_impl</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_initialize_impl</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>force</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="151" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ae3fac535f79a25c293c2cf2ba070fc68" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::style::UniversalAccessInterfaceBase::_signal_base_impl</definition>
+        <argsstring>(element_write_flag, property)=0</argsstring>
+        <name>_signal_base_impl</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_signal_base_impl</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1ad70d465211db6502cdac4d3108683159" kindref="member">element_write_flag</ref></type>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" kindref="member">property</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="152" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ab20ac99011dd48dd3275d9cb721cc601" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::style::UniversalAccessInterfaceBase::_clear_anims_impl</definition>
+        <argsstring>(uai_property prop)=0</argsstring>
+        <name>_clear_anims_impl</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_clear_anims_impl</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">uai_property</ref></type>
+          <declname>prop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="153" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1aea20a0dbd31ffcbd09a4aba5238a5168" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::style::UniversalAccessInterfaceBase::_set_dynamic_impl</definition>
+        <argsstring>(property, bool)=0</argsstring>
+        <name>_set_dynamic_impl</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_set_dynamic_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" kindref="member">property</ref></type>
+        </param>
+        <param>
+          <type>bool</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="154" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a4deaa42e1d9cfdfb7abbf442eb905541" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::style::UniversalAccessInterfaceBase::_test_dynamic_impl</definition>
+        <argsstring>(property)=0</argsstring>
+        <name>_test_dynamic_impl</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_test_dynamic_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" kindref="member">property</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="155" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ae801365b735eb99e905f578a704ba214" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void *</type>
+        <definition>virtual void * d2::style::UniversalAccessInterfaceBase::_has_interface_impl</definition>
+        <argsstring>(std::size_t)=0</argsstring>
+        <name>_has_interface_impl</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_has_interface_impl</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="156" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a963442b0e81f3e8f380b1cb31af2ddb3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::style::UniversalAccessInterfaceBase::_register_dep_bind</definition>
+        <argsstring>(property prop, DependencyHandle handle)=0</argsstring>
+        <name>_register_dep_bind</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_register_dep_bind</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" kindref="member">property</ref></type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1style_1a9be043513a13eec7c51a913e09a2c649" kindref="member">DependencyHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="157" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1adb6bd25928ab3ff9098b995ed3c6584e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::style::UniversalAccessInterfaceBase::_deregister_dep_bind</definition>
+        <argsstring>(property prop)=0</argsstring>
+        <name>_deregister_dep_bind</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_deregister_dep_bind</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" kindref="member">property</ref></type>
+          <declname>prop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="158" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a60ca48dab2508af3d7c684edcd65a15c" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;</type>
+        <definition>virtual std::shared_ptr&lt; IOContext &gt; d2::style::UniversalAccessInterfaceBase::_context_impl</definition>
+        <argsstring>() const =0</argsstring>
+        <name>_context_impl</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_context_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="159" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a97ab723c8ea2b04df5f304935eb30da7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::weak_ptr&lt; void &gt;</type>
+        <definition>virtual std::weak_ptr&lt; void &gt; d2::style::UniversalAccessInterfaceBase::_handle_impl</definition>
+        <argsstring>()=0</argsstring>
+        <name>_handle_impl</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::_handle_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="160" column="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a5d2d148e1e31b3fb1a8a8762049ec2f5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+            <declname>Interface</declname>
+            <defname>Interface</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool d2::style::UniversalAccessInterfaceBase::has_interface</definition>
+        <argsstring>()</argsstring>
+        <name>has_interface</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::has_interface</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="162" column="25" bodyfile="core/tree/d2_styles_base.hpp" bodystart="162" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a7bba69ecbc402496dea6f287d930a14d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+            <declname>Interface</declname>
+            <defname>Interface</defname>
+          </param>
+          <param>
+            <type>Interface&lt; 0 &gt;::Property</type>
+            <declname>Property</declname>
+            <defname>Property</defname>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>Temporary</declname>
+            <defname>Temporary</defname>
+            <defval>false</defval>
+          </param>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::style::UniversalAccessInterfaceBase::set_for</definition>
+        <argsstring>(Type &amp;&amp;value)</argsstring>
+        <name>set_for</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::set_for</qualifiedname>
+        <param>
+          <type>Type &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="173" column="14" bodyfile="core/tree/d2_styles_base.hpp" bodystart="173" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ad1200201fb357ade25421484dc86e7aa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+            <declname>Interface</declname>
+            <defname>Interface</defname>
+          </param>
+          <param>
+            <type>Interface&lt; 0 &gt;::Property</type>
+            <declname>Property</declname>
+            <defname>Property</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::style::UniversalAccessInterfaceBase::get_for</definition>
+        <argsstring>() const</argsstring>
+        <name>get_for</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::get_for</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="190" column="14" bodyfile="core/tree/d2_styles_base.hpp" bodystart="190" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1fd6b506e5dd238c0cd173a9692c0cab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+            <declname>Interface</declname>
+            <defname>Interface</defname>
+          </param>
+          <param>
+            <type>Interface&lt; 0 &gt;::Property</type>
+            <declname>Property</declname>
+            <defname>Property</defname>
+          </param>
+        </templateparamlist>
+        <type>auto *</type>
+        <definition>auto * d2::style::UniversalAccessInterfaceBase::getref_for</definition>
+        <argsstring>()</argsstring>
+        <name>getref_for</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::getref_for</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="207" column="14" bodyfile="core/tree/d2_styles_base.hpp" bodystart="207" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a6e2f3650e4408415fc06aee68eda6018" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+            <declname>Interface</declname>
+            <defname>Interface</defname>
+          </param>
+          <param>
+            <type>Interface&lt; 0 &gt;::Property</type>
+            <declname>Property</declname>
+            <defname>Property</defname>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::style::UniversalAccessInterfaceBase::apply_get_for</definition>
+        <argsstring>(Func &amp;&amp;func)</argsstring>
+        <name>apply_get_for</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::apply_get_for</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="217" column="14" bodyfile="core/tree/d2_styles_base.hpp" bodystart="217" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a61e14e94bd5227f27a72f4d73977f5b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="d2__styles__base_8hpp_1a74f90491e28e99a560ba833bda51bf44" kindref="member">D2_UAI_INTERFACE_TEMPL</ref></type>
+            <declname>Interface</declname>
+            <defname>Interface</defname>
+          </param>
+          <param>
+            <type>Interface&lt; 0 &gt;::Property</type>
+            <declname>Property</declname>
+            <defname>Property</defname>
+          </param>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto d2::style::UniversalAccessInterfaceBase::apply_set_for</definition>
+        <argsstring>(Func &amp;&amp;func)</argsstring>
+        <name>apply_set_for</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::apply_set_for</qualifiedname>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="231" column="14" bodyfile="core/tree/d2_styles_base.hpp" bodystart="231" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a5d952a778bfa4ef1738cc6affede11bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::style::UniversalAccessInterfaceBase::initialize</definition>
+        <argsstring>(bool force=false)</argsstring>
+        <name>initialize</name>
+        <qualifiedname>d2::style::UniversalAccessInterfaceBase::initialize</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>force</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles_base.hpp" line="254" column="14" bodyfile="core/tree/d2_styles_base.hpp" bodystart="254" bodyend="257"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::Element</label>
+        <link refid="classd2_1_1Element"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::MetaParentElement</label>
+        <link refid="classd2_1_1MetaParentElement"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::ParentElement</label>
+        <link refid="classd2_1_1ParentElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::VecParentElement</label>
+        <link refid="classd2_1_1VecParentElement"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::style::UniversalAccessInterfaceBase</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterfaceBase"/>
+      </node>
+    </inheritancegraph>
+    <location file="core/tree/d2_styles_base.hpp" line="53" column="5" bodyfile="core/tree/d2_styles_base.hpp" bodystart="54" bodyend="258"/>
+    <listofallmembers>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ab20ac99011dd48dd3275d9cb721cc601" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_clear_anims_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a60ca48dab2508af3d7c684edcd65a15c" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_context_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1adb6bd25928ab3ff9098b995ed3c6584e" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_deregister_dep_bind</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a97ab723c8ea2b04df5f304935eb30da7" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_handle_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ae801365b735eb99e905f578a704ba214" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_has_interface_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a2f5ad74c60f37781f8aec18e1fbfbb2a" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_initialize_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a0f0c5f2ee8f50a6c40cd4d9a173d4565" prot="private" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_int_get_for</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1b3e6a9bdd1ed7dc38a44f08a2eaf532" prot="private" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_int_set_for</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ada1f44d8d17127d09cc60a8737c03ca7" prot="private" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_interface_for</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a963442b0e81f3e8f380b1cb31af2ddb3" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_register_dep_bind</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1aea20a0dbd31ffcbd09a4aba5238a5168" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_set_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ae3fac535f79a25c293c2cf2ba070fc68" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_signal_base_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a4deaa42e1d9cfdfb7abbf442eb905541" prot="protected" virt="pure-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>_test_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a6e2f3650e4408415fc06aee68eda6018" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>apply_get_for</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a61e14e94bd5227f27a72f4d73977f5b6" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>apply_set_for</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ad1200201fb357ade25421484dc86e7aa" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>get_for</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1fd6b506e5dd238c0cd173a9692c0cab" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>getref_for</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a5d2d148e1e31b3fb1a8a8762049ec2f5" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>has_interface</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a6bde9a056a8856b5c07d2d9427fa6727" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>initial_property</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a5d952a778bfa4ef1738cc6affede11bf" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>initialize</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ac555ee9cd245ffade8b8533b2e146bac" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>invalid_property</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>property</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a7bba69ecbc402496dea6f287d930a14d" prot="public" virt="non-virtual"><scope>d2::style::UniversalAccessInterfaceBase</scope><name>set_for</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

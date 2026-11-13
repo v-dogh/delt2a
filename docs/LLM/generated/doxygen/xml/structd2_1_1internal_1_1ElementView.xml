@@ -1,0 +1,363 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1internal_1_1ElementView" kind="struct" language="C++" prot="public">
+    <compoundname>d2::internal::ElementView</compoundname>
+    <includes refid="d2__tree__element_8hpp" local="no">d2_tree_element.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structd2_1_1internal_1_1ElementView_1aec4a6ab65c325ebae60ecfd421571fc7" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">Element::ptr</ref></type>
+        <definition>Element::ptr d2::internal::ElementView::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::internal::ElementView::_ptr</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="549" column="26" bodyfile="core/tree/d2_tree_element.hpp" bodystart="549" bodyend="549"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1ac831525e899583da148f2a4ad926d7db" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::internal::ElementView::ElementView</definition>
+        <argsstring>(Element::ptr ptr)</argsstring>
+        <name>ElementView</name>
+        <qualifiedname>d2::internal::ElementView::ElementView</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">Element::ptr</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="550" column="13" bodyfile="core/tree/d2_tree_element.hpp" bodystart="550" bodyend="550"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1a58e50365607177500a7855cc1db8b56c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>ElementView</type>
+        <definition>ElementView d2::internal::ElementView::from</definition>
+        <argsstring>(Element::ptr ptr)</argsstring>
+        <name>from</name>
+        <qualifiedname>d2::internal::ElementView::from</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">Element::ptr</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="552" column="32" bodyfile="core/tree/d2_tree_element.cpp" bodystart="730" bodyend="733"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1a2ebb431abfd914480e3b5ca825ce4cbc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::signal_context_change_sub</definition>
+        <argsstring>(Element::write_flag type, unsigned int prop, Element::ptr element)</argsstring>
+        <name>signal_context_change_sub</name>
+        <qualifiedname>d2::internal::ElementView::signal_context_change_sub</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">Element::write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">Element::ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="554" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="735" bodyend="740"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1a09174cc91a39d8eba9dd9a4151296105" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::signal_context_change_sub</definition>
+        <argsstring>(Element::write_flag type, unsigned int prop)</argsstring>
+        <name>signal_context_change_sub</name>
+        <qualifiedname>d2::internal::ElementView::signal_context_change_sub</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">Element::write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="557" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="741" bodyend="744"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1aa8d81128e4516cae0b4dc58b655d7356" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::signal_context_change</definition>
+        <argsstring>(Element::write_flag type, unsigned int prop, Element::ptr element)</argsstring>
+        <name>signal_context_change</name>
+        <qualifiedname>d2::internal::ElementView::signal_context_change</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">Element::write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">Element::ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="558" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="745" bodyend="750"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1a75661778440b257b444dc51929eba33c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::signal_context_change</definition>
+        <argsstring>(Element::write_flag type=Element::WriteType::Masked, unsigned int prop=~0u)</argsstring>
+        <name>signal_context_change</name>
+        <qualifiedname>d2::internal::ElementView::signal_context_change</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">Element::write_flag</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aa3b94f2a78f8e0bf9174fde838ff6184" kindref="member">Element::WriteType::Masked</ref></defval>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+          <defval>~0u</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="561" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="751" bodyend="754"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1aace63bdcc531598a622e66b5b2c27625" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::signal_write</definition>
+        <argsstring>(Element::write_flag type=Element::WriteType::Masked, unsigned int prop=~0u)</argsstring>
+        <name>signal_write</name>
+        <qualifiedname>d2::internal::ElementView::signal_write</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">Element::write_flag</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aa3b94f2a78f8e0bf9174fde838ff6184" kindref="member">Element::WriteType::Masked</ref></defval>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+          <defval>~0u</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="564" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="755" bodyend="758"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1ae1d53ca3f9c610f070b9b6e3062d1fc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::signal_initialization</definition>
+        <argsstring>(unsigned int prop)</argsstring>
+        <name>signal_initialization</name>
+        <qualifiedname>d2::internal::ElementView::signal_initialization</qualifiedname>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="567" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="759" bodyend="762"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1ae8ec993b1522be0093102b420a5fd36b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::signal_write_update</definition>
+        <argsstring>(Element::write_flag type) const</argsstring>
+        <name>signal_write_update</name>
+        <qualifiedname>d2::internal::ElementView::signal_write_update</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">Element::write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="568" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="763" bodyend="766"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1ac65592a929efaa96858ef5d7e8ca1656" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::signal_update</definition>
+        <argsstring>(Element::internal_flag type) const</argsstring>
+        <name>signal_update</name>
+        <qualifiedname>d2::internal::ElementView::signal_update</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1aa1f6afafcaf8c9a2630d23500858230e" kindref="member">Element::internal_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="569" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="767" bodyend="770"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1aef7c705fa8fb6f9675362f54abed5bd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::register_bind</definition>
+        <argsstring>(style::uai_property prop, style::DependencyHandle handle)</argsstring>
+        <name>register_bind</name>
+        <qualifiedname>d2::internal::ElementView::register_bind</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">style::uai_property</ref></type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1style_1a9be043513a13eec7c51a913e09a2c649" kindref="member">style::DependencyHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="570" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="771" bodyend="774"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1ae76fd438967d23eb1663329240a3aec9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::deregister_bind</definition>
+        <argsstring>(style::uai_property prop)</argsstring>
+        <name>deregister_bind</name>
+        <qualifiedname>d2::internal::ElementView::deregister_bind</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">style::uai_property</ref></type>
+          <declname>prop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="571" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="775" bodyend="778"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1ab5ddfb2d5f16bed822f939a7259a4e24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::trigger_event</definition>
+        <argsstring>(in::InputFrame &amp;frame, bool recursive)</argsstring>
+        <name>trigger_event</name>
+        <qualifiedname>d2::internal::ElementView::trigger_event</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>recursive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="572" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="779" bodyend="782"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1aafeee10d54082475470defbe802b90a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::setparent</definition>
+        <argsstring>(Element::pptr ptr)</argsstring>
+        <name>setparent</name>
+        <qualifiedname>d2::internal::ElementView::setparent</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1abd57face94a1b6b39b12fbea90189d05" kindref="member">Element::pptr</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="573" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="783" bodyend="786"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1internal_1_1ElementView_1ab2901efd3f82411830bfac966b369bf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::internal::ElementView::clone_state_if</definition>
+        <argsstring>(Element::ptr parent)</argsstring>
+        <name>clone_state_if</name>
+        <qualifiedname>d2::internal::ElementView::clone_state_if</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">Element::ptr</ref></type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="574" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="787" bodyend="790"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_element.hpp" line="546" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="547" bodyend="575"/>
+    <listofallmembers>
+      <member refid="structd2_1_1internal_1_1ElementView_1aec4a6ab65c325ebae60ecfd421571fc7" prot="private" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>_ptr</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1ab2901efd3f82411830bfac966b369bf2" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>clone_state_if</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1ae76fd438967d23eb1663329240a3aec9" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>deregister_bind</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1ac831525e899583da148f2a4ad926d7db" prot="private" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>ElementView</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1a58e50365607177500a7855cc1db8b56c" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>from</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1aef7c705fa8fb6f9675362f54abed5bd8" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>register_bind</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1aafeee10d54082475470defbe802b90a8" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>setparent</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1aa8d81128e4516cae0b4dc58b655d7356" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>signal_context_change</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1a75661778440b257b444dc51929eba33c" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>signal_context_change</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1a2ebb431abfd914480e3b5ca825ce4cbc" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>signal_context_change_sub</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1a09174cc91a39d8eba9dd9a4151296105" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>signal_context_change_sub</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1ae1d53ca3f9c610f070b9b6e3062d1fc5" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>signal_initialization</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1ac65592a929efaa96858ef5d7e8ca1656" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>signal_update</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1aace63bdcc531598a622e66b5b2c27625" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>signal_write</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1ae8ec993b1522be0093102b420a5fd36b" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>signal_write_update</name></member>
+      <member refid="structd2_1_1internal_1_1ElementView_1ab5ddfb2d5f16bed822f939a7259a4e24" prot="public" virt="non-virtual"><scope>d2::internal::ElementView</scope><name>trigger_event</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

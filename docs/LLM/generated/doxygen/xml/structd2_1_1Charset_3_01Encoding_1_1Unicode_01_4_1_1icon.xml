@@ -1,0 +1,818 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon" kind="struct" language="C++" prot="public">
+    <compoundname>d2::Charset&lt; Encoding::Unicode &gt;::icon</compoundname>
+    <includes refid="d2__chardef_8hpp" local="no">d2_chardef.hpp</includes>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ac29c524abaf3c1ad6bcd19caced894b7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::multiply</definition>
+        <argsstring></argsstring>
+        <name>multiply</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::multiply</qualifiedname>
+        <initializer>= &quot;×&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="176" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a8eae007ba9adc78f797318f9a42c53c8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::filled_bottom_left_triangle</definition>
+        <argsstring></argsstring>
+        <name>filled_bottom_left_triangle</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::filled_bottom_left_triangle</qualifiedname>
+        <initializer>= &quot;◣&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="178" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a577421eea3356d24cab99fa7274244dc" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::filled_bottom_right_triangle</definition>
+        <argsstring></argsstring>
+        <name>filled_bottom_right_triangle</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::filled_bottom_right_triangle</qualifiedname>
+        <initializer>= &quot;◢&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="179" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ae9f79cbc2e96c9e77ef1e1ecfb69d043" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::filled_top_left_triangle</definition>
+        <argsstring></argsstring>
+        <name>filled_top_left_triangle</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::filled_top_left_triangle</qualifiedname>
+        <initializer>= &quot;◤&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="180" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a5aab84c4e57787be088ee0a1e2c35184" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::filled_top_right_triangle</definition>
+        <argsstring></argsstring>
+        <name>filled_top_right_triangle</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::filled_top_right_triangle</qualifiedname>
+        <initializer>= &quot;◥&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="181" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a557b9babbef69b079c73205a163ffe1b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::middle_square</definition>
+        <argsstring></argsstring>
+        <name>middle_square</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::middle_square</qualifiedname>
+        <initializer>= &quot;■&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="183" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="183" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a64c72b1545e554bc530e74c17910675f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::triangle_left</definition>
+        <argsstring></argsstring>
+        <name>triangle_left</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::triangle_left</qualifiedname>
+        <initializer>= &quot;◀&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="185" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1aa0f7e4b49cbb64fc6edf6a34d5ee1e3f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::triangle_right</definition>
+        <argsstring></argsstring>
+        <name>triangle_right</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::triangle_right</qualifiedname>
+        <initializer>= &quot;▶&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="186" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="186" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1af83365aacbbe59db990dfb0aaec4a779" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::triangle_up</definition>
+        <argsstring></argsstring>
+        <name>triangle_up</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::triangle_up</qualifiedname>
+        <initializer>= &quot;▲&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="187" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a5ad74f22a1b854ef4e96ed5738095eed" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::triangle_down</definition>
+        <argsstring></argsstring>
+        <name>triangle_down</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::triangle_down</qualifiedname>
+        <initializer>= &quot;▼&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="188" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1af340e09f0bc62bfd086f3ddd33017395" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::arrow_left</definition>
+        <argsstring></argsstring>
+        <name>arrow_left</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::arrow_left</qualifiedname>
+        <initializer>= &quot;←&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="190" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1acab6aa5204f58f387cc2d0b9e630ca53" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::arrow_right</definition>
+        <argsstring></argsstring>
+        <name>arrow_right</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::arrow_right</qualifiedname>
+        <initializer>= &quot;→&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="191" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a1e301182e8174de9a2f9ec7c272bd5d1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::arrow_up</definition>
+        <argsstring></argsstring>
+        <name>arrow_up</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::arrow_up</qualifiedname>
+        <initializer>= &quot;↑&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="192" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="192" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ab8905dee49d6f891659a42ad9d2e0fdd" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::arrow_down</definition>
+        <argsstring></argsstring>
+        <name>arrow_down</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::arrow_down</qualifiedname>
+        <initializer>= &quot;↓&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="193" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a3bd3bd38a449d408d529d82233e0bd13" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::play</definition>
+        <argsstring></argsstring>
+        <name>play</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::play</qualifiedname>
+        <initializer>= &quot;▶&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="195" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a0fe454d4e575d2e53781fac673db1859" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::pause</definition>
+        <argsstring></argsstring>
+        <name>pause</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::pause</qualifiedname>
+        <initializer>= &quot;⏸&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="196" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a594f569a868d21d2d2ba8cb3c544c5be" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::stop</definition>
+        <argsstring></argsstring>
+        <name>stop</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::stop</qualifiedname>
+        <initializer>= &quot;⏹&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="197" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a091e69b9a655901c7351515e1059ec18" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::record</definition>
+        <argsstring></argsstring>
+        <name>record</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::record</qualifiedname>
+        <initializer>= &quot;⏺&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="198" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ad9b8cda665b4e8372541e0a8cb6a97b0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::next</qualifiedname>
+        <initializer>= &quot;⏭&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="199" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a71175a9b25850be66ea100e66b017961" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::previous</definition>
+        <argsstring></argsstring>
+        <name>previous</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::previous</qualifiedname>
+        <initializer>= &quot;⏮&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="200" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a7b981a8268d5900ab5dd95f30ce04afc" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::checkbox_unchecked</definition>
+        <argsstring></argsstring>
+        <name>checkbox_unchecked</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::checkbox_unchecked</qualifiedname>
+        <initializer>= &quot;☐&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="202" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1aaec5152ab9a3928f030559cb26a6c019" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::checkbox_checked</definition>
+        <argsstring></argsstring>
+        <name>checkbox_checked</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::checkbox_checked</qualifiedname>
+        <initializer>= &quot;☑&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="203" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ace8edbbd406aac8c97ff26d6466d43fb" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::checkbox_crossed</definition>
+        <argsstring></argsstring>
+        <name>checkbox_crossed</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::checkbox_crossed</qualifiedname>
+        <initializer>= &quot;☒&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="204" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a449bac2a6183247c8d3e105c7b8d6bfa" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::volume_muted</definition>
+        <argsstring></argsstring>
+        <name>volume_muted</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::volume_muted</qualifiedname>
+        <initializer>= &quot;🔇&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="206" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="206" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a7126e59852b4e6ae570d3df6dc9a6042" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::volume_low</definition>
+        <argsstring></argsstring>
+        <name>volume_low</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::volume_low</qualifiedname>
+        <initializer>= &quot;🔈&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="207" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a29ae502febaef0aee7528a89b61910c2" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::volume_medium</definition>
+        <argsstring></argsstring>
+        <name>volume_medium</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::volume_medium</qualifiedname>
+        <initializer>= &quot;🔉&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="208" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ae996eb46a7bb3183cabf0532a3dd8bae" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::volume_high</definition>
+        <argsstring></argsstring>
+        <name>volume_high</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::volume_high</qualifiedname>
+        <initializer>= &quot;🔊&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="209" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ab1e124b34ad333c6718805bb0230dce6" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::info</definition>
+        <argsstring></argsstring>
+        <name>info</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::info</qualifiedname>
+        <initializer>= &quot;🛈&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="211" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a5c054f0e07a00856b8dac957692ea4f1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::help</definition>
+        <argsstring></argsstring>
+        <name>help</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::help</qualifiedname>
+        <initializer>= &quot;?⃝&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="212" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a7da214baa7592b79d504c95fdee0359a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::warning</definition>
+        <argsstring></argsstring>
+        <name>warning</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::warning</qualifiedname>
+        <initializer>= &quot;⚠&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="213" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a22a93610559b9d12a5611fb0b7978b10" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::error</definition>
+        <argsstring></argsstring>
+        <name>error</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::error</qualifiedname>
+        <initializer>= &quot;❌&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="214" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1af4f1ca44268c0c8031dc2cff407aff0f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::check</definition>
+        <argsstring></argsstring>
+        <name>check</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::check</qualifiedname>
+        <initializer>= &quot;✔&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="215" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a43b6dd83598972ca82179b886cb12170" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::cross</definition>
+        <argsstring></argsstring>
+        <name>cross</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::cross</qualifiedname>
+        <initializer>= &quot;✖&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="216" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a93426a5a5bc9db3658764725d4831c61" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::exclamation</definition>
+        <argsstring></argsstring>
+        <name>exclamation</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::exclamation</qualifiedname>
+        <initializer>= &quot;❗&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="217" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a2e04eb703711dac7a002ea062ade9cf9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::question</definition>
+        <argsstring></argsstring>
+        <name>question</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::question</qualifiedname>
+        <initializer>= &quot;❓&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="218" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a516ee582b56445a657f8cea02e3d0c20" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::keyboard</definition>
+        <argsstring></argsstring>
+        <name>keyboard</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::keyboard</qualifiedname>
+        <initializer>= &quot;⌨&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="220" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="220" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a684a555c0a915e6b7b48e363c7c8295e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::home</definition>
+        <argsstring></argsstring>
+        <name>home</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::home</qualifiedname>
+        <initializer>= &quot;⌂&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="221" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1acb66183074980c44e60381e13f0bfebb" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::gear</definition>
+        <argsstring></argsstring>
+        <name>gear</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::gear</qualifiedname>
+        <initializer>= &quot;⚙&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="222" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a13e1d82a5d838356dacc647709d01c06" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::wrench</definition>
+        <argsstring></argsstring>
+        <name>wrench</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::wrench</qualifiedname>
+        <initializer>= &quot;🔧&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="223" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ada3e7c365f18dab3c2411a09a67b6613" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::hammer</definition>
+        <argsstring></argsstring>
+        <name>hammer</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::hammer</qualifiedname>
+        <initializer>= &quot;🔨&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="224" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a2442978f342bd55f2bb91514cad9b617" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::document</definition>
+        <argsstring></argsstring>
+        <name>document</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::document</qualifiedname>
+        <initializer>= &quot;📄&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="226" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="226" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a2b11e1ce19e403091223c26974242037" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::folder</definition>
+        <argsstring></argsstring>
+        <name>folder</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::folder</qualifiedname>
+        <initializer>= &quot;📁&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="227" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="227" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a68bf481ca457054ccfda669cb47e9745" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::trash</definition>
+        <argsstring></argsstring>
+        <name>trash</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::trash</qualifiedname>
+        <initializer>= &quot;🗑&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="228" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a48d08223c6627c866e0290a898832c7a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::scissors</definition>
+        <argsstring></argsstring>
+        <name>scissors</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::scissors</qualifiedname>
+        <initializer>= &quot;✂&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="229" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a8907336bec7885994772e0c155418cb9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::star_filled</definition>
+        <argsstring></argsstring>
+        <name>star_filled</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::star_filled</qualifiedname>
+        <initializer>= &quot;★&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="231" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1abccd818e9fc06e46f77c0aac2706792b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::star_empty</definition>
+        <argsstring></argsstring>
+        <name>star_empty</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::star_empty</qualifiedname>
+        <initializer>= &quot;☆&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="232" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1af824d4dc2ff731d2b08eaa14ea3a8a52" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::heart</definition>
+        <argsstring></argsstring>
+        <name>heart</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::heart</qualifiedname>
+        <initializer>= &quot;❤&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="233" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1aef9e8652a3f7b6a375cda6fbbd3db73b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::heart_empty</definition>
+        <argsstring></argsstring>
+        <name>heart_empty</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::heart_empty</qualifiedname>
+        <initializer>= &quot;♡&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="234" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a434f3d49975e09b0c27879aa5c2c58c4" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::envelope</definition>
+        <argsstring></argsstring>
+        <name>envelope</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::envelope</qualifiedname>
+        <initializer>= &quot;✉&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="236" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ae4912309f89a52148b259950928b9b39" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::Charset&lt; Encoding::Unicode &gt;::icon::phone</definition>
+        <argsstring></argsstring>
+        <name>phone</name>
+        <qualifiedname>d2::Charset&lt; Encoding::Unicode &gt;::icon::phone</qualifiedname>
+        <initializer>= &quot;☎&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="237" column="35" bodyfile="core/platform/d2_chardef.hpp" bodystart="237" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_chardef.hpp" line="174" column="9" bodyfile="core/platform/d2_chardef.hpp" bodystart="175" bodyend="238"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ab8905dee49d6f891659a42ad9d2e0fdd" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>arrow_down</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1af340e09f0bc62bfd086f3ddd33017395" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>arrow_left</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1acab6aa5204f58f387cc2d0b9e630ca53" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>arrow_right</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a1e301182e8174de9a2f9ec7c272bd5d1" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>arrow_up</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1af4f1ca44268c0c8031dc2cff407aff0f" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>check</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1aaec5152ab9a3928f030559cb26a6c019" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>checkbox_checked</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ace8edbbd406aac8c97ff26d6466d43fb" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>checkbox_crossed</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a7b981a8268d5900ab5dd95f30ce04afc" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>checkbox_unchecked</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a43b6dd83598972ca82179b886cb12170" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>cross</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a2442978f342bd55f2bb91514cad9b617" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>document</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a434f3d49975e09b0c27879aa5c2c58c4" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>envelope</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a22a93610559b9d12a5611fb0b7978b10" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>error</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a93426a5a5bc9db3658764725d4831c61" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>exclamation</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a8eae007ba9adc78f797318f9a42c53c8" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>filled_bottom_left_triangle</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a577421eea3356d24cab99fa7274244dc" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>filled_bottom_right_triangle</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ae9f79cbc2e96c9e77ef1e1ecfb69d043" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>filled_top_left_triangle</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a5aab84c4e57787be088ee0a1e2c35184" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>filled_top_right_triangle</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a2b11e1ce19e403091223c26974242037" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>folder</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1acb66183074980c44e60381e13f0bfebb" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>gear</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ada3e7c365f18dab3c2411a09a67b6613" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>hammer</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1af824d4dc2ff731d2b08eaa14ea3a8a52" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>heart</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1aef9e8652a3f7b6a375cda6fbbd3db73b" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>heart_empty</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a5c054f0e07a00856b8dac957692ea4f1" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>help</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a684a555c0a915e6b7b48e363c7c8295e" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>home</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ab1e124b34ad333c6718805bb0230dce6" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>info</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a516ee582b56445a657f8cea02e3d0c20" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>keyboard</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a557b9babbef69b079c73205a163ffe1b" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>middle_square</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ac29c524abaf3c1ad6bcd19caced894b7" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>multiply</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ad9b8cda665b4e8372541e0a8cb6a97b0" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>next</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a0fe454d4e575d2e53781fac673db1859" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>pause</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ae4912309f89a52148b259950928b9b39" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>phone</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a3bd3bd38a449d408d529d82233e0bd13" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>play</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a71175a9b25850be66ea100e66b017961" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>previous</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a2e04eb703711dac7a002ea062ade9cf9" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>question</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a091e69b9a655901c7351515e1059ec18" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>record</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a48d08223c6627c866e0290a898832c7a" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>scissors</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1abccd818e9fc06e46f77c0aac2706792b" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>star_empty</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a8907336bec7885994772e0c155418cb9" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>star_filled</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a594f569a868d21d2d2ba8cb3c544c5be" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>stop</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a68bf481ca457054ccfda669cb47e9745" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>trash</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a5ad74f22a1b854ef4e96ed5738095eed" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>triangle_down</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a64c72b1545e554bc530e74c17910675f" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>triangle_left</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1aa0f7e4b49cbb64fc6edf6a34d5ee1e3f" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>triangle_right</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1af83365aacbbe59db990dfb0aaec4a779" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>triangle_up</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1ae996eb46a7bb3183cabf0532a3dd8bae" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>volume_high</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a7126e59852b4e6ae570d3df6dc9a6042" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>volume_low</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a29ae502febaef0aee7528a89b61910c2" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>volume_medium</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a449bac2a6183247c8d3e105c7b8d6bfa" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>volume_muted</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a7da214baa7592b79d504c95fdee0359a" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>warning</name></member>
+      <member refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4_1_1icon_1a13e1d82a5d838356dacc647709d01c06" prot="public" virt="non-virtual"><scope>d2::Charset&lt; Encoding::Unicode &gt;::icon</scope><name>wrench</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

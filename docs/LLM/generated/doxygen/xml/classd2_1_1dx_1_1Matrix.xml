@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1Matrix" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::Matrix</compoundname>
+    <basecompoundref refid="classd2_1_1style_1_1UniversalAccessInterfaceProto" prot="public" virt="non-virtual">d2::style::UniversalAccessInterfaceProto&lt; Element, Base, Interface, Interfaces... &gt;</basecompoundref>
+    <includes refid="d2__matrix_8hpp" local="no">d2_matrix.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1dx_1_1Matrix_1a25c1a884f2a2a82c90c8d10307d8830a" prot="public" static="no">
+        <type><ref refid="namespaced2_1_1style_1a2eed1745215f59656c18149f009b8728" kindref="member">style::UAI</ref>&lt; <ref refid="classd2_1_1dx_1_1Matrix" kindref="compound">Matrix</ref>, <ref refid="structd2_1_1style_1_1ILayout" kindref="compound">style::ILayout</ref>, style::IModel &gt;</type>
+        <definition>using d2::dx::Matrix::data = style::UAI&lt;Matrix, style::ILayout, style::IModel&gt;</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::dx::Matrix::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_matrix.hpp" line="40" column="13" bodyfile="elements/d2_matrix.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classd2_1_1dx_1_1Matrix_1a98ab1ee65f68919d8b2ae918ed035c3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class UnitUpdateHelper</definition>
+        <argsstring></argsstring>
+        <name>UnitUpdateHelper</name>
+        <qualifiedname>d2::dx::Matrix::UnitUpdateHelper</qualifiedname>
+        <param>
+          <type>UnitUpdateHelper</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_matrix.hpp" line="39" column="26" bodyfile="elements/d2_matrix.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1Matrix_1a5af1a42ee35c0bd7c483b82148b33d99" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">Unit</ref></type>
+        <definition>Unit d2::dx::Matrix::_layout_impl</definition>
+        <argsstring>(enum Element::Layout type) const override</argsstring>
+        <name>_layout_impl</name>
+        <qualifiedname>d2::dx::Matrix::_layout_impl</qualifiedname>
+        <reimplements refid="classd2_1_1style_1_1UniversalAccessInterfaceProto_1ae6e59fe1ed9de2e2242fad4fc0fd87c6">_layout_impl</reimplements>
+        <param>
+          <type>enum <ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Element::Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_matrix.hpp" line="43" column="26" bodyfile="elements/d2_matrix.cpp" bodystart="5" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Matrix_1ac2dc77ed5b04fcd408a95190c5aa1016" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::dx::Matrix::_reserve_buffer_impl</definition>
+        <argsstring>() const override</argsstring>
+        <name>_reserve_buffer_impl</name>
+        <qualifiedname>d2::dx::Matrix::_reserve_buffer_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_matrix.hpp" line="44" column="33" bodyfile="elements/d2_matrix.cpp" bodystart="23" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Matrix_1ac7dfea004ddb9cac14286e64601ae4a8" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+        <definition>PixelBuffer::View d2::dx::Matrix::_fetch_pixel_buffer_impl</definition>
+        <argsstring>() const override</argsstring>
+        <name>_fetch_pixel_buffer_impl</name>
+        <qualifiedname>d2::dx::Matrix::_fetch_pixel_buffer_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_matrix.hpp" line="45" column="39" bodyfile="elements/d2_matrix.cpp" bodystart="35" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Matrix_1a3a0c81810d6c15d799c6e95ede06b6ba" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool d2::dx::Matrix::_provides_buffer_impl</definition>
+        <argsstring>() const override</argsstring>
+        <name>_provides_buffer_impl</name>
+        <qualifiedname>d2::dx::Matrix::_provides_buffer_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_matrix.hpp" line="46" column="26" bodyfile="elements/d2_matrix.cpp" bodystart="44" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Matrix_1a4426b493cfb0f26af7d9a4b04005a75d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::Matrix::_frame_impl</definition>
+        <argsstring>(PixelBuffer::View buffer) override</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::dx::Matrix::_frame_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_matrix.hpp" line="48" column="26" bodyfile="elements/d2_matrix.cpp" bodystart="49" bodyend="91"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>Chain</label>
+      </node>
+      <node id="5">
+        <label>Interface&lt; impl::ResolveChain&lt; Chain &gt;::offset &gt;</label>
+      </node>
+      <node id="6">
+        <label>Interfaces&lt; impl::OffsetHelper&lt; impl::ResolveChain&lt; Chain &gt;::offset, Interfaces, Interface, Interfaces... &gt;::offset &gt;</label>
+      </node>
+      <node id="1">
+        <label>d2::dx::Matrix</label>
+        <link refid="classd2_1_1dx_1_1Matrix"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::style::UniversalAccessInterface&lt; Chain, Base, Interface, Interfaces &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>style::UAI&lt; Matrix, style::ILayout, style::IModel &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterfaceProto"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>Chain</label>
+      </node>
+      <node id="5">
+        <label>Interface&lt; impl::ResolveChain&lt; Chain &gt;::offset &gt;</label>
+      </node>
+      <node id="6">
+        <label>Interfaces&lt; impl::OffsetHelper&lt; impl::ResolveChain&lt; Chain &gt;::offset, Interfaces, Interface, Interfaces... &gt;::offset &gt;</label>
+      </node>
+      <node id="1">
+        <label>d2::dx::Matrix</label>
+        <link refid="classd2_1_1dx_1_1Matrix"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::style::UniversalAccessInterface&lt; Chain, Base, Interface, Interfaces &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterface"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>style::UAI&lt; Matrix, style::ILayout, style::IModel &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterfaceProto"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_matrix.hpp" line="36" column="9" bodyfile="elements/d2_matrix.hpp" bodystart="37" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1acba02ced51b68e1c8b12e57a65a6c6c4" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_clear_anims_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a484b34334f398425634a51c0d7847e96" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_context_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ad9b021ad1fcdbdb38bfb04ac6d3c867a" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_deregister_dep_bind</name></member>
+      <member refid="classd2_1_1dx_1_1Matrix_1ac7dfea004ddb9cac14286e64601ae4a8" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_fetch_pixel_buffer_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Matrix_1a4426b493cfb0f26af7d9a4b04005a75d" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a88822a6e794d489cb4d9d2d48a9eac27" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_handle_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a17636cd536cba1ade0f043be67663a7b" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_has_interface_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aec6d1ebe3f9fd530c0cc9070b8b2f079" prot="protected" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>_has_interface_own_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceProto_1a493cb6c3ea9ba207b849cfe652c8b44f" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_index_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a787a2f4cb747d5f7a3665753961ed5d8" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_initialize_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Matrix_1a5af1a42ee35c0bd7c483b82148b33d99" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_layout_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Matrix_1a3a0c81810d6c15d799c6e95ede06b6ba" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_provides_buffer_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a90594412c08060a28df8a2813960ccbe" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_register_dep_bind</name></member>
+      <member refid="classd2_1_1dx_1_1Matrix_1ac2dc77ed5b04fcd408a95190c5aa1016" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_reserve_buffer_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a97ccfaa6b03ac7e36b7e26cae4460484" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_set_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a7697343fbdbe2ff88bbe4ac5d0b79a59" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_signal_base_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a2a4a0da9d046965ff9a67f952e045a78" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_test_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceProto_1a133a1c6f37958c58fafa10436f023bbc" prot="protected" virt="virtual"><scope>d2::dx::Matrix</scope><name>_unit_report_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a25ddba284572cdec9f63676331fa617e" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>apply_get</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a706f047fb93be4001d1419650b6c823e" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>apply_set</name></member>
+      <member refid="classd2_1_1dx_1_1Matrix_1a25c1a884f2a2a82c90c8d10307d8830a" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>data</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ad813debc279767724c892a29e01cddba" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>get</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ae1039af891cf36e6a328d79866c17754" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>getref</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a9001a0c242aaa9d25c010c5b6196fbb6" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>interface</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a8a224c017ad9f97d8df9bbe04c49b445" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>property</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aeb450621d768c7eaa608764a57c62f0c" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>set</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aed33fa9d3fc115078dfc14f6bf14b9a0" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>type_of</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1adf5ef2bd8a40d986f53b72e76a0c5b0a" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>uai_chain</name></member>
+      <member refid="classd2_1_1dx_1_1Matrix_1a98ab1ee65f68919d8b2ae918ed035c3b" prot="public" virt="non-virtual"><scope>d2::dx::Matrix</scope><name>UnitUpdateHelper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1impl_1_1is__dynavar__impl" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::impl::is_dynavar_impl</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
+    <includes refid="d2__styles__base_8hpp" local="no">d2_styles_base.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::style::impl::is_dynavar_impl&lt; Type &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1is__dynavar__impl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::style::impl::is_dynavar_impl&lt; Type &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1is__dynavar__impl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_styles_base.hpp" line="41" column="19" bodyfile="core/tree/d2_styles_base.hpp" bodystart="42" bodyend="43"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

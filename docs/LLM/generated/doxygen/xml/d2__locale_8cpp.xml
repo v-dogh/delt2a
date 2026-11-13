@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="d2__locale_8cpp" kind="file" language="C++">
+    <compoundname>d2_locale.cpp</compoundname>
+    <includes refid="d2__locale_8hpp" local="yes">core/platform/d2_locale.hpp</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>core/platform/d2_extended_page.hpp</label>
+        <link refid="d2__extended__page_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>core/platform/d2_locale.cpp</label>
+        <link refid="d2__locale_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>core/platform/d2_locale.hpp</label>
+        <link refid="d2__locale_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>core/utils/d2_exceptions.hpp</label>
+        <link refid="d2__exceptions_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>absl/container/flat_hash_map.h</label>
+      </node>
+      <node id="10">
+        <label>array</label>
+      </node>
+      <node id="5">
+        <label>exception</label>
+      </node>
+      <node id="6">
+        <label>format</label>
+      </node>
+      <node id="13">
+        <label>limits</label>
+      </node>
+      <node id="7">
+        <label>logs/logd.hpp</label>
+      </node>
+      <node id="11">
+        <label>optional</label>
+      </node>
+      <node id="8">
+        <label>string</label>
+      </node>
+      <node id="12">
+        <label>string_view</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaced2">d2</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_locale.cpp"/>
+  </compounddef>
+</doxygen>

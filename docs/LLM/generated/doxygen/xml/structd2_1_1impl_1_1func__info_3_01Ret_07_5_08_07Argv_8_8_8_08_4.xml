@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1impl_1_1func__info_3_01Ret_07_5_08_07Argv_8_8_8_08_4" kind="struct" language="C++" prot="public">
+    <compoundname>d2::impl::func_info&lt; Ret(*)(Argv...)&gt;</compoundname>
+    <basecompoundref refid="structd2_1_1impl_1_1func__info_3_01Ret_07Argv_8_8_8_08_4" prot="public" virt="non-virtual">d2::impl::func_info&lt; Ret(Argv...)&gt;</basecompoundref>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Ret</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Argv</declname>
+        <defname>Argv</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::impl::func_info&lt; Ret(*)(Argv...)&gt;</label>
+        <link refid="structd2_1_1impl_1_1func__info_3_01Ret_07_5_08_07Argv_8_8_8_08_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::impl::func_info&lt; Ret(Argv...)&gt;</label>
+        <link refid="structd2_1_1impl_1_1func__info_3_01Ret_07Argv_8_8_8_08_4"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::impl::func_info&lt; Ret(*)(Argv...)&gt;</label>
+        <link refid="structd2_1_1impl_1_1func__info_3_01Ret_07_5_08_07Argv_8_8_8_08_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::impl::func_info&lt; Ret(Argv...)&gt;</label>
+        <link refid="structd2_1_1impl_1_1func__info_3_01Ret_07Argv_8_8_8_08_4"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_signal_handler.hpp" line="76" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="77" bodyend="78"/>
+    <listofallmembers>
+      <member refid="structd2_1_1impl_1_1func__info_3_01Ret_07Argv_8_8_8_08_4_1a121b616e73743d712b215b0ca8aff4cb" prot="public" virt="non-virtual"><scope>d2::impl::func_info&lt; Ret(*)(Argv...)&gt;</scope><name>args_t</name></member>
+      <member refid="structd2_1_1impl_1_1func__info_3_01Ret_07Argv_8_8_8_08_4_1a17365386372fb8c2dea4e02965ccdc5e" prot="public" virt="non-virtual"><scope>d2::impl::func_info&lt; Ret(*)(Argv...)&gt;</scope><name>ret_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

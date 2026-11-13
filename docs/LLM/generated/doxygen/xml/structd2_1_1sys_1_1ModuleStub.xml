@@ -1,0 +1,389 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1ModuleStub" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::ModuleStub</compoundname>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Query</name>
+        <qualifiedname>d2::sys::ModuleStub::Query</qualifiedname>
+        <enumvalue id="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836a59d5b10c3a447f036d85cb5ce524c96c" prot="public">
+          <name>Commit</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836acdfd4357ab2cb8f241583cca76fcbb57" prot="public">
+          <name>Preset</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836a4059b0251f66a18cb56f544728796875" prot="public">
+          <name>Info</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="276" column="9" bodyfile="core/io/d2_module.hpp" bodystart="277" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1sys_1_1ModuleStub_1a5e4744f726a32f0259873b1c211d7925" prot="public" static="no">
+        <type>std::variant&lt; <ref refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo" kindref="compound">SystemModule::ModInfo</ref>, <ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">SystemModule::ModPreset</ref>, std::shared_ptr&lt; <ref refid="classd2_1_1sys_1_1SystemModule" kindref="compound">SystemModule</ref> &gt;, std::monostate &gt;</type>
+        <definition>using d2::sys::ModuleStub::handle_info = std::variant&lt;
+           SystemModule::ModInfo,
+           SystemModule::ModPreset,
+           std::shared_ptr&lt;SystemModule&gt;,
+           std::monostate
+       &gt;</definition>
+        <argsstring></argsstring>
+        <name>handle_info</name>
+        <qualifiedname>d2::sys::ModuleStub::handle_info</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="283" column="9" bodyfile="core/io/d2_module.hpp" bodystart="283" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1sys_1_1ModuleStub_1aff46593c9e2fac78d94e47684cff5a80" prot="public" static="no">
+        <type><ref refid="structd2_1_1sys_1_1ModuleStub_1a5e4744f726a32f0259873b1c211d7925" kindref="member">handle_info</ref>(*)(<ref refid="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836" kindref="member">Query</ref>, std::shared_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;)</type>
+        <definition>using d2::sys::ModuleStub::handle_type = handle_info (*)(Query, std::shared_ptr&lt;IOContext&gt;)</definition>
+        <argsstring></argsstring>
+        <name>handle_type</name>
+        <qualifiedname>d2::sys::ModuleStub::handle_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="289" column="9" bodyfile="core/io/d2_module.hpp" bodystart="289" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1ModuleStub_1ab56b4125756a1ca16525e44499acdc2d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref></type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1sys_1_1ModuleStub_1aff46593c9e2fac78d94e47684cff5a80" kindref="member">handle_type</ref></type>
+        <definition>handle_type d2::sys::ModuleStub::handle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <qualifiedname>d2::sys::ModuleStub::handle</qualifiedname>
+        <initializer>                                    =
+    [](<ref refid="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836" kindref="member">Query</ref> query, std::shared_ptr&lt;<ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref>&gt; ctx) -&gt; <ref refid="structd2_1_1sys_1_1ModuleStub_1a5e4744f726a32f0259873b1c211d7925" kindref="member">handle_info</ref>
+{
+    if (query == <ref refid="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836a59d5b10c3a447f036d85cb5ce524c96c" kindref="member">Query::Commit</ref>)
+    {
+        return <ref refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" kindref="member">SystemModule::make</ref>&lt;<ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref>&gt;(ctx);
+    }
+    else if (query == <ref refid="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836a4059b0251f66a18cb56f544728796875" kindref="member">Query::Info</ref>)
+    {
+        return <ref refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" kindref="member">Module::module_info</ref>();
+    }
+    else if (query == <ref refid="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836acdfd4357ab2cb8f241583cca76fcbb57" kindref="member">Query::Preset</ref>)
+    {
+        return <ref refid="structd2_1_1sys_1_1ModuleImpl_1a3b770ad91cfdb330c60ca064add754c7" kindref="member">Module::module_preset</ref>;
+    }
+    return std::monostate{};
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="292" column="38" bodyfile="core/io/d2_module.hpp" bodystart="292" bodyend="308"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1ModuleStub_1abcf6a4b11463f4aa81f99af1a68f9e88" prot="private" static="no" mutable="no">
+        <type>std::variant&lt; <ref refid="structd2_1_1sys_1_1ModuleStub_1aff46593c9e2fac78d94e47684cff5a80" kindref="member">handle_type</ref>, std::shared_ptr&lt; <ref refid="classd2_1_1sys_1_1SystemModule" kindref="compound">SystemModule</ref> &gt;, std::monostate &gt;</type>
+        <definition>std::variant&lt;handle_type, std::shared_ptr&lt;SystemModule&gt;, std::monostate&gt; d2::sys::ModuleStub::_module</definition>
+        <argsstring></argsstring>
+        <name>_module</name>
+        <qualifiedname>d2::sys::ModuleStub::_module</qualifiedname>
+        <initializer>{
+            std::monostate{}
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="310" column="22" bodyfile="core/io/d2_module.hpp" bodystart="310" bodyend="312"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1acdae4370af10902370de51aae8c7c0cf" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref></type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>static auto d2::sys::ModuleStub::make</definition>
+        <argsstring>()</argsstring>
+        <name>make</name>
+        <qualifiedname>d2::sys::ModuleStub::make</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="314" column="32" bodyfile="core/io/d2_module.hpp" bodystart="314" bodyend="317"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1a8d0a6b82a3207bf98119f45993f1f87d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModuleStub::ModuleStub</definition>
+        <argsstring>()=default</argsstring>
+        <name>ModuleStub</name>
+        <qualifiedname>d2::sys::ModuleStub::ModuleStub</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="319" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1a45f1d2b7566cc3988cf1d6aa1abed02d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModuleStub::ModuleStub</definition>
+        <argsstring>(handle_type handle)</argsstring>
+        <name>ModuleStub</name>
+        <qualifiedname>d2::sys::ModuleStub::ModuleStub</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1ModuleStub_1aff46593c9e2fac78d94e47684cff5a80" kindref="member">handle_type</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="320" column="9" bodyfile="core/io/d2_module.hpp" bodystart="320" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1a8dae7ce07b6016efdf596c10caac8b86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModuleStub::ModuleStub</definition>
+        <argsstring>(const ModuleStub &amp;)=default</argsstring>
+        <name>ModuleStub</name>
+        <qualifiedname>d2::sys::ModuleStub::ModuleStub</qualifiedname>
+        <param>
+          <type>const ModuleStub &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="321" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1a57388f28a6d02313338f1d55e4bbdcc8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::ModuleStub::ModuleStub</definition>
+        <argsstring>(ModuleStub &amp;&amp;)=default</argsstring>
+        <name>ModuleStub</name>
+        <qualifiedname>d2::sys::ModuleStub::ModuleStub</qualifiedname>
+        <param>
+          <type>ModuleStub &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="322" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1ac08609996f0a08a2dd8ac832ae554955" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::ModuleStub::commit</definition>
+        <argsstring>(std::shared_ptr&lt; IOContext &gt; ctx)</argsstring>
+        <name>commit</name>
+        <qualifiedname>d2::sys::ModuleStub::commit</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="324" column="14" bodyfile="core/io/d2_module.cpp" bodystart="168" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1ac6c661c99610d8ea1919a7ee6dac7856" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1sys_1_1SystemModule" kindref="compound">SystemModule</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; SystemModule &gt; d2::sys::ModuleStub::ptr</definition>
+        <argsstring>() const</argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::sys::ModuleStub::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="325" column="25" bodyfile="core/io/d2_module.cpp" bodystart="177" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1a83f3f722d56f0f1abb4917d6ffc704a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo" kindref="compound">SystemModule::ModInfo</ref></type>
+        <definition>SystemModule::ModInfo d2::sys::ModuleStub::info</definition>
+        <argsstring>() const</argsstring>
+        <name>info</name>
+        <qualifiedname>d2::sys::ModuleStub::info</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="326" column="31" bodyfile="core/io/d2_module.cpp" bodystart="185" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1a1bbc2e58fd3e03bb7f029eff33b7def6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">SystemModule::ModPreset</ref></type>
+        <definition>SystemModule::ModPreset d2::sys::ModuleStub::preset</definition>
+        <argsstring>() const</argsstring>
+        <name>preset</name>
+        <qualifiedname>d2::sys::ModuleStub::preset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="327" column="33" bodyfile="core/io/d2_module.cpp" bodystart="196" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1a97dab21a114dc7bcc405a15fcda5fa0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">SystemModule::Status</ref></type>
+        <definition>SystemModule::Status d2::sys::ModuleStub::status</definition>
+        <argsstring>() const</argsstring>
+        <name>status</name>
+        <qualifiedname>d2::sys::ModuleStub::status</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="328" column="30" bodyfile="core/io/d2_module.cpp" bodystart="207" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1ac0616657b50708466d52e62bf3ea31cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1ModuleStub_1a8d0a6b82a3207bf98119f45993f1f87d" kindref="member">ModuleStub</ref> &amp;</type>
+        <definition>ModuleStub &amp; d2::sys::ModuleStub::operator=</definition>
+        <argsstring>(const ModuleStub &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::sys::ModuleStub::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1sys_1_1ModuleStub_1a8d0a6b82a3207bf98119f45993f1f87d" kindref="member">ModuleStub</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="330" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1ae56da67ac442fb190f0e236c077cdff6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1ModuleStub_1a8d0a6b82a3207bf98119f45993f1f87d" kindref="member">ModuleStub</ref> &amp;</type>
+        <definition>ModuleStub &amp; d2::sys::ModuleStub::operator=</definition>
+        <argsstring>(ModuleStub &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::sys::ModuleStub::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1ModuleStub_1a8d0a6b82a3207bf98119f45993f1f87d" kindref="member">ModuleStub</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="331" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1a10e4488977fd49b2b9996fc493921b19" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::ModuleStub::operator==</definition>
+        <argsstring>(std::nullptr_t) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::sys::ModuleStub::operator==</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="333" column="14" bodyfile="core/io/d2_module.cpp" bodystart="217" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleStub_1a3a304fd90d61c9cd9e6ec6fbee5b1956" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::ModuleStub::operator!=</definition>
+        <argsstring>(std::nullptr_t) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>d2::sys::ModuleStub::operator!=</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="334" column="14" bodyfile="core/io/d2_module.cpp" bodystart="221" bodyend="224"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_module.hpp" line="272" column="5" bodyfile="core/io/d2_module.hpp" bodystart="273" bodyend="335"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1abcf6a4b11463f4aa81f99af1a68f9e88" prot="private" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>_module</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1ac08609996f0a08a2dd8ac832ae554955" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>commit</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1ab56b4125756a1ca16525e44499acdc2d" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>handle</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a5e4744f726a32f0259873b1c211d7925" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>handle_info</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1aff46593c9e2fac78d94e47684cff5a80" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>handle_type</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a83f3f722d56f0f1abb4917d6ffc704a2" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>info</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1acdae4370af10902370de51aae8c7c0cf" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>make</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a8d0a6b82a3207bf98119f45993f1f87d" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>ModuleStub</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a45f1d2b7566cc3988cf1d6aa1abed02d" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>ModuleStub</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a8dae7ce07b6016efdf596c10caac8b86" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>ModuleStub</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a57388f28a6d02313338f1d55e4bbdcc8" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>ModuleStub</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a3a304fd90d61c9cd9e6ec6fbee5b1956" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>operator!=</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1ac0616657b50708466d52e62bf3ea31cc" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>operator=</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1ae56da67ac442fb190f0e236c077cdff6" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>operator=</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a10e4488977fd49b2b9996fc493921b19" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>operator==</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a1bbc2e58fd3e03bb7f029eff33b7def6" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1ac6c661c99610d8ea1919a7ee6dac7856" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>ptr</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1ac19e371e0cc0c5f97bc002b414587836" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>Query</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleStub_1a97dab21a114dc7bcc405a15fcda5fa0b" prot="public" virt="non-virtual"><scope>d2::sys::ModuleStub</scope><name>status</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

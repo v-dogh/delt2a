@@ -1,0 +1,425 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1ExtendedCodePage" kind="class" language="C++" prot="public">
+    <compoundname>d2::ExtendedCodePage</compoundname>
+    <includes refid="d2__extended__page_8hpp" local="no">d2_extended_page.hpp</includes>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1ExtendedCodePage_1ab85527b079f746ab3400988bf5cb1951" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::ExtendedCodePage::extended_code_range</definition>
+        <argsstring></argsstring>
+        <name>extended_code_range</name>
+        <qualifiedname>d2::ExtendedCodePage::extended_code_range</qualifiedname>
+        <initializer>= 159</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="60" column="38" bodyfile="core/platform/d2_extended_page.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1ExtendedCodePage_1ab5d9e16e5ea992c1737c2158912040fc" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_map&lt; std::string, std::size_t &gt;</type>
+        <definition>absl::flat_hash_map&lt;std::string, std::size_t&gt; d2::ExtendedCodePage::_map</definition>
+        <argsstring></argsstring>
+        <name>_map</name>
+        <qualifiedname>d2::ExtendedCodePage::_map</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="61" column="29" bodyfile="core/platform/d2_extended_page.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1ExtendedCodePage_1a7590696cd5a04a71fc289a0247d27273" prot="private" static="no" mutable="no">
+        <type>std::array&lt; std::string, extended_code_range &gt;</type>
+        <definition>std::array&lt;std::string, extended_code_range&gt; d2::ExtendedCodePage::_page</definition>
+        <argsstring></argsstring>
+        <name>_page</name>
+        <qualifiedname>d2::ExtendedCodePage::_page</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="62" column="20" bodyfile="core/platform/d2_extended_page.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1ExtendedCodePage_1a62f13417d166b8902a16f0b4efdd6006" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::ExtendedCodePage::_ctr</definition>
+        <argsstring></argsstring>
+        <name>_ctr</name>
+        <qualifiedname>d2::ExtendedCodePage::_ctr</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="63" column="21" bodyfile="core/platform/d2_extended_page.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1ExtendedCodePage_1a883a70bdb0c96c819c7de97539a820ac" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::ExtendedCodePage::_activated</definition>
+        <argsstring></argsstring>
+        <name>_activated</name>
+        <qualifiedname>d2::ExtendedCodePage::_activated</qualifiedname>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="64" column="14" bodyfile="core/platform/d2_extended_page.hpp" bodystart="64" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1abcc84e9e2e605f9b5aced2b5c508b57a" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::ExtendedCodePage::_value_to_index</definition>
+        <argsstring>(standard_value_type value) const</argsstring>
+        <name>_value_to_index</name>
+        <qualifiedname>d2::ExtendedCodePage::_value_to_index</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="66" column="21" bodyfile="core/platform/d2_extended_page.cpp" bodystart="11" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1aec45ed2df1cef474f2c03e121824e683" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref></type>
+        <definition>standard_value_type d2::ExtendedCodePage::_index_to_value</definition>
+        <argsstring>(std::size_t idx) const</argsstring>
+        <name>_index_to_value</name>
+        <qualifiedname>d2::ExtendedCodePage::_index_to_value</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="67" column="29" bodyfile="core/platform/d2_extended_page.cpp" bodystart="22" bodyend="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1af6d2f8287a3f55909e9123cc177f23f8" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::ExtendedCodePage::activate_thread</definition>
+        <argsstring>()</argsstring>
+        <name>activate_thread</name>
+        <qualifiedname>d2::ExtendedCodePage::activate_thread</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="69" column="21" bodyfile="core/platform/d2_extended_page.cpp" bodystart="31" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a5cb24ade23d7abe2357891def7775a4d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::ExtendedCodePage::deactivate_thread</definition>
+        <argsstring>()</argsstring>
+        <name>deactivate_thread</name>
+        <qualifiedname>d2::ExtendedCodePage::deactivate_thread</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="70" column="21" bodyfile="core/platform/d2_extended_page.cpp" bodystart="37" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a0549a41ecde63dc69bd53f151114daaa" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>static constexpr std::size_t d2::ExtendedCodePage::capacity</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>d2::ExtendedCodePage::capacity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="78" column="38" bodyfile="core/platform/d2_extended_page.hpp" bodystart="78" bodyend="78"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a3e7fa03d826df6245c74036b9f0905c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::ExtendedCodePage::ExtendedCodePage</definition>
+        <argsstring>()=default</argsstring>
+        <name>ExtendedCodePage</name>
+        <qualifiedname>d2::ExtendedCodePage::ExtendedCodePage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="72" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a71686df8ef96ff304e5553c433faf42f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::ExtendedCodePage::ExtendedCodePage</definition>
+        <argsstring>(const ExtendedCodePage &amp;)=delete</argsstring>
+        <name>ExtendedCodePage</name>
+        <qualifiedname>d2::ExtendedCodePage::ExtendedCodePage</qualifiedname>
+        <param>
+          <type>const ExtendedCodePage &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="73" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1af5a61051d623687ee245a27655f408b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::ExtendedCodePage::ExtendedCodePage</definition>
+        <argsstring>(ExtendedCodePage &amp;&amp;)=default</argsstring>
+        <name>ExtendedCodePage</name>
+        <qualifiedname>d2::ExtendedCodePage::ExtendedCodePage</qualifiedname>
+        <param>
+          <type>ExtendedCodePage &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="74" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a27d07d582fac33532ff6305bfcdf4c34" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::ExtendedCodePage::is_activated</definition>
+        <argsstring>() const</argsstring>
+        <name>is_activated</name>
+        <qualifiedname>d2::ExtendedCodePage::is_activated</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="76" column="14" bodyfile="core/platform/d2_extended_page.cpp" bodystart="44" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a51fc2f2c9ebf2dcfee607cc8a903068d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::ExtendedCodePage::is_extended</definition>
+        <argsstring>(standard_value_type value) const</argsstring>
+        <name>is_extended</name>
+        <qualifiedname>d2::ExtendedCodePage::is_extended</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="77" column="14" bodyfile="core/platform/d2_extended_page.cpp" bodystart="48" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a0811a38366b8e45396424633761f63d9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::ExtendedCodePage::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>d2::ExtendedCodePage::size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="79" column="21" bodyfile="core/platform/d2_extended_page.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1ae84929edacccc2904637e1a007768829" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref> &gt;</type>
+        <definition>std::optional&lt; standard_value_type &gt; d2::ExtendedCodePage::try_write</definition>
+        <argsstring>(std::string_view value)</argsstring>
+        <name>try_write</name>
+        <qualifiedname>d2::ExtendedCodePage::try_write</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="80" column="23" bodyfile="core/platform/d2_extended_page.cpp" bodystart="52" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a7673a4cd8bc92017d7acac6a4403b2fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref></type>
+        <definition>standard_value_type d2::ExtendedCodePage::write</definition>
+        <argsstring>(std::string_view value)</argsstring>
+        <name>write</name>
+        <qualifiedname>d2::ExtendedCodePage::write</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="81" column="29" bodyfile="core/platform/d2_extended_page.cpp" bodystart="71" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1ad0622d147af48c8f72a04228c2f3cf5f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>std::string_view d2::ExtendedCodePage::read</definition>
+        <argsstring>(standard_value_type value) const</argsstring>
+        <name>read</name>
+        <qualifiedname>d2::ExtendedCodePage::read</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a837a24b129535d629142be43eef75f1b" kindref="member">standard_value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="82" column="26" bodyfile="core/platform/d2_extended_page.cpp" bodystart="77" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a1ed50a2b9c980b784cfaa42bd08c1dc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::ExtendedCodePage::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>d2::ExtendedCodePage::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="83" column="14" bodyfile="core/platform/d2_extended_page.cpp" bodystart="82" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a319a6cd7a126e94198033e5b8531e964" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::ExtendedCodePage::activate</definition>
+        <argsstring>()</argsstring>
+        <name>activate</name>
+        <qualifiedname>d2::ExtendedCodePage::activate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="84" column="14" bodyfile="core/platform/d2_extended_page.cpp" bodystart="89" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a773ada9b3ce50b05d507acf4804ca7cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::ExtendedCodePage::deactivate</definition>
+        <argsstring>()</argsstring>
+        <name>deactivate</name>
+        <qualifiedname>d2::ExtendedCodePage::deactivate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="85" column="14" bodyfile="core/platform/d2_extended_page.cpp" bodystart="93" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1ac92a8dd0637f1f5b390d1ee6581cb266" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1ExtendedCodePage_1a3e7fa03d826df6245c74036b9f0905c4" kindref="member">ExtendedCodePage</ref> &amp;</type>
+        <definition>ExtendedCodePage &amp; d2::ExtendedCodePage::operator=</definition>
+        <argsstring>(const ExtendedCodePage &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::ExtendedCodePage::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1ExtendedCodePage_1a3e7fa03d826df6245c74036b9f0905c4" kindref="member">ExtendedCodePage</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="87" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1ExtendedCodePage_1a073f7ad4aa0c37a6a647c9f22688d3b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1ExtendedCodePage_1a3e7fa03d826df6245c74036b9f0905c4" kindref="member">ExtendedCodePage</ref> &amp;</type>
+        <definition>ExtendedCodePage &amp; d2::ExtendedCodePage::operator=</definition>
+        <argsstring>(ExtendedCodePage &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::ExtendedCodePage::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1ExtendedCodePage_1a3e7fa03d826df6245c74036b9f0905c4" kindref="member">ExtendedCodePage</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="88" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_extended_page.hpp" line="56" column="5" bodyfile="core/platform/d2_extended_page.hpp" bodystart="57" bodyend="89"/>
+    <listofallmembers>
+      <member refid="classd2_1_1ExtendedCodePage_1a883a70bdb0c96c819c7de97539a820ac" prot="private" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>_activated</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a62f13417d166b8902a16f0b4efdd6006" prot="private" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>_ctr</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1aec45ed2df1cef474f2c03e121824e683" prot="private" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>_index_to_value</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1ab5d9e16e5ea992c1737c2158912040fc" prot="private" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>_map</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a7590696cd5a04a71fc289a0247d27273" prot="private" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>_page</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1abcc84e9e2e605f9b5aced2b5c508b57a" prot="private" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>_value_to_index</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a319a6cd7a126e94198033e5b8531e964" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>activate</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1af6d2f8287a3f55909e9123cc177f23f8" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>activate_thread</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a0549a41ecde63dc69bd53f151114daaa" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>capacity</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a1ed50a2b9c980b784cfaa42bd08c1dc0" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>clear</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a773ada9b3ce50b05d507acf4804ca7cd" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>deactivate</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a5cb24ade23d7abe2357891def7775a4d" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>deactivate_thread</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1ab85527b079f746ab3400988bf5cb1951" prot="private" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>extended_code_range</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a3e7fa03d826df6245c74036b9f0905c4" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>ExtendedCodePage</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a71686df8ef96ff304e5553c433faf42f" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>ExtendedCodePage</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1af5a61051d623687ee245a27655f408b6" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>ExtendedCodePage</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a27d07d582fac33532ff6305bfcdf4c34" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>is_activated</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a51fc2f2c9ebf2dcfee607cc8a903068d" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>is_extended</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1ac92a8dd0637f1f5b390d1ee6581cb266" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>operator=</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a073f7ad4aa0c37a6a647c9f22688d3b8" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>operator=</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1ad0622d147af48c8f72a04228c2f3cf5f" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>read</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a0811a38366b8e45396424633761f63d9" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>size</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1ae84929edacccc2904637e1a007768829" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>try_write</name></member>
+      <member refid="classd2_1_1ExtendedCodePage_1a7673a4cd8bc92017d7acac6a4403b2fc" prot="public" virt="non-virtual"><scope>d2::ExtendedCodePage</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

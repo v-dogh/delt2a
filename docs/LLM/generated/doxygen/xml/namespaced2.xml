@@ -1,0 +1,517 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2" kind="namespace" language="C++">
+    <compoundname>d2</compoundname>
+    <innerclass refid="classd2_1_1AlignedUnit" prot="public">d2::AlignedUnit</innerclass>
+    <innerclass refid="classd2_1_1Animation" prot="public">d2::Animation</innerclass>
+    <innerclass refid="classd2_1_1AutoValueType" prot="public">d2::AutoValueType</innerclass>
+    <innerclass refid="structd2_1_1BoundingBox" prot="public">d2::BoundingBox</innerclass>
+    <innerclass refid="classd2_1_1CacheDef" prot="public">d2::CacheDef</innerclass>
+    <innerclass refid="structd2_1_1Charset" prot="public">d2::Charset</innerclass>
+    <innerclass refid="structd2_1_1Charset_3_01Encoding_1_1Ascii_01_4" prot="public">d2::Charset&lt; Encoding::Ascii &gt;</innerclass>
+    <innerclass refid="structd2_1_1Charset_3_01Encoding_1_1Unicode_01_4" prot="public">d2::Charset&lt; Encoding::Unicode &gt;</innerclass>
+    <innerclass refid="structd2_1_1DispatchSpecifier" prot="public">d2::DispatchSpecifier</innerclass>
+    <innerclass refid="classd2_1_1DynamicDependencyManager" prot="public">d2::DynamicDependencyManager</innerclass>
+    <innerclass refid="classd2_1_1Element" prot="public">d2::Element</innerclass>
+    <innerclass refid="structd2_1_1EvCase" prot="public">d2::EvCase</innerclass>
+    <innerclass refid="structd2_1_1EvDefault" prot="public">d2::EvDefault</innerclass>
+    <innerclass refid="classd2_1_1ExtendedCodePage" prot="public">d2::ExtendedCodePage</innerclass>
+    <innerclass refid="classd2_1_1IOContext" prot="public">d2::IOContext</innerclass>
+    <innerclass refid="classd2_1_1MainWorker" prot="public">d2::MainWorker</innerclass>
+    <innerclass refid="classd2_1_1MatrixModel" prot="public">d2::MatrixModel</innerclass>
+    <innerclass refid="classd2_1_1MetaParentElement" prot="public">d2::MetaParentElement</innerclass>
+    <innerclass refid="structd2_1_1NamedTree" prot="public">d2::NamedTree</innerclass>
+    <innerclass refid="structd2_1_1OSConfig" prot="public">d2::OSConfig</innerclass>
+    <innerclass refid="classd2_1_1ParentElement" prot="public">d2::ParentElement</innerclass>
+    <innerclass refid="classd2_1_1PixelBuffer" prot="public">d2::PixelBuffer</innerclass>
+    <innerclass refid="structd2_1_1Position" prot="public">d2::Position</innerclass>
+    <innerclass refid="classd2_1_1Ref" prot="public">d2::Ref</innerclass>
+    <innerclass refid="classd2_1_1SignalManifest" prot="public">d2::SignalManifest</innerclass>
+    <innerclass refid="structd2_1_1SignalRegistry" prot="public">d2::SignalRegistry</innerclass>
+    <innerclass refid="structd2_1_1SignalRegistry_3_01sys_1_1audio_1_1Event_01_4" prot="public">d2::SignalRegistry&lt; sys::audio::Event &gt;</innerclass>
+    <innerclass refid="structd2_1_1SignalRegistry_3_01sys_1_1screen_1_1Event_01_4" prot="public">d2::SignalRegistry&lt; sys::screen::Event &gt;</innerclass>
+    <innerclass refid="structd2_1_1SignalRegistry_3_01sys_1_1selector_1_1Event_01_4" prot="public">d2::SignalRegistry&lt; sys::selector::Event &gt;</innerclass>
+    <innerclass refid="structd2_1_1SignalRegistry_3_01void_01_4" prot="public">d2::SignalRegistry&lt; void &gt;</innerclass>
+    <innerclass refid="classd2_1_1Signals" prot="public">d2::Signals</innerclass>
+    <innerclass refid="structd2_1_1SignalSpecifier" prot="public">d2::SignalSpecifier</innerclass>
+    <innerclass refid="classd2_1_1StringIterator" prot="public">d2::StringIterator</innerclass>
+    <innerclass refid="structd2_1_1Stylesheet" prot="public">d2::Stylesheet</innerclass>
+    <innerclass refid="classd2_1_1TextSelection" prot="public">d2::TextSelection</innerclass>
+    <innerclass refid="structd2_1_1Tree" prot="public">d2::Tree</innerclass>
+    <innerclass refid="classd2_1_1TreeCtx" prot="public">d2::TreeCtx</innerclass>
+    <innerclass refid="structd2_1_1TreeCtx_3_01Type_00_01d2_1_1TreeState_01_4" prot="public">d2::TreeCtx&lt; Type, d2::TreeState &gt;</innerclass>
+    <innerclass refid="classd2_1_1TreeCtxBase" prot="public">d2::TreeCtxBase</innerclass>
+    <innerclass refid="structd2_1_1TreeForward" prot="public">d2::TreeForward</innerclass>
+    <innerclass refid="classd2_1_1TreeIter" prot="public">d2::TreeIter</innerclass>
+    <innerclass refid="classd2_1_1TreeState" prot="public">d2::TreeState</innerclass>
+    <innerclass refid="structd2_1_1TreeTag" prot="public">d2::TreeTag</innerclass>
+    <innerclass refid="classd2_1_1TreeTags" prot="public">d2::TreeTags</innerclass>
+    <innerclass refid="structd2_1_1TreeTemplate" prot="public">d2::TreeTemplate</innerclass>
+    <innerclass refid="structd2_1_1TreeTemplateInit" prot="public">d2::TreeTemplateInit</innerclass>
+    <innerclass refid="structd2_1_1TupTreeState" prot="public">d2::TupTreeState</innerclass>
+    <innerclass refid="classd2_1_1Unit" prot="public">d2::Unit</innerclass>
+    <innerclass refid="classd2_1_1VecParentElement" prot="public">d2::VecParentElement</innerclass>
+    <innernamespace refid="namespaced2_1_1anim">d2::anim</innernamespace>
+    <innernamespace refid="namespaced2_1_1colors">d2::colors</innernamespace>
+    <innernamespace refid="namespaced2_1_1dx">d2::dx</innernamespace>
+    <innernamespace refid="namespaced2_1_1fb">d2::fb</innernamespace>
+    <innernamespace refid="namespaced2_1_1image">d2::image</innernamespace>
+    <innernamespace refid="namespaced2_1_1impl">d2::impl</innernamespace>
+    <innernamespace refid="namespaced2_1_1in">d2::in</innernamespace>
+    <innernamespace refid="namespaced2_1_1internal">d2::internal</innernamespace>
+    <innernamespace refid="namespaced2_1_1lsx">d2::lsx</innernamespace>
+    <innernamespace refid="namespaced2_1_1meta">d2::meta</innernamespace>
+    <innernamespace refid="namespaced2_1_1px">d2::px</innernamespace>
+    <innernamespace refid="namespaced2_1_1style">d2::style</innernamespace>
+    <innernamespace refid="namespaced2_1_1sys">d2::sys</innernamespace>
+    <innernamespace refid="namespaced2_1_1text">d2::text</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespaced2_1a11d303d84cb0ba7593a0f246a95dcbbc" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Encoding</name>
+        <qualifiedname>d2::Encoding</qualifiedname>
+        <enumvalue id="namespaced2_1a11d303d84cb0ba7593a0f246a95dcbbca76b8d0dcd02ccaf203c167ced6d7ef31" prot="public">
+          <name>Ascii</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1a11d303d84cb0ba7593a0f246a95dcbbca7f6c02d96265dd1d37b1101de1101541" prot="public">
+          <name>Unicode</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="10" column="5" bodyfile="core/platform/d2_locale.hpp" bodystart="11" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaced2_1a1f15b9b0606424c9c27bc71c1613353a" prot="public" static="no" strong="yes">
+        <type>unsigned char</type>
+        <name>UnitContext</name>
+        <qualifiedname>d2::UnitContext</qualifiedname>
+        <enumvalue id="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aac1b5fa03ecdb95d4a45dd1c40b02527f" prot="public">
+          <name>Horizontal</name>
+          <initializer>= Unit::Mods::Horizontal</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aa06ce2a25e5d12c166a36f654dbea6012" prot="public">
+          <name>Vertical</name>
+          <initializer>= Unit::Mods::Vertical</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aa52f5e0bc3859bc5f5e25130b6c7e8881" prot="public">
+          <name>Position</name>
+          <initializer>= Unit::Mods::_Position</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aaf4843c1c797abf1a256c8802b6cd9f51" prot="public">
+          <name>Dimensions</name>
+          <initializer>= Unit::Mods::_Dimensions</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="221" column="5" bodyfile="core/types/d2_element_units.hpp" bodystart="222" bodyend="227"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaced2_1a105f942fa50bfc9d3a9960cefb8da0c6" prot="public" static="no">
+        <type><ref refid="structd2_1_1Charset" kindref="compound">Charset</ref>&lt; <ref refid="namespaced2_1ad51a85d40f1acfdec4b434a89f99134c" kindref="member">encoding</ref> &gt;</type>
+        <definition>using d2::charset = Charset&lt;encoding&gt;</definition>
+        <argsstring></argsstring>
+        <name>charset</name>
+        <qualifiedname>d2::charset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_chardef.hpp" line="266" column="5" bodyfile="core/platform/d2_chardef.hpp" bodystart="266" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1a837a24b129535d629142be43eef75f1b" prot="public" static="no">
+        <type>char</type>
+        <definition>using d2::standard_value_type = char</definition>
+        <argsstring></argsstring>
+        <name>standard_value_type</name>
+        <qualifiedname>d2::standard_value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="12" column="5" bodyfile="core/platform/d2_extended_page.hpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" prot="public" static="no">
+        <type>std::string</type>
+        <definition>using d2::string = std::string</definition>
+        <argsstring></argsstring>
+        <name>string</name>
+        <qualifiedname>d2::string</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="28" column="5" bodyfile="core/platform/d2_locale.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1a7fe2118fa5d105aea8dc60a5aca629cc" prot="public" static="no">
+        <type>std::string_view</type>
+        <definition>using d2::string_view = std::string_view</definition>
+        <argsstring></argsstring>
+        <name>string_view</name>
+        <qualifiedname>d2::string_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="29" column="5" bodyfile="core/platform/d2_locale.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1ac4f460ab74bc55b8fcd179611bf7375d" prot="public" static="no">
+        <type>char</type>
+        <definition>using d2::value_type = char</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>d2::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="30" column="5" bodyfile="core/platform/d2_locale.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1ac6f877e744cdf31bf62eca587618d502" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename First</type>
+          </param>
+          <param>
+            <type>typename Second</type>
+          </param>
+        </templateparamlist>
+        <type>std::pair&lt; First, Second &gt;</type>
+        <definition>using d2::Case = std::pair&lt;First, Second&gt;</definition>
+        <argsstring></argsstring>
+        <name>Case</name>
+        <qualifiedname>d2::Case</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="58" column="18" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1ad70d465211db6502cdac4d3108683159" prot="public" static="no">
+        <type>unsigned char</type>
+        <definition>using d2::element_write_flag = unsigned char</definition>
+        <argsstring></argsstring>
+        <name>element_write_flag</name>
+        <qualifiedname>d2::element_write_flag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="9" column="1" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1ac4a346cc3d06df6840f99bc7ade51da5" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>std::shared_ptr&lt; Type &gt;</type>
+        <definition>using d2::tree_state_ptr = std::shared_ptr&lt;Type&gt;</definition>
+        <argsstring></argsstring>
+        <name>tree_state_ptr</name>
+        <qualifiedname>d2::tree_state_ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_state.hpp" line="90" column="16" bodyfile="core/tree/d2_tree_state.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1aeeee01fceba9bde60593f3c1aa738657" prot="public" static="no">
+        <type><ref refid="classd2_1_1AlignedUnit" kindref="compound">AlignedUnit</ref>&lt; std::uint8_t(<ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aac1b5fa03ecdb95d4a45dd1c40b02527f" kindref="member">UnitContext::Horizontal</ref>)|std::uint8_t(<ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aaf4843c1c797abf1a256c8802b6cd9f51" kindref="member">UnitContext::Dimensions</ref>)&gt;</type>
+        <definition>using d2::HDUnit = 
+AlignedUnit&lt;std::uint8_t(UnitContext::Horizontal) | std::uint8_t(UnitContext::Dimensions)&gt;</definition>
+        <argsstring></argsstring>
+        <name>HDUnit</name>
+        <qualifiedname>d2::HDUnit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="288" column="5" bodyfile="core/types/d2_element_units.hpp" bodystart="288" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1ac32151a8b30e30c3046fc3a7defb343d" prot="public" static="no">
+        <type><ref refid="classd2_1_1AlignedUnit" kindref="compound">AlignedUnit</ref>&lt; std::uint8_t(<ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aa06ce2a25e5d12c166a36f654dbea6012" kindref="member">UnitContext::Vertical</ref>)|std::uint8_t(<ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aaf4843c1c797abf1a256c8802b6cd9f51" kindref="member">UnitContext::Dimensions</ref>)&gt;</type>
+        <definition>using d2::VDUnit = 
+AlignedUnit&lt;std::uint8_t(UnitContext::Vertical) | std::uint8_t(UnitContext::Dimensions)&gt;</definition>
+        <argsstring></argsstring>
+        <name>VDUnit</name>
+        <qualifiedname>d2::VDUnit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="290" column="5" bodyfile="core/types/d2_element_units.hpp" bodystart="290" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1ac356ccd10e704f0e42b64162432f457c" prot="public" static="no">
+        <type><ref refid="classd2_1_1AlignedUnit" kindref="compound">AlignedUnit</ref>&lt; std::uint8_t(<ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aac1b5fa03ecdb95d4a45dd1c40b02527f" kindref="member">UnitContext::Horizontal</ref>)|std::uint8_t(<ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aa52f5e0bc3859bc5f5e25130b6c7e8881" kindref="member">UnitContext::Position</ref>)&gt;</type>
+        <definition>using d2::HPUnit = 
+AlignedUnit&lt;std::uint8_t(UnitContext::Horizontal) | std::uint8_t(UnitContext::Position)&gt;</definition>
+        <argsstring></argsstring>
+        <name>HPUnit</name>
+        <qualifiedname>d2::HPUnit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="292" column="5" bodyfile="core/types/d2_element_units.hpp" bodystart="292" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1a690c37b95c4403fec6af196cbb3e694f" prot="public" static="no">
+        <type><ref refid="classd2_1_1AlignedUnit" kindref="compound">AlignedUnit</ref>&lt; std::uint8_t(<ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aa06ce2a25e5d12c166a36f654dbea6012" kindref="member">UnitContext::Vertical</ref>)|std::uint8_t(<ref refid="namespaced2_1a1f15b9b0606424c9c27bc71c1613353aa52f5e0bc3859bc5f5e25130b6c7e8881" kindref="member">UnitContext::Position</ref>)&gt;</type>
+        <definition>using d2::VPUnit = 
+AlignedUnit&lt;std::uint8_t(UnitContext::Vertical) | std::uint8_t(UnitContext::Position)&gt;</definition>
+        <argsstring></argsstring>
+        <name>VPUnit</name>
+        <qualifiedname>d2::VPUnit</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="294" column="5" bodyfile="core/types/d2_element_units.hpp" bodystart="294" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" prot="public" static="no">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">px::combined</ref></type>
+        <definition>using d2::pixel = px::combined</definition>
+        <argsstring></argsstring>
+        <name>pixel</name>
+        <qualifiedname>d2::pixel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="954" column="5" bodyfile="core/types/d2_vtypes.hpp" bodystart="954" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaced2_1a851293e376145a24edf2d92818d7a82a" prot="public" static="no" mutable="no" thread_local="yes">
+        <type><ref refid="classd2_1_1ExtendedCodePage" kindref="compound">ExtendedCodePage</ref></type>
+        <definition>ExtendedCodePage d2::global_extended_code_page</definition>
+        <argsstring></argsstring>
+        <name>global_extended_code_page</name>
+        <qualifiedname>d2::global_extended_code_page</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_extended_page.hpp" line="91" column="42" bodyfile="core/platform/d2_extended_page.hpp" bodystart="91" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaced2_1ad51a85d40f1acfdec4b434a89f99134c" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::encoding</definition>
+        <argsstring></argsstring>
+        <name>encoding</name>
+        <qualifiedname>d2::encoding</qualifiedname>
+        <initializer>= <ref refid="namespaced2_1a11d303d84cb0ba7593a0f246a95dcbbca76b8d0dcd02ccaf203c167ced6d7ef31" kindref="member">Encoding::Ascii</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="27" column="20" bodyfile="core/platform/d2_locale.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1afd060307fad94a2f0a09fc4459f7cd27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1Ref" kindref="compound">Ref</ref>&lt; Type &gt;</type>
+        <definition>Ref&lt; Type &gt; d2::ref</definition>
+        <argsstring>(Type &amp;value)</argsstring>
+        <name>ref</name>
+        <qualifiedname>d2::ref</qualifiedname>
+        <param>
+          <type>Type &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="56" column="20" bodyfile="core/io/d2_signal_handler.hpp" bodystart="56" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1a0ef81abcfe48797bb11ff89ccf5067a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1Ref" kindref="compound">Ref</ref>&lt; const Type &gt;</type>
+        <definition>Ref&lt; const Type &gt; d2::cref</definition>
+        <argsstring>(const Type &amp;value)</argsstring>
+        <name>cref</name>
+        <qualifiedname>d2::cref</qualifiedname>
+        <param>
+          <type>const Type &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="60" column="20" bodyfile="core/io/d2_signal_handler.hpp" bodystart="60" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1a5869c507356300066582ab220d8f9124" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1SignalSpecifier" kindref="compound">SignalSpecifier</ref>&lt; std::decay_t&lt; Type &gt; &gt;</type>
+        <definition>SignalSpecifier&lt; std::decay_t&lt; Type &gt; &gt; d2::sigspec</definition>
+        <argsstring>(Type &amp;&amp;value)</argsstring>
+        <name>sigspec</name>
+        <qualifiedname>d2::sigspec</qualifiedname>
+        <param>
+          <type>Type &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="383" column="32" bodyfile="core/io/d2_signal_handler.hpp" bodystart="383" bodyend="386"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1a15fd86572fd726a09b1916bf841f7f52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1DispatchSpecifier" kindref="compound">DispatchSpecifier</ref>&lt; std::decay_t&lt; Type &gt; &gt;</type>
+        <definition>DispatchSpecifier&lt; std::decay_t&lt; Type &gt; &gt; d2::disspec</definition>
+        <argsstring>(Type &amp;&amp;value)</argsstring>
+        <name>disspec</name>
+        <qualifiedname>d2::disspec</qualifiedname>
+        <param>
+          <type>Type &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="387" column="34" bodyfile="core/io/d2_signal_handler.hpp" bodystart="387" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1ab52b9e1f882b486c9a5cc8520725d838" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Parent</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>d2::TreeCtx</definition>
+        <argsstring>(d2::TreeIter&lt; Parent &gt;) -&gt; TreeCtx&lt; Parent &gt;</argsstring>
+        <name>TreeCtx</name>
+        <qualifiedname>d2::TreeCtx</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt; Parent &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="620" column="16" declfile="core/tree/d2_tree_construct.hpp" declline="620" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1ab07e88a4a8cbfa4ee94f5dcd1d430ea7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Parent</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>d2::TreeCtx</definition>
+        <argsstring>(std::shared_ptr&lt; Parent &gt;) -&gt; TreeCtx&lt; Parent &gt;</argsstring>
+        <name>TreeCtx</name>
+        <qualifiedname>d2::TreeCtx</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; Parent &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="621" column="16" declfile="core/tree/d2_tree_construct.hpp" declline="621" declcolumn="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_context.cpp" line="12" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,857 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemModule" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::SystemModule</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::enable_shared_from_this&lt; SystemModule &gt;</basecompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps... &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemAudio, &quot;Audio&quot;, Access::TSafe &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemBinder, Name, Ac, Deps... &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemClipboard, &quot;Clipboard&quot;, Access::TUnsafe &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemImageLoader, &quot;ImageLoader&quot;, Access::TSafe &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemImages, &quot;Images&quot;, Access::TUnsafe, SystemOutput &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemInput, &quot;Input&quot;, Access::TSafe &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemNotify, &quot;Notifications&quot;, Access::TSafe &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemOutput, &quot;Output&quot;, Access::TUnsafe &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemScreen, Name, Ac, Deps... &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemSelector, Name, Ac, Deps... &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemHTTP, &quot;HTTP&quot;, d2::sys::Access::TSafe &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemSession, Name, Ac, Deps... &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemWS, &quot;WebSockets&quot;, d2::sys::Access::TSafe &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;</derivedcompoundref>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <innerclass refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" prot="public">d2::sys::SystemModule::ModPreset</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo" prot="public">d2::sys::SystemModule::ModInfo</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Status</name>
+        <qualifiedname>d2::sys::SystemModule::Status</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434aa60852f204ed8028c1c58808b746d115" prot="public">
+          <name>Ok</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434aaa95669cd5732a57e8f6467705f06642" prot="public">
+          <name>Degraded</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434ae139a585510a502bbf1841cf589f5086" prot="public">
+          <name>Failure</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434a8d9da4bc0e49a50e09ac9f7e56789d39" prot="public">
+          <name>Offline</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434a16bfbf9c462762cf1cba4134ec53c504" prot="public">
+          <name>Loading</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="54" column="9" bodyfile="core/io/d2_module.hpp" bodystart="55" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Compat</name>
+        <qualifiedname>d2::sys::SystemModule::Compat</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54a925641e0b76c28cc940e8f3ca178d826" prot="public">
+          <name>Native</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54a8045a0a6c688b0635e3caccc408a1446" prot="public">
+          <name>Generic</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54a88183b946cc5f0e8c96b2e66e1c74a7e" prot="public">
+          <name>Unknown</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54ad7c8c85bf79bbe1b7188497c32c3b0ca" prot="public">
+          <name>Failed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="62" column="9" bodyfile="core/io/d2_module.hpp" bodystart="63" bodyend="68"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemModule_1a23e5a7853711d3c6e21f94cd3f605d58" prot="private" static="no" mutable="no">
+        <type>const std::weak_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;</type>
+        <definition>const std::weak_ptr&lt;IOContext&gt; d2::sys::SystemModule::_ctx</definition>
+        <argsstring></argsstring>
+        <name>_ctx</name>
+        <qualifiedname>d2::sys::SystemModule::_ctx</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="82" column="29" bodyfile="core/io/d2_module.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemModule_1ab4747087300d3af75a38b21add523ec2" prot="private" static="no" mutable="no">
+        <type>const <ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">ModPreset</ref></type>
+        <definition>const ModPreset d2::sys::SystemModule::_preset</definition>
+        <argsstring></argsstring>
+        <name>_preset</name>
+        <qualifiedname>d2::sys::SystemModule::_preset</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="83" column="25" bodyfile="core/io/d2_module.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemModule_1a6fbf60fa37da88f92951d113cf6daa77" prot="private" static="no" mutable="no">
+        <type>const std::size_t</type>
+        <definition>const std::size_t d2::sys::SystemModule::_static_usage</definition>
+        <argsstring></argsstring>
+        <name>_static_usage</name>
+        <qualifiedname>d2::sys::SystemModule::_static_usage</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="84" column="27" bodyfile="core/io/d2_module.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemModule_1a4b8ed6a4ec2ac9b00ca136ffc085d698" prot="private" static="no" mutable="no">
+        <type>absl::flat_hash_set&lt; std::thread::id &gt;</type>
+        <definition>absl::flat_hash_set&lt;std::thread::id&gt; d2::sys::SystemModule::_safe_threads</definition>
+        <argsstring></argsstring>
+        <name>_safe_threads</name>
+        <qualifiedname>d2::sys::SystemModule::_safe_threads</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="85" column="29" bodyfile="core/io/d2_module.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemModule_1ad74ca537e3f35435378105550fd9c8e0" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; <ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref> &gt;</type>
+        <definition>std::atomic&lt;Status&gt; d2::sys::SystemModule::_status</definition>
+        <argsstring></argsstring>
+        <name>_status</name>
+        <qualifiedname>d2::sys::SystemModule::_status</qualifiedname>
+        <initializer>{<ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434a8d9da4bc0e49a50e09ac9f7e56789d39" kindref="member">Status::Offline</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="86" column="21" bodyfile="core/io/d2_module.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemModule::_mark_safe</definition>
+        <argsstring>(std::thread::id id=std::this_thread::get_id())</argsstring>
+        <name>_mark_safe</name>
+        <qualifiedname>d2::sys::SystemModule::_mark_safe</qualifiedname>
+        <param>
+          <type>std::thread::id</type>
+          <declname>id</declname>
+          <defval>std::this_thread::get_id()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="88" column="14" bodyfile="core/io/d2_module.cpp" bodystart="11" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemModule::_transition</definition>
+        <argsstring>(bool loading, std::function&lt; Status()&gt; callback)</argsstring>
+        <name>_transition</name>
+        <qualifiedname>d2::sys::SystemModule::_transition</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>loading</declname>
+        </param>
+        <param>
+          <type>std::function&lt; <ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref>()&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="89" column="14" bodyfile="core/io/d2_module.cpp" bodystart="20" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemModule::_stat</definition>
+        <argsstring>(Status status)</argsstring>
+        <name>_stat</name>
+        <qualifiedname>d2::sys::SystemModule::_stat</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="90" column="14" bodyfile="core/io/d2_module.cpp" bodystart="50" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemModule::Status d2::sys::SystemModule::_pre_load_impl</definition>
+        <argsstring>()</argsstring>
+        <name>_pre_load_impl</name>
+        <qualifiedname>d2::sys::SystemModule::_pre_load_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="92" column="24" bodyfile="core/io/d2_module.cpp" bodystart="55" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemModule::Status d2::sys::SystemModule::_post_unload_impl</definition>
+        <argsstring>()</argsstring>
+        <name>_post_unload_impl</name>
+        <qualifiedname>d2::sys::SystemModule::_post_unload_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="93" column="24" bodyfile="core/io/d2_module.cpp" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemModule::Status d2::sys::SystemModule::_load_impl</definition>
+        <argsstring>()</argsstring>
+        <name>_load_impl</name>
+        <qualifiedname>d2::sys::SystemModule::_load_impl</qualifiedname>
+        <reimplementedby refid="classd2_1_1sys_1_1SystemAudio_1a7a5128c85e2649f03683364effb31342">_load_impl</reimplementedby>
+        <reimplementedby refid="classd2_1_1sys_1_1SystemImages_1afca14fdd8cc7af5152dc2d517da46574">_load_impl</reimplementedby>
+        <reimplementedby refid="classd2_1_1sys_1_1SystemScreen_1a368b4be8b34f14a1b09080613c06bf94">_load_impl</reimplementedby>
+        <reimplementedby refid="classd2_1_1sys_1_1SystemSelector_1a3d5db74a6b6a7c8ff7bcb54f7ed8e174">_load_impl</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="95" column="24" bodyfile="core/io/d2_module.cpp" bodystart="64" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemModule::Status d2::sys::SystemModule::_unload_impl</definition>
+        <argsstring>()</argsstring>
+        <name>_unload_impl</name>
+        <qualifiedname>d2::sys::SystemModule::_unload_impl</qualifiedname>
+        <reimplementedby refid="classd2_1_1sys_1_1SystemAudio_1a579e75c694e31451a81ce86ad096167b">_unload_impl</reimplementedby>
+        <reimplementedby refid="classd2_1_1sys_1_1SystemImages_1a2ac478e80c203f0f5184e40e4b4dea07">_unload_impl</reimplementedby>
+        <reimplementedby refid="classd2_1_1sys_1_1SystemScreen_1ab6effeea66a4713269015da96fb68c26">_unload_impl</reimplementedby>
+        <reimplementedby refid="classd2_1_1sys_1_1SystemSelector_1ad036a5a11432bb2a085bac793757c8ab">_unload_impl</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="96" column="24" bodyfile="core/io/d2_module.cpp" bodystart="68" bodyend="71"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" kindref="member">Compat</ref></type>
+        <definition>SystemModule::Compat d2::sys::SystemModule::compatible</definition>
+        <argsstring>()</argsstring>
+        <name>compatible</name>
+        <qualifiedname>d2::sys::SystemModule::compatible</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="98" column="23" bodyfile="core/io/d2_module.cpp" bodystart="73" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref></type>
+          </param>
+        </templateparamlist>
+        <type>std::unique_ptr&lt; <ref refid="structd2_1_1sys_1_1Module" kindref="compound">Module</ref> &gt;</type>
+        <definition>static std::unique_ptr&lt; Module &gt; d2::sys::SystemModule::make</definition>
+        <argsstring>(std::weak_ptr&lt; IOContext &gt; ctx)</argsstring>
+        <name>make</name>
+        <qualifiedname>d2::sys::SystemModule::make</qualifiedname>
+        <param>
+          <type>std::weak_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="100" column="43" bodyfile="core/io/d2_module.hpp" bodystart="100" bodyend="103"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::SystemModule::SystemModule</definition>
+        <argsstring>(std::weak_ptr&lt; IOContext &gt; ptr, ModPreset preset, std::size_t static_usage)</argsstring>
+        <name>SystemModule</name>
+        <qualifiedname>d2::sys::SystemModule::SystemModule</qualifiedname>
+        <param>
+          <type>std::weak_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">ModPreset</ref></type>
+          <declname>preset</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>static_usage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="105" column="9" bodyfile="core/io/d2_module.cpp" bodystart="78" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::sys::SystemModule::~SystemModule</definition>
+        <argsstring>()=default</argsstring>
+        <name>~SystemModule</name>
+        <qualifiedname>d2::sys::SystemModule::~SystemModule</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="106" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a56b990ee428e7704a4be33ac65e2fb66" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo" kindref="compound">ModInfo</ref></type>
+        <definition>virtual ModInfo d2::sys::SystemModule::info</definition>
+        <argsstring>() const =0</argsstring>
+        <name>info</name>
+        <qualifiedname>d2::sys::SystemModule::info</qualifiedname>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <reimplementedby refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154">info</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="108" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">ModPreset</ref></type>
+        <definition>SystemModule::ModPreset d2::sys::SystemModule::preset</definition>
+        <argsstring>() const</argsstring>
+        <name>preset</name>
+        <qualifiedname>d2::sys::SystemModule::preset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="109" column="19" bodyfile="core/io/d2_module.cpp" bodystart="84" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a96e8068f6f21a92e0f8fc1fa71a59161" kindref="member">Load</ref></type>
+        <definition>Load d2::sys::SystemModule::load_type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>load_type</name>
+        <qualifiedname>d2::sys::SystemModule::load_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="110" column="14" bodyfile="core/io/d2_module.cpp" bodystart="88" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a0ca7d25c3a0a481de124a30ff73dc786" kindref="member">Access</ref></type>
+        <definition>Access d2::sys::SystemModule::access</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>access</name>
+        <qualifiedname>d2::sys::SystemModule::access</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="111" column="16" bodyfile="core/io/d2_module.cpp" bodystart="92" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemModule::static_usage</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>static_usage</name>
+        <qualifiedname>d2::sys::SystemModule::static_usage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="112" column="21" bodyfile="core/io/d2_module.cpp" bodystart="96" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const std::type_index &gt;</type>
+        <definition>std::span&lt; const std::type_index &gt; d2::sys::SystemModule::dependencies</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>dependencies</name>
+        <qualifiedname>d2::sys::SystemModule::dependencies</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="114" column="19" bodyfile="core/io/d2_module.cpp" bodystart="100" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::span&lt; const std::string &gt;</type>
+        <definition>std::span&lt; const std::string &gt; d2::sys::SystemModule::dependency_names</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>dependency_names</name>
+        <qualifiedname>d2::sys::SystemModule::dependency_names</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="115" column="19" bodyfile="core/io/d2_module.cpp" bodystart="104" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1IOContext" kindref="compound">IOContext</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; IOContext &gt; d2::sys::SystemModule::context</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>context</name>
+        <qualifiedname>d2::sys::SystemModule::context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="116" column="25" bodyfile="core/io/d2_module.cpp" bodystart="108" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemModule::Status d2::sys::SystemModule::status</definition>
+        <argsstring>()</argsstring>
+        <name>status</name>
+        <qualifiedname>d2::sys::SystemModule::status</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="118" column="16" bodyfile="core/io/d2_module.cpp" bodystart="113" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemModule::load</definition>
+        <argsstring>()</argsstring>
+        <name>load</name>
+        <qualifiedname>d2::sys::SystemModule::load</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="119" column="14" bodyfile="core/io/d2_module.cpp" bodystart="117" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemModule::unload</definition>
+        <argsstring>()</argsstring>
+        <name>unload</name>
+        <qualifiedname>d2::sys::SystemModule::unload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="120" column="14" bodyfile="core/io/d2_module.cpp" bodystart="138" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemModule::accessible</definition>
+        <argsstring>() const</argsstring>
+        <name>accessible</name>
+        <qualifiedname>d2::sys::SystemModule::accessible</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="121" column="14" bodyfile="core/io/d2_module.cpp" bodystart="157" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>Type *</type>
+        <definition>Type * d2::sys::SystemModule::as</definition>
+        <argsstring>()</argsstring>
+        <name>as</name>
+        <qualifiedname>d2::sys::SystemModule::as</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="123" column="25" bodyfile="core/io/d2_module.hpp" bodystart="123" bodyend="131"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>d2::sys::Module&lt; Base, Name, Ac, LoadType, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>d2::sys::Module&lt; SystemBinder, &quot;Binder&quot;, Access::TUnsafe, Load::Lazy, sys::SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>d2::sys::Module&lt; SystemScreen, &quot;Screen&quot;, Access::TUnsafe, Load::Immediate, SystemInput, SystemOutput &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="22" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>d2::sys::Module&lt; SystemSelector, &quot;Selector&quot;, Access::TUnsafe, Load::Immediate, SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="25" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>d2::sys::Module&lt; SystemSession, &quot;Session&quot;, Access::TSafe, Load::Lazy &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="30" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleDecl&lt; SystemAudio, &quot;Audio&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>d2::sys::ModuleDecl&lt; SystemBinder, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>d2::sys::ModuleDecl&lt; SystemClipboard, &quot;Clipboard&quot;, Access::TUnsafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>d2::sys::ModuleDecl&lt; SystemHTTP, &quot;HTTP&quot;, d2::sys::Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>d2::sys::ModuleDecl&lt; SystemImageLoader, &quot;ImageLoader&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>d2::sys::ModuleDecl&lt; SystemImages, &quot;Images&quot;, Access::TUnsafe, SystemOutput &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>d2::sys::ModuleDecl&lt; SystemInput, &quot;Input&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>d2::sys::ModuleDecl&lt; SystemNotify, &quot;Notifications&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>d2::sys::ModuleDecl&lt; SystemOutput, &quot;Output&quot;, Access::TUnsafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>d2::sys::ModuleDecl&lt; SystemScreen, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>d2::sys::ModuleDecl&lt; SystemSelector, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>d2::sys::ModuleDecl&lt; SystemSession, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>d2::sys::ModuleDecl&lt; SystemWS, &quot;WebSockets&quot;, d2::sys::Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>d2::sys::SystemAudio</label>
+        <link refid="classd2_1_1sys_1_1SystemAudio"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>d2::sys::SystemBinder</label>
+        <link refid="classd2_1_1sys_1_1SystemBinder"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>d2::sys::SystemClipboard</label>
+        <link refid="classd2_1_1sys_1_1SystemClipboard"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>d2::sys::SystemImageLoader</label>
+        <link refid="classd2_1_1sys_1_1SystemImageLoader"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>d2::sys::SystemImages</label>
+        <link refid="classd2_1_1sys_1_1SystemImages"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>d2::sys::SystemInput</label>
+        <link refid="classd2_1_1sys_1_1SystemInput"/>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>d2::sys::SystemNotify</label>
+        <link refid="classd2_1_1sys_1_1SystemNotify"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>d2::sys::SystemOutput</label>
+        <link refid="classd2_1_1sys_1_1SystemOutput"/>
+        <childnode refid="20" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>d2::sys::SystemScreen</label>
+        <link refid="classd2_1_1sys_1_1SystemScreen"/>
+        <childnode refid="23" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>d2::sys::SystemSelector</label>
+        <link refid="classd2_1_1sys_1_1SystemSelector"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>d2::sys::net::SystemHTTP</label>
+        <link refid="classd2_1_1sys_1_1net_1_1SystemHTTP"/>
+        <childnode refid="28" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>d2::sys::net::SystemSession</label>
+        <link refid="classd2_1_1sys_1_1net_1_1SystemSession"/>
+        <childnode refid="31" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>d2::sys::net::SystemWS</label>
+        <link refid="classd2_1_1sys_1_1net_1_1SystemWS"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_module.hpp" line="51" column="5" bodyfile="core/io/d2_module.hpp" bodystart="52" bodyend="132"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a23e5a7853711d3c6e21f94cd3f605d58" prot="private" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>_ctx</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3" prot="protected" virt="virtual"><scope>d2::sys::SystemModule</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::SystemModule</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::SystemModule</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab4747087300d3af75a38b21add523ec2" prot="private" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>_preset</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a4b8ed6a4ec2ac9b00ca136ffc085d698" prot="private" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>_safe_threads</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a6fbf60fa37da88f92951d113cf6daa77" prot="private" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>_static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad74ca537e3f35435378105550fd9c8e0" prot="private" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>_status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730" prot="protected" virt="virtual"><scope>d2::sys::SystemModule</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>context</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>dependency_names</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a56b990ee428e7704a4be33ac65e2fb66" prot="public" virt="pure-virtual"><scope>d2::sys::SystemModule</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>make</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>preset</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::SystemModule</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

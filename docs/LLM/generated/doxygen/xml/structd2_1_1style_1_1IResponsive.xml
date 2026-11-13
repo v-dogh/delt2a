@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1IResponsive" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::IResponsive</compoundname>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <innerclass refid="structd2_1_1style_1_1IResponsive_1_1type" prot="public">d2::style::IResponsive::type</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Argv</declname>
+        <defname>Argv</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="996" column="17" bodyfile="core/tree/d2_styles.hpp" bodystart="997" bodyend="1007"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

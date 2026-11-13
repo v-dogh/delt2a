@@ -1,0 +1,361 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1StringIterator" kind="class" language="C++" prot="public">
+    <compoundname>d2::StringIterator</compoundname>
+    <includes refid="d2__platform__string_8hpp" local="no">d2_platform_string.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1StringIterator_1ad8b9c59e0eee228cb053853279bc91d6" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1a7fe2118fa5d105aea8dc60a5aca629cc" kindref="member">string_view</ref></type>
+        <definition>string_view d2::StringIterator::_str</definition>
+        <argsstring></argsstring>
+        <name>_str</name>
+        <qualifiedname>d2::StringIterator::_str</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="17" column="21" bodyfile="core/platform/d2_platform_string.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1StringIterator_1a761f5683fc3fd69b80f40221064c14ef" prot="private" static="no" mutable="no">
+        <type>string_view::iterator</type>
+        <definition>string_view::iterator d2::StringIterator::_it</definition>
+        <argsstring></argsstring>
+        <name>_it</name>
+        <qualifiedname>d2::StringIterator::_it</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="18" column="31" bodyfile="core/platform/d2_platform_string.hpp" bodystart="18" bodyend="18"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a0369bd31614fc42040616676390bc528" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::StringIterator::distance</definition>
+        <argsstring>(const StringIterator &amp;first, const StringIterator &amp;second)</argsstring>
+        <name>distance</name>
+        <qualifiedname>d2::StringIterator::distance</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref> &amp;</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref> &amp;</type>
+          <declname>second</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="20" column="28" bodyfile="core/platform/d2_platform_string.cpp" bodystart="8" bodyend="15"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::StringIterator::StringIterator</definition>
+        <argsstring>(StringIterator &amp;)=default</argsstring>
+        <name>StringIterator</name>
+        <qualifiedname>d2::StringIterator::StringIterator</qualifiedname>
+        <param>
+          <type>StringIterator &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="22" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a9eb082389540cb14254f4288e10f8a7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::StringIterator::StringIterator</definition>
+        <argsstring>(const StringIterator &amp;)=default</argsstring>
+        <name>StringIterator</name>
+        <qualifiedname>d2::StringIterator::StringIterator</qualifiedname>
+        <param>
+          <type>const StringIterator &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="23" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a26478bbb04c4591d9542620eb4b90dfd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::StringIterator::StringIterator</definition>
+        <argsstring>(string_view str)</argsstring>
+        <name>StringIterator</name>
+        <qualifiedname>d2::StringIterator::StringIterator</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a7fe2118fa5d105aea8dc60a5aca629cc" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="24" column="9" bodyfile="core/platform/d2_platform_string.hpp" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1af1c3fa1fb55c691b6ab12d8e4bf24403" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::StringIterator::StringIterator</definition>
+        <argsstring>(string_view str, string_view::iterator it)</argsstring>
+        <name>StringIterator</name>
+        <qualifiedname>d2::StringIterator::StringIterator</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a7fe2118fa5d105aea8dc60a5aca629cc" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <param>
+          <type>string_view::iterator</type>
+          <declname>it</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="25" column="9" bodyfile="core/platform/d2_platform_string.hpp" bodystart="25" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1af096d4e0808ff9284bd741c8a3e39472" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref></type>
+        <definition>StringIterator d2::StringIterator::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <qualifiedname>d2::StringIterator::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="27" column="24" bodyfile="core/platform/d2_platform_string.cpp" bodystart="17" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1ab543f2e0e42dde7e56f09e86953a389d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref></type>
+        <definition>StringIterator d2::StringIterator::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <qualifiedname>d2::StringIterator::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="28" column="24" bodyfile="core/platform/d2_platform_string.cpp" bodystart="21" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a62ad3d6759e594c299ce78c828075031" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::StringIterator::increment</definition>
+        <argsstring>()</argsstring>
+        <name>increment</name>
+        <qualifiedname>d2::StringIterator::increment</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="30" column="14" bodyfile="core/platform/d2_platform_string.cpp" bodystart="26" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1afbd844bf60898f1fcf99df15f14836fc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1a7fe2118fa5d105aea8dc60a5aca629cc" kindref="member">string_view</ref></type>
+        <definition>string_view d2::StringIterator::current</definition>
+        <argsstring>() const</argsstring>
+        <name>current</name>
+        <qualifiedname>d2::StringIterator::current</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="31" column="21" bodyfile="core/platform/d2_platform_string.cpp" bodystart="32" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a2c1490fc97ff2196bc927491561a632d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::StringIterator::is_end</definition>
+        <argsstring>() const</argsstring>
+        <name>is_end</name>
+        <qualifiedname>d2::StringIterator::is_end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="33" column="14" bodyfile="core/platform/d2_platform_string.cpp" bodystart="37" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1ad67fd25ffe9c7e95c5fe50b25cea3852" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::StringIterator::is_space</definition>
+        <argsstring>() const</argsstring>
+        <name>is_space</name>
+        <qualifiedname>d2::StringIterator::is_space</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="34" column="14" bodyfile="core/platform/d2_platform_string.cpp" bodystart="41" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1ad199b65656b6f4b1d62410df024bcc4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::StringIterator::is_endline</definition>
+        <argsstring>() const</argsstring>
+        <name>is_endline</name>
+        <qualifiedname>d2::StringIterator::is_endline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="35" column="14" bodyfile="core/platform/d2_platform_string.cpp" bodystart="45" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a9347c490c466cad4d916c2e982795ca9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref> &amp;</type>
+        <definition>StringIterator &amp; d2::StringIterator::operator=</definition>
+        <argsstring>(const StringIterator &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::StringIterator::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="37" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a7bfc5b0a81c786a19e29efad08fa51ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref> &amp;</type>
+        <definition>StringIterator &amp; d2::StringIterator::operator=</definition>
+        <argsstring>(StringIterator &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::StringIterator::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="38" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a2e649e15a6e74883c6c4cf3ad8f61c59" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::StringIterator::operator==</definition>
+        <argsstring>(const StringIterator &amp;copy) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::StringIterator::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref> &amp;</type>
+          <declname>copy</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="40" column="14" bodyfile="core/platform/d2_platform_string.cpp" bodystart="50" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1ac9f80cc3f692ff2c067fb5993fb891fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref> &amp;</type>
+        <definition>StringIterator &amp; d2::StringIterator::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>d2::StringIterator::operator++</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="41" column="24" bodyfile="core/platform/d2_platform_string.cpp" bodystart="58" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a00681f5b2a3c0d0ba07c90796718ecbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" kindref="member">StringIterator</ref></type>
+        <definition>StringIterator d2::StringIterator::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>d2::StringIterator::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="42" column="24" bodyfile="core/platform/d2_platform_string.cpp" bodystart="63" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1StringIterator_1a4c1d31c1aa6dfff091e37aaca5abea1d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1a7fe2118fa5d105aea8dc60a5aca629cc" kindref="member">string_view</ref></type>
+        <definition>string_view d2::StringIterator::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::StringIterator::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_platform_string.hpp" line="43" column="21" bodyfile="core/platform/d2_platform_string.cpp" bodystart="54" bodyend="57"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_platform_string.hpp" line="14" column="5" bodyfile="core/platform/d2_platform_string.hpp" bodystart="15" bodyend="44"/>
+    <listofallmembers>
+      <member refid="classd2_1_1StringIterator_1a761f5683fc3fd69b80f40221064c14ef" prot="private" virt="non-virtual"><scope>d2::StringIterator</scope><name>_it</name></member>
+      <member refid="classd2_1_1StringIterator_1ad8b9c59e0eee228cb053853279bc91d6" prot="private" virt="non-virtual"><scope>d2::StringIterator</scope><name>_str</name></member>
+      <member refid="classd2_1_1StringIterator_1af096d4e0808ff9284bd741c8a3e39472" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>begin</name></member>
+      <member refid="classd2_1_1StringIterator_1afbd844bf60898f1fcf99df15f14836fc" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>current</name></member>
+      <member refid="classd2_1_1StringIterator_1a0369bd31614fc42040616676390bc528" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>distance</name></member>
+      <member refid="classd2_1_1StringIterator_1ab543f2e0e42dde7e56f09e86953a389d" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>end</name></member>
+      <member refid="classd2_1_1StringIterator_1a62ad3d6759e594c299ce78c828075031" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>increment</name></member>
+      <member refid="classd2_1_1StringIterator_1a2c1490fc97ff2196bc927491561a632d" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>is_end</name></member>
+      <member refid="classd2_1_1StringIterator_1ad199b65656b6f4b1d62410df024bcc4a" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>is_endline</name></member>
+      <member refid="classd2_1_1StringIterator_1ad67fd25ffe9c7e95c5fe50b25cea3852" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>is_space</name></member>
+      <member refid="classd2_1_1StringIterator_1a4c1d31c1aa6dfff091e37aaca5abea1d" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>operator*</name></member>
+      <member refid="classd2_1_1StringIterator_1ac9f80cc3f692ff2c067fb5993fb891fb" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>operator++</name></member>
+      <member refid="classd2_1_1StringIterator_1a00681f5b2a3c0d0ba07c90796718ecbd" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>operator++</name></member>
+      <member refid="classd2_1_1StringIterator_1a9347c490c466cad4d916c2e982795ca9" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>operator=</name></member>
+      <member refid="classd2_1_1StringIterator_1a7bfc5b0a81c786a19e29efad08fa51ac" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>operator=</name></member>
+      <member refid="classd2_1_1StringIterator_1a2e649e15a6e74883c6c4cf3ad8f61c59" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>operator==</name></member>
+      <member refid="classd2_1_1StringIterator_1aca1ff1308ee81f9375cd347192033fb4" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>StringIterator</name></member>
+      <member refid="classd2_1_1StringIterator_1a9eb082389540cb14254f4288e10f8a7a" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>StringIterator</name></member>
+      <member refid="classd2_1_1StringIterator_1a26478bbb04c4591d9542620eb4b90dfd" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>StringIterator</name></member>
+      <member refid="classd2_1_1StringIterator_1af1c3fa1fb55c691b6ab12d8e4bf24403" prot="public" virt="non-virtual"><scope>d2::StringIterator</scope><name>StringIterator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

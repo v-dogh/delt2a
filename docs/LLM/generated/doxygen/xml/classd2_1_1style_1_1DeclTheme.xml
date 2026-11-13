@@ -1,0 +1,232 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1style_1_1DeclTheme" kind="class" language="C++" prot="public">
+    <compoundname>d2::style::DeclTheme</compoundname>
+    <basecompoundref refid="classd2_1_1style_1_1Theme" prot="public" virt="non-virtual">d2::style::Theme</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">Deps</basecompoundref>
+    <includes refid="d2__theme_8hpp" local="no">d2_theme.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Base</type>
+      </param>
+      <param>
+        <type>typename Deps</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Ts</declname>
+        <defname>Ts</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1style_1_1DeclTheme_1a1a5b245bb55b9bcad6abfbecf576eded" prot="private" static="no" mutable="no">
+        <type>std::tuple&lt; <ref refid="classd2_1_1style_1_1Dependency" kindref="compound">Dependency</ref>&lt; typename Ts::type &gt;... &gt;</type>
+        <definition>std::tuple&lt;Dependency&lt;typename Ts::type&gt;...&gt; d2::style::DeclTheme&lt; Base, Deps, Ts &gt;::_deps</definition>
+        <argsstring></argsstring>
+        <name>_deps</name>
+        <qualifiedname>d2::style::DeclTheme::_deps</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="690" column="20" bodyfile="core/tree/d2_theme.hpp" bodystart="690" bodyend="690"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1style_1_1DeclTheme_1ab6f554ae2cf01a1d9c04f393fd6fbe3f" prot="public" static="yes" mutable="no">
+        <type>const auto</type>
+        <definition>const auto d2::style::DeclTheme&lt; Base, Deps, Ts &gt;::tc</definition>
+        <argsstring></argsstring>
+        <name>tc</name>
+        <qualifiedname>d2::style::DeclTheme::tc</qualifiedname>
+        <initializer>= typeid(typename Deps::Deps).hash_code()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="692" column="34" bodyfile="core/tree/d2_theme.hpp" bodystart="692" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1style_1_1DeclTheme_1a235b63dbc8ea7c9111b11b4a1b53f312" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DeclTheme&lt; Base, Deps, Ts &gt;::DeclTheme</definition>
+        <argsstring>()=default</argsstring>
+        <name>DeclTheme</name>
+        <qualifiedname>d2::style::DeclTheme::DeclTheme</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="694" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DeclTheme_1a80a18afb9491a9dfb6b3f3c465ba390b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DeclTheme&lt; Base, Deps, Ts &gt;::DeclTheme</definition>
+        <argsstring>(const DeclTheme &amp;)=default</argsstring>
+        <name>DeclTheme</name>
+        <qualifiedname>d2::style::DeclTheme::DeclTheme</qualifiedname>
+        <param>
+          <type>const DeclTheme &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="695" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DeclTheme_1a80735eda44a17ffdde6cde5414c21d1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::style::DeclTheme&lt; Base, Deps, Ts &gt;::DeclTheme</definition>
+        <argsstring>(DeclTheme &amp;&amp;)=default</argsstring>
+        <name>DeclTheme</name>
+        <qualifiedname>d2::style::DeclTheme::DeclTheme</qualifiedname>
+        <param>
+          <type>DeclTheme &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="696" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DeclTheme_1a4a9c398b6b2e5d1d44cc6f0d6f9db999" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>Deps::Deps</type>
+            <declname>Idx</declname>
+            <defname>Idx</defname>
+          </param>
+        </templateparamlist>
+        <type>auto &amp;</type>
+        <definition>auto &amp; d2::style::DeclTheme&lt; Base, Deps, Ts &gt;::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::style::DeclTheme::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="700" column="25" bodyfile="core/tree/d2_theme.hpp" bodystart="700" bodyend="703"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DeclTheme_1a43631bb6aee6c5e0b0dd6d2852338568" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1style_1_1DeclTheme_1a235b63dbc8ea7c9111b11b4a1b53f312" kindref="member">DeclTheme</ref> &amp;</type>
+        <definition>DeclTheme &amp; d2::style::DeclTheme&lt; Base, Deps, Ts &gt;::operator=</definition>
+        <argsstring>(const DeclTheme &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::style::DeclTheme::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1style_1_1DeclTheme_1a235b63dbc8ea7c9111b11b4a1b53f312" kindref="member">DeclTheme</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="705" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1style_1_1DeclTheme_1af8dceb8b8bf05e5a50dff67473a8d43c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1style_1_1DeclTheme_1a235b63dbc8ea7c9111b11b4a1b53f312" kindref="member">DeclTheme</ref> &amp;</type>
+        <definition>DeclTheme &amp; d2::style::DeclTheme&lt; Base, Deps, Ts &gt;::operator=</definition>
+        <argsstring>(DeclTheme &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::style::DeclTheme::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1style_1_1DeclTheme_1a235b63dbc8ea7c9111b11b4a1b53f312" kindref="member">DeclTheme</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_theme.hpp" line="706" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>Deps</label>
+      </node>
+      <node id="1">
+        <label>d2::style::DeclTheme&lt; Base, Deps, Ts &gt;</label>
+        <link refid="classd2_1_1style_1_1DeclTheme"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::style::Theme</label>
+        <link refid="classd2_1_1style_1_1Theme"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Theme &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>Deps</label>
+      </node>
+      <node id="1">
+        <label>d2::style::DeclTheme&lt; Base, Deps, Ts &gt;</label>
+        <link refid="classd2_1_1style_1_1DeclTheme"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::style::Theme</label>
+        <link refid="classd2_1_1style_1_1Theme"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::enable_shared_from_this&lt; Theme &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_theme.hpp" line="687" column="5" bodyfile="core/tree/d2_theme.hpp" bodystart="688" bodyend="707"/>
+    <listofallmembers>
+      <member refid="classd2_1_1style_1_1DeclTheme_1a1a5b245bb55b9bcad6abfbecf576eded" prot="private" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>_deps</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a18c9ca6d7c1c58e179e6e5ffd85517cd" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>as</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a51113198158173acbf0b8f54648d8d52" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>code</name></member>
+      <member refid="classd2_1_1style_1_1DeclTheme_1a235b63dbc8ea7c9111b11b4a1b53f312" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>DeclTheme</name></member>
+      <member refid="classd2_1_1style_1_1DeclTheme_1a80a18afb9491a9dfb6b3f3c465ba390b" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>DeclTheme</name></member>
+      <member refid="classd2_1_1style_1_1DeclTheme_1a80735eda44a17ffdde6cde5414c21d1c" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>DeclTheme</name></member>
+      <member refid="classd2_1_1style_1_1DeclTheme_1a4a9c398b6b2e5d1d44cc6f0d6f9db999" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>get</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1ab4be829f19ece053d799e375dbac588e" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>id_to_code</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1ab531f02f9eaa3bca8a7a0bebe3019e7a" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>make</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a37a522b44b50858eeed60bdb4c41d7b2" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>make_named</name></member>
+      <member refid="classd2_1_1style_1_1DeclTheme_1a43631bb6aee6c5e0b0dd6d2852338568" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>operator=</name></member>
+      <member refid="classd2_1_1style_1_1DeclTheme_1af8dceb8b8bf05e5a50dff67473a8d43c" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>operator=</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1aa3f0f65981f678f3e0d3ab027c9b1133" prot="public" virt="non-virtual" ambiguityscope="d2::style::Theme::"><scope>d2::style::DeclTheme</scope><name>operator=</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a0f99d2da312ebeb749d44b5066371018" prot="public" virt="non-virtual" ambiguityscope="d2::style::Theme::"><scope>d2::style::DeclTheme</scope><name>operator=</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1ae2b911c9b8525c4f0e2c11bc9207bb0a" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>ptr</name></member>
+      <member refid="classd2_1_1style_1_1DeclTheme_1ab6f554ae2cf01a1d9c04f393fd6fbe3f" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>tc</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a19bfca17e2d9687ba60d1095b6749045" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>Theme</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a082949ccd9f0833aa3825a1ab2d97ca4" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>Theme</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a33636c991ecdc1d591276e13a3692bbe" prot="public" virt="non-virtual"><scope>d2::style::DeclTheme</scope><name>Theme</name></member>
+      <member refid="classd2_1_1style_1_1Theme_1a9c53b54908552ab8d13d06ae3330009a" prot="public" virt="virtual"><scope>d2::style::DeclTheme</scope><name>~Theme</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

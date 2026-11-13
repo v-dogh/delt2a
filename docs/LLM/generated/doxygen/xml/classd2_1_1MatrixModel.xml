@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1MatrixModel" kind="class" language="C++" prot="public">
+    <compoundname>d2::MatrixModel</compoundname>
+    <basecompoundref refid="classd2_1_1PixelBuffer" prot="public" virt="non-virtual">d2::PixelBuffer</basecompoundref>
+    <includes refid="d2__model_8hpp" local="no">d2_model.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1MatrixModel_1aa08b921ef07dc6a42626be5b6d9b8df9" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>ModelType</name>
+        <qualifiedname>d2::MatrixModel::ModelType</qualifiedname>
+        <enumvalue id="classd2_1_1MatrixModel_1aa08b921ef07dc6a42626be5b6d9b8df9a65e65c8ab0d8609ce12fc68a03cb8e00" prot="public">
+          <name>Raw</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1MatrixModel_1aa08b921ef07dc6a42626be5b6d9b8df9a4557e77491fe3dbd9a6055aeb0ed00d7" prot="public">
+          <name>Visual</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="13" column="1" bodyfile="core/utils/d2_model.hpp" bodystart="14" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1MatrixModel_1afe8b0ec9e295c674b9070da06f9bc82b" prot="public" static="no" strong="no">
+        <type>std::uint8_t</type>
+        <name>ModelHeader</name>
+        <qualifiedname>d2::MatrixModel::ModelHeader</qualifiedname>
+        <enumvalue id="classd2_1_1MatrixModel_1afe8b0ec9e295c674b9070da06f9bc82ba74e5c140126013a490ae084b040d0dc0" prot="public">
+          <name>Endian</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1MatrixModel_1afe8b0ec9e295c674b9070da06f9bc82ba580619fc314f6987e309619ae5540083" prot="public">
+          <name>Compressed</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1MatrixModel_1afe8b0ec9e295c674b9070da06f9bc82ba6ca562b29094eec70ce9de42a9ee6bf2" prot="public">
+          <name>Extended</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="18" column="1" bodyfile="core/utils/d2_model.hpp" bodystart="19" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1MatrixModel_1a9f8f4438cdd7d1383d98715a61aeb893" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1MatrixModel" kindref="compound">MatrixModel</ref> &gt;</type>
+        <definition>using d2::MatrixModel::ptr = std::shared_ptr&lt;MatrixModel&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::MatrixModel::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="25" column="1" bodyfile="core/utils/d2_model.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1MatrixModel_1a33fb950c1fd0c44e429646b1336d65fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1MatrixModel_1a9f8f4438cdd7d1383d98715a61aeb893" kindref="member">MatrixModel::ptr</ref></type>
+        <definition>MatrixModel::ptr d2::MatrixModel::make</definition>
+        <argsstring>(int width=0, int height=0)</argsstring>
+        <name>make</name>
+        <qualifiedname>d2::MatrixModel::make</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="28" column="25" bodyfile="core/utils/d2_model.cpp" bodystart="7" bodyend="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1MatrixModel_1a47aa340b507405bac97a1a7c7e6471c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::MatrixModel::load_model</definition>
+        <argsstring>(const std::string &amp;path, ModelType type)</argsstring>
+        <name>load_model</name>
+        <qualifiedname>d2::MatrixModel::load_model</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1MatrixModel_1aa08b921ef07dc6a42626be5b6d9b8df9" kindref="member">ModelType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="30" column="6" bodyfile="core/utils/d2_model.cpp" bodystart="14" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MatrixModel_1a3227c69187fa404ab993e6768d6241d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::MatrixModel::save_model</definition>
+        <argsstring>(const std::string &amp;path, ModelType type)</argsstring>
+        <name>save_model</name>
+        <qualifiedname>d2::MatrixModel::save_model</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1MatrixModel_1aa08b921ef07dc6a42626be5b6d9b8df9" kindref="member">ModelType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="31" column="6" bodyfile="core/utils/d2_model.cpp" bodystart="110" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MatrixModel_1a0811954974ec98040ccde37cf00377e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::PixelBuffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>PixelBuffer</name>
+        <qualifiedname>d2::MatrixModel::PixelBuffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="26" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MatrixModel_1aeb76b5fd3e908eb7c3c1dd3e7694e3bd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::PixelBuffer</definition>
+        <argsstring>(int w, int h)</argsstring>
+        <name>PixelBuffer</name>
+        <qualifiedname>d2::MatrixModel::PixelBuffer</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>w</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>h</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="26" column="1" bodyfile="core/types/d2_pixel.hpp" bodystart="127" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MatrixModel_1ad4b88fe51d0f7c562d8c94afee9cd6d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::PixelBuffer</definition>
+        <argsstring>(const PixelBuffer &amp;)=default</argsstring>
+        <name>PixelBuffer</name>
+        <qualifiedname>d2::MatrixModel::PixelBuffer</qualifiedname>
+        <param>
+          <type>const PixelBuffer &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="26" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1MatrixModel_1a5dc2d48a6c94b79c1a856f838ad6fe47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::PixelBuffer::PixelBuffer</definition>
+        <argsstring>(PixelBuffer &amp;&amp;)=default</argsstring>
+        <name>PixelBuffer</name>
+        <qualifiedname>d2::MatrixModel::PixelBuffer</qualifiedname>
+        <param>
+          <type>PixelBuffer &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/utils/d2_model.hpp" line="26" column="1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::MatrixModel</label>
+        <link refid="classd2_1_1MatrixModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::PixelBuffer</label>
+        <link refid="classd2_1_1PixelBuffer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::MatrixModel</label>
+        <link refid="classd2_1_1MatrixModel"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::PixelBuffer</label>
+        <link refid="classd2_1_1PixelBuffer"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>images_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::image::Scene</label>
+        <link refid="classd2_1_1image_1_1Scene"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/utils/d2_model.hpp" line="9" column="1" bodyfile="core/utils/d2_model.hpp" bodystart="10" bodyend="32"/>
+    <listofallmembers>
+      <member refid="classd2_1_1PixelBuffer_1a019b9052eaf736f859d5f5a9f2bb5619" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>at</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a84eda5eaad2503a06d579bfe8529e3ae" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>at</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a586a9336de724671a7649053661d8c1e" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>at</name></member>
+      <member refid="classd2_1_1PixelBuffer_1afdb896589573d9a176780d996d38ed20" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>at</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a0fe14f8c7d20750e4988ccbdad69bfe6" prot="protected" virt="non-virtual"><scope>d2::MatrixModel</scope><name>buffer_</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a3e7d82fea8c7a9e6497e2286cc13bee9" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>clear</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a8c1c70421c67dc261d4f9f1ea6ba290c" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>compress</name></member>
+      <member refid="classd2_1_1MatrixModel_1afe8b0ec9e295c674b9070da06f9bc82ba580619fc314f6987e309619ae5540083" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>Compressed</name></member>
+      <member refid="classd2_1_1PixelBuffer_1ade983f0ff126962f6e9ae24e66ff3bb1" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>compressed</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a9d17123eee21dc7d10c35005bd662aab" prot="protected" virt="non-virtual"><scope>d2::MatrixModel</scope><name>compressed_</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a409c524d3fe5f7dc03210c2235140ffb" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>data</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a8ea5a35b45eb966ba2d2d8750616ebd2" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>data</name></member>
+      <member refid="classd2_1_1PixelBuffer_1af96c462c113d2fcc8f159480e83c5858" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>empty</name></member>
+      <member refid="classd2_1_1MatrixModel_1afe8b0ec9e295c674b9070da06f9bc82ba74e5c140126013a490ae084b040d0dc0" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>Endian</name></member>
+      <member refid="classd2_1_1MatrixModel_1afe8b0ec9e295c674b9070da06f9bc82ba6ca562b29094eec70ce9de42a9ee6bf2" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>Extended</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a0d8109ca38f3559d79f27faf4c05f546" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>fill</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a7f887edf7dce3e1bcc9e592b82067cea" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>fill</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a70402f5fe3e2e3a4a18f8fd35dfafcd5" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>fill_blend</name></member>
+      <member refid="classd2_1_1PixelBuffer_1adfd671ed9f584b74d9071b3c178dd3e2" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>fill_blend</name></member>
+      <member refid="classd2_1_1PixelBuffer_1ae522d09b7c8497b9a51e655cd370b5f4" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>height</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a6e17f79cf3316bde16fde7ac118d639b" prot="protected" virt="non-virtual"><scope>d2::MatrixModel</scope><name>height_</name></member>
+      <member refid="classd2_1_1PixelBuffer_1aa61dd6f0324d289875addfb95e81ff4f" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>image_scene</name></member>
+      <member refid="classd2_1_1PixelBuffer_1ae4c2ccf4a4f7867fe6f14b8bb17b3954" prot="protected" virt="non-virtual"><scope>d2::MatrixModel</scope><name>images_</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a4c9e7f1459c3dcb087c16b2601519a1b" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>inscribe</name></member>
+      <member refid="classd2_1_1MatrixModel_1a47aa340b507405bac97a1a7c7e6471c0" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>load_model</name></member>
+      <member refid="classd2_1_1MatrixModel_1a33fb950c1fd0c44e429646b1336d65fd" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>make</name></member>
+      <member refid="classd2_1_1MatrixModel_1afe8b0ec9e295c674b9070da06f9bc82b" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>ModelHeader</name></member>
+      <member refid="classd2_1_1MatrixModel_1aa08b921ef07dc6a42626be5b6d9b8df9" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>ModelType</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a5bec63717d3efacf8c7d1ef0823aa7e4" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>operator=</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a895d4ed8a71b48cc1075b06a3d06ceac" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>operator=</name></member>
+      <member refid="classd2_1_1MatrixModel_1a0811954974ec98040ccde37cf00377e5" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>PixelBuffer</name></member>
+      <member refid="classd2_1_1MatrixModel_1aeb76b5fd3e908eb7c3c1dd3e7694e3bd" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>PixelBuffer</name></member>
+      <member refid="classd2_1_1MatrixModel_1ad4b88fe51d0f7c562d8c94afee9cd6d0" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>PixelBuffer</name></member>
+      <member refid="classd2_1_1MatrixModel_1a5dc2d48a6c94b79c1a856f838ad6fe47" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>PixelBuffer</name></member>
+      <member refid="classd2_1_1MatrixModel_1a9f8f4438cdd7d1383d98715a61aeb893" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>ptr</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a47f1fcb1eda82a13911d5d856b0130c5" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>reset</name></member>
+      <member refid="classd2_1_1PixelBuffer_1ab85d1d01c6b68e0f1120ee5441291199" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>rle_iterator</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a1d63f63542ace004a3d9a2c4458dd27c" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>rle_mdwalk</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a2749f4e138f8601e7d67471d2382f58c" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>rle_pack</name></member>
+      <member refid="classd2_1_1PixelBuffer_1ab374351e04ffaff20de4bc1c19361376" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>rle_unpack</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a4cd3f9a29e867f115689a38fc00421df" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>rle_walk</name></member>
+      <member refid="classd2_1_1PixelBuffer_1af1fafe95a794cc1d9ec17962182fc39d" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>RleBreak</name></member>
+      <member refid="classd2_1_1MatrixModel_1a3227c69187fa404ab993e6768d6241d0" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>save_model</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a0c1bf41106dc4a8b5ed0bc8360897aa1" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>set_size</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a214c5d91fd57b13beb594cb2279a6bfd" prot="public" virt="non-virtual"><scope>d2::MatrixModel</scope><name>width</name></member>
+      <member refid="classd2_1_1PixelBuffer_1a8454a6085b978b07bef5aa7c32f20599" prot="protected" virt="non-virtual"><scope>d2::MatrixModel</scope><name>width_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

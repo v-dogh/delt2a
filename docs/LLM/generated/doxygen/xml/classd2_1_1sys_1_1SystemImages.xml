@@ -1,0 +1,405 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemImages" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::SystemImages</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemImages, &quot;Images&quot;, Access::TUnsafe, SystemOutput &gt;</basecompoundref>
+    <includes refid="d2__images_8hpp" local="no">d2_images.hpp</includes>
+    <innerclass refid="structd2_1_1sys_1_1SystemImages_1_1Plan" prot="public">d2::sys::SystemImages::Plan</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemImages_1a737846512ba5d615a121650399159870" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::sys::SystemImages::_cell_pixels</definition>
+        <argsstring></argsstring>
+        <name>_cell_pixels</name>
+        <qualifiedname>d2::sys::SystemImages::_cell_pixels</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="17" column="21" bodyfile="core/mods/d2_images.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemImages_1ae08097d24b72aa1bd11047793379b91f" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1image_1_1Scene" kindref="compound">image::Scene</ref></type>
+        <definition>image::Scene d2::sys::SystemImages::_scene</definition>
+        <argsstring></argsstring>
+        <name>_scene</name>
+        <qualifiedname>d2::sys::SystemImages::_scene</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="18" column="22" bodyfile="core/mods/d2_images.hpp" bodystart="18" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemImages_1ad4f7cd4275dd0f37c4f0ac3270531f9c" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1image_1_1Composite" kindref="compound">image::Composite</ref></type>
+        <definition>image::Composite d2::sys::SystemImages::_composite</definition>
+        <argsstring></argsstring>
+        <name>_composite</name>
+        <qualifiedname>d2::sys::SystemImages::_composite</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="19" column="26" bodyfile="core/mods/d2_images.hpp" bodystart="19" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemImages_1ae8a7e1a691c529d02420b420131fd886" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::sys::SystemImages::_viewport</definition>
+        <argsstring></argsstring>
+        <name>_viewport</name>
+        <qualifiedname>d2::sys::SystemImages::_viewport</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="20" column="21" bodyfile="core/mods/d2_images.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemImages_1a414536c2ea3a447ef113a41821697100" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &gt;</type>
+        <definition>std::vector&lt;pixel&gt; d2::sys::SystemImages::_cells</definition>
+        <argsstring></argsstring>
+        <name>_cells</name>
+        <qualifiedname>d2::sys::SystemImages::_cells</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="21" column="21" bodyfile="core/mods/d2_images.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemImages_1a0fe1104875e112e0771698d733bff903" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemImages::_invalid</definition>
+        <argsstring></argsstring>
+        <name>_invalid</name>
+        <qualifiedname>d2::sys::SystemImages::_invalid</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="22" column="14" bodyfile="core/mods/d2_images.hpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemImages_1aad9f8d09306439d9b129f1d8b67e82ff" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemImages::_placed</definition>
+        <argsstring></argsstring>
+        <name>_placed</name>
+        <qualifiedname>d2::sys::SystemImages::_placed</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="23" column="14" bodyfile="core/mods/d2_images.hpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1afca14fdd8cc7af5152dc2d517da46574" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemImages::Status d2::sys::SystemImages::_load_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_load_impl</name>
+        <qualifiedname>d2::sys::SystemImages::_load_impl</qualifiedname>
+        <reimplements refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3">_load_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="25" column="16" bodyfile="core/mods/d2_images.cpp" bodystart="85" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1a2ac478e80c203f0f5184e40e4b4dea07" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" kindref="member">Status</ref></type>
+        <definition>SystemImages::Status d2::sys::SystemImages::_unload_impl</definition>
+        <argsstring>() override</argsstring>
+        <name>_unload_impl</name>
+        <qualifiedname>d2::sys::SystemImages::_unload_impl</qualifiedname>
+        <reimplements refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730">_unload_impl</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="26" column="16" bodyfile="core/mods/d2_images.cpp" bodystart="90" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1ab4efddac8b74f57fd03c436e4a65040d" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::sys::SystemImages::_repaint_on_change</definition>
+        <argsstring>() const =0</argsstring>
+        <name>_repaint_on_change</name>
+        <qualifiedname>d2::sys::SystemImages::_repaint_on_change</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="27" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1a7f0239c47285fa373ea66245f0c07a08" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>virtual BoundingBox d2::sys::SystemImages::_fallback_metrics</definition>
+        <argsstring>() const</argsstring>
+        <name>_fallback_metrics</name>
+        <qualifiedname>d2::sys::SystemImages::_fallback_metrics</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="28" column="29" bodyfile="core/mods/d2_images.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1a35c1d811290874a99a06a947ef616342" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string d2::sys::SystemImages::_encode</definition>
+        <argsstring>(const image::Composite &amp;image, std::span&lt; const pixel &gt; cells, int columns)=0</argsstring>
+        <name>_encode</name>
+        <qualifiedname>d2::sys::SystemImages::_encode</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1image_1_1Composite" kindref="compound">image::Composite</ref> &amp;</type>
+          <declname>image</declname>
+        </param>
+        <param>
+          <type>std::span&lt; const <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &gt;</type>
+          <declname>cells</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>columns</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="29" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1a91de409118e79d46f8b0781f99d2d368" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string d2::sys::SystemImages::_erase</definition>
+        <argsstring>() const =0</argsstring>
+        <name>_erase</name>
+        <qualifiedname>d2::sys::SystemImages::_erase</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="30" column="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1a7bef8234c7249de0fd4622de8f30e228" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemImages::configure</definition>
+        <argsstring>(BoundingBox cell_pixels)</argsstring>
+        <name>configure</name>
+        <qualifiedname>d2::sys::SystemImages::configure</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>cell_pixels</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="33" column="14" bodyfile="core/mods/d2_images.cpp" bodystart="9" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1a4b946af158a8083640b579fa1cf962d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemImages_1_1Plan" kindref="compound">Plan</ref></type>
+        <definition>SystemImages::Plan d2::sys::SystemImages::prepare</definition>
+        <argsstring>(std::span&lt; pixel &gt; cells, BoundingBox viewport, const image::Scene &amp;scene, BoundingBox cell_pixels)</argsstring>
+        <name>prepare</name>
+        <qualifiedname>d2::sys::SystemImages::prepare</qualifiedname>
+        <param>
+          <type>std::span&lt; <ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &gt;</type>
+          <declname>cells</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>viewport</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classd2_1_1image_1_1Scene" kindref="compound">image::Scene</ref> &amp;</type>
+          <declname>scene</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>cell_pixels</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="34" column="14" bodyfile="core/mods/d2_images.cpp" bodystart="20" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1aa4e65bb8d283e02d4d848c04ad6a4cbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemImages_1_1Plan" kindref="compound">Plan</ref></type>
+        <definition>SystemImages::Plan d2::sys::SystemImages::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <qualifiedname>d2::sys::SystemImages::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="36" column="14" bodyfile="core/mods/d2_images.cpp" bodystart="74" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemImages_1ac73d9237bb0fd243df76029206fcfbcf" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemImages::invalidate</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>invalidate</name>
+        <qualifiedname>d2::sys::SystemImages::invalidate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_images.hpp" line="37" column="14" bodyfile="core/mods/d2_images.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemImages, &quot;Images&quot;, Access::TUnsafe, SystemOutput &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemImages &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemImages</label>
+        <link refid="classd2_1_1sys_1_1SystemImages"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemImages, &quot;Images&quot;, Access::TUnsafe, SystemOutput &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemImages &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemImages</label>
+        <link refid="classd2_1_1sys_1_1SystemImages"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_images.hpp" line="8" column="5" bodyfile="core/mods/d2_images.hpp" bodystart="9" bodyend="38"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemImages_1a737846512ba5d615a121650399159870" prot="private" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_cell_pixels</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1a414536c2ea3a447ef113a41821697100" prot="private" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_cells</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1ad4f7cd4275dd0f37c4f0ac3270531f9c" prot="private" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_composite</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1a35c1d811290874a99a06a947ef616342" prot="protected" virt="pure-virtual"><scope>d2::sys::SystemImages</scope><name>_encode</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1a91de409118e79d46f8b0781f99d2d368" prot="protected" virt="pure-virtual"><scope>d2::sys::SystemImages</scope><name>_erase</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1a7f0239c47285fa373ea66245f0c07a08" prot="protected" virt="virtual"><scope>d2::sys::SystemImages</scope><name>_fallback_metrics</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1a0fe1104875e112e0771698d733bff903" prot="private" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_invalid</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1afca14fdd8cc7af5152dc2d517da46574" prot="protected" virt="virtual"><scope>d2::sys::SystemImages</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1aad9f8d09306439d9b129f1d8b67e82ff" prot="private" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_placed</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::SystemImages</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::SystemImages</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1ab4efddac8b74f57fd03c436e4a65040d" prot="protected" virt="pure-virtual"><scope>d2::sys::SystemImages</scope><name>_repaint_on_change</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1ae08097d24b72aa1bd11047793379b91f" prot="private" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_scene</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1a2ac478e80c203f0f5184e40e4b4dea07" prot="protected" virt="virtual"><scope>d2::sys::SystemImages</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1ae8a7e1a691c529d02420b420131fd886" prot="private" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>_viewport</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1a7bef8234c7249de0fd4622de8f30e228" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>configure</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>context</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>dependency_names</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::SystemImages</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1ac73d9237bb0fd243df76029206fcfbcf" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>invalidate</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>make</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>module_info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1a4b946af158a8083640b579fa1cf962d9" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>prepare</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemImages_1aa4e65bb8d283e02d4d848c04ad6a4cbd" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>reset</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>status</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemImages</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::SystemImages</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

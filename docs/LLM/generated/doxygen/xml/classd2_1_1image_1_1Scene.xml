@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1image_1_1Scene" kind="class" language="C++" prot="public">
+    <compoundname>d2::image::Scene</compoundname>
+    <includes refid="core_2types_2d2__image_8hpp" local="no">d2_image.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1image_1_1Scene_1aee0dc231b2aeb97ad806035cf768232e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structd2_1_1image_1_1Placement" kindref="compound">Placement</ref> &gt;</type>
+        <definition>std::vector&lt;Placement&gt; d2::image::Scene::_placements</definition>
+        <argsstring></argsstring>
+        <name>_placements</name>
+        <qualifiedname>d2::image::Scene::_placements</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="51" column="21" bodyfile="core/types/d2_image.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1image_1_1Scene_1aad799b0fc02a8e01350f35a76f0fa586" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::image::Scene::place</definition>
+        <argsstring>(Raster::ptr raster, Rect destination, Rect clip, Rect source={})</argsstring>
+        <name>place</name>
+        <qualifiedname>d2::image::Scene::place</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1image_1_1Raster_1a36afa304406dbee46722c43f16aba98a" kindref="member">Raster::ptr</ref></type>
+          <declname>raster</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref></type>
+          <declname>destination</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref></type>
+          <declname>clip</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref></type>
+          <declname>source</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="53" column="14" bodyfile="core/types/d2_image.cpp" bodystart="44" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Scene_1afcf5c86b9a38c233f06965c9d2ea2536" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::image::Scene::erase</definition>
+        <argsstring>(Rect area)</argsstring>
+        <name>erase</name>
+        <qualifiedname>d2::image::Scene::erase</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref></type>
+          <declname>area</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="54" column="14" bodyfile="core/types/d2_image.cpp" bodystart="64" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Scene_1a6e2acbe5f4c8c9ea19ebb8186a3a2893" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::image::Scene::append</definition>
+        <argsstring>(const Scene &amp;source, Rect source_view, Position destination, Rect clip)</argsstring>
+        <name>append</name>
+        <qualifiedname>d2::image::Scene::append</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1image_1_1Scene" kindref="compound">Scene</ref> &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref></type>
+          <declname>source_view</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>destination</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1image_1_1Rect" kindref="compound">Rect</ref></type>
+          <declname>clip</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="55" column="14" bodyfile="core/types/d2_image.cpp" bodystart="84" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Scene_1ae056bf26b6b9e46e1b99d411d7bff39d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::image::Scene::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>d2::image::Scene::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="56" column="14" bodyfile="core/types/d2_image.hpp" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Scene_1ab11114fd1121874af950cb40108499d7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::image::Scene::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>d2::image::Scene::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="57" column="14" bodyfile="core/types/d2_image.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Scene_1a095846b7ba65211acd20f190b8e74bbf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; <ref refid="structd2_1_1image_1_1Placement" kindref="compound">Placement</ref> &gt; &amp;</type>
+        <definition>const std::vector&lt; Placement &gt; &amp; d2::image::Scene::placements</definition>
+        <argsstring>() const</argsstring>
+        <name>placements</name>
+        <qualifiedname>d2::image::Scene::placements</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="58" column="27" bodyfile="core/types/d2_image.hpp" bodystart="58" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1image_1_1Scene_1a46dccef5e6107d0273ea36a539e4fe62" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::image::Scene::operator==</definition>
+        <argsstring>(const Scene &amp;) const =default</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::image::Scene::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1image_1_1Scene" kindref="compound">Scene</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_image.hpp" line="59" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_image.hpp" line="48" column="5" bodyfile="core/types/d2_image.hpp" bodystart="49" bodyend="60"/>
+    <listofallmembers>
+      <member refid="classd2_1_1image_1_1Scene_1aee0dc231b2aeb97ad806035cf768232e" prot="private" virt="non-virtual"><scope>d2::image::Scene</scope><name>_placements</name></member>
+      <member refid="classd2_1_1image_1_1Scene_1a6e2acbe5f4c8c9ea19ebb8186a3a2893" prot="public" virt="non-virtual"><scope>d2::image::Scene</scope><name>append</name></member>
+      <member refid="classd2_1_1image_1_1Scene_1ae056bf26b6b9e46e1b99d411d7bff39d" prot="public" virt="non-virtual"><scope>d2::image::Scene</scope><name>clear</name></member>
+      <member refid="classd2_1_1image_1_1Scene_1ab11114fd1121874af950cb40108499d7" prot="public" virt="non-virtual"><scope>d2::image::Scene</scope><name>empty</name></member>
+      <member refid="classd2_1_1image_1_1Scene_1afcf5c86b9a38c233f06965c9d2ea2536" prot="public" virt="non-virtual"><scope>d2::image::Scene</scope><name>erase</name></member>
+      <member refid="classd2_1_1image_1_1Scene_1a46dccef5e6107d0273ea36a539e4fe62" prot="public" virt="non-virtual"><scope>d2::image::Scene</scope><name>operator==</name></member>
+      <member refid="classd2_1_1image_1_1Scene_1aad799b0fc02a8e01350f35a76f0fa586" prot="public" virt="non-virtual"><scope>d2::image::Scene</scope><name>place</name></member>
+      <member refid="classd2_1_1image_1_1Scene_1a095846b7ba65211acd20f190b8e74bbf" prot="public" virt="non-virtual"><scope>d2::image::Scene</scope><name>placements</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

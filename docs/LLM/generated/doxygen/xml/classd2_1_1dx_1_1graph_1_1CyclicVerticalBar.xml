@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::graph::CyclicVerticalBar</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">style:: UAI&lt; CyclicVerticalBar, style::ILayout, style::IContainer, style::IColors, style::IRangeGraph &gt;</basecompoundref>
+    <basecompoundref refid="classd2_1_1dx_1_1impl_1_1ContainerHelper" prot="public" virt="non-virtual">d2::dx::impl::ContainerHelper&lt; CyclicVerticalBar &gt;</basecompoundref>
+    <includes refid="d2__graph_8hpp" local="no">d2_graph.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a03814a398b3df99a66f7d5b27c908c59" prot="public" static="no">
+        <type>style:: UAI&lt; <ref refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar" kindref="compound">CyclicVerticalBar</ref>, <ref refid="structd2_1_1style_1_1ILayout" kindref="compound">style::ILayout</ref>, style::IContainer, style::IColors, style::IRangeGraph &gt;</type>
+        <definition>using d2::dx::graph::CyclicVerticalBar::data = style::
+               UAI&lt;CyclicVerticalBar,
+                   style::ILayout,
+                   style::IContainer,
+                   style::IColors,
+                   style::IRangeGraph&gt;</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="66" column="13" bodyfile="elements/d2_graph.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a9157f8cfe6fbee9f340a3b9f96c36b37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ContainerHelper&lt; CyclicVerticalBar &gt;</definition>
+        <argsstring></argsstring>
+        <name>ContainerHelper&lt; CyclicVerticalBar &gt;</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::ContainerHelper&lt; CyclicVerticalBar &gt;</qualifiedname>
+        <param>
+          <type>ContainerHelper&lt; <ref refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar" kindref="compound">CyclicVerticalBar</ref> &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="46" column="13" bodyfile="elements/d2_graph.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1ac9f1eaa7992fea32ecc8e221043e88fc" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; float &gt;</type>
+        <definition>std::vector&lt;float&gt; d2::dx::graph::CyclicVerticalBar::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::_data</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="74" column="25" bodyfile="elements/d2_graph.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a5d9964a923bff1f7da0a149406561e11" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::dx::graph::CyclicVerticalBar::_start_offset</definition>
+        <argsstring></argsstring>
+        <name>_start_offset</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::_start_offset</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="75" column="17" bodyfile="elements/d2_graph.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1ad18336ffce7d7c3211eacc8b64f6372d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::graph::CyclicVerticalBar::_frame_impl</definition>
+        <argsstring>(PixelBuffer::View buffer) override</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::_frame_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="77" column="26" bodyfile="elements/d2_graph.cpp" bodystart="5" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1af2ad0045705a3d6d45d1a5b92e37b39b" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::pair&lt; int, int &gt;</type>
+        <definition>std::pair&lt; int, int &gt; d2::dx::graph::CyclicVerticalBar::_resolution</definition>
+        <argsstring>() const</argsstring>
+        <name>_resolution</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::_resolution</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="79" column="23" bodyfile="elements/d2_graph.cpp" bodystart="204" bodyend="214"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a32d96b57dee0e17796c20cd9c2b93543" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::graph::CyclicVerticalBar::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="81" column="18" bodyfile="elements/d2_graph.cpp" bodystart="215" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1ab3b470262a3b0207d8206bd1af77b13d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::graph::CyclicVerticalBar::push</definition>
+        <argsstring>(float data_point)</argsstring>
+        <name>push</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::push</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>data_point</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="82" column="18" bodyfile="elements/d2_graph.cpp" bodystart="221" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1aae652202bea75df472257b9ca75aa10d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::graph::CyclicVerticalBar::rescale</definition>
+        <argsstring>(float scale)</argsstring>
+        <name>rescale</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::rescale</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>scale</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="83" column="18" bodyfile="elements/d2_graph.cpp" bodystart="235" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a9e9a01b3c0f09ddac09b8c2442a33c17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::graph::CyclicVerticalBar::rescale</definition>
+        <argsstring>(float scale, float trans)</argsstring>
+        <name>rescale</name>
+        <qualifiedname>d2::dx::graph::CyclicVerticalBar::rescale</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>trans</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="84" column="18" bodyfile="elements/d2_graph.cpp" bodystart="243" bodyend="253"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::dx::graph::CyclicVerticalBar</label>
+        <link refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::dx::impl::ContainerHelper&lt; CyclicVerticalBar &gt;</label>
+        <link refid="classd2_1_1dx_1_1impl_1_1ContainerHelper"/>
+      </node>
+      <node id="2">
+        <label>style::
+                                      UAI&lt; CyclicVerticalBar, style::ILayout, style::IContainer, style::IColors, style::IRangeGraph &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::dx::graph::CyclicVerticalBar</label>
+        <link refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::dx::impl::ContainerHelper&lt; CyclicVerticalBar &gt;</label>
+        <link refid="classd2_1_1dx_1_1impl_1_1ContainerHelper"/>
+      </node>
+      <node id="2">
+        <label>style::
+                                      UAI&lt; CyclicVerticalBar, style::ILayout, style::IContainer, style::IColors, style::IRangeGraph &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_graph.hpp" line="56" column="9" bodyfile="elements/d2_graph.hpp" bodystart="63" bodyend="85"/>
+    <listofallmembers>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1afe7017510c948a9efafaea9c704a168e" prot="protected" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>_border_base</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1aa2f0017ca6fec0f9db96278be3caf5f2" prot="protected" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>_border_base_inv</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1ac9f1eaa7992fea32ecc8e221043e88fc" prot="protected" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>_data</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1ad18336ffce7d7c3211eacc8b64f6372d" prot="protected" virt="virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1dx_1_1impl_1_1ContainerHelper_1a3d010f4d71277eb6666c8e5da1d721f7" prot="protected" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>_render_border</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1af2ad0045705a3d6d45d1a5b92e37b39b" prot="protected" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>_resolution</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a5d9964a923bff1f7da0a149406561e11" prot="protected" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>_start_offset</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a32d96b57dee0e17796c20cd9c2b93543" prot="public" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>clear</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a9157f8cfe6fbee9f340a3b9f96c36b37" prot="public" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>ContainerHelper&lt; CyclicVerticalBar &gt;</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a03814a398b3df99a66f7d5b27c908c59" prot="public" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>data</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1ab3b470262a3b0207d8206bd1af77b13d" prot="public" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>push</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1aae652202bea75df472257b9ca75aa10d" prot="public" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>rescale</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1CyclicVerticalBar_1a9e9a01b3c0f09ddac09b8c2442a33c17" prot="public" virt="non-virtual"><scope>d2::dx::graph::CyclicVerticalBar</scope><name>rescale</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

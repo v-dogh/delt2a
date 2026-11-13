@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1fb_1_1Locale" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::fb::Locale</compoundname>
+    <derivedcompoundref refid="structd2_1_1fb_1_1loc_1_1Byte" prot="public" virt="non-virtual">d2::fb::loc::Byte</derivedcompoundref>
+    <includes refid="d2__fragmented__buffer_8hpp" local="no">d2_fragmented_buffer.hpp</includes>
+    <innerclass refid="structd2_1_1fb_1_1Locale_1_1Value" prot="public">d2::fb::Locale::Value</innerclass>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1a05252f7448775d28a376c89c87fe1d1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::fb::Locale::~Locale</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Locale</name>
+        <qualifiedname>d2::fb::Locale::~Locale</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="44" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1a160b032f17d606ac8406860c2bccf408" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::fb::Locale::source</definition>
+        <argsstring>(std::string_view str)=0</argsstring>
+        <name>source</name>
+        <qualifiedname>d2::fb::Locale::source</qualifiedname>
+        <reimplementedby refid="structd2_1_1fb_1_1loc_1_1Byte_1aaddacd8bb9401eab3d431ee40f4b0bb8">source</reimplementedby>
+        <param>
+          <type>std::string_view</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="45" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1a243c2acc5e88d1925c4c8f8e9f04b374" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::fb::Locale::jump</definition>
+        <argsstring>(std::size_t off)=0</argsstring>
+        <name>jump</name>
+        <qualifiedname>d2::fb::Locale::jump</qualifiedname>
+        <reimplementedby refid="structd2_1_1fb_1_1loc_1_1Byte_1ad76c3117eaf19985c3feee256ceccd7f">jump</reimplementedby>
+        <param>
+          <type>std::size_t</type>
+          <declname>off</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="46" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1a7b354bc0caefa17f4bbb6678e8995b44" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::fb::Locale::seek_last</definition>
+        <argsstring>()=0</argsstring>
+        <name>seek_last</name>
+        <qualifiedname>d2::fb::Locale::seek_last</qualifiedname>
+        <reimplementedby refid="structd2_1_1fb_1_1loc_1_1Byte_1a1d088d96b5acd59756504fc805d83f75">seek_last</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="47" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1a971d97856b43071684498eec54de2fb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::fb::Locale::seek</definition>
+        <argsstring>(int pos)=0</argsstring>
+        <name>seek</name>
+        <qualifiedname>d2::fb::Locale::seek</qualifiedname>
+        <reimplementedby refid="structd2_1_1fb_1_1loc_1_1Byte_1abce2f30acc46edcd94c16bd52fef458f">seek</reimplementedby>
+        <param>
+          <type>int</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="48" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1a99dcad1c18f8ed2896269342c7bdc7a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structd2_1_1fb_1_1Locale_1_1Value" kindref="compound">Value</ref></type>
+        <definition>virtual Value d2::fb::Locale::value</definition>
+        <argsstring>()=0</argsstring>
+        <name>value</name>
+        <qualifiedname>d2::fb::Locale::value</qualifiedname>
+        <reimplementedby refid="structd2_1_1fb_1_1loc_1_1Byte_1a56e080109562891f16d751315202879e">value</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="49" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1a2c339b5522da8033645fb032e3135afe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::size_t</type>
+        <definition>virtual std::size_t d2::fb::Locale::offset</definition>
+        <argsstring>() const =0</argsstring>
+        <name>offset</name>
+        <qualifiedname>d2::fb::Locale::offset</qualifiedname>
+        <reimplementedby refid="structd2_1_1fb_1_1loc_1_1Byte_1a2d73717b9824e297348c4a9637788363">offset</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="50" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1a5260ecaa0341df935368277aa0076bd8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::fb::Locale::is_end</definition>
+        <argsstring>() const =0</argsstring>
+        <name>is_end</name>
+        <qualifiedname>d2::fb::Locale::is_end</qualifiedname>
+        <reimplementedby refid="structd2_1_1fb_1_1loc_1_1Byte_1aad1038abc0cf13929a7cf8f81399fb18">is_end</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="51" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1a8301f165e5d2765d025b05ca1c0288f0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::fb::Locale::is_endline</definition>
+        <argsstring>() const =0</argsstring>
+        <name>is_endline</name>
+        <qualifiedname>d2::fb::Locale::is_endline</qualifiedname>
+        <reimplementedby refid="structd2_1_1fb_1_1loc_1_1Byte_1a86ad870c59022c60cee9e447bf6df130">is_endline</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="52" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1fb_1_1Locale_1af37d42d7e8c945911408a8d30dabbfa4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::fb::Locale::iterate</definition>
+        <argsstring>(const std::function&lt; bool(Value)&gt; &amp;callback) const =0</argsstring>
+        <name>iterate</name>
+        <qualifiedname>d2::fb::Locale::iterate</qualifiedname>
+        <reimplementedby refid="structd2_1_1fb_1_1loc_1_1Byte_1af1f3930d3c8fdde1e48648adf11f4593">iterate</reimplementedby>
+        <param>
+          <type>const std::function&lt; bool(<ref refid="structd2_1_1fb_1_1Locale_1_1Value" kindref="compound">Value</ref>)&gt; &amp;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_fragmented_buffer.hpp" line="53" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::fb::Locale</label>
+        <link refid="structd2_1_1fb_1_1Locale"/>
+      </node>
+      <node id="2">
+        <label>d2::fb::loc::Byte</label>
+        <link refid="structd2_1_1fb_1_1loc_1_1Byte"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="core/platform/d2_fragmented_buffer.hpp" line="18" column="5" bodyfile="core/platform/d2_fragmented_buffer.hpp" bodystart="19" bodyend="54"/>
+    <listofallmembers>
+      <member refid="structd2_1_1fb_1_1Locale_1a5260ecaa0341df935368277aa0076bd8" prot="public" virt="pure-virtual"><scope>d2::fb::Locale</scope><name>is_end</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1a8301f165e5d2765d025b05ca1c0288f0" prot="public" virt="pure-virtual"><scope>d2::fb::Locale</scope><name>is_endline</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1af37d42d7e8c945911408a8d30dabbfa4" prot="public" virt="pure-virtual"><scope>d2::fb::Locale</scope><name>iterate</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1a243c2acc5e88d1925c4c8f8e9f04b374" prot="public" virt="pure-virtual"><scope>d2::fb::Locale</scope><name>jump</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1a2c339b5522da8033645fb032e3135afe" prot="public" virt="pure-virtual"><scope>d2::fb::Locale</scope><name>offset</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1a971d97856b43071684498eec54de2fb2" prot="public" virt="pure-virtual"><scope>d2::fb::Locale</scope><name>seek</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1a7b354bc0caefa17f4bbb6678e8995b44" prot="public" virt="pure-virtual"><scope>d2::fb::Locale</scope><name>seek_last</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1a160b032f17d606ac8406860c2bccf408" prot="public" virt="pure-virtual"><scope>d2::fb::Locale</scope><name>source</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1a99dcad1c18f8ed2896269342c7bdc7a2" prot="public" virt="pure-virtual"><scope>d2::fb::Locale</scope><name>value</name></member>
+      <member refid="structd2_1_1fb_1_1Locale_1a05252f7448775d28a376c89c87fe1d1c" prot="public" virt="virtual"><scope>d2::fb::Locale</scope><name>~Locale</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

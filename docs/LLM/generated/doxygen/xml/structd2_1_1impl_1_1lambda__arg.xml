@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1impl_1_1lambda__arg" kind="struct" language="C++" prot="public">
+    <compoundname>d2::impl::lambda_arg</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_construct.hpp" line="37" column="18" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="37" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

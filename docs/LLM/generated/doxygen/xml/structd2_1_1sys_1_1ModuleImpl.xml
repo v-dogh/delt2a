@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1ModuleImpl" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::ModuleImpl</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1ModuleImplTag" prot="private" virt="non-virtual">d2::sys::ModuleImplTag</basecompoundref>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Base</type>
+      </param>
+      <param>
+        <type><ref refid="namespaced2_1_1sys_1a96e8068f6f21a92e0f8fc1fa71a59161" kindref="member">Load</ref></type>
+        <declname>LoadType</declname>
+        <defname>LoadType</defname>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>Deps</declname>
+        <defname>Deps</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="structd2_1_1sys_1_1ModuleImpl_1a57fc9ad96ff8dae4fe3648df021857ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename B</type>
+          </param>
+          <param>
+            <type><ref refid="namespaced2_1_1sys_1a96e8068f6f21a92e0f8fc1fa71a59161" kindref="member">Load</ref></type>
+            <declname>L</declname>
+            <defname>L</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>D</declname>
+            <defname>D</defname>
+          </param>
+        </templateparamlist>
+        <type>struct</type>
+        <definition>friend struct ModuleImpl</definition>
+        <argsstring></argsstring>
+        <name>ModuleImpl</name>
+        <qualifiedname>d2::sys::ModuleImpl::ModuleImpl</qualifiedname>
+        <param>
+          <type>ModuleImpl</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="256" column="38" bodyfile="core/io/d2_module.hpp" bodystart="256" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1ModuleImpl_1a3b770ad91cfdb330c60ca064add754c7" prot="public" static="yes" mutable="no">
+        <type>const <ref refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset" kindref="compound">SystemModule::ModPreset</ref></type>
+        <definition>const SystemModule::ModPreset d2::sys::ModuleImpl&lt; Base, LoadType, Deps &gt;::module_preset</definition>
+        <argsstring></argsstring>
+        <name>module_preset</name>
+        <qualifiedname>d2::sys::ModuleImpl::module_preset</qualifiedname>
+        <initializer>{
+            .access = Base::module_access,
+            .load = LoadType,
+            .deps = <ref refid="structd2_1_1sys_1_1impl_1_1MergeDeps" kindref="compound">impl::MergeDeps</ref>&lt;typename Base::module_deps, Deps...&gt;::list(),
+            .dep_names = <ref refid="structd2_1_1sys_1_1impl_1_1MergeDeps" kindref="compound">impl::MergeDeps</ref>&lt;typename Base::module_deps, Deps...&gt;::names()
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="258" column="53" bodyfile="core/io/d2_module.hpp" bodystart="258" bodyend="263"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::sys::ModuleImpl&lt; Base, LoadType, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::sys::ModuleImplTag</label>
+        <link refid="structd2_1_1sys_1_1ModuleImplTag"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::sys::ModuleImpl&lt; Base, LoadType, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>module_preset</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::sys::ModuleImplTag</label>
+        <link refid="structd2_1_1sys_1_1ModuleImplTag"/>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule::ModPreset</label>
+        <link refid="structd2_1_1sys_1_1SystemModule_1_1ModPreset"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_module.hpp" line="254" column="5" bodyfile="core/io/d2_module.hpp" bodystart="255" bodyend="264"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1ModuleImpl_1a3b770ad91cfdb330c60ca064add754c7" prot="public" virt="non-virtual"><scope>d2::sys::ModuleImpl</scope><name>module_preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleImpl_1a57fc9ad96ff8dae4fe3648df021857ef" prot="public" virt="non-virtual"><scope>d2::sys::ModuleImpl</scope><name>ModuleImpl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

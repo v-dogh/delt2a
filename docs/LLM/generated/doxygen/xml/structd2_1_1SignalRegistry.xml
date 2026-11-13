@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1SignalRegistry" kind="struct" language="C++" prot="public">
+    <compoundname>d2::SignalRegistry</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1SignalRegistry_1aac08ad27a4c9296fd71e9e801e4663a9" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::SignalRegistry&lt; typename &gt;::manifest_t = void</definition>
+        <argsstring></argsstring>
+        <name>manifest_t</name>
+        <qualifiedname>d2::SignalRegistry::manifest_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="208" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="206" column="14" bodyfile="core/io/d2_signal_handler.hpp" bodystart="207" bodyend="209"/>
+    <listofallmembers>
+      <member refid="structd2_1_1SignalRegistry_1aac08ad27a4c9296fd71e9e801e4663a9" prot="public" virt="non-virtual"><scope>d2::SignalRegistry</scope><name>manifest_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1Dependency_1_1Dummy" kind="struct" language="C++" prot="private">
+    <compoundname>d2::style::Dependency::Dummy</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_theme.hpp" line="141" column="9" bodyfile="core/tree/d2_theme.hpp" bodystart="142" bodyend="143"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

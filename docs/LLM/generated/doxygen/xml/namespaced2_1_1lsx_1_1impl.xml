@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1lsx_1_1impl" kind="namespace" language="C++">
+    <compoundname>d2::lsx::impl</compoundname>
+    <innerclass refid="classd2_1_1lsx_1_1impl_1_1Row" prot="public">d2::lsx::impl::Row</innerclass>
+    <innerclass refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle" prot="public">d2::lsx::impl::ConstraintHandle</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver.cpp" line="7" column="5"/>
+  </compounddef>
+</doxygen>

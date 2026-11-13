@@ -1,0 +1,471 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemInput" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::SystemInput</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemInput, &quot;Input&quot;, Access::TSafe &gt;</basecompoundref>
+    <includes refid="d2__core_8hpp" local="no">d2_core.hpp</includes>
+    <innerclass refid="structd2_1_1sys_1_1SystemInput_1_1FrameLock" prot="private">d2::sys::SystemInput::FrameLock</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr" prot="public">d2::sys::SystemInput::FramePtr</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1sys_1_1SystemInput_1a5be22819ac5bd74a7e5fc0b2d899c1bc" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; d2::sys::SystemInput::_enabled</definition>
+        <argsstring></argsstring>
+        <name>_enabled</name>
+        <qualifiedname>d2::sys::SystemInput::_enabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="50" column="21" bodyfile="core/mods/d2_core.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a48e1f35731803f46cdcea0a77cf1529c" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemInput::_lock_frame_impl</definition>
+        <argsstring>()</argsstring>
+        <name>_lock_frame_impl</name>
+        <qualifiedname>d2::sys::SystemInput::_lock_frame_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="52" column="22" bodyfile="core/mods/d2_core.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1abdb16862b0982ec85ace9b73753e9982" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemInput::_unlock_frame_impl</definition>
+        <argsstring>()</argsstring>
+        <name>_unlock_frame_impl</name>
+        <qualifiedname>d2::sys::SystemInput::_unlock_frame_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="53" column="22" bodyfile="core/mods/d2_core.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a047e840b733316bff3b3aee202d0c16d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classd2_1_1in_1_1InputFrame_1a836604c8ca7d6b287f19246c78de5ac6" kindref="member">in::InputFrame::ptr</ref></type>
+        <definition>virtual in::InputFrame::ptr d2::sys::SystemInput::_frame_impl</definition>
+        <argsstring>()=0</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::sys::SystemInput::_frame_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="54" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a6347e2d1eb13f0902c2332bedf2dd368" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemInput::_begincycle_impl</definition>
+        <argsstring>()=0</argsstring>
+        <name>_begincycle_impl</name>
+        <qualifiedname>d2::sys::SystemInput::_begincycle_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="55" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a6e7c8d7a5eb8d3f21867726e1c480439" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::SystemInput::_endcycle_impl</definition>
+        <argsstring>()=0</argsstring>
+        <name>_endcycle_impl</name>
+        <qualifiedname>d2::sys::SystemInput::_endcycle_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="56" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a36e0e0afd7e3242ad58785495df1b91c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classd2_1_1MainWorker_1ab3922518d3df0b55c6a0bd0040a3b411" kindref="member">MainWorker::ptr</ref></type>
+        <definition>virtual MainWorker::ptr d2::sys::SystemInput::_worker_impl</definition>
+        <argsstring>()=0</argsstring>
+        <name>_worker_impl</name>
+        <qualifiedname>d2::sys::SystemInput::_worker_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="57" column="33"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a05e018289d44684cf65c42e2a6c46607" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr" kindref="compound">FramePtr</ref></type>
+        <definition>SystemInput::FramePtr d2::sys::SystemInput::frame</definition>
+        <argsstring>()</argsstring>
+        <name>frame</name>
+        <qualifiedname>d2::sys::SystemInput::frame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="61" column="18" bodyfile="core/mods/d2_core.cpp" bodystart="66" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a6a59ca0b475a7b6fbbe6c5c976d07052" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1MainWorker_1ab3922518d3df0b55c6a0bd0040a3b411" kindref="member">MainWorker::ptr</ref></type>
+        <definition>MainWorker::ptr d2::sys::SystemInput::worker</definition>
+        <argsstring>()</argsstring>
+        <name>worker</name>
+        <qualifiedname>d2::sys::SystemInput::worker</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="62" column="25" bodyfile="core/mods/d2_core.cpp" bodystart="70" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a440cca282f9e22a8a0acf73d6e6cada4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemInput::begincycle</definition>
+        <argsstring>()</argsstring>
+        <name>begincycle</name>
+        <qualifiedname>d2::sys::SystemInput::begincycle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="64" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="75" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a68a1c5245ef1d28824813676c99c6205" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemInput::endcycle</definition>
+        <argsstring>()</argsstring>
+        <name>endcycle</name>
+        <qualifiedname>d2::sys::SystemInput::endcycle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="65" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="79" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1ab4b1264c77537b7d10d38db57b75ed29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemInput::enable</definition>
+        <argsstring>()</argsstring>
+        <name>enable</name>
+        <qualifiedname>d2::sys::SystemInput::enable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="67" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="84" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1ab199d4f744de9bb4f80074c14f9d97e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::sys::SystemInput::disable</definition>
+        <argsstring>()</argsstring>
+        <name>disable</name>
+        <qualifiedname>d2::sys::SystemInput::disable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="68" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="88" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a39a74f87b2e4f993528b4839453aa085" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemInput::had_event</definition>
+        <argsstring>(in::Event ev)</argsstring>
+        <name>had_event</name>
+        <qualifiedname>d2::sys::SystemInput::had_event</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527b" kindref="member">in::Event</ref></type>
+          <declname>ev</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="70" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="93" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1ae129821ee0ff89644c1edf5049ee628c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemInput::had_pulse</definition>
+        <argsstring>()</argsstring>
+        <name>had_pulse</name>
+        <qualifiedname>d2::sys::SystemInput::had_pulse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="71" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="101" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a9c06bd12dbeed677000c0e935d162df5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::sys::SystemInput::mouse_position</definition>
+        <argsstring>()</argsstring>
+        <name>mouse_position</name>
+        <qualifiedname>d2::sys::SystemInput::mouse_position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="73" column="18" bodyfile="core/mods/d2_core.cpp" bodystart="109" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a989823944e80ae438253c15fc553e6aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::sys::SystemInput::screen_capacity</definition>
+        <argsstring>()</argsstring>
+        <name>screen_capacity</name>
+        <qualifiedname>d2::sys::SystemInput::screen_capacity</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="74" column="21" bodyfile="core/mods/d2_core.cpp" bodystart="114" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a9702f7f06998156ab9e6df082e6ccda2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::sys::SystemInput::screen_size</definition>
+        <argsstring>()</argsstring>
+        <name>screen_size</name>
+        <qualifiedname>d2::sys::SystemInput::screen_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="75" column="21" bodyfile="core/mods/d2_core.cpp" bodystart="119" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1adece1c2f01fdcdebe99dd20e333ddbe1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemInput::active</definition>
+        <argsstring>(in::Mouse mouse, in::Mode mode)</argsstring>
+        <name>active</name>
+        <qualifiedname>d2::sys::SystemInput::active</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64" kindref="member">in::Mouse</ref></type>
+          <declname>mouse</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">in::Mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="77" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="125" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1aa8462e3502dcb1b722764e9628501e99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemInput::active</definition>
+        <argsstring>(in::Special mod, in::Mode mode)</argsstring>
+        <name>active</name>
+        <qualifiedname>d2::sys::SystemInput::active</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265b" kindref="member">in::Special</ref></type>
+          <declname>mod</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">in::Mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="78" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="130" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1a2c3de33583b1826c028457c40cb5b99f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemInput::active</definition>
+        <argsstring>(in::keytype key, in::Mode mode)</argsstring>
+        <name>active</name>
+        <qualifiedname>d2::sys::SystemInput::active</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">in::keytype</ref></type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">in::Mode</ref></type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="79" column="14" bodyfile="core/mods/d2_core.cpp" bodystart="135" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemInput_1ad969d4ee428ec2d35c25cf0cb6c18111" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string_view</type>
+        <definition>std::string_view d2::sys::SystemInput::sequence</definition>
+        <argsstring>()</argsstring>
+        <name>sequence</name>
+        <qualifiedname>d2::sys::SystemInput::sequence</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="81" column="26" bodyfile="core/mods/d2_core.cpp" bodystart="141" bodyend="147"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemInput, &quot;Input&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemInput &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemInput</label>
+        <link refid="classd2_1_1sys_1_1SystemInput"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemInput, &quot;Input&quot;, Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemInput &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemInput</label>
+        <link refid="classd2_1_1sys_1_1SystemInput"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_core.hpp" line="12" column="5" bodyfile="core/mods/d2_core.hpp" bodystart="13" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a6347e2d1eb13f0902c2332bedf2dd368" prot="protected" virt="pure-virtual"><scope>d2::sys::SystemInput</scope><name>_begincycle_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a5be22819ac5bd74a7e5fc0b2d899c1bc" prot="private" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>_enabled</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a6e7c8d7a5eb8d3f21867726e1c480439" prot="protected" virt="pure-virtual"><scope>d2::sys::SystemInput</scope><name>_endcycle_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a047e840b733316bff3b3aee202d0c16d" prot="protected" virt="pure-virtual"><scope>d2::sys::SystemInput</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3" prot="protected" virt="virtual"><scope>d2::sys::SystemInput</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a48e1f35731803f46cdcea0a77cf1529c" prot="protected" virt="virtual"><scope>d2::sys::SystemInput</scope><name>_lock_frame_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::SystemInput</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::SystemInput</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730" prot="protected" virt="virtual"><scope>d2::sys::SystemInput</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1abdb16862b0982ec85ace9b73753e9982" prot="protected" virt="virtual"><scope>d2::sys::SystemInput</scope><name>_unlock_frame_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a36e0e0afd7e3242ad58785495df1b91c" prot="protected" virt="pure-virtual"><scope>d2::sys::SystemInput</scope><name>_worker_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1adece1c2f01fdcdebe99dd20e333ddbe1" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>active</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1aa8462e3502dcb1b722764e9628501e99" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>active</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a2c3de33583b1826c028457c40cb5b99f" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>active</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a440cca282f9e22a8a0acf73d6e6cada4" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>begincycle</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>context</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>dependency_names</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1ab199d4f744de9bb4f80074c14f9d97e3" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>disable</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1ab4b1264c77537b7d10d38db57b75ed29" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>enable</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a68a1c5245ef1d28824813676c99c6205" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>endcycle</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a05e018289d44684cf65c42e2a6c46607" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>frame</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>get_if</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a39a74f87b2e4f993528b4839453aa085" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>had_event</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1ae129821ee0ff89644c1edf5049ee628c" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>had_pulse</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::SystemInput</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>make</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>module_info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a9c06bd12dbeed677000c0e935d162df5" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>mouse_position</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a989823944e80ae438253c15fc553e6aa" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>screen_capacity</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a9702f7f06998156ab9e6df082e6ccda2" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>screen_size</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1ad969d4ee428ec2d35c25cf0cb6c18111" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>sequence</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>status</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemInput_1a6a59ca0b475a7b6fbbe6c5c976d07052" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput</scope><name>worker</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::SystemInput</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1dx_1_1impl_1_1cnt" kind="namespace" language="C++">
+    <compoundname>d2::dx::impl::cnt</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="elements/d2_element_utils.hpp" line="39" column="5"/>
+  </compounddef>
+</doxygen>

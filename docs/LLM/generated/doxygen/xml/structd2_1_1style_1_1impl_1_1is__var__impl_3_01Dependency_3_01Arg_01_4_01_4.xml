@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1impl_1_1is__var__impl_3_01Dependency_3_01Arg_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::impl::is_var_impl&lt; Dependency&lt; Arg &gt; &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">std::true_type</basecompoundref>
+    <includes refid="d2__styles__base_8hpp" local="no">d2_styles_base.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Arg</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::style::impl::is_var_impl&lt; Dependency&lt; Arg &gt; &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1is__var__impl_3_01Dependency_3_01Arg_01_4_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="3">
+        <label>std::true_type</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::style::impl::is_var_impl&lt; Dependency&lt; Arg &gt; &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1is__var__impl_3_01Dependency_3_01Arg_01_4_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="3">
+        <label>std::true_type</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_styles_base.hpp" line="34" column="19" bodyfile="core/tree/d2_styles_base.hpp" bodystart="35" bodyend="36"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

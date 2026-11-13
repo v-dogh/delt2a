@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemInput_1_1FramePtr" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::SystemInput::FramePtr</compoundname>
+    <includes refid="d2__core_8hpp" local="no">d2_core.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1ae6cde533b7e1640a0bc25d47047b6d92" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1in_1_1InputFrame_1a836604c8ca7d6b287f19246c78de5ac6" kindref="member">in::InputFrame::ptr</ref></type>
+        <definition>in::InputFrame::ptr d2::sys::SystemInput::FramePtr::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::_ptr</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="34" column="33" bodyfile="core/mods/d2_core.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a5112a3a3679a0e111f9ec09b47f48957" prot="private" static="no" mutable="no">
+        <type>FrameLock</type>
+        <definition>FrameLock d2::sys::SystemInput::FramePtr::_lock</definition>
+        <argsstring></argsstring>
+        <name>_lock</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::_lock</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="35" column="23" bodyfile="core/mods/d2_core.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a96d2256a361534c3f7561fa0f35fb1be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::SystemInput::FramePtr::FramePtr</definition>
+        <argsstring>(in::InputFrame::ptr ptr, FrameLock lock)</argsstring>
+        <name>FramePtr</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::FramePtr</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame_1a836604c8ca7d6b287f19246c78de5ac6" kindref="member">in::InputFrame::ptr</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>FrameLock</type>
+          <declname>lock</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="37" column="13" bodyfile="core/mods/d2_core.cpp" bodystart="47" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1adacb26bf22a9ba1546d0ce8701cb90fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::SystemInput::FramePtr::FramePtr</definition>
+        <argsstring>(FramePtr &amp;&amp;)=default</argsstring>
+        <name>FramePtr</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::FramePtr</qualifiedname>
+        <param>
+          <type>FramePtr &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="38" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1ad71e72bde707bcc66e1a1681927b5729" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::sys::SystemInput::FramePtr::FramePtr</definition>
+        <argsstring>(const FramePtr &amp;)=delete</argsstring>
+        <name>FramePtr</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::FramePtr</qualifiedname>
+        <param>
+          <type>const FramePtr &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="39" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1ae1506ec1117607b1c05e29fdef1a6218" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> *</type>
+        <definition>in::InputFrame * d2::sys::SystemInput::FramePtr::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="41" column="28" bodyfile="core/mods/d2_core.cpp" bodystart="52" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1ac8b7dffb3f06b6f054519d5a8248d987" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+        <definition>in::InputFrame &amp; d2::sys::SystemInput::FramePtr::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="43" column="28" bodyfile="core/mods/d2_core.cpp" bodystart="57" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1af14026e19b88d36e3a18494b030e612f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> *</type>
+        <definition>in::InputFrame * d2::sys::SystemInput::FramePtr::operator-&gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::operator-&gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="44" column="28" bodyfile="core/mods/d2_core.cpp" bodystart="61" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1aff0ff21e3ab727ecb1fc7ad8991b30aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a96d2256a361534c3f7561fa0f35fb1be" kindref="member">FramePtr</ref> &amp;</type>
+        <definition>FramePtr &amp; d2::sys::SystemInput::FramePtr::operator=</definition>
+        <argsstring>(FramePtr &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a96d2256a361534c3f7561fa0f35fb1be" kindref="member">FramePtr</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="46" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a3a06664d86fe7b5a795b25b0a8162ad9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a96d2256a361534c3f7561fa0f35fb1be" kindref="member">FramePtr</ref> &amp;</type>
+        <definition>FramePtr &amp; d2::sys::SystemInput::FramePtr::operator=</definition>
+        <argsstring>(const FramePtr &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::sys::SystemInput::FramePtr::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a96d2256a361534c3f7561fa0f35fb1be" kindref="member">FramePtr</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_core.hpp" line="47" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_core.hpp" line="31" column="9" bodyfile="core/mods/d2_core.hpp" bodystart="32" bodyend="48"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a5112a3a3679a0e111f9ec09b47f48957" prot="private" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>_lock</name></member>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1ae6cde533b7e1640a0bc25d47047b6d92" prot="private" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>_ptr</name></member>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a96d2256a361534c3f7561fa0f35fb1be" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>FramePtr</name></member>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1adacb26bf22a9ba1546d0ce8701cb90fd" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>FramePtr</name></member>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1ad71e72bde707bcc66e1a1681927b5729" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>FramePtr</name></member>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1ae1506ec1117607b1c05e29fdef1a6218" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1ac8b7dffb3f06b6f054519d5a8248d987" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>operator*</name></member>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1af14026e19b88d36e3a18494b030e612f" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>operator-&gt;</name></member>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1aff0ff21e3ab727ecb1fc7ad8991b30aa" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>operator=</name></member>
+      <member refid="structd2_1_1sys_1_1SystemInput_1_1FramePtr_1a3a06664d86fe7b5a795b25b0a8162ad9" prot="public" virt="non-virtual"><scope>d2::sys::SystemInput::FramePtr</scope><name>operator=</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1lsx_1_1ParentVarWrapper" kind="struct" language="C++" prot="public">
+    <compoundname>d2::lsx::ParentVarWrapper</compoundname>
+    <includes refid="d2__solver__types_8hpp" local="no">d2_solver_types.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1lsx_1_1ParentVarWrapper_1ab7d238394f571c06658720afdd652938" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+        <definition>Variable d2::lsx::ParentVarWrapper::operator[]</definition>
+        <argsstring>(Variable var) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>d2::lsx::ParentVarWrapper::operator[]</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver_types.hpp" line="377" column="28" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="377" bodyend="382"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver_types.hpp" line="375" column="5" bodyfile="core/lsx/d2_solver_types.hpp" bodystart="376" bodyend="383"/>
+    <listofallmembers>
+      <member refid="structd2_1_1lsx_1_1ParentVarWrapper_1ab7d238394f571c06658720afdd652938" prot="public" virt="non-virtual"><scope>d2::lsx::ParentVarWrapper</scope><name>operator[]</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

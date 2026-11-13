@@ -1,0 +1,758 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="d2__element__units_8hpp" kind="file" language="C++">
+    <compoundname>d2_element_units.hpp</compoundname>
+    <includes local="no">cstdint</includes>
+    <includedby refid="d2__styles_8hpp" local="no">core/tree/d2_styles.hpp</includedby>
+    <includedby refid="d2__tree__element_8hpp" local="no">core/tree/d2_tree_element.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>core/types/d2_element_units.hpp</label>
+        <link refid="d2__element__units_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstdint</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="53">
+        <label>core/io/d2_context.cpp</label>
+        <link refid="d2__context_8cpp"/>
+      </node>
+      <node id="42">
+        <label>core/mods/d2_binder.cpp</label>
+        <link refid="d2__binder_8cpp"/>
+      </node>
+      <node id="41">
+        <label>core/mods/d2_binder.hpp</label>
+        <link refid="d2__binder_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>core/mods/d2_ext.cpp</label>
+        <link refid="d2__ext_8cpp"/>
+      </node>
+      <node id="44">
+        <label>core/mods/d2_ext.hpp</label>
+        <link refid="d2__ext_8hpp"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>core/mods/d2_images.cpp</label>
+        <link refid="d2__images_8cpp"/>
+      </node>
+      <node id="46">
+        <label>core/screen/d2_animate.cpp</label>
+        <link refid="d2__animate_8cpp"/>
+      </node>
+      <node id="55">
+        <label>core/screen/d2_screen.cpp</label>
+        <link refid="d2__screen_8cpp"/>
+      </node>
+      <node id="52">
+        <label>core/screen/d2_screen.hpp</label>
+        <link refid="d2__screen_8hpp"/>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>core/tree/d2_styles.hpp</label>
+        <link refid="d2__styles_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>core/tree/d2_text_select.cpp</label>
+        <link refid="d2__text__select_8cpp"/>
+      </node>
+      <node id="47">
+        <label>core/tree/d2_tree.hpp</label>
+        <link refid="d2__tree_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>core/tree/d2_tree_construct.hpp</label>
+        <link refid="d2__tree__construct_8hpp"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>core/tree/d2_tree_element.cpp</label>
+        <link refid="d2__tree__element_8cpp"/>
+      </node>
+      <node id="40">
+        <label>core/tree/d2_tree_element.hpp</label>
+        <link refid="d2__tree__element_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>core/tree/d2_tree_parent.cpp</label>
+        <link refid="d2__tree__parent_8cpp"/>
+      </node>
+      <node id="51">
+        <label>core/tree/d2_tree_parent.hpp</label>
+        <link refid="d2__tree__parent_8hpp"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>core/tree/d2_tree_state.cpp</label>
+        <link refid="d2__tree__state_8cpp"/>
+      </node>
+      <node id="1">
+        <label>core/types/d2_element_units.hpp</label>
+        <link refid="d2__element__units_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>d2_std.hpp</label>
+        <link refid="d2__std_8hpp"/>
+      </node>
+      <node id="4">
+        <label>elements/d2_box.cpp</label>
+        <link refid="d2__box_8cpp"/>
+      </node>
+      <node id="3">
+        <label>elements/d2_box.hpp</label>
+        <link refid="d2__box_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>elements/d2_button.cpp</label>
+        <link refid="d2__button_8cpp"/>
+      </node>
+      <node id="12">
+        <label>elements/d2_button.hpp</label>
+        <link refid="d2__button_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>elements/d2_checkbox.cpp</label>
+        <link refid="d2__checkbox_8cpp"/>
+      </node>
+      <node id="14">
+        <label>elements/d2_checkbox.hpp</label>
+        <link refid="d2__checkbox_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>elements/d2_demand_scrollbox.cpp</label>
+        <link refid="d2__demand__scrollbox_8cpp"/>
+      </node>
+      <node id="19">
+        <label>elements/d2_demand_scrollbox.hpp</label>
+        <link refid="d2__demand__scrollbox_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>elements/d2_draggable_box.cpp</label>
+        <link refid="d2__draggable__box_8cpp"/>
+      </node>
+      <node id="5">
+        <label>elements/d2_draggable_box.hpp</label>
+        <link refid="d2__draggable__box_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>elements/d2_dropdown.cpp</label>
+        <link refid="d2__dropdown_8cpp"/>
+      </node>
+      <node id="16">
+        <label>elements/d2_dropdown.hpp</label>
+        <link refid="d2__dropdown_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>elements/d2_element_utils.cpp</label>
+        <link refid="d2__element__utils_8cpp"/>
+      </node>
+      <node id="18">
+        <label>elements/d2_element_utils.hpp</label>
+        <link refid="d2__element__utils_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>elements/d2_flow_box.cpp</label>
+        <link refid="d2__flow__box_8cpp"/>
+      </node>
+      <node id="7">
+        <label>elements/d2_flow_box.hpp</label>
+        <link refid="d2__flow__box_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>elements/d2_graph.cpp</label>
+        <link refid="d2__graph_8cpp"/>
+      </node>
+      <node id="22">
+        <label>elements/d2_graph.hpp</label>
+        <link refid="d2__graph_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>elements/d2_image.cpp</label>
+        <link refid="elements_2d2__image_8cpp"/>
+      </node>
+      <node id="24">
+        <label>elements/d2_image.hpp</label>
+        <link refid="elements_2d2__image_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>elements/d2_input.cpp</label>
+        <link refid="d2__input_8cpp"/>
+      </node>
+      <node id="30">
+        <label>elements/d2_input.hpp</label>
+        <link refid="d2__input_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>elements/d2_matrix.cpp</label>
+        <link refid="d2__matrix_8cpp"/>
+      </node>
+      <node id="34">
+        <label>elements/d2_matrix.hpp</label>
+        <link refid="d2__matrix_8hpp"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>elements/d2_multiline_input.cpp</label>
+        <link refid="d2__multiline__input_8cpp"/>
+      </node>
+      <node id="32">
+        <label>elements/d2_multiline_input.hpp</label>
+        <link refid="d2__multiline__input_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>elements/d2_scrollbox.cpp</label>
+        <link refid="d2__scrollbox_8cpp"/>
+      </node>
+      <node id="10">
+        <label>elements/d2_scrollbox.hpp</label>
+        <link refid="d2__scrollbox_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>elements/d2_separator.cpp</label>
+        <link refid="d2__separator_8cpp"/>
+      </node>
+      <node id="36">
+        <label>elements/d2_separator.hpp</label>
+        <link refid="d2__separator_8hpp"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>elements/d2_slider.cpp</label>
+        <link refid="d2__slider_8cpp"/>
+      </node>
+      <node id="38">
+        <label>elements/d2_slider.hpp</label>
+        <link refid="d2__slider_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>elements/d2_std.hpp</label>
+        <link refid="elements_2d2__std_8hpp"/>
+      </node>
+      <node id="27">
+        <label>elements/d2_switch.cpp</label>
+        <link refid="d2__switch_8cpp"/>
+      </node>
+      <node id="26">
+        <label>elements/d2_switch.hpp</label>
+        <link refid="d2__switch_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>elements/d2_text.cpp</label>
+        <link refid="d2__text_8cpp"/>
+      </node>
+      <node id="28">
+        <label>elements/d2_text.hpp</label>
+        <link refid="d2__text_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classd2_1_1Unit" prot="public">d2::Unit</innerclass>
+    <innerclass refid="structd2_1_1Unit_1_1UnitType" prot="private">d2::Unit::UnitType</innerclass>
+    <innerclass refid="classd2_1_1AlignedUnit" prot="public">d2::AlignedUnit</innerclass>
+    <innernamespace refid="namespaced2">d2</innernamespace>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="d2__element__units_8hpp_1a71813c043d3864272ee8ce9fba071ac1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_px</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_px</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="298" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="298" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a744c5b06045938800e18e91e58572c9d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_pxi</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_pxi</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="302" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="302" bodyend="305"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a24859afe3e6814c444032f049b8d2527" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_pv</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_pv</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="307" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="307" bodyend="310"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a105d93636e6e92ebe7bd0b354210be1a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_pvi</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_pvi</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="311" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="311" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a50c4f8d27fc29644d0293a16b373c510" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_pc</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_pc</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="316" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="316" bodyend="319"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a4417db6006a7c9860f9872370cd9ecb7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_pci</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_pci</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="320" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="320" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1aef1c4c6e4a099b5c5448e451da56d46f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_cpx</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_cpx</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="325" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="325" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a8c001638b796d7c078f5ab7336e13505" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_cpxi</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_cpxi</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="329" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="329" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a48fdb2fb2b83e4921d93937c654763cf" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_cpv</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_cpv</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="334" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="334" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1ab92685bbc68661b7ce40947ac1fcfff4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_cpvi</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_cpvi</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="338" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="338" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a4438849c0ac50b58221a8584c76dedb5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_cpc</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_cpc</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="343" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="343" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a0b998dadec9038d02e37f5ed37dce9fd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_cpci</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_cpci</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="347" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="347" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a501778b75f86c470742308366062206e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_center</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_center</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="352" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="352" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a5362899a0b96326ec30a0a28116fe6ca" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_auto</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_auto</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="356" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="356" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="d2__element__units_8hpp_1a25d73ef570901f094e72322543af6f6f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">d2::Unit</ref></type>
+        <definition>d2::Unit operator&quot;&quot;_relative</definition>
+        <argsstring>(long double value)</argsstring>
+        <name>operator&quot;&quot;_relative</name>
+        <param>
+          <type>long double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_element_units.hpp" line="360" column="20" bodyfile="core/types/d2_element_units.hpp" bodystart="360" bodyend="363"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_element_units.hpp"/>
+  </compounddef>
+</doxygen>

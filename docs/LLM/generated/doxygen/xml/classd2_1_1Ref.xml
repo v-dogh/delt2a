@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1Ref" kind="class" language="C++" prot="public">
+    <compoundname>d2::Ref</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1Ref_1ad476b9c49a7f7dde94af954e33ed0077" prot="private" static="no" mutable="no">
+        <type>Type *</type>
+        <definition>Type* d2::Ref&lt; Type &gt;::_value</definition>
+        <argsstring></argsstring>
+        <name>_value</name>
+        <qualifiedname>d2::Ref::_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="28" column="14" bodyfile="core/io/d2_signal_handler.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1Ref_1ae9cf94a7ae8f93c65d51b5cbbaf8b998" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::Ref&lt; Type &gt;::Ref</definition>
+        <argsstring>(Type &amp;value) noexcept</argsstring>
+        <name>Ref</name>
+        <qualifiedname>d2::Ref::Ref</qualifiedname>
+        <param>
+          <type>Type &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="30" column="28" bodyfile="core/io/d2_signal_handler.hpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Ref_1a3371a3e4d3131c681f94a8ad182ddebb" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>Type &amp;</type>
+        <definition>Type &amp; d2::Ref&lt; Type &gt;::get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::Ref::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="32" column="24" bodyfile="core/io/d2_signal_handler.hpp" bodystart="32" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Ref_1a4ac84d6bb1dbd0f5fbe862e5ba34f00a" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::Ref&lt; Type &gt;::operator Type &amp;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator Type &amp;</name>
+        <qualifiedname>d2::Ref::operator Type &amp;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="37" column="19" bodyfile="core/io/d2_signal_handler.hpp" bodystart="37" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Ref_1ab98c1e2335f2ec9b2087121c3eefdd97" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>Type *</type>
+        <definition>Type * d2::Ref&lt; Type &gt;::operator&amp;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator&amp;</name>
+        <qualifiedname>d2::Ref::operator&amp;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="42" column="24" bodyfile="core/io/d2_signal_handler.hpp" bodystart="42" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Ref_1a488cb1a43f52a078b5bebb85d90bdf6d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>Type *</type>
+        <definition>Type * d2::Ref&lt; Type &gt;::operator-&gt;</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>d2::Ref::operator-&gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="46" column="24" bodyfile="core/io/d2_signal_handler.hpp" bodystart="46" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Ref_1a626b7af9fcdc2e33abe2d267cdd3464d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>Type &amp;</type>
+        <definition>Type &amp; d2::Ref&lt; Type &gt;::operator*</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::Ref::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="50" column="24" bodyfile="core/io/d2_signal_handler.hpp" bodystart="50" bodyend="53"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="24" column="15" bodyfile="core/io/d2_signal_handler.hpp" bodystart="25" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classd2_1_1Ref_1ad476b9c49a7f7dde94af954e33ed0077" prot="private" virt="non-virtual"><scope>d2::Ref</scope><name>_value</name></member>
+      <member refid="classd2_1_1Ref_1a3371a3e4d3131c681f94a8ad182ddebb" prot="public" virt="non-virtual"><scope>d2::Ref</scope><name>get</name></member>
+      <member refid="classd2_1_1Ref_1a4ac84d6bb1dbd0f5fbe862e5ba34f00a" prot="public" virt="non-virtual"><scope>d2::Ref</scope><name>operator Type &amp;</name></member>
+      <member refid="classd2_1_1Ref_1ab98c1e2335f2ec9b2087121c3eefdd97" prot="public" virt="non-virtual"><scope>d2::Ref</scope><name>operator&amp;</name></member>
+      <member refid="classd2_1_1Ref_1a626b7af9fcdc2e33abe2d267cdd3464d" prot="public" virt="non-virtual"><scope>d2::Ref</scope><name>operator*</name></member>
+      <member refid="classd2_1_1Ref_1a488cb1a43f52a078b5bebb85d90bdf6d" prot="public" virt="non-virtual"><scope>d2::Ref</scope><name>operator-&gt;</name></member>
+      <member refid="classd2_1_1Ref_1ae9cf94a7ae8f93c65d51b5cbbaf8b998" prot="public" virt="non-virtual"><scope>d2::Ref</scope><name>Ref</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

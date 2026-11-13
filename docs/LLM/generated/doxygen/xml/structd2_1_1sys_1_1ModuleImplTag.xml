@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1ModuleImplTag" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::ModuleImplTag</compoundname>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleImpl" prot="private" virt="non-virtual">d2::sys::ModuleImpl&lt; Base, LoadType &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleImpl" prot="private" virt="non-virtual">d2::sys::ModuleImpl&lt; SystemBinder, LoadType &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleImpl" prot="private" virt="non-virtual">d2::sys::ModuleImpl&lt; SystemScreen, LoadType &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleImpl" prot="private" virt="non-virtual">d2::sys::ModuleImpl&lt; SystemSelector, LoadType &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleImpl" prot="private" virt="non-virtual">d2::sys::ModuleImpl&lt; SystemSession, LoadType &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleImpl" prot="private" virt="non-virtual">d2::sys::ModuleImpl&lt; Base, LoadType, Deps &gt;</derivedcompoundref>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>d2::sys::Module&lt; Base, Name, Ac, LoadType, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::Module&lt; SystemBinder, &quot;Binder&quot;, Access::TUnsafe, Load::Lazy, sys::SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>d2::sys::Module&lt; SystemScreen, &quot;Screen&quot;, Access::TUnsafe, Load::Immediate, SystemInput, SystemOutput &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>d2::sys::Module&lt; SystemSelector, &quot;Selector&quot;, Access::TUnsafe, Load::Immediate, SystemScreen &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>d2::sys::Module&lt; SystemSession, &quot;Session&quot;, Access::TSafe, Load::Lazy &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>d2::sys::ModuleImpl&lt; Base, LoadType, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::sys::ModuleImpl&lt; Base, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::sys::ModuleImpl&lt; SystemBinder, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>d2::sys::ModuleImpl&lt; SystemScreen, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>d2::sys::ModuleImpl&lt; SystemSelector, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>d2::sys::ModuleImpl&lt; SystemSession, LoadType &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleImpl"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::ModuleImplTag</label>
+        <link refid="structd2_1_1sys_1_1ModuleImplTag"/>
+      </node>
+      <node id="6">
+        <label>d2::sys::SystemBinder</label>
+        <link refid="classd2_1_1sys_1_1SystemBinder"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>d2::sys::SystemScreen</label>
+        <link refid="classd2_1_1sys_1_1SystemScreen"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>d2::sys::SystemSelector</label>
+        <link refid="classd2_1_1sys_1_1SystemSelector"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>d2::sys::net::SystemSession</label>
+        <link refid="classd2_1_1sys_1_1net_1_1SystemSession"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="core/io/d2_module.hpp" line="246" column="5" bodyfile="core/io/d2_module.hpp" bodystart="247" bodyend="248"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

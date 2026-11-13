@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1VerticalSwitch" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::VerticalSwitch</compoundname>
+    <basecompoundref refid="classd2_1_1style_1_1UniversalAccessInterface" prot="public" virt="non-virtual">d2::style::UniversalAccessInterface&lt; Chain, Base, Interface, Interfaces... &gt;</basecompoundref>
+    <includes refid="d2__switch_8hpp" local="no">d2_switch.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1dx_1_1VerticalSwitch_1acc2574bcb8cd2dc3595faf6b73784882" prot="public" static="no">
+        <type><ref refid="namespaced2_1_1style_1a907f2784dac2c79abf8869c5345c1ce4" kindref="member">style::UAIC</ref>&lt; <ref refid="classd2_1_1dx_1_1Switch" kindref="compound">Switch</ref>, <ref refid="classd2_1_1dx_1_1VerticalSwitch_1ae3026a2f19f74b8ef2f6c4778b7a287f" kindref="member">VerticalSwitch</ref>, style::IVerticalSwitch &gt;</type>
+        <definition>using d2::dx::VerticalSwitch::data = style::UAIC&lt;Switch, VerticalSwitch, style::IVerticalSwitch&gt;</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::dx::VerticalSwitch::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="142" column="13" bodyfile="elements/d2_switch.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1VerticalSwitch_1a3bb3669379f251a2cd483b91ce47c352" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::dx::VerticalSwitch::_scroll_offset</definition>
+        <argsstring></argsstring>
+        <name>_scroll_offset</name>
+        <qualifiedname>d2::dx::VerticalSwitch::_scroll_offset</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="145" column="17" bodyfile="elements/d2_switch.hpp" bodystart="145" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1VerticalSwitch_1a9d2c486b99d17b3bcaf78f76808286bb" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::dx::VerticalSwitch::_selector</definition>
+        <argsstring></argsstring>
+        <name>_selector</name>
+        <qualifiedname>d2::dx::VerticalSwitch::_selector</qualifiedname>
+        <initializer>{-1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="146" column="17" bodyfile="elements/d2_switch.hpp" bodystart="146" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1VerticalSwitch_1a9a1d5fdb126de99f1bda397bd38ad2bc" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::dx::VerticalSwitch::_scrollbar</definition>
+        <argsstring></argsstring>
+        <name>_scrollbar</name>
+        <qualifiedname>d2::dx::VerticalSwitch::_scrollbar</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="147" column="18" bodyfile="elements/d2_switch.hpp" bodystart="147" bodyend="147"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1VerticalSwitch_1a985c5936442b4f2bc71e32308e692ef8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::VerticalSwitch::_signal_write_impl</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element) override</argsstring>
+        <name>_signal_write_impl</name>
+        <qualifiedname>d2::dx::VerticalSwitch::_signal_write_impl</qualifiedname>
+        <param>
+          <type>write_flag</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type>ptr</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="150" column="13" bodyfile="elements/d2_switch.cpp" bodystart="207" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1VerticalSwitch_1a39a2eb80b04af8ebbaf535af9fc5b485" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::VerticalSwitch::_state_change_impl</definition>
+        <argsstring>(State state, bool value) override</argsstring>
+        <name>_state_change_impl</name>
+        <qualifiedname>d2::dx::VerticalSwitch::_state_change_impl</qualifiedname>
+        <param>
+          <type>State</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="151" column="26" bodyfile="elements/d2_switch.cpp" bodystart="258" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1VerticalSwitch_1a0faaaa109875892673e5ab223d8f7c9c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::VerticalSwitch::_event_impl</definition>
+        <argsstring>(in::InputFrame &amp;frame) override</argsstring>
+        <name>_event_impl</name>
+        <qualifiedname>d2::dx::VerticalSwitch::_event_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="152" column="26" bodyfile="elements/d2_switch.cpp" bodystart="307" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1VerticalSwitch_1aa6cbb6adff09554914eec1d1f8127e04" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::VerticalSwitch::_frame_impl</definition>
+        <argsstring>(PixelBuffer::View buffer) override</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::dx::VerticalSwitch::_frame_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="153" column="26" bodyfile="elements/d2_switch.cpp" bodystart="383" bodyend="586"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1VerticalSwitch_1ae3026a2f19f74b8ef2f6c4778b7a287f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::dx::VerticalSwitch::VerticalSwitch</definition>
+        <argsstring>(const std::string &amp;name, TreeState::ptr state)</argsstring>
+        <name>VerticalSwitch</name>
+        <qualifiedname>d2::dx::VerticalSwitch::VerticalSwitch</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref></type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_switch.hpp" line="155" column="13" bodyfile="elements/d2_switch.hpp" bodystart="155" bodyend="158"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>Chain</label>
+      </node>
+      <node id="4">
+        <label>Interface&lt; impl::ResolveChain&lt; Chain &gt;::offset &gt;</label>
+      </node>
+      <node id="5">
+        <label>Interfaces&lt; impl::OffsetHelper&lt; impl::ResolveChain&lt; Chain &gt;::offset, Interfaces, Interface, Interfaces... &gt;::offset &gt;</label>
+      </node>
+      <node id="1">
+        <label>d2::dx::VerticalSwitch</label>
+        <link refid="classd2_1_1dx_1_1VerticalSwitch"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>style::UAIC&lt; Switch, VerticalSwitch, style::IVerticalSwitch &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterface"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>Chain</label>
+      </node>
+      <node id="4">
+        <label>Interface&lt; impl::ResolveChain&lt; Chain &gt;::offset &gt;</label>
+      </node>
+      <node id="5">
+        <label>Interfaces&lt; impl::OffsetHelper&lt; impl::ResolveChain&lt; Chain &gt;::offset, Interfaces, Interface, Interfaces... &gt;::offset &gt;</label>
+      </node>
+      <node id="1">
+        <label>d2::dx::VerticalSwitch</label>
+        <link refid="classd2_1_1dx_1_1VerticalSwitch"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>style::UAIC&lt; Switch, VerticalSwitch, style::IVerticalSwitch &gt;</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterface"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_switch.hpp" line="139" column="9" bodyfile="elements/d2_switch.hpp" bodystart="140" bodyend="159"/>
+    <listofallmembers>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1acba02ced51b68e1c8b12e57a65a6c6c4" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_clear_anims_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a484b34334f398425634a51c0d7847e96" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_context_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ad9b021ad1fcdbdb38bfb04ac6d3c867a" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_deregister_dep_bind</name></member>
+      <member refid="classd2_1_1dx_1_1VerticalSwitch_1a0faaaa109875892673e5ab223d8f7c9c" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_event_impl</name></member>
+      <member refid="classd2_1_1dx_1_1VerticalSwitch_1aa6cbb6adff09554914eec1d1f8127e04" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a88822a6e794d489cb4d9d2d48a9eac27" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_handle_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a17636cd536cba1ade0f043be67663a7b" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_has_interface_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aec6d1ebe3f9fd530c0cc9070b8b2f079" prot="protected" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>_has_interface_own_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a787a2f4cb747d5f7a3665753961ed5d8" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_initialize_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a90594412c08060a28df8a2813960ccbe" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_register_dep_bind</name></member>
+      <member refid="classd2_1_1dx_1_1VerticalSwitch_1a3bb3669379f251a2cd483b91ce47c352" prot="private" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>_scroll_offset</name></member>
+      <member refid="classd2_1_1dx_1_1VerticalSwitch_1a9a1d5fdb126de99f1bda397bd38ad2bc" prot="private" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>_scrollbar</name></member>
+      <member refid="classd2_1_1dx_1_1VerticalSwitch_1a9d2c486b99d17b3bcaf78f76808286bb" prot="private" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>_selector</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a97ccfaa6b03ac7e36b7e26cae4460484" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_set_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a7697343fbdbe2ff88bbe4ac5d0b79a59" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_signal_base_impl</name></member>
+      <member refid="classd2_1_1dx_1_1VerticalSwitch_1a985c5936442b4f2bc71e32308e692ef8" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_signal_write_impl</name></member>
+      <member refid="classd2_1_1dx_1_1VerticalSwitch_1a39a2eb80b04af8ebbaf535af9fc5b485" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_state_change_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a2a4a0da9d046965ff9a67f952e045a78" prot="protected" virt="virtual"><scope>d2::dx::VerticalSwitch</scope><name>_test_dynamic_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a25ddba284572cdec9f63676331fa617e" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>apply_get</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a706f047fb93be4001d1419650b6c823e" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>apply_set</name></member>
+      <member refid="classd2_1_1dx_1_1VerticalSwitch_1acc2574bcb8cd2dc3595faf6b73784882" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>data</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ad813debc279767724c892a29e01cddba" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>get</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1ae1039af891cf36e6a328d79866c17754" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>getref</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a9001a0c242aaa9d25c010c5b6196fbb6" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>interface</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1a8a224c017ad9f97d8df9bbe04c49b445" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>property</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aeb450621d768c7eaa608764a57c62f0c" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>set</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1aed33fa9d3fc115078dfc14f6bf14b9a0" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>type_of</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterface_1adf5ef2bd8a40d986f53b72e76a0c5b0a" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>uai_chain</name></member>
+      <member refid="classd2_1_1dx_1_1VerticalSwitch_1ae3026a2f19f74b8ef2f6c4778b7a287f" prot="public" virt="non-virtual"><scope>d2::dx::VerticalSwitch</scope><name>VerticalSwitch</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

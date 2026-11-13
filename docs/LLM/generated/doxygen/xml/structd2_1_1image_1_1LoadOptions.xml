@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1image_1_1LoadOptions" kind="struct" language="C++" prot="public">
+    <compoundname>d2::image::LoadOptions</compoundname>
+    <includes refid="d2__image__loader_8hpp" local="no">d2_image_loader.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1image_1_1LoadOptions_1a711831b09de427efb7d051a148c8c970" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::image::LoadOptions::max_bytes</definition>
+        <argsstring></argsstring>
+        <name>max_bytes</name>
+        <qualifiedname>d2::image::LoadOptions::max_bytes</qualifiedname>
+        <initializer>{64 * 1024 * 1024}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_image_loader.hpp" line="12" column="21" bodyfile="core/mods/d2_image_loader.hpp" bodystart="12" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1image_1_1LoadOptions_1a4351e73533eabdba82b413b01a93a68e" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::image::LoadOptions::max_pixels</definition>
+        <argsstring></argsstring>
+        <name>max_pixels</name>
+        <qualifiedname>d2::image::LoadOptions::max_pixels</qualifiedname>
+        <initializer>{<ref refid="classd2_1_1image_1_1Raster_1a956f66912dc607c5dbd3e0d5643bb66f" kindref="member">Raster::max_pixels</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_image_loader.hpp" line="13" column="21" bodyfile="core/mods/d2_image_loader.hpp" bodystart="13" bodyend="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1image_1_1LoadOptions_1a1df1364049cb31b448e4c6c4115e8649" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::image::LoadOptions::validate</definition>
+        <argsstring>() const</argsstring>
+        <name>validate</name>
+        <qualifiedname>d2::image::LoadOptions::validate</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_image_loader.hpp" line="14" column="14" bodyfile="core/mods/d2_image_loader.cpp" bodystart="8" bodyend="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_image_loader.hpp" line="10" column="5" bodyfile="core/mods/d2_image_loader.hpp" bodystart="11" bodyend="15"/>
+    <listofallmembers>
+      <member refid="structd2_1_1image_1_1LoadOptions_1a711831b09de427efb7d051a148c8c970" prot="public" virt="non-virtual"><scope>d2::image::LoadOptions</scope><name>max_bytes</name></member>
+      <member refid="structd2_1_1image_1_1LoadOptions_1a4351e73533eabdba82b413b01a93a68e" prot="public" virt="non-virtual"><scope>d2::image::LoadOptions</scope><name>max_pixels</name></member>
+      <member refid="structd2_1_1image_1_1LoadOptions_1a1df1364049cb31b448e4c6c4115e8649" prot="public" virt="non-virtual"><scope>d2::image::LoadOptions</scope><name>validate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

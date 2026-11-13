@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemBinder_1_1BindValue" kind="struct" language="C++" prot="private">
+    <compoundname>d2::sys::SystemBinder::BindValue</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a6177a3f5b84e7166e6e8b4489b88570b" prot="public" static="no" mutable="no">
+        <type><ref refid="structd2_1_1sys_1_1SystemBinder_1_1Bind" kindref="compound">Bind</ref></type>
+        <definition>Bind d2::sys::SystemBinder::BindValue::bind</definition>
+        <argsstring></argsstring>
+        <name>bind</name>
+        <qualifiedname>d2::sys::SystemBinder::BindValue::bind</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="85" column="18" bodyfile="core/mods/d2_binder.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a07eea114b9d5538c7fe44f4123798f20" prot="public" static="no" mutable="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemBinder_1ae6a1436e19ea2ab5169e1a39f8704d5c" kindref="member">callback_type</ref></type>
+        <definition>callback_type d2::sys::SystemBinder::BindValue::callback</definition>
+        <argsstring></argsstring>
+        <name>callback</name>
+        <qualifiedname>d2::sys::SystemBinder::BindValue::callback</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="86" column="27" bodyfile="core/mods/d2_binder.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a4c3349fd74f616269291ce0777b4f7dd" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemBinder::BindValue::epoch</definition>
+        <argsstring></argsstring>
+        <name>epoch</name>
+        <qualifiedname>d2::sys::SystemBinder::BindValue::epoch</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="87" column="25" bodyfile="core/mods/d2_binder.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1ae03afc51a0ac99e90fa7eca1e368bd35" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemBinder::BindValue::sequence_idx</definition>
+        <argsstring></argsstring>
+        <name>sequence_idx</name>
+        <qualifiedname>d2::sys::SystemBinder::BindValue::sequence_idx</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="88" column="25" bodyfile="core/mods/d2_binder.hpp" bodystart="88" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a762f118c08f23ce7e6c484ecf5a379da" prot="public" static="no" mutable="no">
+        <type>std::chrono::steady_clock::time_point</type>
+        <definition>std::chrono::steady_clock::time_point d2::sys::SystemBinder::BindValue::sequence_ts</definition>
+        <argsstring></argsstring>
+        <name>sequence_ts</name>
+        <qualifiedname>d2::sys::SystemBinder::BindValue::sequence_ts</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="89" column="51" bodyfile="core/mods/d2_binder.hpp" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a7646d6a0ce85a0d8cad057789096321b" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classd2_1_1Element_1_1EventListener" kindref="compound">d2::Element::EventListener</ref> &gt;</type>
+        <definition>std::vector&lt;d2::Element::EventListener&gt; d2::sys::SystemBinder::BindValue::listeners</definition>
+        <argsstring></argsstring>
+        <name>listeners</name>
+        <qualifiedname>d2::sys::SystemBinder::BindValue::listeners</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="90" column="25" bodyfile="core/mods/d2_binder.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1abce72a500ea66406f122164dbde97618" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemBinder::BindValue::active</definition>
+        <argsstring></argsstring>
+        <name>active</name>
+        <qualifiedname>d2::sys::SystemBinder::BindValue::active</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="91" column="18" bodyfile="core/mods/d2_binder.hpp" bodystart="91" bodyend="91"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::SystemBinder::Bind</label>
+        <link refid="structd2_1_1sys_1_1SystemBinder_1_1Bind"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemBinder::BindValue</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>bind</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_binder.hpp" line="83" column="9" bodyfile="core/mods/d2_binder.hpp" bodystart="84" bodyend="92"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1abce72a500ea66406f122164dbde97618" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::BindValue</scope><name>active</name></member>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a6177a3f5b84e7166e6e8b4489b88570b" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::BindValue</scope><name>bind</name></member>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a07eea114b9d5538c7fe44f4123798f20" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::BindValue</scope><name>callback</name></member>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a4c3349fd74f616269291ce0777b4f7dd" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::BindValue</scope><name>epoch</name></member>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a7646d6a0ce85a0d8cad057789096321b" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::BindValue</scope><name>listeners</name></member>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1ae03afc51a0ac99e90fa7eca1e368bd35" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::BindValue</scope><name>sequence_idx</name></member>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1BindValue_1a762f118c08f23ce7e6c484ecf5a379da" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::BindValue</scope><name>sequence_ts</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

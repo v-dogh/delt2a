@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1impl_1_1LinearInterpolationWriter" kind="class" language="C++" prot="public">
+    <compoundname>d2::impl::LinearInterpolationWriter</compoundname>
+    <includes refid="d2__animate_8hpp" local="no">d2_animate.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1impl_1_1LinearInterpolationWriter_1afaacc79b5c758f39b4e950fd27beb104" prot="private" static="no" mutable="no">
+        <type>Type</type>
+        <definition>Type d2::impl::LinearInterpolationWriter&lt; Type &gt;::_source</definition>
+        <argsstring></argsstring>
+        <name>_source</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter::_source</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="20" column="18" bodyfile="core/screen/d2_animate.hpp" bodystart="20" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1impl_1_1LinearInterpolationWriter_1a9cedd155ff455876c954e70e196bc1a5" prot="private" static="no" mutable="no">
+        <type>Type</type>
+        <definition>Type d2::impl::LinearInterpolationWriter&lt; Type &gt;::_dest</definition>
+        <argsstring></argsstring>
+        <name>_dest</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter::_dest</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="21" column="18" bodyfile="core/screen/d2_animate.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1impl_1_1LinearInterpolationWriter_1aa6af284425d10f971e0a2e433dedc623" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::impl::LinearInterpolationWriter&lt; Type &gt;::LinearInterpolationWriter</definition>
+        <argsstring>(Type source, Type dest)</argsstring>
+        <name>LinearInterpolationWriter</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter::LinearInterpolationWriter</qualifiedname>
+        <param>
+          <type>Type</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>Type</type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="23" column="13" bodyfile="core/screen/d2_animate.hpp" bodystart="23" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1impl_1_1LinearInterpolationWriter_1a2fe023efcdd9c3b5e7d392156c7a2304" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::impl::LinearInterpolationWriter&lt; Type &gt;::reset</definition>
+        <argsstring>(const Type &amp;source, const Type &amp;dest)</argsstring>
+        <name>reset</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter::reset</qualifiedname>
+        <param>
+          <type>const Type &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>const Type &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="25" column="18" bodyfile="core/screen/d2_animate.hpp" bodystart="25" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1impl_1_1LinearInterpolationWriter_1a791565c4ab69bd9e1d049365fd462402" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Type</type>
+        <definition>Type d2::impl::LinearInterpolationWriter&lt; Type &gt;::write</definition>
+        <argsstring>(float progress)</argsstring>
+        <name>write</name>
+        <qualifiedname>d2::impl::LinearInterpolationWriter::write</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="30" column="18" bodyfile="core/screen/d2_animate.hpp" bodystart="30" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/screen/d2_animate.hpp" line="17" column="19" bodyfile="core/screen/d2_animate.hpp" bodystart="18" bodyend="34"/>
+    <listofallmembers>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_1a9cedd155ff455876c954e70e196bc1a5" prot="private" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter</scope><name>_dest</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_1afaacc79b5c758f39b4e950fd27beb104" prot="private" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter</scope><name>_source</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_1aa6af284425d10f971e0a2e433dedc623" prot="public" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter</scope><name>LinearInterpolationWriter</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_1a2fe023efcdd9c3b5e7d392156c7a2304" prot="public" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter</scope><name>reset</name></member>
+      <member refid="classd2_1_1impl_1_1LinearInterpolationWriter_1a791565c4ab69bd9e1d049365fd462402" prot="public" virt="non-virtual"><scope>d2::impl::LinearInterpolationWriter</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

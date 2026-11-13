@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Signals_1_1Config" kind="struct" language="C++" prot="public">
+    <compoundname>d2::Signals::Config</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1Config_1aa85757a82de8e794e1931973b017b0c4" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char d2::Signals::Config::flags</definition>
+        <argsstring></argsstring>
+        <name>flags</name>
+        <qualifiedname>d2::Signals::Config::flags</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="838" column="27" bodyfile="core/io/d2_signal_handler.hpp" bodystart="838" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Config_1a08b25124596926fa4414feca5319b08c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>d2::Signals::Config::Config</definition>
+        <argsstring>(unsigned char flags=0x00) noexcept</argsstring>
+        <name>Config</name>
+        <qualifiedname>d2::Signals::Config::Config</qualifiedname>
+        <param>
+          <type>unsigned char</type>
+          <declname>flags</declname>
+          <defval>0x00</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="840" column="23" bodyfile="core/io/d2_signal_handler.hpp" bodystart="840" bodyend="840"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="836" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="837" bodyend="841"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Signals_1_1Config_1a08b25124596926fa4414feca5319b08c" prot="public" virt="non-virtual"><scope>d2::Signals::Config</scope><name>Config</name></member>
+      <member refid="structd2_1_1Signals_1_1Config_1aa85757a82de8e794e1931973b017b0c4" prot="public" virt="non-virtual"><scope>d2::Signals::Config</scope><name>flags</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

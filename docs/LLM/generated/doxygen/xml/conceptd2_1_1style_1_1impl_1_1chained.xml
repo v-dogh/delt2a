@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="conceptd2_1_1style_1_1impl_1_1chained" kind="concept">
+    <compoundname>d2::style::impl::chained</compoundname>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename Type&gt;
+concept <ref refid="conceptd2_1_1style_1_1impl_1_1chained" kindref="compound">d2::style::impl::chained</ref> =  requires { typename Type::uai_chain; }</initializer>
+    <conceptparts>
+      <codepart line="22">    <programlisting>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type&gt;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">chained<sp/>=<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Type::uai_chain;<sp/>}</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_styles.hpp" line="22" column="9"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1style_1_1impl_1_1InterfaceHelper" kind="struct" language="C++" prot="public">
+    <compoundname>d2::style::impl::InterfaceHelper</compoundname>
+    <basecompoundref refid="structd2_1_1style_1_1impl_1_1XAllocInterface" prot="public" virt="non-virtual">d2::style::impl::XAllocInterface&lt; Type &gt;</basecompoundref>
+    <includes refid="d2__styles_8hpp" local="no">d2_styles.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>template&lt; std::size_t &gt; typename</type>
+        <declname>Type</declname>
+        <defname>Type</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>PropBase</declname>
+        <defname>PropBase</defname>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>Count</declname>
+        <defname>Count</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structd2_1_1style_1_1impl_1_1InterfaceHelper_1a78a0d8ce1294593fc8296f3ef683c480" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::style::impl::InterfaceHelper&lt; Type, PropBase, Count &gt;::base</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <qualifiedname>d2::style::impl::InterfaceHelper::base</qualifiedname>
+        <initializer>= PropBase</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="713" column="42" bodyfile="core/tree/d2_styles.hpp" bodystart="713" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1impl_1_1InterfaceHelper_1aadf016091c9adc625ddcc4c0787950c0" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::style::impl::InterfaceHelper&lt; Type, PropBase, Count &gt;::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <qualifiedname>d2::style::impl::InterfaceHelper::offset</qualifiedname>
+        <initializer>= PropBase + Count</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="714" column="42" bodyfile="core/tree/d2_styles.hpp" bodystart="714" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1style_1_1impl_1_1InterfaceHelper_1a50ff6dc576c03d6aec585a4d444906f1" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::style::impl::InterfaceHelper&lt; Type, PropBase, Count &gt;::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>d2::style::impl::InterfaceHelper::count</qualifiedname>
+        <initializer>= Count</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_styles.hpp" line="715" column="42" bodyfile="core/tree/d2_styles.hpp" bodystart="715" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::style::impl::InterfaceHelper&lt; Type, PropBase, Count &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1InterfaceHelper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::style::impl::XAllocInterface&lt; Type &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1XAllocInterface"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::style::impl::InterfaceHelper&lt; Type, PropBase, Count &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1InterfaceHelper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::style::impl::XAllocInterface&lt; Type &gt;</label>
+        <link refid="structd2_1_1style_1_1impl_1_1XAllocInterface"/>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_styles.hpp" line="711" column="9" bodyfile="core/tree/d2_styles.hpp" bodystart="712" bodyend="716"/>
+    <listofallmembers>
+      <member refid="structd2_1_1style_1_1impl_1_1InterfaceHelper_1a78a0d8ce1294593fc8296f3ef683c480" prot="public" virt="non-virtual"><scope>d2::style::impl::InterfaceHelper</scope><name>base</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1InterfaceHelper_1a50ff6dc576c03d6aec585a4d444906f1" prot="public" virt="non-virtual"><scope>d2::style::impl::InterfaceHelper</scope><name>count</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1InterfaceHelper_1aadf016091c9adc625ddcc4c0787950c0" prot="public" virt="non-virtual"><scope>d2::style::impl::InterfaceHelper</scope><name>offset</name></member>
+      <member refid="structd2_1_1style_1_1impl_1_1XAllocInterface_1ad946296926110c4511f2381d7f0fd39c" prot="protected" virt="non-virtual"><scope>d2::style::impl::InterfaceHelper</scope><name>xid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

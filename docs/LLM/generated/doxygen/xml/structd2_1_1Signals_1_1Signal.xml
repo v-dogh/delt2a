@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Signals_1_1Signal" kind="struct" language="C++" prot="public">
+    <compoundname>d2::Signals::Signal</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1Signal_1a757e5b8f694fe22566d047fc639e61df" prot="private" static="no" mutable="no">
+        <type>std::weak_ptr&lt; <ref refid="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" kindref="member">Signals</ref> &gt;</type>
+        <definition>std::weak_ptr&lt;Signals&gt; d2::Signals::Signal::_state</definition>
+        <argsstring></argsstring>
+        <name>_state</name>
+        <qualifiedname>d2::Signals::Signal::_state</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="815" column="27" bodyfile="core/io/d2_signal_handler.hpp" bodystart="815" bodyend="815"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1Signal_1a255d57ba3fbf1d16fa3fae4727313d6f" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; SignalStorage &gt;</type>
+        <definition>std::shared_ptr&lt;SignalStorage&gt; d2::Signals::Signal::_storage</definition>
+        <argsstring></argsstring>
+        <name>_storage</name>
+        <qualifiedname>d2::Signals::Signal::_storage</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="816" column="29" bodyfile="core/io/d2_signal_handler.hpp" bodystart="816" bodyend="816"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1Signals_1_1Signal_1ae8ce474435263b86c87a59f227dfa438" prot="private" static="no" mutable="no">
+        <type>SignalKey</type>
+        <definition>SignalKey d2::Signals::Signal::_id</definition>
+        <argsstring></argsstring>
+        <name>_id</name>
+        <qualifiedname>d2::Signals::Signal::_id</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="817" column="23" bodyfile="core/io/d2_signal_handler.hpp" bodystart="817" bodyend="817"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1a6eee4a11dab8e06ae7687bcc9e9b7017" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::Signal::Signal</definition>
+        <argsstring>()=default</argsstring>
+        <name>Signal</name>
+        <qualifiedname>d2::Signals::Signal::Signal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="819" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1a3750ebde0bdebc59c8eaef86fe8ced31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::Signal::Signal</definition>
+        <argsstring>(std::weak_ptr&lt; Signals &gt; ptr, std::shared_ptr&lt; SignalStorage &gt; storage, SignalKey id)</argsstring>
+        <name>Signal</name>
+        <qualifiedname>d2::Signals::Signal::Signal</qualifiedname>
+        <param>
+          <type>std::weak_ptr&lt; <ref refid="classd2_1_1Signals_1aa74e039e654a17d5ecb3c0566310064f" kindref="member">Signals</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; SignalStorage &gt;</type>
+          <declname>storage</declname>
+        </param>
+        <param>
+          <type>SignalKey</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="820" column="13" bodyfile="core/io/d2_signal_handler.cpp" bodystart="302" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1a93edd1599480b77a0c2531f4dc34cd11" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::Signal::Signal</definition>
+        <argsstring>(std::nullptr_t)</argsstring>
+        <name>Signal</name>
+        <qualifiedname>d2::Signals::Signal::Signal</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="823" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="823" bodyend="823"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1a8109ef85d756fc8d13dbcf71f3b1da8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::Signal::Signal</definition>
+        <argsstring>(const Signal &amp;)=delete</argsstring>
+        <name>Signal</name>
+        <qualifiedname>d2::Signals::Signal::Signal</qualifiedname>
+        <param>
+          <type>const Signal &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="824" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1a31feaf72914f076c394c7c054a576696" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::Signal::Signal</definition>
+        <argsstring>(Signal &amp;&amp;other) noexcept</argsstring>
+        <name>Signal</name>
+        <qualifiedname>d2::Signals::Signal::Signal</qualifiedname>
+        <param>
+          <type>Signal &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="825" column="13" bodyfile="core/io/d2_signal_handler.cpp" bodystart="308" bodyend="312"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1ae3d92bce55dc3af58cba0aa16938e718" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Signals::Signal::~Signal</definition>
+        <argsstring>()</argsstring>
+        <name>~Signal</name>
+        <qualifiedname>d2::Signals::Signal::~Signal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="826" column="13" bodyfile="core/io/d2_signal_handler.cpp" bodystart="314" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1a8547e9ab3f4e0ca885ee2537ce1e341b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Signals::Signal::disconnect</definition>
+        <argsstring>()</argsstring>
+        <name>disconnect</name>
+        <qualifiedname>d2::Signals::Signal::disconnect</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="828" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="333" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1a2cd37b586417250d2284ba90c5ea3fda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Signals_1_1Signal_1a6eee4a11dab8e06ae7687bcc9e9b7017" kindref="member">Signal</ref> &amp;</type>
+        <definition>Signal &amp; d2::Signals::Signal::operator=</definition>
+        <argsstring>(const Signal &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Signals::Signal::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1Signals_1_1Signal_1a6eee4a11dab8e06ae7687bcc9e9b7017" kindref="member">Signal</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="830" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1af66d82257bd6d654443badf2fd148bb7" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1Signals_1_1Signal_1a6eee4a11dab8e06ae7687bcc9e9b7017" kindref="member">Signal</ref> &amp;</type>
+        <definition>Signals::Signal &amp; d2::Signals::Signal::operator=</definition>
+        <argsstring>(Signal &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Signals::Signal::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Signals_1_1Signal_1a6eee4a11dab8e06ae7687bcc9e9b7017" kindref="member">Signal</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="831" column="20" bodyfile="core/io/d2_signal_handler.cpp" bodystart="319" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1a9ecf72eb50f86ce613dad3ddbbc909a3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Signals::Signal::operator==</definition>
+        <argsstring>(std::nullptr_t) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::Signals::Signal::operator==</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="833" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="344" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1Signals_1_1Signal_1ad4726a06ff5f7b95a0eedf37efe996b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Signals::Signal::operator!=</definition>
+        <argsstring>(std::nullptr_t) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>d2::Signals::Signal::operator!=</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="834" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="349" bodyend="352"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="812" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="813" bodyend="835"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Signals_1_1Signal_1ae8ce474435263b86c87a59f227dfa438" prot="private" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>_id</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a757e5b8f694fe22566d047fc639e61df" prot="private" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>_state</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a255d57ba3fbf1d16fa3fae4727313d6f" prot="private" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>_storage</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a8547e9ab3f4e0ca885ee2537ce1e341b" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>disconnect</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1ad4726a06ff5f7b95a0eedf37efe996b3" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>operator!=</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a2cd37b586417250d2284ba90c5ea3fda" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>operator=</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1af66d82257bd6d654443badf2fd148bb7" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>operator=</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a9ecf72eb50f86ce613dad3ddbbc909a3" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>operator==</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a6eee4a11dab8e06ae7687bcc9e9b7017" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>Signal</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a3750ebde0bdebc59c8eaef86fe8ced31" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>Signal</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a93edd1599480b77a0c2531f4dc34cd11" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>Signal</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a8109ef85d756fc8d13dbcf71f3b1da8a" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>Signal</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1a31feaf72914f076c394c7c054a576696" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>Signal</name></member>
+      <member refid="structd2_1_1Signals_1_1Signal_1ae3d92bce55dc3af58cba0aa16938e718" prot="public" virt="non-virtual"><scope>d2::Signals::Signal</scope><name>~Signal</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

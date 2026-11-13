@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1impl" kind="namespace" language="C++">
+    <compoundname>d2::impl</compoundname>
+    <innerclass refid="structd2_1_1impl_1_1args__normalize" prot="public">d2::impl::args_normalize</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1args__normalize_3_01Ref_3_01Type_01_4_01_4" prot="public">d2::impl::args_normalize&lt; Ref&lt; Type &gt; &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1args__normalize_3_01std_1_1tuple_3_01Argv_8_8_8_01_4_01_4" prot="public">d2::impl::args_normalize&lt; std::tuple&lt; Argv... &gt; &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1args__sig__normalize" prot="public">d2::impl::args_sig_normalize</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1args__sig__normalize_3_01Ref_3_01Type_01_4_01_4" prot="public">d2::impl::args_sig_normalize&lt; Ref&lt; Type &gt; &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1args__sig__normalize_3_01std_1_1tuple_3_01Argv_8_8_8_01_4_01_4" prot="public">d2::impl::args_sig_normalize&lt; std::tuple&lt; Argv... &gt; &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1func__info" prot="public">d2::impl::func_info</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1func__info_3_01Ret_07_5_08_07Argv_8_8_8_08_4" prot="public">d2::impl::func_info&lt; Ret(*)(Argv...)&gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1func__info_3_01Ret_07Argv_8_8_8_08_4" prot="public">d2::impl::func_info&lt; Ret(Argv...)&gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1func__info_3_01Ret_07State_1_1_5_08_07Argv_8_8_8_08_01const_01_4" prot="public">d2::impl::func_info&lt; Ret(State::*)(Argv...) const &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1func__info_3_01Ret_07State_1_1_5_08_07Argv_8_8_8_08_4" prot="public">d2::impl::func_info&lt; Ret(State::*)(Argv...)&gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1lambda__arg" prot="public">d2::impl::lambda_arg</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1lambda__arg_3_01Ret_07Type_1_1_5_08_07Arg_08_01const_01_4" prot="public">d2::impl::lambda_arg&lt; Ret(Type::*)(Arg) const &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1lambda__arg_3_01Ret_07Type_1_1_5_08_07Arg_08_4" prot="public">d2::impl::lambda_arg&lt; Ret(Type::*)(Arg)&gt;</innerclass>
+    <innerclass refid="classd2_1_1impl_1_1LinearInterpolationWriter" prot="public">d2::impl::LinearInterpolationWriter</innerclass>
+    <innerclass refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01pixel_01_4" prot="public">d2::impl::LinearInterpolationWriter&lt; pixel &gt;</innerclass>
+    <innerclass refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1background_01_4" prot="public">d2::impl::LinearInterpolationWriter&lt; px::background &gt;</innerclass>
+    <innerclass refid="classd2_1_1impl_1_1LinearInterpolationWriter_3_01px_1_1foreground_01_4" prot="public">d2::impl::LinearInterpolationWriter&lt; px::foreground &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1normalize" prot="public">d2::impl::normalize</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1normalize_3_01Ref_3_01Type_01_4_01_4" prot="public">d2::impl::normalize&lt; Ref&lt; Type &gt; &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1normalize_3_01std_1_1tuple_3_01Argv_8_8_8_01_4_01_4" prot="public">d2::impl::normalize&lt; std::tuple&lt; Argv... &gt; &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1normalize_3_01Type_01_6_01_4" prot="public">d2::impl::normalize&lt; Type &amp; &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1runtime__signature__for__tuple" prot="public">d2::impl::runtime_signature_for_tuple</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1runtime__signature__for__tuple_3_01std_1_1tuple_3_01Argv_8_8_8_01_4_01_4" prot="public">d2::impl::runtime_signature_for_tuple&lt; std::tuple&lt; Argv... &gt; &gt;</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1RuntimeArg" prot="public">d2::impl::RuntimeArg</innerclass>
+    <innerclass refid="structd2_1_1impl_1_1RuntimeSignature" prot="public">d2::impl::RuntimeSignature</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaced2_1_1impl_1ab38f3aedee5dcba12b5ced673e043c4b" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>style::uai_property</type>
+            <declname>Property</declname>
+            <defname>Property</defname>
+          </param>
+        </templateparamlist>
+        <type>decltype(std::declval&lt; Type &gt;().template get&lt; Property &gt;())</type>
+        <definition>using d2::impl::style_type = decltype(std::declval&lt;Type&gt;().template get&lt;Property&gt;())</definition>
+        <argsstring></argsstring>
+        <name>style_type</name>
+        <qualifiedname>d2::impl::style_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_animate.hpp" line="15" column="9" bodyfile="core/screen/d2_animate.hpp" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1impl_1a2af5f53878f9976c4be7daf45b8bb98a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="structd2_1_1impl_1_1lambda__arg" kindref="compound">lambda_arg</ref>&lt; decltype(&amp;std::remove_reference_t&lt; Func &gt;::operator())&gt;::type</type>
+        <definition>using d2::impl::lambda_arg_t = 
+typename lambda_arg&lt;decltype(&amp;std::remove_reference_t&lt;Func&gt;::operator())&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>lambda_arg_t</name>
+        <qualifiedname>d2::impl::lambda_arg_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="49" column="9" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1impl_1ac1485683f899af9e942998ee0b0867ef" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="namespaced2_1_1impl_1a2af5f53878f9976c4be7daf45b8bb98a" kindref="member">lambda_arg_t</ref>&lt; Func &gt;::element_type</type>
+        <definition>using d2::impl::deduced_type_t = typename lambda_arg_t&lt;Func&gt;::element_type</definition>
+        <argsstring></argsstring>
+        <name>deduced_type_t</name>
+        <qualifiedname>d2::impl::deduced_type_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="52" column="20" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1impl_1a37552f380f5b36f949f9c9a6cbc820ce" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="namespaced2_1_1impl_1a2af5f53878f9976c4be7daf45b8bb98a" kindref="member">lambda_arg_t</ref>&lt; Func &gt;::state_type</type>
+        <definition>using d2::impl::deduced_state_t = typename lambda_arg_t&lt;Func&gt;::state_type</definition>
+        <argsstring></argsstring>
+        <name>deduced_state_t</name>
+        <qualifiedname>d2::impl::deduced_state_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="53" column="20" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1impl_1a907921bd055486f7d8f75ce4e4bf4e54" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Func</type>
+          </param>
+        </templateparamlist>
+        <type>typename <ref refid="namespaced2_1_1impl_1a2af5f53878f9976c4be7daf45b8bb98a" kindref="member">lambda_arg_t</ref>&lt; Func &gt;::tree_type</type>
+        <definition>using d2::impl::deduced_tree_t = typename lambda_arg_t&lt;Func&gt;::tree_type</definition>
+        <argsstring></argsstring>
+        <name>deduced_tree_t</name>
+        <qualifiedname>d2::impl::deduced_tree_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_construct.hpp" line="54" column="20" bodyfile="core/tree/d2_tree_construct.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaced2_1_1impl_1a3c3f13174ecd0b05ae05fef538bdf5a1" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool d2::impl::dependent_false_v</definition>
+        <argsstring></argsstring>
+        <name>dependent_false_v</name>
+        <qualifiedname>d2::impl::dependent_false_v</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="67" column="41" bodyfile="core/io/d2_signal_handler.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1_1impl_1abde96ba1e56041c7490a936c9d3f4a8f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structd2_1_1impl_1_1RuntimeSignature" kindref="compound">RuntimeSignature</ref></type>
+        <definition>RuntimeSignature d2::impl::runtime_signature_for</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>runtime_signature_for</name>
+        <qualifiedname>d2::impl::runtime_signature_for</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="173" column="37" bodyfile="core/io/d2_signal_handler.hpp" bodystart="173" bodyend="177"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.cpp" line="9" column="5"/>
+  </compounddef>
+</doxygen>

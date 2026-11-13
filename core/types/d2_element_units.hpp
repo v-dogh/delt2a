@@ -176,7 +176,7 @@ namespace d2
         }
         constexpr Unit operator-(float value) const
         {
-            return Unit(value_ + value, units_.type, units_.mods);
+            return Unit(value_ - value, units_.type, units_.mods);
         }
         constexpr Unit operator*(float value) const
         {

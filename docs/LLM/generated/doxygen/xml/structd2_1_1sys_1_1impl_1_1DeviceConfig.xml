@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1impl_1_1DeviceConfig" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::impl::DeviceConfig</compoundname>
+    <includes refid="d2__audio_8hpp" local="no">d2_audio.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1impl_1_1DeviceConfig_1a0187ee61e7c03bc077fe1474fba03f76" prot="public" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1" kindref="member">Format</ref></type>
+        <definition>Format d2::sys::impl::DeviceConfig::format</definition>
+        <argsstring></argsstring>
+        <name>format</name>
+        <qualifiedname>d2::sys::impl::DeviceConfig::format</qualifiedname>
+        <initializer>{<ref refid="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1a166495adc0d0f53bee6baecc577f5204" kindref="member">Format::Float32</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="27" column="20" bodyfile="core/mods/d2_audio.hpp" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1impl_1_1DeviceConfig_1ad8ac62520076234924c62ca894774fb6" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::impl::DeviceConfig::channels</definition>
+        <argsstring></argsstring>
+        <name>channels</name>
+        <qualifiedname>d2::sys::impl::DeviceConfig::channels</qualifiedname>
+        <initializer>{2}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="28" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1impl_1_1DeviceConfig_1adf3826c3cb13761d87c72bd4b5c2d870" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::impl::DeviceConfig::sample_rate</definition>
+        <argsstring></argsstring>
+        <name>sample_rate</name>
+        <qualifiedname>d2::sys::impl::DeviceConfig::sample_rate</qualifiedname>
+        <initializer>{48&apos;000}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="29" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1impl_1_1DeviceConfig_1a60e6332ac7d4ba2331983d545faaf59b" prot="public" static="no" mutable="no">
+        <type>std::chrono::milliseconds</type>
+        <definition>std::chrono::milliseconds d2::sys::impl::DeviceConfig::latency</definition>
+        <argsstring></argsstring>
+        <name>latency</name>
+        <qualifiedname>d2::sys::impl::DeviceConfig::latency</qualifiedname>
+        <initializer>{24}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="30" column="39" bodyfile="core/mods/d2_audio.hpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1impl_1_1DeviceConfig_1ac04d07b1918b26ee06f455a4887360fa" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::impl::DeviceConfig::force_latency</definition>
+        <argsstring></argsstring>
+        <name>force_latency</name>
+        <qualifiedname>d2::sys::impl::DeviceConfig::force_latency</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="31" column="18" bodyfile="core/mods/d2_audio.hpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_audio.hpp" line="25" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="26" bodyend="32"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1impl_1_1DeviceConfig_1ad8ac62520076234924c62ca894774fb6" prot="public" virt="non-virtual"><scope>d2::sys::impl::DeviceConfig</scope><name>channels</name></member>
+      <member refid="structd2_1_1sys_1_1impl_1_1DeviceConfig_1ac04d07b1918b26ee06f455a4887360fa" prot="public" virt="non-virtual"><scope>d2::sys::impl::DeviceConfig</scope><name>force_latency</name></member>
+      <member refid="structd2_1_1sys_1_1impl_1_1DeviceConfig_1a0187ee61e7c03bc077fe1474fba03f76" prot="public" virt="non-virtual"><scope>d2::sys::impl::DeviceConfig</scope><name>format</name></member>
+      <member refid="structd2_1_1sys_1_1impl_1_1DeviceConfig_1a60e6332ac7d4ba2331983d545faaf59b" prot="public" virt="non-virtual"><scope>d2::sys::impl::DeviceConfig</scope><name>latency</name></member>
+      <member refid="structd2_1_1sys_1_1impl_1_1DeviceConfig_1adf3826c3cb13761d87c72bd4b5c2d870" prot="public" virt="non-virtual"><scope>d2::sys::impl::DeviceConfig</scope><name>sample_rate</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

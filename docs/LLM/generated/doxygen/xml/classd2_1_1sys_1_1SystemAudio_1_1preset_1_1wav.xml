@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav" kind="class" language="C++" prot="public">
+    <compoundname>d2::sys::SystemAudio::preset::wav</compoundname>
+    <includes refid="d2__audio_8hpp" local="no">d2_audio.hpp</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1a0e4bca155593da5cffb8a332444e3240" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::wav::sine</definition>
+        <argsstring>(float frequency=440.f, float sample_rate=48 &apos;000.f)</argsstring>
+        <name>sine</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::wav::sine</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>frequency</declname>
+          <defval>440.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>sample_rate</declname>
+          <defval>48 &apos;000.f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="233" column="29" bodyfile="core/mods/d2_audio.hpp" bodystart="233" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1af37e48577322405085f404481f51d9e0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::wav::square</definition>
+        <argsstring>(float frequency=440.f, float sample_rate=48 &apos;000.f)</argsstring>
+        <name>square</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::wav::square</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>frequency</declname>
+          <defval>440.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>sample_rate</declname>
+          <defval>48 &apos;000.f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="246" column="29" bodyfile="core/mods/d2_audio.hpp" bodystart="246" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1aefb472c0f9144a774941199cd4014160" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::wav::saw</definition>
+        <argsstring>(float frequency=440.f, float sample_rate=48 &apos;000.f)</argsstring>
+        <name>saw</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::wav::saw</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>frequency</declname>
+          <defval>440.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>sample_rate</declname>
+          <defval>48 &apos;000.f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="259" column="29" bodyfile="core/mods/d2_audio.hpp" bodystart="259" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1af84b903e1fe467ad40ec4fcacafb2bfb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::wav::triangle</definition>
+        <argsstring>(float frequency=440.f, float sample_rate=48 &apos;000.f)</argsstring>
+        <name>triangle</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::wav::triangle</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>frequency</declname>
+          <defval>440.f</defval>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>sample_rate</declname>
+          <defval>48 &apos;000.f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="272" column="29" bodyfile="core/mods/d2_audio.hpp" bodystart="272" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1ab6d1cfb983672826a725cc5eb0912c44" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::wav::noise</definition>
+        <argsstring>()</argsstring>
+        <name>noise</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::wav::noise</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="290" column="29" bodyfile="core/mods/d2_audio.hpp" bodystart="290" bodyend="294"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_audio.hpp" line="230" column="13" bodyfile="core/mods/d2_audio.hpp" bodystart="231" bodyend="295"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1ab6d1cfb983672826a725cc5eb0912c44" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset::wav</scope><name>noise</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1aefb472c0f9144a774941199cd4014160" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset::wav</scope><name>saw</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1a0e4bca155593da5cffb8a332444e3240" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset::wav</scope><name>sine</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1af37e48577322405085f404481f51d9e0" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset::wav</scope><name>square</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav_1af84b903e1fe467ad40ec4fcacafb2bfb" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset::wav</scope><name>triangle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

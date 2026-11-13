@@ -1,0 +1,505 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1px" kind="namespace" language="C++">
+    <compoundname>d2::px</compoundname>
+    <innerclass refid="structd2_1_1px_1_1background" prot="public">d2::px::background</innerclass>
+    <innerclass refid="structd2_1_1px_1_1foreground" prot="public">d2::px::foreground</innerclass>
+    <innerclass refid="structd2_1_1px_1_1combined" prot="public">d2::px::combined</innerclass>
+    <innernamespace refid="namespaced2_1_1px_1_1impl">d2::px::impl</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" prot="public" static="no" strong="yes">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <name>style</name>
+        <qualifiedname>d2::px::style</qualifiedname>
+        <enumvalue id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a6adf97f83acf6453d4a6a4b1070f3754" prot="public">
+          <name>None</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a114c3050111d8b8ddd830b99ccebd246" prot="public">
+          <name>Bold</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a852721aa5fc738dfedff2945d71da439" prot="public">
+          <name>Underline</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a1d874710ccdcd46b95397049d2e7500c" prot="public">
+          <name>Italic</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a926a51baad949d12035107e5d06e2fdb" prot="public">
+          <name>Strikethrough</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295acfad0a7419f44ea0c64db24197abbf70" prot="public">
+          <name>Blink</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a9f87f02f2da8f99c571b2a1c2a96132b" prot="public">
+          <name>Inverse</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a7acdf85c69cc3c5305456a293524386e" prot="public">
+          <name>Hidden</name>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295a942d4e37dd5607ab68e54755540d4a47" prot="public">
+          <name>Reserved</name>
+          <initializer>= 1 &lt;&lt; 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="156" column="9" bodyfile="core/types/d2_vtypes.hpp" bodystart="157" bodyend="167"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" prot="public" static="no">
+        <type>std::uint8_t</type>
+        <definition>using d2::px::component = std::uint8_t</definition>
+        <argsstring></argsstring>
+        <name>component</name>
+        <qualifiedname>d2::px::component</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="152" column="9" bodyfile="core/types/d2_vtypes.hpp" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1px_1a714f0873abb82f92d82c00f6bcb44975" prot="public" static="no">
+        <type>std::uint32_t</type>
+        <definition>using d2::px::scalar = std::uint32_t</definition>
+        <argsstring></argsstring>
+        <name>scalar</name>
+        <qualifiedname>d2::px::scalar</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="153" column="9" bodyfile="core/types/d2_vtypes.hpp" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1px_1a65fae78759ab1cfcc9a93ad54653dbfe" prot="public" static="no">
+        <type><ref refid="namespaced2_1ac4f460ab74bc55b8fcd179611bf7375d" kindref="member">d2::value_type</ref></type>
+        <definition>using d2::px::value_type = d2::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>d2::px::value_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="154" column="9" bodyfile="core/types/d2_vtypes.hpp" bodystart="154" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1_1px_1a22007abc34209904a2d3813056e2e1e2" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::to_underlying</definition>
+        <argsstring>(style value) noexcept</argsstring>
+        <name>to_underlying</name>
+        <qualifiedname>d2::px::to_underlying</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="169" column="30" bodyfile="core/types/d2_vtypes.hpp" bodystart="169" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a2dfb948ee6acbe2b8a5816e1be8d5d89" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+        <definition>style d2::px::as_style</definition>
+        <argsstring>(component value) noexcept</argsstring>
+        <name>as_style</name>
+        <qualifiedname>d2::px::as_style</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="174" column="26" bodyfile="core/types/d2_vtypes.hpp" bodystart="174" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a55db05e8afe3b5c4996fb114a8cdfe50" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+        <definition>style d2::px::operator|</definition>
+        <argsstring>(style lhs, style rhs) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>d2::px::operator|</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="179" column="26" bodyfile="core/types/d2_vtypes.hpp" bodystart="179" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a5430eb04b2fa6dda7d27f49b02111b55" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+        <definition>style d2::px::operator&amp;</definition>
+        <argsstring>(style lhs, style rhs) noexcept</argsstring>
+        <name>operator&amp;</name>
+        <qualifiedname>d2::px::operator&amp;</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="184" column="26" bodyfile="core/types/d2_vtypes.hpp" bodystart="184" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a41ab00778dff684928df8994a9f56f63" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+        <definition>style d2::px::operator^</definition>
+        <argsstring>(style lhs, style rhs) noexcept</argsstring>
+        <name>operator^</name>
+        <qualifiedname>d2::px::operator^</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="189" column="26" bodyfile="core/types/d2_vtypes.hpp" bodystart="189" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a7eb1454eae5b6d29d36856190ae260cb" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+        <definition>style d2::px::operator~</definition>
+        <argsstring>(style value) noexcept</argsstring>
+        <name>operator~</name>
+        <qualifiedname>d2::px::operator~</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="194" column="26" bodyfile="core/types/d2_vtypes.hpp" bodystart="194" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a2efcc0a56839d71b090c3249c96e95a5" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref> &amp;</type>
+        <definition>style &amp; d2::px::operator|=</definition>
+        <argsstring>(style &amp;lhs, style rhs) noexcept</argsstring>
+        <name>operator|=</name>
+        <qualifiedname>d2::px::operator|=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="199" column="25" bodyfile="core/types/d2_vtypes.hpp" bodystart="199" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a3d01fb6c05925534b1e5968e174eb679" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref> &amp;</type>
+        <definition>style &amp; d2::px::operator&amp;=</definition>
+        <argsstring>(style &amp;lhs, style rhs) noexcept</argsstring>
+        <name>operator&amp;=</name>
+        <qualifiedname>d2::px::operator&amp;=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="205" column="25" bodyfile="core/types/d2_vtypes.hpp" bodystart="205" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a7f4ec953f33ae1c6bd7e5cd7f54b2830" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref> &amp;</type>
+        <definition>style &amp; d2::px::operator^=</definition>
+        <argsstring>(style &amp;lhs, style rhs) noexcept</argsstring>
+        <name>operator^=</name>
+        <qualifiedname>d2::px::operator^=</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="211" column="25" bodyfile="core/types/d2_vtypes.hpp" bodystart="211" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1ae3325a474690fcbea785393b4812f228" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::px::any</definition>
+        <argsstring>(style flags) noexcept</argsstring>
+        <name>any</name>
+        <qualifiedname>d2::px::any</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="217" column="25" bodyfile="core/types/d2_vtypes.hpp" bodystart="217" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a87ee053ee2e2b32f1fa1620c2cd730af" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::px::has</definition>
+        <argsstring>(style flags, style flag) noexcept</argsstring>
+        <name>has</name>
+        <qualifiedname>d2::px::has</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flags</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="222" column="25" bodyfile="core/types/d2_vtypes.hpp" bodystart="222" bodyend="225"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a08ed4a084a9da47ea362298d980ff7d6" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+        <definition>foreground d2::px::operator|</definition>
+        <argsstring>(foreground fg, style flags) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>d2::px::operator|</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+          <declname>fg</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="924" column="31" bodyfile="core/types/d2_vtypes.hpp" bodystart="924" bodyend="927"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a58ccea67bb7d366661bea5bb7d0c0a0e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+        <definition>foreground d2::px::operator|</definition>
+        <argsstring>(foreground fg, component flags) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>d2::px::operator|</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+          <declname>fg</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="929" column="31" bodyfile="core/types/d2_vtypes.hpp" bodystart="929" bodyend="932"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1abe932ca647bd0b4e534c4b901f3f140f" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+        <definition>foreground d2::px::operator|</definition>
+        <argsstring>(background bg, style flags) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>d2::px::operator|</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+          <declname>bg</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="934" column="31" bodyfile="core/types/d2_vtypes.hpp" bodystart="934" bodyend="937"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a49f6468e0fd0e62383b4b0f8ac2088da" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1foreground" kindref="compound">foreground</ref></type>
+        <definition>foreground d2::px::operator|</definition>
+        <argsstring>(background bg, component flags) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>d2::px::operator|</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1background" kindref="compound">background</ref></type>
+          <declname>bg</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="939" column="31" bodyfile="core/types/d2_vtypes.hpp" bodystart="939" bodyend="942"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1aeb009ff776191cb1bf4e28ef77995480" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::operator|</definition>
+        <argsstring>(combined px, style flags) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>d2::px::operator|</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>px</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1aa95f6b08bfa074865dee683947eb6295" kindref="member">style</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="944" column="29" bodyfile="core/types/d2_vtypes.hpp" bodystart="944" bodyend="947"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1a4e600237bc3c6bc8a5c1c9cfd56b9077" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+        <definition>combined d2::px::operator|</definition>
+        <argsstring>(combined px, component flags) noexcept</argsstring>
+        <name>operator|</name>
+        <qualifiedname>d2::px::operator|</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1px_1_1combined" kindref="compound">combined</ref></type>
+          <declname>px</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="949" column="29" bodyfile="core/types/d2_vtypes.hpp" bodystart="949" bodyend="952"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_vtypes.hpp" line="150" column="5"/>
+  </compounddef>
+</doxygen>

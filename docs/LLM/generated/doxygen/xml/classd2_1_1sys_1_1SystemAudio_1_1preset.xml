@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1SystemAudio_1_1preset" kind="class" language="C++" prot="public">
+    <compoundname>d2::sys::SystemAudio::preset</compoundname>
+    <includes refid="d2__audio_8hpp" local="no">d2_audio.hpp</includes>
+    <innerclass refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1_1wav" prot="public">d2::sys::SystemAudio::preset::wav</innerclass>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1ae115fa75e81b55a3ea41c770c291a337" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::volume</definition>
+        <argsstring>(float gain)</argsstring>
+        <name>volume</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::volume</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>gain</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="143" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="143" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1a9205b377ed3d6d527bc0992423e6cfcb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::fade</definition>
+        <argsstring>(auto func)</argsstring>
+        <name>fade</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::fade</qualifiedname>
+        <param>
+          <type>auto</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="151" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="151" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1aefae4132b65e4623dc836edbfca5651f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::fade_in</definition>
+        <argsstring>(auto func)</argsstring>
+        <name>fade_in</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::fade_in</qualifiedname>
+        <param>
+          <type>auto</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="159" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="159" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1a126335949096f33162ca45d9c5d7d6fb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::fade_out</definition>
+        <argsstring>(auto func)</argsstring>
+        <name>fade_out</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::fade_out</qualifiedname>
+        <param>
+          <type>auto</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="163" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="163" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1a4d6f8d622937a8e832e59edc43b74e70" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::fade_in</definition>
+        <argsstring>()</argsstring>
+        <name>fade_in</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::fade_in</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="167" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="167" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1a053ddf34b1033c567e8f7f6f7a3ebb2f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::fade_out</definition>
+        <argsstring>()</argsstring>
+        <name>fade_out</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::fade_out</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="171" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="171" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1ad8a154c8e149a7c8413566af049c375a" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::bitcrusher</definition>
+        <argsstring>(int bits=8, int steps=32)</argsstring>
+        <name>bitcrusher</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::bitcrusher</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>bits</declname>
+          <defval>8</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>steps</declname>
+          <defval>32</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="176" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="176" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1a66e404f40d1bcdee69c397f5de726ee1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::tremolo</definition>
+        <argsstring>(float frequency, float depth=0.5f)</argsstring>
+        <name>tremolo</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::tremolo</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>frequency</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>depth</declname>
+          <defval>0.5f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="196" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="196" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1af3ac1e8a706c658078a6981a1b0a456d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::wave</definition>
+        <argsstring>(auto func, float gain=1.f)</argsstring>
+        <name>wave</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::wave</qualifiedname>
+        <param>
+          <type>auto</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>gain</declname>
+          <defval>1.f</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="213" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="213" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1sys_1_1SystemAudio_1_1preset_1a606d9a50ab86798a54662f3652c76fb9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto d2::sys::SystemAudio::preset::wave_am</definition>
+        <argsstring>(auto func)</argsstring>
+        <name>wave_am</name>
+        <qualifiedname>d2::sys::SystemAudio::preset::wave_am</qualifiedname>
+        <param>
+          <type>auto</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="221" column="25" bodyfile="core/mods/d2_audio.hpp" bodystart="221" bodyend="228"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_audio.hpp" line="140" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="141" bodyend="296"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1ad8a154c8e149a7c8413566af049c375a" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>bitcrusher</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1a9205b377ed3d6d527bc0992423e6cfcb" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>fade</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1aefae4132b65e4623dc836edbfca5651f" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>fade_in</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1a4d6f8d622937a8e832e59edc43b74e70" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>fade_in</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1a126335949096f33162ca45d9c5d7d6fb" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>fade_out</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1a053ddf34b1033c567e8f7f6f7a3ebb2f" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>fade_out</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1a66e404f40d1bcdee69c397f5de726ee1" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>tremolo</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1ae115fa75e81b55a3ea41c770c291a337" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>volume</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1af3ac1e8a706c658078a6981a1b0a456d" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>wave</name></member>
+      <member refid="classd2_1_1sys_1_1SystemAudio_1_1preset_1a606d9a50ab86798a54662f3652c76fb9" prot="public" virt="non-virtual"><scope>d2::sys::SystemAudio::preset</scope><name>wave_am</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState" kind="struct" language="C++" prot="private">
+    <compoundname>d2::sys::SystemScreen::TempTreeState</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1accda8c7ada8183b297fa7a1956b828d1" prot="public" static="no" mutable="no">
+        <type><ref refid="classd2_1_1internal_1_1DynamicIterator" kindref="compound">internal::DynamicIterator</ref></type>
+        <definition>internal::DynamicIterator d2::sys::SystemScreen::TempTreeState::keynav_iterator</definition>
+        <argsstring></argsstring>
+        <name>keynav_iterator</name>
+        <qualifiedname>d2::sys::SystemScreen::TempTreeState::keynav_iterator</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="81" column="39" bodyfile="core/screen/d2_screen.hpp" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1ad52d67467413014b08a5de0238d0c82f" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::SystemScreen::TempTreeState::current_name</definition>
+        <argsstring></argsstring>
+        <name>current_name</name>
+        <qualifiedname>d2::sys::SystemScreen::TempTreeState::current_name</qualifiedname>
+        <initializer>{&quot;&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="82" column="25" bodyfile="core/screen/d2_screen.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1a0c53a33de66e922c1b4aabbd8b523505" prot="public" static="no" mutable="no">
+        <type>eptr</type>
+        <definition>eptr d2::sys::SystemScreen::TempTreeState::focused</definition>
+        <argsstring></argsstring>
+        <name>focused</name>
+        <qualifiedname>d2::sys::SystemScreen::TempTreeState::focused</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="83" column="18" bodyfile="core/screen/d2_screen.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1a6f366c845343d59394f1a06e52ec4376" prot="public" static="no" mutable="no">
+        <type>eptr</type>
+        <definition>eptr d2::sys::SystemScreen::TempTreeState::targetted</definition>
+        <argsstring></argsstring>
+        <name>targetted</name>
+        <qualifiedname>d2::sys::SystemScreen::TempTreeState::targetted</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="84" column="18" bodyfile="core/screen/d2_screen.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1a22c28d3a908f9945b7699e505c00cfed" prot="public" static="no" mutable="no">
+        <type>eptr</type>
+        <definition>eptr d2::sys::SystemScreen::TempTreeState::clicked</definition>
+        <argsstring></argsstring>
+        <name>clicked</name>
+        <qualifiedname>d2::sys::SystemScreen::TempTreeState::clicked</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="85" column="18" bodyfile="core/screen/d2_screen.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1ab8c6730bee8445a4869cabba183b2524" prot="public" static="no" mutable="no">
+        <type>tree</type>
+        <definition>tree d2::sys::SystemScreen::TempTreeState::current</definition>
+        <argsstring></argsstring>
+        <name>current</name>
+        <qualifiedname>d2::sys::SystemScreen::TempTreeState::current</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="86" column="18" bodyfile="core/screen/d2_screen.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1af998c374cad3f9aa5906bc65512f402f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::sys::SystemScreen::TempTreeState::recursive</definition>
+        <argsstring></argsstring>
+        <name>recursive</name>
+        <qualifiedname>d2::sys::SystemScreen::TempTreeState::recursive</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/screen/d2_screen.hpp" line="87" column="18" bodyfile="core/screen/d2_screen.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::internal::DynamicIterator</label>
+        <link refid="classd2_1_1internal_1_1DynamicIterator"/>
+      </node>
+      <node id="1">
+        <label>d2::sys::SystemScreen::TempTreeState</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>keynav_iterator</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/screen/d2_screen.hpp" line="79" column="9" bodyfile="core/screen/d2_screen.hpp" bodystart="80" bodyend="88"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1a22c28d3a908f9945b7699e505c00cfed" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TempTreeState</scope><name>clicked</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1ab8c6730bee8445a4869cabba183b2524" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TempTreeState</scope><name>current</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1ad52d67467413014b08a5de0238d0c82f" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TempTreeState</scope><name>current_name</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1a0c53a33de66e922c1b4aabbd8b523505" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TempTreeState</scope><name>focused</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1accda8c7ada8183b297fa7a1956b828d1" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TempTreeState</scope><name>keynav_iterator</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1af998c374cad3f9aa5906bc65512f402f" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TempTreeState</scope><name>recursive</name></member>
+      <member refid="structd2_1_1sys_1_1SystemScreen_1_1TempTreeState_1a6f366c845343d59394f1a06e52ec4376" prot="public" virt="non-virtual"><scope>d2::sys::SystemScreen::TempTreeState</scope><name>targetted</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

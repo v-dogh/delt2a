@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1in_1_1internal" kind="namespace" language="C++">
+    <compoundname>d2::in::internal</compoundname>
+    <innerclass refid="structd2_1_1in_1_1internal_1_1InputFrameView" prot="public">d2::in::internal::InputFrameView</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_input_base.cpp" line="136" column="5"/>
+  </compounddef>
+</doxygen>

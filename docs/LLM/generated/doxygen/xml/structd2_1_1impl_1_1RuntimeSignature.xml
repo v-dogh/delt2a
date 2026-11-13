@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1impl_1_1RuntimeSignature" kind="struct" language="C++" prot="public">
+    <compoundname>d2::impl::RuntimeSignature</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1impl_1_1RuntimeSignature_1abd6478b2edad690e539d290b67d44522" prot="public" static="no" mutable="no">
+        <type>const <ref refid="structd2_1_1impl_1_1RuntimeArg" kindref="compound">RuntimeArg</ref> *</type>
+        <definition>const RuntimeArg* d2::impl::RuntimeSignature::args</definition>
+        <argsstring></argsstring>
+        <name>args</name>
+        <qualifiedname>d2::impl::RuntimeSignature::args</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="167" column="30" bodyfile="core/io/d2_signal_handler.hpp" bodystart="167" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1impl_1_1RuntimeSignature_1add90a94bbca6792fe6526cb9b257c6e5" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::impl::RuntimeSignature::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <qualifiedname>d2::impl::RuntimeSignature::size</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="168" column="25" bodyfile="core/io/d2_signal_handler.hpp" bodystart="168" bodyend="168"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1impl_1_1RuntimeSignature_1ae682170adbab5bc42c25a4e8d72ea4c6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::impl::RuntimeSignature::operator==</definition>
+        <argsstring>(const RuntimeSignature &amp;other) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::impl::RuntimeSignature::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structd2_1_1impl_1_1RuntimeSignature" kindref="compound">RuntimeSignature</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="170" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="22" bodyend="32"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::impl::RuntimeArg</label>
+        <link refid="structd2_1_1impl_1_1RuntimeArg"/>
+      </node>
+      <node id="1">
+        <label>d2::impl::RuntimeSignature</label>
+        <link refid="structd2_1_1impl_1_1RuntimeSignature"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>args</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="core/io/d2_signal_handler.hpp" line="165" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="166" bodyend="171"/>
+    <listofallmembers>
+      <member refid="structd2_1_1impl_1_1RuntimeSignature_1abd6478b2edad690e539d290b67d44522" prot="public" virt="non-virtual"><scope>d2::impl::RuntimeSignature</scope><name>args</name></member>
+      <member refid="structd2_1_1impl_1_1RuntimeSignature_1ae682170adbab5bc42c25a4e8d72ea4c6" prot="public" virt="non-virtual"><scope>d2::impl::RuntimeSignature</scope><name>operator==</name></member>
+      <member refid="structd2_1_1impl_1_1RuntimeSignature_1add90a94bbca6792fe6526cb9b257c6e5" prot="public" virt="non-virtual"><scope>d2::impl::RuntimeSignature</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

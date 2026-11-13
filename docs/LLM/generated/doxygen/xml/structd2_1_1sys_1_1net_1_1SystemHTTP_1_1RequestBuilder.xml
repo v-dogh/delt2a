@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::net::SystemHTTP::RequestBuilder</compoundname>
+    <includes refid="d2__http_8hpp" local="no">d2_http.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder_1a67e3bbf519bbccc8d79731a0e95d215b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemHTTP::RequestBuilder::set</definition>
+        <argsstring>(std::string_view header, std::string_view value)=0</argsstring>
+        <name>set</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::RequestBuilder::set</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>header</declname>
+        </param>
+        <param>
+          <type>std::string_view</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="58" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder_1a16cddc0ba6ed6f0e3e5900eb84f384f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemHTTP::RequestBuilder::body</definition>
+        <argsstring>(std::string_view value)=0</argsstring>
+        <name>body</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::RequestBuilder::body</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="59" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder_1a8104eaddec8bbf85b72edec38f04b718" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::sys::net::SystemHTTP::RequestBuilder::stream</definition>
+        <argsstring>()=0</argsstring>
+        <name>stream</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::RequestBuilder::stream</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="60" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder_1a38896aded5ea16c7ba306d9f59ca89b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::sys::net::SystemHTTP::RequestBuilder::~RequestBuilder</definition>
+        <argsstring>()=default</argsstring>
+        <name>~RequestBuilder</name>
+        <qualifiedname>d2::sys::net::SystemHTTP::RequestBuilder::~RequestBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_http.hpp" line="62" column="21"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_http.hpp" line="56" column="9" bodyfile="core/mods/d2_http.hpp" bodystart="57" bodyend="63"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder_1a16cddc0ba6ed6f0e3e5900eb84f384f7" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::RequestBuilder</scope><name>body</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder_1a67e3bbf519bbccc8d79731a0e95d215b" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::RequestBuilder</scope><name>set</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder_1a8104eaddec8bbf85b72edec38f04b718" prot="public" virt="pure-virtual"><scope>d2::sys::net::SystemHTTP::RequestBuilder</scope><name>stream</name></member>
+      <member refid="structd2_1_1sys_1_1net_1_1SystemHTTP_1_1RequestBuilder_1a38896aded5ea16c7ba306d9f59ca89b8" prot="public" virt="virtual"><scope>d2::sys::net::SystemHTTP::RequestBuilder</scope><name>~RequestBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

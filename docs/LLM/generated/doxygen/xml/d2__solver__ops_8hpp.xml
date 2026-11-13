@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="d2__solver__ops_8hpp" kind="file" language="C++">
+    <compoundname>d2_solver_ops.hpp</compoundname>
+    <includes refid="d2__solver__types_8hpp" local="no">core/lsx/d2_solver_types.hpp</includes>
+    <includedby refid="d2__solver_8hpp" local="no">core/lsx/d2_solver.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>core/lsx/d2_solver_ops.hpp</label>
+        <link refid="d2__solver__ops_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>core/lsx/d2_solver_types.hpp</label>
+        <link refid="d2__solver__types_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>array</label>
+      </node>
+      <node id="4">
+        <label>cstdint</label>
+      </node>
+      <node id="5">
+        <label>span</label>
+      </node>
+      <node id="6">
+        <label>string</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>core/lsx/d2_solver.cpp</label>
+        <link refid="d2__solver_8cpp"/>
+      </node>
+      <node id="2">
+        <label>core/lsx/d2_solver.hpp</label>
+        <link refid="d2__solver_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>core/lsx/d2_solver_ops.hpp</label>
+        <link refid="d2__solver__ops_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespaced2">d2</innernamespace>
+    <innernamespace refid="namespaced2_1_1lsx">d2::lsx</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver_ops.hpp"/>
+  </compounddef>
+</doxygen>

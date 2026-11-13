@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1SignalRegistry_3_01void_01_4_1_1SignatureLookupImpl_3_01Ev_00_01Manifest_01_4" kind="struct" language="C++" prot="private">
+    <compoundname>d2::SignalRegistry&lt; void &gt;::SignatureLookupImpl&lt; Ev, Manifest &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structd2_1_1SignalRegistry_3_01void_01_4_1_1SignatureLookupImpl_3_01Ev_00_01Manifest_01_4_1ac8c76b723395ed1df57eabab2e64c3fb" prot="private" static="no">
+        <type>typename Manifest::template case_for_t&lt; Ev &gt;</type>
+        <definition>using d2::SignalRegistry&lt; void &gt;::SignatureLookupImpl&lt; Ev, Manifest &gt;::case_t = typename Manifest::template case_for_t&lt;Ev&gt;</definition>
+        <argsstring></argsstring>
+        <name>case_t</name>
+        <qualifiedname>d2::SignalRegistry&lt; void &gt;::SignatureLookupImpl&lt; Ev, Manifest &gt;::case_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="332" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="332" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1SignalRegistry_3_01void_01_4_1_1SignatureLookupImpl_3_01Ev_00_01Manifest_01_4_1a16b2db9048c77d9e0312fc53b4246d14" prot="public" static="no">
+        <type>typename case_t::signature_t</type>
+        <definition>using d2::SignalRegistry&lt; void &gt;::SignatureLookupImpl&lt; Ev, Manifest &gt;::signature_t = typename case_t::signature_t</definition>
+        <argsstring></argsstring>
+        <name>signature_t</name>
+        <qualifiedname>d2::SignalRegistry&lt; void &gt;::SignatureLookupImpl&lt; Ev, Manifest &gt;::signature_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="335" column="13" bodyfile="core/io/d2_signal_handler.hpp" bodystart="335" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1SignalRegistry_1aac08ad27a4c9296fd71e9e801e4663a9" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::SignalRegistry&lt; typename &gt;::manifest_t = </definition>
+        <argsstring></argsstring>
+        <name>manifest_t</name>
+        <qualifiedname>d2::SignalRegistry&lt; void &gt;::SignatureLookupImpl&lt; Ev, Manifest &gt;::manifest_t</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="208" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <requiresclause>(!std::is_void_v&lt;Manifest&gt;)    </requiresclause>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="329" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="330" bodyend="336"/>
+    <listofallmembers>
+      <member refid="structd2_1_1SignalRegistry_3_01void_01_4_1_1SignatureLookupImpl_3_01Ev_00_01Manifest_01_4_1ac8c76b723395ed1df57eabab2e64c3fb" prot="private" virt="non-virtual"><scope>d2::SignalRegistry&lt; void &gt;::SignatureLookupImpl&lt; Ev, Manifest &gt;</scope><name>case_t</name></member>
+      <member refid="structd2_1_1SignalRegistry_1aac08ad27a4c9296fd71e9e801e4663a9" prot="public" virt="non-virtual"><scope>d2::SignalRegistry&lt; void &gt;::SignatureLookupImpl&lt; Ev, Manifest &gt;</scope><name>manifest_t</name></member>
+      <member refid="structd2_1_1SignalRegistry_3_01void_01_4_1_1SignatureLookupImpl_3_01Ev_00_01Manifest_01_4_1a16b2db9048c77d9e0312fc53b4246d14" prot="public" virt="non-virtual"><scope>d2::SignalRegistry&lt; void &gt;::SignatureLookupImpl&lt; Ev, Manifest &gt;</scope><name>signature_t</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

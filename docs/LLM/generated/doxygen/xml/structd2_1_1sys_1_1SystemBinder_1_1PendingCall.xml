@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemBinder_1_1PendingCall" kind="struct" language="C++" prot="private">
+    <compoundname>d2::sys::SystemBinder::PendingCall</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1PendingCall_1a756dedba6dbc1fd1b278856b61bcdf49" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::SystemBinder::PendingCall::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>d2::sys::SystemBinder::PendingCall::name</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="95" column="25" bodyfile="core/mods/d2_binder.hpp" bodystart="95" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1PendingCall_1ac9f4d1973096a17f2a4dd28f00886a43" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::sys::SystemBinder::PendingCall::epoch</definition>
+        <argsstring></argsstring>
+        <name>epoch</name>
+        <qualifiedname>d2::sys::SystemBinder::PendingCall::epoch</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="96" column="25" bodyfile="core/mods/d2_binder.hpp" bodystart="96" bodyend="96"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_binder.hpp" line="93" column="9" bodyfile="core/mods/d2_binder.hpp" bodystart="94" bodyend="97"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1PendingCall_1ac9f4d1973096a17f2a4dd28f00886a43" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::PendingCall</scope><name>epoch</name></member>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1PendingCall_1a756dedba6dbc1fd1b278856b61bcdf49" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::PendingCall</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

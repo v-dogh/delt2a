@@ -1,0 +1,632 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1TreeIter" kind="class" language="C++" prot="public">
+    <compoundname>d2::TreeIter</compoundname>
+    <includes refid="d2__tree__element__frwd_8hpp" local="no">d2_tree_element_frwd.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Type</type>
+        <defval><ref refid="classd2_1_1Element" kindref="compound">Element</ref></defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1TreeIter_1a192737f91480429f005be5156b415e6c" prot="public" static="no">
+        <type>Type</type>
+        <definition>using d2::TreeIter&lt; Type &gt;::type = Type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>d2::TreeIter::type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="18" column="9" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1TreeIter_1aa3bf4114fc52052435d40ee3b60f416b" prot="public" static="no">
+        <type>std::function&lt; bool(<ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref>&lt;&gt;)&gt;</type>
+        <definition>using d2::TreeIter&lt; Type &gt;::foreach_callback = std::function&lt;bool(TreeIter&lt;&gt;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>foreach_callback</name>
+        <qualifiedname>d2::TreeIter::foreach_callback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="19" column="9" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1TreeIter_1ad90315041ed0f1febaf51eae9c11d978" prot="private" static="no" mutable="no">
+        <type>std::weak_ptr&lt; Type &gt;</type>
+        <definition>std::weak_ptr&lt;Type&gt; d2::TreeIter&lt; Type &gt;::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::TreeIter::_ptr</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="21" column="23" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="21" bodyend="21"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::TreeIter</definition>
+        <argsstring>()=default</argsstring>
+        <name>TreeIter</name>
+        <qualifiedname>d2::TreeIter::TreeIter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="23" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1ad64d5d102480cec3b274122fbc572947" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::TreeIter</definition>
+        <argsstring>(std::nullptr_t)</argsstring>
+        <name>TreeIter</name>
+        <qualifiedname>d2::TreeIter::TreeIter</qualifiedname>
+        <param>
+          <type>std::nullptr_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="24" column="9" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="24" bodyend="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a174853e4a50fb26a4895c61ccc9e3dba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::TreeIter</definition>
+        <argsstring>(const TreeIter &amp;)=default</argsstring>
+        <name>TreeIter</name>
+        <qualifiedname>d2::TreeIter::TreeIter</qualifiedname>
+        <param>
+          <type>const TreeIter &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="25" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a883d90a2519b36e1955785b065038b08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::TreeIter</definition>
+        <argsstring>(TreeIter &amp;&amp;)=default</argsstring>
+        <name>TreeIter</name>
+        <qualifiedname>d2::TreeIter::TreeIter</qualifiedname>
+        <param>
+          <type>TreeIter &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="26" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a471250eda65568c2bb706ab9218c9a52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::TreeIter</definition>
+        <argsstring>(std::weak_ptr&lt; Type &gt; ptr)</argsstring>
+        <name>TreeIter</name>
+        <qualifiedname>d2::TreeIter::TreeIter</qualifiedname>
+        <param>
+          <type>std::weak_ptr&lt; Type &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="27" column="9" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1aaa886896a4f1655a9f61d9375bcb6710" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Other</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::TreeIter</definition>
+        <argsstring>(TreeIter&lt; Other &gt; ptr)</argsstring>
+        <name>TreeIter</name>
+        <qualifiedname>d2::TreeIter::TreeIter</qualifiedname>
+        <param>
+          <type>TreeIter&lt; Other &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="28" column="20" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a8a7833f8ff4ba2b078dc6e88fca04a65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Other</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::TreeIter</definition>
+        <argsstring>(std::shared_ptr&lt; Other &gt; ptr)</argsstring>
+        <name>TreeIter</name>
+        <qualifiedname>d2::TreeIter::TreeIter</qualifiedname>
+        <param>
+          <type>std::shared_ptr&lt; Other &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="29" column="20" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1abab4e3e35a8ae7daa83199fc76e84c47" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Other</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::TreeIter</definition>
+        <argsstring>(std::weak_ptr&lt; Other &gt; ptr)</argsstring>
+        <name>TreeIter</name>
+        <qualifiedname>d2::TreeIter::TreeIter</qualifiedname>
+        <param>
+          <type>std::weak_ptr&lt; Other &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="30" column="20" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="30" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1abb22261a2fb5e2cbc031a945d9327cd6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; Type &gt;</type>
+        <definition>std::shared_ptr&lt; Type &gt; d2::TreeIter&lt; Type &gt;::shared</definition>
+        <argsstring>() const</argsstring>
+        <name>shared</name>
+        <qualifiedname>d2::TreeIter::shared</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="41" column="25" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="41" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1ae26fcd59b058f15e38df4c31eb425919" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::weak_ptr&lt; Type &gt;</type>
+        <definition>std::weak_ptr&lt; Type &gt; d2::TreeIter&lt; Type &gt;::weak</definition>
+        <argsstring>() const</argsstring>
+        <name>weak</name>
+        <qualifiedname>d2::TreeIter::weak</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="42" column="23" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1abd9396b70fb4ade31e1a926f25771cf0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Other</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool d2::TreeIter&lt; Type &gt;::is_type</definition>
+        <argsstring>() const</argsstring>
+        <name>is_type</name>
+        <qualifiedname>d2::TreeIter::is_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="45" column="14" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="45" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a6a654553d25ecabf15318de76bcf0c41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::TreeIter&lt; Type &gt;::is_type_of</definition>
+        <argsstring>(TreeIter&lt;&gt; other) const</argsstring>
+        <name>is_type_of</name>
+        <qualifiedname>d2::TreeIter::is_type_of</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref>&lt;&gt;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="51" column="14" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="51" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1af4b5b6ced0ac9aa5c652d61dddf8d480" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Other</type>
+            <defval><ref refid="classd2_1_1Element" kindref="compound">Element</ref></defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref>&lt; Other &gt;</type>
+        <definition>TreeIter&lt; Other &gt; d2::TreeIter&lt; Type &gt;::as</definition>
+        <argsstring>() const</argsstring>
+        <name>as</name>
+        <qualifiedname>d2::TreeIter::as</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="58" column="31" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="58" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1ae194bb77b8118f9b8754afdb094b30c5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref>&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>TreeIter&lt; ParentElement &gt; d2::TreeIter&lt; Type &gt;::asp</definition>
+        <argsstring>() const</argsstring>
+        <name>asp</name>
+        <qualifiedname>d2::TreeIter::asp</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="65" column="18" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1ac8161a299bd0397b8b126589377a3697" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref>&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>TreeIter&lt; ParentElement &gt; d2::TreeIter&lt; Type &gt;::up</definition>
+        <argsstring>() const</argsstring>
+        <name>up</name>
+        <qualifiedname>d2::TreeIter::up</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="67" column="18" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="67" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a46a1830750a593657a4f135fe629483f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref>&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>TreeIter&lt; ParentElement &gt; d2::TreeIter&lt; Type &gt;::up</definition>
+        <argsstring>(std::size_t cnt) const</argsstring>
+        <name>up</name>
+        <qualifiedname>d2::TreeIter::up</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>cnt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="71" column="18" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="71" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1ac5c1b7bf03ce7a6e676670bfc550e4de" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref>&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>TreeIter&lt; ParentElement &gt; d2::TreeIter&lt; Type &gt;::up</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>up</name>
+        <qualifiedname>d2::TreeIter::up</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="77" column="18" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="77" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a7d11943d405ddef647e3cf6913bc6ffe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::TreeIter&lt; Type &gt;::foreach</definition>
+        <argsstring>(foreach_callback callback) const</argsstring>
+        <name>foreach</name>
+        <qualifiedname>d2::TreeIter::foreach</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter_1aa3bf4114fc52052435d40ee3b60f416b" kindref="member">foreach_callback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="89" column="14" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a237253044a8889e7c5d3736c377e9b75" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::TreeIter&lt; Type &gt;::operator==</definition>
+        <argsstring>(const TreeIter &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>d2::TreeIter::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="91" column="14" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="91" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a12f238c121e4ebde94cd20928f6d79c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::TreeIter&lt; Type &gt;::operator!=</definition>
+        <argsstring>(const TreeIter &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>d2::TreeIter::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="96" column="14" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a24ae12905a178bdf5ef92fa15873c96c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; Type &gt;</type>
+        <definition>std::shared_ptr&lt; Type &gt; d2::TreeIter&lt; Type &gt;::operator-&gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-&gt;</name>
+        <qualifiedname>d2::TreeIter::operator-&gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="98" column="25" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1ac38a95bbf338ded73ecf91efa7d9f590" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Type &amp;</type>
+        <definition>Type &amp; d2::TreeIter&lt; Type &gt;::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <qualifiedname>d2::TreeIter::operator*</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="99" column="14" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1ad840302ec560ae616ea4896dc64a3814" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref></type>
+        <definition>TreeIter d2::TreeIter&lt; Type &gt;::operator/</definition>
+        <argsstring>(const std::string &amp;path) const</argsstring>
+        <name>operator/</name>
+        <qualifiedname>d2::TreeIter::operator/</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="101" column="10" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a6fd84545cdb3f49e915505e14264b32e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref>&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>TreeIter&lt; ParentElement &gt; d2::TreeIter&lt; Type &gt;::operator^</definition>
+        <argsstring>(std::size_t cnt) const</argsstring>
+        <name>operator^</name>
+        <qualifiedname>d2::TreeIter::operator^</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>cnt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="102" column="18" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1aa6e289d629dd53f9fe8de43705ff08f2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref>&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>TreeIter&lt; ParentElement &gt; d2::TreeIter&lt; Type &gt;::operator^</definition>
+        <argsstring>(const std::string &amp;name) const</argsstring>
+        <name>operator^</name>
+        <qualifiedname>d2::TreeIter::operator^</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="103" column="18" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1ac258e2fc0c6c3e69e5260d93e3571383" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::operator std::shared_ptr&lt; Element &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator std::shared_ptr&lt; Element &gt;</name>
+        <qualifiedname>d2::TreeIter::shared_ptr&lt; Element &gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="105" column="9" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1adb3ecb2dd300f682705a5989a37076fc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::operator std::weak_ptr&lt; Element &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator std::weak_ptr&lt; Element &gt;</name>
+        <qualifiedname>d2::TreeIter::weak_ptr&lt; Element &gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="106" column="9" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="106" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a153a1159bb770cc4381609c745ca416e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::operator std::shared_ptr&lt; Type &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator std::shared_ptr&lt; Type &gt;</name>
+        <qualifiedname>d2::TreeIter::shared_ptr&lt; Type &gt;</qualifiedname>
+    <requiresclause>(!std::is_same_v&lt;Type, <ref refid="classd2_1_1Element" kindref="compound">Element</ref>&gt;)    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="108" column="9" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1a5ab506f5f3e89b395b4684d6d083c511" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::TreeIter&lt; Type &gt;::operator std::weak_ptr&lt; Type &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator std::weak_ptr&lt; Type &gt;</name>
+        <qualifiedname>d2::TreeIter::weak_ptr&lt; Type &gt;</qualifiedname>
+    <requiresclause>(!std::is_same_v&lt;Type, <ref refid="classd2_1_1Element" kindref="compound">Element</ref>&gt;)    </requiresclause>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="109" column="9" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="109" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1ad329300ce3fe2ad4578df649b810dca2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref> &amp;</type>
+        <definition>TreeIter &amp; d2::TreeIter&lt; Type &gt;::operator=</definition>
+        <argsstring>(const TreeIter &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::TreeIter::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="111" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1TreeIter_1aec16a8bdb78da13a91a5e096cc2b5e26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref> &amp;</type>
+        <definition>TreeIter &amp; d2::TreeIter&lt; Type &gt;::operator=</definition>
+        <argsstring>(TreeIter &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::TreeIter::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" kindref="member">TreeIter</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element_frwd.hpp" line="112" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_element_frwd.hpp" line="14" column="5" bodyfile="core/tree/d2_tree_element_frwd.hpp" bodystart="15" bodyend="113"/>
+    <listofallmembers>
+      <member refid="classd2_1_1TreeIter_1ad90315041ed0f1febaf51eae9c11d978" prot="private" virt="non-virtual"><scope>d2::TreeIter</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1TreeIter_1af4b5b6ced0ac9aa5c652d61dddf8d480" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>as</name></member>
+      <member refid="classd2_1_1TreeIter_1ae194bb77b8118f9b8754afdb094b30c5" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>asp</name></member>
+      <member refid="classd2_1_1TreeIter_1a7d11943d405ddef647e3cf6913bc6ffe" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>foreach</name></member>
+      <member refid="classd2_1_1TreeIter_1aa3bf4114fc52052435d40ee3b60f416b" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>foreach_callback</name></member>
+      <member refid="classd2_1_1TreeIter_1abd9396b70fb4ade31e1a926f25771cf0" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>is_type</name></member>
+      <member refid="classd2_1_1TreeIter_1a6a654553d25ecabf15318de76bcf0c41" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>is_type_of</name></member>
+      <member refid="classd2_1_1TreeIter_1ac258e2fc0c6c3e69e5260d93e3571383" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator std::shared_ptr&lt; Element &gt;</name></member>
+      <member refid="classd2_1_1TreeIter_1a153a1159bb770cc4381609c745ca416e" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator std::shared_ptr&lt; Type &gt;</name></member>
+      <member refid="classd2_1_1TreeIter_1adb3ecb2dd300f682705a5989a37076fc" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator std::weak_ptr&lt; Element &gt;</name></member>
+      <member refid="classd2_1_1TreeIter_1a5ab506f5f3e89b395b4684d6d083c511" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator std::weak_ptr&lt; Type &gt;</name></member>
+      <member refid="classd2_1_1TreeIter_1a12f238c121e4ebde94cd20928f6d79c0" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator!=</name></member>
+      <member refid="classd2_1_1TreeIter_1ac38a95bbf338ded73ecf91efa7d9f590" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator*</name></member>
+      <member refid="classd2_1_1TreeIter_1a24ae12905a178bdf5ef92fa15873c96c" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator-&gt;</name></member>
+      <member refid="classd2_1_1TreeIter_1ad840302ec560ae616ea4896dc64a3814" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator/</name></member>
+      <member refid="classd2_1_1TreeIter_1ad329300ce3fe2ad4578df649b810dca2" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator=</name></member>
+      <member refid="classd2_1_1TreeIter_1aec16a8bdb78da13a91a5e096cc2b5e26" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator=</name></member>
+      <member refid="classd2_1_1TreeIter_1a237253044a8889e7c5d3736c377e9b75" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator==</name></member>
+      <member refid="classd2_1_1TreeIter_1a6fd84545cdb3f49e915505e14264b32e" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator^</name></member>
+      <member refid="classd2_1_1TreeIter_1aa6e289d629dd53f9fe8de43705ff08f2" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>operator^</name></member>
+      <member refid="classd2_1_1TreeIter_1abb22261a2fb5e2cbc031a945d9327cd6" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>shared</name></member>
+      <member refid="classd2_1_1TreeIter_1af633a65ce040d89a04fdd25607f7bb3a" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>TreeIter</name></member>
+      <member refid="classd2_1_1TreeIter_1ad64d5d102480cec3b274122fbc572947" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>TreeIter</name></member>
+      <member refid="classd2_1_1TreeIter_1a174853e4a50fb26a4895c61ccc9e3dba" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>TreeIter</name></member>
+      <member refid="classd2_1_1TreeIter_1a883d90a2519b36e1955785b065038b08" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>TreeIter</name></member>
+      <member refid="classd2_1_1TreeIter_1a471250eda65568c2bb706ab9218c9a52" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>TreeIter</name></member>
+      <member refid="classd2_1_1TreeIter_1aaa886896a4f1655a9f61d9375bcb6710" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>TreeIter</name></member>
+      <member refid="classd2_1_1TreeIter_1a8a7833f8ff4ba2b078dc6e88fca04a65" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>TreeIter</name></member>
+      <member refid="classd2_1_1TreeIter_1abab4e3e35a8ae7daa83199fc76e84c47" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>TreeIter</name></member>
+      <member refid="classd2_1_1TreeIter_1a192737f91480429f005be5156b415e6c" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>type</name></member>
+      <member refid="classd2_1_1TreeIter_1ac8161a299bd0397b8b126589377a3697" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>up</name></member>
+      <member refid="classd2_1_1TreeIter_1a46a1830750a593657a4f135fe629483f" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>up</name></member>
+      <member refid="classd2_1_1TreeIter_1ac5c1b7bf03ce7a6e676670bfc550e4de" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>up</name></member>
+      <member refid="classd2_1_1TreeIter_1ae26fcd59b058f15e38df4c31eb425919" prot="public" virt="non-virtual"><scope>d2::TreeIter</scope><name>weak</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

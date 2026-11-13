@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1TreeTemplateInit" kind="struct" language="C++" prot="public">
+    <compoundname>d2::TreeTemplateInit</compoundname>
+    <includes refid="d2__tree_8hpp" local="no">d2_tree.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename State</type>
+      </param>
+      <param>
+        <type>typename <ref refid="structd2_1_1Tree" kindref="compound">Tree</ref></type>
+      </param>
+      <param>
+        <type>typename Root</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1TreeTemplateInit_1a4e874b038d56ec9296449a0ce3816024" prot="public" static="no">
+        <type>Root</type>
+        <definition>using d2::TreeTemplateInit&lt; State, Tree, Root &gt;::root = Root</definition>
+        <argsstring></argsstring>
+        <name>root</name>
+        <qualifiedname>d2::TreeTemplateInit::root</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree.hpp" line="13" column="9" bodyfile="core/tree/d2_tree.hpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1TreeTemplateInit_1aade151f1040ea1925de26de7345939c6" prot="public" static="no">
+        <type>State</type>
+        <definition>using d2::TreeTemplateInit&lt; State, Tree, Root &gt;::state = State</definition>
+        <argsstring></argsstring>
+        <name>state</name>
+        <qualifiedname>d2::TreeTemplateInit::state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree.hpp" line="14" column="9" bodyfile="core/tree/d2_tree.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1TreeTemplateInit_1a503af8f8f459b6eb9d5f04bd44856e97" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>static auto d2::TreeTemplateInit&lt; State, Tree, Root &gt;::build_sub</definition>
+        <argsstring>(const std::string &amp;name, TreeState::ptr state, d2::Element::pptr root, Argv &amp;&amp;... args)</argsstring>
+        <name>build_sub</name>
+        <qualifiedname>d2::TreeTemplateInit::build_sub</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref></type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1abd57face94a1b6b39b12fbea90189d05" kindref="member">d2::Element::pptr</ref></type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree.hpp" line="17" column="21" bodyfile="core/tree/d2_tree.hpp" bodystart="17" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1TreeTemplateInit_1a965ffc910d4b2e3974b1cbfacc56d29d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>static auto d2::TreeTemplateInit&lt; State, Tree, Root &gt;::build</definition>
+        <argsstring>(IOContext::ptr ctx, Argv &amp;&amp;... args)</argsstring>
+        <name>build</name>
+        <qualifiedname>d2::TreeTemplateInit::build</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" kindref="member">IOContext::ptr</ref></type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree.hpp" line="31" column="32" bodyfile="core/tree/d2_tree.hpp" bodystart="31" bodyend="40"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree.hpp" line="10" column="19" bodyfile="core/tree/d2_tree.hpp" bodystart="11" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structd2_1_1TreeTemplateInit_1a965ffc910d4b2e3974b1cbfacc56d29d" prot="public" virt="non-virtual"><scope>d2::TreeTemplateInit</scope><name>build</name></member>
+      <member refid="structd2_1_1TreeTemplateInit_1a503af8f8f459b6eb9d5f04bd44856e97" prot="public" virt="non-virtual"><scope>d2::TreeTemplateInit</scope><name>build_sub</name></member>
+      <member refid="structd2_1_1TreeTemplateInit_1a4e874b038d56ec9296449a0ce3816024" prot="public" virt="non-virtual"><scope>d2::TreeTemplateInit</scope><name>root</name></member>
+      <member refid="structd2_1_1TreeTemplateInit_1aade151f1040ea1925de26de7345939c6" prot="public" virt="non-virtual"><scope>d2::TreeTemplateInit</scope><name>state</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

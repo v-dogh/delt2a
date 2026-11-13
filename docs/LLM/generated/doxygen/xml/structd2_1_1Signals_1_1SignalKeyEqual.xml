@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Signals_1_1SignalKeyEqual" kind="struct" language="C++" prot="private">
+    <compoundname>d2::Signals::SignalKeyEqual</compoundname>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structd2_1_1Signals_1_1SignalKeyEqual_1a0004b64ed8c7748c26ce3cc59de7469d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Signals::SignalKeyEqual::operator()</definition>
+        <argsstring>(const SignalKey &amp;lhs, const SignalKey &amp;rhs) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>d2::Signals::SignalKeyEqual::operator()</qualifiedname>
+        <param>
+          <type>const SignalKey &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type>const SignalKey &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="581" column="18" bodyfile="core/io/d2_signal_handler.cpp" bodystart="178" bodyend="181"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="579" column="9" bodyfile="core/io/d2_signal_handler.hpp" bodystart="580" bodyend="582"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Signals_1_1SignalKeyEqual_1a0004b64ed8c7748c26ce3cc59de7469d" prot="public" virt="non-virtual"><scope>d2::Signals::SignalKeyEqual</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

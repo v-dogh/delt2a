@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="dir_182a39db29e4ad63eb633860d83c5a1d" kind="dir">
+    <compoundname>core/utils</compoundname>
+    <innerfile refid="d2__exceptions_8hpp">d2_exceptions.hpp</innerfile>
+    <innerfile refid="d2__meta_8hpp">d2_meta.hpp</innerfile>
+    <innerfile refid="d2__model_8cpp">d2_model.cpp</innerfile>
+    <innerfile refid="d2__model_8hpp">d2_model.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/utils/"/>
+  </compounddef>
+</doxygen>

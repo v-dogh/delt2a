@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1EntrySeed" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::EntrySeed</compoundname>
+    <includes refid="d2__demand__scrollbox_8hpp" local="no">d2_demand_scrollbox.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1EntrySeed_1a7f857bd3c5ebe0f18aeac6dfb4574ee5" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::EntrySeed::_idx</definition>
+        <argsstring></argsstring>
+        <name>_idx</name>
+        <qualifiedname>d2::dx::EntrySeed::_idx</qualifiedname>
+        <initializer>{ 0 }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="14" column="25" bodyfile="elements/d2_demand_scrollbox.hpp" bodystart="14" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1EntrySeed_1a182b033ad8b7c55cbe2bdf7750c196a3" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt; <ref refid="classd2_1_1dx_1_1EntrySeed_1ab169b001a495021c8ecbf71eeae0b86f" kindref="member">DemandScrollBox</ref> &gt;</type>
+        <definition>d2::TreeIter&lt;DemandScrollBox&gt; d2::dx::EntrySeed::_ptr</definition>
+        <argsstring></argsstring>
+        <name>_ptr</name>
+        <qualifiedname>d2::dx::EntrySeed::_ptr</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="15" column="26" bodyfile="elements/d2_demand_scrollbox.hpp" bodystart="15" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1EntrySeed_1a6554b9b23f9553a6c2d2135bfd4beacd" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">d2::Element::ptr</ref></type>
+        <definition>d2::Element::ptr d2::dx::EntrySeed::_element</definition>
+        <argsstring></argsstring>
+        <name>_element</name>
+        <qualifiedname>d2::dx::EntrySeed::_element</qualifiedname>
+        <initializer>{ nullptr }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="16" column="30" bodyfile="elements/d2_demand_scrollbox.hpp" bodystart="16" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1EntrySeed_1ad5fcbbc10666bc08a24cd9ec2cbe22d2" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::dx::EntrySeed::_created</definition>
+        <argsstring></argsstring>
+        <name>_created</name>
+        <qualifiedname>d2::dx::EntrySeed::_created</qualifiedname>
+        <initializer>{ false }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="17" column="18" bodyfile="elements/d2_demand_scrollbox.hpp" bodystart="17" bodyend="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classd2_1_1dx_1_1EntrySeed_1ab169b001a495021c8ecbf71eeae0b86f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class DemandScrollBox</definition>
+        <argsstring></argsstring>
+        <name>DemandScrollBox</name>
+        <qualifiedname>d2::dx::EntrySeed::DemandScrollBox</qualifiedname>
+        <param>
+          <type>DemandScrollBox</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="22" column="26" bodyfile="elements/d2_demand_scrollbox.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1ab164aa332015d6b144a8e53a99acb684" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">d2::Element::ptr</ref></type>
+        <definition>d2::Element::ptr d2::dx::EntrySeed::_get</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>_get</name>
+        <qualifiedname>d2::dx::EntrySeed::_get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="19" column="30" bodyfile="elements/d2_demand_scrollbox.cpp" bodystart="5" bodyend="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1a37809554814002240cb25b1bc9469d30" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::EntrySeed::_insert</definition>
+        <argsstring>(d2::Element::ptr ptr)</argsstring>
+        <name>_insert</name>
+        <qualifiedname>d2::dx::EntrySeed::_insert</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">d2::Element::ptr</ref></type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="20" column="18" bodyfile="elements/d2_demand_scrollbox.cpp" bodystart="9" bodyend="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1a2e7c26b1632aff3bf3a120b268fd5508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::dx::EntrySeed::EntrySeed</definition>
+        <argsstring>(const EntrySeed &amp;)=delete</argsstring>
+        <name>EntrySeed</name>
+        <qualifiedname>d2::dx::EntrySeed::EntrySeed</qualifiedname>
+        <param>
+          <type>const EntrySeed &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="24" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1ad1388cd82220817780ee32e84233a8ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::dx::EntrySeed::EntrySeed</definition>
+        <argsstring>(EntrySeed &amp;&amp;)=delete</argsstring>
+        <name>EntrySeed</name>
+        <qualifiedname>d2::dx::EntrySeed::EntrySeed</qualifiedname>
+        <param>
+          <type>EntrySeed &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="25" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1a92875f4435c089ac6e59f22dc70aa6d3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::dx::EntrySeed::EntrySeed</definition>
+        <argsstring>(std::size_t idx, d2::TreeIter&lt; DemandScrollBox &gt; ptr)</argsstring>
+        <name>EntrySeed</name>
+        <qualifiedname>d2::dx::EntrySeed::EntrySeed</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt; <ref refid="classd2_1_1dx_1_1EntrySeed_1ab169b001a495021c8ecbf71eeae0b86f" kindref="member">DemandScrollBox</ref> &gt;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="26" column="13" bodyfile="elements/d2_demand_scrollbox.hpp" bodystart="26" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1ac48e20ca55b92d6338f9bf36743748d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="classd2_1_1Element" kindref="compound">Element</ref></type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt; <ref refid="classd2_1_1Element" kindref="compound">Element</ref> &gt;</type>
+        <definition>d2::TreeIter&lt; Element &gt; d2::dx::EntrySeed::create</definition>
+        <argsstring>(Argv &amp;&amp;... args)</argsstring>
+        <name>create</name>
+        <qualifiedname>d2::dx::EntrySeed::create</qualifiedname>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="30" column="26" bodyfile="elements/d2_demand_scrollbox.hpp" bodystart="30" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1a8fcedae619601e9aceb15947bcc2510c" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::EntrySeed::index</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>index</name>
+        <qualifiedname>d2::dx::EntrySeed::index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="45" column="25" bodyfile="elements/d2_demand_scrollbox.cpp" bodystart="13" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1ae926bed21f88f6957b401788f4900563" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">d2::TreeIter</ref>&lt; <ref refid="classd2_1_1dx_1_1EntrySeed_1ab169b001a495021c8ecbf71eeae0b86f" kindref="member">DemandScrollBox</ref> &gt;</type>
+        <definition>d2::TreeIter&lt; DemandScrollBox &gt; d2::dx::EntrySeed::parent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>parent</name>
+        <qualifiedname>d2::dx::EntrySeed::parent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="46" column="26" bodyfile="elements/d2_demand_scrollbox.cpp" bodystart="17" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1a39cbbd07ab4763b31990436f5ad0e51e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1dx_1_1EntrySeed_1a2e7c26b1632aff3bf3a120b268fd5508" kindref="member">EntrySeed</ref> &amp;</type>
+        <definition>EntrySeed &amp; d2::dx::EntrySeed::operator=</definition>
+        <argsstring>(const EntrySeed &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::dx::EntrySeed::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1dx_1_1EntrySeed_1a2e7c26b1632aff3bf3a120b268fd5508" kindref="member">EntrySeed</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="48" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1EntrySeed_1a14d31ce4af3fee32ebe8445212315c7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1dx_1_1EntrySeed_1a2e7c26b1632aff3bf3a120b268fd5508" kindref="member">EntrySeed</ref> &amp;</type>
+        <definition>EntrySeed &amp; d2::dx::EntrySeed::operator=</definition>
+        <argsstring>(EntrySeed &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::dx::EntrySeed::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1dx_1_1EntrySeed_1a2e7c26b1632aff3bf3a120b268fd5508" kindref="member">EntrySeed</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_demand_scrollbox.hpp" line="49" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="elements/d2_demand_scrollbox.hpp" line="11" column="9" bodyfile="elements/d2_demand_scrollbox.hpp" bodystart="12" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1ad5fcbbc10666bc08a24cd9ec2cbe22d2" prot="private" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>_created</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1a6554b9b23f9553a6c2d2135bfd4beacd" prot="private" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>_element</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1ab164aa332015d6b144a8e53a99acb684" prot="private" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>_get</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1a7f857bd3c5ebe0f18aeac6dfb4574ee5" prot="private" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>_idx</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1a37809554814002240cb25b1bc9469d30" prot="private" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>_insert</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1a182b033ad8b7c55cbe2bdf7750c196a3" prot="private" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>_ptr</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1ac48e20ca55b92d6338f9bf36743748d2" prot="public" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>create</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1ab169b001a495021c8ecbf71eeae0b86f" prot="public" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>DemandScrollBox</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1a2e7c26b1632aff3bf3a120b268fd5508" prot="public" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>EntrySeed</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1ad1388cd82220817780ee32e84233a8ed" prot="public" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>EntrySeed</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1a92875f4435c089ac6e59f22dc70aa6d3" prot="public" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>EntrySeed</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1a8fcedae619601e9aceb15947bcc2510c" prot="public" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>index</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1a39cbbd07ab4763b31990436f5ad0e51e" prot="public" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>operator=</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1a14d31ce4af3fee32ebe8445212315c7b" prot="public" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>operator=</name></member>
+      <member refid="classd2_1_1dx_1_1EntrySeed_1ae926bed21f88f6957b401788f4900563" prot="public" virt="non-virtual"><scope>d2::dx::EntrySeed</scope><name>parent</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

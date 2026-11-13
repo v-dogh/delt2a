@@ -1,0 +1,470 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1in" kind="namespace" language="C++">
+    <compoundname>d2::in</compoundname>
+    <innerclass refid="classd2_1_1in_1_1InputFrame" prot="public">d2::in::InputFrame</innerclass>
+    <innernamespace refid="namespaced2_1_1in_1_1internal">d2::in::internal</innernamespace>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Mode</name>
+        <qualifiedname>d2::in::Mode</qualifiedname>
+        <enumvalue id="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661a0610123bdd4ffc191a3ea05a847e1307" prot="public">
+          <name>Press</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661ab8e7b465df7c5979dc731d06e84ce2cf" prot="public">
+          <name>Release</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661abcd8db575b47c838e5d551e3973db4ac" prot="public">
+          <name>Hold</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="16" column="5" bodyfile="core/io/d2_input_base.hpp" bodystart="17" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265b" prot="public" static="no" strong="yes">
+        <type><ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref></type>
+        <name>Special</name>
+        <qualifiedname>d2::in::Special</qualifiedname>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba942d4e37dd5607ab68e54755540d4a47" prot="public">
+          <name>Reserved</name>
+          <initializer>= ((&apos;`&apos; - &apos; &apos;) + (&apos;~&apos; - &apos;{&apos;)) + 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265bacd7d13ceea728b08555f7c818cfb13ef" prot="public">
+          <name>Backspace</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265baf1851d5600eae616ee802a31ac74701b" prot="public">
+          <name>Enter</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba1766072510e73215188615125158e669" prot="public">
+          <name>ArrowUp</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba49c46f6d84c8d55a8ab230f676c2454c" prot="public">
+          <name>ArrowDown</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265badd6a4a8cb6db295d53aa87fdae673d3b" prot="public">
+          <name>ArrowLeft</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba53fb8061a410262e2c9123486bdce50e" prot="public">
+          <name>ArrowRight</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba96f9c4eb595a467d02e35c723f63ebf7" prot="public">
+          <name>LeftAlt</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265bad88bad98046b623323aa6ca28eefa6d5" prot="public">
+          <name>RightAlt</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba641642d3718d5db8994a79d51b43e88c" prot="public">
+          <name>LeftControl</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba857bb13bb233ca520283eb9886509b65" prot="public">
+          <name>RightControl</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba5c6ba25104401c9ee0650230fc6ba413" prot="public">
+          <name>Tab</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba825a3d98017bab11815ad2817201324c" prot="public">
+          <name>Shift</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba8cf04a9734132302f96da8e113e80ce5" prot="public">
+          <name>Home</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba87557f11575c0ad78e4e28abedc13b6e" prot="public">
+          <name>End</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265baa458be0f08b7e4ff3c0f633c100176c0" prot="public">
+          <name>Insert</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265baf2a6c498fb90ee345d997f888fce3b18" prot="public">
+          <name>Delete</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba753a2fb3083e135b9236c92ecc560a50" prot="public">
+          <name>PgUp</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba33b68dcba2c2265cf01efcc65f7e3a53" prot="public">
+          <name>PgDown</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba013ec032d3460d4be4431c6ab1f8f224" prot="public">
+          <name>Escape</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265ba0ce3266d4eb71ad50f7a90aee6d21dcd" prot="public">
+          <name>Super</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265bada0e1c5d348be593152ee1f67df6f3b3" prot="public">
+          <name>Fn</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265bacfc20e72afd5757a62fb2be961e85ca7" prot="public">
+          <name>SpecialKeyMax</name>
+          <initializer>= (Fn + 24)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="22" column="5" bodyfile="core/io/d2_input_base.hpp" bodystart="23" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64" prot="public" static="no" strong="yes">
+        <type><ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref></type>
+        <name>Mouse</name>
+        <qualifiedname>d2::in::Mouse</qualifiedname>
+        <enumvalue id="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64a945d5e233cf7d6240f6b783b36a374ff" prot="public">
+          <name>Left</name>
+          <initializer>= keytype(Special::SpecialKeyMax) + 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64a92b09c7c48c520c3c55e497875da437c" prot="public">
+          <name>Right</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64ab1ca34f82e83c52b010f86955f264e05" prot="public">
+          <name>Middle</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64aca7ac4a2377e5c801cdb3defbe77e85a" prot="public">
+          <name>SideTop</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64a9e475036df2ca085735da35309419722" prot="public">
+          <name>SideBottom</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64abe33449d8073a56c508e45cc711cb610" prot="public">
+          <name>MouseKeyMax</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="50" column="5" bodyfile="core/io/d2_input_base.hpp" bodystart="51" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527b" prot="public" static="no" strong="yes">
+        <type>unsigned char</type>
+        <name>Event</name>
+        <qualifiedname>d2::in::Event</qualifiedname>
+        <enumvalue id="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527bab7820ee1514e599bfdd386105cae48db" prot="public">
+          <name>ScreenResize</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527baca0998628c9cb58d2795b3abaf8548a8" prot="public">
+          <name>ScreenCapacityChange</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527ba1976ec26dc654506e432644b141b8d63" prot="public">
+          <name>MouseMovement</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527ba226d00c5766e875c0acdf421c32a2a7d" prot="public">
+          <name>ScrollWheelMovement</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527ba9edb25f45590ca0fb6e31f1bc5ee96b8" prot="public">
+          <name>KeyInput</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527ba52282462b49e177046da79ce2b93b1c0" prot="public">
+          <name>KeyMouseInput</name>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1in_1a06b77f0ba7c3247c1d29038d3db6527ba03dfabba0777c81647ec4028aa91c154" prot="public">
+          <name>KeySequenceInput</name>
+          <initializer>= 1 &lt;&lt; 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="59" column="5" bodyfile="core/io/d2_input_base.hpp" bodystart="60" bodyend="68"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" prot="public" static="no">
+        <type>short</type>
+        <definition>using d2::in::keytype = short</definition>
+        <argsstring></argsstring>
+        <name>keytype</name>
+        <qualifiedname>d2::in::keytype</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="14" column="5" bodyfile="core/io/d2_input_base.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1in_1ac12fff2551fd69f826623b09f824ba71" prot="public" static="no">
+        <type><ref refid="namespaced2_1_1in_1ae5322b0ce6c945279e3ad1a739f54661" kindref="member">Mode</ref></type>
+        <definition>using d2::in::mode = Mode</definition>
+        <argsstring></argsstring>
+        <name>mode</name>
+        <qualifiedname>d2::in::mode</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="70" column="5" bodyfile="core/io/d2_input_base.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1in_1a80abc611dfaacad3e4f40c6e197cc27d" prot="public" static="no">
+        <type><ref refid="namespaced2_1_1in_1a681b42afc2aad6b84aa5a213c4aa9d64" kindref="member">Mouse</ref></type>
+        <definition>using d2::in::mouse = Mouse</definition>
+        <argsstring></argsstring>
+        <name>mouse</name>
+        <qualifiedname>d2::in::mouse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="71" column="5" bodyfile="core/io/d2_input_base.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaced2_1_1in_1a520f76dc702c8a58061d580b3e5267c1" prot="public" static="no">
+        <type><ref refid="namespaced2_1_1in_1af98afe08d8f1c137744615a9ac29265b" kindref="member">Special</ref></type>
+        <definition>using d2::in::special = Special</definition>
+        <argsstring></argsstring>
+        <name>special</name>
+        <qualifiedname>d2::in::special</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="72" column="5" bodyfile="core/io/d2_input_base.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1_1in_1aa49d0451bdf788966eec20cc8bf5d34a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref></type>
+        <definition>keytype d2::in::keymin</definition>
+        <argsstring>()</argsstring>
+        <name>keymin</name>
+        <qualifiedname>d2::in::keymin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="74" column="23" bodyfile="core/io/d2_input_base.hpp" bodystart="74" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1in_1a9f41fa82f6e54f2302625c8cbfa91159" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref></type>
+        <definition>keytype d2::in::keymax</definition>
+        <argsstring>()</argsstring>
+        <name>keymax</name>
+        <qualifiedname>d2::in::keymax</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="78" column="23" bodyfile="core/io/d2_input_base.hpp" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1in_1a646ef1d0e2cf52556a38625bd087063a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref></type>
+        <definition>keytype d2::in::key</definition>
+        <argsstring>(char ch)</argsstring>
+        <name>key</name>
+        <qualifiedname>d2::in::key</qualifiedname>
+        <param>
+          <type>char</type>
+          <declname>ch</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="82" column="23" bodyfile="core/io/d2_input_base.hpp" bodystart="82" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1in_1a6f3bbcf4fc62f1ebdcea73e81d04f782" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1in_1a02ded26726be45d95a60abff0d704101" kindref="member">keytype</ref></type>
+        <definition>keytype d2::in::fn</definition>
+        <argsstring>(std::size_t cnt)</argsstring>
+        <name>fn</name>
+        <qualifiedname>d2::in::fn</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>cnt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_input_base.hpp" line="99" column="23" bodyfile="core/io/d2_input_base.hpp" bodystart="99" bodyend="102"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_input_base.cpp" line="5" column="1"/>
+  </compounddef>
+</doxygen>

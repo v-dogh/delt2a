@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1px_1_1impl" kind="namespace" language="C++">
+    <compoundname>d2::px::impl</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1_1px_1_1impl_1a36efe5fd5c3a4007521787fb6bb9e418" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float d2::px::impl::clamp01</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>clamp01</name>
+        <qualifiedname>d2::px::impl::clamp01</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="229" column="30" bodyfile="core/types/d2_vtypes.hpp" bodystart="229" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1_1impl_1a471e1c955c2a389ab8eeabb2ea229772" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::impl::clamp_byte</definition>
+        <argsstring>(int value) noexcept</argsstring>
+        <name>clamp_byte</name>
+        <qualifiedname>d2::px::impl::clamp_byte</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="234" column="34" bodyfile="core/types/d2_vtypes.hpp" bodystart="234" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1_1impl_1a4d1d3809cc7de8f257258edd4a16438f" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::impl::byte_from_unit</definition>
+        <argsstring>(float value) noexcept</argsstring>
+        <name>byte_from_unit</name>
+        <qualifiedname>d2::px::impl::byte_from_unit</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="239" column="34" bodyfile="core/types/d2_vtypes.hpp" bodystart="239" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1_1impl_1a5ee20b55e59e8884dad94c4e9e572131" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::impl::lerp</definition>
+        <argsstring>(component from, component to, float progress) noexcept</argsstring>
+        <name>lerp</name>
+        <qualifiedname>d2::px::impl::lerp</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>progress</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="245" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="245" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1px_1_1impl_1a76eedb76af464d3cec64d319461ee30a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+        <definition>component d2::px::impl::blend</definition>
+        <argsstring>(component source, component dest, float alpha) noexcept</argsstring>
+        <name>blend</name>
+        <qualifiedname>d2::px::impl::blend</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1px_1a4c861208bbcbba772db482d648fc0fb4" kindref="member">component</ref></type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>alpha</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/types/d2_vtypes.hpp" line="257" column="13" bodyfile="core/types/d2_vtypes.hpp" bodystart="257" bodyend="260"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/types/d2_vtypes.hpp" line="227" column="9"/>
+  </compounddef>
+</doxygen>

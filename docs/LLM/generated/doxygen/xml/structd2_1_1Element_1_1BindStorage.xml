@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1Element_1_1BindStorage" kind="struct" language="C++" prot="private">
+    <compoundname>d2::Element::BindStorage</compoundname>
+    <innerclass refid="structd2_1_1Element_1_1BindStorage_1_1Bind" prot="public">d2::Element::BindStorage::Bind</innerclass>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1Element_1_1BindStorage_1aba3dd8f78300ce06cf1169cc39837fc8" prot="public" static="no" mutable="no">
+        <type>absl::InlinedVector&lt; <ref refid="structd2_1_1Element_1_1BindStorage_1_1Bind" kindref="compound">Bind</ref>, 4 &gt;</type>
+        <definition>absl::InlinedVector&lt;Bind, 4&gt; d2::Element::BindStorage::buf</definition>
+        <argsstring></argsstring>
+        <name>buf</name>
+        <qualifiedname>d2::Element::BindStorage::buf</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="193" column="33" bodyfile="core/tree/d2_tree_element.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/tree/d2_tree_element.hpp" line="186" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="187" bodyend="194"/>
+    <listofallmembers>
+      <member refid="structd2_1_1Element_1_1BindStorage_1aba3dd8f78300ce06cf1169cc39837fc8" prot="public" virt="non-virtual"><scope>d2::Element::BindStorage</scope><name>buf</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

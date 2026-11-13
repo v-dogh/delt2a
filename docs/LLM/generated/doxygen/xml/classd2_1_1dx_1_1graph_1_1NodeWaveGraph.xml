@@ -1,0 +1,314 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::graph::NodeWaveGraph</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">d2::style:: UAI&lt; NodeWaveGraph, d2::style::ILayout, d2::style::IColors, d2::style::INodeWaveGraph &gt;</basecompoundref>
+    <includes refid="d2__graph_8hpp" local="no">d2_graph.hpp</includes>
+    <innerclass refid="structd2_1_1dx_1_1graph_1_1NodeWaveGraph_1_1NodePair" prot="public">d2::dx::graph::NodeWaveGraph::NodePair</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a73f85183d8a69b1f9f7f0df3ecdd3d35" prot="public" static="no">
+        <type>d2::style:: UAI&lt; <ref refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph" kindref="compound">NodeWaveGraph</ref>, <ref refid="structd2_1_1style_1_1ILayout" kindref="compound">d2::style::ILayout</ref>, d2::style::IColors, d2::style::INodeWaveGraph &gt;</type>
+        <definition>using d2::dx::graph::NodeWaveGraph::data = d2::style::
+               UAI&lt;NodeWaveGraph,
+                   d2::style::ILayout,
+                   d2::style::IColors,
+                   d2::style::INodeWaveGraph&gt;</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="94" column="13" bodyfile="elements/d2_graph.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1af6a265d80e7e8e8264fca0594e53a1fb" prot="private" static="no" mutable="no">
+        <type><ref refid="structd2_1_1dx_1_1graph_1_1NodeWaveGraph_1_1NodePair" kindref="compound">NodePair</ref> *</type>
+        <definition>NodePair* d2::dx::graph::NodeWaveGraph::_focused_node</definition>
+        <argsstring></argsstring>
+        <name>_focused_node</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::_focused_node</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="112" column="22" bodyfile="elements/d2_graph.hpp" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a72022680f36e5d022ff72181d3d287b6" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::graph::NodeWaveGraph::_start_point</definition>
+        <argsstring></argsstring>
+        <name>_start_point</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::_start_point</qualifiedname>
+        <initializer>{~0ull}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="113" column="25" bodyfile="elements/d2_graph.hpp" bodystart="113" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1ac57146d18d25a364f581538cebdb0b3c" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::graph::NodeWaveGraph::_end_point</definition>
+        <argsstring></argsstring>
+        <name>_end_point</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::_end_point</qualifiedname>
+        <initializer>{~0ull}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="114" column="25" bodyfile="elements/d2_graph.hpp" bodystart="114" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a101fae5de57b76b9c108af0730d9d898" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::graph::NodeWaveGraph::_id</definition>
+        <argsstring></argsstring>
+        <name>_id</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::_id</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="115" column="25" bodyfile="elements/d2_graph.hpp" bodystart="115" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1ac9034813a53c2b517499f172fb250b9f" prot="private" static="no" mutable="no">
+        <type>std::list&lt; <ref refid="structd2_1_1dx_1_1graph_1_1NodeWaveGraph_1_1NodePair" kindref="compound">NodePair</ref> &gt;</type>
+        <definition>std::list&lt;NodePair&gt; d2::dx::graph::NodeWaveGraph::_nodes</definition>
+        <argsstring></argsstring>
+        <name>_nodes</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::_nodes</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="116" column="23" bodyfile="elements/d2_graph.hpp" bodystart="116" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a1298777616e4ffba12375b425f330f8b" prot="private" static="no" mutable="no">
+        <type>float</type>
+        <definition>float d2::dx::graph::NodeWaveGraph::_offset</definition>
+        <argsstring></argsstring>
+        <name>_offset</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::_offset</qualifiedname>
+        <initializer>{0.f}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="117" column="19" bodyfile="elements/d2_graph.hpp" bodystart="117" bodyend="117"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1af37f2eec9fdc41f5c0cebb60c5372cd7" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float d2::dx::graph::NodeWaveGraph::_lerp</definition>
+        <argsstring>(float t, float a, float b)</argsstring>
+        <name>_lerp</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::_lerp</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="119" column="26" bodyfile="elements/d2_graph.cpp" bodystart="255" bodyend="258"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1ae3013bcfe50d3709e1d6c2f4c120b822" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::graph::NodeWaveGraph::_state_change_impl</definition>
+        <argsstring>(State state, bool value) override</argsstring>
+        <name>_state_change_impl</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::_state_change_impl</qualifiedname>
+        <param>
+          <type>State</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="121" column="26" bodyfile="elements/d2_graph.cpp" bodystart="260" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1ad9e88df5cac1f3a76f53d4a4ae71ae9b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::graph::NodeWaveGraph::_frame_impl</definition>
+        <argsstring>(d2::PixelBuffer::View buffer) override</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::_frame_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">d2::PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="122" column="26" bodyfile="elements/d2_graph.cpp" bodystart="293" bodyend="447"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a980e3407289c7c12243489f2f912c0b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::graph::NodeWaveGraph::push</definition>
+        <argsstring>()</argsstring>
+        <name>push</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::push</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="126" column="25" bodyfile="elements/d2_graph.cpp" bodystart="449" bodyend="457"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1af5c108f5c006dab244dafb71f009c80f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::graph::NodeWaveGraph::push</definition>
+        <argsstring>(float start, float end)</argsstring>
+        <name>push</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::push</qualifiedname>
+        <param>
+          <type>float</type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="127" column="25" bodyfile="elements/d2_graph.cpp" bodystart="458" bodyend="486"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a2653eeabf793a69b61de393165d34870" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::graph::NodeWaveGraph::pop</definition>
+        <argsstring>(std::size_t id)</argsstring>
+        <name>pop</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::pop</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="128" column="18" bodyfile="elements/d2_graph.cpp" bodystart="487" bodyend="490"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a3a8e2ca276079b637948cdc8941a8d51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::graph::NodeWaveGraph::set_parameters</definition>
+        <argsstring>(std::size_t id, const NodePair &amp;node)</argsstring>
+        <name>set_parameters</name>
+        <qualifiedname>d2::dx::graph::NodeWaveGraph::set_parameters</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structd2_1_1dx_1_1graph_1_1NodeWaveGraph_1_1NodePair" kindref="compound">NodePair</ref> &amp;</type>
+          <declname>node</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_graph.hpp" line="129" column="18" bodyfile="elements/d2_graph.cpp" bodystart="491" bodyend="501"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::dx::graph::NodeWaveGraph</label>
+        <link refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::style::
+                                  UAI&lt; NodeWaveGraph, d2::style::ILayout, d2::style::IColors, d2::style::INodeWaveGraph &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::dx::graph::NodeWaveGraph</label>
+        <link refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::style::
+                                  UAI&lt; NodeWaveGraph, d2::style::ILayout, d2::style::IColors, d2::style::INodeWaveGraph &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_graph.hpp" line="87" column="9" bodyfile="elements/d2_graph.hpp" bodystart="92" bodyend="130"/>
+    <listofallmembers>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1ac57146d18d25a364f581538cebdb0b3c" prot="private" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>_end_point</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1af6a265d80e7e8e8264fca0594e53a1fb" prot="private" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>_focused_node</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1ad9e88df5cac1f3a76f53d4a4ae71ae9b" prot="protected" virt="virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a101fae5de57b76b9c108af0730d9d898" prot="private" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>_id</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1af37f2eec9fdc41f5c0cebb60c5372cd7" prot="private" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>_lerp</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1ac9034813a53c2b517499f172fb250b9f" prot="private" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>_nodes</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a1298777616e4ffba12375b425f330f8b" prot="private" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>_offset</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a72022680f36e5d022ff72181d3d287b6" prot="private" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>_start_point</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1ae3013bcfe50d3709e1d6c2f4c120b822" prot="protected" virt="virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>_state_change_impl</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a73f85183d8a69b1f9f7f0df3ecdd3d35" prot="public" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>data</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a2653eeabf793a69b61de393165d34870" prot="public" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>pop</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a980e3407289c7c12243489f2f912c0b6" prot="public" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>push</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1af5c108f5c006dab244dafb71f009c80f" prot="public" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>push</name></member>
+      <member refid="classd2_1_1dx_1_1graph_1_1NodeWaveGraph_1a3a8e2ca276079b637948cdc8941a8d51" prot="public" virt="non-virtual"><scope>d2::dx::graph::NodeWaveGraph</scope><name>set_parameters</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

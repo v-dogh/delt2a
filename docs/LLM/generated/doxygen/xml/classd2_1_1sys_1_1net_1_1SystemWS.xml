@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1sys_1_1net_1_1SystemWS" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::sys::net::SystemWS</compoundname>
+    <basecompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; SystemWS, &quot;WebSockets&quot;, d2::sys::Access::TSafe &gt;</basecompoundref>
+    <includes refid="d2__ws_8hpp" local="no">d2_ws.hpp</includes>
+    <innerclass refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client" prot="public">d2::sys::net::SystemWS::Client</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1RequestBuilder" prot="public">d2::sys::net::SystemWS::RequestBuilder</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection" prot="public">d2::sys::net::SystemWS::Connection</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>State</name>
+        <qualifiedname>d2::sys::net::SystemWS::State</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423a0eceeb45861f9585dd7a97a3e36f85c6" prot="public">
+          <name>Created</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423ae321c53b354930ba96f0243e652df458" prot="public">
+          <name>Connecting</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423ac3bf447eabe632720a3aa1a7ce401274" prot="public">
+          <name>Open</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423a5c8de6f894682fdb1786037b2040a26e" prot="public">
+          <name>Closing</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423a03f4a47830f97377a35321051685071e" prot="public">
+          <name>Closed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423ad7c8c85bf79bbe1b7188497c32c3b0ca" prot="public">
+          <name>Failed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423a80154864ebe36b3db0acd51f9b10f568" prot="public">
+          <name>Reconnecting</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="11" column="9" bodyfile="core/mods/d2_ws.hpp" bodystart="12" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1sys_1_1net_1_1SystemWS_1af67f663146cc884dbd765ec8eb77cc69" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Type</name>
+        <qualifiedname>d2::sys::net::SystemWS::Type</qualifiedname>
+        <enumvalue id="classd2_1_1sys_1_1net_1_1SystemWS_1af67f663146cc884dbd765ec8eb77cc69a9dffbf69ffba8bc38bc4e01abf4b1675" prot="public">
+          <name>Text</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1sys_1_1net_1_1SystemWS_1af67f663146cc884dbd765ec8eb77cc69a6ce976e8f061b2b5cfe4d0c50c3405dd" prot="public">
+          <name>Binary</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="21" column="9" bodyfile="core/mods/d2_ws.hpp" bodystart="22" bodyend="25"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1net_1_1SystemWS_1a5b9a30667af422207e68d1cf9cd60c37" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a65c0c81220e56970298f44a47c8bf881" kindref="member">Client::ptr</ref></type>
+        <definition>virtual Client::ptr d2::sys::net::SystemWS::_connect_impl</definition>
+        <argsstring>(Connection connection)=0</argsstring>
+        <name>_connect_impl</name>
+        <qualifiedname>d2::sys::net::SystemWS::_connect_impl</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection" kindref="compound">Connection</ref></type>
+          <declname>connection</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="60" column="29"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1sys_1_1net_1_1SystemWS_1a6301de31b6a5a494ca0d9780ba87087f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Client_1a65c0c81220e56970298f44a47c8bf881" kindref="member">Client::ptr</ref></type>
+        <definition>SystemWS::Client::ptr d2::sys::net::SystemWS::connect</definition>
+        <argsstring>(Connection connection)</argsstring>
+        <name>connect</name>
+        <qualifiedname>d2::sys::net::SystemWS::connect</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1sys_1_1net_1_1SystemWS_1_1Connection" kindref="compound">Connection</ref></type>
+          <declname>connection</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_ws.hpp" line="62" column="21" bodyfile="core/mods/d2_ws.cpp" bodystart="7" bodyend="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemWS, &quot;WebSockets&quot;, d2::sys::Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemWS &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::net::SystemWS</label>
+        <link refid="classd2_1_1sys_1_1net_1_1SystemWS"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; SystemWS, &quot;WebSockets&quot;, d2::sys::Access::TSafe &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::sys::ModuleLocalGet&lt; SystemWS &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+      <node id="3">
+        <label>d2::sys::SystemModule</label>
+        <link refid="classd2_1_1sys_1_1SystemModule"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::net::SystemWS</label>
+        <link refid="classd2_1_1sys_1_1net_1_1SystemWS"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::enable_shared_from_this&lt; SystemModule &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/mods/d2_ws.hpp" line="8" column="5" bodyfile="core/mods/d2_ws.hpp" bodystart="9" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classd2_1_1sys_1_1net_1_1SystemWS_1a5b9a30667af422207e68d1cf9cd60c37" prot="protected" virt="pure-virtual"><scope>d2::sys::net::SystemWS</scope><name>_connect_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a4046e7f0ab32f91e8c44992d157090d3" prot="protected" virt="virtual"><scope>d2::sys::net::SystemWS</scope><name>_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aceda42a21d34307502e85ed71a8f1bfd" prot="protected" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>_mark_safe</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac9a0554066147366103f0f8eedd66825" prot="protected" virt="virtual"><scope>d2::sys::net::SystemWS</scope><name>_post_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0cd31b676a154970e7b11542eeca11bf" prot="protected" virt="virtual"><scope>d2::sys::net::SystemWS</scope><name>_pre_load_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a86d2dbcd137b14bcf1196f0f46e736a2" prot="protected" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>_stat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a3d00c6f644839f6da033b2cb1ba57c3d" prot="protected" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>_transition</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a9cbef60d01c9d1207bd8bb3501d6f730" prot="protected" virt="virtual"><scope>d2::sys::net::SystemWS</scope><name>_unload_impl</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ac2e69a01429c7c54b159c5d6e400ec62" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>access</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1aec9c978249bfad5adc1a901f915d65dd" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>accessible</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0811a1384bd18e161740075431f9bf41" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>as</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab61cbe6d0870452285b8f9b2e23d1b54" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>Compat</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12c04d2e198803af3948aabbc9e47cf9" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>compatible</name></member>
+      <member refid="classd2_1_1sys_1_1net_1_1SystemWS_1a6301de31b6a5a494ca0d9780ba87087f" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>connect</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ab141797742a5d5c7ea1621f366e9602b" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>context</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a8c89fa1216f264d55003483012d32909" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>D2_TAG_MODULE_VALUE</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a7db2e453ef75d370350714075cffa135" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>dependencies</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ade4a3056d7150e42012c669ff45f85c3" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>dependency_names</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a62080f120905a03689cc286e68541154" prot="public" virt="virtual"><scope>d2::sys::net::SystemWS</scope><name>info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a8f30825f7e1758d237078cadaed841c4" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>load</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1ad48d70086fc21d654ff9aa44b055a537" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>load_type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a48c3de66575a6321a0634d495a4b8fbb" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>make</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a9f5a14a685b7bad02fc3e1686f0dc6bf" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>module_info</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a97523b8ab4904f405bf951eafae3114a" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>preset</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a4c9d01f9a004d65f9a7505e958d55ad3" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>ptr</name></member>
+      <member refid="classd2_1_1sys_1_1net_1_1SystemWS_1a6eade63e27773db6b86be21f3a136423" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>State</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5518a4eeb2654571cc6e3d7af7e4d1fa" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>static_usage</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a12ecbbb99b6d0377da1fc3254dbb9434" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>Status</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a67eaee79e3501268d9e71240142093e7" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>status</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleDecl_1a2c8aa61f8f7a53efb12319a6d3a4ffc2" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>SystemModule</name></member>
+      <member refid="classd2_1_1sys_1_1net_1_1SystemWS_1af67f663146cc884dbd765ec8eb77cc69" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>Type</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a5827a1d876069e9aa923d9cdcc5247b0" prot="public" virt="non-virtual"><scope>d2::sys::net::SystemWS</scope><name>unload</name></member>
+      <member refid="classd2_1_1sys_1_1SystemModule_1a0bab34e2f13dcfbc22ba7a7b5faf2f46" prot="public" virt="virtual"><scope>d2::sys::net::SystemWS</scope><name>~SystemModule</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

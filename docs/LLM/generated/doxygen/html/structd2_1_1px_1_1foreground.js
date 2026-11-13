@@ -1,0 +1,28 @@
+var structd2_1_1px_1_1foreground =
+[
+    [ "add_style", "structd2_1_1px_1_1foreground.html#a39a8e0a0bec2d1e7ada613a84de07bd6", null ],
+    [ "alpha", "structd2_1_1px_1_1foreground.html#a4fc1082e4f5a154feac014e3988391df", null ],
+    [ "alpha", "structd2_1_1px_1_1foreground.html#a46f716854731a60f0af6df3caf7fef61", null ],
+    [ "as_background", "structd2_1_1px_1_1foreground.html#a3468b788ea480c4d6bd312d8d94f83bc", null ],
+    [ "extend", "structd2_1_1px_1_1foreground.html#acb042d8debb0a84496d83370b551254a", null ],
+    [ "has_style", "structd2_1_1px_1_1foreground.html#a349dafcbc74de513ce263a593b911c81", null ],
+    [ "invert", "structd2_1_1px_1_1foreground.html#aee2b7ddddb3331486d122f9929b03801", null ],
+    [ "inverted", "structd2_1_1px_1_1foreground.html#a6078dbaf290191bc15442e37000e3729", null ],
+    [ "mask", "structd2_1_1px_1_1foreground.html#a91260dc7d3ce4be88fa948783bb7f6b5", null ],
+    [ "mix", "structd2_1_1px_1_1foreground.html#aaf18c1c8a3f5ad0764126dc3bf6873c6", null ],
+    [ "operator background", "structd2_1_1px_1_1foreground.html#a5e4cc839b7942aef8dc2e6d013a2b7af", null ],
+    [ "operator combined", "structd2_1_1px_1_1foreground.html#afcd50faa7a1123d9ed3a9b1a8802f4d3", null ],
+    [ "operator<=>", "structd2_1_1px_1_1foreground.html#a7c6c1c29784d07c92b9bdf384a4c4037", null ],
+    [ "remove_style", "structd2_1_1px_1_1foreground.html#af39af815fe899080d8c0aadfa642941d", null ],
+    [ "stylize", "structd2_1_1px_1_1foreground.html#a72dbe4bbf825e19930c902592597140d", null ],
+    [ "with_alpha", "structd2_1_1px_1_1foreground.html#a02a65bc02f8011c22f0a8a9f8d64b4c7", null ],
+    [ "with_alpha", "structd2_1_1px_1_1foreground.html#aec69216297bc8c52d109c7963f507a92", null ],
+    [ "with_style", "structd2_1_1px_1_1foreground.html#a62354b6abc957a69bfbbaa2255b98918", null ],
+    [ "with_value", "structd2_1_1px_1_1foreground.html#ac1edaf6e4f252cd0b925b910b99512de", null ],
+    [ "a", "structd2_1_1px_1_1foreground.html#a6e0b31618af020a7ca1499407672887f", null ],
+    [ "b", "structd2_1_1px_1_1foreground.html#ab9b26a39db0a909a69234c4ad0728719", null ],
+    [ "g", "structd2_1_1px_1_1foreground.html#af23a8a14c5532334ca4df2b271aa4eb6", null ],
+    [ "r", "structd2_1_1px_1_1foreground.html#ae9a67d4acdfc7531fe8689061a4f08a1", null ],
+    [ "style", "structd2_1_1px_1_1foreground.html#a58edff0beb856743227a9c8612ed885f", null ],
+    [ "v", "structd2_1_1px_1_1foreground.html#a0d6ca8bd2b1608586f8d99be61c8acc4", null ]
+];

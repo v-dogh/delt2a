@@ -1,0 +1,793 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1lsx_1_1ConstraintArray" kind="class" language="C++" prot="public">
+    <compoundname>d2::lsx::ConstraintArray</compoundname>
+    <includes refid="d2__solver_8hpp" local="no">d2_solver.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1lsx_1_1ConstraintArray_1a3b32d56a44b7c51013580921efc5abd8" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Status</name>
+        <qualifiedname>d2::lsx::ConstraintArray::Status</qualifiedname>
+        <enumvalue id="classd2_1_1lsx_1_1ConstraintArray_1a3b32d56a44b7c51013580921efc5abd8a38c300f4fc9ce8a77aad4a30de05cad8" prot="public">
+          <name>NotFound</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1lsx_1_1ConstraintArray_1a3b32d56a44b7c51013580921efc5abd8ae252ddd12e5cf76658bfbb0784214566" prot="public">
+          <name>Unsolvable</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1lsx_1_1ConstraintArray_1a3b32d56a44b7c51013580921efc5abd8aa60852f204ed8028c1c58808b746d115" prot="public">
+          <name>Ok</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="126" column="9" bodyfile="core/lsx/d2_solver.hpp" bodystart="127" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1lsx_1_1ConstraintArray_1ac29a2273bd590c691c44f6ac4555cc96" prot="public" static="no">
+        <type><ref refid="structd2_1_1lsx_1_1impl_1_1ConstraintHandle" kindref="compound">impl::ConstraintHandle</ref></type>
+        <definition>using d2::lsx::ConstraintArray::handle = impl::ConstraintHandle</definition>
+        <argsstring></argsstring>
+        <name>handle</name>
+        <qualifiedname>d2::lsx::ConstraintArray::handle</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="125" column="9" bodyfile="core/lsx/d2_solver.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classd2_1_1lsx_1_1ConstraintArray_1ac5d2e6870f58fde6f09ffbca2d29e4e3" prot="private" static="no" strong="no">
+        <type>unsigned char</type>
+        <name>Flags</name>
+        <qualifiedname>d2::lsx::ConstraintArray::Flags</qualifiedname>
+        <enumvalue id="classd2_1_1lsx_1_1ConstraintArray_1ac5d2e6870f58fde6f09ffbca2d29e4e3a1ccecb031292109a0a17c616766ee275" prot="private">
+          <name>IsBatched</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="133" column="9" bodyfile="core/lsx/d2_solver.hpp" bodystart="134" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1lsx_1_1ConstraintArray_1a8aa4e605b759ff15d6360d5e6302eb5b" prot="private" static="no">
+        <type><ref refid="namespaced2_1_1lsx_1aca3726aad5d984b66e613e2996fbbd60" kindref="member">hash_map</ref>&lt; <ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref>, <ref refid="classd2_1_1lsx_1_1impl_1_1Row" kindref="compound">impl::Row</ref> &gt;</type>
+        <definition>using d2::lsx::ConstraintArray::tableau = hash_map&lt;VariableIndex, impl::Row&gt;</definition>
+        <argsstring></argsstring>
+        <name>tableau</name>
+        <qualifiedname>d2::lsx::ConstraintArray::tableau</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="137" column="9" bodyfile="core/lsx/d2_solver.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1lsx_1_1ConstraintArray_1aa836ec543d3cffcfd09ecc51c470cc78" prot="private" static="no">
+        <type>tableau::iterator</type>
+        <definition>using d2::lsx::ConstraintArray::tableau_iterator = tableau::iterator</definition>
+        <argsstring></argsstring>
+        <name>tableau_iterator</name>
+        <qualifiedname>d2::lsx::ConstraintArray::tableau_iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="138" column="9" bodyfile="core/lsx/d2_solver.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1ConstraintArray_1abf28233ebfb67972412b0d7020eac81d" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::lsx::ConstraintArray::_unsolvable_const</definition>
+        <argsstring></argsstring>
+        <name>_unsolvable_const</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_unsolvable_const</qualifiedname>
+        <initializer>= std::numeric_limits&lt;<ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref>&gt;::infinity()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="140" column="31" bodyfile="core/lsx/d2_solver.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1ConstraintArray_1a505c76428cf57f2a4d70ef08846243d8" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::lsx::ConstraintArray::_not_found_const</definition>
+        <argsstring></argsstring>
+        <name>_not_found_const</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_not_found_const</qualifiedname>
+        <initializer>= std::numeric_limits&lt;<ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref>&gt;::quiet_NaN()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="141" column="31" bodyfile="core/lsx/d2_solver.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1ConstraintArray_1aaa203fc90cfe51b143558def410ad82e" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto d2::lsx::ConstraintArray::_epsilon</definition>
+        <argsstring></argsstring>
+        <name>_epsilon</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_epsilon</qualifiedname>
+        <initializer>= 1e-8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="142" column="31" bodyfile="core/lsx/d2_solver.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1ConstraintArray_1aa65ea7ac111bd91d3b83e6c2f57e3f10" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1lsx_1aca3726aad5d984b66e613e2996fbbd60" kindref="member">hash_map</ref>&lt; <ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref>, <ref refid="classd2_1_1lsx_1_1impl_1_1Row" kindref="compound">impl::Row</ref> &gt;</type>
+        <definition>hash_map&lt;VariableIndex, impl::Row&gt; d2::lsx::ConstraintArray::_tableau</definition>
+        <argsstring></argsstring>
+        <name>_tableau</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_tableau</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="144" column="18" bodyfile="core/lsx/d2_solver.hpp" bodystart="144" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1ConstraintArray_1a5ae475fc8f076a4547e2423b6ffac52e" prot="private" static="no" mutable="no">
+        <type><ref refid="namespaced2_1_1lsx_1a6384755e76af632bdbe97ad83dd6355a" kindref="member">hash_set</ref>&lt; <ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref> &gt;</type>
+        <definition>hash_set&lt;VariableIndex&gt; d2::lsx::ConstraintArray::_infeasible</definition>
+        <argsstring></argsstring>
+        <name>_infeasible</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_infeasible</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="145" column="18" bodyfile="core/lsx/d2_solver.hpp" bodystart="145" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1ConstraintArray_1a8e68ee98d878fcbb48a41afa6ed1bc79" prot="private" static="no" mutable="no">
+        <type>std::uint32_t</type>
+        <definition>std::uint32_t d2::lsx::ConstraintArray::_internal_id_ctr</definition>
+        <argsstring></argsstring>
+        <name>_internal_id_ctr</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_internal_id_ctr</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="146" column="23" bodyfile="core/lsx/d2_solver.hpp" bodystart="146" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1lsx_1_1ConstraintArray_1a98ff14702f36dae2896a63049e7be487" prot="private" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char d2::lsx::ConstraintArray::_flags</definition>
+        <argsstring></argsstring>
+        <name>_flags</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_flags</qualifiedname>
+        <initializer>{0x00}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="147" column="23" bodyfile="core/lsx/d2_solver.hpp" bodystart="147" bodyend="147"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a31d493ede4e9a52652e4699d182a441a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref> &gt;</type>
+        <definition>std::optional&lt; Symbol &gt; d2::lsx::ConstraintArray::_find_subject</definition>
+        <argsstring>(const impl::Row &amp;row)</argsstring>
+        <name>_find_subject</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_find_subject</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1impl_1_1Row" kindref="compound">impl::Row</ref> &amp;</type>
+          <declname>row</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="149" column="23" bodyfile="core/lsx/d2_solver.cpp" bodystart="130" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a62448a4612178066579982d12f49d31b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref> &gt;</type>
+        <definition>std::optional&lt; Symbol &gt; d2::lsx::ConstraintArray::_find_entering</definition>
+        <argsstring>()</argsstring>
+        <name>_find_entering</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_find_entering</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="150" column="23" bodyfile="core/lsx/d2_solver.cpp" bodystart="161" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1aa1f4d99111576d7ef18a30ffa71fd0f7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref> &gt;</type>
+        <definition>std::optional&lt; Symbol &gt; d2::lsx::ConstraintArray::_find_dual_entering</definition>
+        <argsstring>(tableau_iterator row)</argsstring>
+        <name>_find_dual_entering</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_find_dual_entering</qualifiedname>
+        <param>
+          <type>tableau_iterator</type>
+          <declname>row</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="151" column="23" bodyfile="core/lsx/d2_solver.cpp" bodystart="185" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a8a6b625cca8b63ab8053f5cdfc7bdb01" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; tableau_iterator &gt;</type>
+        <definition>std::optional&lt; ConstraintArray::tableau_iterator &gt; d2::lsx::ConstraintArray::_find_leaving</definition>
+        <argsstring>(Symbol entering)</argsstring>
+        <name>_find_leaving</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_find_leaving</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref></type>
+          <declname>entering</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="152" column="23" bodyfile="core/lsx/d2_solver.cpp" bodystart="216" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a669d5ac7fb01232bbb6d57d4c4c94b95" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref> &gt;</type>
+        <definition>std::optional&lt; VariableIndex &gt; d2::lsx::ConstraintArray::_pop_infeasible</definition>
+        <argsstring>()</argsstring>
+        <name>_pop_infeasible</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_pop_infeasible</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="153" column="23" bodyfile="core/lsx/d2_solver.cpp" bodystart="247" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a1d5e18c5d5f71009e5ae224a61a5abf6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::ConstraintArray::_pivot</definition>
+        <argsstring>(Symbol entering, tableau_iterator leaving)</argsstring>
+        <name>_pivot</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_pivot</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Symbol" kindref="compound">Symbol</ref></type>
+          <declname>entering</declname>
+        </param>
+        <param>
+          <type>tableau_iterator</type>
+          <declname>leaving</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="155" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="256" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1adcdd611114b6b5c334ac0fe4f644f309" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::ConstraintArray::_mark</definition>
+        <argsstring>(VariableIndex symbol, bool condition)</argsstring>
+        <name>_mark</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_mark</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1VariableIndex" kindref="compound">VariableIndex</ref></type>
+          <declname>symbol</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>condition</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="156" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="271" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a1831af9d8bcf5baa69021165cfdc0595" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::lsx::ConstraintArray::_optimize</definition>
+        <argsstring>()</argsstring>
+        <name>_optimize</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_optimize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="158" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="292" bodyend="303"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a545265608faefc73ad527ff82f02b96f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::lsx::ConstraintArray::_dual_optimize</definition>
+        <argsstring>()</argsstring>
+        <name>_dual_optimize</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_dual_optimize</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="159" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="279" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a816e51d7a9849db347159867343caf2a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::ConstraintArray::_set_error</definition>
+        <argsstring>(Variable error, result_type strength)</argsstring>
+        <name>_set_error</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_set_error</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>error</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>strength</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="161" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="305" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1abaf3e754488ab90e17f006074504a38a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::ConstraintArray::_set_error</definition>
+        <argsstring>(Variable e1, Variable e2, result_type strength)</argsstring>
+        <name>_set_error</name>
+        <qualifiedname>d2::lsx::ConstraintArray::_set_error</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>e1</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>e2</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>strength</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="162" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="310" bodyend="316"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1aa58928c8b0355f0013f5a5db3d1f5e94" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string d2::lsx::ConstraintArray::status_to_string</definition>
+        <argsstring>(Status status)</argsstring>
+        <name>status_to_string</name>
+        <qualifiedname>d2::lsx::ConstraintArray::status_to_string</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1ConstraintArray_1a3b32d56a44b7c51013580921efc5abd8" kindref="member">Status</ref></type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="164" column="28" bodyfile="core/lsx/d2_solver.cpp" bodystart="318" bodyend="330"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a96aa1e2fa52711884d76beb3bd134bb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::ConstraintArray::ConstraintArray</definition>
+        <argsstring>()=default</argsstring>
+        <name>ConstraintArray</name>
+        <qualifiedname>d2::lsx::ConstraintArray::ConstraintArray</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="166" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a940721a3a975a79de364a407b62dda4d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::ConstraintArray::ConstraintArray</definition>
+        <argsstring>(const ConstraintArray &amp;)=default</argsstring>
+        <name>ConstraintArray</name>
+        <qualifiedname>d2::lsx::ConstraintArray::ConstraintArray</qualifiedname>
+        <param>
+          <type>const ConstraintArray &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="167" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a23d6a928de26a7942c28147f3802c911" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::lsx::ConstraintArray::ConstraintArray</definition>
+        <argsstring>(ConstraintArray &amp;&amp;)=default</argsstring>
+        <name>ConstraintArray</name>
+        <qualifiedname>d2::lsx::ConstraintArray::ConstraintArray</qualifiedname>
+        <param>
+          <type>ConstraintArray &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="168" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a58b185624447e945b5fe2c2e9a08c288" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1ConstraintArray_1a3b32d56a44b7c51013580921efc5abd8" kindref="member">Status</ref></type>
+        <definition>ConstraintArray::Status d2::lsx::ConstraintArray::status</definition>
+        <argsstring>(result_type value) const</argsstring>
+        <name>status</name>
+        <qualifiedname>d2::lsx::ConstraintArray::status</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="171" column="16" bodyfile="core/lsx/d2_solver.cpp" bodystart="332" bodyend="339"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a15292d22da8c03c3834ebe45ca255362" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::lsx::ConstraintArray::remove_constraint</definition>
+        <argsstring>(handle handle)</argsstring>
+        <name>remove_constraint</name>
+        <qualifiedname>d2::lsx::ConstraintArray::remove_constraint</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1ConstraintArray_1ac29a2273bd590c691c44f6ac4555cc96" kindref="member">handle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="174" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="341" bodyend="344"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1abc7ab580dc646ec0b3b757631f691922" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1ConstraintArray_1ac29a2273bd590c691c44f6ac4555cc96" kindref="member">handle</ref></type>
+        <definition>ConstraintArray::handle d2::lsx::ConstraintArray::set_constraint</definition>
+        <argsstring>(const Expression &amp;expr, Strength strength=Strength::Required)</argsstring>
+        <name>set_constraint</name>
+        <qualifiedname>d2::lsx::ConstraintArray::set_constraint</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1adde6768f6558b26a861e1ebcb0426355" kindref="member">Strength</ref></type>
+          <declname>strength</declname>
+          <defval><ref refid="namespaced2_1_1lsx_1adde6768f6558b26a861e1ebcb0426355ab651efdb98a5d6bd2b3935d0c3f4a5e2" kindref="member">Strength::Required</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="175" column="16" bodyfile="core/lsx/d2_solver.cpp" bodystart="346" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a1a449364a99fe04f1a48091cb2949430" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1ConstraintArray_1ac29a2273bd590c691c44f6ac4555cc96" kindref="member">handle</ref></type>
+        <definition>ConstraintArray::handle d2::lsx::ConstraintArray::set_constraint</definition>
+        <argsstring>(const Expression &amp;expr, float strength)</argsstring>
+        <name>set_constraint</name>
+        <qualifiedname>d2::lsx::ConstraintArray::set_constraint</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1Expression" kindref="compound">Expression</ref> &amp;</type>
+          <declname>expr</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>strength</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="176" column="16" bodyfile="core/lsx/d2_solver.cpp" bodystart="351" bodyend="442"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a331471828e829363f24a8a46f24e9d0c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+        <definition>result_type d2::lsx::ConstraintArray::get</definition>
+        <argsstring>(Variable var) const</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::lsx::ConstraintArray::get</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="178" column="21" bodyfile="core/lsx/d2_solver.cpp" bodystart="443" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a331f5933689747e8bc0abd927095f1e6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+        <definition>result_type d2::lsx::ConstraintArray::get_or</definition>
+        <argsstring>(Variable var, auto &amp;&amp;func, result_type fallback) const</argsstring>
+        <name>get_or</name>
+        <qualifiedname>d2::lsx::ConstraintArray::get_or</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>auto &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref></type>
+          <declname>fallback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="179" column="21" bodyfile="core/lsx/d2_solver.hpp" bodystart="179" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1aa2a2848d5c92e754b2df447fc741b5d9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::optional&lt; <ref refid="namespaced2_1_1lsx_1a06569577251de5d35b9b482e666c827f" kindref="member">result_type</ref> &gt;</type>
+        <definition>std::optional&lt; result_type &gt; d2::lsx::ConstraintArray::get_or</definition>
+        <argsstring>(Variable var, auto &amp;&amp;func) const</argsstring>
+        <name>get_or</name>
+        <qualifiedname>d2::lsx::ConstraintArray::get_or</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1Variable" kindref="compound">Variable</ref></type>
+          <declname>var</declname>
+        </param>
+        <param>
+          <type>auto &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="193" column="23" bodyfile="core/lsx/d2_solver.hpp" bodystart="193" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a6a28e1487d08f94d381e7c1b4792b9db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::ConstraintArray::start_batch</definition>
+        <argsstring>()</argsstring>
+        <name>start_batch</name>
+        <qualifiedname>d2::lsx::ConstraintArray::start_batch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="208" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="451" bodyend="454"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a87dc0271df2918e519cd25ad76ae71a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::ConstraintArray::end_batch</definition>
+        <argsstring>()</argsstring>
+        <name>end_batch</name>
+        <qualifiedname>d2::lsx::ConstraintArray::end_batch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="209" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="455" bodyend="458"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a7484507aa1ceb39e50f684290ec3e676" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::ConstraintArray::batch</definition>
+        <argsstring>(auto &amp;&amp;func)</argsstring>
+        <name>batch</name>
+        <qualifiedname>d2::lsx::ConstraintArray::batch</qualifiedname>
+        <param>
+          <type>auto &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="214" column="14" bodyfile="core/lsx/d2_solver.hpp" bodystart="214" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a29c3eeb5074b804414a2d1359bb2ddfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::lsx::ConstraintArray::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>d2::lsx::ConstraintArray::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="220" column="14" bodyfile="core/lsx/d2_solver.cpp" bodystart="460" bodyend="465"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1aee5f69e0dd84711345d74e12d533405c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string d2::lsx::ConstraintArray::print</definition>
+        <argsstring>() const</argsstring>
+        <name>print</name>
+        <qualifiedname>d2::lsx::ConstraintArray::print</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="222" column="21" bodyfile="core/lsx/d2_solver.cpp" bodystart="467" bodyend="484"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1ad2242b167e8b6450110986c680dc1bc4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1ConstraintArray_1a96aa1e2fa52711884d76beb3bd134bb4" kindref="member">ConstraintArray</ref> &amp;</type>
+        <definition>ConstraintArray &amp; d2::lsx::ConstraintArray::operator=</definition>
+        <argsstring>(const ConstraintArray &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::lsx::ConstraintArray::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1lsx_1_1ConstraintArray_1a96aa1e2fa52711884d76beb3bd134bb4" kindref="member">ConstraintArray</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="224" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1lsx_1_1ConstraintArray_1a2e0e17e55dd6d1248c33c69139030e11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1lsx_1_1ConstraintArray_1a96aa1e2fa52711884d76beb3bd134bb4" kindref="member">ConstraintArray</ref> &amp;</type>
+        <definition>ConstraintArray &amp; d2::lsx::ConstraintArray::operator=</definition>
+        <argsstring>(ConstraintArray &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::lsx::ConstraintArray::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1lsx_1_1ConstraintArray_1a96aa1e2fa52711884d76beb3bd134bb4" kindref="member">ConstraintArray</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/lsx/d2_solver.hpp" line="225" column="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/lsx/d2_solver.hpp" line="122" column="5" bodyfile="core/lsx/d2_solver.hpp" bodystart="123" bodyend="226"/>
+    <listofallmembers>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a545265608faefc73ad527ff82f02b96f" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_dual_optimize</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1aaa203fc90cfe51b143558def410ad82e" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_epsilon</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1aa1f4d99111576d7ef18a30ffa71fd0f7" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_find_dual_entering</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a62448a4612178066579982d12f49d31b" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_find_entering</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a8a6b625cca8b63ab8053f5cdfc7bdb01" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_find_leaving</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a31d493ede4e9a52652e4699d182a441a" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_find_subject</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a98ff14702f36dae2896a63049e7be487" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_flags</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a5ae475fc8f076a4547e2423b6ffac52e" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_infeasible</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a8e68ee98d878fcbb48a41afa6ed1bc79" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_internal_id_ctr</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1adcdd611114b6b5c334ac0fe4f644f309" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_mark</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a505c76428cf57f2a4d70ef08846243d8" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_not_found_const</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a1831af9d8bcf5baa69021165cfdc0595" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_optimize</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a1d5e18c5d5f71009e5ae224a61a5abf6" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_pivot</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a669d5ac7fb01232bbb6d57d4c4c94b95" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_pop_infeasible</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a816e51d7a9849db347159867343caf2a" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_set_error</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1abaf3e754488ab90e17f006074504a38a" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_set_error</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1aa65ea7ac111bd91d3b83e6c2f57e3f10" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_tableau</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1abf28233ebfb67972412b0d7020eac81d" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>_unsolvable_const</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a7484507aa1ceb39e50f684290ec3e676" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>batch</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a29c3eeb5074b804414a2d1359bb2ddfc" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>clear</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a96aa1e2fa52711884d76beb3bd134bb4" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>ConstraintArray</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a940721a3a975a79de364a407b62dda4d" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>ConstraintArray</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a23d6a928de26a7942c28147f3802c911" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>ConstraintArray</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a87dc0271df2918e519cd25ad76ae71a5" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>end_batch</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1ac5d2e6870f58fde6f09ffbca2d29e4e3" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>Flags</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a331471828e829363f24a8a46f24e9d0c" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>get</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a331f5933689747e8bc0abd927095f1e6" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>get_or</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1aa2a2848d5c92e754b2df447fc741b5d9" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>get_or</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1ac29a2273bd590c691c44f6ac4555cc96" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>handle</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1ac5d2e6870f58fde6f09ffbca2d29e4e3a1ccecb031292109a0a17c616766ee275" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>IsBatched</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1ad2242b167e8b6450110986c680dc1bc4" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>operator=</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a2e0e17e55dd6d1248c33c69139030e11" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>operator=</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1aee5f69e0dd84711345d74e12d533405c" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>print</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a15292d22da8c03c3834ebe45ca255362" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>remove_constraint</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1abc7ab580dc646ec0b3b757631f691922" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>set_constraint</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a1a449364a99fe04f1a48091cb2949430" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>set_constraint</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a6a28e1487d08f94d381e7c1b4792b9db" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>start_batch</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a3b32d56a44b7c51013580921efc5abd8" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>Status</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a58b185624447e945b5fe2c2e9a08c288" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>status</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1aa58928c8b0355f0013f5a5db3d1f5e94" prot="public" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>status_to_string</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1a8aa4e605b759ff15d6360d5e6302eb5b" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>tableau</name></member>
+      <member refid="classd2_1_1lsx_1_1ConstraintArray_1aa836ec543d3cffcfd09ecc51c470cc78" prot="private" virt="non-virtual"><scope>d2::lsx::ConstraintArray</scope><name>tableau_iterator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

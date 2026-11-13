@@ -1,0 +1,2919 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1Element" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>d2::Element</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::enable_shared_from_this&lt; Element &gt;</basecompoundref>
+    <basecompoundref refid="classd2_1_1style_1_1UniversalAccessInterfaceBase" prot="public" virt="non-virtual">d2::style::UniversalAccessInterfaceBase</basecompoundref>
+    <derivedcompoundref refid="classd2_1_1ParentElement" prot="public" virt="non-virtual">d2::ParentElement</derivedcompoundref>
+    <includes refid="d2__tree__element_8hpp" local="no">d2_tree_element.hpp</includes>
+    <innerclass refid="classd2_1_1Element_1_1Frame" prot="public">d2::Element::Frame</innerclass>
+    <innerclass refid="structd2_1_1Element_1_1LayoutStorage" prot="private">d2::Element::LayoutStorage</innerclass>
+    <innerclass refid="structd2_1_1Element_1_1BindStorage" prot="private">d2::Element::BindStorage</innerclass>
+    <innerclass refid="classd2_1_1Element_1_1EventListenerState" prot="private">d2::Element::EventListenerState</innerclass>
+    <innerclass refid="classd2_1_1Element_1_1EventListener" prot="public">d2::Element::EventListener</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" prot="public" static="no" strong="no">
+        <type><ref refid="classd2_1_1Element_1a722263aff6c2cc69cb2e2708c3deb458" kindref="member">state_flag</ref></type>
+        <name>State</name>
+        <qualifiedname>d2::Element::State</qualifiedname>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eadc309166dcf9888c353f906760fc16ee" prot="public">
+          <name>Invalid</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea6e7200768b6620145a3e40985b641136" prot="public">
+          <name>Display</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea36d3dc97265a5776782c490060e84fd4" prot="public">
+          <name>Swapped</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea484cdecbbcf06608aaecacd636c7a42f" prot="public">
+          <name>Created</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea762e0750f73366248b1f947bc929a636" prot="public">
+          <name>Embedded</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eabfaea5553443e3391264dcfdb0109076" prot="public">
+          <name>Event</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea16e508c7d79acb50a761c04b8fb645fc" prot="public">
+          <name>RcEvent</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eae2c05ad55da057d3f4471dbcc2a3440f" prot="public">
+          <name>Clicked</name>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea7508cb38fd55ecc97d8b1261daf015d7" prot="public">
+          <name>Hovered</name>
+          <initializer>= 1 &lt;&lt; 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea1d48be968cce83013b238e15f8998da0" prot="public">
+          <name>Focused</name>
+          <initializer>= 1 &lt;&lt; 8</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ead984049a1327dd30b9f1aa361235fc79" prot="public">
+          <name>RcClick</name>
+          <initializer>= 1 &lt;&lt; 9</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea9d8b9c503842b02b5012d09143cf8fd5" prot="public">
+          <name>RcHover</name>
+          <initializer>= 1 &lt;&lt; 10</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea84e7a5bfaa5b96bf4517ad6a11cbe6f1" prot="public">
+          <name>RcFocus</name>
+          <initializer>= 1 &lt;&lt; 11</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea6fd188fa6424e4d24fbc8d15fdf46b71" prot="public">
+          <name>Keynavi</name>
+          <initializer>= 1 &lt;&lt; 12</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eaac46903858f0e47dc412d72a8a7b8257" prot="public">
+          <name>Public1</name>
+          <initializer>= 1 &lt;&lt; 13</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea9c8fe368905520911a39260bdcf0ff5e" prot="public">
+          <name>Public2</name>
+          <initializer>= 1 &lt;&lt; 14</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea87ade9b277110fc35e95c5519883398a" prot="public">
+          <name>Public3</name>
+          <initializer>= 1 &lt;&lt; 15</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="74" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="75" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5" prot="public" static="no" strong="no">
+        <type><ref refid="classd2_1_1Element_1aa1f6afafcaf8c9a2630d23500858230e" kindref="member">internal_flag</ref></type>
+        <name>InternalState</name>
+        <qualifiedname>d2::Element::InternalState</qualifiedname>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5abaf501fb7c238a010891e3bb929ed69a" prot="public">
+          <name>IsBeingRendered</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5aab135f99d9552a04e9ebb3189f1e5c86" prot="public">
+          <name>IsBeingInitialized</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a1eb4a8c3c9725361a174f039e7323678" prot="public">
+          <name>WasWritten</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a76ff642fda92149d3b3867b5218d87b6" prot="public">
+          <name>WasWrittenLayout</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a27627c9f6fb246bf91cb1d8d595cbf5d" prot="public">
+          <name>PositionXUpdated</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5aafe8698afda69970c8bf18ee9380f3cd" prot="public">
+          <name>PositionYUpdated</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a50846f36269ec74b8026783ccadc1345" prot="public">
+          <name>DimensionsWidthUpdated</name>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a00b0f90798c471f9a7832b96a7fbd135" prot="public">
+          <name>DimensionsHeightUpdated</name>
+          <initializer>= 1 &lt;&lt; 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5af84ec7d68ed99f7e2389a0ae5e22e50c" prot="public">
+          <name>CachePolicyDynamic</name>
+          <initializer>= 1 &lt;&lt; 8</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a517ab6545fb01e8f27e0724036b51014" prot="public">
+          <name>CachePolicyVolatile</name>
+          <initializer>= 1 &lt;&lt; 9</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a4092b4cad128bda4a1fae8dd58600435" prot="public">
+          <name>CachePolicyStatic</name>
+          <initializer>= 1 &lt;&lt; 10</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a77342524e1014bc5cf8c806a3fb33814" prot="public">
+          <name>CachePolicyBypass</name>
+          <initializer>= 1 &lt;&lt; 11</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="94" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="95" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8" prot="public" static="no" strong="no">
+        <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+        <name>WriteType</name>
+        <qualifiedname>d2::Element::WriteType</qualifiedname>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8ae47e1856724eda8b3c18f9945e098115" prot="public">
+          <name>None</name>
+          <initializer>= 0x00</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8afad14e7cd74b0976b0aa37ce18014a40" prot="public">
+          <name>Style</name>
+          <initializer>= WasWritten</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8afb2edb9e46a9433b78756445377a8656" prot="public">
+          <name>InternalLayout</name>
+          <initializer>= WasWrittenLayout</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8ad7984d80f9eb93e0e9561a069a7cca25" prot="public">
+          <name>LayoutXPos</name>
+          <initializer>= PositionXUpdated | WasWrittenLayout</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a17fe83833761996d853ce82b6ca55ec2" prot="public">
+          <name>LayoutYPos</name>
+          <initializer>= PositionYUpdated | WasWrittenLayout</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a1235ef9bb7682c1e1ba8d78244ad91df" prot="public">
+          <name>LayoutWidth</name>
+          <initializer>= DimensionsWidthUpdated | WasWrittenLayout | Style</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a361dc259e83842273faec5f59c1deef0" prot="public">
+          <name>LayoutHeight</name>
+          <initializer>= DimensionsHeightUpdated | WasWrittenLayout | Style</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8abb554a878cbc4e9c0da0fb202cde8390" prot="public">
+          <name>Dimensions</name>
+          <initializer>= LayoutWidth | LayoutHeight</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aef55e2f39a8c4587683f13cda2be5e09" prot="public">
+          <name>Offset</name>
+          <initializer>= LayoutXPos | LayoutYPos</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aa3b94f2a78f8e0bf9174fde838ff6184" prot="public">
+          <name>Masked</name>
+          <initializer>= Style | Dimensions | Offset</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8ac4aad62c208b99eb077991bda7f771b0" prot="public">
+          <name>Strip</name>
+          <initializer>= LayoutXPos | LayoutYPos | LayoutWidth | LayoutHeight</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a28f56923c2807491ee4dfde6223fbfcf" prot="public">
+          <name>StripPerm</name>
+          <initializer>= Strip &amp; ~(Style | WasWrittenLayout)</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="120" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="121" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3" prot="public" static="no" strong="no">
+        <type><ref refid="classd2_1_1Element_1afa06d59b6436a6cfb1eb88508e905da4" kindref="member">unit_meta_flag</ref></type>
+        <name>UnitState</name>
+        <qualifiedname>d2::Element::UnitState</qualifiedname>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a8393ce090bcab053fba77365cc83d326" prot="public">
+          <name>RelativeXPos</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3af235e4f171d6a5bf75e432215f415a61" prot="public">
+          <name>RelativeYPos</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a55d77576a41b72dd8d8b5981b367e9ad" prot="public">
+          <name>RelativeWidth</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a5777785c146df9eb35434b6e8cb45b72" prot="public">
+          <name>RelativeHeight</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a3ad9452d15c7690584c67e6f59b4d20b" prot="public">
+          <name>ContextualXPos</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a528581b10d5a9df067506c6954f6c7d9" prot="public">
+          <name>ContextualYPos</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3aca8c4cda597cd33b06b5adfa85600d57" prot="public">
+          <name>ContextualWidth</name>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a38c0ded57405bb7c6e4e2ddf259b41d0" prot="public">
+          <name>ContextualHeight</name>
+          <initializer>= 1 &lt;&lt; 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a24d092b6dedba76380bdc480f4526fdb" prot="public">
+          <name>InvertedXPos</name>
+          <initializer>= 1 &lt;&lt; 8</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3ae0a02e29d15e80b25fcefb7741219564" prot="public">
+          <name>InvertedYPos</name>
+          <initializer>= 1 &lt;&lt; 9</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a051cf9aff7fd56ed17c2c72afa892c8e" prot="public">
+          <name>InvertedWidth</name>
+          <initializer>= 1 &lt;&lt; 10</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a18f9a3a0b7dc12c3542c3d1a57fb8936" prot="public">
+          <name>InvertedHeight</name>
+          <initializer>= 1 &lt;&lt; 11</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="135" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="136" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1Element_1abfb56ffec1565b561c99fb2ff6408b38" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>CachePolicy</name>
+        <qualifiedname>d2::Element::CachePolicy</qualifiedname>
+        <enumvalue id="classd2_1_1Element_1abfb56ffec1565b561c99fb2ff6408b38a84a8921b25f505d0d2077aeb5db4bc16" prot="public">
+          <name>Static</name>
+          <initializer>= CachePolicyStatic</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1abfb56ffec1565b561c99fb2ff6408b38a971fd8cc345d8bd9f92e9f7d88fdf20c" prot="public">
+          <name>Dynamic</name>
+          <initializer>= CachePolicyDynamic</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1abfb56ffec1565b561c99fb2ff6408b38a3e3af98b6b48c7e593d8d18863e3333b" prot="public">
+          <name>Volatile</name>
+          <initializer>= CachePolicyVolatile</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="157" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="158" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="enum" id="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" prot="public" static="no" strong="yes">
+        <type>unsigned int</type>
+        <name>Layout</name>
+        <qualifiedname>d2::Element::Layout</qualifiedname>
+        <enumvalue id="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306a02129bb861061d1a052c592e2dc6b383" prot="public">
+          <name>X</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306a57cec4137b614c87cb4e24a3d003a3e0" prot="public">
+          <name>Y</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306a32954654ac8fe66a1d09be19001de2d4" prot="public">
+          <name>Width</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306aeec6c4bdbd339edf8cbea68becb85244" prot="public">
+          <name>Height</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="163" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="164" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1a58116e63a422c097c04b57538f28c13c" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>std::shared_ptr&lt; Type &gt;</type>
+        <definition>using d2::Element::eptr = std::shared_ptr&lt;Type&gt;</definition>
+        <argsstring></argsstring>
+        <name>eptr</name>
+        <qualifiedname>d2::Element::eptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="30" column="20" bodyfile="core/tree/d2_tree_element.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1Element_1a6d4f780a7a61d561f6a35acd7c9483c5" kindref="member">Element</ref> &gt;</type>
+        <definition>using d2::Element::ptr = std::shared_ptr&lt;Element&gt;</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <qualifiedname>d2::Element::ptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="31" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1a77cb0a3434fb6e8ce0e8189936e749a6" prot="public" static="no">
+        <type>std::shared_ptr&lt; const <ref refid="classd2_1_1Element_1a6d4f780a7a61d561f6a35acd7c9483c5" kindref="member">Element</ref> &gt;</type>
+        <definition>using d2::Element::cptr = std::shared_ptr&lt;const Element&gt;</definition>
+        <argsstring></argsstring>
+        <name>cptr</name>
+        <qualifiedname>d2::Element::cptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="32" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1af8c212acaa09e075352d4c96db2f9be2" prot="public" static="no">
+        <type>std::weak_ptr&lt; <ref refid="classd2_1_1Element_1a6d4f780a7a61d561f6a35acd7c9483c5" kindref="member">Element</ref> &gt;</type>
+        <definition>using d2::Element::wptr = std::weak_ptr&lt;Element&gt;</definition>
+        <argsstring></argsstring>
+        <name>wptr</name>
+        <qualifiedname>d2::Element::wptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="33" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1abd57face94a1b6b39b12fbea90189d05" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>using d2::Element::pptr = std::shared_ptr&lt;ParentElement&gt;</definition>
+        <argsstring></argsstring>
+        <name>pptr</name>
+        <qualifiedname>d2::Element::pptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="34" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1ab8339c087465699c724cdf8fbc647d5e" prot="public" static="no">
+        <type>std::shared_ptr&lt; const <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>using d2::Element::cpptr = std::shared_ptr&lt;const ParentElement&gt;</definition>
+        <argsstring></argsstring>
+        <name>cpptr</name>
+        <qualifiedname>d2::Element::cpptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="35" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1ad51034e46beecb0b04252f84c17d00c4" prot="public" static="no">
+        <type>std::weak_ptr&lt; <ref refid="classd2_1_1ParentElement" kindref="compound">ParentElement</ref> &gt;</type>
+        <definition>using d2::Element::pwptr = std::weak_ptr&lt;ParentElement&gt;</definition>
+        <argsstring></argsstring>
+        <name>pwptr</name>
+        <qualifiedname>d2::Element::pwptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="36" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1ae52a0f188c68387d40f209bc8af18824" prot="public" static="no">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;</type>
+        <definition>using d2::Element::iptr = TreeIter&lt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>iptr</name>
+        <qualifiedname>d2::Element::iptr</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="37" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1afa06d59b6436a6cfb1eb88508e905da4" prot="public" static="no">
+        <type>unsigned short</type>
+        <definition>using d2::Element::unit_meta_flag = unsigned short</definition>
+        <argsstring></argsstring>
+        <name>unit_meta_flag</name>
+        <qualifiedname>d2::Element::unit_meta_flag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="63" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1aa1f6afafcaf8c9a2630d23500858230e" prot="public" static="no">
+        <type>unsigned short</type>
+        <definition>using d2::Element::internal_flag = unsigned short</definition>
+        <argsstring></argsstring>
+        <name>internal_flag</name>
+        <qualifiedname>d2::Element::internal_flag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="64" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1a722263aff6c2cc69cb2e2708c3deb458" prot="public" static="no">
+        <type>unsigned short</type>
+        <definition>using d2::Element::state_flag = unsigned short</definition>
+        <argsstring></argsstring>
+        <name>state_flag</name>
+        <qualifiedname>d2::Element::state_flag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="65" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" prot="public" static="no">
+        <type><ref refid="namespaced2_1ad70d465211db6502cdac4d3108683159" kindref="member">element_write_flag</ref></type>
+        <definition>using d2::Element::write_flag = element_write_flag</definition>
+        <argsstring></argsstring>
+        <name>write_flag</name>
+        <qualifiedname>d2::Element::write_flag</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="66" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1a471bc822139b4d9d2fe679de101f1785" prot="public" static="no">
+        <type>std::function&lt; void(<ref refid="classd2_1_1Element_1_1EventListener" kindref="compound">EventListener</ref>, <ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;)&gt;</type>
+        <definition>using d2::Element::event_callback = std::function&lt;void(EventListener, TreeIter&lt;&gt;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>event_callback</name>
+        <qualifiedname>d2::Element::event_callback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="68" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1a7c2334444cc16acefb1ae606718b13b0" prot="public" static="no">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref>&lt;&gt;::foreach_callback</type>
+        <definition>using d2::Element::foreach_callback = TreeIter&lt;&gt;::foreach_callback</definition>
+        <argsstring></argsstring>
+        <name>foreach_callback</name>
+        <qualifiedname>d2::Element::foreach_callback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="69" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classd2_1_1Element_1ab90fea8bb045f8675328f7aebab40702" prot="public" static="no">
+        <type>std::function&lt; bool(<ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref>)&gt;</type>
+        <definition>using d2::Element::foreach_internal_callback = std::function&lt;bool(ptr)&gt;</definition>
+        <argsstring></argsstring>
+        <name>foreach_internal_callback</name>
+        <qualifiedname>d2::Element::foreach_internal_callback</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="70" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classd2_1_1Element_1afdf7149d704cf40d46b81f3a65b6c391" prot="private" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string d2::Element::_name</definition>
+        <argsstring></argsstring>
+        <name>_name</name>
+        <qualifiedname>d2::Element::_name</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="329" column="27" bodyfile="core/tree/d2_tree_element.hpp" bodystart="329" bodyend="329"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a13076db3e890d86b4f8110de788588d2" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref></type>
+        <definition>TreeState::ptr d2::Element::_state_ptr</definition>
+        <argsstring></argsstring>
+        <name>_state_ptr</name>
+        <qualifiedname>d2::Element::_state_ptr</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="330" column="24" bodyfile="core/tree/d2_tree_element.hpp" bodystart="330" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a96aede45c5498e9a16732a2c231e58da" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1Element_1ad51034e46beecb0b04252f84c17d00c4" kindref="member">pwptr</ref></type>
+        <definition>pwptr d2::Element::_parent</definition>
+        <argsstring></argsstring>
+        <name>_parent</name>
+        <qualifiedname>d2::Element::_parent</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="331" column="15" bodyfile="core/tree/d2_tree_element.hpp" bodystart="331" bodyend="331"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a0685db85af36f40fff99dd7a4e430e3b" prot="private" static="no" mutable="yes">
+        <type>std::atomic&lt; <ref refid="classd2_1_1Element_1a722263aff6c2cc69cb2e2708c3deb458" kindref="member">state_flag</ref> &gt;</type>
+        <definition>std::atomic&lt;state_flag&gt; d2::Element::_state</definition>
+        <argsstring></argsstring>
+        <name>_state</name>
+        <qualifiedname>d2::Element::_state</qualifiedname>
+        <initializer>{<ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea6e7200768b6620145a3e40985b641136" kindref="member">Display</ref> | <ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea36d3dc97265a5776782c490060e84fd4" kindref="member">Swapped</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="335" column="29" bodyfile="core/tree/d2_tree_element.hpp" bodystart="335" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a918d9a666be6870e90bbcb13f65c189f" prot="private" static="no" mutable="yes">
+        <type>std::atomic&lt; <ref refid="classd2_1_1Element_1aa1f6afafcaf8c9a2630d23500858230e" kindref="member">internal_flag</ref> &gt;</type>
+        <definition>std::atomic&lt;internal_flag&gt; d2::Element::_internal_state</definition>
+        <argsstring></argsstring>
+        <name>_internal_state</name>
+        <qualifiedname>d2::Element::_internal_state</qualifiedname>
+        <initializer>{
+            <ref refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a1eb4a8c3c9725361a174f039e7323678" kindref="member">WasWritten</ref> | <ref refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a76ff642fda92149d3b3867b5218d87b6" kindref="member">WasWrittenLayout</ref> | <ref refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5aab135f99d9552a04e9ebb3189f1e5c86" kindref="member">IsBeingInitialized</ref> | <ref refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a77342524e1014bc5cf8c806a3fb33814" kindref="member">CachePolicyBypass</ref>
+            
+            
+            
+        }</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="336" column="29" bodyfile="core/tree/d2_tree_element.hpp" bodystart="336" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a34ef3e8582cee4c4b64d0d7eb7499685" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; BindStorage &gt;</type>
+        <definition>std::unique_ptr&lt;BindStorage&gt; d2::Element::_deps</definition>
+        <argsstring></argsstring>
+        <name>_deps</name>
+        <qualifiedname>d2::Element::_deps</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="345" column="25" bodyfile="core/tree/d2_tree_element.hpp" bodystart="345" bodyend="345"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a5557a919d657803df0438de26598084e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; EventListenerState::ptr &gt;</type>
+        <definition>std::vector&lt;EventListenerState::ptr&gt; d2::Element::_subscribers</definition>
+        <argsstring></argsstring>
+        <name>_subscribers</name>
+        <qualifiedname>d2::Element::_subscribers</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="346" column="21" bodyfile="core/tree/d2_tree_element.hpp" bodystart="346" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1ae9c25cdf1656f3039c94352c30936df1" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Element::_cursor_sink_listener_cnt</definition>
+        <argsstring></argsstring>
+        <name>_cursor_sink_listener_cnt</name>
+        <qualifiedname>d2::Element::_cursor_sink_listener_cnt</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="347" column="21" bodyfile="core/tree/d2_tree_element.hpp" bodystart="347" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a8adc4ed685ab19ca4acc71b0ad164c10" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Element::_dynamic_input_listener_cnt</definition>
+        <argsstring></argsstring>
+        <name>_dynamic_input_listener_cnt</name>
+        <qualifiedname>d2::Element::_dynamic_input_listener_cnt</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="348" column="21" bodyfile="core/tree/d2_tree_element.hpp" bodystart="348" bodyend="348"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a195c7fdcfb64306f872303080f8ea0b8" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Element::_depth</definition>
+        <argsstring></argsstring>
+        <name>_depth</name>
+        <qualifiedname>d2::Element::_depth</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="349" column="21" bodyfile="core/tree/d2_tree_element.hpp" bodystart="349" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a105aff7b1a571f9218bd5759faf3c73f" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Element::_frames_reused</definition>
+        <argsstring></argsstring>
+        <name>_frames_reused</name>
+        <qualifiedname>d2::Element::_frames_reused</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="350" column="21" bodyfile="core/tree/d2_tree_element.hpp" bodystart="350" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a2ea422461403da7a92476e674f52ad05" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Element::_frames_redrawn</definition>
+        <argsstring></argsstring>
+        <name>_frames_redrawn</name>
+        <qualifiedname>d2::Element::_frames_redrawn</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="351" column="21" bodyfile="core/tree/d2_tree_element.hpp" bodystart="351" bodyend="351"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a8dc235bc5ea3ef3c0c01a8ea559c427a" prot="private" static="no" mutable="no">
+        <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> *</type>
+        <definition>in::InputFrame* d2::Element::_tmp_frame</definition>
+        <argsstring></argsstring>
+        <name>_tmp_frame</name>
+        <qualifiedname>d2::Element::_tmp_frame</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="352" column="24" bodyfile="core/tree/d2_tree_element.hpp" bodystart="352" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1af55fdcf639718246243b4e715d6439d1" prot="private" static="no" mutable="yes">
+        <type>LayoutStorage</type>
+        <definition>LayoutStorage d2::Element::_layout</definition>
+        <argsstring></argsstring>
+        <name>_layout</name>
+        <qualifiedname>d2::Element::_layout</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="356" column="31" bodyfile="core/tree/d2_tree_element.hpp" bodystart="356" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1Element_1a757f9284dd450e4d268b566fc556802c" prot="private" static="no" mutable="yes">
+        <type><ref refid="classd2_1_1PixelBuffer" kindref="compound">PixelBuffer</ref></type>
+        <definition>PixelBuffer d2::Element::_buffer</definition>
+        <argsstring></argsstring>
+        <name>_buffer</name>
+        <qualifiedname>d2::Element::_buffer</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="357" column="29" bodyfile="core/tree/d2_tree_element.hpp" bodystart="357" bodyend="357"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classd2_1_1Element_1a8b93a7b2c303fed867402507faa07b84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class internal::ElementView</definition>
+        <argsstring></argsstring>
+        <name>internal::ElementView</name>
+        <qualifiedname>d2::Element::ElementView</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1internal_1_1ElementView" kindref="compound">internal::ElementView</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="459" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="459" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classd2_1_1Element_1aa28d23bc2997a07a9295a43b9bd6ff85" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1_1EventListener" kindref="compound">EventListener</ref></type>
+        <definition>Element::EventListener d2::Element::_push_listener</definition>
+        <argsstring>(State event, EventListenerState::Dep value, event_callback callback)</argsstring>
+        <name>_push_listener</name>
+        <qualifiedname>d2::Element::_push_listener</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">State</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>EventListenerState::Dep</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a471bc822139b4d9d2fe679de101f1785" kindref="member">event_callback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="362" column="9" bodyfile="core/tree/d2_tree_element.cpp" bodystart="93" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a6d58a598e80fe228fd945ba839b35baf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_unmute_listener</definition>
+        <argsstring>(EventListenerState::ptr listener)</argsstring>
+        <name>_unmute_listener</name>
+        <qualifiedname>d2::Element::_unmute_listener</qualifiedname>
+        <param>
+          <type>EventListenerState::ptr</type>
+          <declname>listener</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="363" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="106" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a38ae7f1601f0326487c7379d7e6876e1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_mute_listener</definition>
+        <argsstring>(EventListenerState::ptr listener)</argsstring>
+        <name>_mute_listener</name>
+        <qualifiedname>d2::Element::_mute_listener</qualifiedname>
+        <param>
+          <type>EventListenerState::ptr</type>
+          <declname>listener</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="364" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="117" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a3b425c9f2bb64cf7c31ff3e81b58b4dc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_destroy_listener</definition>
+        <argsstring>(EventListenerState::ptr listener)</argsstring>
+        <name>_destroy_listener</name>
+        <qualifiedname>d2::Element::_destroy_listener</qualifiedname>
+        <param>
+          <type>EventListenerState::ptr</type>
+          <declname>listener</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="365" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="128" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1abc5ec99f1b9dc5df96d08efbc057f3a6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_trigger</definition>
+        <argsstring>(State event, bool value)</argsstring>
+        <name>_trigger</name>
+        <qualifiedname>d2::Element::_trigger</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">State</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="366" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="138" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1afe8f64edbaee94e6af1d22cb4a9e8e6e" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+        <definition>Element::write_flag d2::Element::_contextual_change</definition>
+        <argsstring>(write_flag flags) const</argsstring>
+        <name>_contextual_change</name>
+        <qualifiedname>d2::Element::_contextual_change</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="370" column="20" bodyfile="core/tree/d2_tree_element.cpp" bodystart="75" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a79d8940250d62c2813412abda98d4b04" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_write_internal</definition>
+        <argsstring>(write_flag type=WriteType::Masked, unsigned int prop=~0u) const</argsstring>
+        <name>_signal_write_internal</name>
+        <qualifiedname>d2::Element::_signal_write_internal</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aa3b94f2a78f8e0bf9174fde838ff6184" kindref="member">WriteType::Masked</ref></defval>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+          <defval>~0u</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="373" column="9" bodyfile="core/tree/d2_tree_element.cpp" bodystart="173" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a2c51587ece203462d311acf7bf8fd9b1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_write_local</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element)</argsstring>
+        <name>_signal_write_local</name>
+        <qualifiedname>d2::Element::_signal_write_local</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="374" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="177" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1afc94a3e7ab760ae247cb3516c751dcc7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_write_local</definition>
+        <argsstring>(write_flag type=WriteType::Masked, unsigned int prop=~0u)</argsstring>
+        <name>_signal_write_local</name>
+        <qualifiedname>d2::Element::_signal_write_local</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aa3b94f2a78f8e0bf9174fde838ff6184" kindref="member">WriteType::Masked</ref></defval>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+          <defval>~0u</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="375" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="187" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a79c2f0ca935ba67b6d201b4f264c63e4" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_invalidate_state</definition>
+        <argsstring>(write_flag type) const</argsstring>
+        <name>_invalidate_state</name>
+        <qualifiedname>d2::Element::_invalidate_state</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="376" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="167" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aaa385ed3d6a0a6659819d3c30e086481" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_reset_depth</definition>
+        <argsstring>()</argsstring>
+        <name>_reset_depth</name>
+        <qualifiedname>d2::Element::_reset_depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="378" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="153" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ad63812f66f3445b048e45c229877ef1f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_setparent</definition>
+        <argsstring>(pptr parent)</argsstring>
+        <name>_setparent</name>
+        <qualifiedname>d2::Element::_setparent</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1abd57face94a1b6b39b12fbea90189d05" kindref="member">pptr</ref></type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="379" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="398" bodyend="401"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1Element_1a7aaa53a3b510f69174abe3ba92b26d17" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::_is_write_type</definition>
+        <argsstring>(write_flag type) const</argsstring>
+        <name>_is_write_type</name>
+        <qualifiedname>d2::Element::_is_write_type</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="389" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="163" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a49fc0d03580f77bec356567dfebdb4d6" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::Element::_signal_write_child_impl</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element)</argsstring>
+        <name>_signal_write_child_impl</name>
+        <qualifiedname>d2::Element::_signal_write_child_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="391" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="391" bodyend="391"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a752828e23893873b7dc6f877e36dc95e" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::Element::_signal_write_impl</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element)</argsstring>
+        <name>_signal_write_impl</name>
+        <qualifiedname>d2::Element::_signal_write_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="392" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="392" bodyend="392"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a75266407cf8fce83b735a85ee8685c1d" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::Element::_signal_context_change_impl</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element)</argsstring>
+        <name>_signal_context_change_impl</name>
+        <qualifiedname>d2::Element::_signal_context_change_impl</qualifiedname>
+        <reimplementedby refid="classd2_1_1ParentElement_1a1afd5148fbd345350b54e389fce77c04">_signal_context_change_impl</reimplementedby>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="393" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="393" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1afb410f4dc026ec5908038594eef7904c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_write_child</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element)</argsstring>
+        <name>_signal_write_child</name>
+        <qualifiedname>d2::Element::_signal_write_child</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="395" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="191" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1adc2d4d968599a78b512d992832564a05" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_write</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element)</argsstring>
+        <name>_signal_write</name>
+        <qualifiedname>d2::Element::_signal_write</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="396" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="195" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aa751fbdbd55008143a4c775fd11c6042" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_clone_state_if</definition>
+        <argsstring>(ptr parent)</argsstring>
+        <name>_clone_state_if</name>
+        <qualifiedname>d2::Element::_clone_state_if</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="398" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="210" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a471087a22802a9740d971bb277d5481e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_obliterate_dep_bind</definition>
+        <argsstring>(style::uai_property prop)</argsstring>
+        <name>_obliterate_dep_bind</name>
+        <qualifiedname>d2::Element::_obliterate_dep_bind</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">style::uai_property</ref></type>
+          <declname>prop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="400" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="216" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a40705ac231418d71418fc58a0af08242" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_bind_dep</definition>
+        <argsstring>(style::uai_property prop, style::DependencyHandle handle)</argsstring>
+        <name>_bind_dep</name>
+        <qualifiedname>d2::Element::_bind_dep</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1_1style_1aaa8b6052b4a66cb036c59790c975c6e5" kindref="member">style::uai_property</ref></type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1_1style_1a9be043513a13eec7c51a913e09a2c649" kindref="member">style::DependencyHandle</ref></type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="401" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="224" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1af3178761b5dceb929fe78656e052db32" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_context_change_sub</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element)</argsstring>
+        <name>_signal_context_change_sub</name>
+        <qualifiedname>d2::Element::_signal_context_change_sub</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="405" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="231" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1afb551839422348ad46217cc581fb3e4e" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_context_change_sub</definition>
+        <argsstring>(write_flag type, unsigned int prop)</argsstring>
+        <name>_signal_context_change_sub</name>
+        <qualifiedname>d2::Element::_signal_context_change_sub</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="406" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="240" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a35a72f15dc295577438540448345c234" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_context_change</definition>
+        <argsstring>(write_flag type, unsigned int prop, ptr element)</argsstring>
+        <name>_signal_context_change</name>
+        <qualifiedname>d2::Element::_signal_context_change</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="407" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="245" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a98a87cee046b32126eb7e1e44e21bb61" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_context_change</definition>
+        <argsstring>(write_flag type=WriteType::Masked, unsigned int prop=~0u)</argsstring>
+        <name>_signal_context_change</name>
+        <qualifiedname>d2::Element::_signal_context_change</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aa3b94f2a78f8e0bf9174fde838ff6184" kindref="member">WriteType::Masked</ref></defval>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+          <defval>~0u</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="408" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="249" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ae6c4da7d4f22b6c57aade93fa40581a0" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_write</definition>
+        <argsstring>(write_flag type=WriteType::Masked, unsigned int prop=~0u)</argsstring>
+        <name>_signal_write</name>
+        <qualifiedname>d2::Element::_signal_write</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aa3b94f2a78f8e0bf9174fde838ff6184" kindref="member">WriteType::Masked</ref></defval>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+          <defval>~0u</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="409" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="254" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a3fd60fe0f59d776e2fc6106fc8fe6882" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_initialization</definition>
+        <argsstring>(unsigned int prop)</argsstring>
+        <name>_signal_initialization</name>
+        <qualifiedname>d2::Element::_signal_initialization</qualifiedname>
+        <param>
+          <type>unsigned int</type>
+          <declname>prop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="410" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="259" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a79e851e7123a1b67a4efbb0cfe2fa697" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_write_update</definition>
+        <argsstring>(write_flag type) const</argsstring>
+        <name>_signal_write_update</name>
+        <qualifiedname>d2::Element::_signal_write_update</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" kindref="member">write_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="411" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="264" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a2919fc7435da905c6f5d300fd091ac81" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_signal_update</definition>
+        <argsstring>(internal_flag type) const</argsstring>
+        <name>_signal_update</name>
+        <qualifiedname>d2::Element::_signal_update</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1aa1f6afafcaf8c9a2630d23500858230e" kindref="member">internal_flag</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="412" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="268" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a692b785cf9ee7971060c5c4e19ee3a7f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::_trigger_event</definition>
+        <argsstring>(in::InputFrame &amp;frame, bool recursive)</argsstring>
+        <name>_trigger_event</name>
+        <qualifiedname>d2::Element::_trigger_event</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>recursive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="413" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="272" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a310ffe58500b157592c673325a8f8919" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">Unit</ref></type>
+        <definition>virtual Unit d2::Element::_layout_impl</definition>
+        <argsstring>(Layout) const =0</argsstring>
+        <name>_layout_impl</name>
+        <qualifiedname>d2::Element::_layout_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Layout</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="417" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aaa63262087666273db2041939ea33bc2" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::Element::_provides_input_impl</definition>
+        <argsstring>() const</argsstring>
+        <name>_provides_input_impl</name>
+        <qualifiedname>d2::Element::_provides_input_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="421" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="421" bodyend="424"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a10dd593ff2dd3c1929e4d6a4704bdada" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classd2_1_1Element_1afa06d59b6436a6cfb1eb88508e905da4" kindref="member">unit_meta_flag</ref></type>
+        <definition>virtual unit_meta_flag d2::Element::_unit_report_impl</definition>
+        <argsstring>() const =0</argsstring>
+        <name>_unit_report_impl</name>
+        <qualifiedname>d2::Element::_unit_report_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="425" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1abdc10f60982a33e74e8cb33e490b6e6b" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>char</type>
+        <definition>virtual char d2::Element::_index_impl</definition>
+        <argsstring>() const =0</argsstring>
+        <name>_index_impl</name>
+        <qualifiedname>d2::Element::_index_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="426" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a3d253c0f661d8dfe33420e0457b15009" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::Element::_event_impl</definition>
+        <argsstring>(in::InputFrame &amp;)</argsstring>
+        <name>_event_impl</name>
+        <qualifiedname>d2::Element::_event_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="430" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="430" bodyend="430"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a1f5572e7d2862cda97fddde8effbacd6" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::Element::_state_change_impl</definition>
+        <argsstring>(State, bool)</argsstring>
+        <name>_state_change_impl</name>
+        <qualifiedname>d2::Element::_state_change_impl</qualifiedname>
+        <reimplementedby refid="classd2_1_1ParentElement_1abc867e95dddb793f33a188c48ba0fe32">_state_change_impl</reimplementedby>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">State</ref></type>
+        </param>
+        <param>
+          <type>bool</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="431" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="431" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a7af1225ef2d5226cfb78465296d24a82" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>virtual BoundingBox d2::Element::_reserve_buffer_impl</definition>
+        <argsstring>() const</argsstring>
+        <name>_reserve_buffer_impl</name>
+        <qualifiedname>d2::Element::_reserve_buffer_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="435" column="29" bodyfile="core/tree/d2_tree_element.hpp" bodystart="435" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aa7171f8f3ab36b549b840a0589da64af" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+        <definition>PixelBuffer::View d2::Element::_fetch_pixel_buffer_impl</definition>
+        <argsstring>() const</argsstring>
+        <name>_fetch_pixel_buffer_impl</name>
+        <qualifiedname>d2::Element::_fetch_pixel_buffer_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="439" column="35" bodyfile="core/tree/d2_tree_element.cpp" bodystart="286" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ac80c164f4efb9a631c981f24f307cebf" prot="protected" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool d2::Element::_provides_buffer_impl</definition>
+        <argsstring>() const</argsstring>
+        <name>_provides_buffer_impl</name>
+        <qualifiedname>d2::Element::_provides_buffer_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="440" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="440" bodyend="443"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ae004f38fbadd8a43376a83b14f0565fd" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::Element::_update_layout_impl</definition>
+        <argsstring>()</argsstring>
+        <name>_update_layout_impl</name>
+        <qualifiedname>d2::Element::_update_layout_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="447" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="447" bodyend="447"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a0144b1e82c4a52e7b03da682e0729a1a" prot="protected" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void d2::Element::_update_style_impl</definition>
+        <argsstring>()</argsstring>
+        <name>_update_style_impl</name>
+        <qualifiedname>d2::Element::_update_style_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="448" column="22" bodyfile="core/tree/d2_tree_element.hpp" bodystart="448" bodyend="448"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a87177c8536fc85909568820911a31763" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void d2::Element::_frame_impl</definition>
+        <argsstring>(PixelBuffer::View)=0</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::Element::_frame_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="449" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classd2_1_1Element_1af3f4e7d502411469fa5b721bc797e0f8" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Argv</declname>
+            <defname>Argv</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>static auto d2::Element::make</definition>
+        <argsstring>(const std::string &amp;name, TreeState::ptr state, Argv &amp;&amp;... args)</argsstring>
+        <name>make</name>
+        <qualifiedname>d2::Element::make</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref></type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>Argv &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="452" column="21" bodyfile="core/tree/d2_tree_element.hpp" bodystart="452" bodyend="457"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1Element_1a6d4f780a7a61d561f6a35acd7c9483c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Element::Element</definition>
+        <argsstring>()=default</argsstring>
+        <name>Element</name>
+        <qualifiedname>d2::Element::Element</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="461" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a26a95af327ccf70f623acf8cf455d4d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>d2::Element::Element</definition>
+        <argsstring>(const std::string &amp;name, TreeState::ptr state)</argsstring>
+        <name>Element</name>
+        <qualifiedname>d2::Element::Element</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref></type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="462" column="9" bodyfile="core/tree/d2_tree_element.hpp" bodystart="462" bodyend="462"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a789e8d7ae300e01e108dee39cfb75627" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Element::Element</definition>
+        <argsstring>(Element &amp;&amp;)=delete</argsstring>
+        <name>Element</name>
+        <qualifiedname>d2::Element::Element</qualifiedname>
+        <param>
+          <type>Element &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="463" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a8cfe860586c85380df5a5f1167fdf2b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>d2::Element::Element</definition>
+        <argsstring>(const Element &amp;)=delete</argsstring>
+        <name>Element</name>
+        <qualifiedname>d2::Element::Element</qualifiedname>
+        <param>
+          <type>const Element &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="464" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a6a4ba15f266d67e8d28b2c8cef2dcadd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual d2::Element::~Element</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Element</name>
+        <qualifiedname>d2::Element::~Element</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="465" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a8eb74bc2114d40835a0c58c2932f4e60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::remove</definition>
+        <argsstring>()</argsstring>
+        <name>remove</name>
+        <qualifiedname>d2::Element::remove</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="469" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="302" bodyend="307"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a485d2d7388635657908c2ec1cccf95c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" kindref="member">ptr</ref></type>
+        <definition>Element::ptr d2::Element::extract</definition>
+        <argsstring>()</argsstring>
+        <name>extract</name>
+        <qualifiedname>d2::Element::extract</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="470" column="13" bodyfile="core/tree/d2_tree_element.cpp" bodystart="308" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aae0d3b85c5f0b1b1181b99643103935f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">sys::module</ref>&lt; <ref refid="namespaced2_1_1sys_1ab058ff847007d9e3636603a9db4e67c9" kindref="member">sys::screen</ref> &gt;</type>
+        <definition>sys::module&lt; sys::screen &gt; d2::Element::screen</definition>
+        <argsstring>() const</argsstring>
+        <name>screen</name>
+        <qualifiedname>d2::Element::screen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="474" column="21" bodyfile="core/tree/d2_tree_element.cpp" bodystart="317" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a93179c68c4bc0cad9fbde49cad62e5da" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1IOContext_1a5eeb32a3d43dba49c254cf56688b0479" kindref="member">IOContext::ptr</ref></type>
+        <definition>IOContext::ptr d2::Element::context</definition>
+        <argsstring>() const</argsstring>
+        <name>context</name>
+        <qualifiedname>d2::Element::context</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="475" column="24" bodyfile="core/tree/d2_tree_element.cpp" bodystart="321" bodyend="324"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a46eb075f8c65a9183c2ab414958d21ca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeState_1afb9b32fd7a6a60bfb610c572f675c3cc" kindref="member">TreeState::ptr</ref></type>
+        <definition>TreeState::ptr d2::Element::state</definition>
+        <argsstring>() const</argsstring>
+        <name>state</name>
+        <qualifiedname>d2::Element::state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="476" column="24" bodyfile="core/tree/d2_tree_element.cpp" bodystart="325" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aa5d4c5a01df678c41935f6fde6640a7f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1abd57face94a1b6b39b12fbea90189d05" kindref="member">pptr</ref></type>
+        <definition>Element::pptr d2::Element::parent</definition>
+        <argsstring>() const</argsstring>
+        <name>parent</name>
+        <qualifiedname>d2::Element::parent</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="477" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="329" bodyend="332"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ae9916d8895d01882f699e8448d2084d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; d2::Element::name</definition>
+        <argsstring>() const</argsstring>
+        <name>name</name>
+        <qualifiedname>d2::Element::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="478" column="27" bodyfile="core/tree/d2_tree_element.cpp" bodystart="333" bodyend="336"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a572cafac3ed1e5ed0422224e14d00c18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+        <definition>in::InputFrame &amp; d2::Element::input_frame</definition>
+        <argsstring>() const</argsstring>
+        <name>input_frame</name>
+        <qualifiedname>d2::Element::input_frame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="479" column="24" bodyfile="core/tree/d2_tree_element.cpp" bodystart="337" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1abf89d265be9aa7324d183db46c623d97" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::getistate</definition>
+        <argsstring>(internal_flag flags) const</argsstring>
+        <name>getistate</name>
+        <qualifiedname>d2::Element::getistate</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1aa1f6afafcaf8c9a2630d23500858230e" kindref="member">internal_flag</ref></type>
+          <declname>flags</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="483" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="346" bodyend="349"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ad8ac4c7b2e33e4bc19694603b42c6ecd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::setcache</definition>
+        <argsstring>(CachePolicy flag) const</argsstring>
+        <name>setcache</name>
+        <qualifiedname>d2::Element::setcache</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1abfb56ffec1565b561c99fb2ff6408b38" kindref="member">CachePolicy</ref></type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="484" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="350" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a075c6e41be9bd39f8a791cce5c331f8e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::getstate</definition>
+        <argsstring>(State state) const</argsstring>
+        <name>getstate</name>
+        <qualifiedname>d2::Element::getstate</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">State</ref></type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="485" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="356" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aa3dc103db9356f8b8cdc1e9a688e2762" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::setstate</definition>
+        <argsstring>(State state, bool value=true)</argsstring>
+        <name>setstate</name>
+        <qualifiedname>d2::Element::setstate</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">State</ref></type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="486" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="360" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a6e6c7f6cf773237479aeded7cf907b9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::Element::depth</definition>
+        <argsstring>()</argsstring>
+        <name>depth</name>
+        <qualifiedname>d2::Element::depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="487" column="21" bodyfile="core/tree/d2_tree_element.cpp" bodystart="402" bodyend="405"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1af6410415e8f051ce8079868c15dd3537" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1afa06d59b6436a6cfb1eb88508e905da4" kindref="member">unit_meta_flag</ref></type>
+        <definition>Element::unit_meta_flag d2::Element::unit_report</definition>
+        <argsstring>() const</argsstring>
+        <name>unit_report</name>
+        <qualifiedname>d2::Element::unit_report</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="491" column="24" bodyfile="core/tree/d2_tree_element.cpp" bodystart="407" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a94f0dd567889fe6675b5a2645a47b9ea" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::provides_cursor_sink</definition>
+        <argsstring>() const</argsstring>
+        <name>provides_cursor_sink</name>
+        <qualifiedname>d2::Element::provides_cursor_sink</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="493" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="412" bodyend="415"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1afdd2fcd9a138de2c2f18cba65d039db5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::provides_input</definition>
+        <argsstring>() const</argsstring>
+        <name>provides_input</name>
+        <qualifiedname>d2::Element::provides_input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="494" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="416" bodyend="419"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ae110e3769d1e8227a655971ec9428868" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::needs_update</definition>
+        <argsstring>() const</argsstring>
+        <name>needs_update</name>
+        <qualifiedname>d2::Element::needs_update</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="495" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="420" bodyend="423"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ae4b203e28f1efe7ceca3d06fef649880" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1_1EventListener" kindref="compound">EventListener</ref></type>
+        <definition>Element::EventListener d2::Element::listen</definition>
+        <argsstring>(State event, bool value, event_callback callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Element::listen</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">State</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a471bc822139b4d9d2fe679de101f1785" kindref="member">event_callback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="497" column="23" bodyfile="core/tree/d2_tree_element.cpp" bodystart="427" bodyend="432"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a50c5fd3f6580870e99a6260b72d7cd60" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1_1EventListener" kindref="compound">EventListener</ref></type>
+        <definition>Element::EventListener d2::Element::listen</definition>
+        <argsstring>(State event, event_callback callback)</argsstring>
+        <name>listen</name>
+        <qualifiedname>d2::Element::listen</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" kindref="member">State</ref></type>
+          <declname>event</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a471bc822139b4d9d2fe679de101f1785" kindref="member">event_callback</ref></type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="498" column="23" bodyfile="core/tree/d2_tree_element.cpp" bodystart="433" bodyend="436"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a0921b422adef3a3728e5fe7585323145" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1_1Frame" kindref="compound">Frame</ref></type>
+        <definition>Element::Frame d2::Element::frame</definition>
+        <argsstring>()</argsstring>
+        <name>frame</name>
+        <qualifiedname>d2::Element::frame</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="502" column="15" bodyfile="core/tree/d2_tree_element.cpp" bodystart="564" bodyend="655"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ac847ad981455d23dad5dadbc91a68079" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::Element::box</definition>
+        <argsstring>() const</argsstring>
+        <name>box</name>
+        <qualifiedname>d2::Element::box</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="504" column="21" bodyfile="core/tree/d2_tree_element.cpp" bodystart="656" bodyend="665"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a8f780627e082e708652f0475b839c262" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::Element::position</definition>
+        <argsstring>() const</argsstring>
+        <name>position</name>
+        <qualifiedname>d2::Element::position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="505" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="666" bodyend="675"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a166481944f7ea316db7e1410eb5ac0c0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::Element::internal_box</definition>
+        <argsstring>() const</argsstring>
+        <name>internal_box</name>
+        <qualifiedname>d2::Element::internal_box</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="506" column="21" bodyfile="core/tree/d2_tree_element.cpp" bodystart="676" bodyend="682"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ad439136396e65005120a8380d0737a14" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::Element::internal_position</definition>
+        <argsstring>() const</argsstring>
+        <name>internal_position</name>
+        <qualifiedname>d2::Element::internal_position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="507" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="683" bodyend="688"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a44be626040a8843032803f91a0abb386" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::Element::position_screen_space</definition>
+        <argsstring>() const</argsstring>
+        <name>position_screen_space</name>
+        <qualifiedname>d2::Element::position_screen_space</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="509" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="689" bodyend="701"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1ab14910dff69bbe3ea9a0d62cb81dc0f7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position d2::Element::mouse_object_space</definition>
+        <argsstring>() const</argsstring>
+        <name>mouse_object_space</name>
+        <qualifiedname>d2::Element::mouse_object_space</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="510" column="18" bodyfile="core/tree/d2_tree_element.cpp" bodystart="702" bodyend="712"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a4b2777f7dad26097e21498dbb17ceca5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::Element::layout</definition>
+        <argsstring>(Layout type) const</argsstring>
+        <name>layout</name>
+        <qualifiedname>d2::Element::layout</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="512" column="13" bodyfile="core/tree/d2_tree_element.cpp" bodystart="447" bodyend="471"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1af332bc7bfabf20efd8b6b4c83ee16f0e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">Unit</ref></type>
+        <definition>Unit d2::Element::internal_layout</definition>
+        <argsstring>(Layout type) const</argsstring>
+        <name>internal_layout</name>
+        <qualifiedname>d2::Element::internal_layout</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="513" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="472" bodyend="487"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aef45b860b44a05bf567f6aff5e7c5510" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::accept_layout</definition>
+        <argsstring>() const</argsstring>
+        <name>accept_layout</name>
+        <qualifiedname>d2::Element::accept_layout</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="515" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="489" bodyend="494"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a4ccecbcf24dba3a5a44592784d4a63d3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::accept_layout</definition>
+        <argsstring>(Layout type) const</argsstring>
+        <name>accept_layout</name>
+        <qualifiedname>d2::Element::accept_layout</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="516" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="495" bodyend="512"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1afd4f3934eadc23293c68e19a35472f71" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::override_layout</definition>
+        <argsstring>(Layout type, int value) const</argsstring>
+        <name>override_layout</name>
+        <qualifiedname>d2::Element::override_layout</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="517" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="513" bodyend="517"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a16c51a9a85f01152a70165dcd1d85a8a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::override_dimensions</definition>
+        <argsstring>(int width, int height) const</argsstring>
+        <name>override_dimensions</name>
+        <qualifiedname>d2::Element::override_dimensions</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="518" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="518" bodyend="523"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a7a1f33c7176ed90518c5003f59935c2c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::Element::override_position</definition>
+        <argsstring>(int x, int y) const</argsstring>
+        <name>override_position</name>
+        <qualifiedname>d2::Element::override_position</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="519" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="524" bodyend="529"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a12316381a9501f84b6ee9270ee223075" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::contextual_layout</definition>
+        <argsstring>(Layout type) const</argsstring>
+        <name>contextual_layout</name>
+        <qualifiedname>d2::Element::contextual_layout</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="521" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="531" bodyend="546"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a678e3be9f3834fa0e32df46074325e9b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::Element::relative_layout</definition>
+        <argsstring>(Layout type) const</argsstring>
+        <name>relative_layout</name>
+        <qualifiedname>d2::Element::relative_layout</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="522" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="547" bodyend="562"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a39424c79c34e19f0d9315e8c9f681231" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>char</type>
+        <definition>char d2::Element::getzindex</definition>
+        <argsstring>() const</argsstring>
+        <name>getzindex</name>
+        <qualifiedname>d2::Element::getzindex</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="524" column="14" bodyfile="core/tree/d2_tree_element.cpp" bodystart="714" bodyend="717"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a9f16486fd793309fb2c373e196b139ad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::Element::resolve_units</definition>
+        <argsstring>(Unit unit) const</argsstring>
+        <name>resolve_units</name>
+        <qualifiedname>d2::Element::resolve_units</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Unit" kindref="compound">Unit</ref></type>
+          <declname>unit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="526" column="13" bodyfile="core/tree/d2_tree_element.cpp" bodystart="440" bodyend="445"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a65f8848ebe026ea195cd9e864008bf3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>TreeIter d2::Element::traverse</definition>
+        <argsstring>()</argsstring>
+        <name>traverse</name>
+        <qualifiedname>d2::Element::traverse</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="528" column="10" bodyfile="core/tree/d2_tree_element.cpp" bodystart="719" bodyend="722"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1a9a15f4c156e7b71e3cd0488025161816" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1TreeIter" kindref="compound">TreeIter</ref></type>
+        <definition>TreeIter d2::Element::operator+</definition>
+        <argsstring>()</argsstring>
+        <name>operator+</name>
+        <qualifiedname>d2::Element::operator+</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="529" column="10" bodyfile="core/tree/d2_tree_element.cpp" bodystart="723" bodyend="726"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aa595f9dc1d45e6c8236d3939cf7c7588" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1a6d4f780a7a61d561f6a35acd7c9483c5" kindref="member">Element</ref> &amp;</type>
+        <definition>Element &amp; d2::Element::operator=</definition>
+        <argsstring>(const Element &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Element::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classd2_1_1Element_1a6d4f780a7a61d561f6a35acd7c9483c5" kindref="member">Element</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="531" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1Element_1aa32c3e082e25efb4095957768d71ef27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classd2_1_1Element_1a6d4f780a7a61d561f6a35acd7c9483c5" kindref="member">Element</ref> &amp;</type>
+        <definition>Element &amp; d2::Element::operator=</definition>
+        <argsstring>(Element &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>d2::Element::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a6d4f780a7a61d561f6a35acd7c9483c5" kindref="member">Element</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/tree/d2_tree_element.hpp" line="532" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::Element</label>
+        <link refid="classd2_1_1Element"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>d2::MetaParentElement</label>
+        <link refid="classd2_1_1MetaParentElement"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::ParentElement</label>
+        <link refid="classd2_1_1ParentElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>d2::VecParentElement</label>
+        <link refid="classd2_1_1VecParentElement"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::style::UniversalAccessInterfaceBase</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterfaceBase"/>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; Element &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::Element</label>
+        <link refid="classd2_1_1Element"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::style::UniversalAccessInterfaceBase</label>
+        <link refid="classd2_1_1style_1_1UniversalAccessInterfaceBase"/>
+      </node>
+      <node id="2">
+        <label>std::enable_shared_from_this&lt; Element &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="core/tree/d2_tree_element.hpp" line="25" column="5" bodyfile="core/tree/d2_tree_element.hpp" bodystart="27" bodyend="533"/>
+    <listofallmembers>
+      <member refid="classd2_1_1Element_1a40705ac231418d71418fc58a0af08242" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_bind_dep</name></member>
+      <member refid="classd2_1_1Element_1a757f9284dd450e4d268b566fc556802c" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_buffer</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ab20ac99011dd48dd3275d9cb721cc601" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_clear_anims_impl</name></member>
+      <member refid="classd2_1_1Element_1aa751fbdbd55008143a4c775fd11c6042" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_clone_state_if</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a60ca48dab2508af3d7c684edcd65a15c" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_context_impl</name></member>
+      <member refid="classd2_1_1Element_1afe8f64edbaee94e6af1d22cb4a9e8e6e" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_contextual_change</name></member>
+      <member refid="classd2_1_1Element_1ae9c25cdf1656f3039c94352c30936df1" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_cursor_sink_listener_cnt</name></member>
+      <member refid="classd2_1_1Element_1a34ef3e8582cee4c4b64d0d7eb7499685" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_deps</name></member>
+      <member refid="classd2_1_1Element_1a195c7fdcfb64306f872303080f8ea0b8" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_depth</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1adb6bd25928ab3ff9098b995ed3c6584e" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_deregister_dep_bind</name></member>
+      <member refid="classd2_1_1Element_1a3b425c9f2bb64cf7c31ff3e81b58b4dc" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_destroy_listener</name></member>
+      <member refid="classd2_1_1Element_1a8adc4ed685ab19ca4acc71b0ad164c10" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_dynamic_input_listener_cnt</name></member>
+      <member refid="classd2_1_1Element_1a3d253c0f661d8dfe33420e0457b15009" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_event_impl</name></member>
+      <member refid="classd2_1_1Element_1aa7171f8f3ab36b549b840a0589da64af" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_fetch_pixel_buffer_impl</name></member>
+      <member refid="classd2_1_1Element_1a87177c8536fc85909568820911a31763" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1Element_1a2ea422461403da7a92476e674f52ad05" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_frames_redrawn</name></member>
+      <member refid="classd2_1_1Element_1a105aff7b1a571f9218bd5759faf3c73f" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_frames_reused</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a97ab723c8ea2b04df5f304935eb30da7" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_handle_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ae801365b735eb99e905f578a704ba214" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_has_interface_impl</name></member>
+      <member refid="classd2_1_1Element_1abdc10f60982a33e74e8cb33e490b6e6b" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_index_impl</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a2f5ad74c60f37781f8aec18e1fbfbb2a" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_initialize_impl</name></member>
+      <member refid="classd2_1_1Element_1a918d9a666be6870e90bbcb13f65c189f" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_internal_state</name></member>
+      <member refid="classd2_1_1Element_1a79c2f0ca935ba67b6d201b4f264c63e4" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_invalidate_state</name></member>
+      <member refid="classd2_1_1Element_1a7aaa53a3b510f69174abe3ba92b26d17" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_is_write_type</name></member>
+      <member refid="classd2_1_1Element_1af55fdcf639718246243b4e715d6439d1" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_layout</name></member>
+      <member refid="classd2_1_1Element_1a310ffe58500b157592c673325a8f8919" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_layout_impl</name></member>
+      <member refid="classd2_1_1Element_1a38ae7f1601f0326487c7379d7e6876e1" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_mute_listener</name></member>
+      <member refid="classd2_1_1Element_1afdf7149d704cf40d46b81f3a65b6c391" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_name</name></member>
+      <member refid="classd2_1_1Element_1a471087a22802a9740d971bb277d5481e" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_obliterate_dep_bind</name></member>
+      <member refid="classd2_1_1Element_1a96aede45c5498e9a16732a2c231e58da" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_parent</name></member>
+      <member refid="classd2_1_1Element_1ac80c164f4efb9a631c981f24f307cebf" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_provides_buffer_impl</name></member>
+      <member refid="classd2_1_1Element_1aaa63262087666273db2041939ea33bc2" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_provides_input_impl</name></member>
+      <member refid="classd2_1_1Element_1aa28d23bc2997a07a9295a43b9bd6ff85" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_push_listener</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a963442b0e81f3e8f380b1cb31af2ddb3" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_register_dep_bind</name></member>
+      <member refid="classd2_1_1Element_1a7af1225ef2d5226cfb78465296d24a82" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_reserve_buffer_impl</name></member>
+      <member refid="classd2_1_1Element_1aaa385ed3d6a0a6659819d3c30e086481" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_reset_depth</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1aea20a0dbd31ffcbd09a4aba5238a5168" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_set_dynamic_impl</name></member>
+      <member refid="classd2_1_1Element_1ad63812f66f3445b048e45c229877ef1f" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_setparent</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ae3fac535f79a25c293c2cf2ba070fc68" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_signal_base_impl</name></member>
+      <member refid="classd2_1_1Element_1a35a72f15dc295577438540448345c234" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_context_change</name></member>
+      <member refid="classd2_1_1Element_1a98a87cee046b32126eb7e1e44e21bb61" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_context_change</name></member>
+      <member refid="classd2_1_1Element_1a75266407cf8fce83b735a85ee8685c1d" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_signal_context_change_impl</name></member>
+      <member refid="classd2_1_1Element_1af3178761b5dceb929fe78656e052db32" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_context_change_sub</name></member>
+      <member refid="classd2_1_1Element_1afb551839422348ad46217cc581fb3e4e" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_context_change_sub</name></member>
+      <member refid="classd2_1_1Element_1a3fd60fe0f59d776e2fc6106fc8fe6882" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_initialization</name></member>
+      <member refid="classd2_1_1Element_1a2919fc7435da905c6f5d300fd091ac81" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_update</name></member>
+      <member refid="classd2_1_1Element_1adc2d4d968599a78b512d992832564a05" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_write</name></member>
+      <member refid="classd2_1_1Element_1ae6c4da7d4f22b6c57aade93fa40581a0" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_write</name></member>
+      <member refid="classd2_1_1Element_1afb410f4dc026ec5908038594eef7904c" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_write_child</name></member>
+      <member refid="classd2_1_1Element_1a49fc0d03580f77bec356567dfebdb4d6" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_signal_write_child_impl</name></member>
+      <member refid="classd2_1_1Element_1a752828e23893873b7dc6f877e36dc95e" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_signal_write_impl</name></member>
+      <member refid="classd2_1_1Element_1a79d8940250d62c2813412abda98d4b04" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_signal_write_internal</name></member>
+      <member refid="classd2_1_1Element_1a2c51587ece203462d311acf7bf8fd9b1" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_signal_write_local</name></member>
+      <member refid="classd2_1_1Element_1afc94a3e7ab760ae247cb3516c751dcc7" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_signal_write_local</name></member>
+      <member refid="classd2_1_1Element_1a79e851e7123a1b67a4efbb0cfe2fa697" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_signal_write_update</name></member>
+      <member refid="classd2_1_1Element_1a0685db85af36f40fff99dd7a4e430e3b" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_state</name></member>
+      <member refid="classd2_1_1Element_1a1f5572e7d2862cda97fddde8effbacd6" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_state_change_impl</name></member>
+      <member refid="classd2_1_1Element_1a13076db3e890d86b4f8110de788588d2" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_state_ptr</name></member>
+      <member refid="classd2_1_1Element_1a5557a919d657803df0438de26598084e" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_subscribers</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a4deaa42e1d9cfdfb7abbf442eb905541" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_test_dynamic_impl</name></member>
+      <member refid="classd2_1_1Element_1a8dc235bc5ea3ef3c0c01a8ea559c427a" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_tmp_frame</name></member>
+      <member refid="classd2_1_1Element_1abc5ec99f1b9dc5df96d08efbc057f3a6" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_trigger</name></member>
+      <member refid="classd2_1_1Element_1a692b785cf9ee7971060c5c4e19ee3a7f" prot="protected" virt="non-virtual"><scope>d2::Element</scope><name>_trigger_event</name></member>
+      <member refid="classd2_1_1Element_1a10dd593ff2dd3c1929e4d6a4704bdada" prot="protected" virt="pure-virtual"><scope>d2::Element</scope><name>_unit_report_impl</name></member>
+      <member refid="classd2_1_1Element_1a6d58a598e80fe228fd945ba839b35baf" prot="private" virt="non-virtual"><scope>d2::Element</scope><name>_unmute_listener</name></member>
+      <member refid="classd2_1_1Element_1ae004f38fbadd8a43376a83b14f0565fd" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_update_layout_impl</name></member>
+      <member refid="classd2_1_1Element_1a0144b1e82c4a52e7b03da682e0729a1a" prot="protected" virt="virtual"><scope>d2::Element</scope><name>_update_style_impl</name></member>
+      <member refid="classd2_1_1Element_1aef45b860b44a05bf567f6aff5e7c5510" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>accept_layout</name></member>
+      <member refid="classd2_1_1Element_1a4ccecbcf24dba3a5a44592784d4a63d3" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>accept_layout</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a6e2f3650e4408415fc06aee68eda6018" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>apply_get_for</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a61e14e94bd5227f27a72f4d73977f5b6" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>apply_set_for</name></member>
+      <member refid="classd2_1_1Element_1ac847ad981455d23dad5dadbc91a68079" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>box</name></member>
+      <member refid="classd2_1_1Element_1abfb56ffec1565b561c99fb2ff6408b38" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>CachePolicy</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a77342524e1014bc5cf8c806a3fb33814" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>CachePolicyBypass</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5af84ec7d68ed99f7e2389a0ae5e22e50c" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>CachePolicyDynamic</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a4092b4cad128bda4a1fae8dd58600435" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>CachePolicyStatic</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a517ab6545fb01e8f27e0724036b51014" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>CachePolicyVolatile</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eae2c05ad55da057d3f4471dbcc2a3440f" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Clicked</name></member>
+      <member refid="classd2_1_1Element_1a93179c68c4bc0cad9fbde49cad62e5da" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>context</name></member>
+      <member refid="classd2_1_1Element_1a12316381a9501f84b6ee9270ee223075" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>contextual_layout</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a38c0ded57405bb7c6e4e2ddf259b41d0" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>ContextualHeight</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3aca8c4cda597cd33b06b5adfa85600d57" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>ContextualWidth</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a3ad9452d15c7690584c67e6f59b4d20b" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>ContextualXPos</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a528581b10d5a9df067506c6954f6c7d9" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>ContextualYPos</name></member>
+      <member refid="classd2_1_1Element_1ab8339c087465699c724cdf8fbc647d5e" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>cpptr</name></member>
+      <member refid="classd2_1_1Element_1a77cb0a3434fb6e8ce0e8189936e749a6" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>cptr</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea484cdecbbcf06608aaecacd636c7a42f" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Created</name></member>
+      <member refid="classd2_1_1Element_1a6e6c7f6cf773237479aeded7cf907b9f" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>depth</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8abb554a878cbc4e9c0da0fb202cde8390" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Dimensions</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a00b0f90798c471f9a7832b96a7fbd135" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>DimensionsHeightUpdated</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a50846f36269ec74b8026783ccadc1345" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>DimensionsWidthUpdated</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea6e7200768b6620145a3e40985b641136" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Display</name></member>
+      <member refid="classd2_1_1Element_1a6d4f780a7a61d561f6a35acd7c9483c5" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Element</name></member>
+      <member refid="classd2_1_1Element_1a26a95af327ccf70f623acf8cf455d4d1" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Element</name></member>
+      <member refid="classd2_1_1Element_1a789e8d7ae300e01e108dee39cfb75627" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Element</name></member>
+      <member refid="classd2_1_1Element_1a8cfe860586c85380df5a5f1167fdf2b4" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Element</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea762e0750f73366248b1f947bc929a636" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Embedded</name></member>
+      <member refid="classd2_1_1Element_1a58116e63a422c097c04b57538f28c13c" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>eptr</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eabfaea5553443e3391264dcfdb0109076" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Event</name></member>
+      <member refid="classd2_1_1Element_1a471bc822139b4d9d2fe679de101f1785" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>event_callback</name></member>
+      <member refid="classd2_1_1Element_1a485d2d7388635657908c2ec1cccf95c2" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>extract</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea1d48be968cce83013b238e15f8998da0" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Focused</name></member>
+      <member refid="classd2_1_1Element_1a7c2334444cc16acefb1ae606718b13b0" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>foreach_callback</name></member>
+      <member refid="classd2_1_1Element_1ab90fea8bb045f8675328f7aebab40702" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>foreach_internal_callback</name></member>
+      <member refid="classd2_1_1Element_1a0921b422adef3a3728e5fe7585323145" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>frame</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ad1200201fb357ade25421484dc86e7aa" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>get_for</name></member>
+      <member refid="classd2_1_1Element_1abf89d265be9aa7324d183db46c623d97" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>getistate</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1fd6b506e5dd238c0cd173a9692c0cab" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>getref_for</name></member>
+      <member refid="classd2_1_1Element_1a075c6e41be9bd39f8a791cce5c331f8e" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>getstate</name></member>
+      <member refid="classd2_1_1Element_1a39424c79c34e19f0d9315e8c9f681231" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>getzindex</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a5d2d148e1e31b3fb1a8a8762049ec2f5" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>has_interface</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea7508cb38fd55ecc97d8b1261daf015d7" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Hovered</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a6bde9a056a8856b5c07d2d9427fa6727" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>initial_property</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a5d952a778bfa4ef1738cc6affede11bf" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>initialize</name></member>
+      <member refid="classd2_1_1Element_1a572cafac3ed1e5ed0422224e14d00c18" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>input_frame</name></member>
+      <member refid="classd2_1_1Element_1a8b93a7b2c303fed867402507faa07b84" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>internal::ElementView</name></member>
+      <member refid="classd2_1_1Element_1a166481944f7ea316db7e1410eb5ac0c0" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>internal_box</name></member>
+      <member refid="classd2_1_1Element_1aa1f6afafcaf8c9a2630d23500858230e" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>internal_flag</name></member>
+      <member refid="classd2_1_1Element_1af332bc7bfabf20efd8b6b4c83ee16f0e" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>internal_layout</name></member>
+      <member refid="classd2_1_1Element_1ad439136396e65005120a8380d0737a14" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>internal_position</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8afb2edb9e46a9433b78756445377a8656" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>InternalLayout</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>InternalState</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eadc309166dcf9888c353f906760fc16ee" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Invalid</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1ac555ee9cd245ffade8b8533b2e146bac" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>invalid_property</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a18f9a3a0b7dc12c3542c3d1a57fb8936" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>InvertedHeight</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a051cf9aff7fd56ed17c2c72afa892c8e" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>InvertedWidth</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a24d092b6dedba76380bdc480f4526fdb" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>InvertedXPos</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3ae0a02e29d15e80b25fcefb7741219564" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>InvertedYPos</name></member>
+      <member refid="classd2_1_1Element_1ae52a0f188c68387d40f209bc8af18824" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>iptr</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5aab135f99d9552a04e9ebb3189f1e5c86" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>IsBeingInitialized</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5abaf501fb7c238a010891e3bb929ed69a" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>IsBeingRendered</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea6fd188fa6424e4d24fbc8d15fdf46b71" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Keynavi</name></member>
+      <member refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Layout</name></member>
+      <member refid="classd2_1_1Element_1a4b2777f7dad26097e21498dbb17ceca5" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>layout</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a361dc259e83842273faec5f59c1deef0" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>LayoutHeight</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a1235ef9bb7682c1e1ba8d78244ad91df" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>LayoutWidth</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8ad7984d80f9eb93e0e9561a069a7cca25" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>LayoutXPos</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a17fe83833761996d853ce82b6ca55ec2" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>LayoutYPos</name></member>
+      <member refid="classd2_1_1Element_1ae4b203e28f1efe7ceca3d06fef649880" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>listen</name></member>
+      <member refid="classd2_1_1Element_1a50c5fd3f6580870e99a6260b72d7cd60" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>listen</name></member>
+      <member refid="classd2_1_1Element_1af3f4e7d502411469fa5b721bc797e0f8" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>make</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aa3b94f2a78f8e0bf9174fde838ff6184" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Masked</name></member>
+      <member refid="classd2_1_1Element_1ab14910dff69bbe3ea9a0d62cb81dc0f7" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>mouse_object_space</name></member>
+      <member refid="classd2_1_1Element_1ae9916d8895d01882f699e8448d2084d9" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>name</name></member>
+      <member refid="classd2_1_1Element_1ae110e3769d1e8227a655971ec9428868" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>needs_update</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8ae47e1856724eda8b3c18f9945e098115" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>None</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8aef55e2f39a8c4587683f13cda2be5e09" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Offset</name></member>
+      <member refid="classd2_1_1Element_1a9a15f4c156e7b71e3cd0488025161816" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>operator+</name></member>
+      <member refid="classd2_1_1Element_1aa595f9dc1d45e6c8236d3939cf7c7588" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Element_1aa32c3e082e25efb4095957768d71ef27" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>operator=</name></member>
+      <member refid="classd2_1_1Element_1a16c51a9a85f01152a70165dcd1d85a8a" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>override_dimensions</name></member>
+      <member refid="classd2_1_1Element_1afd4f3934eadc23293c68e19a35472f71" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>override_layout</name></member>
+      <member refid="classd2_1_1Element_1a7a1f33c7176ed90518c5003f59935c2c" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>override_position</name></member>
+      <member refid="classd2_1_1Element_1aa5d4c5a01df678c41935f6fde6640a7f" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>parent</name></member>
+      <member refid="classd2_1_1Element_1a8f780627e082e708652f0475b839c262" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>position</name></member>
+      <member refid="classd2_1_1Element_1a44be626040a8843032803f91a0abb386" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>position_screen_space</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a27627c9f6fb246bf91cb1d8d595cbf5d" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>PositionXUpdated</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5aafe8698afda69970c8bf18ee9380f3cd" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>PositionYUpdated</name></member>
+      <member refid="classd2_1_1Element_1abd57face94a1b6b39b12fbea90189d05" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>pptr</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a1aaf33570d897849da1114bc977e3590" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>property</name></member>
+      <member refid="classd2_1_1Element_1a94f0dd567889fe6675b5a2645a47b9ea" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>provides_cursor_sink</name></member>
+      <member refid="classd2_1_1Element_1afdd2fcd9a138de2c2f18cba65d039db5" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>provides_input</name></member>
+      <member refid="classd2_1_1Element_1ac4a69163520d200f921d0377d74be260" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>ptr</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13eaac46903858f0e47dc412d72a8a7b8257" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Public1</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea9c8fe368905520911a39260bdcf0ff5e" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Public2</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea87ade9b277110fc35e95c5519883398a" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Public3</name></member>
+      <member refid="classd2_1_1Element_1ad51034e46beecb0b04252f84c17d00c4" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>pwptr</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ead984049a1327dd30b9f1aa361235fc79" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>RcClick</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea16e508c7d79acb50a761c04b8fb645fc" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>RcEvent</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea84e7a5bfaa5b96bf4517ad6a11cbe6f1" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>RcFocus</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea9d8b9c503842b02b5012d09143cf8fd5" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>RcHover</name></member>
+      <member refid="classd2_1_1Element_1a678e3be9f3834fa0e32df46074325e9b" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>relative_layout</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a5777785c146df9eb35434b6e8cb45b72" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>RelativeHeight</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a55d77576a41b72dd8d8b5981b367e9ad" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>RelativeWidth</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3a8393ce090bcab053fba77365cc83d326" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>RelativeXPos</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3af235e4f171d6a5bf75e432215f415a61" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>RelativeYPos</name></member>
+      <member refid="classd2_1_1Element_1a8eb74bc2114d40835a0c58c2932f4e60" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>remove</name></member>
+      <member refid="classd2_1_1Element_1a9f16486fd793309fb2c373e196b139ad" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>resolve_units</name></member>
+      <member refid="classd2_1_1Element_1aae0d3b85c5f0b1b1181b99643103935f" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>screen</name></member>
+      <member refid="classd2_1_1style_1_1UniversalAccessInterfaceBase_1a7bba69ecbc402496dea6f287d930a14d" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>set_for</name></member>
+      <member refid="classd2_1_1Element_1ad8ac4c7b2e33e4bc19694603b42c6ecd" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>setcache</name></member>
+      <member refid="classd2_1_1Element_1aa3dc103db9356f8b8cdc1e9a688e2762" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>setstate</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13e" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>State</name></member>
+      <member refid="classd2_1_1Element_1a46eb075f8c65a9183c2ab414958d21ca" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>state</name></member>
+      <member refid="classd2_1_1Element_1a722263aff6c2cc69cb2e2708c3deb458" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>state_flag</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8ac4aad62c208b99eb077991bda7f771b0" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Strip</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8a28f56923c2807491ee4dfde6223fbfcf" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>StripPerm</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8afad14e7cd74b0976b0aa37ce18014a40" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Style</name></member>
+      <member refid="classd2_1_1Element_1a4873882c6dbc2de0e46068213d2ef13ea36d3dc97265a5776782c490060e84fd4" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>Swapped</name></member>
+      <member refid="classd2_1_1Element_1a65f8848ebe026ea195cd9e864008bf3a" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>traverse</name></member>
+      <member refid="classd2_1_1Element_1afa06d59b6436a6cfb1eb88508e905da4" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>unit_meta_flag</name></member>
+      <member refid="classd2_1_1Element_1af6410415e8f051ce8079868c15dd3537" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>unit_report</name></member>
+      <member refid="classd2_1_1Element_1aa3c00130fc5c2848fd564c8724004cb3" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>UnitState</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a1eb4a8c3c9725361a174f039e7323678" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>WasWritten</name></member>
+      <member refid="classd2_1_1Element_1aaa18f68fb4444d63200ca3749e157ae5a76ff642fda92149d3b3867b5218d87b6" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>WasWrittenLayout</name></member>
+      <member refid="classd2_1_1Element_1af8c212acaa09e075352d4c96db2f9be2" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>wptr</name></member>
+      <member refid="classd2_1_1Element_1a09d2719fb96edb836ce1c166330bd804" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>write_flag</name></member>
+      <member refid="classd2_1_1Element_1a7fce53d13ab95386f9095530ad7c51b8" prot="public" virt="non-virtual"><scope>d2::Element</scope><name>WriteType</name></member>
+      <member refid="classd2_1_1Element_1a6a4ba15f266d67e8d28b2c8cef2dcadd" prot="public" virt="virtual"><scope>d2::Element</scope><name>~Element</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

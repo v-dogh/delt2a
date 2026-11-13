@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1fb_1_1loc" kind="namespace" language="C++">
+    <compoundname>d2::fb::loc</compoundname>
+    <innerclass refid="structd2_1_1fb_1_1loc_1_1Byte" prot="public">d2::fb::loc::Byte</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_fragmented_buffer.cpp" line="39" column="5"/>
+  </compounddef>
+</doxygen>

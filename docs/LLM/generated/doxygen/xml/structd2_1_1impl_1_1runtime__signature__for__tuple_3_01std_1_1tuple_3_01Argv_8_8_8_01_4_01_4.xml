@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1impl_1_1runtime__signature__for__tuple_3_01std_1_1tuple_3_01Argv_8_8_8_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>d2::impl::runtime_signature_for_tuple&lt; std::tuple&lt; Argv... &gt; &gt;</compoundname>
+    <includes refid="d2__signal__handler_8hpp" local="no">d2_signal_handler.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>Argv</declname>
+        <defname>Argv</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1impl_1_1runtime__signature__for__tuple_3_01std_1_1tuple_3_01Argv_8_8_8_01_4_01_4_1ac5992bcc3ab369c63a10e0cd1f4c88d4" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structd2_1_1impl_1_1RuntimeSignature" kindref="compound">RuntimeSignature</ref></type>
+        <definition>static RuntimeSignature d2::impl::runtime_signature_for_tuple&lt; std::tuple&lt; Argv... &gt; &gt;::get</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::impl::runtime_signature_for_tuple&lt; std::tuple&lt; Argv... &gt; &gt;::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_signal_handler.hpp" line="182" column="37" bodyfile="core/io/d2_signal_handler.hpp" bodystart="182" bodyend="185"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_signal_handler.hpp" line="180" column="19" bodyfile="core/io/d2_signal_handler.hpp" bodystart="181" bodyend="186"/>
+    <listofallmembers>
+      <member refid="structd2_1_1impl_1_1runtime__signature__for__tuple_3_01std_1_1tuple_3_01Argv_8_8_8_01_4_01_4_1ac5992bcc3ab369c63a10e0cd1f4c88d4" prot="public" virt="non-virtual"><scope>d2::impl::runtime_signature_for_tuple&lt; std::tuple&lt; Argv... &gt; &gt;</scope><name>get</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemModule_1_1ModInfo" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::SystemModule::ModInfo</compoundname>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemModule_1_1ModInfo_1a60b1b5aef987f2e02875b9dafa32fa5e" prot="public" static="no" mutable="no">
+        <type>std::string_view</type>
+        <definition>std::string_view d2::sys::SystemModule::ModInfo::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>d2::sys::SystemModule::ModInfo::name</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="78" column="30" bodyfile="core/io/d2_module.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemModule_1_1ModInfo_1a39398977af1739ad04de0e29850c3ac8" prot="public" static="no" mutable="no">
+        <type>std::type_index</type>
+        <definition>std::type_index d2::sys::SystemModule::ModInfo::index</definition>
+        <argsstring></argsstring>
+        <name>index</name>
+        <qualifiedname>d2::sys::SystemModule::ModInfo::index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="79" column="29" bodyfile="core/io/d2_module.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_module.hpp" line="76" column="9" bodyfile="core/io/d2_module.hpp" bodystart="77" bodyend="80"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo_1a39398977af1739ad04de0e29850c3ac8" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule::ModInfo</scope><name>index</name></member>
+      <member refid="structd2_1_1sys_1_1SystemModule_1_1ModInfo_1a60b1b5aef987f2e02875b9dafa32fa5e" prot="public" virt="non-virtual"><scope>d2::sys::SystemModule::ModInfo</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

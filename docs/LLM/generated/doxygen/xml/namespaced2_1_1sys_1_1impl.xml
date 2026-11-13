@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1sys_1_1impl" kind="namespace" language="C++">
+    <compoundname>d2::sys::impl</compoundname>
+    <innerclass refid="structd2_1_1sys_1_1impl_1_1DeviceConfig" prot="public">d2::sys::impl::DeviceConfig</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1impl_1_1FormatInfo" prot="public">d2::sys::impl::FormatInfo</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1impl_1_1MergeDeps" prot="public">d2::sys::impl::MergeDeps</innerclass>
+    <innerclass refid="structd2_1_1sys_1_1impl_1_1MergeDeps_3_01std_1_1tuple_3_01DepsA_8_8_8_01_4_00_01DepsB_8_8_8_01_4" prot="public">d2::sys::impl::MergeDeps&lt; std::tuple&lt; DepsA... &gt;, DepsB... &gt;</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Format</name>
+        <qualifiedname>d2::sys::impl::Format</qualifiedname>
+        <enumvalue id="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1a1674e5751ee747c73262d1479e828d15" prot="public">
+          <name>PCM16</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1afc57fb6cf43d17c9924d87193a0628be" prot="public">
+          <name>PCM32</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1a166495adc0d0f53bee6baecc577f5204" prot="public">
+          <name>Float32</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespaced2_1_1sys_1_1impl_1a10c0419c4ff1db19aadc68884cac5cf1ad2b556d8a8f5c8ac323f51a4b82e79a0" prot="public">
+          <name>Float64</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_audio.hpp" line="10" column="9" bodyfile="core/mods/d2_audio.hpp" bodystart="11" bodyend="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/io/d2_module.hpp" line="183" column="5"/>
+  </compounddef>
+</doxygen>

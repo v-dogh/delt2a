@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1OSConfig" kind="struct" language="C++" prot="public">
+    <compoundname>d2::OSConfig</compoundname>
+    <includes refid="d2__locale_8hpp" local="no">d2_locale.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>std::size_t</type>
+        <declname>ID</declname>
+        <defname>ID</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structd2_1_1OSConfig_1a8acb3c4c150884bcbd6758855acfb546" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::OSConfig&lt; ID &gt;::input = void</definition>
+        <argsstring></argsstring>
+        <name>input</name>
+        <qualifiedname>d2::OSConfig::input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="18" column="9" bodyfile="core/platform/d2_locale.hpp" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1OSConfig_1abf0618099b1b69603c0299d21ab29be5" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::OSConfig&lt; ID &gt;::output = void</definition>
+        <argsstring></argsstring>
+        <name>output</name>
+        <qualifiedname>d2::OSConfig::output</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="19" column="9" bodyfile="core/platform/d2_locale.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1OSConfig_1a50c60aa0623e62a87e45e63235589e18" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::OSConfig&lt; ID &gt;::screen = void</definition>
+        <argsstring></argsstring>
+        <name>screen</name>
+        <qualifiedname>d2::OSConfig::screen</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="20" column="9" bodyfile="core/platform/d2_locale.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1OSConfig_1a29843c63ea0bd20e694b7698b573e38e" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::OSConfig&lt; ID &gt;::clipboard = void</definition>
+        <argsstring></argsstring>
+        <name>clipboard</name>
+        <qualifiedname>d2::OSConfig::clipboard</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="21" column="9" bodyfile="core/platform/d2_locale.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1OSConfig_1a0743636a4db4eb2f86031c0bae893739" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::OSConfig&lt; ID &gt;::audio = void</definition>
+        <argsstring></argsstring>
+        <name>audio</name>
+        <qualifiedname>d2::OSConfig::audio</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="22" column="9" bodyfile="core/platform/d2_locale.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structd2_1_1OSConfig_1a21bf9b240de526be09c5d276134f3448" prot="public" static="no">
+        <type>void</type>
+        <definition>using d2::OSConfig&lt; ID &gt;::notifications = void</definition>
+        <argsstring></argsstring>
+        <name>notifications</name>
+        <qualifiedname>d2::OSConfig::notifications</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/platform/d2_locale.hpp" line="23" column="9" bodyfile="core/platform/d2_locale.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/platform/d2_locale.hpp" line="16" column="15" bodyfile="core/platform/d2_locale.hpp" bodystart="17" bodyend="24"/>
+    <listofallmembers>
+      <member refid="structd2_1_1OSConfig_1a0743636a4db4eb2f86031c0bae893739" prot="public" virt="non-virtual"><scope>d2::OSConfig</scope><name>audio</name></member>
+      <member refid="structd2_1_1OSConfig_1a29843c63ea0bd20e694b7698b573e38e" prot="public" virt="non-virtual"><scope>d2::OSConfig</scope><name>clipboard</name></member>
+      <member refid="structd2_1_1OSConfig_1a8acb3c4c150884bcbd6758855acfb546" prot="public" virt="non-virtual"><scope>d2::OSConfig</scope><name>input</name></member>
+      <member refid="structd2_1_1OSConfig_1a21bf9b240de526be09c5d276134f3448" prot="public" virt="non-virtual"><scope>d2::OSConfig</scope><name>notifications</name></member>
+      <member refid="structd2_1_1OSConfig_1abf0618099b1b69603c0299d21ab29be5" prot="public" virt="non-virtual"><scope>d2::OSConfig</scope><name>output</name></member>
+      <member refid="structd2_1_1OSConfig_1a50c60aa0623e62a87e45e63235589e18" prot="public" virt="non-virtual"><scope>d2::OSConfig</scope><name>screen</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

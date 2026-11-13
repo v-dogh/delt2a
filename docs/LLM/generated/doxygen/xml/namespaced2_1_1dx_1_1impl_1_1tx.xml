@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="namespaced2_1_1dx_1_1impl_1_1tx" kind="namespace" language="C++">
+    <compoundname>d2::dx::impl::tx</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="namespaced2_1_1dx_1_1impl_1_1tx_1a9c695b0490488b001812e878f7f2e365" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::dx::impl::tx::_text_bounding_box</definition>
+        <argsstring>(const string &amp;value)</argsstring>
+        <name>_text_bounding_box</name>
+        <qualifiedname>d2::dx::impl::tx::_text_bounding_box</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_element_utils.cpp" line="6" column="17" bodyfile="elements/d2_element_utils.cpp" bodystart="6" bodyend="9" declfile="elements/d2_element_utils.hpp" declline="10" declcolumn="21"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1dx_1_1impl_1_1tx_1a32117a095e9c57e1a3406cf2f1957309" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+        <definition>BoundingBox d2::dx::impl::tx::_paragraph_bounding_box</definition>
+        <argsstring>(const string &amp;value, int width, int height)</argsstring>
+        <name>_paragraph_bounding_box</name>
+        <qualifiedname>d2::dx::impl::tx::_paragraph_bounding_box</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_element_utils.cpp" line="10" column="17" bodyfile="elements/d2_element_utils.cpp" bodystart="10" bodyend="14" declfile="elements/d2_element_utils.hpp" declline="12" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1dx_1_1impl_1_1tx_1a51ce4eadb935bb4566eec879bf0b04b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::impl::tx::_render_text_simple</definition>
+        <argsstring>(const string &amp;value, pixel color, style::IZText::Alignment alignment, Position pos, BoundingBox box, PixelBuffer::View buffer)</argsstring>
+        <name>_render_text_simple</name>
+        <qualifiedname>d2::dx::impl::tx::_render_text_simple</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>style::IZText::Alignment</type>
+          <declname>alignment</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_element_utils.cpp" line="33" column="10" bodyfile="elements/d2_element_utils.cpp" bodystart="33" bodyend="37" declfile="elements/d2_element_utils.hpp" declline="14" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1dx_1_1impl_1_1tx_1a554fd46fe7d32b2c18840d29cc5774d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::impl::tx::_render_text</definition>
+        <argsstring>(const string &amp;value, pixel color, style::IZText::Alignment alignment, Position pos, BoundingBox box, PixelBuffer::View buffer)</argsstring>
+        <name>_render_text</name>
+        <qualifiedname>d2::dx::impl::tx::_render_text</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>style::IZText::Alignment</type>
+          <declname>alignment</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_element_utils.cpp" line="38" column="10" bodyfile="elements/d2_element_utils.cpp" bodystart="38" bodyend="42" declfile="elements/d2_element_utils.hpp" declline="22" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="namespaced2_1_1dx_1_1impl_1_1tx_1a65dd223562d419ce673b60b02df5f1e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::impl::tx::_render_paragraph</definition>
+        <argsstring>(const string &amp;value, pixel color, style::IZText::Alignment alignment, Position pos, BoundingBox box, PixelBuffer::View buffer)</argsstring>
+        <name>_render_paragraph</name>
+        <qualifiedname>d2::dx::impl::tx::_render_paragraph</qualifiedname>
+        <param>
+          <type>const <ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref></type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>style::IZText::Alignment</type>
+          <declname>alignment</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type><ref refid="structd2_1_1BoundingBox" kindref="compound">BoundingBox</ref></type>
+          <declname>box</declname>
+        </param>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_element_utils.cpp" line="43" column="10" bodyfile="elements/d2_element_utils.cpp" bodystart="43" bodyend="47" declfile="elements/d2_element_utils.hpp" declline="30" declcolumn="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="elements/d2_element_utils.cpp" line="4" column="1"/>
+  </compounddef>
+</doxygen>

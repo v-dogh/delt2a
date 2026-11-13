@@ -1,0 +1,694 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="classd2_1_1dx_1_1Input" kind="class" language="C++" prot="public">
+    <compoundname>d2::dx::Input</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">style:: UAI&lt; Input, style::ILayout, style::IColors, style::IText, style::IInput, style::ISelectable, style::IResponsive&lt; Input, string &gt;::type &gt;</basecompoundref>
+    <includes refid="d2__input_8hpp" local="no">d2_input.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classd2_1_1dx_1_1Input_1acfd6be9a547b3592059fe8520b384eea" prot="public" static="no">
+        <type>style:: UAI&lt; <ref refid="classd2_1_1dx_1_1Input" kindref="compound">Input</ref>, <ref refid="structd2_1_1style_1_1ILayout" kindref="compound">style::ILayout</ref>, style::IColors, style::IText, style::IInput, style::ISelectable, <ref refid="structd2_1_1style_1_1IResponsive" kindref="compound">style::IResponsive</ref>&lt; <ref refid="classd2_1_1dx_1_1Input" kindref="compound">Input</ref>, <ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref> &gt;::type &gt;</type>
+        <definition>using d2::dx::Input::data = style::
+               UAI&lt;Input,
+                   style::ILayout,
+                   style::IColors,
+                   style::IText,
+                   style::IInput,
+                   style::ISelectable,
+                   style::IResponsive&lt;Input, string&gt;::type&gt;</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>d2::dx::Input::data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="58" column="13" bodyfile="elements/d2_input.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Input_1aa8118236d445068a17e77ab884c0be9a" prot="protected" static="no" mutable="no">
+        <type><ref refid="classd2_1_1IOContext_1ae7ba66e43fda338bd09550fe34f1c4ad" kindref="member">IOContext::future</ref>&lt; void &gt;</type>
+        <definition>IOContext::future&lt;void&gt; d2::dx::Input::btask_</definition>
+        <argsstring></argsstring>
+        <name>btask_</name>
+        <qualifiedname>d2::dx::Input::btask_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="68" column="31" bodyfile="elements/d2_input.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Input_1a0b9db6a6aa12aad606b0ac9e949b245d" prot="protected" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::Input::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>d2::dx::Input::ptr_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="69" column="25" bodyfile="elements/d2_input.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Input_1ac372223d1a967aa070986796f870decf" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int d2::dx::Input::bound_lower_</definition>
+        <argsstring></argsstring>
+        <name>bound_lower_</name>
+        <qualifiedname>d2::dx::Input::bound_lower_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="70" column="17" bodyfile="elements/d2_input.hpp" bodystart="70" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Input_1adbafc464e438e506e6af3eb3da388765" prot="protected" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::Input::highlight_start_</definition>
+        <argsstring></argsstring>
+        <name>highlight_start_</name>
+        <qualifiedname>d2::dx::Input::highlight_start_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="71" column="25" bodyfile="elements/d2_input.hpp" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Input_1aa34e1662c0fd232fb44bfeb7f868ad1d" prot="protected" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::Input::highlight_end_</definition>
+        <argsstring></argsstring>
+        <name>highlight_end_</name>
+        <qualifiedname>d2::dx::Input::highlight_end_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="72" column="25" bodyfile="elements/d2_input.hpp" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Input_1a33477884681530e8dbbba7008a57dbf1" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool d2::dx::Input::ptr_blink_</definition>
+        <argsstring></argsstring>
+        <name>ptr_blink_</name>
+        <qualifiedname>d2::dx::Input::ptr_blink_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="73" column="18" bodyfile="elements/d2_input.hpp" bodystart="73" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="variable" id="classd2_1_1dx_1_1Input_1a418842573d7afc53da55ba0861bec6e6" prot="protected" static="no" mutable="yes">
+        <type><ref refid="structd2_1_1dx_1_1detail_1_1InputLayout" kindref="compound">detail::InputLayout</ref></type>
+        <definition>detail::InputLayout d2::dx::Input::_text</definition>
+        <argsstring></argsstring>
+        <name>_text</name>
+        <qualifiedname>d2::dx::Input::_text</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="75" column="41" bodyfile="elements/d2_input.hpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1aa10ba91bf8aa6f1add13f22e147ebd2f" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classd2_1_1text_1_1Layout" kindref="compound">text::Layout</ref> &amp;</type>
+        <definition>const text::Layout &amp; d2::dx::Input::_layout</definition>
+        <argsstring>() const</argsstring>
+        <name>_layout</name>
+        <qualifiedname>d2::dx::Input::_layout</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="76" column="32" bodyfile="elements/d2_input.cpp" bodystart="8" bodyend="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1aa8096ad753938512f64705d67728c560" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int d2::dx::Input::_prefix_width</definition>
+        <argsstring>() const</argsstring>
+        <name>_prefix_width</name>
+        <qualifiedname>d2::dx::Input::_prefix_width</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="77" column="17" bodyfile="elements/d2_input.cpp" bodystart="13" bodyend="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1ab610555d15545598c9a914393652e50a" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_ensure_ptr_visible</definition>
+        <argsstring>()</argsstring>
+        <name>_ensure_ptr_visible</name>
+        <qualifiedname>d2::dx::Input::_ensure_ptr_visible</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="78" column="18" bodyfile="elements/d2_input.cpp" bodystart="17" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a8de60a2097569cac3820330511325fed" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::Input::_hit</definition>
+        <argsstring>(Position position) const</argsstring>
+        <name>_hit</name>
+        <qualifiedname>d2::dx::Input::_hit</qualifiedname>
+        <param>
+          <type><ref refid="structd2_1_1Position" kindref="compound">Position</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="79" column="25" bodyfile="elements/d2_input.cpp" bodystart="31" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a5a8329e74d427370d2465a2b6b2d6d02" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_move_to</definition>
+        <argsstring>(std::size_t pos, bool select=false)</argsstring>
+        <name>_move_to</name>
+        <qualifiedname>d2::dx::Input::_move_to</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>select</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="80" column="18" bodyfile="elements/d2_input.cpp" bodystart="149" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a26373ea5f3fd0292f612a4080a33d458" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_insert</definition>
+        <argsstring>(std::string_view value)</argsstring>
+        <name>_insert</name>
+        <qualifiedname>d2::dx::Input::_insert</qualifiedname>
+        <param>
+          <type>std::string_view</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="81" column="18" bodyfile="elements/d2_input.cpp" bodystart="86" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a041b87ee9801ddfb9463f2376855f4b9" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_erase</definition>
+        <argsstring>(std::size_t begin, std::size_t end)</argsstring>
+        <name>_erase</name>
+        <qualifiedname>d2::dx::Input::_erase</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>begin</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="82" column="18" bodyfile="elements/d2_input.cpp" bodystart="52" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a24ebb55454c28028dbe4e5da93b885bf" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_write_ptr</definition>
+        <argsstring>(pixel &amp;px)</argsstring>
+        <name>_write_ptr</name>
+        <qualifiedname>d2::dx::Input::_write_ptr</qualifiedname>
+        <param>
+          <type><ref refid="namespaced2_1a2eabdbc28976fcd295e11074ee5e890b" kindref="member">pixel</ref> &amp;</type>
+          <declname>px</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="83" column="18" bodyfile="elements/d2_input.cpp" bodystart="40" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a50c323b6c6d419e8003978d25782c3aa" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool d2::dx::Input::_is_highlighted</definition>
+        <argsstring>()</argsstring>
+        <name>_is_highlighted</name>
+        <qualifiedname>d2::dx::Input::_is_highlighted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="84" column="18" bodyfile="elements/d2_input.cpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1aac38d324be86564838a4ff953ebd4bac" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_remove_highlighted</definition>
+        <argsstring>()</argsstring>
+        <name>_remove_highlighted</name>
+        <qualifiedname>d2::dx::Input::_remove_highlighted</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="85" column="18" bodyfile="elements/d2_input.cpp" bodystart="65" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a5146a8a6ffd9228c5c626d36d7e20477" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_begin_highlight_if</definition>
+        <argsstring>()</argsstring>
+        <name>_begin_highlight_if</name>
+        <qualifiedname>d2::dx::Input::_begin_highlight_if</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="86" column="18" bodyfile="elements/d2_input.cpp" bodystart="70" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1ad4f0e1f88374620fd6120840f7d7e5d7" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_reset_highlight</definition>
+        <argsstring>()</argsstring>
+        <name>_reset_highlight</name>
+        <qualifiedname>d2::dx::Input::_reset_highlight</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="87" column="18" bodyfile="elements/d2_input.cpp" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a4ebd8d13caa4ed22d648e3304852302b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_reset_ptrs</definition>
+        <argsstring>()</argsstring>
+        <name>_reset_ptrs</name>
+        <qualifiedname>d2::dx::Input::_reset_ptrs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="88" column="18" bodyfile="elements/d2_input.cpp" bodystart="76" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a0c6bc9591be2ca327943a778a9ea3505" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1a46726a4e8cb5fdcd3c84353edf30b843" kindref="member">string</ref></type>
+        <definition>string d2::dx::Input::_highlighted_value</definition>
+        <argsstring>()</argsstring>
+        <name>_highlighted_value</name>
+        <qualifiedname>d2::dx::Input::_highlighted_value</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="89" column="20" bodyfile="elements/d2_input.cpp" bodystart="81" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a0d794a12e6ae43f8f1bce2e00475d9bb" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_start_blink</definition>
+        <argsstring>()</argsstring>
+        <name>_start_blink</name>
+        <qualifiedname>d2::dx::Input::_start_blink</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="91" column="18" bodyfile="elements/d2_input.cpp" bodystart="102" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a07131c903915559ce86ab129ba0d4b2d" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_stop_blink</definition>
+        <argsstring>()</argsstring>
+        <name>_stop_blink</name>
+        <qualifiedname>d2::dx::Input::_stop_blink</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="92" column="18" bodyfile="elements/d2_input.cpp" bodystart="123" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1abfa82a2f01a1a196ce234c661190046f" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_freeze_blink</definition>
+        <argsstring>()</argsstring>
+        <name>_freeze_blink</name>
+        <qualifiedname>d2::dx::Input::_freeze_blink</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="93" column="18" bodyfile="elements/d2_input.cpp" bodystart="134" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a5f54fc900f150af13e02f3a820a89917" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_unfreeze_blink</definition>
+        <argsstring>()</argsstring>
+        <name>_unfreeze_blink</name>
+        <qualifiedname>d2::dx::Input::_unfreeze_blink</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="94" column="18" bodyfile="elements/d2_input.cpp" bodystart="142" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a6ffa764a965e97d5d947ed4b6fe01f56" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_move_right</definition>
+        <argsstring>(std::size_t cnt=1)</argsstring>
+        <name>_move_right</name>
+        <qualifiedname>d2::dx::Input::_move_right</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>cnt</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="96" column="18" bodyfile="elements/d2_input.cpp" bodystart="162" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1afdc646a6e41918705753dcc6eaa2134b" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_move_left</definition>
+        <argsstring>(std::size_t cnt=1)</argsstring>
+        <name>_move_left</name>
+        <qualifiedname>d2::dx::Input::_move_left</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>cnt</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="97" column="18" bodyfile="elements/d2_input.cpp" bodystart="167" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a10ea9be7f341c5ae2dbc06b27ea2f597" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classd2_1_1Unit" kindref="compound">Unit</ref></type>
+        <definition>Unit d2::dx::Input::_layout_impl</definition>
+        <argsstring>(Element::Layout type) const override</argsstring>
+        <name>_layout_impl</name>
+        <qualifiedname>d2::dx::Input::_layout_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1Element_1a8039f61137a4700bfad6c44319545306" kindref="member">Element::Layout</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="99" column="26" bodyfile="elements/d2_input.cpp" bodystart="169" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1afc64a536625d2c15c0a4334a0255fc54" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool d2::dx::Input::_provides_input_impl</definition>
+        <argsstring>() const override</argsstring>
+        <name>_provides_input_impl</name>
+        <qualifiedname>d2::dx::Input::_provides_input_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="100" column="26" bodyfile="elements/d2_input.cpp" bodystart="168" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a366e89c623bf437794d6ad99e92aafd8" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_state_change_impl</definition>
+        <argsstring>(State state, bool value) override</argsstring>
+        <name>_state_change_impl</name>
+        <qualifiedname>d2::dx::Input::_state_change_impl</qualifiedname>
+        <param>
+          <type>State</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="101" column="26" bodyfile="elements/d2_input.cpp" bodystart="188" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1abbdac644505646a2cef937728d80686c" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_event_impl</definition>
+        <argsstring>(in::InputFrame &amp;frame) override</argsstring>
+        <name>_event_impl</name>
+        <qualifiedname>d2::dx::Input::_event_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1in_1_1InputFrame" kindref="compound">in::InputFrame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="102" column="26" bodyfile="elements/d2_input.cpp" bodystart="215" bodyend="285"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a375fa019ea0abc9a50a61ee26d55f622" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::_frame_impl</definition>
+        <argsstring>(PixelBuffer::View buffer) override</argsstring>
+        <name>_frame_impl</name>
+        <qualifiedname>d2::dx::Input::_frame_impl</qualifiedname>
+        <param>
+          <type><ref refid="classd2_1_1PixelBuffer_1_1View" kindref="compound">PixelBuffer::View</ref></type>
+          <declname>buffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="103" column="26" bodyfile="elements/d2_input.cpp" bodystart="286" bodyend="314"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1a1e42fa783b44e74b4fb6b7187e3a1136" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>d2::dx::Input::~Input</definition>
+        <argsstring>()</argsstring>
+        <name>~Input</name>
+        <qualifiedname>d2::dx::Input::~Input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="105" column="21" bodyfile="elements/d2_input.cpp" bodystart="315" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1aa55b3fcd2d9d3644ee4db3d32bd87c11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::jump</definition>
+        <argsstring>(std::size_t pos)</argsstring>
+        <name>jump</name>
+        <qualifiedname>d2::dx::Input::jump</qualifiedname>
+        <param>
+          <type>std::size_t</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="107" column="18" bodyfile="elements/d2_input.cpp" bodystart="322" bodyend="322"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1ae5ce09f8576a2a8f4070637642a8391c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void d2::dx::Input::sync</definition>
+        <argsstring>()</argsstring>
+        <name>sync</name>
+        <qualifiedname>d2::dx::Input::sync</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="108" column="18" bodyfile="elements/d2_input.cpp" bodystart="321" bodyend="321"/>
+      </memberdef>
+      <memberdef kind="function" id="classd2_1_1dx_1_1Input_1af74e591c42ab5e61cdbb4ec830196079" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t d2::dx::Input::cursor</definition>
+        <argsstring>() const</argsstring>
+        <name>cursor</name>
+        <qualifiedname>d2::dx::Input::cursor</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="elements/d2_input.hpp" line="109" column="25" bodyfile="elements/d2_input.cpp" bodystart="323" bodyend="323"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>d2::dx::Input</label>
+        <link refid="classd2_1_1dx_1_1Input"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>style::
+                          UAI&lt; Input, style::ILayout, style::IColors, style::IText, style::IInput, style::ISelectable, style::IResponsive&lt; Input, string &gt;::type &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>d2::dx::Input</label>
+        <link refid="classd2_1_1dx_1_1Input"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_text</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>d2::dx::detail::InputLayout</label>
+        <link refid="structd2_1_1dx_1_1detail_1_1InputLayout"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>masked</edgelabel>
+          <edgelabel>source</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::text::Layout</label>
+        <link refid="classd2_1_1text_1_1Layout"/>
+      </node>
+      <node id="2">
+        <label>style::
+                          UAI&lt; Input, style::ILayout, style::IColors, style::IText, style::IInput, style::ISelectable, style::IResponsive&lt; Input, string &gt;::type &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="elements/d2_input.hpp" line="48" column="9" bodyfile="elements/d2_input.hpp" bodystart="56" bodyend="110"/>
+    <listofallmembers>
+      <member refid="classd2_1_1dx_1_1Input_1a5146a8a6ffd9228c5c626d36d7e20477" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_begin_highlight_if</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1ab610555d15545598c9a914393652e50a" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_ensure_ptr_visible</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a041b87ee9801ddfb9463f2376855f4b9" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_erase</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1abbdac644505646a2cef937728d80686c" prot="protected" virt="virtual"><scope>d2::dx::Input</scope><name>_event_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a375fa019ea0abc9a50a61ee26d55f622" prot="protected" virt="virtual"><scope>d2::dx::Input</scope><name>_frame_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1abfa82a2f01a1a196ce234c661190046f" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_freeze_blink</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a0c6bc9591be2ca327943a778a9ea3505" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_highlighted_value</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a8de60a2097569cac3820330511325fed" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_hit</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a26373ea5f3fd0292f612a4080a33d458" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_insert</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a50c323b6c6d419e8003978d25782c3aa" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_is_highlighted</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1aa10ba91bf8aa6f1add13f22e147ebd2f" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_layout</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a10ea9be7f341c5ae2dbc06b27ea2f597" prot="protected" virt="virtual"><scope>d2::dx::Input</scope><name>_layout_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1afdc646a6e41918705753dcc6eaa2134b" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_move_left</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a6ffa764a965e97d5d947ed4b6fe01f56" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_move_right</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a5a8329e74d427370d2465a2b6b2d6d02" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_move_to</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1aa8096ad753938512f64705d67728c560" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_prefix_width</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1afc64a536625d2c15c0a4334a0255fc54" prot="protected" virt="virtual"><scope>d2::dx::Input</scope><name>_provides_input_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1aac38d324be86564838a4ff953ebd4bac" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_remove_highlighted</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1ad4f0e1f88374620fd6120840f7d7e5d7" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_reset_highlight</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a4ebd8d13caa4ed22d648e3304852302b" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_reset_ptrs</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a0d794a12e6ae43f8f1bce2e00475d9bb" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_start_blink</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a366e89c623bf437794d6ad99e92aafd8" prot="protected" virt="virtual"><scope>d2::dx::Input</scope><name>_state_change_impl</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a07131c903915559ce86ab129ba0d4b2d" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_stop_blink</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a418842573d7afc53da55ba0861bec6e6" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_text</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a5f54fc900f150af13e02f3a820a89917" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_unfreeze_blink</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a24ebb55454c28028dbe4e5da93b885bf" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>_write_ptr</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1ac372223d1a967aa070986796f870decf" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>bound_lower_</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1aa8118236d445068a17e77ab884c0be9a" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>btask_</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1af74e591c42ab5e61cdbb4ec830196079" prot="public" virt="non-virtual"><scope>d2::dx::Input</scope><name>cursor</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1acfd6be9a547b3592059fe8520b384eea" prot="public" virt="non-virtual"><scope>d2::dx::Input</scope><name>data</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1aa34e1662c0fd232fb44bfeb7f868ad1d" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>highlight_end_</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1adbafc464e438e506e6af3eb3da388765" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>highlight_start_</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1aa55b3fcd2d9d3644ee4db3d32bd87c11" prot="public" virt="non-virtual"><scope>d2::dx::Input</scope><name>jump</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a0b9db6a6aa12aad606b0ac9e949b245d" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>ptr_</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a33477884681530e8dbbba7008a57dbf1" prot="protected" virt="non-virtual"><scope>d2::dx::Input</scope><name>ptr_blink_</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1ae5ce09f8576a2a8f4070637642a8391c" prot="public" virt="non-virtual"><scope>d2::dx::Input</scope><name>sync</name></member>
+      <member refid="classd2_1_1dx_1_1Input_1a1e42fa783b44e74b4fb6b7187e3a1136" prot="public" virt="virtual"><scope>d2::dx::Input</scope><name>~Input</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

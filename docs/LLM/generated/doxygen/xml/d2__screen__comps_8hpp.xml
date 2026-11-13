@@ -1,0 +1,812 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="d2__screen__comps_8hpp" kind="file" language="C++">
+    <compoundname>d2_screen_comps.hpp</compoundname>
+    <includes refid="d2__input__base_8hpp" local="no">core/io/d2_input_base.hpp</includes>
+    <includes refid="d2__context__frwd_8hpp" local="no">core/io/d2_context_frwd.hpp</includes>
+    <includes refid="d2__styles__base_8hpp" local="no">core/tree/d2_styles_base.hpp</includes>
+    <includes refid="d2__tree__element__frwd_8hpp" local="no">core/tree/d2_tree_element_frwd.hpp</includes>
+    <includes local="no">absl/container/flat_hash_map.h</includes>
+    <includes local="no">absl/container/flat_hash_set.h</includes>
+    <includes local="no">any</includes>
+    <includes local="no">chrono</includes>
+    <includes local="no">format</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includedby refid="d2__screen_8hpp" local="no">core/screen/d2_screen.hpp</includedby>
+    <includedby refid="d2__screen__comps_8cpp" local="yes">core/screen/d2_screen_comps.cpp</includedby>
+    <incdepgraph>
+      <node id="24">
+        <label>core/io/d2_context.hpp</label>
+        <link refid="d2__context_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>core/io/d2_context_frwd.hpp</label>
+        <link refid="d2__context__frwd_8hpp"/>
+      </node>
+      <node id="2">
+        <label>core/io/d2_input_base.hpp</label>
+        <link refid="d2__input__base_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>core/io/d2_main_worker.hpp</label>
+        <link refid="d2__main__worker_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>core/io/d2_module.hpp</label>
+        <link refid="d2__module_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>core/io/d2_signal_handler.hpp</label>
+        <link refid="d2__signal__handler_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>core/mods/d2_core.hpp</label>
+        <link refid="d2__core_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>core/platform/d2_extended_page.hpp</label>
+        <link refid="d2__extended__page_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>core/platform/d2_locale.hpp</label>
+        <link refid="d2__locale_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>core/screen/d2_screen_comps.hpp</label>
+        <link refid="d2__screen__comps_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>core/tree/d2_styles_base.hpp</label>
+        <link refid="d2__styles__base_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>core/tree/d2_theme.hpp</label>
+        <link refid="d2__theme_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>core/tree/d2_tree_element_frwd.hpp</label>
+        <link refid="d2__tree__element__frwd_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>core/types/d2_image.hpp</label>
+        <link refid="core_2types_2d2__image_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>core/types/d2_pixel.hpp</label>
+        <link refid="d2__pixel_8hpp"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>core/types/d2_vtypes.hpp</label>
+        <link refid="d2__vtypes_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>core/utils/d2_exceptions.hpp</label>
+        <link refid="d2__exceptions_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>core/utils/d2_meta.hpp</label>
+        <link refid="d2__meta_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>absl/container/flat_hash_map.h</label>
+      </node>
+      <node id="25">
+        <label>absl/container/flat_hash_set.h</label>
+      </node>
+      <node id="3">
+        <label>absl/container/inlined_vector.h</label>
+      </node>
+      <node id="23">
+        <label>algorithm</label>
+      </node>
+      <node id="55">
+        <label>any</label>
+      </node>
+      <node id="4">
+        <label>array</label>
+      </node>
+      <node id="32">
+        <label>atomic</label>
+      </node>
+      <node id="5">
+        <label>bitset</label>
+      </node>
+      <node id="26">
+        <label>chrono</label>
+      </node>
+      <node id="33">
+        <label>cstddef</label>
+      </node>
+      <node id="39">
+        <label>cstdint</label>
+      </node>
+      <node id="10">
+        <label>exception</label>
+      </node>
+      <node id="11">
+        <label>format</label>
+      </node>
+      <node id="40">
+        <label>functional</label>
+      </node>
+      <node id="17">
+        <label>limits</label>
+      </node>
+      <node id="12">
+        <label>logs/logd.hpp</label>
+      </node>
+      <node id="18">
+        <label>memory</label>
+      </node>
+      <node id="19">
+        <label>memory_resource</label>
+      </node>
+      <node id="30">
+        <label>mt/pool.hpp</label>
+      </node>
+      <node id="41">
+        <label>mt/task_queue.hpp</label>
+      </node>
+      <node id="42">
+        <label>new</label>
+      </node>
+      <node id="15">
+        <label>optional</label>
+      </node>
+      <node id="52">
+        <label>os/d2_registry.hpp</label>
+      </node>
+      <node id="27">
+        <label>shared_mutex</label>
+      </node>
+      <node id="34">
+        <label>span</label>
+      </node>
+      <node id="50">
+        <label>stdexcept</label>
+      </node>
+      <node id="28">
+        <label>stop_token</label>
+      </node>
+      <node id="13">
+        <label>string</label>
+      </node>
+      <node id="16">
+        <label>string_view</label>
+      </node>
+      <node id="20">
+        <label>thread</label>
+      </node>
+      <node id="43">
+        <label>tuple</label>
+      </node>
+      <node id="44">
+        <label>type_traits</label>
+      </node>
+      <node id="35">
+        <label>typeindex</label>
+      </node>
+      <node id="45">
+        <label>typeinfo</label>
+      </node>
+      <node id="46">
+        <label>utility</label>
+      </node>
+      <node id="36">
+        <label>variant</label>
+      </node>
+      <node id="47">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>core/io/d2_context.cpp</label>
+        <link refid="d2__context_8cpp"/>
+      </node>
+      <node id="5">
+        <label>core/mods/d2_binder.cpp</label>
+        <link refid="d2__binder_8cpp"/>
+      </node>
+      <node id="4">
+        <label>core/mods/d2_binder.hpp</label>
+        <link refid="d2__binder_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>core/mods/d2_ext.cpp</label>
+        <link refid="d2__ext_8cpp"/>
+      </node>
+      <node id="8">
+        <label>core/mods/d2_images.cpp</label>
+        <link refid="d2__images_8cpp"/>
+      </node>
+      <node id="9">
+        <label>core/screen/d2_screen.cpp</label>
+        <link refid="d2__screen_8cpp"/>
+      </node>
+      <node id="2">
+        <label>core/screen/d2_screen.hpp</label>
+        <link refid="d2__screen_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>core/screen/d2_screen_comps.cpp</label>
+        <link refid="d2__screen__comps_8cpp"/>
+      </node>
+      <node id="1">
+        <label>core/screen/d2_screen_comps.hpp</label>
+        <link refid="d2__screen__comps_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>core/tree/d2_styles.hpp</label>
+        <link refid="d2__styles_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>core/tree/d2_tree.hpp</label>
+        <link refid="d2__tree_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>core/tree/d2_tree_construct.hpp</label>
+        <link refid="d2__tree__construct_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>d2_std.hpp</label>
+        <link refid="d2__std_8hpp"/>
+      </node>
+      <node id="12">
+        <label>elements/d2_box.cpp</label>
+        <link refid="d2__box_8cpp"/>
+      </node>
+      <node id="11">
+        <label>elements/d2_box.hpp</label>
+        <link refid="d2__box_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>elements/d2_button.cpp</label>
+        <link refid="d2__button_8cpp"/>
+      </node>
+      <node id="20">
+        <label>elements/d2_button.hpp</label>
+        <link refid="d2__button_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>elements/d2_checkbox.cpp</label>
+        <link refid="d2__checkbox_8cpp"/>
+      </node>
+      <node id="22">
+        <label>elements/d2_checkbox.hpp</label>
+        <link refid="d2__checkbox_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>elements/d2_demand_scrollbox.cpp</label>
+        <link refid="d2__demand__scrollbox_8cpp"/>
+      </node>
+      <node id="27">
+        <label>elements/d2_demand_scrollbox.hpp</label>
+        <link refid="d2__demand__scrollbox_8hpp"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>elements/d2_draggable_box.cpp</label>
+        <link refid="d2__draggable__box_8cpp"/>
+      </node>
+      <node id="13">
+        <label>elements/d2_draggable_box.hpp</label>
+        <link refid="d2__draggable__box_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>elements/d2_dropdown.cpp</label>
+        <link refid="d2__dropdown_8cpp"/>
+      </node>
+      <node id="24">
+        <label>elements/d2_dropdown.hpp</label>
+        <link refid="d2__dropdown_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>elements/d2_element_utils.cpp</label>
+        <link refid="d2__element__utils_8cpp"/>
+      </node>
+      <node id="26">
+        <label>elements/d2_element_utils.hpp</label>
+        <link refid="d2__element__utils_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>elements/d2_flow_box.cpp</label>
+        <link refid="d2__flow__box_8cpp"/>
+      </node>
+      <node id="15">
+        <label>elements/d2_flow_box.hpp</label>
+        <link refid="d2__flow__box_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>elements/d2_graph.cpp</label>
+        <link refid="d2__graph_8cpp"/>
+      </node>
+      <node id="30">
+        <label>elements/d2_graph.hpp</label>
+        <link refid="d2__graph_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>elements/d2_image.cpp</label>
+        <link refid="elements_2d2__image_8cpp"/>
+      </node>
+      <node id="32">
+        <label>elements/d2_image.hpp</label>
+        <link refid="elements_2d2__image_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>elements/d2_input.cpp</label>
+        <link refid="d2__input_8cpp"/>
+      </node>
+      <node id="38">
+        <label>elements/d2_input.hpp</label>
+        <link refid="d2__input_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>elements/d2_matrix.cpp</label>
+        <link refid="d2__matrix_8cpp"/>
+      </node>
+      <node id="42">
+        <label>elements/d2_matrix.hpp</label>
+        <link refid="d2__matrix_8hpp"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>elements/d2_multiline_input.cpp</label>
+        <link refid="d2__multiline__input_8cpp"/>
+      </node>
+      <node id="40">
+        <label>elements/d2_multiline_input.hpp</label>
+        <link refid="d2__multiline__input_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>elements/d2_scrollbox.cpp</label>
+        <link refid="d2__scrollbox_8cpp"/>
+      </node>
+      <node id="18">
+        <label>elements/d2_scrollbox.hpp</label>
+        <link refid="d2__scrollbox_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>elements/d2_separator.cpp</label>
+        <link refid="d2__separator_8cpp"/>
+      </node>
+      <node id="44">
+        <label>elements/d2_separator.hpp</label>
+        <link refid="d2__separator_8hpp"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>elements/d2_slider.cpp</label>
+        <link refid="d2__slider_8cpp"/>
+      </node>
+      <node id="46">
+        <label>elements/d2_slider.hpp</label>
+        <link refid="d2__slider_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>elements/d2_std.hpp</label>
+        <link refid="elements_2d2__std_8hpp"/>
+      </node>
+      <node id="35">
+        <label>elements/d2_switch.cpp</label>
+        <link refid="d2__switch_8cpp"/>
+      </node>
+      <node id="34">
+        <label>elements/d2_switch.hpp</label>
+        <link refid="d2__switch_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>elements/d2_text.cpp</label>
+        <link refid="d2__text_8cpp"/>
+      </node>
+      <node id="36">
+        <label>elements/d2_text.hpp</label>
+        <link refid="d2__text_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classd2_1_1TreeTags" prot="public">d2::TreeTags</innerclass>
+    <innerclass refid="classd2_1_1DynamicDependencyManager" prot="public">d2::DynamicDependencyManager</innerclass>
+    <innernamespace refid="namespaced2">d2</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/screen/d2_screen_comps.hpp"/>
+  </compounddef>
+</doxygen>

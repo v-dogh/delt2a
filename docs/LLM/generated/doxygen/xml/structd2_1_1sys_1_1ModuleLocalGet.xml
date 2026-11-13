@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1ModuleLocalGet" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::ModuleLocalGet</compoundname>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps... &gt;</derivedcompoundref>
+    <derivedcompoundref refid="structd2_1_1sys_1_1ModuleDecl" prot="public" virt="non-virtual">d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;</derivedcompoundref>
+    <includes refid="d2__module_8hpp" local="no">d2_module.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Base</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">module</ref>&lt; Base &gt;</type>
+        <definition>module&lt; Base &gt; d2::sys::ModuleLocalGet&lt; Base &gt;::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::sys::ModuleLocalGet::get</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="206" column="23" bodyfile="core/io/d2_context.hpp" bodystart="353" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleLocalGet_1a2ce0bd860d7531e0c8d2bee674a9425a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">module</ref>&lt; Base &gt;</type>
+        <definition>module&lt; Base &gt; d2::sys::ModuleLocalGet&lt; Base &gt;::get</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>get</name>
+        <qualifiedname>d2::sys::ModuleLocalGet::get</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="207" column="23" bodyfile="core/io/d2_context.hpp" bodystart="362" bodyend="365"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">module</ref>&lt; Base &gt;</type>
+        <definition>module&lt; Base &gt; d2::sys::ModuleLocalGet&lt; Base &gt;::get_if</definition>
+        <argsstring>()</argsstring>
+        <name>get_if</name>
+        <qualifiedname>d2::sys::ModuleLocalGet::get_if</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="209" column="23" bodyfile="core/io/d2_context.hpp" bodystart="357" bodyend="360"/>
+      </memberdef>
+      <memberdef kind="function" id="structd2_1_1sys_1_1ModuleLocalGet_1ae8bba2eace551e09aeb99546e2d8a062" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="namespaced2_1_1sys_1a8e198c427582367188c84985bfae66ec" kindref="member">module</ref>&lt; Base &gt;</type>
+        <definition>module&lt; Base &gt; d2::sys::ModuleLocalGet&lt; Base &gt;::get_if</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>get_if</name>
+        <qualifiedname>d2::sys::ModuleLocalGet::get_if</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/io/d2_module.hpp" line="210" column="23" bodyfile="core/io/d2_context.hpp" bodystart="366" bodyend="369"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>d2::sys::Module&lt; Base, Name, Ac, LoadType, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1Module"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>d2::sys::ModuleDecl&lt; Base, Name, Ac, Deps... &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleDecl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>d2::sys::ModuleLocalGet&lt; Base &gt;</label>
+        <link refid="structd2_1_1sys_1_1ModuleLocalGet"/>
+      </node>
+    </inheritancegraph>
+    <location file="core/io/d2_module.hpp" line="204" column="15" bodyfile="core/io/d2_module.hpp" bodystart="205" bodyend="211"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a95d8d0bf527eef987375b44248d3f1df" prot="public" virt="non-virtual"><scope>d2::sys::ModuleLocalGet</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a2ce0bd860d7531e0c8d2bee674a9425a" prot="public" virt="non-virtual"><scope>d2::sys::ModuleLocalGet</scope><name>get</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1a1348172a6902d4298a4ac08c41347dd0" prot="public" virt="non-virtual"><scope>d2::sys::ModuleLocalGet</scope><name>get_if</name></member>
+      <member refid="structd2_1_1sys_1_1ModuleLocalGet_1ae8bba2eace551e09aeb99546e2d8a062" prot="public" virt="non-virtual"><scope>d2::sys::ModuleLocalGet</scope><name>get_if</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

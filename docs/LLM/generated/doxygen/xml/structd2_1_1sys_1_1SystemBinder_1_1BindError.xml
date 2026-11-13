@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.18.0" xml:lang="en-US">
+  <compounddef id="structd2_1_1sys_1_1SystemBinder_1_1BindError" kind="struct" language="C++" prot="public">
+    <compoundname>d2::sys::SystemBinder::BindError</compoundname>
+    <includes refid="d2__binder_8hpp" local="no">d2_binder.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1BindError_1aa1f9a4b32cd3c0313bec445a847bee6b" prot="public" static="no" mutable="no">
+        <type><ref refid="classd2_1_1sys_1_1SystemBinder_1af769cdf7bc98063192d29ddc7ee9207e" kindref="member">ConflictType</ref></type>
+        <definition>ConflictType d2::sys::SystemBinder::BindError::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>d2::sys::SystemBinder::BindError::type</qualifiedname>
+        <initializer>{<ref refid="classd2_1_1sys_1_1SystemBinder_1af769cdf7bc98063192d29ddc7ee9207ea15fb6ccbd11ebebcea2b48dc477f3561" kindref="member">ConflictType::Collision</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="79" column="26" bodyfile="core/mods/d2_binder.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="variable" id="structd2_1_1sys_1_1SystemBinder_1_1BindError_1a880cdaf35242f7690f52c3fe972dd6a0" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string d2::sys::SystemBinder::BindError::description</definition>
+        <argsstring></argsstring>
+        <name>description</name>
+        <qualifiedname>d2::sys::SystemBinder::BindError::description</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="core/mods/d2_binder.hpp" line="80" column="25" bodyfile="core/mods/d2_binder.hpp" bodystart="80" bodyend="80"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="core/mods/d2_binder.hpp" line="77" column="9" bodyfile="core/mods/d2_binder.hpp" bodystart="78" bodyend="81"/>
+    <listofallmembers>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1BindError_1a880cdaf35242f7690f52c3fe972dd6a0" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::BindError</scope><name>description</name></member>
+      <member refid="structd2_1_1sys_1_1SystemBinder_1_1BindError_1aa1f9a4b32cd3c0313bec445a847bee6b" prot="public" virt="non-virtual"><scope>d2::sys::SystemBinder::BindError</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
