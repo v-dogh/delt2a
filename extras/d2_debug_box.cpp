@@ -1139,7 +1139,7 @@ namespace d2::ex
                                             logs.clear();
                                             logs_size = 0;
                                         }
-                                        const auto scroll = ctx->vertical_scollbar();
+                                        const auto scroll = ctx->vertical_scrollbar();
                                         const auto synced = !scroll->getstate(Element::Display) ||
                                                             scroll->relative_value() == 1.f;
                                         ctx->append(std::move(out));

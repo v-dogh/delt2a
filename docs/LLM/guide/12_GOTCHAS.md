@@ -21,42 +21,4 @@ This section covers usage pitfalls and compatibility notes from the supplied arc
 | `Switch` change handler precedence | `_submit()` calls `OnChange` **or else** `OnChangeValues`, not both | Register the intended callback, or have one handler invoke shared logic |
 | Dropdown callback timing | `choose(idx)` invokes `OnSubmit` **before** storing `_selected = idx` | Use callback arguments for the new selection, not `index()` during callback |
 | `MultiInput` callback/ownership | Does not derive from `Input`, yet uses `IResponsive<Input,string>` | Verify callbacks from current implementation before choosing callback parameter type |
-
-## Other snapshot-specific observations (recheck against current source)
-
-These are separate from the maintainer-reported fixes above and have **not** been verified against newer commits.
-
-### Named theme lookup
-
-In the supplied archive, `SystemScreen::themev<Var>(id)` in `core/screen/d2_screen.hpp` calls `theme<...>()` without forwarding `id`. When depending on multiple named theme instances, verify the current overload behavior and add a focused test.
-
-### Built-in Doxygen route
-
-In the archive, the `D2_BUILD_DOCS` branch in `CMakeLists.txt` refers to `tools/doxygen_filter.py` and `docs/index.md`, absent at those paths. Check the current repository before assuming this build option works. This handbook does not depend on that route.
-
-### Multiline scrollbar spelling
-
-In the archive, `MultiInput` declares both `vertical_scrollbar()` and `vertical_scollbar()`. Prefer the correctly spelled method; keep the misspelled alias only if backwards compatibility matters.
-
-### Image example against current image API
-
-The archived `examples/images.cpp` uses `SystemImages::Config`, while the archived `core/mods/d2_images.hpp` exposes `configure(BoundingBox cell_pixels)`. Prefer the actual module header when maintaining example code; the current repo may already differ.
-
-## Behavioral uncertainty to test instead of guessing
-
-- Timing of slider `OnSubmit` and its input-origin details; its float argument order is source-verified as `(relative, absolute)` in `elements/d2_slider.cpp`.
-- `SignalRegistry` event payloads and flags beyond the screen events; APIs are typed by event manifest, so mismatched lambda signatures may not compile.
-- Terminal image protocol support and terminal-cell pixel metrics on different terminal emulators.
-- Cross-thread behavior of a specific widget's imperative method (as opposed to UAI `set`); not all non-property calls synchronize.
-- How a `TreeState` object and dependency store are retained/reinitialized under specific swap tags; verify with `tests` and implementation before promising persistence semantics.
-- Unsupported image formats even if a generic `image_loader` interface is declared.
-
-## Regression tests worth preserving
-
-- An eager dependency subscription fires once initially, then on change, and unsubscribes properly after element destruction.
-- `DemandScrollBox::EntrySeed` forbids multiple `create` calls per seed and keeps instantiated rows bounded while scrolling.
-- Network callbacks exit safely after the destination UI element is destroyed.
-
-## Documentation confidence
-
-Behavioral notes are based on the supplied source snapshot. For newly fixed code, consult the current repository and its tests: this archive does not include those post-audit changes.
+| `Units::Pc` treats a value of N as N * 100% rather than N% | x | x |
