@@ -1100,10 +1100,6 @@ namespace d2::dx
     {
         return _vscrollbar;
     }
-    d2::TreeIter<VerticalSlider> MultiInput::vertical_scollbar() const noexcept
-    {
-        return vertical_scrollbar();
-    }
     d2::TreeIter<Slider> MultiInput::horizontal_scrollbar() const noexcept
     {
         return _hscrollbar;

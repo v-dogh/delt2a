@@ -186,7 +186,6 @@ namespace d2
             std::size_t cursor() const;
 
             d2::TreeIter<VerticalSlider> vertical_scrollbar() const noexcept;
-            d2::TreeIter<VerticalSlider> vertical_scollbar() const noexcept;
             d2::TreeIter<Slider> horizontal_scrollbar() const noexcept;
 
             const fb::FragmentedBuffer& buffer() const noexcept;

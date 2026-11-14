@@ -27,7 +27,8 @@ This guide is **descriptive**: it reflects patterns in the supplied source snaps
 ## Dependency and ownership style
 
 - Public interfaces are typically lean and defined in headers; concrete OS logic lives in `os/`.
-- The framework uses `std::shared_ptr`/`weak_ptr` deliberately. Prefer weak captures in global input, network, scheduler and tree-swap callbacks to avoid leaks or invalid access.
+- The framework uses `std::shared_ptr`/`weak_ptr` deliberately. Prefer weak captures in global input, network, scheduler and tree-swap callbacks to avoid leaks or invalid access. 
+- Classes meant to be used with shared/weak will usually expose ClassName::ptr or ClassName::wptr. Use these instead of std::shared_ptr/weak_ptr<ClassName>.
 - RAII for event signal connections; a stored `Signals::Handle` is a common idiom (`examples/editing.cpp`, `examples/images.cpp`).
 - Use `TreeIter<T>` for temporary element access and convert to strong pointer only with an explicit ownership reason.
 - Prefer value semantics for callback payloads and copy `string_view` when asynchronous lifetime requires it.

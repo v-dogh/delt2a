@@ -2,8 +2,6 @@
 
 Generated from Doxygen XML. For idiomatic application code and lifecycle rules, **read `AGENTS.md` and the curated handbook first**.
 
-This is a declaration inventory, not proof that an API is safe or suitable in every context.
-
 ## Classes (103)
 
 - [`d2::AlignedUnit`](classes/d2_AlignedUnit-e55343bd.md)
